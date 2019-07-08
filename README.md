@@ -20,7 +20,7 @@ Data structures containing a Plugin Identifier, parameters for the plugin, and a
 Data structures containing a Resource Identifier, the type of Resource being described, and parameters for the Resource
 
 ## Workflow
-![SMACD Tool Workflow image](https://github.com/anthturner/SMACD/blob/master/DocAssets/Workflow.png?raw=true "SMACD Tool Workflow image")
+![SMACD Tool Workflow image](https://raw.githubusercontent.com/anthturner/SMACD/383a3d838cd6a1b81efe80d2ba7a73a599b4db50/DocAssets/Workflow.png "SMACD Tool Workflow image")
 
 **Describing a Scan Workflow:**
 1. A Service Map is loaded
