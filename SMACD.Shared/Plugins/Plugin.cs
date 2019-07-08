@@ -43,7 +43,7 @@ namespace SMACD.Shared.Plugins
         /// <summary>
         /// Logger for plugin
         /// </summary>
-        protected ILogger Logger { get; private set; } = Extensions.LogFactory.CreateLogger("Plugin Init");
+        protected ILogger Logger { get; set; } = Extensions.LogFactory.CreateLogger("Plugin Init");
 
         public Plugin()
         {

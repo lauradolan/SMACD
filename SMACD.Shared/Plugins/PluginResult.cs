@@ -11,6 +11,8 @@ namespace SMACD.Shared.Plugins
     /// </summary>
     public abstract class PluginResult
     {
+        private const string POINTER_FILE = ".ptr";
+
         /// <summary>
         /// Pointer that generated this PluginResult
         /// </summary>
@@ -25,14 +27,19 @@ namespace SMACD.Shared.Plugins
         {
         }
 
-        public PluginResult(string workingDirectory) => WorkingDirectory = workingDirectory;
-
-        public PluginResult(PluginPointerModel pluginPointer) => PluginPointer = pluginPointer;
+        public PluginResult(string workingDirectory)
+        {
+            WorkingDirectory = workingDirectory;
+            if (File.Exists(Path.Combine(WorkingDirectory, ".ptr")))
+                PluginPointer = LoadResultArtifact<PluginPointerModel>(Path.Combine(WorkingDirectory, POINTER_FILE));
+        }
 
         public PluginResult(PluginPointerModel pluginPointer, string workingDirectory)
         {
             PluginPointer = pluginPointer;
             WorkingDirectory = workingDirectory;
+
+            SaveResultArtifact(Path.Combine(WorkingDirectory, POINTER_FILE), pluginPointer);
         }
 
         /// <summary>

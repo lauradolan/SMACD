@@ -59,8 +59,6 @@ namespace SMACD.CLITool.Verbs
             using (var sw = new StreamWriter(outputFile))
                 sw.WriteLine(JsonConvert.SerializeObject(result));
 
-            Console.WriteLine(ObjectDumper.Dump(result));
-
             Console.WriteLine("Average score: {0}", result.ScoreAvg);
             Console.WriteLine("Summed score: {0}", result.ScoreSum);
 

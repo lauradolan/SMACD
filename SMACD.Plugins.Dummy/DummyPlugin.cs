@@ -12,7 +12,7 @@ namespace SMACD.Plugins.Dummy
     [PluginMetadata("dummy", Name = "Dummy Plugin")]
     public class DummyPlugin : Plugin
     {
-        public override async Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)
+        public override Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)
         {
             var sw = new Stopwatch();
             sw.Start();
@@ -35,11 +35,11 @@ namespace SMACD.Plugins.Dummy
 
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 
-            return new DummyPluginResult(pointer, workingDirectory)
+            return Task.FromResult((PluginResult)new DummyPluginResult(pointer, workingDirectory)
             {
                 Generations = g,
                 Duration = sw.Elapsed
-            };
+            });
         }
 
         public override Task<PluginResult> Reprocess(string workingDirectory)

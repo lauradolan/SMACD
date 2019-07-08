@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
 using SMACD.Shared.Plugins;
 using SMACD.Shared.Resources;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
@@ -64,13 +66,16 @@ namespace SMACD.Shared
             {
                 var deserializer = new DeserializerBuilder();
 
-                //foreach (var item in ResourceManager.Instance.RecognizedIdentifiers)
-                //    deserializer = deserializer.WithTagMapping("!" + item.Key, item.Value);
+                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                    foreach (var type in asm.GetTypes())
+                    {
+                        var attr = type.GetConfigAttribute<ResourceIdentifierAttribute, string>(a => a.ResourceIdentifier);
+                        if (attr != null)
+                            deserializer = deserializer.WithTagMapping("!" + attr, type);
+                    }
 
                 return (deserializer
                     .WithNamingConvention(new CamelCaseNamingConvention())
-                    .WithTagMapping("!http", typeof(HttpResource))
-                    .WithTagMapping("!https", typeof(HttpsResource))
                     .Build())
                     .Deserialize<ServiceMapFile>(sr);
             }

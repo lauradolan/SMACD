@@ -7,18 +7,7 @@ using System.Reflection;
 
 namespace SMACD.Shared.WorkspaceManagers
 {
-    public interface ILibraryManager
-    {
-        bool Exists(string identifier);
-
-        Type GetLibraryType(string identifier);
-
-        object GetInstance(string identifier);
-
-        object GetInstance(string identifier, params object[] parameters);
-    }
-
-    public abstract class LibraryManager<TBaseType> : ILibraryManager
+    public abstract class LibraryManager<TBaseType>
     {
         private static string EXTENSION_SEARCH_PATH = Directory.GetCurrentDirectory();
 
@@ -56,22 +45,10 @@ namespace SMACD.Shared.WorkspaceManagers
         public TBaseType GetInstance(string identifier)
         {
             Logger.LogDebug("Creating instance of {0} type from identifier '{1}'", typeof(TBaseType).Name, identifier);
-            return (TBaseType)((ILibraryManager)this).GetInstance(identifier);
-        }
-
-        public TBaseType GetInstance(string identifier, params object[] parameters)
-        {
-            Logger.LogDebug("Creating instance of {0} type from identifier '{1}' (with {2} parameter[s] given)", typeof(TBaseType).Name, identifier, parameters.Length);
-            return (TBaseType)((ILibraryManager)this).GetInstance(identifier, parameters);
-        }
-
-        object ILibraryManager.GetInstance(string identifier)
-        {
-            Logger.LogDebug("Creating instance of {0} type from identifier '{1}'", typeof(TBaseType).Name, identifier);
             return (TBaseType)Activator.CreateInstance(GetLibraryType(identifier));
         }
 
-        object ILibraryManager.GetInstance(string identifier, params object[] parameters)
+        public TBaseType GetInstance(string identifier, params object[] parameters)
         {
             Logger.LogDebug("Creating instance of {0} type from identifier '{1}' (with {2} parameter[s] given)", typeof(TBaseType).Name, identifier, parameters.Length);
             return (TBaseType)Activator.CreateInstance(GetLibraryType(identifier), parameters);
