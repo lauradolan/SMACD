@@ -29,7 +29,7 @@ namespace SMACD.Shared.WorkspaceManagers
 
                 PluginLoader loader = PluginLoader.CreateFromAssemblyFile(
                     assemblyFile: file,
-                    sharedTypes: new[] { typeof(Plugin), typeof(PluginResult), typeof(ServiceHook) });
+                    sharedTypes: new[] { typeof(Plugin), typeof(PluginResult), typeof(ServiceHook), typeof(ILogger) });
                 var asm = loader.LoadDefaultAssembly();
 
                 var plugins = asm.GetTypes().Where(t => typeof(TBaseType).IsAssignableFrom(t));
