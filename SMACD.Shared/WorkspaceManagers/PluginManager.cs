@@ -24,8 +24,8 @@ namespace SMACD.Shared.WorkspaceManagers
 
         internal Type GetLibraryType(PluginPointerModel pointer) => LoadedLibraryTypes.FirstOrDefault(p => GetTypeIdentifier(p) == pointer.Plugin);
 
-        internal Plugin GetInstance(PluginPointerModel pointer) => (Plugin)((ILibraryManager)this).GetInstance(pointer.Plugin);
+        internal Plugin GetInstance(PluginPointerModel pointer) => GetInstance(pointer.Plugin);
 
-        internal Plugin GetInstance(PluginPointerModel pointer, params object[] parameters) => (Plugin)((ILibraryManager)this).GetInstance(pointer.Plugin, parameters);
+        internal Plugin GetInstance(PluginPointerModel pointer, params object[] parameters) => GetInstance(pointer.Plugin, parameters);
     }
 }

@@ -18,10 +18,6 @@ namespace SMACD.Plugins.Dummy
         {
         }
 
-        public DummyPluginResult(PluginPointerModel pluginPointer) : base(pluginPointer)
-        {
-        }
-
         public DummyPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer, workingDirectory)
         {
         }

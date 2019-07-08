@@ -64,14 +64,13 @@ namespace SMACD.Shared
                 .Select(a => propertySelectionAction(a));
         }
 
-        #endregion Config Attribute Helpers
-
         public static TProperty GetConfigAttribute<TAttribute, TProperty>(this Type type, Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
         {
             if (!type.CustomAttributes.Any(a => typeof(TAttribute).IsAssignableFrom(a.AttributeType)))
                 return default(TProperty);
             return type.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>().Select(a => propertySelectionAction(a)).FirstOrDefault();
         }
+        #endregion
 
         private static readonly Dictionary<WeakReference<Task>, Tuple<bool, string>> _taskNames = new Dictionary<WeakReference<Task>, Tuple<bool, string>>();
 

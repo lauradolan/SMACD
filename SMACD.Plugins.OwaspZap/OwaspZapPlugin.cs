@@ -17,7 +17,6 @@ namespace SMACD.Plugins.OwaspZap
     {
         internal const string JSON_REPORT_FILE = "report.json";
         internal const string HTML_REPORT_FILE = "report.html";
-        protected ILogger Logger { get; set; } = Extensions.LogFactory.CreateLogger("OwaspZapPlugin");
 
         public override async Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)
         {

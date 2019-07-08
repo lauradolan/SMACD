@@ -15,9 +15,6 @@ namespace SMACD.Plugins.OwaspZap
 {
     public class OwaspZapPluginResult : PluginResult
     {
-        [YamlIgnore]
-        public ZapJsonReport Report { get; set; }
-
         private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("OwaspZapPluginResult");
 
         public OwaspZapPluginResult()
@@ -28,10 +25,6 @@ namespace SMACD.Plugins.OwaspZap
         {
         }
 
-        public OwaspZapPluginResult(PluginPointerModel pluginPointer) : base(pluginPointer)
-        {
-        }
-
         public OwaspZapPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer, workingDirectory)
         {
             SaveResultArtifact(Path.Combine(workingDirectory, ".ptr"), pluginPointer);
@@ -39,14 +32,12 @@ namespace SMACD.Plugins.OwaspZap
 
         public override async Task SummaryRunOnce(VulnerabilitySummary summary)
         {
-            if (File.Exists(Path.Combine(WorkingDirectory, ".ptr")))
-                PluginPointer = LoadResultArtifact<PluginPointerModel>(Path.Combine(WorkingDirectory, ".ptr"));
-
+            ZapJsonReport report = null;
             var jsonReportPath = Path.Combine(WorkingDirectory, OwaspZapPlugin.JSON_REPORT_FILE);
             if (File.Exists(jsonReportPath))
             {
                 using (var sr = new StreamReader(jsonReportPath))
-                    Report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
+                    report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
             }
             else
             {
@@ -54,7 +45,13 @@ namespace SMACD.Plugins.OwaspZap
                 return;
             }
 
-            foreach (var alert in Report.Site.First().Alerts)
+            if (report == null)
+            {
+                Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
+                return;
+            }
+
+            foreach (var alert in report.Site.First().Alerts)
             {
                 var item = new VulnerabilityItem()
                 {
