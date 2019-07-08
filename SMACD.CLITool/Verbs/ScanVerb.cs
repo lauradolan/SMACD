@@ -17,8 +17,8 @@ namespace SMACD.CLITool.Verbs
         [Option('s', "servicemap", HelpText = "Location of the Service Map", Required = true)]
         public string ServiceMap { get; set; }
 
-        [Option('c', "workingcontainer", HelpText = "Root directory of all plugin working directories")]
-        public string WorkingContainer { get; set; }
+        [Option('d', "workingdirectory", HelpText = "Working directory of Workspace")]
+        public string WorkingDirectory { get; set; }
 
         [Option('t', "threshold", HelpText = "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
@@ -28,8 +28,8 @@ namespace SMACD.CLITool.Verbs
         public override Task Execute()
         {
             // Hotpatch workspace storage
-            if (WorkingContainer == null) WorkingContainer = Path.Combine(Path.GetTempPath(), "SMACD");
-            Workspace.WORKSPACE_STORAGE = WorkingContainer;
+            if (WorkingDirectory == null) WorkingDirectory = Path.Combine(Path.GetTempPath(), "SMACD");
+            Workspace.WORKSPACE_STORAGE = WorkingDirectory;
 
             int workerThreads, completionPortThreads;
             ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);

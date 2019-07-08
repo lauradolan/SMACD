@@ -11,7 +11,7 @@ namespace SMACD.Shared.WorkspaceManagers
     /// Handles Task creation and management for multi-threaded operations
     /// </summary>
     /// <typeparam name="T">Plugin Result type this Task Manager's actions create</typeparam>
-    public class TaskManager
+    internal class TaskManager
     {
         private const int WORKER_LOOP_LOGGER_INTERVAL_SECS = 15;
         private const int DEFAULT_MAX_CONCURRENT_THREADS = 10;

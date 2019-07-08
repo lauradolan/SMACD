@@ -21,10 +21,10 @@ namespace SMACD.Shared.WorkspaceManagers
     /// <summary>
     /// Handles scanning and mapping of service hooks and integrations
     /// </summary>
-    internal class ServiceHookManager : LibraryManager<Plugin>
+    public class ServiceHookManager : LibraryManager<Plugin>
     {
         private static readonly Lazy<ServiceHookManager> _instance = new Lazy<ServiceHookManager>(() => new ServiceHookManager());
-        internal static ServiceHookManager Instance => _instance.Value;
+        public static ServiceHookManager Instance => _instance.Value;
 
         private ServiceHookManager() : base("SMACD.Services.*.dll", "ServiceHookManager")
         {
@@ -40,7 +40,7 @@ namespace SMACD.Shared.WorkspaceManagers
             }
         }
 
-        public void RegisterHook(TaskServiceHookType hookType, Action<Task> callback)
+        public void RegisterTaskHook(TaskServiceHookType hookType, Action<Task> callback)
         {
             switch (hookType)
             {
