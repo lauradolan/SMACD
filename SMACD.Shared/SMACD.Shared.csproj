@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="McMaster.NETCore.Plugins" Version="0.3.0-beta.26" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.Logging;
+using SMACD.Shared.Plugins;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +26,12 @@ namespace SMACD.Shared.WorkspaceManagers
             foreach (var file in Directory.GetFiles(EXTENSION_SEARCH_PATH, pluginFileMask))
             {
                 Logger.LogDebug("Loading Assembly from {0}", file);
-                var asm = Assembly.LoadFrom(file);
+
+                PluginLoader loader = PluginLoader.CreateFromAssemblyFile(
+                    assemblyFile: file,
+                    sharedTypes: new[] { typeof(Plugin), typeof(PluginResult), typeof(ServiceHook) });
+                var asm = loader.LoadDefaultAssembly();
+
                 var plugins = asm.GetTypes().Where(t => typeof(TBaseType).IsAssignableFrom(t));
                 Logger.LogDebug("Found {0} plugins in {1}", plugins.Count(), file);
                 foreach (var plugin in plugins)
@@ -44,13 +51,13 @@ namespace SMACD.Shared.WorkspaceManagers
 
         public TBaseType GetInstance(string identifier)
         {
-            Logger.LogDebug("Creating instance of {0} type from identifier '{1}'", typeof(TBaseType).Name, identifier);
+            Logger.LogTrace("Creating instance of {0} type from identifier '{1}'", typeof(TBaseType).Name, identifier);
             return (TBaseType)Activator.CreateInstance(GetLibraryType(identifier));
         }
 
         public TBaseType GetInstance(string identifier, params object[] parameters)
         {
-            Logger.LogDebug("Creating instance of {0} type from identifier '{1}' (with {2} parameter[s] given)", typeof(TBaseType).Name, identifier, parameters.Length);
+            Logger.LogTrace("Creating instance of {0} type from identifier '{1}' (with {2} parameter[s] given)", typeof(TBaseType).Name, identifier, parameters.Length);
             return (TBaseType)Activator.CreateInstance(GetLibraryType(identifier), parameters);
         }
     }
