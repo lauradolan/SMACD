@@ -54,14 +54,6 @@ namespace SMACD.Shared.WorkspaceManagers
             }
         }
 
-        protected override string GetTypeIdentifier(Type type) => type.GetConfigAttribute<PluginMetadataAttribute, string>(a => a.Identifier);
-
-        internal bool Exists(IntegrationPointerModel pointer) => Exists(pointer.Service);
-
-        internal Type GetLibraryType(IntegrationPointerModel pointer) => LoadedLibraryTypes.FirstOrDefault(p => GetTypeIdentifier(p) == pointer.Service);
-
-        internal Plugin GetInstance(IntegrationPointerModel pointer) => (Plugin)((ILibraryManager)this).GetInstance(pointer.Service);
-
-        internal Plugin GetInstance(IntegrationPointerModel pointer, params object[] parameters) => (Plugin)((ILibraryManager)this).GetInstance(pointer.Service, parameters);
+        protected override string GetTypeIdentifier(Type type) => type.GetConfigAttribute<ServiceHookMetadataAttribute, string>(a => a.Identifier);
     }
 }
