@@ -1,59 +1,62 @@
-using SMACD.Shared.Data;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using SMACD.Shared.Data;
 
 namespace SMACD.Shared.Plugins
 {
     /// <summary>
-    /// Wraps the execution of external (system) tasks run by a plugin
+    ///     Wraps the execution of external (system) tasks run by a plugin
     /// </summary>
     public class ExecutionWrapper
     {
-        /// <summary>
-        /// Task wrapping this execution
-        /// </summary>
-        public Task RuntimeTask { get; private set; } = Task.FromResult(default(PluginResult));
-
-        /// <summary>
-        /// Command being executed
-        /// </summary>
-        public string Command { get; set; }
-
-        /// <summary>
-        /// Duration of last execution
-        /// </summary>
-        public TimeSpan ExecutionTime { get; private set; }
-
-        /// <summary>
-        /// Process object executing this command
-        /// </summary>
-        public Process Process { get; private set; } = new Process();
-
-        /// <summary>
-        /// Standard output from last execution
-        /// </summary>
-        public string StdOut { get; set; }
-
-        /// <summary>
-        /// Standard error from last execution
-        /// </summary>
-        public string StdErr { get; set; }
-
-        /// <summary>
-        /// Plugin Pointer originally used in plugin that created this wrapper
-        /// </summary>
-        public PluginPointerModel PluginPointer { get; set; }
-
         public ExecutionWrapper()
         {
         }
 
-        public ExecutionWrapper(string cmd) => Command = cmd;
+        public ExecutionWrapper(string cmd)
+        {
+            Command = cmd;
+        }
 
         /// <summary>
-        /// Execute the command, wrapped by a Task
+        ///     Task wrapping this execution
+        /// </summary>
+        public Task RuntimeTask { get; private set; } = Task.FromResult(default(PluginResult));
+
+        /// <summary>
+        ///     Command being executed
+        /// </summary>
+        public string Command { get; set; }
+
+        /// <summary>
+        ///     Duration of last execution
+        /// </summary>
+        public TimeSpan ExecutionTime { get; private set; }
+
+        /// <summary>
+        ///     Process object executing this command
+        /// </summary>
+        public Process Process { get; } = new Process();
+
+        /// <summary>
+        ///     Standard output from last execution
+        /// </summary>
+        public string StdOut { get; set; }
+
+        /// <summary>
+        ///     Standard error from last execution
+        /// </summary>
+        public string StdErr { get; set; }
+
+        /// <summary>
+        ///     Plugin Pointer originally used in plugin that created this wrapper
+        /// </summary>
+        public PluginPointerModel PluginPointer { get; set; }
+
+        /// <summary>
+        ///     Execute the command, wrapped by a Task
         /// </summary>
         /// <returns></returns>
         public Task Start(PluginPointerModel pluginPointer)

@@ -1,20 +1,22 @@
-﻿using CommandLine;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using SMACD.CLITool.Verbs;
-using System;
-using System.Threading;
+using SMACD.Shared;
 
 namespace SMACD.CLITool
 {
     internal class Program
     {
-        private static ILogger<Program> Logger { get; set; } = Shared.Extensions.LogFactory.CreateLogger<Program>();
+        private static ILogger<Program> Logger { get; } = Extensions.LogFactory.CreateLogger<Program>();
 
         private static void Main(string[] args)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 Console.Write(Output.Underline().Green().Text("Enter arguments:") + " ");
                 var strArgs = "";
@@ -23,7 +25,7 @@ namespace SMACD.CLITool
                 args = strArgs.Split(' ');
             }
 
-            CommandLine.Parser.Default.ParseArguments<ScanVerb, ReportVerb>(args)
+            Parser.Default.ParseArguments<ScanVerb, ReportVerb>(args)
                 .WithParsed<ScanVerb>(RunVerbLifecycle)
                 .WithParsed<ReportVerb>(RunVerbLifecycle);
         }
@@ -42,7 +44,7 @@ namespace SMACD.CLITool
                 .WriteTo.Console(outputTemplate: template)
                 .WriteTo.File("smacd.log", outputTemplate: currentTimeTemplate + template)
                 .CreateLogger();
-            Shared.Extensions.LogFactory.AddSerilog();
+            Extensions.LogFactory.AddSerilog();
 
             if (!verb.Silent)
                 TerminalEffects.DrawLogoBanner();
@@ -56,10 +58,8 @@ namespace SMACD.CLITool
                 if (runningTask.Exception != null)
                 {
                     if (runningTask.Exception is AggregateException)
-                    {
-                        foreach (var item in ((AggregateException)runningTask.Exception).InnerExceptions)
+                        foreach (var item in runningTask.Exception.InnerExceptions)
                             Logger.LogCritical(item, "Error running task");
-                    }
                     else
                         Logger.LogCritical(runningTask.Exception, "Error running task");
                 }

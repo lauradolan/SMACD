@@ -1,22 +1,19 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
 using SMACD.Shared.Data;
 using SMACD.Shared.Plugins;
 using SMACD.Shared.Resources;
 using SMACD.Shared.WorkspaceManagers;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using YamlDotNet.Serialization;
 
 namespace SMACD.Plugins.OwaspZap
 {
     public class OwaspZapPluginResult : PluginResult
     {
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("OwaspZapPluginResult");
-
         public OwaspZapPluginResult()
         {
         }
@@ -25,10 +22,13 @@ namespace SMACD.Plugins.OwaspZap
         {
         }
 
-        public OwaspZapPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer, workingDirectory)
+        public OwaspZapPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer,
+            workingDirectory)
         {
             SaveResultArtifact(Path.Combine(workingDirectory, ".ptr"), pluginPointer);
         }
+
+        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("OwaspZapPluginResult");
 
         public override async Task SummaryRunOnce(VulnerabilitySummary summary)
         {
@@ -37,7 +37,9 @@ namespace SMACD.Plugins.OwaspZap
             if (File.Exists(jsonReportPath))
             {
                 using (var sr = new StreamReader(jsonReportPath))
+                {
                     report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
+                }
             }
             else
             {
@@ -53,52 +55,54 @@ namespace SMACD.Plugins.OwaspZap
 
             foreach (var alert in report.Site.First().Alerts)
             {
-                var item = new VulnerabilityItem()
+                var item = new VulnerabilityItem
                 {
-                    PluginResults = new List<PluginResult>() { this },
+                    PluginResults = new List<PluginResult> {this},
                     PluginPointer = PluginPointer,
                     PluginRawScore = alert.RiskCode * alert.Confidence,
-                    PluginAdjustedScore = ((alert.RiskCode * alert.Confidence) / (3.0 * 5.0)) * 100,
+                    PluginAdjustedScore = alert.RiskCode * alert.Confidence / (3.0 * 5.0) * 100,
                     Description = alert.Desc,
                     Resources = alert.Instances.Select(instance =>
                     {
-                        var newResource = new HttpResource() { Method = instance.Method, Url = instance.Uri };
-                        var newFingerprint = newResource.Fingerprint(skippedFields: new[] { "resourceId", "fields", "headers" });
+                        var newResource = new HttpResource {Method = instance.Method, Url = instance.Uri};
+                        var newFingerprint =
+                            newResource.Fingerprint(skippedFields: new[] {"resourceId", "fields", "headers"});
                         if (ResourceManager.Instance.ContainsFingerprint(newFingerprint))
                             return ResourceManager.Instance.GetByFingerprint<HttpResource>(newFingerprint);
-                        else
-                        {
-                            ResourceManager.Instance.Register(newResource);
-                            return newResource;
-                        }
+
+                        ResourceManager.Instance.Register(newResource);
+                        return newResource;
                     }).Cast<Resource>().ToList()
                 };
 
                 item.Extras["OWASPZAP"] = new
                 {
-                    Alert = alert.Alert,
-                    Confidence = alert.Confidence,
-                    Count = alert.Count,
-                    CWEId = alert.CWEId,
-                    Desc = alert.Desc,
-                    Name = alert.Name,
-                    OtherInfo = alert.OtherInfo,
-                    PluginId = alert.PluginId,
-                    Reference = alert.Reference,
-                    RiskCode = alert.RiskCode,
-                    RiskDesc = alert.RiskDesc,
-                    Solution = alert.Solution,
-                    SourceId = alert.SourceId,
-                    WASCId = alert.WASCId
+                    alert.Alert,
+                    alert.Confidence,
+                    alert.Count,
+                    alert.CWEId,
+                    alert.Desc,
+                    alert.Name,
+                    alert.OtherInfo,
+                    alert.PluginId,
+                    alert.Reference,
+                    alert.RiskCode,
+                    alert.RiskDesc,
+                    alert.Solution,
+                    alert.SourceId,
+                    alert.WASCId
                 };
 
-                string[] skipFields = new string[] { "pluginResults", "extras" };
+                string[] skipFields = {"pluginResults", "extras"};
                 var fingerprint = item.Fingerprint(skippedFields: skipFields);
                 if (!summary.VulnerabilityItems.Any(i => i.Fingerprint(skippedFields: skipFields) == fingerprint))
+                {
                     summary.VulnerabilityItems.Add(item);
+                }
                 else // correlation -- multiple plugins see this
                 {
-                    var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v => v.Fingerprint(skippedFields: skipFields) == fingerprint);
+                    var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v =>
+                        v.Fingerprint(skippedFields: skipFields) == fingerprint);
                     if (correlatedItem != null && !correlatedItem.PluginResults.Contains(this))
                     {
                         correlatedItem.PluginResults.Add(this);

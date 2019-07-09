@@ -1,14 +1,14 @@
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace SMACD.Shared.WorkspaceManagers
 {
     /// <summary>
-    /// Handles Task creation and management for multi-threaded operations
+    ///     Handles Task creation and management for multi-threaded operations
     /// </summary>
     /// <typeparam name="T">Plugin Result type this Task Manager's actions create</typeparam>
     internal class TaskManager
@@ -17,66 +17,73 @@ namespace SMACD.Shared.WorkspaceManagers
         private const int DEFAULT_MAX_CONCURRENT_THREADS = 10;
 
         private static readonly Lazy<TaskManager> _instance = new Lazy<TaskManager>(() => new TaskManager());
+
+        [ThreadStatic] public static Task CurrentTask;
+
+        internal TaskManager()
+        {
+            Logger.LogInformation("TaskManager has been created with {0} maximum concurrent tasks",
+                MaximumConcurrentThreads);
+        }
+
         internal static TaskManager Instance => _instance.Value;
-
-        [ThreadStatic]
-        public static Task CurrentTask;
-
-        /// <summary>
-        /// Fired when the Task Queue starts its processing loop
-        /// The processing loop expires when the queue is drained
-        /// </summary>
-        public event EventHandler TaskQueueStarted;
-
-        /// <summary>
-        /// Fired when the Task Queue is drained
-        /// </summary>
-        public event EventHandler TaskQueueDrained;
-
-        /// <summary>
-        /// Fired when a Task is started
-        /// </summary>
-        public event EventHandler<Task> TaskStarted;
-
-        /// <summary>
-        /// Fired when a Task is completed
-        /// </summary>
-        public event EventHandler<Task> TaskCompleted;
 
         public bool IsEmpty => !ActiveTasks.Any() && !ScheduledTasks.Any();
 
         /// <summary>
-        /// Controls if the Task Manager is processing new Tasks or not
+        ///     Controls if the Task Manager is processing new Tasks or not
         /// </summary>
-        public ManualResetEventSlim Running { get; private set; } = new ManualResetEventSlim(true);
+        public ManualResetEventSlim Running { get; } = new ManualResetEventSlim(true);
 
         /// <summary>
-        /// Maximum concurrent operations run by this manager
+        ///     Maximum concurrent operations run by this manager
         /// </summary>
         public int MaximumConcurrentThreads { get; set; } = DEFAULT_MAX_CONCURRENT_THREADS;
 
         /// <summary>
-        /// Tasks currently being executed (being in this set does not guarantee Task will be started yet) - Dictionary values are unused
+        ///     Tasks currently being executed (being in this set does not guarantee Task will be started yet) - Dictionary values
+        ///     are unused
         /// </summary>
         private ConcurrentDictionary<Task, bool> ActiveTasks { get; } = new ConcurrentDictionary<Task, bool>();
 
         /// <summary>
-        /// Tasks scheduled for later activation
+        ///     Tasks scheduled for later activation
         /// </summary>
         private ConcurrentQueue<Task> ScheduledTasks { get; } = new ConcurrentQueue<Task>();
 
         /// <summary>
-        /// CLI tool logger
+        ///     CLI tool logger
         /// </summary>
         private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("TaskManager");
 
         /// <summary>
-        /// Worker loop task
+        ///     Worker loop task
         /// </summary>
         private Task TaskManagerWorkerTask { get; set; }
 
         /// <summary>
-        /// Add a Task to the queue
+        ///     Fired when the Task Queue starts its processing loop
+        ///     The processing loop expires when the queue is drained
+        /// </summary>
+        public event EventHandler TaskQueueStarted;
+
+        /// <summary>
+        ///     Fired when the Task Queue is drained
+        /// </summary>
+        public event EventHandler TaskQueueDrained;
+
+        /// <summary>
+        ///     Fired when a Task is started
+        /// </summary>
+        public event EventHandler<Task> TaskStarted;
+
+        /// <summary>
+        ///     Fired when a Task is completed
+        /// </summary>
+        public event EventHandler<Task> TaskCompleted;
+
+        /// <summary>
+        ///     Add a Task to the queue
         /// </summary>
         /// <param name="task">Task to add</param>
         /// <returns></returns>
@@ -87,11 +94,6 @@ namespace SMACD.Shared.WorkspaceManagers
             ScheduledTasks.Enqueue(task);
             TaskManagerWorkerLoop();
             return task;
-        }
-
-        internal TaskManager()
-        {
-            Logger.LogInformation("TaskManager has been created with {0} maximum concurrent tasks", MaximumConcurrentThreads);
         }
 
         private void TaskManagerWorkerLoop()
@@ -109,8 +111,7 @@ namespace SMACD.Shared.WorkspaceManagers
                 {
                     if (!Running.Wait(500))
                         continue;
-                    else
-                        Thread.Sleep(500);
+                    Thread.Sleep(500);
 
                     if ((DateTime.Now - lastLog).Seconds > WORKER_LOOP_LOGGER_INTERVAL_SECS)
                     {
@@ -131,7 +132,7 @@ namespace SMACD.Shared.WorkspaceManagers
                                 task.Key.Start();
                                 task.Key.ContinueWith(t =>
                                 {
-                                    ActiveTasks.TryRemove(t, out bool emptyVar);
+                                    ActiveTasks.TryRemove(t, out var emptyVar);
                                     Logger.LogDebug("Task ID {0} has completed", t.Id);
                                     TaskCompleted?.Invoke(this, task.Key);
                                 });
@@ -145,16 +146,16 @@ namespace SMACD.Shared.WorkspaceManagers
                     }
 
                     while (ActiveTasks.Count < MaximumConcurrentThreads && ScheduledTasks.Any())
-                    {
                         // Keep TaskManager full to maximum by dequeueing scheduled tasks
                         // TODO: If these Try*s fail, weird things will happen; need to handle false cases
-                        if (ScheduledTasks.TryDequeue(out Task task))
+                        if (ScheduledTasks.TryDequeue(out var task))
                         {
-                            Logger.LogDebug("Moving status of Task {0} from {1} to {2} ", task.Id, "scheduled", "active");
+                            Logger.LogDebug("Moving status of Task {0} from {1} to {2} ", task.Id, "scheduled",
+                                "active");
                             ActiveTasks.TryAdd(task, false);
                         }
-                    }
                 }
+
                 TaskManagerWorkerTask = null;
                 TaskQueueDrained?.Invoke(this, new EventArgs());
                 Logger.LogDebug("Task Queue drained");

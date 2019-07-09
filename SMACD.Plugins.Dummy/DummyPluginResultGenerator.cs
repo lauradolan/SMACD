@@ -1,15 +1,12 @@
-﻿using SMACD.Shared.Data;
-using SMACD.Shared.Plugins;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using SMACD.Shared.Data;
+using SMACD.Shared.Plugins;
 
 namespace SMACD.Plugins.Dummy
 {
     public class DummyPluginResult : PluginResult
     {
-        public int Generations { get; set; }
-        public TimeSpan Duration { get; set; }
-
         public DummyPluginResult()
         {
         }
@@ -18,9 +15,13 @@ namespace SMACD.Plugins.Dummy
         {
         }
 
-        public DummyPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer, workingDirectory)
+        public DummyPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer,
+            workingDirectory)
         {
         }
+
+        public int Generations { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public override async Task SummaryRunOnce(VulnerabilitySummary summary)
         {

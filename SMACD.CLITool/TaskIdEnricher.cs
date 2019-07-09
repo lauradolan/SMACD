@@ -1,18 +1,45 @@
-﻿using Crayon;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Crayon;
 using Serilog.Core;
 using Serilog.Events;
 using SMACD.Shared;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SMACD.CLITool
 {
     internal class TaskIdEnricher : ILogEventEnricher
     {
+        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+        {
+            if (Task.CurrentId == null)
+            {
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", Output.Bold().Green().Text("#")));
+            }
+            else if (Extensions.CurrentTask != null && Extensions.CurrentTask.Tag() != null)
+            {
+                var tagData = Extensions.CurrentTask.Tag();
+                string str;
+                if (tagData.Item1) // system thread
+                    str = Output.White().Reversed().Text($"{tagData.Item2}");
+                else if (!string.IsNullOrEmpty(tagData.Item2)) // named worker
+                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
+                        Output.Underline().Text(tagData.Item2));
+                else // worker thread
+                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
+                        Output.Underline().Text($"WORKER#{Task.CurrentId})"));
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", str));
+            }
+            else
+            {
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
+                    "TaskId", Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count, $"WORK{Task.CurrentId}")));
+            }
+        }
+
         #region Styling
 
-        private static List<ConsoleColor> Colors { get; set; } = new List<ConsoleColor>()
+        private static List<ConsoleColor> Colors { get; } = new List<ConsoleColor>
         {
             ConsoleColor.Blue,
             ConsoleColor.Cyan,
@@ -26,7 +53,7 @@ namespace SMACD.CLITool
             ConsoleColor.DarkRed
         };
 
-        private static int _colorIndex = 0;
+        private static int _colorIndex;
 
         private static int ColorIndex
         {
@@ -74,30 +101,10 @@ namespace SMACD.CLITool
                 case -1:
                     return Output.White(s);
             }
+
             return s;
         }
 
         #endregion Styling
-
-        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
-        {
-            if (Task.CurrentId == null)
-                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", Output.Bold().Green().Text("#")));
-            else if (Extensions.CurrentTask != null && Extensions.CurrentTask.Tag() != null)
-            {
-                var tagData = Shared.Extensions.CurrentTask.Tag();
-                string str;
-                if (tagData.Item1) // system thread
-                    str = Output.White().Reversed().Text($"{tagData.Item2}");
-                else if (!string.IsNullOrEmpty(tagData.Item2)) // named worker
-                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count, Output.Underline().Text(tagData.Item2));
-                else // worker thread
-                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count, Output.Underline().Text($"WORKER#{Task.CurrentId})"));
-                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", str));
-            }
-            else
-                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
-                    "TaskId", Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count, $"WORK{Task.CurrentId}")));
-        }
     }
 }

@@ -1,9 +1,7 @@
-using SMACD.Shared.Attributes;
-using SMACD.Shared.Data;
-using SMACD.Shared.Plugins;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
+using SMACD.Shared.Attributes;
+using SMACD.Shared.Plugins;
 
 namespace SMACD.Shared.WorkspaceManagers
 {
@@ -19,16 +17,18 @@ namespace SMACD.Shared.WorkspaceManagers
     }
 
     /// <summary>
-    /// Handles scanning and mapping of service hooks and integrations
+    ///     Handles scanning and mapping of service hooks and integrations
     /// </summary>
     public class ServiceHookManager : LibraryManager<Plugin>
     {
-        private static readonly Lazy<ServiceHookManager> _instance = new Lazy<ServiceHookManager>(() => new ServiceHookManager());
-        public static ServiceHookManager Instance => _instance.Value;
+        private static readonly Lazy<ServiceHookManager> _instance =
+            new Lazy<ServiceHookManager>(() => new ServiceHookManager());
 
         private ServiceHookManager() : base("SMACD.Services.*.dll", "ServiceHookManager")
         {
         }
+
+        public static ServiceHookManager Instance => _instance.Value;
 
         public void RegisterHook(ServiceHookType hookType, Action callback)
         {
@@ -54,6 +54,9 @@ namespace SMACD.Shared.WorkspaceManagers
             }
         }
 
-        protected override string GetTypeIdentifier(Type type) => type.GetConfigAttribute<ServiceHookMetadataAttribute, string>(a => a.Identifier);
+        protected override string GetTypeIdentifier(Type type)
+        {
+            return type.GetConfigAttribute<ServiceHookMetadataAttribute, string>(a => a.Identifier);
+        }
     }
 }

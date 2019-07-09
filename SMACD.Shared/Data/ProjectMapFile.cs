@@ -4,28 +4,31 @@ using System.Collections.Generic;
 namespace SMACD.Shared.Data
 {
     /// <summary>
-    /// Project Map - Stores information about Features
+    ///     Project Map - Stores information about Features
     /// </summary>
     public class ProjectMapFile : IModel
     {
         /// <summary>
-        /// When this file was created originally
+        ///     When this file was created originally
         /// </summary>
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// When this file was last updated
+        ///     When this file was last updated
         /// </summary>
         public DateTime Updated { get; set; }
 
         /// <summary>
-        /// Features stored in this Project Map
+        ///     Features stored in this Project Map
         /// </summary>
         public IList<FeatureModel> Features { get; set; } = new List<FeatureModel>();
 
         /// <summary>
-        /// Fingerprint of this data model
+        ///     Fingerprint of this data model
         /// </summary>
-        public string GetFingerprint() => this.Fingerprint();
+        public string GetFingerprint()
+        {
+            return this.Fingerprint();
+        }
     }
 }

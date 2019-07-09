@@ -1,12 +1,12 @@
-﻿using Crayon;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Crayon;
 
 namespace SMACD.CLITool
 {
     internal static class TerminalEffects
     {
-        private static string LOGO2 =
+        private static readonly string LOGO2 =
             "" + Environment.NewLine +
             " .d8888b.  888b     d888        d8888  .d8888b.  8888888b.  " + Environment.NewLine +
             "d88P  Y88b 8888b   d8888       d88888 d88P  Y88b 888  `Y88b " + Environment.NewLine +
@@ -32,7 +32,8 @@ namespace SMACD.CLITool
             Console.WriteLine(Output.Red().Text(Center(LOGO2)));
 
             Console.BackgroundColor = ConsoleColor.White;
-            Console.WriteLine(Output.Bold().Blue().Text(Center("System Mapping & Architectural Concept Diagram CLI Tool")));
+            Console.WriteLine(Output.Bold().Blue()
+                .Text(Center("System Mapping & Architectural Concept Diagram CLI Tool")));
 
             Console.BackgroundColor = ConsoleColor.White;
             Console.WriteLine(new string(' ', Console.WindowWidth));
@@ -59,9 +60,10 @@ namespace SMACD.CLITool
             var lines = new List<string>();
             foreach (var line in text.Split(Environment.NewLine))
             {
-                int padLeft = (Console.WindowWidth - line.Length) / 2 + line.Length;
+                var padLeft = (Console.WindowWidth - line.Length) / 2 + line.Length;
                 lines.Add(line.PadLeft(padLeft).PadRight(Console.WindowWidth));
             }
+
             return string.Join(Environment.NewLine, lines);
         }
     }

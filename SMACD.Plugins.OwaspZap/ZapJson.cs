@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SMACD.Plugins.OwaspZap
 {
@@ -11,17 +10,13 @@ namespace SMACD.Plugins.OwaspZap
 
     public class ZapJsonSite
     {
-        [JsonProperty("@name")]
-        public string Name { get; set; }
+        [JsonProperty("@name")] public string Name { get; set; }
 
-        [JsonProperty("@host")]
-        public string Host { get; set; }
+        [JsonProperty("@host")] public string Host { get; set; }
 
-        [JsonProperty("@port")]
-        public string Port { get; set; }
+        [JsonProperty("@port")] public string Port { get; set; }
 
-        [JsonProperty("@ssl")]
-        public string IsSSL { get; set; }
+        [JsonProperty("@ssl")] public string IsSSL { get; set; }
 
         public IEnumerable<ZapJsonAlertWithInstances> Alerts { get; set; }
     }

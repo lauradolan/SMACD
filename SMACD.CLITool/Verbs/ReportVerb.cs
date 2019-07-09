@@ -1,10 +1,10 @@
-﻿using CommandLine;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -14,19 +14,23 @@ namespace SMACD.CLITool.Verbs
         [Option('d', "workingdir", HelpText = "Working directory", Required = true)]
         public string WorkingDir { get; set; }
 
-        [Option('t', "threshold", HelpText = "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
+        [Option('t', "threshold", HelpText =
+            "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
 
-        private static ILogger<ScanVerb> Logger { get; set; } = Shared.Extensions.LogFactory.CreateLogger<ScanVerb>();
+        private static ILogger<ScanVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ScanVerb>();
 
         public override Task Execute()
         {
             Workspace.Instance.Load(WorkingDir);
             var summary = Workspace.Instance.ReprocessEntireMap().Result;
 
-            var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory, "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
+            var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory,
+                "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
             using (var sw = new StreamWriter(outputFile))
+            {
                 sw.WriteLine(JsonConvert.SerializeObject(summary));
+            }
 
             Console.WriteLine("Average score: {0}", summary.ScoreAvg);
             Console.WriteLine("Summed score: {0}", summary.ScoreSum);
@@ -47,6 +51,7 @@ namespace SMACD.CLITool.Verbs
                     Environment.Exit(0);
                 }
             }
+
             return Task.FromResult(0);
         }
     }
