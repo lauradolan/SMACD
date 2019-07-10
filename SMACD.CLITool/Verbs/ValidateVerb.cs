@@ -24,8 +24,10 @@ namespace SMACD.CLITool.Verbs
             var extensions = Workspace.GetLoadedExtensions();
 
             Logger.LogInformation("Validating that all Resource IDs exist");
+            var tasksGenerated = 0;
             Workspace.Instance.IteratePluginPointers((feature, useCase, abuseCase, pluginPointer) =>
             {
+                tasksGenerated++;
                 var plugin = extensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
                 if (plugin == null)
                 {
@@ -49,7 +51,7 @@ namespace SMACD.CLITool.Verbs
                 }
             });
 
-            Logger.LogInformation("Validation of {0} complete! Found {0} issues", ServiceMap, issues);
+            Logger.LogInformation("Validation of {0} complete! Found {1} issues. Service Map scan will generate {2} tasks.", ServiceMap, issues, tasksGenerated);
 
             return Task.FromResult(0);
         }
