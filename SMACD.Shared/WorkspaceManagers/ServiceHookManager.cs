@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using SMACD.Shared.Attributes;
-using SMACD.Shared.Plugins;
 
 namespace SMACD.Shared.WorkspaceManagers
 {
@@ -19,7 +18,7 @@ namespace SMACD.Shared.WorkspaceManagers
     /// <summary>
     ///     Handles scanning and mapping of service hooks and integrations
     /// </summary>
-    public class ServiceHookManager : LibraryManager<Plugin>
+    public class ServiceHookManager : LibraryManager<ServiceHook>
     {
         private static readonly Lazy<ServiceHookManager> _instance =
             new Lazy<ServiceHookManager>(() => new ServiceHookManager());

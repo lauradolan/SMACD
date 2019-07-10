@@ -95,10 +95,8 @@ namespace SMACD.Plugins.OwaspZap
 
                 string[] skipFields = {"pluginResults", "extras"};
                 var fingerprint = item.Fingerprint(skippedFields: skipFields);
-                if (!summary.VulnerabilityItems.Any(i => i.Fingerprint(skippedFields: skipFields) == fingerprint))
-                {
+                if (summary.VulnerabilityItems.All(i => i.Fingerprint(skippedFields: skipFields) != fingerprint))
                     summary.VulnerabilityItems.Add(item);
-                }
                 else // correlation -- multiple plugins see this
                 {
                     var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v =>

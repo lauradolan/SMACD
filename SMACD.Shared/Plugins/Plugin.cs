@@ -62,32 +62,62 @@ namespace SMACD.Shared.Plugins
         public abstract Task<PluginResult> Reprocess(string workingDirectory);
 
         /// <summary>
-        ///     Retrieve a Task that will execute this Plugin (inside a wrapper)
-        ///     This Task will be tagged with its Plugin name and Workspace ID
+        ///     Validate that the settings provided in a given pointer are valid
         /// </summary>
-        /// <param name="workspace">Workspace running this Plugin</param>
-        /// <param name="pointer">Pointer that describes the Plugin and its options</param>
+        /// <param name="pointer">Plugin pointer to validate</param>
         /// <returns></returns>
-        public Task<PluginResult> GetValidatedExecutionTask(Workspace workspace, PluginPointerModel pointer)
+        public bool Validate(PluginPointerModel pointer)
         {
-            var logger = Extensions.LogFactory.CreateLogger<Plugin>();
-
             var coalescedOptions = GetOptions(pointer.PluginParameters);
             if (ConfigurableOptions.Any(o =>
                 o.Required && (!coalescedOptions.ContainsKey(o.OptionName) ||
                                string.IsNullOrEmpty(coalescedOptions[o.OptionName]))))
-                throw new Exception("One or more required configuration elements are missing!");
+            {
+                Logger.LogCritical("One or more required configuration elements are missing!");
+                return false;
+            }
 
             if (ValidResourceTypes == null && pointer.Resource != null)
-                throw new Exception("Plugin does not take any Resource inputs");
+            {
+                Logger.LogCritical("Plugin does not take any Resource inputs");
+                return false;
+            }
 
             if (pointer.Resource != null)
             {
                 var targetResource = ResourceManager.Instance.GetByPointer(pointer.Resource); // Check if this resolves
                 if (targetResource == null)
-                    throw new Exception("Resource does not resolve");
-                if (!ValidResourceTypes.Any(t => t.IsAssignableFrom(targetResource.GetType())))
-                    throw new Exception("One or more resources are not supported by plugin");
+                {
+                    Logger.LogCritical("Resource {0} does not resolve", pointer.Resource.ResourceId);
+                    return false;
+                }
+
+                if (!ValidResourceTypes.Any(t => t.IsInstanceOfType(targetResource)))
+                {
+                    Logger.LogCritical("One or more resources are not supported by plugin");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Retrieve a Task that will execute this Plugin (inside a wrapper)
+        ///     This Task will be tagged with its Plugin name
+        /// </summary>
+        /// <param name="pointer">Pointer that describes the Plugin and its options</param>
+        /// <returns></returns>
+        public Task<PluginResult> GetValidatedExecutionTask(PluginPointerModel pointer)
+        {
+            var logger = Extensions.LogFactory.CreateLogger<Plugin>();
+            try
+            {
+                Validate(pointer);
+            }
+            catch (Exception ex)
+            {
+                logger.LogCritical(ex, "Error validating Plugin Pointer for execution");
             }
 
             Task<PluginResult> generatedTask = null;

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
 using SMACD.Shared.Resources;
 
@@ -46,6 +48,19 @@ namespace SMACD.Shared.WorkspaceManagers
         ///     Fired when a Resource has a collision with another Resource's fingerprint
         /// </summary>
         public event ResourceCollisionDelegate ResourceFingerprintCollision;
+
+        /// <summary>
+        ///     Get a list of known resource handler tags and types
+        /// </summary>
+        /// <returns>Builder with tag mappings</returns>
+        internal static List<Tuple<string, Type>> GetKnownResourceHandlers()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes().Select(type =>
+            {
+                var attr = type.GetConfigAttribute<ResourceIdentifierAttribute, string>(a => a.ResourceIdentifier);
+                return attr == null ? null : Tuple.Create(attr, type);
+            })).Except(new Tuple<string, Type>[] {null}).ToList();
+        }
 
         public bool ContainsId(string resourceId)
         {

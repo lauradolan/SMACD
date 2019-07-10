@@ -37,7 +37,7 @@ namespace SMACD.Shared
         /// <summary>
         ///     Features from the Service Map
         /// </summary>
-        public IList<FeatureModel> Features { get; set; }
+        public IList<FeatureModel> Features => ServiceMap?.Features;
 
         /// <summary>
         ///     If the Workspace has either been created or loaded
@@ -49,12 +49,12 @@ namespace SMACD.Shared
         /// </summary>
         public string WorkingDirectory { get; private set; }
 
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger(typeof(Workspace).Name);
-
         /// <summary>
-        ///     Fired when the Workspace queue has completed
+        ///     Service Map currently loaded
         /// </summary>
-        public event EventHandler WorkspaceCompleted;
+        public ServiceMapFile ServiceMap { get; private set; }
+
+        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger(typeof(Workspace).Name);
 
         /// <summary>
         ///     Deserialize a Service Map from a given file
@@ -65,20 +65,31 @@ namespace SMACD.Shared
         {
             using (var sr = new StreamReader(file))
             {
-                var deserializer = new DeserializerBuilder();
-
-                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
-                foreach (var type in asm.GetTypes())
-                {
-                    var attr = type.GetConfigAttribute<ResourceIdentifierAttribute, string>(a => a.ResourceIdentifier);
-                    if (attr != null)
-                        deserializer = deserializer.WithTagMapping("!" + attr, type);
-                }
-
-                return deserializer
+                return new DeserializerBuilder()
                     .WithNamingConvention(new CamelCaseNamingConvention())
+                    .AddLoadedTagMappings()
                     .Build()
                     .Deserialize<ServiceMapFile>(sr);
+            }
+        }
+
+        /// <summary>
+        ///     Serialize a Service Map to a given file
+        /// </summary>
+        /// <param name="file">File to serialize Service Map to</param>
+        /// <returns></returns>
+        public static void PutServiceMap(ServiceMapFile serviceMap, string file)
+        {
+            // Change the metadata to reflect this updated version
+            serviceMap.Updated = DateTime.Now;
+
+            using (var sr = new StreamWriter(file))
+            {
+                new SerializerBuilder()
+                    .WithNamingConvention(new CamelCaseNamingConvention())
+                    .AddLoadedTagMappings()
+                    .Build()
+                    .Serialize(sr, serviceMap);
             }
         }
 
@@ -91,6 +102,10 @@ namespace SMACD.Shared
         {
             // Configuration:
             // <storage root>/<workspace>/<resource>/<plugin>.<item hash>
+
+            if (string.IsNullOrEmpty(WorkingDirectory))
+                throw new Exception(
+                    "Attempted to create child in ephemeral workspace; this operation is not allowed without a persistent working directory");
 
             var _workingDirectory = "";
             if (pointer.Resource == null)
@@ -105,9 +120,6 @@ namespace SMACD.Shared
                 Directory.CreateDirectory(_workingDirectory);
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     new UnixFileInfo(_workingDirectory).FileAccessPermissions = FileAccessPermissions.AllPermissions;
-                else
-                    Logger.LogWarning(
-                        "!!! Strange behavior *sometimes* occurs with some containers and Docker mounts between Linux and Windows !!!");
             }
 
             return _workingDirectory;
@@ -145,6 +157,44 @@ namespace SMACD.Shared
             var resultInstances = await Task.WhenAll(resultTasks);
 
             return await SummarizeArtifacts(await Task.WhenAll(resultTasks));
+        }
+
+        /// <summary>
+        ///     Retrieve a list of extensions currently loaded
+        /// </summary>
+        /// <returns></returns>
+        public static IList<Tuple<string, string>> GetLoadedExtensions()
+        {
+            var loaded = new List<Tuple<string, string>>();
+            loaded.AddRange(PluginManager.Instance.LoadedLibraryTypes.Select(t =>
+            {
+                var attr = t.GetConfigAttribute<PluginMetadataAttribute, PluginMetadataAttribute>(a => a);
+                return attr == null ? null : Tuple.Create(attr.Identifier, attr.Name);
+            }));
+
+            loaded.AddRange(ResourceManager.GetKnownResourceHandlers()
+                .Select(h => Tuple.Create(h.Item1, $"{h.Item1} Resource Handler")));
+
+            loaded.AddRange(ServiceHookManager.Instance.LoadedLibraryTypes.Select(t =>
+            {
+                var attr = t.GetConfigAttribute<ServiceHookMetadataAttribute, ServiceHookMetadataAttribute>(a => a);
+                return attr == null ? null : Tuple.Create(attr.Identifier, attr.Name);
+            }));
+
+            loaded.RemoveAll(i => i == null);
+            return loaded;
+        }
+
+        /// <summary>
+        ///     Validate a Plugin Pointer to ensure its target is acceptable
+        /// </summary>
+        /// <param name="pointer">Plugin Pointer to validate</param>
+        /// <returns></returns>
+        public bool Validate(PluginPointerModel pointer)
+        {
+            var instance = PluginManager.Instance.GetInstance(pointer);
+            if (instance == null) return false;
+            return instance.Validate(pointer);
         }
 
         private async Task<VulnerabilitySummary> SummarizeArtifacts(IList<PluginResult> results)
@@ -207,7 +257,7 @@ namespace SMACD.Shared
                     throw new Exception($"Resource '{pointer.Resource.ResourceId}' does not exist in resource map");
             }
 
-            return TaskManager.Instance.Enqueue(plugin.GetValidatedExecutionTask(this, pointer));
+            return TaskManager.Instance.Enqueue(plugin.GetValidatedExecutionTask(pointer));
         }
 
         /// <summary>
@@ -225,6 +275,36 @@ namespace SMACD.Shared
             return TaskManager.Instance.Enqueue(plugin.Reprocess(GetChildWorkingDirectory(pointer)));
         }
 
+        /// <summary>
+        ///     Creates a Workspace without a persistent Working Directory (cannot create Plugin instances)
+        /// </summary>
+        /// <returns></returns>
+        public void CreateEphemeral(string serviceMapFile = null)
+        {
+            if (string.IsNullOrEmpty(serviceMapFile))
+            {
+                Logger.LogDebug("Creating new ephemeral Workspace with blank Service Map");
+                ServiceMap = new ServiceMapFile
+                {
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now
+                };
+            }
+            else
+            {
+                Logger.LogDebug("Creating new ephemeral Workspace with Service Map from {0}", serviceMapFile);
+                ImportServiceMapFromFile(serviceMapFile);
+            }
+
+            WorkingDirectory = null;
+        }
+
+        /// <summary>
+        ///     Creates a new Workspace around a given Service Map
+        /// </summary>
+        /// <param name="serviceMapFile">Service Map file</param>
+        /// <param name="workingDirectory">Working Directory, otherwise it is randomly generated</param>
+        /// <returns></returns>
         public void Create(string serviceMapFile, string workingDirectory = null)
         {
             Logger.LogDebug("Creating new Workspace for Service Map {0}", serviceMapFile);
@@ -281,13 +361,12 @@ namespace SMACD.Shared
         private void ImportServiceMapFromFile(string serviceMapFile)
         {
             Logger.LogDebug("Reading Service Map {0}", serviceMapFile);
-            var map = GetServiceMap(serviceMapFile);
-            Features = map.Features;
-            Logger.LogInformation("Read {0} Features and {1} Resources from Service Map", map.Features.Count,
-                map.Resources.Count);
+            ServiceMap = GetServiceMap(serviceMapFile);
+            Logger.LogInformation("Read {0} Features and {1} Resources from Service Map", ServiceMap.Features.Count,
+                ServiceMap.Resources.Count);
 
-            Logger.LogDebug("Registering {1} Resources in ResourceManager", map.Resources.Count);
-            foreach (var resource in map.Resources)
+            Logger.LogDebug("Registering {1} Resources in ResourceManager", ServiceMap.Resources.Count);
+            foreach (var resource in ServiceMap.Resources)
                 if (ResourceManager.Instance.Register(resource) == null)
                     Logger.LogWarning("Could not successfully register resource {0}", resource.ResourceId);
                 else

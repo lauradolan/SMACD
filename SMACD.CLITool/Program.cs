@@ -25,9 +25,12 @@ namespace SMACD.CLITool
                 args = strArgs.Split(' ');
             }
 
-            Parser.Default.ParseArguments<ScanVerb, ReportVerb>(args)
+            Parser.Default.ParseArguments<GenerateVerb, ReportVerb, ScanVerb, SnoopVerb, ValidateVerb>(args)
+                .WithParsed<GenerateVerb>(RunVerbLifecycle)
+                .WithParsed<ReportVerb>(RunVerbLifecycle)
                 .WithParsed<ScanVerb>(RunVerbLifecycle)
-                .WithParsed<ReportVerb>(RunVerbLifecycle);
+                .WithParsed<SnoopVerb>(RunVerbLifecycle)
+                .WithParsed<ValidateVerb>(RunVerbLifecycle);
         }
 
         private static void RunVerbLifecycle(VerbBase verb)

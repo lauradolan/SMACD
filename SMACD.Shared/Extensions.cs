@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SMACD.Shared.WorkspaceManagers;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization.TypeInspectors;
@@ -230,7 +231,7 @@ namespace SMACD.Shared
         /// </summary>
         public static ILoggerFactory LogFactory { get; set; } = new LoggerFactory();
 
-        private static Random Random { get; } = new Random((int) DateTime.Now.Ticks);
+        public static Random Random { get; } = new Random((int) DateTime.Now.Ticks);
 
         /// <summary>
         ///     Generate a random string
@@ -251,6 +252,18 @@ namespace SMACD.Shared
         public static string RandomName()
         {
             return $"{ADJECTIVES[Random.Next(ADJECTIVES.Length)]}.{VERBS[Random.Next(VERBS.Length)]}";
+        }
+
+        /// <summary>
+        ///     Add loaded tag mappings from Resource handlers to [de]serializer
+        /// </summary>
+        /// <param name="builder">[De]serializer builder</param>
+        /// <returns>Builder with tag mappings</returns>
+        internal static T AddLoadedTagMappings<T>(this T builder) where T : BuilderSkeleton<T>
+        {
+            ResourceManager.GetKnownResourceHandlers()
+                .ForEach(h => builder = builder.WithTagMapping("!" + h.Item1, h.Item2));
+            return builder;
         }
 
         /// <summary>

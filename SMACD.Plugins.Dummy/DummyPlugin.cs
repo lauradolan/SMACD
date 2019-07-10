@@ -6,10 +6,12 @@ using Microsoft.Extensions.Logging;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
 using SMACD.Shared.Plugins;
+using SMACD.Shared.Resources;
 
 namespace SMACD.Plugins.Dummy
 {
     [PluginMetadata("dummy", Name = "Dummy Plugin")]
+    [ValidResources(typeof(HttpResource))]
     public class DummyPlugin : Plugin
     {
         public override Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)

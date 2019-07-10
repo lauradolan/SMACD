@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared;
@@ -12,25 +13,43 @@ namespace SMACD.CLITool.Verbs
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
-        [Option('t', "threshold", HelpText =
-            "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
-        public int? Threshold { get; set; }
-
         private static ILogger<ValidateVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ValidateVerb>();
 
         public override Task Execute()
         {
-            var serviceMap = Workspace.GetServiceMap(ServiceMap);
+            var issues = 0;
+            Workspace.Instance.CreateEphemeral(ServiceMap);
+
+            Logger.LogInformation("Grabbing list of loaded extensions");
+            var extensions = Workspace.GetLoadedExtensions();
 
             Logger.LogInformation("Validating that all Resource IDs exist");
-            foreach (var feature in serviceMap.Features)
-            foreach (var useCase in feature.UseCases)
-            foreach (var abuseCase in useCase.AbuseCases)
-            foreach (var ptr in abuseCase.PluginPointers)
-                if (ptr.Resource != null)
-                    if (!ResourceManager.Instance.ContainsPointer(ptr.Resource))
-                        Logger.LogError(
-                            $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {ptr.Plugin} : Resource list does *not* contain the resource requested");
+            Workspace.Instance.IteratePluginPointers((feature, useCase, abuseCase, pluginPointer) =>
+            {
+                var plugin = extensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
+                if (plugin == null)
+                {
+                    Logger.LogError(
+                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Requested plugin name is not loaded");
+                    issues++;
+                }
+                else if (!Workspace.Instance.Validate(pluginPointer))
+                {
+                    Logger.LogError(
+                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Plugin pointer is not valid");
+                    issues++;
+                }
+
+                if (pluginPointer.Resource == null) return;
+                if (!ResourceManager.Instance.ContainsPointer(pluginPointer.Resource))
+                {
+                    Logger.LogError(
+                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Resource list does *not* contain the resource requested");
+                    issues++;
+                }
+            });
+
+            Logger.LogInformation("Validation of {0} complete! Found {0} issues", ServiceMap, issues);
 
             return Task.FromResult(0);
         }
