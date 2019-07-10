@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
+using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared;
 using SMACD.Shared.WorkspaceManagers;
@@ -15,43 +20,42 @@ namespace SMACD.CLITool.Verbs
 
         private static ILogger<ValidateVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ValidateVerb>();
 
+        private int _tasksGenerated = 0;
+        private IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+
         public override Task Execute()
         {
-            var issues = 0;
             Workspace.Instance.CreateEphemeral(ServiceMap);
 
-            Logger.LogInformation("Grabbing list of loaded extensions");
-            var extensions = Workspace.GetLoadedExtensions();
-
-            Logger.LogInformation("Validating that all Resource IDs exist");
-            var tasksGenerated = 0;
-            Workspace.Instance.IteratePluginPointers((feature, useCase, abuseCase, pluginPointer) =>
+            var treeRenderer = new TreeRenderer();
+            treeRenderer.AfterPluginPointerDrawn += (indent, isLast, pluginPointer) =>
             {
-                tasksGenerated++;
-                var plugin = extensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
-                if (plugin == null)
+                _tasksGenerated++;
+                var plugin = _loadedExtensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
+                var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?", () => plugin != null, indent, isLast);
+                if (plugin != null)
                 {
-                    Logger.LogError(
-                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Requested plugin name is not loaded");
-                    issues++;
+                    var tests = new Tuple<string, Func<bool?>>[]
+                    {
+                        Tuple.Create("Plugin pointer has valid options?", new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
+                        Tuple.Create("Resource Map contains Resource?", new Func<bool?>(() =>
+                        {
+                            if (pluginPointer.Resource == null) return null;
+                            return ResourceManager.Instance.ContainsPointer(pluginPointer.Resource);
+                        }))
+                    };
+                    foreach (var test in tests)
+                        treeRenderer.WriteExecutedTest(test.Item1, test.Item2, newIndent, tests.Last().Equals(test));
                 }
-                else if (!Workspace.Instance.Validate(pluginPointer))
-                {
-                    Logger.LogError(
-                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Plugin pointer is not valid");
-                    issues++;
-                }
+            };
+            
+            Console.WriteLine(Output.Reversed().White().Text(Path.GetFileName(ServiceMap)));
+            foreach (var feature in Workspace.Instance.Features)
+                treeRenderer.PrintNode(feature, "", Workspace.Instance.Features.Last() == feature);
 
-                if (pluginPointer.Resource == null) return;
-                if (!ResourceManager.Instance.ContainsPointer(pluginPointer.Resource))
-                {
-                    Logger.LogError(
-                        $"{feature.Name} -> {useCase.Name} -> {abuseCase.Name} -> {pluginPointer.Plugin} : Resource list does *not* contain the resource requested");
-                    issues++;
-                }
-            });
-
-            Logger.LogInformation("Validation of {0} complete! Found {1} issues. Service Map scan will generate {2} tasks.", ServiceMap, issues, tasksGenerated);
+            Logger.LogInformation(
+                "Validation of {0} complete! Tests: {1} passed, {2} failed. Service Map scan will generate {3} tasks.",
+                ServiceMap, treeRenderer.TestsPassed, treeRenderer.TestsFailed, _tasksGenerated);
 
             return Task.FromResult(0);
         }

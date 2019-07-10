@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SMACD.Shared.Data;
 using YamlDotNet.Serialization;
 
 namespace SMACD.Shared.Resources
@@ -6,7 +7,7 @@ namespace SMACD.Shared.Resources
     /// <summary>
     ///     Represents a Resource resolved to its handler
     /// </summary>
-    public abstract class Resource
+    public abstract class Resource : IModel
     {
         protected Resource()
         {
@@ -45,5 +46,7 @@ namespace SMACD.Shared.Resources
         {
             return this;
         }
+
+        public string GetFingerprint() => this.Fingerprint();
     }
 }

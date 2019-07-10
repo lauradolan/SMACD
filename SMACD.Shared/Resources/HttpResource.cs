@@ -99,5 +99,15 @@ namespace SMACD.Shared.Resources
                 MethodInstance
             );
         }
+
+        public override string ToString()
+        {
+            var str = $"{Method} {UriInstance.ToString()}";
+            if (Fields.Count > 0)
+                str += $" ({Fields.Count} fields)";
+            if (Headers.Count > 0)
+                str += $" ({Headers.Count} headers)";
+            return str;
+        }
     }
 }
