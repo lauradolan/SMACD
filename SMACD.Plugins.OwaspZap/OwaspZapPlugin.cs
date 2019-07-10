@@ -51,9 +51,7 @@ namespace SMACD.Plugins.OwaspZap
             wrapper.Process.ErrorDataReceived += (s, e) => Logger.LogDebug(e.Data);
             await wrapper.Start(pointer);
 
-            Logger.LogInformation($"Completed OWASP ZAP scanner runtime execution in {0}", wrapper.ExecutionTime);
-            //if (!string.IsNullOrEmpty(wrapper.StdErr))
-            //    Logger.LogError("Error executing scanner: " + wrapper.StdErr);
+            Logger.LogInformation("Completed OWASP ZAP scanner runtime execution in {0}", wrapper.ExecutionTime);
             return new OwaspZapPluginResult(pointer, workingDirectory);
         }
 
