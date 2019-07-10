@@ -28,7 +28,7 @@ namespace SMACD.CLITool.Verbs
             Logger.LogInformation("Creating 1-{0} of each element for a new Service Map", MaxOfEach);
             Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
             {
-                Name = new Faker().Lorem.Sentence(),
+                Name = JargonGenerator.GenerateMultiPartJargon(),
                 Description = new Faker().Lorem.Paragraph(2),
                 Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
                 {
@@ -43,7 +43,7 @@ namespace SMACD.CLITool.Verbs
                 UseCases = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(useCaseId =>
                     new UseCaseModel
                     {
-                        Name = new Faker().Lorem.Sentence(),
+                        Name = JargonGenerator.GenerateMultiPartJargon(),
                         Description = new Faker().Lorem.Paragraph(2),
                         Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
                         {
@@ -58,7 +58,7 @@ namespace SMACD.CLITool.Verbs
                         AbuseCases = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(abuseCaseId =>
                             new AbuseCaseModel
                             {
-                                Name = new Faker().Lorem.Sentence(),
+                                Name = JargonGenerator.GenerateMultiPartJargon(),
                                 Description = new Faker().Lorem.Paragraph(2),
                                 Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
                                 {
@@ -80,7 +80,6 @@ namespace SMACD.CLITool.Verbs
                             }).ToList()
                     }).ToList()
             }).ToList().ForEach(f => Workspace.Instance.ServiceMap.Features.Add(f));
-
             new List<Resource>
             {
                 new HttpResource
