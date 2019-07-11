@@ -14,7 +14,7 @@ namespace SMACD.Shared.WorkspaceManagers
 
         public LibraryManager(string pluginFileMask, string loggerName)
         {
-            Logger = Extensions.LogFactory.CreateLogger(loggerName);
+            Logger = Workspace.LogFactory.CreateLogger(loggerName);
             Logger.LogDebug("Searching directory {0} for extensions with mask {1}", EXTENSION_SEARCH_PATH,
                 pluginFileMask);
             foreach (var file in Directory.GetFiles(EXTENSION_SEARCH_PATH, pluginFileMask))

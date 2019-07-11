@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Mono.Unix;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Plugins;
 using SMACD.Shared.WorkspaceManagers;
 using YamlDotNet.Serialization;
@@ -34,6 +35,8 @@ namespace SMACD.Shared
         public static string WORKSPACE_STORAGE { get; set; }
         public static Workspace Instance => _instance.Value;
 
+        public static ILoggerFactory LogFactory { get; } = new LoggerFactory();
+
         /// <summary>
         ///     Features from the Service Map
         /// </summary>
@@ -54,7 +57,7 @@ namespace SMACD.Shared
         /// </summary>
         public ServiceMapFile ServiceMap { get; private set; }
 
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger(typeof(Workspace).Name);
+        private ILogger Logger { get; } = LogFactory.CreateLogger(typeof(Workspace).Name);
 
         /// <summary>
         ///     Deserialize a Service Map from a given file
@@ -316,7 +319,7 @@ namespace SMACD.Shared
 
             if (string.IsNullOrEmpty(workingDirectory))
             {
-                var newId = Extensions.RandomName();
+                var newId = RandomExtensions.RandomName();
                 workingDirectory = Directory.GetCurrentDirectory();
                 while (Directory.Exists(workingDirectory))
                     workingDirectory = Path.Combine(WORKSPACE_STORAGE, $"{newId.Replace(' ', '_')}");

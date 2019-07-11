@@ -1,3 +1,5 @@
+using SMACD.Shared.Extensions;
+
 namespace SMACD.Shared.Data
 {
     /// <summary>

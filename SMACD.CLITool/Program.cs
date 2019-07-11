@@ -12,7 +12,7 @@ namespace SMACD.CLITool
 {
     internal class Program
     {
-        private static ILogger<Program> Logger { get; } = Extensions.LogFactory.CreateLogger<Program>();
+        private static ILogger<Program> Logger { get; } = Workspace.LogFactory.CreateLogger<Program>();
 
         private static void Main(string[] args)
         {
@@ -48,7 +48,7 @@ namespace SMACD.CLITool
                 .WriteTo.Console(outputTemplate: template)
                 .WriteTo.File("smacd.log", outputTemplate: currentTimeTemplate + template)
                 .CreateLogger();
-            Extensions.LogFactory.AddSerilog();
+            Workspace.LogFactory.AddSerilog();
 
             if (!verb.Silent)
                 TerminalEffects.DrawLogoBanner();

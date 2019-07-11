@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.Shared.WorkspaceManagers;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization.TypeInspectors;
 
-namespace SMACD.Shared
+namespace SMACD.Shared.Extensions
 {
-    public static class Extensions
+    public static class RandomExtensions
     {
-        private const int HASH_LENGTH = 8;
-
         private static readonly string[] ADJECTIVES =
         {
             "round", "obeisant", "quirky", "doubtful", "extra-large", "rural", "roomy", "synonymous", "ajar",
@@ -221,16 +210,6 @@ namespace SMACD.Shared
             "swim", "plot", "trade", "record", "gold", "stitch", "collar", "bit"
         };
 
-        [ThreadStatic] public static Task CurrentTask;
-
-        private static readonly Dictionary<WeakReference<Task>, Tuple<bool, string>> _taskNames =
-            new Dictionary<WeakReference<Task>, Tuple<bool, string>>();
-
-        /// <summary>
-        ///     System-wide ILoggerFactory
-        /// </summary>
-        public static ILoggerFactory LogFactory { get; set; } = new LoggerFactory();
-
         public static Random Random { get; } = new Random((int) DateTime.Now.Ticks);
 
         /// <summary>
@@ -252,156 +231,6 @@ namespace SMACD.Shared
         public static string RandomName()
         {
             return $"{ADJECTIVES[Random.Next(ADJECTIVES.Length)]}.{VERBS[Random.Next(VERBS.Length)]}";
-        }
-
-        /// <summary>
-        ///     Add loaded tag mappings from Resource handlers to [de]serializer
-        /// </summary>
-        /// <param name="builder">[De]serializer builder</param>
-        /// <returns>Builder with tag mappings</returns>
-        internal static T AddLoadedTagMappings<T>(this T builder) where T : BuilderSkeleton<T>
-        {
-            ResourceManager.GetKnownResourceHandlers()
-                .ForEach(h => builder = builder.WithTagMapping("!" + h.Item1, h.Item2));
-            return builder;
-        }
-
-        /// <summary>
-        ///     Tag a Task with some additional information
-        /// </summary>
-        /// <param name="task">Task</param>
-        /// <param name="tagData">Tag information</param>
-        /// <param name="isSystem">If the source is a system-level source</param>
-        public static void Tag(this Task task, string tagData, bool isSystem = false)
-        {
-            if (task == null) return;
-            var weakReference = ContainsTask(task);
-            if (weakReference == null)
-                weakReference = new WeakReference<Task>(task);
-            _taskNames[weakReference] = Tuple.Create(isSystem, tagData);
-        }
-
-        /// <summary>
-        ///     Retrieve the data associated with a Task
-        /// </summary>
-        /// <param name="task">Task</param>
-        /// <returns></returns>
-        public static Tuple<bool, string> Tag(this Task task)
-        {
-            var weakReference = ContainsTask(task);
-            if (weakReference == null) return null;
-            return _taskNames[weakReference];
-        }
-
-        private static WeakReference<Task> ContainsTask(Task task)
-        {
-            foreach (var kvp in _taskNames.ToList())
-                if (!kvp.Key.TryGetTarget(out var taskFromReference)) _taskNames.Remove(kvp.Key);
-                else if (task == taskFromReference) return kvp.Key;
-            return null;
-        }
-
-        /// <summary>
-        ///     Gets a fingerprint hash of a given object
-        /// </summary>
-        /// <param name="obj">Object to hash</param>
-        /// <param name="hashLength">Length of string to emit (from beginning)</param>
-        /// <param name="skippedFields">Fields to skip in fingerprinting</param>
-        /// <param name="serializeEphemeralData">
-        ///     If <c>TRUE</c> the fingerprinting process will include the ResourceId and
-        ///     SystemGenerated properties (not recommended)
-        /// </param>
-        /// <returns></returns>
-        public static string Fingerprint<TObject>(this TObject obj, int hashLength = HASH_LENGTH,
-            bool serializeEphemeralData = false, params string[] skippedFields)
-        {
-            var allSkippedFields = new List<string>();
-            if (!serializeEphemeralData)
-                allSkippedFields.AddRange(new[] {"resourceId", "systemCreated"});
-
-            allSkippedFields.AddRange(skippedFields);
-            allSkippedFields = allSkippedFields.Distinct().ToList();
-
-            using (var sha1 = new SHA1Managed())
-            {
-                var str = new SerializerBuilder()
-                    .WithNamingConvention(new CamelCaseNamingConvention())
-                    .WithTypeInspector(i => new SkipFieldsInspector(i, allSkippedFields.ToArray()))
-                    .Build()
-                    .Serialize(obj).Replace(Environment.NewLine, "\n");
-
-                return sha1.ComputeHash(Encoding.ASCII.GetBytes(str))
-                    .Aggregate(new StringBuilder(), (current, next) => current.Append(next.ToString("X2")))
-                    .ToString()
-                    .Substring(0, hashLength);
-            }
-        }
-
-        #region Config Attribute Helpers
-
-        public static TProperty GetConfigAttribute<TAttribute, TProperty>(this object obj,
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            return GetConfigAttributes(obj.GetType(), propertySelectionAction).FirstOrDefault();
-        }
-
-        public static TProperty GetConfigAttribute<TParent, TAttribute, TProperty>(
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            return GetConfigAttributes(typeof(TParent), propertySelectionAction)
-                .FirstOrDefault();
-        }
-
-        public static IEnumerable<TProperty> GetConfigAttributes<TAttribute, TProperty>(this object obj,
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            return GetConfigAttributes(obj.GetType(), propertySelectionAction);
-        }
-
-        public static IEnumerable<TProperty> GetConfigAttributes<TParent, TAttribute, TProperty>(
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            return GetConfigAttributes(typeof(TParent), propertySelectionAction);
-        }
-
-        private static IEnumerable<TProperty> GetConfigAttributes<TAttribute, TProperty>(Type type,
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            if (!type.CustomAttributes.Any(a => typeof(TAttribute).IsAssignableFrom(a.AttributeType)))
-                return new List<TProperty>();
-            return type.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>()
-                .Select(a => propertySelectionAction(a));
-        }
-
-        public static TProperty GetConfigAttribute<TAttribute, TProperty>(this Type type,
-            Func<TAttribute, TProperty> propertySelectionAction) where TAttribute : Attribute
-        {
-            if (!type.CustomAttributes.Any(a => typeof(TAttribute).IsAssignableFrom(a.AttributeType)))
-                return default;
-            return type.GetCustomAttributes(typeof(TAttribute), true).Cast<TAttribute>()
-                .Select(a => propertySelectionAction(a)).FirstOrDefault();
-        }
-
-        #endregion
-    }
-
-    public class SkipFieldsInspector : TypeInspectorSkeleton
-    {
-        private readonly ITypeInspector _innerTypeDescriptor;
-
-        // Skip Resource system fields that would break a Fingerprint because they include ephemeral data
-        private readonly string[] _skippedFields;
-
-        public SkipFieldsInspector(ITypeInspector innerTypeDescriptor, params string[] skippedFields)
-        {
-            _innerTypeDescriptor = innerTypeDescriptor;
-            _skippedFields = skippedFields;
-        }
-
-        public override IEnumerable<IPropertyDescriptor> GetProperties(Type type, object container)
-        {
-            return _innerTypeDescriptor.GetProperties(type, container)
-                .Where(p => !_skippedFields.Contains(p.Name));
         }
     }
 }

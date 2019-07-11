@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Resources;
 
 namespace SMACD.Shared.WorkspaceManagers
@@ -32,7 +33,7 @@ namespace SMACD.Shared.WorkspaceManagers
         private ConcurrentDictionary<string, Resource> ResourcesByFingerprint { get; } =
             new ConcurrentDictionary<string, Resource>();
 
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("ResourceManager");
+        private ILogger Logger { get; } = Workspace.LogFactory.CreateLogger("ResourceManager");
 
         /// <summary>
         ///     Fired when a Resource is successfully registered

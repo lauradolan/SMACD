@@ -20,7 +20,7 @@ namespace SMACD.Plugins.OwaspZap
 
         public override async Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)
         {
-            Logger = Extensions.LogFactory.CreateLogger("OwaspZap@" + pointer.Resource.ResourceId);
+            Logger = Workspace.LogFactory.CreateLogger("OwaspZap@" + pointer.Resource.ResourceId);
             Logger.LogInformation("Starting OWASP ZAP plugin against Resource {0} with working directory {1}",
                 pointer.Resource?.ResourceId, workingDirectory);
             var httpTarget = ResourceManager.Instance.GetByPointer(pointer.Resource) as HttpResource;

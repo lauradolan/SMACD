@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using SMACD.Shared.Data;
+using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.Shared.Plugins
 {
@@ -23,6 +25,7 @@ namespace SMACD.Shared.Plugins
         /// <summary>
         ///     Task wrapping this execution
         /// </summary>
+        //public Task RuntimeTask { get; private set; } = Task.FromResult(default(ScannerReportAggregator));
         public Task RuntimeTask { get; private set; } = Task.FromResult(default(PluginResult));
 
         /// <summary>
@@ -74,6 +77,10 @@ namespace SMACD.Shared.Plugins
                 Process.StartInfo = GetStartInfo(Command);
                 Process.Start();
 
+                PluginManager.ProcessIdTags.TryAdd(Process.Id,
+                    pluginPointer.Plugin + "@" +
+                    (pluginPointer.Resource == null ? "<None>" : pluginPointer.Resource.ResourceId));
+
                 Process.BeginOutputReadLine();
                 Process.BeginErrorReadLine();
 
@@ -81,6 +88,8 @@ namespace SMACD.Shared.Plugins
                 Process.ErrorDataReceived += (s, e) => StdErr += e + Environment.NewLine;
 
                 Process.WaitForExit();
+
+                PluginManager.ProcessIdTags.Remove(Process.Id);
 
                 sw.Stop();
                 ExecutionTime = sw.Elapsed;

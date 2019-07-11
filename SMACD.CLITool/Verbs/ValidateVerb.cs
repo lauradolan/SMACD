@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,13 +14,14 @@ namespace SMACD.CLITool.Verbs
     [Verb("validate", HelpText = "Validate the content of a given Service Map")]
     public class ValidateVerb : VerbBase
     {
+        private readonly IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+
+        private int _tasksGenerated;
+
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
-        private static ILogger<ValidateVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ValidateVerb>();
-
-        private int _tasksGenerated = 0;
-        private IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+        private static ILogger<ValidateVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<ValidateVerb>();
 
         public override Task Execute()
         {
@@ -32,12 +32,14 @@ namespace SMACD.CLITool.Verbs
             {
                 _tasksGenerated++;
                 var plugin = _loadedExtensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
-                var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?", () => plugin != null, indent, isLast);
+                var newIndent =
+                    treeRenderer.WriteExecutedTest("Supports Plugin type?", () => plugin != null, indent, isLast);
                 if (plugin != null)
                 {
-                    var tests = new Tuple<string, Func<bool?>>[]
+                    var tests = new[]
                     {
-                        Tuple.Create("Plugin pointer has valid options?", new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
+                        Tuple.Create("Plugin pointer has valid options?",
+                            new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
                         Tuple.Create("Resource Map contains Resource?", new Func<bool?>(() =>
                         {
                             if (pluginPointer.Resource == null) return null;
@@ -48,7 +50,7 @@ namespace SMACD.CLITool.Verbs
                         treeRenderer.WriteExecutedTest(test.Item1, test.Item2, newIndent, tests.Last().Equals(test));
                 }
             };
-            
+
             Console.WriteLine(Output.Reversed().White().Text(Path.GetFileName(ServiceMap)));
             foreach (var feature in Workspace.Instance.Features)
                 treeRenderer.PrintNode(feature, "", Workspace.Instance.Features.Last() == feature);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using YamlDotNet.Serialization;
 
 namespace SMACD.Shared.Resources
@@ -11,7 +12,7 @@ namespace SMACD.Shared.Resources
     {
         protected Resource()
         {
-            ResourceId = Extensions.RandomName();
+            ResourceId = RandomExtensions.RandomName();
             SystemCreated = true;
         }
 
@@ -37,6 +38,11 @@ namespace SMACD.Shared.Resources
         [YamlIgnore]
         public virtual string DataFingerprint => this.Fingerprint();
 
+        public string GetFingerprint()
+        {
+            return this.Fingerprint();
+        }
+
         /// <summary>
         ///     Retrieve the resource with given transformations
         /// </summary>
@@ -46,7 +52,5 @@ namespace SMACD.Shared.Resources
         {
             return this;
         }
-
-        public string GetFingerprint() => this.Fingerprint();
     }
 }

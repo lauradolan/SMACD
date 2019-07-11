@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using SMACD.Shared.Attributes;
+using SMACD.Shared.Extensions;
 
 namespace SMACD.Shared
 {

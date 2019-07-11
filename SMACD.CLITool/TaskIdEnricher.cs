@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Crayon;
 using Serilog.Core;
 using Serilog.Events;
-using SMACD.Shared;
+using SMACD.Plugins.Extensions;
+using SMACD.Shared.Extensions;
 
 namespace SMACD.CLITool
 {
@@ -16,9 +17,9 @@ namespace SMACD.CLITool
             {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", Output.Bold().Green().Text("#")));
             }
-            else if (Extensions.CurrentTask != null && Extensions.CurrentTask.Tag() != null)
+            else if (InteropExtensions.CurrentTask != null && InteropExtensions.CurrentTask.Tag() != null)
             {
-                var tagData = Extensions.CurrentTask.Tag();
+                var tagData = InteropExtensions.CurrentTask.Tag();
                 string str;
                 if (tagData.Item1) // system thread
                     str = Output.White().Reversed().Text($"{tagData.Item2}");

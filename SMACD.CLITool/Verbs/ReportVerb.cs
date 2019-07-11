@@ -18,7 +18,7 @@ namespace SMACD.CLITool.Verbs
             "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
 
-        private static ILogger<ScanVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ScanVerb>();
+        private static ILogger<ScanVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<ScanVerb>();
 
         public override Task Execute()
         {

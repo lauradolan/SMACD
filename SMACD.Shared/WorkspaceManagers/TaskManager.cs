@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using SMACD.Plugins.Extensions;
 
 namespace SMACD.Shared.WorkspaceManagers
 {
@@ -54,7 +55,7 @@ namespace SMACD.Shared.WorkspaceManagers
         /// <summary>
         ///     CLI tool logger
         /// </summary>
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("TaskManager");
+        private ILogger Logger { get; } = Workspace.LogFactory.CreateLogger("TaskManager");
 
         /// <summary>
         ///     Worker loop task

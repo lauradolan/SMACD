@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SMACD.Shared.Extensions;
 
 namespace SMACD.Shared.Data
 {

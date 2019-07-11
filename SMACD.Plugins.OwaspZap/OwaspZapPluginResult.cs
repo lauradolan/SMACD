@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Plugins;
 using SMACD.Shared.Resources;
 using SMACD.Shared.WorkspaceManagers;
@@ -28,7 +29,7 @@ namespace SMACD.Plugins.OwaspZap
             SaveResultArtifact(Path.Combine(workingDirectory, ".ptr"), pluginPointer);
         }
 
-        private ILogger Logger { get; } = Extensions.LogFactory.CreateLogger("OwaspZapPluginResult");
+        private ILogger Logger { get; } = Workspace.LogFactory.CreateLogger("OwaspZapPluginResult");
 
         public override async Task SummaryRunOnce(VulnerabilitySummary summary)
         {
@@ -96,7 +97,9 @@ namespace SMACD.Plugins.OwaspZap
                 string[] skipFields = {"pluginResults", "extras"};
                 var fingerprint = item.Fingerprint(skippedFields: skipFields);
                 if (summary.VulnerabilityItems.All(i => i.Fingerprint(skippedFields: skipFields) != fingerprint))
+                {
                     summary.VulnerabilityItems.Add(item);
+                }
                 else // correlation -- multiple plugins see this
                 {
                     var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v =>

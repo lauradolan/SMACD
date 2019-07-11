@@ -6,6 +6,7 @@ using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Resources;
 
 namespace SMACD.CLITool.Verbs
@@ -19,18 +20,18 @@ namespace SMACD.CLITool.Verbs
         [Option('m', "max", HelpText = "Maximum number of elements of each generation to create", Default = 3)]
         public int MaxOfEach { get; set; }
 
-        private static ILogger<GenerateVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<GenerateVerb>();
+        private static ILogger<GenerateVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<GenerateVerb>();
 
         public override Task Execute()
         {
             Workspace.Instance.CreateEphemeral();
 
             Logger.LogInformation("Creating 1-{0} of each element for a new Service Map", MaxOfEach);
-            Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
+            Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
             {
                 Name = JargonGenerator.GenerateMultiPartJargon(),
                 Description = new Faker().Lorem.Paragraph(2),
-                Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
+                Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
                 {
                     var person = new Faker().Person;
                     return new OwnerPointerModel
@@ -40,12 +41,12 @@ namespace SMACD.CLITool.Verbs
                     };
                 }).ToList(),
 
-                UseCases = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(useCaseId =>
+                UseCases = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(useCaseId =>
                     new UseCaseModel
                     {
                         Name = JargonGenerator.GenerateMultiPartJargon(),
                         Description = new Faker().Lorem.Paragraph(2),
-                        Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
+                        Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
                         {
                             var person = new Faker().Person;
                             return new OwnerPointerModel
@@ -55,29 +56,33 @@ namespace SMACD.CLITool.Verbs
                             };
                         }).ToList(),
 
-                        AbuseCases = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(abuseCaseId =>
-                            new AbuseCaseModel
-                            {
-                                Name = JargonGenerator.GenerateMultiPartJargon(),
-                                Description = new Faker().Lorem.Paragraph(2),
-                                Owners = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
+                        AbuseCases = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(
+                            abuseCaseId =>
+                                new AbuseCaseModel
                                 {
-                                    var person = new Faker().Person;
-                                    return new OwnerPointerModel
-                                    {
-                                        Name = person.FullName,
-                                        Email = person.Email
-                                    };
-                                }).ToList(),
+                                    Name = JargonGenerator.GenerateMultiPartJargon(),
+                                    Description = new Faker().Lorem.Paragraph(2),
+                                    Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(
+                                        ownerId =>
+                                        {
+                                            var person = new Faker().Person;
+                                            return new OwnerPointerModel
+                                            {
+                                                Name = person.FullName,
+                                                Email = person.Email
+                                            };
+                                        }).ToList(),
 
-                                PluginPointers = Enumerable.Range(0, Extensions.Random.Next(1, MaxOfEach)).Select(
-                                    pluginId => new PluginPointerModel
-                                    {
-                                        Plugin = "dummy",
-                                        PluginParameters = new Dictionary<string, string> {{"parameter", "value"}},
-                                        Resource = new ResourcePointerModel {ResourceId = "dummyResource"}
-                                    }).ToList()
-                            }).ToList()
+                                    PluginPointers = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach))
+                                        .Select(
+                                            pluginId => new PluginPointerModel
+                                            {
+                                                Plugin = "dummy",
+                                                PluginParameters = new Dictionary<string, string>
+                                                    {{"parameter", "value"}},
+                                                Resource = new ResourcePointerModel {ResourceId = "dummyResource"}
+                                            }).ToList()
+                                }).ToList()
                     }).ToList()
             }).ToList().ForEach(f => Workspace.Instance.ServiceMap.Features.Add(f));
             new List<Resource>

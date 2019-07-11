@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Plugins;
 
 namespace SMACD.Shared.WorkspaceManagers
@@ -18,6 +21,8 @@ namespace SMACD.Shared.WorkspaceManagers
         }
 
         internal static PluginManager Instance => _instance.Value;
+
+        public static IDictionary<int, string> ProcessIdTags { get; } = new ConcurrentDictionary<int, string>();
 
         protected override string GetTypeIdentifier(Type type)
         {

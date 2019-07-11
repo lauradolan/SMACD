@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.Shared.Plugins
@@ -44,7 +45,7 @@ namespace SMACD.Shared.Plugins
         /// <summary>
         ///     Logger for plugin
         /// </summary>
-        protected ILogger Logger { get; set; } = Extensions.LogFactory.CreateLogger("Plugin Init");
+        protected ILogger Logger { get; set; } = Workspace.LogFactory.CreateLogger("Plugin Init");
 
         /// <summary>
         ///     Execute any tasks that the plugin requires to generate some output (i.e. run a scanner)
@@ -110,7 +111,7 @@ namespace SMACD.Shared.Plugins
         /// <returns></returns>
         public Task<PluginResult> GetValidatedExecutionTask(PluginPointerModel pointer)
         {
-            var logger = Extensions.LogFactory.CreateLogger<Plugin>();
+            var logger = Workspace.LogFactory.CreateLogger<Plugin>();
             try
             {
                 Validate(pointer);
@@ -125,7 +126,7 @@ namespace SMACD.Shared.Plugins
             {
                 try
                 {
-                    Logger = Extensions.LogFactory.CreateLogger($"{Identifier}@{pointer.Resource?.ResourceId}");
+                    Logger = Workspace.LogFactory.CreateLogger($"{Identifier}@{pointer.Resource?.ResourceId}");
 
                     logger.LogDebug("Starting scheduled task -- Plugin: {0} -- Resource: {1}", pointer.Plugin,
                         pointer.Resource?.ResourceId);

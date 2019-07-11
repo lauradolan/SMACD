@@ -9,24 +9,24 @@ namespace SMACD.CLITool
 {
     public class TreeRenderer
     {
+        public delegate void DataModelCallback<in T>(string indent, bool isLast, T feature) where T : IModel;
+
         private const string _cross = " ├─";
         private const string _corner = " └─";
         private const string _vertical = " │ ";
         private const string _space = "   ";
 
-        public delegate void DataModelCallback<in T>(string indent, bool isLast, T feature) where T : IModel;
+        private static readonly int VALIDATION_QUESTION_FULL_WIDTH = (int) (Console.WindowWidth * 0.8d);
+
+        public int TestsExecuted { get; set; }
+        public int TestsPassed { get; set; }
+        public int TestsFailed { get; set; }
 
         public event DataModelCallback<FeatureModel> AfterFeatureDrawn;
         public event DataModelCallback<UseCaseModel> AfterUseCaseDrawn;
         public event DataModelCallback<AbuseCaseModel> AfterAbuseCaseDrawn;
         public event DataModelCallback<PluginPointerModel> AfterPluginPointerDrawn;
         public event DataModelCallback<Resource> AfterResourceDrawn;
-
-        private static int VALIDATION_QUESTION_FULL_WIDTH = (int)(Console.WindowWidth * 0.8d);
-
-        public int TestsExecuted { get; set; }
-        public int TestsPassed { get; set; }
-        public int TestsFailed { get; set; }
 
         public string WriteExecutedTest(string testName, Func<bool?> testToRun, string indent = "", bool isLast = false)
         {
@@ -52,7 +52,9 @@ namespace SMACD.CLITool
                 }
             }
             else
+            {
                 Console.WriteLine(Output.Yellow("N/A"));
+            }
 
             return indent;
         }
@@ -65,6 +67,7 @@ namespace SMACD.CLITool
             foreach (var useCase in model.UseCases)
                 PrintNode(useCase, indent, model.UseCases.Last() == useCase);
         }
+
         public void PrintNode(UseCaseModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
@@ -73,6 +76,7 @@ namespace SMACD.CLITool
             foreach (var abuseCase in model.AbuseCases)
                 PrintNode(abuseCase, indent, model.AbuseCases.Last() == abuseCase);
         }
+
         public void PrintNode(AbuseCaseModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
@@ -81,6 +85,7 @@ namespace SMACD.CLITool
             foreach (var pluginPointer in model.PluginPointers)
                 PrintNode(pluginPointer, indent, model.PluginPointers.Last() == pluginPointer);
         }
+
         public void PrintNode(PluginPointerModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
@@ -91,9 +96,13 @@ namespace SMACD.CLITool
                                   Output.BrightYellow(resource.ToString()));
             }
             else
+            {
                 Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " + Output.Yellow("<No Resource>"));
+            }
+
             AfterPluginPointerDrawn?.Invoke(indent, isLast, model);
         }
+
         public void PrintNode(Resource model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);

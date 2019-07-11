@@ -10,7 +10,7 @@ namespace SMACD.CLITool.Verbs
     [Verb("snoop", HelpText = "Snoop on the tool's awareness of its environment")]
     public class SnoopVerb : VerbBase
     {
-        private static ILogger<SnoopVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<SnoopVerb>();
+        private static ILogger<SnoopVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<SnoopVerb>();
 
         public override Task Execute()
         {

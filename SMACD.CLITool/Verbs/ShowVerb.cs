@@ -13,12 +13,12 @@ namespace SMACD.CLITool.Verbs
     [Verb("show", HelpText = "Display the content of a given Service Map")]
     public class ShowVerb : VerbBase
     {
+        private IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
-        private static ILogger<ShowVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ShowVerb>();
-
-        private IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+        private static ILogger<ShowVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<ShowVerb>();
 
         public override Task Execute()
         {

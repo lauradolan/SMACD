@@ -102,7 +102,7 @@ namespace SMACD.Shared.Resources
 
         public override string ToString()
         {
-            var str = $"{Method} {UriInstance.ToString()}";
+            var str = $"{Method} {UriInstance}";
             if (Fields.Count > 0)
                 str += $" ({Fields.Count} fields)";
             if (Headers.Count > 0)
