@@ -7,6 +7,8 @@ using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
+using SMACD.Shared.Plugins.AttackTools;
+using SMACD.Shared.Plugins.Scorers;
 using SMACD.Shared.Resources;
 
 namespace SMACD.CLITool.Verbs
@@ -34,30 +36,23 @@ namespace SMACD.CLITool.Verbs
 
             int workerThreads, completionPortThreads;
             ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
-            Logger.LogDebug("ThreadPool configuration: {0} workers, {1} completion port threads", workerThreads,
+            Logger.LogTrace("ThreadPool configuration: {0} workers, {1} completion port threads", workerThreads,
                 completionPortThreads);
 
             ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
-            Logger.LogDebug("ThreadPool availability: {0} workers, {1} completion port threads", workerThreads,
+            Logger.LogTrace("ThreadPool availability: {0} workers, {1} completion port threads", workerThreads,
                 completionPortThreads);
 
             Logger.LogInformation($"Running scan with service map {ServiceMap}");
             Workspace.Instance.Create(ServiceMap);
-            var result = Workspace.Instance.ScanEntireMap().Result;
-
-            if (!Silent)
-                TerminalEffects.DrawSingleLineBanner("= Orphan URLs =");
+            AttackToolManager.Instance.ScanEntireMap().Wait();
+            var result = ScorerPluginManager.Instance.ScoreEntireMap().Result;
+            
             Logger.LogInformation("Found {0} URLs not found in Resource Map",
                 result.DiscoveredResources.Count(r => r.SystemCreated));
             foreach (var resource in result.DiscoveredResources)
-                // todo: move formatting to the resource (via log)
-                if (resource is HttpResource)
-                    Logger.LogInformation("URL: {0} {1}", ((HttpResource) resource).Method,
-                        ((HttpResource) resource).Url);
-
-            if (!Silent)
-                TerminalEffects.DrawSingleLineBanner("= Results =");
-
+                Logger.LogInformation(resource.GetDescription());
+            
             var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory,
                 "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
             using (var sw = new StreamWriter(outputFile))
@@ -68,14 +63,14 @@ namespace SMACD.CLITool.Verbs
             Console.WriteLine("Average score: {0}", result.ScoreAvg);
             Console.WriteLine("Summed score: {0}", result.ScoreSum);
 
-            Logger.LogInformation("Report serialized to {0}", outputFile);
+            Console.WriteLine("Report serialized to {0}", outputFile);
 
             if (Threshold.HasValue)
             {
                 Logger.LogDebug("Checking threshold");
                 if (Threshold > result.ScoreAvg)
                 {
-                    Logger.LogDebug("Failed! Expected: {0} / Actual: {1}", Threshold, result.ScoreAvg);
+                    Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold, result.ScoreAvg);
                     Environment.Exit(-1);
                 }
                 else

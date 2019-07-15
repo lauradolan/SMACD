@@ -7,6 +7,7 @@ namespace SMACD.Shared.Attributes
     /// <summary>
     ///     Specify valid Resource Types that can be used by this plugin
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
     public class ValidResourcesAttribute : Attribute
     {
         /// <summary>

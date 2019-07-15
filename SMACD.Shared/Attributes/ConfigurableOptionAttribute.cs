@@ -22,19 +22,5 @@ namespace SMACD.Shared.Attributes
         ///     If this option is required for the plugin to execute
         /// </summary>
         public bool Required { get; set; }
-
-        /// <summary>
-        ///     Create a new copy of this Attribute
-        /// </summary>
-        /// <returns>A complete copy of this attribute</returns>
-        public ConfigurableOptionAttribute Clone()
-        {
-            return new ConfigurableOptionAttribute
-            {
-                OptionName = OptionName,
-                Default = Default,
-                Required = Required
-            };
-        }
     }
 }

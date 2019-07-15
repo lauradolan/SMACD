@@ -1,18 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Mono.Unix;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
 using SMACD.Shared.Extensions;
-using SMACD.Shared.Plugins;
-using SMACD.Shared.WorkspaceManagers;
+using SMACD.Shared.Plugins.AttackTools;
+using SMACD.Shared.Plugins.Services;
+using SMACD.Shared.Resources;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -43,11 +39,6 @@ namespace SMACD.Shared
         public IList<FeatureModel> Features => ServiceMap?.Features;
 
         /// <summary>
-        ///     If the Workspace has either been created or loaded
-        /// </summary>
-        public bool WorkspaceConfigured => !string.IsNullOrEmpty(WorkingDirectory);
-
-        /// <summary>
         ///     Working Directory to store output artifacts used by results
         /// </summary>
         public string WorkingDirectory { get; private set; }
@@ -60,118 +51,15 @@ namespace SMACD.Shared
         private ILogger Logger { get; } = LogFactory.CreateLogger(typeof(Workspace).Name);
 
         /// <summary>
-        ///     Deserialize a Service Map from a given file
-        /// </summary>
-        /// <param name="file">File containing Service Map</param>
-        /// <returns></returns>
-        public static ServiceMapFile GetServiceMap(string file)
-        {
-            using (var sr = new StreamReader(file))
-            {
-                return new DeserializerBuilder()
-                    .WithNamingConvention(new CamelCaseNamingConvention())
-                    .AddLoadedTagMappings()
-                    .Build()
-                    .Deserialize<ServiceMapFile>(sr);
-            }
-        }
-
-        /// <summary>
-        ///     Serialize a Service Map to a given file
-        /// </summary>
-        /// <param name="file">File to serialize Service Map to</param>
-        /// <returns></returns>
-        public static void PutServiceMap(ServiceMapFile serviceMap, string file)
-        {
-            // Change the metadata to reflect this updated version
-            serviceMap.Updated = DateTime.Now;
-
-            using (var sr = new StreamWriter(file))
-            {
-                new SerializerBuilder()
-                    .WithNamingConvention(new CamelCaseNamingConvention())
-                    .AddLoadedTagMappings()
-                    .Build()
-                    .Serialize(sr, serviceMap);
-            }
-        }
-
-        /// <summary>
-        ///     Get the working directory for a given Plugin Pointer
-        /// </summary>
-        /// <param name="pointer">Plugin pointer</param>
-        /// <returns></returns>
-        public string GetChildWorkingDirectory(PluginPointerModel pointer)
-        {
-            // Configuration:
-            // <storage root>/<workspace>/<resource>/<plugin>.<item hash>
-
-            if (string.IsNullOrEmpty(WorkingDirectory))
-                throw new Exception(
-                    "Attempted to create child in ephemeral workspace; this operation is not allowed without a persistent working directory");
-
-            var _workingDirectory = "";
-            if (pointer.Resource == null)
-                _workingDirectory = Path.Combine(WorkingDirectory, "no_resource_given",
-                    $"{pointer.Plugin}.{pointer.Fingerprint(serializeEphemeralData: true)}");
-            else
-                _workingDirectory = Path.Combine(WorkingDirectory, pointer.Resource.ResourceId,
-                    $"{pointer.Plugin}.{pointer.Fingerprint(serializeEphemeralData: true)}");
-
-            if (!Directory.Exists(_workingDirectory))
-            {
-                Directory.CreateDirectory(_workingDirectory);
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                    new UnixFileInfo(_workingDirectory).FileAccessPermissions = FileAccessPermissions.AllPermissions;
-            }
-
-            return _workingDirectory;
-        }
-
-        /// <summary>
-        ///     Scan all items on the loaded map
-        /// </summary>
-        /// <returns></returns>
-        public async Task<VulnerabilitySummary> ScanEntireMap()
-        {
-            Logger.LogInformation("Beginning to scan loaded map");
-            var resultTasks = new List<Task<PluginResult>>();
-            IteratePluginPointers((feature, useCase, abuseCase, pluginPointer) =>
-                resultTasks.Add(Execute(pluginPointer)));
-
-            while (!TaskManager.Instance.IsEmpty) Thread.Sleep(100);
-            Logger.LogInformation("Completed executing {0} plugins from given map", resultTasks.Count);
-
-            Logger.LogInformation("Artifacts processed successfully, beginning summarization");
-            return await SummarizeArtifacts(await Task.WhenAll(resultTasks));
-        }
-
-        /// <summary>
-        ///     Reprocess all items on the loaded map. Reprocessing involves reparsing the scanner-generated artifacts and
-        ///     regenerating the summary report
-        /// </summary>
-        /// <returns></returns>
-        public async Task<VulnerabilitySummary> ReprocessEntireMap()
-        {
-            Logger.LogInformation("Beginning to reprocess data from working directory {0}", WorkingDirectory);
-            var resultTasks = new List<Task<PluginResult>>();
-            IteratePluginPointers((feature, useCase, abuseCase, pluginPointer) =>
-                resultTasks.Add(Reprocess(pluginPointer)));
-            var resultInstances = await Task.WhenAll(resultTasks);
-
-            return await SummarizeArtifacts(await Task.WhenAll(resultTasks));
-        }
-
-        /// <summary>
         ///     Retrieve a list of extensions currently loaded
         /// </summary>
         /// <returns></returns>
         public static IList<Tuple<string, string>> GetLoadedExtensions()
         {
             var loaded = new List<Tuple<string, string>>();
-            loaded.AddRange(PluginManager.Instance.LoadedLibraryTypes.Select(t =>
+            loaded.AddRange(AttackToolManager.Instance.LoadedLibraryTypes.Select(t =>
             {
-                var attr = t.GetConfigAttribute<PluginMetadataAttribute, PluginMetadataAttribute>(a => a);
+                var attr = t.GetConfigAttribute<MetadataAttribute, MetadataAttribute>(a => a);
                 return attr == null ? null : Tuple.Create(attr.Identifier, attr.Name);
             }));
 
@@ -180,102 +68,12 @@ namespace SMACD.Shared
 
             loaded.AddRange(ServiceHookManager.Instance.LoadedLibraryTypes.Select(t =>
             {
-                var attr = t.GetConfigAttribute<ServiceHookMetadataAttribute, ServiceHookMetadataAttribute>(a => a);
+                var attr = t.GetConfigAttribute<MetadataAttribute, MetadataAttribute>(a => a);
                 return attr == null ? null : Tuple.Create(attr.Identifier, attr.Name);
             }));
 
             loaded.RemoveAll(i => i == null);
             return loaded;
-        }
-
-        /// <summary>
-        ///     Validate a Plugin Pointer to ensure its target is acceptable
-        /// </summary>
-        /// <param name="pointer">Plugin Pointer to validate</param>
-        /// <returns></returns>
-        public bool Validate(PluginPointerModel pointer)
-        {
-            var instance = PluginManager.Instance.GetInstance(pointer);
-            if (instance == null) return false;
-            return instance.Validate(pointer);
-        }
-
-        private async Task<VulnerabilitySummary> SummarizeArtifacts(IList<PluginResult> results)
-        {
-            var summary = new VulnerabilitySummary {ResultInstances = results};
-
-            // Run single-execution tasks for each of the result objects
-            Logger.LogInformation("Executing single-run tasks for {0} result objects", results.Count);
-            await Task.WhenAll(results.Select(r => r.SummaryRunOnce(summary)));
-            Logger.LogInformation("Completed single-run execution against {0} result objects", results.Count);
-
-            // Run generations of multi-execution tasks
-            var changesOccurredThisGeneration = true;
-            var sw = new Stopwatch();
-            sw.Start();
-            var generations = 0;
-            while (changesOccurredThisGeneration)
-            {
-                generations++;
-                foreach (var g in results)
-                    changesOccurredThisGeneration = await g.SummaryRunGenerationally(summary);
-                Logger.LogDebug("Completed summary generation {0} ... Converged? {1}", generations,
-                    !changesOccurredThisGeneration);
-            }
-
-            sw.Stop();
-            Logger.LogInformation("Completed summary report in {0} over {1} generations", sw.Elapsed, generations);
-            return summary;
-        }
-
-        /// <summary>
-        ///     Iterate over all PluginPointerModels in the Service Map, passing in all of each of their parents
-        /// </summary>
-        /// <param name="action">Action to take</param>
-        public void IteratePluginPointers(Action<FeatureModel, UseCaseModel, AbuseCaseModel, PluginPointerModel> action)
-        {
-            foreach (var feature in Features)
-            foreach (var useCase in feature.UseCases)
-            foreach (var abuseCase in useCase.AbuseCases)
-            foreach (var pluginPtr in abuseCase.PluginPointers)
-                action(feature, useCase, abuseCase, pluginPtr);
-        }
-
-        /// <summary>
-        ///     Execute a single Plugin from its Plugin Pointer
-        /// </summary>
-        /// <param name="pointer">Plugin pointer</param>
-        /// <returns></returns>
-        public Task<PluginResult> Execute(PluginPointerModel pointer)
-        {
-            Logger.LogInformation("Resolving plugin pointer id {0}", pointer.Plugin);
-            var plugin = PluginManager.Instance.GetInstance(pointer);
-            if (plugin == null)
-                throw new Exception($"Plugin '{pointer.Plugin}' is not loaded");
-
-            if (pointer.Resource != null)
-            {
-                Logger.LogInformation("Resolving resource pointer id {0}", pointer.Resource.ResourceId);
-                if (!ResourceManager.Instance.ContainsPointer(pointer.Resource))
-                    throw new Exception($"Resource '{pointer.Resource.ResourceId}' does not exist in resource map");
-            }
-
-            return TaskManager.Instance.Enqueue(plugin.GetValidatedExecutionTask(pointer));
-        }
-
-        /// <summary>
-        ///     Reprocess a single Plugin Pointer
-        /// </summary>
-        /// <param name="pointer">Plugin pointer</param>
-        /// <returns></returns>
-        public Task<PluginResult> Reprocess(PluginPointerModel pointer)
-        {
-            Logger.LogInformation("Resolving plugin pointer id {0}", pointer.Plugin);
-            var plugin = PluginManager.Instance.GetInstance(pointer);
-            if (plugin == null)
-                throw new Exception($"Plugin '{pointer.Plugin}' is not loaded");
-
-            return TaskManager.Instance.Enqueue(plugin.Reprocess(GetChildWorkingDirectory(pointer)));
         }
 
         /// <summary>
@@ -348,6 +146,10 @@ namespace SMACD.Shared
             WorkingDirectory = workingDirectory;
         }
 
+        /// <summary>
+        ///     Load an existing Workspace from its Working Directory
+        /// </summary>
+        /// <param name="workingDirectory">Existing Workspace</param>
         public void Load(string workingDirectory)
         {
             Logger.LogInformation("Using existing Workspace from {0}", workingDirectory);
@@ -359,6 +161,44 @@ namespace SMACD.Shared
 
             ImportServiceMapFromFile(Path.Combine(workingDirectory, WORKSPACE_SERVICE_MAP_MIRROR));
             WorkingDirectory = workingDirectory;
+        }
+
+        /// <summary>
+        ///     Deserialize a Service Map from a given file
+        /// </summary>
+        /// <param name="file">File containing Service Map</param>
+        /// <returns></returns>
+        public static ServiceMapFile GetServiceMap(string file)
+        {
+            using (var sr = new StreamReader(file))
+            {
+                return new DeserializerBuilder()
+                    .WithNamingConvention(new CamelCaseNamingConvention())
+                    .AddLoadedTagMappings()
+                    .Build()
+                    .Deserialize<ServiceMapFile>(sr);
+            }
+        }
+
+        /// <summary>
+        ///     Serialize a Service Map to a given file
+        /// </summary>
+        /// <param name="serviceMap">Service Map to serialize</param>
+        /// <param name="file">File to serialize Service Map to</param>
+        /// <returns></returns>
+        public static void PutServiceMap(ServiceMapFile serviceMap, string file)
+        {
+            // Change the metadata to reflect this updated version
+            serviceMap.Updated = DateTime.Now;
+
+            using (var sr = new StreamWriter(file))
+            {
+                new SerializerBuilder()
+                    .WithNamingConvention(new CamelCaseNamingConvention())
+                    .AddLoadedTagMappings()
+                    .Build()
+                    .Serialize(sr, serviceMap);
+            }
         }
 
         private void ImportServiceMapFromFile(string serviceMapFile)

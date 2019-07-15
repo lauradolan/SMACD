@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using SMACD.Shared.Data;
-using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.Shared.Plugins
 {
@@ -22,11 +24,13 @@ namespace SMACD.Shared.Plugins
             Command = cmd;
         }
 
+        public static IDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
+
         /// <summary>
         ///     Task wrapping this execution
         /// </summary>
-        //public Task RuntimeTask { get; private set; } = Task.FromResult(default(ScannerReportAggregator));
-        public Task RuntimeTask { get; private set; } = Task.FromResult(default(PluginResult));
+        //public Task RuntimeTask { get; private set; } = Task.FromResult(default(Scorer));
+        public Task RuntimeTask { get; private set; } = Task.FromResult(0);
 
         /// <summary>
         ///     Command being executed
@@ -41,7 +45,7 @@ namespace SMACD.Shared.Plugins
         /// <summary>
         ///     Process object executing this command
         /// </summary>
-        public Process Process { get; } = new Process();
+        private Process Process { get; } = new Process();
 
         /// <summary>
         ///     Standard output from last execution
@@ -58,6 +62,13 @@ namespace SMACD.Shared.Plugins
         /// </summary>
         public PluginPointerModel PluginPointer { get; set; }
 
+        public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
+        public event ExternalProcessDataReceived StandardOutputDataReceived;
+        public event ExternalProcessDataReceived StandardErrorDataReceived;
+
+        private ILogger Logger { get; } = Workspace.LogFactory.CreateLogger("ExecutionWrapper");
+        private int OwnerTaskId { get; set; }
+
         /// <summary>
         ///     Execute the command, wrapped by a Task
         /// </summary>
@@ -68,7 +79,7 @@ namespace SMACD.Shared.Plugins
                 throw new Exception("Command has not been set but execution has been requested");
 
             PluginPointer = pluginPointer;
-
+            OwnerTaskId = Task.CurrentId.GetValueOrDefault(-1);
             RuntimeTask = Task.Run(() =>
             {
                 var sw = new Stopwatch();
@@ -77,19 +88,26 @@ namespace SMACD.Shared.Plugins
                 Process.StartInfo = GetStartInfo(Command);
                 Process.Start();
 
-                PluginManager.ProcessIdTags.TryAdd(Process.Id,
-                    pluginPointer.Plugin + "@" +
-                    (pluginPointer.Resource == null ? "<None>" : pluginPointer.Resource.ResourceId));
+                Logger.LogTrace("Started process {0}", Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
 
                 Process.BeginOutputReadLine();
                 Process.BeginErrorReadLine();
 
-                Process.OutputDataReceived += (s, e) => StdOut += e + Environment.NewLine;
-                Process.ErrorDataReceived += (s, e) => StdErr += e + Environment.NewLine;
+                Process.OutputDataReceived += (s, e) =>
+                {
+                    if (e.Data == null) return;
+                    StdOut += e.Data + Environment.NewLine;
+                    StandardOutputDataReceived?.Invoke(s, OwnerTaskId, e.Data);
+                };
+                Process.ErrorDataReceived += (s, e) =>
+                {
+                    if (e.Data == null) return;
+                    StdErr += e.Data + Environment.NewLine;
+                    StandardErrorDataReceived?.Invoke(s, OwnerTaskId, e.Data);
+                };
 
                 Process.WaitForExit();
-
-                PluginManager.ProcessIdTags.Remove(Process.Id);
+                Logger.LogTrace("Process {0} completed", Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
 
                 sw.Stop();
                 ExecutionTime = sw.Elapsed;

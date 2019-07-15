@@ -15,7 +15,7 @@ namespace SMACD.CLITool.Verbs
         public override Task Execute()
         {
             var extensions = Workspace.GetLoadedExtensions();
-            Logger.LogInformation("Starting snoop on environment configuration");
+            Logger.LogDebug("Starting snoop on environment configuration");
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Output.BrightBlue("HOST ENVIRONMENT:"));

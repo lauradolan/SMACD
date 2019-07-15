@@ -5,6 +5,7 @@ using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
+using SMACD.Shared.Plugins.Scorers;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -23,7 +24,7 @@ namespace SMACD.CLITool.Verbs
         public override Task Execute()
         {
             Workspace.Instance.Load(WorkingDir);
-            var summary = Workspace.Instance.ReprocessEntireMap().Result;
+            var summary = ScorerPluginManager.Instance.ScoreEntireMap().Result;
 
             var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory,
                 "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
@@ -32,7 +33,7 @@ namespace SMACD.CLITool.Verbs
                 sw.WriteLine(JsonConvert.SerializeObject(summary));
             }
 
-            Console.WriteLine("Average score: {0}", summary.ScoreAvg);
+            Console.WriteLine("Averaged score: {0}", summary.ScoreAvg);
             Console.WriteLine("Summed score: {0}", summary.ScoreSum);
 
             Logger.LogInformation("Report serialized to {0}", outputFile);
@@ -42,7 +43,7 @@ namespace SMACD.CLITool.Verbs
                 Logger.LogDebug("Checking threshold");
                 if (Threshold > summary.ScoreAvg)
                 {
-                    Logger.LogDebug("Failed! Expected: {0} / Actual: {1}", Threshold, summary.ScoreAvg);
+                    Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold, summary.ScoreAvg);
                     Environment.Exit(-1);
                 }
                 else

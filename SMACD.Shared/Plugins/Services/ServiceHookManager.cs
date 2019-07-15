@@ -1,9 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using SMACD.Shared.Attributes;
-using SMACD.Shared.Extensions;
 
-namespace SMACD.Shared.WorkspaceManagers
+namespace SMACD.Shared.Plugins.Services
 {
     public enum ServiceHookType
     {
@@ -52,11 +50,6 @@ namespace SMACD.Shared.WorkspaceManagers
                     TaskManager.Instance.TaskCompleted += (s, e) => callback(e);
                     break;
             }
-        }
-
-        protected override string GetTypeIdentifier(Type type)
-        {
-            return type.GetConfigAttribute<ServiceHookMetadataAttribute, string>(a => a.Identifier);
         }
     }
 }

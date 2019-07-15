@@ -9,7 +9,7 @@ namespace SMACD.Shared.Resources
     /// <summary>
     ///     Web Resource (HTTP)
     /// </summary>
-    [ResourceIdentifier("http")]
+    [ResourceMetadata("http")]
     public class HttpResource : Resource
     {
         /// <summary>
@@ -44,23 +44,14 @@ namespace SMACD.Shared.Resources
         /// </summary>
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
 
-        public static HttpResource GenerateGet(string url, IDictionary<string, string> headers = null)
+        public override string GetDescription()
         {
-            return new HttpResource
-            {
-                Method = "GET", Url = url, Headers = headers != null ? headers : new Dictionary<string, string>(),
-                SystemCreated = true
-            };
-        }
-
-        public static HttpResource GeneratePost(string url, IDictionary<string, string> fields,
-            IDictionary<string, string> headers = null)
-        {
-            return new HttpResource
-            {
-                Method = "POST", Url = url, Fields = fields,
-                Headers = headers != null ? headers : new Dictionary<string, string>(), SystemCreated = true
-            };
+            var str = $"{(this is HttpsResource ? "HTTPS" : "HTTP")} {Method} {Url}";
+            if (Fields != null && Fields.Count > 0)
+                str += $" (Fields: {Fields.Count})";
+            if (Headers != null && Headers.Count > 0)
+                str += $" (Headers: {Headers.Count})";
+            return str;
         }
 
         public bool MatchesExceptQuery(HttpResource that)
@@ -100,14 +91,6 @@ namespace SMACD.Shared.Resources
             );
         }
 
-        public override string ToString()
-        {
-            var str = $"{Method} {UriInstance}";
-            if (Fields.Count > 0)
-                str += $" ({Fields.Count} fields)";
-            if (Headers.Count > 0)
-                str += $" ({Headers.Count} headers)";
-            return str;
-        }
+        public override string ToString() => GetDescription();
     }
 }

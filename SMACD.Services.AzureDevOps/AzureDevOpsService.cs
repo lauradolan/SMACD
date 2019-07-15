@@ -6,9 +6,7 @@ using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
-using SMACD.Shared;
-using SMACD.Shared.Plugins;
-using SMACD.Shared.WorkspaceManagers;
+using SMACD.Shared.Plugins.Services;
 
 namespace SMACD.Services.AzureDevOps
 {
@@ -22,7 +20,7 @@ namespace SMACD.Services.AzureDevOps
             ServiceHookManager.Instance.RegisterTaskHook(TaskServiceHookType.TaskCompleted, task =>
             {
                 var errorOccurred = task.IsFaulted;
-                var pluginResult = ((Task<PluginResult>) task).Result;
+                //var pluginResult = ((Task<PluginResult>) task).Result;
 
                 var status = new GitPullRequestStatus
                 {

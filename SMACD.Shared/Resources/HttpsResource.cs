@@ -5,7 +5,7 @@ namespace SMACD.Shared.Resources
     /// <summary>
     ///     Web Resource (HTTPS)
     /// </summary>
-    [ResourceIdentifier("https")]
+    [ResourceMetadata("https")]
     public class HttpsResource : HttpResource
     {
     }

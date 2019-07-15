@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMACD.Plugins.Extensions
+namespace SMACD.Shared.Extensions
 {
     public static class TagDataExtension
     {

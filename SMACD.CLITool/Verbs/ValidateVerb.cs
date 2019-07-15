@@ -7,7 +7,7 @@ using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Shared;
-using SMACD.Shared.WorkspaceManagers;
+using SMACD.Shared.Resources;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -38,8 +38,8 @@ namespace SMACD.CLITool.Verbs
                 {
                     var tests = new[]
                     {
-                        Tuple.Create("Plugin pointer has valid options?",
-                            new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
+                        //Tuple.Create("Plugin pointer has valid options?",
+                        //    new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
                         Tuple.Create("Resource Map contains Resource?", new Func<bool?>(() =>
                         {
                             if (pluginPointer.Resource == null) return null;

@@ -7,9 +7,8 @@ using Microsoft.Extensions.Logging;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
 using SMACD.Shared.Extensions;
-using SMACD.Shared.Resources;
 
-namespace SMACD.Shared.WorkspaceManagers
+namespace SMACD.Shared.Resources
 {
     /// <summary>
     ///     Manages Resources and their fingerprints
@@ -58,7 +57,7 @@ namespace SMACD.Shared.WorkspaceManagers
         {
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(asm => asm.GetTypes().Select(type =>
             {
-                var attr = type.GetConfigAttribute<ResourceIdentifierAttribute, string>(a => a.ResourceIdentifier);
+                var attr = type.GetConfigAttribute<MetadataAttribute, string>(a => a.Identifier);
                 return attr == null ? null : Tuple.Create(attr, type);
             })).Except(new Tuple<string, Type>[] {null}).ToList();
         }

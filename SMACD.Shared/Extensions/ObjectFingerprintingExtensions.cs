@@ -48,6 +48,29 @@ namespace SMACD.Shared.Extensions
                     .Substring(0, hashLength);
             }
         }
+
+        /// <summary>
+        /// Calculate SHA1 hash of a string (not cryptographically safe operation!)
+        /// </summary>
+        /// <param name="str">String to hash</param>
+        /// <returns></returns>
+        public static string SHA1(this string str)
+        {
+            try
+            {
+                byte[] hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
+                StringBuilder ret = new StringBuilder();
+
+                for (int i = 0; i < hash.Length; i++)
+                    ret.Append(hash[i].ToString("x2"));
+
+                return ret.ToString();
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 
     public class SkipFieldsInspector : TypeInspectorSkeleton

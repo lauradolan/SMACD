@@ -19,6 +19,11 @@ namespace SMACD.Shared.Data
         public IDictionary<string, string> PluginParameters { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
+        ///     Scorer to use instead of Plugin-provided default
+        /// </summary>
+        public string Scorer { get; set; }
+
+        /// <summary>
         ///     Resource to pass to plugin
         /// </summary>
         public ResourcePointerModel Resource { get; set; }

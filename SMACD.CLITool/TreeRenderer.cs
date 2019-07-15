@@ -3,7 +3,6 @@ using System.Linq;
 using Crayon;
 using SMACD.Shared.Data;
 using SMACD.Shared.Resources;
-using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.CLITool
 {

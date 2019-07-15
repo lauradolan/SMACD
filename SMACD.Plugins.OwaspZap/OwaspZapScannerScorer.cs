@@ -1,45 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Shared;
-using SMACD.Shared.Data;
+using SMACD.Shared.Attributes;
 using SMACD.Shared.Extensions;
-using SMACD.Shared.Plugins;
+using SMACD.Shared.Plugins.Scorers;
 using SMACD.Shared.Resources;
-using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.Plugins.OwaspZap
 {
-    public class OwaspZapPluginResult : PluginResult
+    [ScorerMetadata("owaspzap", Name = "OWASP ZAP Scanner Default Scorer")]
+    public class OwaspZapScannerScorer : Scorer
     {
-        public OwaspZapPluginResult()
+        public OwaspZapScannerScorer(string workingDirectory) : base(workingDirectory)
         {
+            Logger = Workspace.LogFactory.CreateLogger("OwaspZapScannerScorer");
         }
-
-        public OwaspZapPluginResult(string workingDirectory) : base(workingDirectory)
-        {
-        }
-
-        public OwaspZapPluginResult(PluginPointerModel pluginPointer, string workingDirectory) : base(pluginPointer,
-            workingDirectory)
-        {
-            SaveResultArtifact(Path.Combine(workingDirectory, ".ptr"), pluginPointer);
-        }
-
-        private ILogger Logger { get; } = Workspace.LogFactory.CreateLogger("OwaspZapPluginResult");
-
-        public override async Task SummaryRunOnce(VulnerabilitySummary summary)
+ 
+        public override async Task GenerateScore(VulnerabilitySummary summary)
         {
             ZapJsonReport report = null;
-            var jsonReportPath = Path.Combine(WorkingDirectory, OwaspZapPlugin.JSON_REPORT_FILE);
+            var jsonReportPath = Path.Combine(WorkingDirectory, OwaspZapAttackTool.JSON_REPORT_FILE);
             if (File.Exists(jsonReportPath))
             {
-                using (var sr = new StreamReader(jsonReportPath))
+                try
                 {
-                    report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
+                    using (var sr = new StreamReader(jsonReportPath))
+                    {
+                        report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogCritical(ex, "Error deserializing OWASP ZAP JSON output report!");
                 }
             }
             else
@@ -54,11 +50,12 @@ namespace SMACD.Plugins.OwaspZap
                 return;
             }
 
-            foreach (var alert in report.Site.First().Alerts)
+            foreach (var site in report.Site)
+            foreach (var alert in site.Alerts)
             {
                 var item = new VulnerabilityItem
                 {
-                    PluginResults = new List<PluginResult> {this},
+                    //PluginResults = new List<ScannerReportAggregator> {this},
                     PluginPointer = PluginPointer,
                     PluginRawScore = alert.RiskCode * alert.Confidence,
                     PluginAdjustedScore = alert.RiskCode * alert.Confidence / (3.0 * 5.0) * 100,
@@ -104,18 +101,18 @@ namespace SMACD.Plugins.OwaspZap
                 {
                     var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v =>
                         v.Fingerprint(skippedFields: skipFields) == fingerprint);
-                    if (correlatedItem != null && !correlatedItem.PluginResults.Contains(this))
-                    {
-                        correlatedItem.PluginResults.Add(this);
-                        correlatedItem.Extras["OWASPZAP"] = item.Extras["OWASPZAP"];
-                    }
+                    //if (correlatedItem != null && !correlatedItem.PluginResults.Contains(this))
+                    //{
+                    //    correlatedItem.PluginResults.Add(this);
+                    //    correlatedItem.Extras["OWASPZAP"] = item.Extras["OWASPZAP"];
+                    //}
                 }
             }
 
             // TODO: Migrate HTML report into AzDO plugin?
         }
 
-        public override async Task<bool> SummaryRunGenerationally(VulnerabilitySummary summary)
+        public override async Task<bool> ConvergeSummary(VulnerabilitySummary summary)
         {
             // Nothing to converge!
             return await Task.FromResult(false);

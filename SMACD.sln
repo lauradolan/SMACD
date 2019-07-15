@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{0B676335
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{18DE1DEE-966F-45ED-8A8C-919F0BB6E8FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMACD.Services.AzureDevOps", "SMACD.Services.AzureDevOps\SMACD.Services.AzureDevOps.csproj", "{058F2396-13B2-4B0E-8FE6-743FF8CC5247}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMACD.Services.AzureDevOps", "SMACD.Services.AzureDevOps\SMACD.Services.AzureDevOps.csproj", "{058F2396-13B2-4B0E-8FE6-743FF8CC5247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -38,6 +38,12 @@ namespace SMACD.Shared.Resources
         [YamlIgnore]
         public virtual string DataFingerprint => this.Fingerprint();
 
+        /// <summary>
+        /// Retrieve a string that represents the target of this resource
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetDescription();
+
         public string GetFingerprint()
         {
             return this.Fingerprint();

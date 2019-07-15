@@ -94,7 +94,7 @@ namespace SMACD.CLITool.Verbs
                 }
             }.ForEach(r => Workspace.Instance.ServiceMap.Resources.Add(r));
 
-            Logger.LogInformation("Created all elements, generating Service Map file");
+            Logger.LogDebug("Created all elements, generating Service Map file");
             Workspace.PutServiceMap(Workspace.Instance.ServiceMap, ServiceMap);
             Logger.LogInformation("Created new Service Map at {0}", ServiceMap);
 

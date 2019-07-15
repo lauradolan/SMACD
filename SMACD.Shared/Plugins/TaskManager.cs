@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using SMACD.Plugins.Extensions;
+using SMACD.Shared.Extensions;
 
-namespace SMACD.Shared.WorkspaceManagers
+namespace SMACD.Shared.Plugins
 {
     /// <summary>
     ///     Handles Task creation and management for multi-threaded operations
@@ -89,6 +89,20 @@ namespace SMACD.Shared.WorkspaceManagers
         /// <param name="task">Task to add</param>
         /// <returns></returns>
         public Task<T> Enqueue<T>(Task<T> task, string taskName = "")
+        {
+            if (!string.IsNullOrEmpty(taskName))
+                task.Tag(taskName);
+            ScheduledTasks.Enqueue(task);
+            TaskManagerWorkerLoop();
+            return task;
+        }
+
+        /// <summary>
+        ///     Add a Task to the queue
+        /// </summary>
+        /// <param name="task">Task to add</param>
+        /// <returns></returns>
+        public Task Enqueue(Task task, string taskName = "")
         {
             if (!string.IsNullOrEmpty(taskName))
                 task.Tag(taskName);

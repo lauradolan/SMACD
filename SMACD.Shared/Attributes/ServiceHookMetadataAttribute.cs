@@ -5,25 +5,15 @@ namespace SMACD.Shared.Attributes
     /// <summary>
     ///     Specify the metadata for the service hook, such as its name
     /// </summary>
-    public class ServiceHookMetadataAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public class ServiceHookMetadataAttribute : MetadataAttribute
     {
         /// <summary>
         ///     Specify the metadata for the service hook, such as its name
         /// </summary>
         /// <param name="identifier">Single-word identifier that is used to point to service from Service Map</param>
-        public ServiceHookMetadataAttribute(string identifier)
+        public ServiceHookMetadataAttribute(string identifier) : base(identifier)
         {
-            Identifier = identifier;
         }
-
-        /// <summary>
-        ///     Human-friendly name of plugin
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     Single-word identifier that is used to point to plugin from Service Map
-        /// </summary>
-        public string Identifier { get; set; }
     }
 }

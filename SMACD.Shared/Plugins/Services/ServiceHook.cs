@@ -2,7 +2,7 @@
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Extensions;
 
-namespace SMACD.Shared
+namespace SMACD.Shared.Plugins.Services
 {
     public abstract class ServiceHook
     {

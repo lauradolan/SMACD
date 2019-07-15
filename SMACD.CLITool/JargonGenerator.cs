@@ -42,16 +42,16 @@ namespace SMACD.CLITool
 
         internal static string GenerateVerbAdjNounJargon(bool capitalizeFirstLetter = true)
         {
-            var str = new Bogus.Faker().PickRandom(VERBS) + " " +
-                      new Bogus.Faker().PickRandom(ADJECTIVES) + " " +
-                      new Bogus.Faker().PickRandom(NOUNS);
+            var str = new Faker().PickRandom(VERBS) + " " +
+                      new Faker().PickRandom(ADJECTIVES) + " " +
+                      new Faker().PickRandom(NOUNS);
             return capitalizeFirstLetter ? FixCase(str) : str;
         }
 
         internal static string GenerateAdjNounJargon(bool capitalizeFirstLetter = true)
         {
-            var str = new Bogus.Faker().PickRandom(ADJECTIVES) + " " +
-                      new Bogus.Faker().PickRandom(NOUNS);
+            var str = new Faker().PickRandom(ADJECTIVES) + " " +
+                      new Faker().PickRandom(NOUNS);
             return capitalizeFirstLetter ? FixCase(str) : str;
         }
 

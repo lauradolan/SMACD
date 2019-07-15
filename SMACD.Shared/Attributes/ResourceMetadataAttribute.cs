@@ -3,19 +3,17 @@ using System;
 namespace SMACD.Shared.Attributes
 {
     /// <summary>
-    ///     Specify the metadata for the plugin, such as its name
+    ///     Specify the metadata for the resource, such as its identifier
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class AttackToolMetadataAttribute : MetadataAttribute
+    public class ResourceMetadataAttribute : MetadataAttribute
     {
         /// <summary>
         ///     Specify the metadata for the plugin, such as its name
         /// </summary>
         /// <param name="identifier">Single-word identifier that is used to point to plugin from Service Map</param>
-        public AttackToolMetadataAttribute(string identifier) : base(identifier)
+        public ResourceMetadataAttribute(string identifier) : base(identifier)
         {
         }
-
-        public string DefaultScorer { get; set; }
     }
 }

@@ -3,22 +3,23 @@ using Microsoft.Extensions.Logging;
 using SMACD.Shared;
 using SMACD.Shared.Attributes;
 using SMACD.Shared.Data;
+using SMACD.Shared.Extensions;
 using SMACD.Shared.Plugins;
+using SMACD.Shared.Plugins.AttackTools;
 using SMACD.Shared.Resources;
-using SMACD.Shared.WorkspaceManagers;
 
 namespace SMACD.Plugins.OwaspZap
 {
     [ValidResources(typeof(HttpResource), typeof(HttpsResource))]
     [ConfigurableOption(OptionName = "aggressive", Default = "false")]
     [ConfigurableOption(OptionName = "useajaxspider", Default = "true")]
-    [PluginMetadata("owaspzap", Name = "OWASP ZAP Scanner", Confidence = 0.9)]
-    public class OwaspZapPlugin : Plugin
+    [AttackToolMetadata("owaspzap", Name = "OWASP ZAP Scanner", DefaultScorer = "owaspzap")]
+    public class OwaspZapAttackTool : AttackTool
     {
         internal const string JSON_REPORT_FILE = "report.json";
         internal const string HTML_REPORT_FILE = "report.html";
 
-        public override async Task<PluginResult> Execute(PluginPointerModel pointer, string workingDirectory)
+        public override async Task Execute(PluginPointerModel pointer, string workingDirectory)
         {
             Logger = Workspace.LogFactory.CreateLogger("OwaspZap@" + pointer.Resource.ResourceId);
             Logger.LogInformation("Starting OWASP ZAP plugin against Resource {0} with working directory {1}",
@@ -47,17 +48,11 @@ namespace SMACD.Plugins.OwaspZap
             wrapper.Command = string.Format(dockerCommandTemplate,
                 workingDirectory, pyScript, httpTarget.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
 
-            wrapper.Process.OutputDataReceived += (s, e) => Logger.LogInformation(e.Data);
-            wrapper.Process.ErrorDataReceived += (s, e) => Logger.LogDebug(e.Data);
+            wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+            wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
             await wrapper.Start(pointer);
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution in {0}", wrapper.ExecutionTime);
-            return new OwaspZapPluginResult(pointer, workingDirectory);
-        }
-
-        public override Task<PluginResult> Reprocess(string workingDirectory)
-        {
-            return Task.FromResult((PluginResult) new OwaspZapPluginResult(workingDirectory));
         }
     }
 }
