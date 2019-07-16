@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Shared\SMACD.Shared.csproj" />
+    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
   </ItemGroup>
 
 </Project>

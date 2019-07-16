@@ -9,8 +9,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.153.0-preview" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SMACD.Shared\SMACD.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

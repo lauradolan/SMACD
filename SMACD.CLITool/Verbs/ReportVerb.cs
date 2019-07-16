@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SMACD.Shared;
+using SMACD.ScannerEngine;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -18,21 +18,20 @@ namespace SMACD.CLITool.Verbs
             "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
 
-        private static ILogger<ScanVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ScanVerb>();
+        private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
         public override Task Execute()
         {
-            Workspace.Instance.Load(WorkingDir);
-            var summary = Workspace.Instance.ReprocessEntireMap().Result;
+            var summary = new ScoreWorkflow(WorkingDir).Execute().Result;
 
-            var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory,
+            var outputFile = Path.Combine(WorkingDir,
                 "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
             using (var sw = new StreamWriter(outputFile))
             {
                 sw.WriteLine(JsonConvert.SerializeObject(summary));
             }
 
-            Console.WriteLine("Average score: {0}", summary.ScoreAvg);
+            Console.WriteLine("Averaged score: {0}", summary.ScoreAvg);
             Console.WriteLine("Summed score: {0}", summary.ScoreSum);
 
             Logger.LogInformation("Report serialized to {0}", outputFile);
@@ -42,7 +41,8 @@ namespace SMACD.CLITool.Verbs
                 Logger.LogDebug("Checking threshold");
                 if (Threshold > summary.ScoreAvg)
                 {
-                    Logger.LogDebug("Failed! Expected: {0} / Actual: {1}", Threshold, summary.ScoreAvg);
+                    Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold,
+                        summary.ScoreAvg);
                     Environment.Exit(-1);
                 }
                 else

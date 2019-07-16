@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Crayon;
 using Serilog.Core;
 using Serilog.Events;
-using SMACD.Shared;
+using SMACD.ScannerEngine.Plugins;
 
 namespace SMACD.CLITool
 {
@@ -12,23 +13,19 @@ namespace SMACD.CLITool
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            if (Task.CurrentId == null)
+            if (Task.CurrentId == null || ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
             {
-                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", Output.Bold().Green().Text("#")));
-            }
-            else if (Extensions.CurrentTask != null && Extensions.CurrentTask.Tag() != null)
-            {
-                var tagData = Extensions.CurrentTask.Tag();
-                string str;
-                if (tagData.Item1) // system thread
-                    str = Output.White().Reversed().Text($"{tagData.Item2}");
-                else if (!string.IsNullOrEmpty(tagData.Item2)) // named worker
-                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
-                        Output.Underline().Text(tagData.Item2));
-                else // worker thread
-                    str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
-                        Output.Underline().Text($"WORKER#{Task.CurrentId})"));
-                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", str));
+                if (ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
+                {
+                    var owner = ExecutionWrapper.Maps[Thread.CurrentThread.ManagedThreadId];
+                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId",
+                        Style(owner % Colors.Count, Output.Underline().Text("WORK" + owner))));
+                }
+                else
+                {
+                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId",
+                        Output.Bold().Green().Text("#MAIN#")));
+                }
             }
             else
             {
@@ -52,17 +49,6 @@ namespace SMACD.CLITool
             ConsoleColor.DarkYellow,
             ConsoleColor.DarkRed
         };
-
-        private static int _colorIndex;
-
-        private static int ColorIndex
-        {
-            get
-            {
-                _colorIndex = (_colorIndex + 1) % Colors.Count;
-                return _colorIndex;
-            }
-        }
 
         private static string Style(int idx, string s)
         {

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SMACD.Shared;
-using SMACD.Shared.Resources;
+using SMACD.ScannerEngine;
+using SMACD.ScannerEngine.Extensions;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -24,41 +23,26 @@ namespace SMACD.CLITool.Verbs
             "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
 
-        private static ILogger<ScanVerb> Logger { get; } = Extensions.LogFactory.CreateLogger<ScanVerb>();
+        private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
-        public override Task Execute()
+        public override async Task Execute()
         {
             // Hotpatch workspace storage
-            if (WorkingDirectory == null) WorkingDirectory = Path.Combine(Path.GetTempPath(), "SMACD");
-            Workspace.WORKSPACE_STORAGE = WorkingDirectory;
+            if (WorkingDirectory == null)
+                WorkingDirectory = Path.Combine(Path.GetTempPath(), "SMACD", RandomExtensions.RandomName());
 
-            int workerThreads, completionPortThreads;
-            ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
-            Logger.LogDebug("ThreadPool configuration: {0} workers, {1} completion port threads", workerThreads,
-                completionPortThreads);
+            var scanWorkflow = new ScanWorkflow(WorkingDirectory, ServiceMap);
+            scanWorkflow.Execute().Wait();
 
-            ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
-            Logger.LogDebug("ThreadPool availability: {0} workers, {1} completion port threads", workerThreads,
-                completionPortThreads);
+            var scoreWorkflow = new ScoreWorkflow(WorkingDirectory);
+            var result = scoreWorkflow.Execute().Result;
 
-            Logger.LogInformation($"Running scan with service map {ServiceMap}");
-            Workspace.Instance.Create(ServiceMap);
-            var result = Workspace.Instance.ScanEntireMap().Result;
-
-            if (!Silent)
-                TerminalEffects.DrawSingleLineBanner("= Orphan URLs =");
             Logger.LogInformation("Found {0} URLs not found in Resource Map",
                 result.DiscoveredResources.Count(r => r.SystemCreated));
             foreach (var resource in result.DiscoveredResources)
-                // todo: move formatting to the resource (via log)
-                if (resource is HttpResource)
-                    Logger.LogInformation("URL: {0} {1}", ((HttpResource) resource).Method,
-                        ((HttpResource) resource).Url);
+                Logger.LogInformation(resource.GetDescription());
 
-            if (!Silent)
-                TerminalEffects.DrawSingleLineBanner("= Results =");
-
-            var outputFile = Path.Combine(Workspace.Instance.WorkingDirectory,
+            var outputFile = Path.Combine(WorkingDirectory,
                 "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
             using (var sw = new StreamWriter(outputFile))
             {
@@ -68,14 +52,15 @@ namespace SMACD.CLITool.Verbs
             Console.WriteLine("Average score: {0}", result.ScoreAvg);
             Console.WriteLine("Summed score: {0}", result.ScoreSum);
 
-            Logger.LogInformation("Report serialized to {0}", outputFile);
+            Console.WriteLine("Report serialized to {0}", outputFile);
 
             if (Threshold.HasValue)
             {
                 Logger.LogDebug("Checking threshold");
                 if (Threshold > result.ScoreAvg)
                 {
-                    Logger.LogDebug("Failed! Expected: {0} / Actual: {1}", Threshold, result.ScoreAvg);
+                    Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold,
+                        result.ScoreAvg);
                     Environment.Exit(-1);
                 }
                 else
@@ -84,8 +69,6 @@ namespace SMACD.CLITool.Verbs
                     Environment.Exit(0);
                 }
             }
-
-            return Task.FromResult(0);
         }
     }
 }
