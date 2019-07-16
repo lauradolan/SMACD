@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Crayon;
 using Serilog.Core;
 using Serilog.Events;
-using SMACD.Shared.Extensions;
-using SMACD.Shared.Plugins;
+using SMACD.ScannerEngine.Plugins;
 
 namespace SMACD.CLITool
 {
@@ -14,31 +13,20 @@ namespace SMACD.CLITool
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            if (Task.CurrentId == null)
+            if (Task.CurrentId == null || ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
             {
                 if (ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
                 {
                     var owner = ExecutionWrapper.Maps[Thread.CurrentThread.ManagedThreadId];
                     logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId",
-                        Style(owner % Colors.Count, Output.Underline().Text("WORK"+owner))));
+                        Style(owner % Colors.Count, Output.Underline().Text("WORK" + owner))));
                 }
                 else
-                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", Output.Bold().Green().Text("#MAIN#")));
+                {
+                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId",
+                        Output.Bold().Green().Text("#MAIN#")));
+                }
             }
-            //else if (InteropExtensions.CurrentTask != null && InteropExtensions.CurrentTask.Tag() != null)
-            //{
-            //    var tagData = InteropExtensions.CurrentTask.Tag();
-            //    string str;
-            //    if (tagData.Item1) // system thread
-            //        str = Output.White().Reversed().Text($"{tagData.Item2}");
-            //    else if (!string.IsNullOrEmpty(tagData.Item2)) // named worker
-            //        str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
-            //            Output.Underline().Text(tagData.Item2));
-            //    else // worker thread
-            //        str = Style(Task.CurrentId.GetValueOrDefault(-1) % Colors.Count,
-            //            Output.Underline().Text($"WORKER#{Task.CurrentId})"));
-            //    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId", str));
-            //}
             else
             {
                 logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(

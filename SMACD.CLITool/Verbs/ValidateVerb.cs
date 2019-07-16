@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
-using SMACD.Shared;
-using SMACD.Shared.Resources;
+using SMACD.ScannerEngine;
+using SMACD.ScannerEngine.Resources;
 
 namespace SMACD.CLITool.Verbs
 {
     [Verb("validate", HelpText = "Validate the content of a given Service Map")]
     public class ValidateVerb : VerbBase
     {
-        private readonly IList<Tuple<string, string>> _loadedExtensions = Workspace.GetLoadedExtensions();
+        private readonly IList<Tuple<string, string>> _loadedExtensions = Global.GetLoadedExtensions();
 
         private int _tasksGenerated;
 
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
-        private static ILogger<ValidateVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<ValidateVerb>();
+        private static ILogger<ValidateVerb> Logger { get; } = Global.LogFactory.CreateLogger<ValidateVerb>();
 
         public override Task Execute()
         {
-            Workspace.Instance.CreateEphemeral(ServiceMap);
+            var serviceMap = Global.GetServiceMap(ServiceMap);
 
             var treeRenderer = new TreeRenderer();
             treeRenderer.AfterPluginPointerDrawn += (indent, isLast, pluginPointer) =>
@@ -52,8 +52,8 @@ namespace SMACD.CLITool.Verbs
             };
 
             Console.WriteLine(Output.Reversed().White().Text(Path.GetFileName(ServiceMap)));
-            foreach (var feature in Workspace.Instance.Features)
-                treeRenderer.PrintNode(feature, "", Workspace.Instance.Features.Last() == feature);
+            foreach (var feature in serviceMap.Features)
+                treeRenderer.PrintNode(feature, "", serviceMap.Features.Last() == feature);
 
             Logger.LogInformation(
                 "Validation of {0} complete! Tests: {1} passed, {2} failed. Service Map scan will generate {3} tasks.",

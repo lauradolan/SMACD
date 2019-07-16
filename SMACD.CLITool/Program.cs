@@ -6,13 +6,13 @@ using Crayon;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using SMACD.CLITool.Verbs;
-using SMACD.Shared;
+using SMACD.ScannerEngine;
 
 namespace SMACD.CLITool
 {
     internal class Program
     {
-        private static ILogger<Program> Logger { get; } = Workspace.LogFactory.CreateLogger<Program>();
+        private static ILogger<Program> Logger { get; } = Global.LogFactory.CreateLogger<Program>();
 
         private static void Main(string[] args)
         {
@@ -48,7 +48,7 @@ namespace SMACD.CLITool
                 .WriteTo.Console(outputTemplate: template)
                 .WriteTo.File("smacd.log", outputTemplate: currentTimeTemplate + template)
                 .CreateLogger();
-            Workspace.LogFactory.AddSerilog();
+            Global.LogFactory.AddSerilog();
 
             if (!verb.Silent)
                 TerminalEffects.DrawLogoBanner();

@@ -20,18 +20,15 @@ features:
       - plugin: owaspzap
         resource:
           resourceId: resourceRoot
-      - plugin: owaspzap
-        resource:
-          resourceId: resourceRoot3
 resources:
 - !http
   resourceId: resourceRoot
   method: get
-  url: http://192.168.1.197:5000
+  url: http://10.0.10.5/
 - !http
   resourceId: resourceRoot3
   method: get
-  url: http://192.168.1.1
+  url: http://eshopapp.azurewebsites.net
 - !http
   resourceId: resourceRoot2
   url: http://192.168.1.182/

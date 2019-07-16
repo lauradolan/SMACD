@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using SMACD.Shared.Extensions;
+using SMACD.ScannerEngine.Extensions;
 
 namespace SMACD.CLITool
 {

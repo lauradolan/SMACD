@@ -3,18 +3,18 @@ using System.Threading.Tasks;
 using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
-using SMACD.Shared;
+using SMACD.ScannerEngine;
 
 namespace SMACD.CLITool.Verbs
 {
     [Verb("snoop", HelpText = "Snoop on the tool's awareness of its environment")]
     public class SnoopVerb : VerbBase
     {
-        private static ILogger<SnoopVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<SnoopVerb>();
+        private static ILogger<SnoopVerb> Logger { get; } = Global.LogFactory.CreateLogger<SnoopVerb>();
 
         public override Task Execute()
         {
-            var extensions = Workspace.GetLoadedExtensions();
+            var extensions = Global.GetLoadedExtensions();
             Logger.LogDebug("Starting snoop on environment configuration");
 
             Console.WriteLine(Environment.NewLine);

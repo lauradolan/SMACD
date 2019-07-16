@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Shared\SMACD.Shared.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
   </ItemGroup>
 
 </Project>

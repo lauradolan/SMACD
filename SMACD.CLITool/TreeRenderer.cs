@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Crayon;
-using SMACD.Shared.Data;
-using SMACD.Shared.Resources;
+using SMACD.Data;
+using SMACD.ScannerEngine.Resources;
 
 namespace SMACD.CLITool
 {

@@ -21,13 +21,11 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
-    <PackageReference Include="YamlDotNet" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Plugins.Dummy\SMACD.Plugins.Dummy.csproj" />
-    <ProjectReference Include="..\SMACD.Plugins.OwaspZap\SMACD.Plugins.OwaspZap.csproj" />
-    <ProjectReference Include="..\SMACD.Shared\SMACD.Shared.csproj" />
+    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

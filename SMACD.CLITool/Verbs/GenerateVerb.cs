@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Bogus;
 using CommandLine;
 using Microsoft.Extensions.Logging;
-using SMACD.Shared;
-using SMACD.Shared.Data;
-using SMACD.Shared.Extensions;
-using SMACD.Shared.Resources;
+using SMACD.Data;
+using SMACD.ScannerEngine;
+using SMACD.ScannerEngine.Extensions;
+using SMACD.ScannerEngine.Resources;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -20,12 +20,11 @@ namespace SMACD.CLITool.Verbs
         [Option('m', "max", HelpText = "Maximum number of elements of each generation to create", Default = 3)]
         public int MaxOfEach { get; set; }
 
-        private static ILogger<GenerateVerb> Logger { get; } = Workspace.LogFactory.CreateLogger<GenerateVerb>();
+        private static ILogger<GenerateVerb> Logger { get; } = Global.LogFactory.CreateLogger<GenerateVerb>();
 
         public override Task Execute()
         {
-            Workspace.Instance.CreateEphemeral();
-
+            var serviceMap = new ServiceMapFile();
             Logger.LogInformation("Creating 1-{0} of each element for a new Service Map", MaxOfEach);
             Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
             {
@@ -84,7 +83,7 @@ namespace SMACD.CLITool.Verbs
                                             }).ToList()
                                 }).ToList()
                     }).ToList()
-            }).ToList().ForEach(f => Workspace.Instance.ServiceMap.Features.Add(f));
+            }).ToList().ForEach(f => serviceMap.Features.Add(f));
             new List<Resource>
             {
                 new HttpResource
@@ -92,10 +91,10 @@ namespace SMACD.CLITool.Verbs
                     ResourceId = "dummyResource",
                     Url = "http://localhost"
                 }
-            }.ForEach(r => Workspace.Instance.ServiceMap.Resources.Add(r));
+            }.ForEach(r => serviceMap.Resources.Add(r));
 
             Logger.LogDebug("Created all elements, generating Service Map file");
-            Workspace.PutServiceMap(Workspace.Instance.ServiceMap, ServiceMap);
+            Global.PutServiceMap(serviceMap, ServiceMap);
             Logger.LogInformation("Created new Service Map at {0}", ServiceMap);
 
             return Task.FromResult(0);
