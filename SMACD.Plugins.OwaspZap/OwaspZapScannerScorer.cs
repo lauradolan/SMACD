@@ -16,11 +16,6 @@ namespace SMACD.Plugins.OwaspZap
     [PluginMetadata("owaspzap", Name = "OWASP ZAP Scanner Default Scorer")]
     public class OwaspZapScannerScorer : ScorerPlugin
     {
-        public OwaspZapScannerScorer()
-        {
-            Logger = Global.LogFactory.CreateLogger("OwaspZapScannerScorer");
-        }
-
         public override async Task Score(VulnerabilitySummary summary)
         {
             ZapJsonReport report = null;
