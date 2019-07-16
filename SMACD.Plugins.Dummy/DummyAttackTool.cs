@@ -32,9 +32,6 @@ namespace SMACD.Plugins.Dummy
             // Here, prep and execute anything that generates artifacts to be scored later.
             // This phase will always be the longest and runs in parallel to other tasks (up to a configurable limit, default 10)
 
-            // You can change how the Plugin appears in logs by creating one with an alternate name
-            Logger = Global.LogFactory.CreateLogger("DummyAttackTool");
-
             // GetChildWorkingDirectory() retrieves a directory to store artifacts for this Plugin
             // base.Pointer saves the original PluginPointerModel that requested this plugin
             var workingDirectory = GetChildWorkingDirectory(WorkingDirectory, Pointer);

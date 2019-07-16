@@ -61,6 +61,8 @@ namespace SMACD.ScannerEngine
             var attackTool = AttackToolPluginFactory.Instance.Emit(pointer.Plugin, pointer.PluginParameters);
             if (pointer.Resource != null)
                 attackTool.Resources.Add(ResourceManager.Instance.GetByPointer(pointer.Resource));
+            attackTool.Pointer = pointer;
+            attackTool.WorkingDirectory = Path.Combine(WorkingDirectory, attackTool.GetChildWorkingDirectory(WorkingDirectory, pointer));
 
             try
             {
@@ -75,8 +77,6 @@ namespace SMACD.ScannerEngine
             return TaskManager.Instance.Enqueue(new Task(async () =>
             {
                 Logger.LogDebug("Starting scheduled task for plugin pointer {0}", pointer);
-                attackTool.Pointer = pointer;
-                attackTool.WorkingDirectory = Path.Combine(WorkingDirectory, attackTool.GetChildWorkingDirectory(WorkingDirectory, pointer));
                 await attackTool.Execute();
                 Logger.LogDebug("Completed scheduled task for plugin pointer {0}", pointer);
             }));
