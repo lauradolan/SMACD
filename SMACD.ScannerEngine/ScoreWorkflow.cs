@@ -14,11 +14,19 @@ namespace SMACD.ScannerEngine
 {
     public class ScoreWorkflow
     {
+        /// <summary>
+        /// Represents a workflow which reads *sets* of artifacts from a Working Directory
+        /// and regenerates any scoring-related information, including a converged summary
+        /// </summary>
+        /// <param name="baseWorkingDirectory"></param>
         public ScoreWorkflow(string baseWorkingDirectory)
         {
             WorkingDirectory = baseWorkingDirectory;
         }
 
+        /// <summary>
+        /// Working directory containing all artifacts in all plugins
+        /// </summary>
         public string WorkingDirectory { get; set; }
 
         private ILogger Logger { get; } = Global.LogFactory.CreateLogger("ScoreWorkflow");

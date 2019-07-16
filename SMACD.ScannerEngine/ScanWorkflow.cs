@@ -12,13 +12,26 @@ namespace SMACD.ScannerEngine
 {
     public class ScanWorkflow
     {
+        /// <summary>
+        /// Represents a workflow which generates Attack Tools from a given
+        /// service map, runs them, and then runs Scorers to generate a result report
+        /// </summary>
+        /// <param name="baseWorkingDirectory">Working directory for all artifacts in all plugins</param>
+        /// <param name="serviceMapFile">Service Map file to read</param>
         public ScanWorkflow(string baseWorkingDirectory, string serviceMapFile)
         {
             WorkingDirectory = baseWorkingDirectory;
             ServiceMapFile = serviceMapFile;
         }
 
+        /// <summary>
+        /// Working directory containing all artifacts in all plugins
+        /// </summary>
         public string WorkingDirectory { get; set; }
+
+        /// <summary>
+        /// Service Map file that is being operated on by this workflow
+        /// </summary>
         public string ServiceMapFile { get; set; }
 
         private ILogger Logger { get; } = Global.LogFactory.CreateLogger("ScanWorkflow");

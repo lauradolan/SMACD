@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace SMACD.ScannerEngine.Attributes
 {
+    /// <summary>
+    /// Specifies the metadata for the Plugin, such as identifier and default Scorer
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class PluginMetadataAttribute : Attribute
     {

@@ -9,6 +9,9 @@ namespace SMACD.ScannerEngine.Plugins
 {
     public abstract class AttackToolPlugin : Plugin
     {
+        /// <summary>
+        /// Resource[s] this Attack Tool will act on
+        /// </summary>
         public IList<Resource> Resources { get; set; } = new List<Resource>();
         public abstract Task Execute();
 

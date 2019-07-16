@@ -17,6 +17,9 @@ namespace SMACD.ScannerEngine.Plugins
     {
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
+        /// <summary>
+        /// A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
+        /// </summary>
         public static IDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
 
         public ExecutionWrapper()

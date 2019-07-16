@@ -15,6 +15,13 @@ namespace SMACD.ScannerEngine.Factories
 
         public static AttackToolPluginFactory Instance => _instance.Value;
 
+        /// <summary>
+        /// Creates an instance of an Attack Tool with a given identifier,
+        /// whose behavior is adjusted by a set of options
+        /// </summary>
+        /// <param name="identifier">Attack Tool identifier</param>
+        /// <param name="options">Options</param>
+        /// <returns></returns>
         public AttackToolPlugin Emit(string identifier, Dictionary<string, string> options)
         {
             return (AttackToolPlugin) base.Emit(identifier)

@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace SMACD.ScannerEngine.Attributes
 {
+    /// <summary>
+    /// Specifies what types of Resources can be used by this Plugini
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class AllowResourceTypeAttribute : Attribute
     {
