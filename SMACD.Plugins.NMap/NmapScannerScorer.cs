@@ -20,7 +20,6 @@ namespace SMACD.Plugins.OwaspZap
         {
             var runObject = new NmapRun();
             var scanFile = Path.Combine(WorkingDirectory, "scan.xml");
-            scanFile = "C:\\Working Folder\\GitHub\\SMACD\\scan.xml";
             if (File.Exists(scanFile))
             {
                 try
