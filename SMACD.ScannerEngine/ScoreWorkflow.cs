@@ -94,7 +94,7 @@ namespace SMACD.ScannerEngine
                     $"Plugin instance of {toolMetadata.Identifier} does not specify a Scorer and no default Scorer is provided");
             }
 
-            scorer.WorkingDirectory = WorkingDirectory;
+            scorer.WorkingDirectory = scorer.GetChildWorkingDirectory(WorkingDirectory, pointer);
             scorer.Pointer = pointer;
 
             return scorer;
