@@ -33,3 +33,6 @@ Data structures containing a Resource Identifier, the type of Resource being des
 8. When complete, TaskManager notifies any consumers subscribed to the event indicating a task has completed
 9. When all Plugins have completed, iterate over each result object, running operations to summarize the content of all reports and generate a risk score
 10. Summary Report is generated, containing all result objects, a generalized list of vulnerabilities, scores for each result, and any Resources that were generated during a spider operation (not provided on the Resource Map)
+
+#### ConsoleDump
+This project repackages (for purposes of platform compatibility) the [ConsoleDump](https://github.com/cameronism/ConsoleDump) library to render the output results from a report or scan.

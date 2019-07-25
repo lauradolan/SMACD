@@ -1,12 +1,18 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.Services.Common;
 using Serilog;
 using SMACD.CLITool.Verbs;
-using SMACD.ScannerEngine;
+using SMACD.PluginHost;
+using SMACD.PluginHost.Resources;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace SMACD.CLITool
 {
@@ -24,6 +30,8 @@ namespace SMACD.CLITool
                     strArgs = Console.ReadLine().Trim();
                 args = strArgs.Split(' ');
             }
+
+            BindSerializers();
 
             Parser.Default.ParseArguments<GenerateVerb, ReportVerb, ScanVerb, ShowVerb, SnoopVerb, ValidateVerb>(args)
                 .WithParsed<GenerateVerb>(RunVerbLifecycle)
@@ -70,6 +78,55 @@ namespace SMACD.CLITool
 
                 Logger.LogDebug("Application complete");
             }
+        }
+
+        private static void BindSerializers()
+        {
+            Global.SerializeToFile = (serializedObject, skippedFields, filename) =>
+            {
+                using (var sw = new StreamWriter(filename))
+                {
+                    sw.WriteLine(Serialize(serializedObject, skippedFields));
+                }
+            };
+            Global.DeserializeFromFile = (filename, type) =>
+            {
+                using (var sr = new StreamReader(filename))
+                {
+                    return Deserialize(sr.ReadToEnd(), type);
+                }
+            };
+            Global.SerializeToString = Serialize;
+            Global.DeserializeFromString = Deserialize;
+        }
+
+        private static string Serialize(object obj, string[] skippedFields)
+        {
+            return new SerializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .WithTypeInspector(i => new SkipFieldsInspector(i, skippedFields.ToArray()))
+                .AddLoadedTagMappings()
+                .Build()
+                .Serialize(obj);
+        }
+
+        private static object Deserialize(string yaml, Type type)
+        {
+            return new DeserializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .AddLoadedTagMappings()
+                .Build()
+                .Deserialize(yaml, type);
+        }
+    }
+
+    internal static class ProgramExtensions
+    {
+        internal static T AddLoadedTagMappings<T>(this T builder) where T : BuilderSkeleton<T>
+        {
+            ResourceManager.GetKnownResourceHandlers()
+                .ForEach(h => builder = builder.WithTagMapping("!" + h.Key, h.Value));
+            return builder;
         }
     }
 }

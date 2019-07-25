@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
   </ItemGroup>
 
@@ -35,6 +35,10 @@
     <None Update="sample.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ConsoleDump\" />
   </ItemGroup>
 
 </Project>

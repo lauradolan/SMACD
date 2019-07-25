@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bogus;
+﻿using Bogus;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
-using SMACD.ScannerEngine;
-using SMACD.ScannerEngine.Extensions;
-using SMACD.ScannerEngine.Resources;
+using SMACD.PluginHost;
+using SMACD.PluginHost.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -79,22 +78,22 @@ namespace SMACD.CLITool.Verbs
                                                 Plugin = "dummy",
                                                 PluginParameters = new Dictionary<string, string>
                                                     {{"parameter", "value"}},
-                                                Resource = new ResourcePointerModel {ResourceId = "dummyResource"}
+                                                Resource = new ResourcePointerModel { ResourceId = "dummyResource" }
                                             }).ToList()
                                 }).ToList()
                     }).ToList()
             }).ToList().ForEach(f => serviceMap.Features.Add(f));
-            new List<Resource>
+            new List<object>
             {
-                new HttpResource
+                new
                 {
                     ResourceId = "dummyResource",
                     Url = "http://localhost"
                 }
-            }.ForEach(r => serviceMap.Resources.Add(r));
+            }.ForEach(r => serviceMap.Resources.Add((ResourceModel)r));
 
             Logger.LogDebug("Created all elements, generating Service Map file");
-            Global.PutServiceMap(serviceMap, ServiceMap);
+            ServiceMapFile.PutServiceMap(serviceMap, ServiceMap);
             Logger.LogInformation("Created new Service Map at {0}", ServiceMap);
 
             return Task.FromResult(0);

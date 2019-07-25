@@ -1,32 +1,34 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SMACD.PluginHost.Attributes;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
+using System;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using SMACD.Data;
-using SMACD.ScannerEngine;
-using SMACD.ScannerEngine.Attributes;
-using SMACD.ScannerEngine.Extensions;
-using SMACD.ScannerEngine.Plugins;
-using SMACD.ScannerEngine.Resources;
 
 namespace SMACD.Plugins.OwaspZap
 {
-    [PluginMetadata("owaspzap", Name = "OWASP ZAP Scanner Default Scorer")]
-    public class OwaspZapScannerScorer : ScorerPlugin
+    [PluginImplementation(PluginHost.Extensions.PluginTypes.Scorer, "owaspzap")]
+    public class OwaspZapScannerScorer : Plugin
     {
-        public override async Task Score(VulnerabilitySummary summary)
+        public OwaspZapScannerScorer(string workingDirectory) : base(workingDirectory)
         {
+        }
+
+        public override ScoredResult Execute()
+        {
+            var result = CreateBlankScoredResult();
             ZapJsonReport report = null;
-            var jsonReportPath = Path.Combine(WorkingDirectory, OwaspZapAttackTool.JSON_REPORT_FILE);
+            var jsonReportPath = WorkingDirectory.WithFile(OwaspZapAttackTool.JSON_REPORT_FILE);
             if (File.Exists(jsonReportPath))
             {
                 try
                 {
                     using (var sr = new StreamReader(jsonReportPath))
                     {
-                        report = JsonConvert.DeserializeObject<ZapJsonReport>(await sr.ReadToEndAsync());
+                        report = JsonConvert.DeserializeObject<ZapJsonReport>(sr.ReadToEnd());
                     }
                 }
                 catch (Exception ex)
@@ -37,80 +39,69 @@ namespace SMACD.Plugins.OwaspZap
             else
             {
                 Logger.LogCritical("JSON report from this plugin was not found! Aborting...");
-                return;
+                return null;
             }
 
             if (report == null)
             {
                 Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
-                return;
+                return null;
             }
 
             foreach (var site in report.Site)
-            foreach (var alert in site.Alerts)
-            {
-                var item = new VulnerabilityItem
+                foreach (var alert in site.Alerts)
                 {
-                    PluginPointer = Pointer,
-                    PluginRawScore = alert.RiskCode * alert.Confidence,
-                    PluginAdjustedScore = alert.RiskCode * alert.Confidence / (3.0 * 5.0) * 100,
-                    Description = alert.Desc,
-                    Resources = alert.Instances.Select(instance =>
+                    var resources = alert.Instances.Select(i => new HttpResource()
                     {
-                        var newResource = new HttpResource {Method = instance.Method, Url = instance.Uri};
-                        var newFingerprint =
-                            newResource.Fingerprint(skippedFields: new[] {"resourceId", "fields", "headers"});
-                        if (ResourceManager.Instance.ContainsFingerprint(newFingerprint))
-                            return (HttpResource) ResourceManager.Instance.GetByFingerprint(newFingerprint);
+                        Url = i.Uri,
+                        Method = i.Method,
+                        Fields = i.Param.Split(',').Select(set => Tuple.Create(set.Split('=')[0], set.Split('=')[1]))
+                            .ToDictionary(k => k.Item1, v => v.Item2)
+                    }).ToList();
 
-                        ResourceManager.Instance.Register(newResource);
-                        return newResource;
-                    }).Cast<Resource>().ToList()
-                };
 
-                item.Extras["OWASPZAP"] = new
-                {
-                    alert.Alert,
-                    alert.Confidence,
-                    alert.Count,
-                    alert.CWEId,
-                    alert.Desc,
-                    alert.Name,
-                    alert.OtherInfo,
-                    alert.PluginId,
-                    alert.Reference,
-                    alert.RiskCode,
-                    alert.RiskDesc,
-                    alert.Solution,
-                    alert.SourceId,
-                    alert.WASCId
-                };
+                    resources.ForEach(resource =>
+                    {
+                        var knownResource = ResourceManager.Instance.Search(r => r.IsApproximateTo(resource));
+                        if (knownResource == null) // new resource
+                        ResourceManager.Instance.Register(resource);
 
-                string[] skipFields = {"pluginResults", "extras"};
-                var fingerprint = item.Fingerprint(skippedFields: skipFields);
-                if (summary.VulnerabilityItems.All(i => i.Fingerprint(skippedFields: skipFields) != fingerprint))
-                {
-                    summary.VulnerabilityItems.Add(item);
+                        result.Vulnerabilities.Add(new Vulnerability()
+                        {
+                            Target = resource,
+                            Confidence = (Vulnerability.Confidences)alert.Confidence,
+                            RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
+                            Description = alert.Desc,
+                            Occurrences = alert.Instances.Count(),
+                            Remedy = alert.Solution,
+                            ShortName = alert.Name
+                        });
+                    });
+
+                    // Will be cleaned up for duplicates later
+                    result.Plugin.ResourceIds.AddRange(resources.Select(r => r.ResourceId));
+
+                    result.Extra["OWASPZAP"] = new
+                    {
+                        alert.Alert,
+                        alert.Confidence,
+                        alert.Count,
+                        alert.CWEId,
+                        alert.Desc,
+                        alert.Name,
+                        alert.OtherInfo,
+                        alert.PluginId,
+                        alert.Reference,
+                        alert.RiskCode,
+                        alert.RiskDesc,
+                        alert.Solution,
+                        alert.SourceId,
+                        alert.WASCId
+                    };
                 }
-                else // correlation -- multiple plugins see this
-                {
-                    var correlatedItem = summary.VulnerabilityItems.FirstOrDefault(v =>
-                        v.Fingerprint(skippedFields: skipFields) == fingerprint);
-                    //if (correlatedItem != null && !correlatedItem.PluginResults.Contains(this))
-                    //{
-                    //    correlatedItem.PluginResults.Add(this);
-                    //    correlatedItem.Extras["OWASPZAP"] = item.Extras["OWASPZAP"];
-                    //}
-                }
-            }
 
+            return result;
             // TODO: Migrate HTML report into AzDO plugin?
-        }
-
-        public override async Task<bool> Converge(VulnerabilitySummary summary)
-        {
-            // Nothing to converge!
-            return false;
         }
     }
 }

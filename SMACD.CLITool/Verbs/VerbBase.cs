@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Serilog.Events;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -19,9 +19,9 @@ namespace SMACD.CLITool.Verbs
 
         protected IList<string> SplitIntoLines(string targetString, int maxLength)
         {
-            var str = (string) targetString.Clone();
+            var str = (string)targetString.Clone();
             if (str.Length <= maxLength)
-                return new List<string> {str};
+                return new List<string> { str };
             var result = new List<string>();
             var start = 0;
             while (start < str.Length - 1)

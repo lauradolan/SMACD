@@ -1,19 +1,23 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.ScannerEngine.Attributes;
-using SMACD.ScannerEngine.Extensions;
-using SMACD.ScannerEngine.Plugins;
-using SMACD.ScannerEngine.Resources;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Attributes;
+using SMACD.PluginHost.Extensions;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
 
 namespace SMACD.Plugins.Nmap
 {
-    [AllowResourceType(typeof(HttpResource))]
-    [PluginMetadata("nmap", Name = "Nmap Port Scanner", DefaultScorer = "nmap")]
-    public class NmapAttackTool : AttackToolPlugin
+    [PluginImplementation(PluginTypes.AttackTool, "nmap")]
+    public class NmapAttackTool : Plugin
     {
-        public override async Task Execute()
+        public HttpResource WebEndpointResource { get; set; }
+        public SocketPortResource SocketEndpointResource { get; set; }
+
+        public NmapAttackTool(string workingDirectory) : base(workingDirectory)
+        {
+        }
+
+        public override ScoredResult Execute()
         {
             Logger.LogInformation("Starting Nmap plugin against Resources {0}", string.Join(", ", Resources));
             foreach (var resource in Resources)
@@ -21,16 +25,22 @@ namespace SMACD.Plugins.Nmap
                 string subnet = string.Empty;
                 if (resource is HttpResource)
                 {
-                    var uri = ((HttpResource) resource).UriInstance;
+                    var uri = ((HttpResource)resource).UriInstance;
                     subnet = uri.DnsSafeHost;
                 }
-                var cmd = $"nmap --open -T4 -PN {subnet} -n -oX {Path.Combine(WorkingDirectory, "scan.xml")}";
+                else if (resource is SocketPortResource)
+                {
+                    subnet = ((SocketPortResource)resource).Hostname;
+                }
+                var cmd = $"nmap --open -T4 -PN {subnet} -n -oX {WorkingDirectory.WithFile("scan.xml")}";
 
                 var wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
-                wrapper.Start(Pointer).Wait();
+                wrapper.Start().Wait();
             }
+
+            return GetScoredResult();
         }
     }
 }

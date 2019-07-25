@@ -1,17 +1,14 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.ScannerEngine;
-using SMACD.ScannerEngine.Attributes;
-using SMACD.ScannerEngine.Extensions;
-using SMACD.ScannerEngine.Plugins;
-using SMACD.ScannerEngine.Resources;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Attributes;
+using SMACD.PluginHost.Extensions;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
 
 namespace SMACD.Plugins.OwaspZap
 {
-    [AllowResourceType(typeof(HttpResource))]
-    [AllowResourceType(typeof(HttpsResource))]
-    [PluginMetadata("owaspzap", Name = "OWASP ZAP Scanner", DefaultScorer = "owaspzap")]
-    public class OwaspZapAttackTool : AttackToolPlugin
+    [PluginImplementation(PluginTypes.AttackTool, "owaspzap")]
+    public class OwaspZapAttackTool : Plugin
     {
         internal const string JSON_REPORT_FILE = "report.json";
         internal const string HTML_REPORT_FILE = "report.html";
@@ -20,11 +17,17 @@ namespace SMACD.Plugins.OwaspZap
 
         [Configurable] public bool UseAjaxSpider { get; set; } = true;
 
-        public override async Task Execute()
+        public HttpResource Resource { get; set; }
+
+        public OwaspZapAttackTool(string workingDirectory) : base(workingDirectory)
         {
-            Logger.LogInformation("Starting OWASP ZAP plugin against Resource {0} with working directory {1}",
-                Pointer.Resource?.ResourceId, WorkingDirectory);
-            var httpTarget = ResourceManager.Instance.GetByPointer(Pointer.Resource) as HttpResource;
+
+        }
+
+        public override ScoredResult Execute()
+        {
+            Logger.LogInformation("Starting OWASP ZAP plugin against {0} with working directory {1}",
+                Resource.ResourceId, WorkingDirectory);
             var wrapper = new ExecutionWrapper();
 
             var pyScript = Aggressive ? "zap-full-scan.py" : "zap-baseline.py";
@@ -41,15 +44,17 @@ namespace SMACD.Plugins.OwaspZap
                 dockerCommandTemplate += "-j ";
 
             Logger.LogDebug("Invoking command " + dockerCommandTemplate,
-                WorkingDirectory, pyScript, httpTarget.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                WorkingDirectory, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
             wrapper.Command = string.Format(dockerCommandTemplate,
-                WorkingDirectory, pyScript, httpTarget.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                WorkingDirectory, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
 
             wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
             wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
-            wrapper.Start(Pointer).Wait();
+            wrapper.Start().Wait();
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution in {0}", wrapper.ExecutionTime);
+
+            return this.GetScoredResult();
         }
     }
 }

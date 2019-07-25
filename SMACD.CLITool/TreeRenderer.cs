@@ -1,11 +1,56 @@
-﻿using System;
-using System.Linq;
-using Crayon;
+﻿using Crayon;
 using SMACD.Data;
-using SMACD.ScannerEngine.Resources;
+using SMACD.PluginHost.Resources;
+using System;
+using System.Linq;
 
 namespace SMACD.CLITool
 {
+    public static class ObjectTreeRenderer
+    {
+        private const string _cross = " ├─";
+        private const string _corner = " └─";
+        private const string _vertical = " │ ";
+        private const string _space = "   ";
+
+        public static void Print(object obj)
+        {
+            var indent = PrintNodeBase("", false);
+            Print(obj, indent, false);
+        }
+
+        private static void Print(object obj, string indent, bool isLast)
+        {
+            //indent = PrintNodeBase(indent, isLast);
+            Console.WriteLine(" " + Output.BrightWhite(obj.ToString()));
+            if (obj is string)
+                return; // short-circuit this or it tries to read the char[]
+            var props = obj.GetType().GetProperties();
+            foreach (var child in props)
+            {
+                indent = PrintNodeBase(indent, props.Last() == child);
+                Console.Write(" " + child.Name);
+                Print(child.GetValue(obj), indent, child == props.Last());
+            }
+        }
+
+        public static string PrintNodeBase(string indent, bool isLast)
+        {
+            Console.Write(indent);
+            if (isLast)
+            {
+                Console.Write(_corner);
+                indent += _space;
+            }
+            else
+            {
+                Console.Write(_cross);
+                indent += _vertical;
+            }
+
+            return indent;
+        }
+    }
     public class TreeRenderer
     {
         public delegate void DataModelCallback<in T>(string indent, bool isLast, T feature) where T : IModel;
@@ -15,7 +60,7 @@ namespace SMACD.CLITool
         private const string _vertical = " │ ";
         private const string _space = "   ";
 
-        private static readonly int VALIDATION_QUESTION_FULL_WIDTH = (int) (Console.WindowWidth * 0.8d);
+        private static readonly int VALIDATION_QUESTION_FULL_WIDTH = (int)(Console.WindowWidth * 0.8d);
 
         public int TestsExecuted { get; set; }
         public int TestsPassed { get; set; }
@@ -25,7 +70,7 @@ namespace SMACD.CLITool
         public event DataModelCallback<UseCaseModel> AfterUseCaseDrawn;
         public event DataModelCallback<AbuseCaseModel> AfterAbuseCaseDrawn;
         public event DataModelCallback<PluginPointerModel> AfterPluginPointerDrawn;
-        public event DataModelCallback<Resource> AfterResourceDrawn;
+        public event DataModelCallback<ResourceModel> AfterResourceDrawn;
 
         public string WriteExecutedTest(string testName, Func<bool?> testToRun, string indent = "", bool isLast = false)
         {
@@ -96,13 +141,13 @@ namespace SMACD.CLITool
             }
             else
             {
-                Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " + Output.Yellow("<No Resource>"));
+                Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " + Output.Yellow("<No ResourceModel>"));
             }
 
             AfterPluginPointerDrawn?.Invoke(indent, isLast, model);
         }
 
-        public void PrintNode(Resource model, string indent = "", bool isLast = false)
+        public void PrintNode(ResourceModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
             Console.WriteLine(model.ResourceId);

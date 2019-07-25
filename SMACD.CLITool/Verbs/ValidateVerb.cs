@@ -1,20 +1,22 @@
-﻿using System;
+﻿using CommandLine;
+using Crayon;
+using Microsoft.Extensions.Logging;
+using SMACD.Data;
+using SMACD.PluginHost;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CommandLine;
-using Crayon;
-using Microsoft.Extensions.Logging;
-using SMACD.ScannerEngine;
-using SMACD.ScannerEngine.Resources;
 
 namespace SMACD.CLITool.Verbs
 {
     [Verb("validate", HelpText = "Validate the content of a given Service Map")]
     public class ValidateVerb : VerbBase
     {
-        private readonly IList<Tuple<string, string>> _loadedExtensions = Global.GetLoadedExtensions();
+        private readonly IDictionary<string, PluginDescription> _loadedExtensions = PluginLibrary.PluginsAvailable;
 
         private int _tasksGenerated;
 
@@ -25,25 +27,21 @@ namespace SMACD.CLITool.Verbs
 
         public override Task Execute()
         {
-            var serviceMap = Global.GetServiceMap(ServiceMap);
+            var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
 
             var treeRenderer = new TreeRenderer();
             treeRenderer.AfterPluginPointerDrawn += (indent, isLast, pluginPointer) =>
             {
                 _tasksGenerated++;
-                var plugin = _loadedExtensions.FirstOrDefault(e => e.Item1.Equals(pluginPointer.Plugin));
-                var newIndent =
-                    treeRenderer.WriteExecutedTest("Supports Plugin type?", () => plugin != null, indent, isLast);
-                if (plugin != null)
+                var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?", () => _loadedExtensions.ContainsKey(pluginPointer.Plugin), indent, isLast);
+                if (!_loadedExtensions.ContainsKey(pluginPointer.Plugin))
                 {
                     var tests = new[]
                     {
-                        //Tuple.Create("Plugin pointer has valid options?",
-                        //    new Func<bool?>(() => Workspace.Instance.Validate(pluginPointer))),
-                        Tuple.Create("Resource Map contains Resource?", new Func<bool?>(() =>
+                        Tuple.Create("ResourceModel Map contains ResourceModel?", new Func<bool?>(() =>
                         {
                             if (pluginPointer.Resource == null) return null;
-                            return ResourceManager.Instance.ContainsPointer(pluginPointer.Resource);
+                            return ResourceManager.Instance.ContainsId(pluginPointer.Resource.ResourceId);
                         }))
                     };
                     foreach (var test in tests)

@@ -1,10 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
+using Crayon;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SMACD.ScannerEngine;
+using SMACD.Data;
+using SMACD.PluginHost;
+using SMACD.PluginHost.Extensions;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -20,29 +27,57 @@ namespace SMACD.CLITool.Verbs
 
         private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
-        public override Task Execute()
+        public override async Task Execute()
         {
-            var summary = new ScoreWorkflow(WorkingDir).Execute().Result;
+            WorkingDirectory.WorkingDirectoryBaseLocation = WorkingDir;
+            var serviceMap = ServiceMapFile.GetServiceMap(Path.Combine(WorkingDir, "input.yaml"));
+
+            var scorers = new List<Task<ScoredResult>>();
+            foreach (var directory in Directory.GetDirectories(WorkingDir))
+            {
+                var workingDir = new ResourceWorkingDirectory(directory);
+                if (workingDir.Configuration == null) continue;
+
+                foreach (var pluginSummary in workingDir.PluginChain)
+                {
+                    var pluginDesc = PluginLibrary.PluginsAvailable[pluginSummary.Identifier];
+                    if (pluginDesc.PluginType != PluginTypes.Scorer)
+                        continue;
+                    scorers.Add(TaskManager.Instance.Enqueue(pluginSummary));
+                }
+            }
+
+            scorers.ForEach(s => s.Start());
+            await Task.WhenAll(scorers);
+            var results = scorers.Select(t => t.Result).ToList();
+            foreach (var result in results)
+            {
+                Console.Write(Output.BrightWhite("Plugin: "));
+                PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType.WriteTypeColoredText(result.Plugin.Identifier + Environment.NewLine);
+
+                ObjectTreeRenderer.Print(result);
+            }
 
             var outputFile = Path.Combine(WorkingDir,
                 "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
             using (var sw = new StreamWriter(outputFile))
             {
-                sw.WriteLine(JsonConvert.SerializeObject(summary));
+                sw.WriteLine(JsonConvert.SerializeObject(results));
             }
 
-            Console.WriteLine("Averaged score: {0}", summary.ScoreAvg);
-            Console.WriteLine("Summed score: {0}", summary.ScoreSum);
+            Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
+            Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
+            Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count / 2));
 
-            Logger.LogInformation("Report serialized to {0}", outputFile);
+            Console.WriteLine("Report serialized to {0}", outputFile);
 
             if (Threshold.HasValue)
             {
                 Logger.LogDebug("Checking threshold");
-                if (Threshold > summary.ScoreAvg)
+                if (Threshold > results.Average(r => r.AdjustedScore))
                 {
                     Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold,
-                        summary.ScoreAvg);
+                        results.Average(r => r.AdjustedScore));
                     Environment.Exit(-1);
                 }
                 else
@@ -51,8 +86,6 @@ namespace SMACD.CLITool.Verbs
                     Environment.Exit(0);
                 }
             }
-
-            return Task.FromResult(0);
         }
     }
 }

@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -21,6 +21,6 @@ namespace SMACD.Data
         /// <summary>
         ///     Resources stored in this Resource Map
         /// </summary>
-        public IList<Resource> Resources { get; set; } = new List<Resource>();
+        public IList<ResourceModel> Resources { get; set; } = new List<ResourceModel>();
     }
 }

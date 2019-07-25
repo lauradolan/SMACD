@@ -1,25 +1,28 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Attributes;
+using SMACD.PluginHost.Extensions;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
+using System;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using Microsoft.Extensions.Logging;
-using SMACD.Plugins.Nmap;
-using SMACD.ScannerEngine;
-using SMACD.ScannerEngine.Attributes;
-using SMACD.ScannerEngine.Plugins;
-using SMACD.ScannerEngine.Resources;
 
-namespace SMACD.Plugins.OwaspZap
+namespace SMACD.Plugins.Nmap
 {
-    [PluginMetadata("nmap", Name = "Nmap Port Scanner Default Scorer")]
-    public class NmapScannerScorer : ScorerPlugin
+    [PluginImplementation(PluginTypes.Scorer, "nmap")]
+    public class NmapScannerScorer : Plugin
     {
-
-        public override async Task Score(VulnerabilitySummary summary)
+        public NmapScannerScorer(string workingDirectory) : base(workingDirectory)
         {
+        }
+
+        public override ScoredResult Execute()
+        {
+            var result = CreateBlankScoredResult();
             var runObject = new NmapRun();
-            var scanFile = Path.Combine(WorkingDirectory, "scan.xml");
+            var scanFile = WorkingDirectory.WithFile("scan.xml");
             if (File.Exists(scanFile))
             {
                 try
@@ -47,14 +50,24 @@ namespace SMACD.Plugins.OwaspZap
                             Service = service,
                             ServiceFingerprintConfidence = Int32.Parse(conf)
                         });
-                        
-                        summary.DiscoveredResources.Add(new SocketPortResource()
+
+                        var confidenceEnum = (Vulnerability.Confidences)((2.0 / 5.0) * Int32.Parse(conf));
+                        result.Vulnerabilities.Add(new Vulnerability()
                         {
-                            Hostname = addr,
-                            Protocol = protocol,
-                            Port = Int32.Parse(port),
-                            ServiceGuess = service,
-                            SystemCreated = true
+                            Confidence = confidenceEnum,
+                            RiskLevel = Vulnerability.RiskLevels.Informational,
+                            Description = $"NMap found an open port {protocol} {port} on {addr}. NMap's guess for this service is {service} (confidence: {conf} - {confidenceEnum})",
+                            Occurrences = 1,
+                            Remedy = "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
+                                     "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
+                            ShortName = "{protocol} {port} open" + (service == null ? "" : " ({service})"),
+                            Target = new SocketPortResource()
+                            {
+                                Hostname = addr,
+                                Port = Int32.Parse(port),
+                                Protocol = protocol,
+                                ServiceGuess = service
+                            }
                         });
                     }
                 }
@@ -66,16 +79,12 @@ namespace SMACD.Plugins.OwaspZap
             else
             {
                 Logger.LogCritical("XML report from this plugin was not found! Aborting...");
-                return;
+                return null;
             }
 
-            // TODO: Migrate HTML report into AzDO plugin?
-        }
+            return result;
 
-        public override async Task<bool> Converge(VulnerabilitySummary summary)
-        {
-            // Nothing to converge!
-            return false;
+            // TODO: Migrate HTML report into AzDO plugin?
         }
     }
 }

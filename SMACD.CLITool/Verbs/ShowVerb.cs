@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CommandLine;
+using Crayon;
+using Microsoft.Extensions.Logging;
+using SMACD.Data;
+using SMACD.PluginHost;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CommandLine;
-using Crayon;
-using Microsoft.Extensions.Logging;
-using SMACD.ScannerEngine;
 
 namespace SMACD.CLITool.Verbs
 {
     [Verb("show", HelpText = "Display the content of a given Service Map")]
     public class ShowVerb : VerbBase
     {
-        private IList<Tuple<string, string>> _loadedExtensions = Global.GetLoadedExtensions();
-
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
@@ -22,7 +20,7 @@ namespace SMACD.CLITool.Verbs
 
         public override Task Execute()
         {
-            var serviceMap = Global.GetServiceMap(ServiceMap);
+            var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
             var treeRenderer = new TreeRenderer();
 
             Console.WriteLine(Output.Reversed().White().Text(Path.GetFileName(ServiceMap)));

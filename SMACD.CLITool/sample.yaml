@@ -16,8 +16,7 @@ features:
     - name: Sample Abuse Case A1i
       description: This is the first abuse case for the first use case for the first feature!
       pluginPointers:
-      - plugin: dummy
-      - plugin: owaspzap
+      - plugin: nmap
         resource:
           resourceId: resourceRoot
 resources:
