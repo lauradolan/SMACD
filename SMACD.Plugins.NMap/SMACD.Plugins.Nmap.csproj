@@ -11,8 +11,4 @@
     <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\SMACD.CLITool\bin\Debug\netcoreapp2.2\&quot;" />
-  </Target>
-
 </Project>

@@ -31,7 +31,7 @@ namespace SMACD.PluginHost.Plugins
         {
             StaticLogger.LogDebug("Loading plugins from {0} with mask {1}", Directory.GetCurrentDirectory(),
                 LIBRARY_FILE_MASK);
-            Directory.GetFiles(Directory.GetCurrentDirectory(), "SMACD.Plugins.*.dll").ToList()
+            Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Plugins"), "SMACD.Plugins.*.dll").ToList()
                 .ForEach(f => LoadedLibraries.Add(new PluginLibrary(f)));
         }
         #endregion

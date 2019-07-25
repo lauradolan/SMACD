@@ -13,7 +13,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.143.2" />
-    <PackageReference Include="ObjectDumper.NET" Version="2.4.19166.1" />
     <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.Enrichers.Demystify" Version="1.0.0-dev-00019" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
@@ -38,7 +37,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ConsoleDump\" />
+    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Debug\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
