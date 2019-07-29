@@ -1,17 +1,19 @@
-﻿using CommandLine;
-using Crayon;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using SMACD.Data;
-using SMACD.PluginHost;
-using SMACD.PluginHost.Extensions;
-using SMACD.PluginHost.Plugins;
-using SMACD.PluginHost.Reports;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CommandLine;
+using Crayon;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SMACD.Data;
+using SMACD.Data.Resources;
+using SMACD.PluginHost;
+using SMACD.PluginHost.Extensions;
+using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -31,6 +33,16 @@ namespace SMACD.CLITool.Verbs
         {
             WorkingDirectory.WorkingDirectoryBaseLocation = WorkingDir;
             var serviceMap = ServiceMapFile.GetServiceMap(Path.Combine(WorkingDir, "input.yaml"));
+            foreach (var resourceModel in serviceMap.Resources)
+            {
+                Resource dest = null;
+                if (resourceModel is HttpResourceModel)
+                    dest = new HttpResource();
+                if (resourceModel is SocketPortResourceModel)
+                    dest = new SocketPortResource();
+                CopyProperties(resourceModel, dest);
+                ResourceManager.Instance.Register(dest);
+            }
 
             var scorers = new List<Task<ScoredResult>>();
             foreach (var directory in Directory.GetDirectories(WorkingDir))
@@ -38,11 +50,11 @@ namespace SMACD.CLITool.Verbs
                 var workingDir = new ResourceWorkingDirectory(directory);
                 if (workingDir.Configuration == null) continue;
 
-                foreach (var pluginSummary in workingDir.PluginChain)
+                foreach (var pluginSummary in workingDir.Configuration.Plugins)
                 {
                     var pluginDesc = PluginLibrary.PluginsAvailable[pluginSummary.Identifier];
-                    if (pluginDesc.PluginType != PluginTypes.Scorer)
-                        continue;
+                    //if (pluginDesc.PluginType != PluginTypes.Scorer)
+                    //    continue;
                     scorers.Add(TaskManager.Instance.Enqueue(pluginSummary));
                 }
             }
@@ -52,10 +64,8 @@ namespace SMACD.CLITool.Verbs
             var results = scorers.Select(t => t.Result).ToList();
             foreach (var result in results)
             {
-                Console.Write(Output.BrightWhite("Plugin: "));
-                PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType.WriteTypeColoredText(result.Plugin.Identifier + Environment.NewLine);
-
-                ObjectTreeRenderer.Print(result);
+                TreeDump.Dump(result, PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType
+                    .GetTypeColoredText(result.Plugin.Identifier));
             }
 
             var outputFile = Path.Combine(WorkingDir,
@@ -85,6 +95,22 @@ namespace SMACD.CLITool.Verbs
                     Logger.LogDebug("Passed");
                     Environment.Exit(0);
                 }
+            }
+        }
+        private static void CopyProperties<TSrc, TDest>(TSrc source, TDest dest)
+        {
+            var sourceProperties = source.GetType().GetProperties();
+            var destProperties = dest.GetType().GetProperties();
+            var copyable = sourceProperties.Where(s =>
+                destProperties.Any(d => d.Name == s.Name && d.PropertyType == s.PropertyType));
+            foreach (var prop in copyable)
+            {
+                var target = destProperties.FirstOrDefault(p => p.Name == prop.Name);
+                var oldValue = target.GetValue(dest);
+                var newValue = prop.GetValue(source);
+                if (oldValue != null && newValue == null)
+                    continue;
+                target.SetValue(dest, prop.GetValue(source));
             }
         }
     }

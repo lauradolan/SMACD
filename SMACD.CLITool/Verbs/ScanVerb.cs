@@ -1,19 +1,19 @@
-﻿using CommandLine;
-using ConsoleDump;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Data;
+using SMACD.Data.Resources;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -37,6 +37,9 @@ namespace SMACD.CLITool.Verbs
             // Hotpatch workspace storage
             if (WorkingDirectory == null)
                 WorkingDirectory = Path.Combine(Path.GetTempPath(), "SMACD", RandomExtensions.RandomName());
+            SMACD.PluginHost.WorkingDirectory.WorkingDirectoryBaseLocation = WorkingDirectory;
+            if (!Directory.Exists(WorkingDirectory))
+                Directory.CreateDirectory(WorkingDirectory);
 
             var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
             foreach (var resourceModel in serviceMap.Resources)
@@ -49,37 +52,44 @@ namespace SMACD.CLITool.Verbs
                 CopyProperties(resourceModel, dest);
                 ResourceManager.Instance.Register(dest);
             }
+            File.Copy(
+                ServiceMap,
+                Path.Combine(WorkingDirectory, "input.yaml"));
+
             Logger.LogDebug("{0} Libraries Loaded", PluginLibrary.LoadedLibraries.Count);
 
             var attackToolTasks = new List<Task<ScoredResult>>();
             foreach (var feature in serviceMap.Features)
-                foreach (var useCase in feature.UseCases)
-                    foreach (var abuseCase in useCase.AbuseCases)
-                        foreach (var pluginPointer in abuseCase.PluginPointers)
-                        {
-                            var resources = new List<Resource>()
+            foreach (var useCase in feature.UseCases)
+            foreach (var abuseCase in useCase.AbuseCases)
+            foreach (var pluginPointer in abuseCase.PluginPointers)
+            {
+                var resources = new List<Resource>
                     {ResourceManager.Instance.GetById(pluginPointer.Resource.ResourceId)};
-                            attackToolTasks.Add(
-                                TaskManager.Instance.Enqueue(new PluginSummary()
-                                {
-                                    Identifier = $"attack.{pluginPointer.Plugin}",
-                                    Options = pluginPointer.PluginParameters,
-                                    ResourceIds = resources.Select(r => r.ResourceId).ToList()
-                                }));
-                        }
+                attackToolTasks.Add(
+                    TaskManager.Instance.Enqueue(new PluginSummary
+                    {
+                        Identifier = $"attack.{pluginPointer.Plugin}",
+                        Options = pluginPointer.PluginParameters,
+                        ResourceIds = resources.Select(r => r.ResourceId).ToList()
+                    }));
+            }
 
-            Task.WhenAll(attackToolTasks).Wait();
+            while (TaskManager.Instance.IsCurrentlyRunning)
+            {
+                System.Threading.Thread.Sleep(500);
+            }
 
             ResourceManager.Instance.Clear();
             var results = attackToolTasks.Select(t => t.Result).ToList();
             foreach (var result in results)
             {
-                Console.Write(Output.BrightWhite("Plugin: "));
-                PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType.WriteTypeColoredText(
-                    PluginLibrary.PluginsAvailable[result.Plugin.Identifier].Identifier + Environment.NewLine);
+                //Console.Write(Output.BrightWhite("Plugin: "));
+                //PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType.WriteTypeColoredText(
+                //    PluginLibrary.PluginsAvailable[result.Plugin.Identifier].Identifier + Environment.NewLine);
 
-                result.Dump();
-                //ObjectTreeRenderer.Print(result);
+                TreeDump.Dump(result, PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType
+                    .GetTypeColoredText(result.Plugin.Identifier));
             }
 
             var outputFile = Path.Combine(WorkingDirectory,

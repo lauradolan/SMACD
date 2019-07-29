@@ -19,11 +19,14 @@ features:
       - plugin: nmap
         resource:
           resourceId: resourceRoot
+      - plugin: owaspzap
+        resource:
+          resourceId: resourceRoot
 resources:
 - !http
   resourceId: resourceRoot
   method: get
-  url: http://10.0.10.5/
+  url: http://10.0.2.5/
 - !http
   resourceId: resourceRoot3
   method: get

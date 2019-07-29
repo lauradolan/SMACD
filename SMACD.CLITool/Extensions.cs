@@ -1,12 +1,14 @@
-﻿using Crayon;
+﻿using System;
+using Crayon;
 using SMACD.PluginHost.Extensions;
-using System;
 
 namespace SMACD.CLITool
 {
     internal static class Extensions
     {
-        public static void WriteTypeColoredText(this PluginTypes type, string text)
+        public static void WriteTypeColoredText(this PluginTypes type, string text) =>
+            Console.WriteLine(type.GetTypeColoredText(text));
+        public static string GetTypeColoredText(this PluginTypes type, string text)
         {
             string outputText;
             switch (type)
@@ -26,7 +28,8 @@ namespace SMACD.CLITool
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Console.Write(outputText);
+
+            return outputText;
         }
     }
 }

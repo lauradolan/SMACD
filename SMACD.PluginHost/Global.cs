@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
+using Microsoft.Extensions.Logging;
 
 namespace SMACD.PluginHost
 {
@@ -16,7 +16,7 @@ namespace SMACD.PluginHost
         {
             LogFactory.CreateLogger("Serializer")
                 .LogCritical("Must specify Serialization strategy in {0}", typeof(Global).FullName);
-            return default(T);
+            return default;
         }
     }
 }

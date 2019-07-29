@@ -62,11 +62,11 @@ namespace SMACD.CLITool
             switch (i)
             {
                 case 0: // <a> with <b>
-                    var wordsLikeWith = new[] { "with", "using" };
+                    var wordsLikeWith = new[] {"with", "using"};
                     return $"{partA} {new Faker().PickRandom(wordsLikeWith)} {GenerateAdjNounJargon(false)}";
 
                 case 1: // <a> to <b>
-                    var wordsLikeAnd = new[] { "and", "to" };
+                    var wordsLikeAnd = new[] {"and", "to"};
                     return $"{partA} {new Faker().PickRandom(wordsLikeAnd)} {GenerateVerbAdjNounJargon(false)}";
 
                 default: // <a>, <b>, and <c>

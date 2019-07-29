@@ -28,7 +28,7 @@ namespace SMACD.PluginHost.Resources
         public bool SystemCreated { get; set; }
 
         /// <summary>
-        /// Instances of the Resource base
+        ///     Instances of the Resource base
         /// </summary>
         public IList<Resource> Instances { get; } = new List<Resource>();
 
@@ -39,9 +39,9 @@ namespace SMACD.PluginHost.Resources
         public abstract string GetDescription();
 
         /// <summary>
-        /// If the given Resource is approximately this Resource.
-        /// For example, in an HttpResource, this would validate that the URL matched
-        ///   the given Resource's URL, but ignore comparing Headers or Fields.
+        ///     If the given Resource is approximately this Resource.
+        ///     For example, in an HttpResource, this would validate that the URL matched
+        ///     the given Resource's URL, but ignore comparing Headers or Fields.
         /// </summary>
         /// <param name="resource">Resource to compare against</param>
         /// <returns></returns>

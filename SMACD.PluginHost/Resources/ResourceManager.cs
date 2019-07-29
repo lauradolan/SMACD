@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Extensions;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Extensions;
 
 namespace SMACD.PluginHost.Resources
 {
@@ -140,7 +140,9 @@ namespace SMACD.PluginHost.Resources
                     // if FALSE or NULL, break -- otherwise override stop behavior
                     return null;
                 existing.Instances.Add(resource);
-                Logger.LogDebug("Attempted to register resource ID {0} which already exists -- added to existing element {1}", resource.ResourceId, existing.ResourceId);
+                Logger.LogDebug(
+                    "Attempted to register resource ID {0} which already exists -- added to existing element {1}",
+                    resource.ResourceId, existing.ResourceId);
             }
 
             var resourceFingerprint = resource.Fingerprint();

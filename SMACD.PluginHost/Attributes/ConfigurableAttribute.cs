@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace SMACD.PluginHost.Attributes
 {
     /// <summary>
-    /// Indicates that the property can be overwritten by a user's custom configuration
+    ///     Indicates that the property can be overwritten by a user's custom configuration
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class ConfigurableAttribute : Attribute

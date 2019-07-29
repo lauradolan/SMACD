@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using SMACD.Data.Resources;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -47,6 +48,7 @@ namespace SMACD.Data
                     .Build()
                     .Deserialize<ServiceMapFile>(sr);
             }
+
             return serviceMap;
         }
 
@@ -77,7 +79,7 @@ namespace SMACD.Data
         internal static T AddLoadedTagMappings<T>(this T builder)
             where T : BuilderSkeleton<T>
         {
-            var types = new Dictionary<string, Type>()
+            var types = new Dictionary<string, Type>
             {
                 {"!http", typeof(HttpResourceModel)},
                 {"!socketport", typeof(SocketPortResourceModel)}

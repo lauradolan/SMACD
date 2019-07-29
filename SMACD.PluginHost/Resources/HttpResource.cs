@@ -41,7 +41,7 @@ namespace SMACD.PluginHost.Resources
 
         public override string GetDescription()
         {
-            var str = $"{this.UriInstance.Scheme} {Method} {Url}";
+            var str = $"{UriInstance.Scheme} {Method} {Url}";
             if (Fields != null && Fields.Count > 0)
                 str += $" (Fields: {Fields.Count})";
             if (Headers != null && Headers.Count > 0)
@@ -68,7 +68,7 @@ namespace SMACD.PluginHost.Resources
         {
             if (!(obj is HttpResource))
                 return false;
-            var that = (HttpResource)obj;
+            var that = (HttpResource) obj;
 
             if (!IsApproximateTo(that))
                 return false;

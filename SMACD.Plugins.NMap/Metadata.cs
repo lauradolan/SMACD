@@ -1,7 +1,7 @@
-﻿using SMACD.PluginHost.Plugins;
-using System;
+﻿using System;
+using SMACD.PluginHost.Plugins;
 
-namespace SMACD.Plugins.Dummy
+namespace SMACD.Plugins.Nmap
 {
     public class Metadata : ILibraryMetadata
     {

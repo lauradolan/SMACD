@@ -1,4 +1,4 @@
-namespace SMACD.Data
+namespace SMACD.Data.Resources
 {
     /// <summary>
     ///     Represents a Resource resolved to its handler

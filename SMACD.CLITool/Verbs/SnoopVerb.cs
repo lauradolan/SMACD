@@ -1,12 +1,12 @@
-﻿using CommandLine;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -34,11 +34,12 @@ namespace SMACD.CLITool.Verbs
                 Console.WriteLine("· " + $"{Output.BrightGreen(loaded.Name)} by {Output.Green(loaded.Author)}");
                 Console.WriteLine("  " + Output.White().Text(loaded.FileName));
                 Console.WriteLine("  " + Output.White().Dim().Text(loaded.Description));
-                var pluginInfo = loaded.PluginsProvided.Select(p => Tuple.Create(p.Identifier, p)).OrderBy(p => p.Item1).ToList();
-                for (int i = 0; i < pluginInfo.Count; i++)
+                var pluginInfo = loaded.PluginsProvided.Select(p => Tuple.Create(p.Identifier, p)).OrderBy(p => p.Item1)
+                    .ToList();
+                for (var i = 0; i < pluginInfo.Count; i++)
                 {
-                    Console.Write(i == 0 ? "  └─ " : " ├─ ");
-                    string outputText = "";
+                    Console.Write(i != 0 ? "  └─ " : "  ├─ ");
+                    var outputText = "";
                     switch (pluginInfo[i].Item2.PluginType)
                     {
                         case PluginTypes.Unknown:
@@ -56,6 +57,7 @@ namespace SMACD.CLITool.Verbs
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+
                     Console.WriteLine(outputText);
                 }
             }

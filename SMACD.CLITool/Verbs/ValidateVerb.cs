@@ -1,15 +1,15 @@
-﻿using CommandLine;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Resources;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -33,7 +33,8 @@ namespace SMACD.CLITool.Verbs
             treeRenderer.AfterPluginPointerDrawn += (indent, isLast, pluginPointer) =>
             {
                 _tasksGenerated++;
-                var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?", () => _loadedExtensions.ContainsKey(pluginPointer.Plugin), indent, isLast);
+                var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?",
+                    () => _loadedExtensions.ContainsKey(pluginPointer.Plugin), indent, isLast);
                 if (!_loadedExtensions.ContainsKey(pluginPointer.Plugin))
                 {
                     var tests = new[]

@@ -1,6 +1,6 @@
-﻿using Crayon;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Crayon;
 
 namespace SMACD.CLITool
 {

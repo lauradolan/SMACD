@@ -1,13 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Attributes;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace SMACD.Plugins.Nmap
 {
@@ -20,9 +21,10 @@ namespace SMACD.Plugins.Nmap
 
         public override ScoredResult Execute()
         {
+            Logger.LogDebug("Starting Nmap scorer");
             var result = CreateBlankScoredResult();
             var runObject = new NmapRun();
-            var scanFile = WorkingDirectory.WithFile("scan.xml");
+            var scanFile = WorkingDirectory.ParentResource.GetMostRecent(PluginTypes.AttackTool).WithFile("scan.xml");
             if (File.Exists(scanFile))
             {
                 try
@@ -43,28 +45,30 @@ namespace SMACD.Plugins.Nmap
                         var service = serviceDetail.Attributes("name").First().Value;
                         var conf = serviceDetail.Attributes("conf").First().Value;
 
-                        runObject.Ports.Add(new NmapPort()
+                        runObject.Ports.Add(new NmapPort
                         {
                             Protocol = protocol,
-                            Port = Int32.Parse(port),
+                            Port = int.Parse(port),
                             Service = service,
-                            ServiceFingerprintConfidence = Int32.Parse(conf)
+                            ServiceFingerprintConfidence = int.Parse(conf)
                         });
 
-                        var confidenceEnum = (Vulnerability.Confidences)((2.0 / 5.0) * Int32.Parse(conf));
-                        result.Vulnerabilities.Add(new Vulnerability()
+                        var confidenceEnum = (Vulnerability.Confidences) (2.0 / 5.0 * int.Parse(conf));
+                        ((IList)result.Vulnerabilities).Add(new Vulnerability
                         {
                             Confidence = confidenceEnum,
                             RiskLevel = Vulnerability.RiskLevels.Informational,
-                            Description = $"NMap found an open port {protocol} {port} on {addr}. NMap's guess for this service is {service} (confidence: {conf} - {confidenceEnum})",
+                            Description =
+                                $"NMap found an open port {protocol} {port} on {addr}. NMap's guess for this service is {service} (confidence: {conf} - {confidenceEnum})",
                             Occurrences = 1,
-                            Remedy = "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
-                                     "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
-                            ShortName = "{protocol} {port} open" + (service == null ? "" : " ({service})"),
-                            Target = new SocketPortResource()
+                            Remedy =
+                                "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
+                                "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
+                            ShortName = $"{protocol} {port} open" + (service == null ? "" : $" ({service})"),
+                            Target = new SocketPortResource
                             {
                                 Hostname = addr,
-                                Port = Int32.Parse(port),
+                                Port = int.Parse(port),
                                 Protocol = protocol,
                                 ServiceGuess = service
                             }
@@ -79,7 +83,7 @@ namespace SMACD.Plugins.Nmap
             else
             {
                 Logger.LogCritical("XML report from this plugin was not found! Aborting...");
-                return null;
+                return CreateBlankScoredResult();
             }
 
             return result;

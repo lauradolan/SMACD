@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SMACD.PluginHost.Extensions;
 
 namespace SMACD.PluginHost.Plugins
 {
@@ -10,7 +11,8 @@ namespace SMACD.PluginHost.Plugins
 
         public override string ToString()
         {
-            return $"{Extensions.PluginTypeExtensions.GetPluginType(Identifier)} {Identifier} running against {{{string.Join(", ", ResourceIds)}}}";
+            return
+                $"{PluginTypeExtensions.GetPluginType(Identifier)} {Identifier} running against {{{string.Join(", ", ResourceIds)}}}";
         }
     }
 }

@@ -1,10 +1,10 @@
-using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Extensions;
 
 namespace SMACD.PluginHost.Plugins
 {
@@ -16,7 +16,7 @@ namespace SMACD.PluginHost.Plugins
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
         /// <summary>
-        /// A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
+        ///     A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
         /// </summary>
         public static ConcurrentDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
 

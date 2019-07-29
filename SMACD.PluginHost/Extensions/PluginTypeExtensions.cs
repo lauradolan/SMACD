@@ -7,36 +7,34 @@ namespace SMACD.PluginHost.Extensions
 {
     public enum PluginTypes
     {
-        [Description("unknown")]
-        Unknown,
-        [Description("attack")]
-        AttackTool,
-        [Description("score")]
-        Scorer,
-        [Description("decide")]
-        Decision
+        [Description("unknown")] Unknown,
+        [Description("attack")] AttackTool,
+        [Description("score")] Scorer,
+        [Description("decide")] Decision
     }
 
     internal static class PluginTypeExtensions
     {
-        private static List<string> VALID_TYPES = Enum.GetNames(typeof(PluginTypes))
+        private static readonly List<string> VALID_TYPES = Enum.GetNames(typeof(PluginTypes))
             .Select(n =>
-                ((DescriptionAttribute)Attribute.GetCustomAttribute(
+                ((DescriptionAttribute) Attribute.GetCustomAttribute(
                     typeof(PluginTypes).GetMember(n).Single(),
                     typeof(DescriptionAttribute))).Description).ToList();
 
         /// <summary>
-        /// Retrieve the document-stored identifier for this plugin type
+        ///     Retrieve the document-stored identifier for this plugin type
         /// </summary>
         /// <param name="type">Plugin type</param>
         /// <returns>PluginType string</returns>
-        public static string GetPluginTypeString(this PluginTypes type) =>
-            Enum.GetNames(typeof(PluginTypes))
+        public static string GetPluginTypeString(this PluginTypes type)
+        {
+            return Enum.GetNames(typeof(PluginTypes))
                 .Where(n => n == Enum.GetName(typeof(PluginTypes), type))
                 .Select(n =>
-                ((DescriptionAttribute)Attribute.GetCustomAttribute(
-                    typeof(PluginTypes).GetMember(n).Single(),
-                    typeof(DescriptionAttribute))).Description).FirstOrDefault();
+                    ((DescriptionAttribute) Attribute.GetCustomAttribute(
+                        typeof(PluginTypes).GetMember(n).Single(),
+                        typeof(DescriptionAttribute))).Description).FirstOrDefault();
+        }
 
         internal static PluginTypes GetPluginType(string identifier)
         {

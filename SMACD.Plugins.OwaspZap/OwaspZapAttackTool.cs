@@ -13,16 +13,15 @@ namespace SMACD.Plugins.OwaspZap
         internal const string JSON_REPORT_FILE = "report.json";
         internal const string HTML_REPORT_FILE = "report.html";
 
+        public OwaspZapAttackTool(string workingDirectory) : base(workingDirectory)
+        {
+        }
+
         [Configurable] public bool Aggressive { get; set; } = false;
 
         [Configurable] public bool UseAjaxSpider { get; set; } = true;
 
         public HttpResource Resource { get; set; }
-
-        public OwaspZapAttackTool(string workingDirectory) : base(workingDirectory)
-        {
-
-        }
 
         public override ScoredResult Execute()
         {
@@ -44,9 +43,9 @@ namespace SMACD.Plugins.OwaspZap
                 dockerCommandTemplate += "-j ";
 
             Logger.LogDebug("Invoking command " + dockerCommandTemplate,
-                WorkingDirectory, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                WorkingDirectory.Location, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
             wrapper.Command = string.Format(dockerCommandTemplate,
-                WorkingDirectory, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                WorkingDirectory.Location, pyScript, Resource.Url, JSON_REPORT_FILE, HTML_REPORT_FILE);
 
             wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
             wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
@@ -54,7 +53,7 @@ namespace SMACD.Plugins.OwaspZap
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution in {0}", wrapper.ExecutionTime);
 
-            return this.GetScoredResult();
+            return GetScoredResult();
         }
     }
 }

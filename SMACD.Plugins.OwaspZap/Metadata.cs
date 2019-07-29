@@ -1,5 +1,5 @@
-﻿using SMACD.PluginHost.Plugins;
-using System;
+﻿using System;
+using SMACD.PluginHost.Plugins;
 
 namespace SMACD.Plugins.OwaspZap
 {

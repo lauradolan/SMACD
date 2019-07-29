@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Attributes;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
-using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SMACD.Plugins.Dummy
 {
@@ -18,6 +18,10 @@ namespace SMACD.Plugins.Dummy
     [PluginImplementation(PluginTypes.AttackTool, "dummy")]
     public class DummyAttackTool : Plugin
     {
+        public DummyAttackTool(string workingDirectory) : base(workingDirectory)
+        {
+        }
+
         // Specify the ResourceModel type as needed; when the instance is given to the action, this will
         //   be pre-populated with the specified resource. Ensure inheritance needs match what
         //   is provided (either here or as another parameter)
@@ -34,10 +38,6 @@ namespace SMACD.Plugins.Dummy
         [Configurable] public string ConfigurationOption { get; set; }
         [Configurable] public int ConfigurationOption2 { get; set; }
 
-        public DummyAttackTool(string workingDirectory) : base(workingDirectory)
-        {
-        }
-
         public override ScoredResult Execute()
         {
             // When running the workflow, the plugin provides a few elements pertaining to the current process:
@@ -53,7 +53,7 @@ namespace SMACD.Plugins.Dummy
 
             var sw = new Stopwatch();
             sw.Start();
-            var rng = new Random((int)DateTime.Now.Ticks);
+            var rng = new Random((int) DateTime.Now.Ticks);
             var v = 0;
             var g = 0;
             while (v < 50)
@@ -95,7 +95,7 @@ namespace SMACD.Plugins.Dummy
 
             // Using the "SaveResultArtifact" command on the WorkingDirectory is recommended, since it handles serialization
             //   and deserialization in a standard way for all components
-            WorkingDirectory.SaveResultArtifact("dummy.dat", new DummyData { Duration = sw.Elapsed, Generations = g });
+            WorkingDirectory.SaveResultArtifact("dummy.dat", new DummyData {Duration = sw.Elapsed, Generations = g});
 
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 

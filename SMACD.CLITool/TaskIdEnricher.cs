@@ -1,11 +1,11 @@
-﻿using Crayon;
-using Serilog.Core;
-using Serilog.Events;
-using SMACD.PluginHost.Plugins;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Crayon;
+using Serilog.Core;
+using Serilog.Events;
+using SMACD.PluginHost.Plugins;
 
 namespace SMACD.CLITool
 {

@@ -22,9 +22,9 @@ namespace SMACD.PluginHost.Resources
             var socketPort = resource as SocketPortResource;
             if (socketPort == null) return false;
 
-            if (this.Hostname != socketPort.Hostname) return false;
-            if (this.Protocol != socketPort.Protocol) return false;
-            if (this.Port != socketPort.Port) return false;
+            if (Hostname != socketPort.Hostname) return false;
+            if (Protocol != socketPort.Protocol) return false;
+            if (Port != socketPort.Port) return false;
             return true;
         }
 
@@ -32,13 +32,13 @@ namespace SMACD.PluginHost.Resources
         {
             if (!(obj is SocketPortResource))
                 return false;
-            var that = (SocketPortResource)obj;
+            var that = (SocketPortResource) obj;
 
-            if (this.Hostname != that.Hostname)
+            if (Hostname != that.Hostname)
                 return false;
-            if (this.Protocol != that.Protocol)
+            if (Protocol != that.Protocol)
                 return false;
-            if (this.Port != this.Port)
+            if (Port != Port)
                 return false;
 
             return true;

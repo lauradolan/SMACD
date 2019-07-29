@@ -210,7 +210,7 @@ namespace SMACD.PluginHost.Extensions
             "swim", "plot", "trade", "record", "gold", "stitch", "collar", "bit"
         };
 
-        public static Random Random { get; } = new Random((int)DateTime.Now.Ticks);
+        public static Random Random { get; } = new Random((int) DateTime.Now.Ticks);
 
         /// <summary>
         ///     Generate a random string
