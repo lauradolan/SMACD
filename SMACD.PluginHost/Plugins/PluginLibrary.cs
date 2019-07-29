@@ -33,7 +33,7 @@ namespace SMACD.PluginHost.Plugins
                 new[]
                 {
                     typeof(Plugin), typeof(PluginDescription), typeof(ScoredResult), typeof(ILogger)
-                });
+            });
             Assembly = loader.LoadDefaultAssembly();
 
             var metadataType = Assembly.GetTypes().FirstOrDefault(t => typeof(ILibraryMetadata).IsAssignableFrom(t));
@@ -43,7 +43,7 @@ namespace SMACD.PluginHost.Plugins
                 throw new Exception($"Library {FileName} built without metadata interface");
             }
 
-            var metadata = (ILibraryMetadata) Activator.CreateInstance(metadataType);
+            var metadata = (ILibraryMetadata)Activator.CreateInstance(metadataType);
             Name = metadata.Name;
             Author = metadata.Author;
             Version = metadata.Version;
@@ -63,7 +63,7 @@ namespace SMACD.PluginHost.Plugins
                     continue;
                 }
 
-                PluginsProvided.Add(new PluginDescription(pluginInformation.FullIdentifier) {InstanceType = plugin});
+                PluginsProvided.Add(new PluginDescription(pluginInformation.FullIdentifier) { InstanceType = plugin });
                 Logger.LogDebug("Loaded Plugin identifier '{0}'", pluginInformation.FullIdentifier);
             }
         }
