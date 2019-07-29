@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {

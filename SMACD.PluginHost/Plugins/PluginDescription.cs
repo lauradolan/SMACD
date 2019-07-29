@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SMACD.PluginHost.Plugins
 {
@@ -42,7 +42,7 @@ namespace SMACD.PluginHost.Plugins
 
         public Plugin CreateInstance(Dictionary<string, string> options, IList<Resource> resources)
         {
-            var plugin = (Plugin) Activator.CreateInstance(InstanceType, WorkingDirectory.ComputeWorkingDirectory(
+            var plugin = (Plugin)Activator.CreateInstance(InstanceType, WorkingDirectory.ComputeWorkingDirectory(
                 resources.FirstOrDefault()?.ResourceId,
                 Identifier,
                 options.Fingerprint()));

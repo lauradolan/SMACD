@@ -68,7 +68,7 @@ namespace SMACD.PluginHost.Resources
         {
             if (!(obj is HttpResource))
                 return false;
-            var that = (HttpResource) obj;
+            var that = (HttpResource)obj;
 
             if (!IsApproximateTo(that))
                 return false;

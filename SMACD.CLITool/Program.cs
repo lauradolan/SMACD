@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.Services.Common;
@@ -11,6 +6,11 @@ using Serilog;
 using SMACD.CLITool.Verbs;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

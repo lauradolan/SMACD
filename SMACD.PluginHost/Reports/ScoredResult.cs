@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SMACD.PluginHost.Plugins;
+using System;
 using System.Collections.Generic;
-using SMACD.PluginHost.Plugins;
 
 namespace SMACD.PluginHost.Reports
 {

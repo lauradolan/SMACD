@@ -25,12 +25,12 @@ namespace SMACD.Plugins.Nmap
                 var subnet = string.Empty;
                 if (resource is HttpResource)
                 {
-                    var uri = ((HttpResource) resource).UriInstance;
+                    var uri = ((HttpResource)resource).UriInstance;
                     subnet = uri.DnsSafeHost;
                 }
                 else if (resource is SocketPortResource)
                 {
-                    subnet = ((SocketPortResource) resource).Hostname;
+                    subnet = ((SocketPortResource)resource).Hostname;
                 }
 
                 var cmd = $"nmap --open -T4 -PN {subnet} -n -oX {WorkingDirectory.WithFile("scan.xml")}";

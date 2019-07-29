@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Crayon;
+﻿using Crayon;
 using SMACD.Data;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Linq;
 
 namespace SMACD.CLITool
 {
@@ -17,16 +15,20 @@ namespace SMACD.CLITool
         private const string _vertical = " │ ";
         private const string _space = "   ";
 
-        private static readonly int VALIDATION_QUESTION_FULL_WIDTH = (int) (Console.WindowWidth * 0.8d);
+        private static readonly int VALIDATION_QUESTION_FULL_WIDTH = (int)(Console.WindowWidth * 0.8d);
 
         public int TestsExecuted { get; set; }
         public int TestsPassed { get; set; }
         public int TestsFailed { get; set; }
 
         public event DataModelCallback<FeatureModel> AfterFeatureDrawn;
+
         public event DataModelCallback<UseCaseModel> AfterUseCaseDrawn;
+
         public event DataModelCallback<AbuseCaseModel> AfterAbuseCaseDrawn;
+
         public event DataModelCallback<PluginPointerModel> AfterPluginPointerDrawn;
+
         public event DataModelCallback<ResourceModel> AfterResourceDrawn;
 
         public string WriteExecutedTest(string testName, Func<bool?> testToRun, string indent = "", bool isLast = false)

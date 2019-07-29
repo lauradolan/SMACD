@@ -1,10 +1,10 @@
+using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Extensions;
 
 namespace SMACD.PluginHost.Plugins
 {
@@ -62,7 +62,9 @@ namespace SMACD.PluginHost.Plugins
 
         private ILogger Logger { get; } = Global.LogFactory.CreateLogger("ExecutionWrapper");
         private int OwnerTaskId { get; }
+
         public event ExternalProcessDataReceived StandardOutputDataReceived;
+
         public event ExternalProcessDataReceived StandardErrorDataReceived;
 
         /// <summary>

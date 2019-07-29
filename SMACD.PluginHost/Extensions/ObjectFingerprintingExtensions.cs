@@ -25,7 +25,7 @@ namespace SMACD.PluginHost.Extensions
         {
             var allSkippedFields = new List<string>();
             if (!serializeEphemeralData)
-                allSkippedFields.AddRange(new[] {"resourceId", "systemCreated"});
+                allSkippedFields.AddRange(new[] { "resourceId", "systemCreated" });
 
             allSkippedFields.AddRange(skippedFields);
             allSkippedFields = allSkippedFields.Distinct().ToList();

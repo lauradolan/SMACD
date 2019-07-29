@@ -1,7 +1,7 @@
+using SMACD.Data.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using SMACD.Data.Resources;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

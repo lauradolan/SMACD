@@ -1,5 +1,5 @@
-﻿using System;
-using SMACD.PluginHost.Extensions;
+﻿using SMACD.PluginHost.Extensions;
+using System;
 
 namespace SMACD.PluginHost.Attributes
 {

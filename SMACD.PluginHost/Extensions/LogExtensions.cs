@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Plugins;
+using System;
+using System.Threading;
 
 namespace SMACD.PluginHost.Extensions
 {

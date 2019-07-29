@@ -1,11 +1,11 @@
-﻿using System;
+﻿using SMACD.PluginHost.Plugins;
+using SMACD.PluginHost.Reports;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using SMACD.PluginHost.Plugins;
-using SMACD.PluginHost.Reports;
 
 namespace SMACD.Plugins.Dummy
 {

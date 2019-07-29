@@ -1,5 +1,5 @@
-﻿using System;
-using SMACD.PluginHost.Plugins;
+﻿using SMACD.PluginHost.Plugins;
+using System;
 
 namespace SMACD.Plugins.Nmap
 {

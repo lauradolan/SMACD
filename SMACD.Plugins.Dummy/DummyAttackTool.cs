@@ -1,13 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Attributes;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SMACD.Plugins.Dummy
 {
@@ -36,6 +36,7 @@ namespace SMACD.Plugins.Dummy
         //   types. If there is a more complicated object, it's suggested to serialize that to a
         //   string and handle that serialization in the Plugin.
         [Configurable] public string ConfigurationOption { get; set; }
+
         [Configurable] public int ConfigurationOption2 { get; set; }
 
         public override ScoredResult Execute()
@@ -53,7 +54,7 @@ namespace SMACD.Plugins.Dummy
 
             var sw = new Stopwatch();
             sw.Start();
-            var rng = new Random((int) DateTime.Now.Ticks);
+            var rng = new Random((int)DateTime.Now.Ticks);
             var v = 0;
             var g = 0;
             while (v < 50)
@@ -68,7 +69,7 @@ namespace SMACD.Plugins.Dummy
                 if (g == 1)
                 {
                     // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
-                    // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the 
+                    // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
                     //   "owner" Task that spawned this external program (to correlate issues in logs)
                     var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
                     var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
@@ -95,7 +96,7 @@ namespace SMACD.Plugins.Dummy
 
             // Using the "SaveResultArtifact" command on the WorkingDirectory is recommended, since it handles serialization
             //   and deserialization in a standard way for all components
-            WorkingDirectory.SaveResultArtifact("dummy.dat", new DummyData {Duration = sw.Elapsed, Generations = g});
+            WorkingDirectory.SaveResultArtifact("dummy.dat", new DummyData { Duration = sw.Elapsed, Generations = g });
 
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 

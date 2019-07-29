@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using SMACD.PluginHost.Extensions;
+﻿using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SMACD.PluginHost
 {
@@ -16,7 +16,9 @@ namespace SMACD.PluginHost
         // TODO: Internal the List<T> and write methods to GetLastX() and Count
 
         public PluginSummary GetLast(string identifier) => Plugins.FindLast(p => p.Identifier == identifier);
+
         public PluginSummary GetLast(PluginTypes type) => Plugins.FindLast(p => PluginLibrary.PluginsAvailable[p.Identifier].PluginType == type);
+
         public PluginSummary GetLast() => Plugins.Last();
     }
 

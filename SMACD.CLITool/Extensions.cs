@@ -1,6 +1,6 @@
-﻿using System;
-using Crayon;
+﻿using Crayon;
 using SMACD.PluginHost.Extensions;
+using System;
 
 namespace SMACD.CLITool
 {
@@ -8,6 +8,7 @@ namespace SMACD.CLITool
     {
         public static void WriteTypeColoredText(this PluginTypes type, string text) =>
             Console.WriteLine(type.GetTypeColoredText(text));
+
         public static string GetTypeColoredText(this PluginTypes type, string text)
         {
             string outputText;
@@ -16,15 +17,19 @@ namespace SMACD.CLITool
                 case PluginTypes.Unknown:
                     outputText = text;
                     break;
+
                 case PluginTypes.AttackTool:
                     outputText = Output.Red().Text(text);
                     break;
+
                 case PluginTypes.Scorer:
                     outputText = Output.Green().Text(text);
                     break;
+
                 case PluginTypes.Decision:
                     outputText = Output.Yellow().Text(text);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

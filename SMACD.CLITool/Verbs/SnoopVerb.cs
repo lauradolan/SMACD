@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.PluginHost;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -45,15 +45,19 @@ namespace SMACD.CLITool.Verbs
                         case PluginTypes.Unknown:
                             outputText = pluginInfo[i].Item1;
                             break;
+
                         case PluginTypes.AttackTool:
                             outputText = Output.Red().Text(pluginInfo[i].Item1);
                             break;
+
                         case PluginTypes.Scorer:
                             outputText = Output.Green().Text(pluginInfo[i].Item1);
                             break;
+
                         case PluginTypes.Decision:
                             outputText = Output.Yellow().Text(pluginInfo[i].Item1);
                             break;
+
                         default:
                             throw new ArgumentOutOfRangeException();
                     }

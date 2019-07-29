@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CommandLine;
-using Crayon;
+﻿using CommandLine;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Data;
@@ -14,6 +8,11 @@ using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SMACD.CLITool.Verbs
 {
@@ -60,20 +59,20 @@ namespace SMACD.CLITool.Verbs
 
             var attackToolTasks = new List<Task<ScoredResult>>();
             foreach (var feature in serviceMap.Features)
-            foreach (var useCase in feature.UseCases)
-            foreach (var abuseCase in useCase.AbuseCases)
-            foreach (var pluginPointer in abuseCase.PluginPointers)
-            {
-                var resources = new List<Resource>
+                foreach (var useCase in feature.UseCases)
+                    foreach (var abuseCase in useCase.AbuseCases)
+                        foreach (var pluginPointer in abuseCase.PluginPointers)
+                        {
+                            var resources = new List<Resource>
                     {ResourceManager.Instance.GetById(pluginPointer.Resource.ResourceId)};
-                attackToolTasks.Add(
-                    TaskManager.Instance.Enqueue(new PluginSummary
-                    {
-                        Identifier = $"attack.{pluginPointer.Plugin}",
-                        Options = pluginPointer.PluginParameters,
-                        ResourceIds = resources.Select(r => r.ResourceId).ToList()
-                    }));
-            }
+                            attackToolTasks.Add(
+                                TaskManager.Instance.Enqueue(new PluginSummary
+                                {
+                                    Identifier = $"attack.{pluginPointer.Plugin}",
+                                    Options = pluginPointer.PluginParameters,
+                                    ResourceIds = resources.Select(r => r.ResourceId).ToList()
+                                }));
+                        }
 
             while (TaskManager.Instance.IsCurrentlyRunning)
             {

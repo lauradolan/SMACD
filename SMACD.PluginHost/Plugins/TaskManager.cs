@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Reports;
+using SMACD.PluginHost.Resources;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Reports;
-using SMACD.PluginHost.Resources;
 
 namespace SMACD.PluginHost.Plugins
 {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Extensions;
+using System;
 using System.IO;
 using System.Linq;
-using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Extensions;
-using SMACD.PluginHost.Plugins;
 
 namespace SMACD.PluginHost
 {
@@ -26,7 +24,6 @@ namespace SMACD.PluginHost
     {
         protected WorkingDirectory(string directory)
         {
-            
             if (!directory.EndsWith(Path.DirectorySeparatorChar)) directory += Path.DirectorySeparatorChar;
             Location = Path.GetFullPath(Path.GetDirectoryName(directory));
             if (!Directory.Exists(directory))
@@ -55,7 +52,7 @@ namespace SMACD.PluginHost
         /// <param name="fileName">File name</param>
         /// <returns></returns>
         public string WithFile(string fileName) => Path.Combine(Location, fileName);
-        
+
         /// <summary>
         ///     Compute the Working Directory for a scenario where only a Resource ID is known
         /// </summary>
@@ -134,7 +131,7 @@ namespace SMACD.PluginHost
         /// <param name="fileName">File name (no path)</param>
         public T LoadResultArtifact<T>(string fileName)
         {
-            return (T) Global.DeserializeFromFile(WithFile(fileName), typeof(T));
+            return (T)Global.DeserializeFromFile(WithFile(fileName), typeof(T));
         }
 
         public string ResourceId => Location.Substring(WorkingDirectoryBaseLocation.Length + 1).Split(Path.DirectorySeparatorChar)[0];
@@ -143,7 +140,7 @@ namespace SMACD.PluginHost
 
         public string PluginOptionsHashCode => Location.Substring(WorkingDirectoryBaseLocation.Length + 1).Split(Path.DirectorySeparatorChar)[2];
 
-        public override string ToString() =>  $"{Location} - {Configuration.Options.Count} generations deep";
+        public override string ToString() => $"{Location} - {Configuration.Options.Count} generations deep";
     }
 
     public class ResourceWorkingDirectory : WorkingDirectory
@@ -158,7 +155,7 @@ namespace SMACD.PluginHost
         {
             if (File.Exists(WithFile(RESOURCE_WORKING_DIRECTORY_CONFIG)))
             {
-                Configuration = (ResourceWorkingDirectoryLayout) Global.DeserializeFromFile(
+                Configuration = (ResourceWorkingDirectoryLayout)Global.DeserializeFromFile(
                     WithFile(RESOURCE_WORKING_DIRECTORY_CONFIG), typeof(ResourceWorkingDirectoryLayout));
             }
             else
@@ -173,7 +170,7 @@ namespace SMACD.PluginHost
         /// </summary>
         public new ResourceWorkingDirectoryLayout Configuration
         {
-            get => (ResourceWorkingDirectoryLayout) base.Configuration;
+            get => (ResourceWorkingDirectoryLayout)base.Configuration;
             set => base.Configuration = value;
         }
 
@@ -225,7 +222,7 @@ namespace SMACD.PluginHost
         {
             if (File.Exists(WithFile(PLUGIN_WORKING_DIRECTORY_CONFIG)))
             {
-                Configuration = (PluginWorkingDirectoryLayout) Global.DeserializeFromFile(
+                Configuration = (PluginWorkingDirectoryLayout)Global.DeserializeFromFile(
                     WithFile(PLUGIN_WORKING_DIRECTORY_CONFIG), typeof(PluginWorkingDirectoryLayout));
             }
             else
@@ -249,7 +246,7 @@ namespace SMACD.PluginHost
         /// </summary>
         public new PluginWorkingDirectoryLayout Configuration
         {
-            get => (PluginWorkingDirectoryLayout) base.Configuration;
+            get => (PluginWorkingDirectoryLayout)base.Configuration;
             set => base.Configuration = value;
         }
 

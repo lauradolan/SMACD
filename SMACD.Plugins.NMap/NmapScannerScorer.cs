@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.PluginHost.Attributes;
 using SMACD.PluginHost.Extensions;
 using SMACD.PluginHost.Plugins;
 using SMACD.PluginHost.Reports;
 using SMACD.PluginHost.Resources;
+using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace SMACD.Plugins.Nmap
 {
@@ -53,7 +53,7 @@ namespace SMACD.Plugins.Nmap
                             ServiceFingerprintConfidence = int.Parse(conf)
                         });
 
-                        var confidenceEnum = (Vulnerability.Confidences) (2.0 / 5.0 * int.Parse(conf));
+                        var confidenceEnum = (Vulnerability.Confidences)(2.0 / 5.0 * int.Parse(conf));
                         ((IList)result.Vulnerabilities).Add(new Vulnerability
                         {
                             Confidence = confidenceEnum,

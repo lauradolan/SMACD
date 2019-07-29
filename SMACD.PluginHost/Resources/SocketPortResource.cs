@@ -32,7 +32,7 @@ namespace SMACD.PluginHost.Resources
         {
             if (!(obj is SocketPortResource))
                 return false;
-            var that = (SocketPortResource) obj;
+            var that = (SocketPortResource)obj;
 
             if (Hostname != that.Hostname)
                 return false;

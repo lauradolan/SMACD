@@ -17,7 +17,7 @@ namespace SMACD.PluginHost.Extensions
     {
         private static readonly List<string> VALID_TYPES = Enum.GetNames(typeof(PluginTypes))
             .Select(n =>
-                ((DescriptionAttribute) Attribute.GetCustomAttribute(
+                ((DescriptionAttribute)Attribute.GetCustomAttribute(
                     typeof(PluginTypes).GetMember(n).Single(),
                     typeof(DescriptionAttribute))).Description).ToList();
 
@@ -31,7 +31,7 @@ namespace SMACD.PluginHost.Extensions
             return Enum.GetNames(typeof(PluginTypes))
                 .Where(n => n == Enum.GetName(typeof(PluginTypes), type))
                 .Select(n =>
-                    ((DescriptionAttribute) Attribute.GetCustomAttribute(
+                    ((DescriptionAttribute)Attribute.GetCustomAttribute(
                         typeof(PluginTypes).GetMember(n).Single(),
                         typeof(DescriptionAttribute))).Description).FirstOrDefault();
         }
@@ -47,10 +47,13 @@ namespace SMACD.PluginHost.Extensions
             {
                 case "attack":
                     return PluginTypes.AttackTool;
+
                 case "score":
                     return PluginTypes.Scorer;
+
                 case "decision":
                     return PluginTypes.Decision;
+
                 default:
                     return PluginTypes.Unknown;
             }

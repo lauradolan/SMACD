@@ -1,12 +1,12 @@
-﻿using System;
+﻿using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.Logging;
+using SMACD.PluginHost.Attributes;
+using SMACD.PluginHost.Reports;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using McMaster.NETCore.Plugins;
-using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Attributes;
-using SMACD.PluginHost.Reports;
 
 namespace SMACD.PluginHost.Plugins
 {
@@ -137,6 +137,6 @@ namespace SMACD.PluginHost.Plugins
                 .ForEach(f => LoadedLibraries.Add(new PluginLibrary(f)));
         }
 
-        #endregion
+        #endregion Plugin Scanning/Loading
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using SMACD.PluginHost.Extensions;
+﻿using SMACD.PluginHost.Extensions;
+using System.Collections.Generic;
 
 namespace SMACD.PluginHost.Plugins
 {
