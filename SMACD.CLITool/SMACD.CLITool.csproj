@@ -25,11 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
     <ProjectReference Include="..\SMACD.Plugins.Dummy\SMACD.Plugins.Dummy.csproj" />
-    <ProjectReference Include="..\SMACD.Plugins.Nmap\SMACD.Plugins.Nmap.csproj" />
-    <ProjectReference Include="..\SMACD.Plugins.OwaspZap\SMACD.Plugins.OwaspZap.csproj" />
   </ItemGroup>
 
   <ItemGroup>

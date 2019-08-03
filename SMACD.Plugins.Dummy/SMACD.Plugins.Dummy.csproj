@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
-    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
+    <ProjectReference Include="..\SMACD.Workspace\SMACD.Workspace.csproj" />
   </ItemGroup>
 
 </Project>

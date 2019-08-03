@@ -6,11 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <Compile Remove="Metadata.cs" />
+    <Compile Remove="OwaspZapAttackTool.cs" />
+    <Compile Remove="OwaspZapScannerScorer.cs" />
+    <Compile Remove="ZapJson.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
+    <None Include="Metadata.cs" />
+    <None Include="OwaspZapAttackTool.cs" />
+    <None Include="OwaspZapScannerScorer.cs" />
+    <None Include="ZapJson.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
 </Project>

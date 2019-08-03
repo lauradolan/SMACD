@@ -2,7 +2,7 @@
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
-using SMACD.PluginHost;
+using SMACD.Workspace;
 using System;
 using System.IO;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace SMACD.CLITool.Verbs
         [Option('s', "servicemap", HelpText = "Service Map file", Required = true)]
         public string ServiceMap { get; set; }
 
-        private static ILogger<ShowVerb> Logger { get; } = Global.LogFactory.CreateLogger<ShowVerb>();
+        private static ILogger<ShowVerb> Logger { get; } = WorkspaceToolbox.LogFactory.CreateLogger<ShowVerb>();
 
         public override Task Execute()
         {

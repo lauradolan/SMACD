@@ -8,7 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.PluginHost\SMACD.PluginHost.csproj" />
+    <Compile Remove="Metadata.cs" />
+    <Compile Remove="NmapAttackTool.cs" />
+    <Compile Remove="NmapRun.cs" />
+    <Compile Remove="NmapScannerScorer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Metadata.cs" />
+    <None Include="NmapAttackTool.cs" />
+    <None Include="NmapRun.cs" />
+    <None Include="NmapScannerScorer.cs" />
   </ItemGroup>
 
 </Project>

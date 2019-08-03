@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using SMACD.PluginHost.Extensions;
 
 namespace SMACD.CLITool
 {
@@ -58,7 +57,7 @@ namespace SMACD.CLITool
         internal static string GenerateMultiPartJargon()
         {
             var partA = GenerateVerbAdjNounJargon();
-            var i = RandomExtensions.Random.Next(0, 2);
+            var i = new Faker().Random.Number(2);
             switch (i)
             {
                 case 0: // <a> with <b>

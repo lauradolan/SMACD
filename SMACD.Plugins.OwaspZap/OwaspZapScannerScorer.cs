@@ -23,7 +23,13 @@ namespace SMACD.Plugins.OwaspZap
         {
             var result = CreateBlankScoredResult();
             ZapJsonReport report = null;
-            var jsonReportPath = WorkingDirectory.ParentResource.GetMostRecent(PluginTypes.AttackTool).WithFile(OwaspZapAttackTool.JSON_REPORT_FILE);
+            var workingDir = WorkingDirectory.ParentResource.GetMostRecent(this, PluginTypes.AttackTool);
+            if (workingDir == null)
+            {
+                Logger.LogCritical("No corresponding Attack Tool to score!");
+                return CreateBlankScoredResult();
+            }
+            var jsonReportPath = workingDir.WithFile(OwaspZapAttackTool.JSON_REPORT_FILE);
             if (File.Exists(jsonReportPath))
             {
                 try

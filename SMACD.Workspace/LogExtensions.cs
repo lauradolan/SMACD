@@ -1,17 +1,18 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Plugins;
+using SMACD.Workspace.Actions;
 using System;
+using System.Text;
 using System.Threading;
 
-namespace SMACD.PluginHost.Extensions
+namespace SMACD.Workspace
 {
-    public static class InteropExtensions
+    public static class LogExtensions
     {
         private static void WrappedLogCommand(int taskId, string hash, Action command)
         {
             ExecutionWrapper.Maps.TryAdd(Thread.CurrentThread.ManagedThreadId, taskId);
             command();
-            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out var dummy);
+            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out int dummy);
         }
 
         public static void TaskLogCritical(this ILogger logger, int taskId, string message, params object[] parameters)
@@ -43,6 +44,31 @@ namespace SMACD.PluginHost.Extensions
         public static void TaskLogWarning(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogWarning(message, parameters));
+        }
+
+        /// <summary>
+        ///     Calculate SHA1 hash of a string (not cryptographically safe operation!)
+        /// </summary>
+        /// <param name="str">String to hash</param>
+        /// <returns></returns>
+        public static string SHA1(this string str)
+        {
+            try
+            {
+                byte[] hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
+                StringBuilder ret = new StringBuilder();
+
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    ret.Append(hash[i].ToString("x2"));
+                }
+
+                return ret.ToString();
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

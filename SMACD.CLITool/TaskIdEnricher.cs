@@ -1,7 +1,7 @@
 ﻿using Crayon;
 using Serilog.Core;
 using Serilog.Events;
-using SMACD.PluginHost.Plugins;
+using SMACD.Workspace.Actions;
 using System;
 using System.Collections.Generic;
 using System.Threading;

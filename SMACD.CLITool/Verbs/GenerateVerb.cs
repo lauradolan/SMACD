@@ -2,8 +2,8 @@
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
-using SMACD.PluginHost;
-using SMACD.PluginHost.Extensions;
+using SMACD.Workspace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,17 +19,18 @@ namespace SMACD.CLITool.Verbs
         [Option('m', "max", HelpText = "Maximum number of elements of each generation to create", Default = 3)]
         public int MaxOfEach { get; set; }
 
-        private static ILogger<GenerateVerb> Logger { get; } = Global.LogFactory.CreateLogger<GenerateVerb>();
+        private static ILogger<GenerateVerb> Logger { get; } = WorkspaceToolbox.LogFactory.CreateLogger<GenerateVerb>();
 
         public override Task Execute()
         {
+            var random = new Random((int)DateTime.Now.Ticks);
             var serviceMap = new ServiceMapFile();
             Logger.LogInformation("Creating 1-{0} of each element for a new Service Map", MaxOfEach);
-            Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
+            Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
             {
                 Name = JargonGenerator.GenerateMultiPartJargon(),
                 Description = new Faker().Lorem.Paragraph(2),
-                Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
+                Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(ownerId =>
                 {
                     var person = new Faker().Person;
                     return new OwnerPointerModel
@@ -39,12 +40,12 @@ namespace SMACD.CLITool.Verbs
                     };
                 }).ToList(),
 
-                UseCases = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(useCaseId =>
+                UseCases = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(useCaseId =>
                     new UseCaseModel
                     {
                         Name = JargonGenerator.GenerateMultiPartJargon(),
                         Description = new Faker().Lorem.Paragraph(2),
-                        Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(ownerId =>
+                        Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(ownerId =>
                         {
                             var person = new Faker().Person;
                             return new OwnerPointerModel
@@ -54,13 +55,13 @@ namespace SMACD.CLITool.Verbs
                             };
                         }).ToList(),
 
-                        AbuseCases = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(
+                        AbuseCases = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(
                             abuseCaseId =>
                                 new AbuseCaseModel
                                 {
                                     Name = JargonGenerator.GenerateMultiPartJargon(),
                                     Description = new Faker().Lorem.Paragraph(2),
-                                    Owners = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach)).Select(
+                                    Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(
                                         ownerId =>
                                         {
                                             var person = new Faker().Person;
@@ -71,7 +72,7 @@ namespace SMACD.CLITool.Verbs
                                             };
                                         }).ToList(),
 
-                                    PluginPointers = Enumerable.Range(0, RandomExtensions.Random.Next(1, MaxOfEach))
+                                    PluginPointers = Enumerable.Range(0, random.Next(1, MaxOfEach))
                                         .Select(
                                             pluginId => new PluginPointerModel
                                             {

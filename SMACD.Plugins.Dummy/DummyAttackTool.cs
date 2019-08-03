@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.PluginHost.Attributes;
-using SMACD.PluginHost.Extensions;
-using SMACD.PluginHost.Plugins;
-using SMACD.PluginHost.Reports;
-using SMACD.PluginHost.Resources;
+using SMACD.Workspace;
+using SMACD.Workspace.Actions;
+using SMACD.Workspace.Actions.Attributes;
+using SMACD.Workspace.Targets;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,10 +15,10 @@ namespace SMACD.Plugins.Dummy
     //   to access it. Identifiers are used inside the framework as "<type>.<name>", such as "attack.dummy". However,
     //   the framework will determine what role is most appropriate for the situation and only request the Plugin by
     //   its name-- in this case, just "dummy".
-    [PluginImplementation(PluginTypes.AttackTool, "dummy")]
-    public class DummyAttackTool : Plugin
+    [ActionImplementation(ActionRoles.Producer, "dummy")]
+    public class DummyAttackTool : ActionInstance
     {
-        public DummyAttackTool(string workingDirectory) : base(workingDirectory)
+        public DummyAttackTool() : base("DummyAttacker")
         {
         }
 
@@ -29,7 +29,7 @@ namespace SMACD.Plugins.Dummy
         //   could set the type as "ResourceModel", since they both fit in that Type requirement;
         //   they both inherit from "ResourceModel". You could alternatively write two properties; one for
         //   the HttpResource and another for the SocketResource.
-        public HttpResource DummyResource { get; set; }
+        public HttpTarget DummyTarget { get; set; }
 
         // Options that can be configured by the Service Map must be marked with the "Configurable"
         //   attribute. The runtime will take care of casting the string values to their proper
@@ -39,18 +39,15 @@ namespace SMACD.Plugins.Dummy
 
         [Configurable] public int ConfigurationOption2 { get; set; }
 
-        public override ScoredResult Execute()
+        public override ActionSpecificReport Execute()
         {
             // When running the workflow, the plugin provides a few elements pertaining to the current process:
 
             // "Logger" is a named, generic log facility that is tied into the rest of the running application
             Logger.LogInformation("I'm a log message appearing at the '{0}' level!", "Information");
 
-            // "WorkingDirectory" is the location where artifacts should be placed by this Plugin
-            Logger.LogInformation("Working Directory: {0}", WorkingDirectory);
-
-            // "PluginType" contains the Plugin defining this instance
-            Logger.LogInformation("Plugin Type: {0}", PluginDescription.PluginType);
+            // Using the "Workspace" property allows access to other parts of the system and the instance
+            Logger.LogInformation("Plugin Type: {0}", Workspace.Actions.GetActionDescriptor(RuntimeConfiguration.ActionId).ActionInstanceType);
 
             var sw = new Stopwatch();
             sw.Start();
@@ -68,60 +65,68 @@ namespace SMACD.Plugins.Dummy
                 // Only test ExecutionWrapper on the first generation
                 if (g == 1)
                 {
-                    // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
-                    // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
-                    //   "owner" Task that spawned this external program (to correlate issues in logs)
-                    var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
-                    var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
-                    execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
+                    // Using waitallocate since it's a short op
+                    using (var execContainer = Workspace.Artifacts.CreateOrLoadNativePath("dummyBasicContainer", TimeSpan.FromSeconds(60)).GetContext())
                     {
-                        // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
-                        //  functions, which accept a Task ID to correlate these outputs with any outputs from the
-                        //  enclosing automation
-                        Logger.TaskLogCritical(ownerTaskId, "RECEIVED ERROR: {1}", data);
-                    };
-                    execSuccess.StandardOutputDataReceived += (sender, ownerTaskId, data) =>
-                    {
-                        Logger.TaskLogInformation(ownerTaskId, "RECEIVED DATA: {1}", data);
-                    };
+                        File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
 
-                    // Keeping all actions within the same Task helps when correlating information later
-                    Task.WhenAll(
-                        execFail.Start(),
-                        execSuccess.Start()).Wait();
+                        // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
+                        // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
+                        //   "owner" Task that spawned this external program (to correlate issues in logs)
+                        var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
+                        var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
+                        execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
+                        {
+                            // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
+                            //  functions, which accept a Task ID to correlate these outputs with any outputs from the
+                            //  enclosing automation
+                            Logger.TaskLogCritical(ownerTaskId, "RECEIVED ERROR: {1}", data);
+                        };
+                        execSuccess.StandardOutputDataReceived += (sender, ownerTaskId, data) =>
+                        {
+                            Logger.TaskLogInformation(ownerTaskId, "RECEIVED DATA: {1}", data);
+                        };
+
+                        // Keeping all actions within the same Task helps when correlating information later
+                        Task.WhenAll(
+                            execFail.Start(),
+                            execSuccess.Start()).Wait();
+                    }
                 }
             }
 
             sw.Stop();
 
-            // Using the "SaveResultArtifact" command on the WorkingDirectory is recommended, since it handles serialization
-            //   and deserialization in a standard way for all components
-            WorkingDirectory.SaveResultArtifact("dummy.dat", new DummyData { Duration = sw.Elapsed, Generations = g });
+            Workspace.Artifacts.Save("dummyData", new { str = "arbitrary!", num = 42 });
+            Workspace.Artifacts.Save("dummyResult", new DummyDataClass()
+            {
+                DummyString = "I'm a dummy string!",
+                DummyDouble = 42.42
+            });
 
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 
-            // Plugins must return a ScoredResult object. *No matter what*, a Runtime will be filled in at the end of the run.
-
-            // This ScoredResult can be created by the attack tool; the Plugin provides a template with Plugin metadata populated.
-            var exampleScoredResult = CreateBlankScoredResult();
-            exampleScoredResult.RawScore = 256;
-            exampleScoredResult.RawScoreMaximum = 300;
-
-            // The attack tool can also return GetScoredResult(), which will allow the runtime to decide which scorer to use.
-            // If the Service Map defines an explicit scorer, that will always take precedence.
-            // If the Attack Tool specifies a preferred scorer identifier, that will be used.
-            // If the Attack Tool does not specify a preferred scorer, a scorer called "score.<attack tool identifier>"
-            //   will be used.
-            return GetScoredResult();
-
-            // Since there is no preferred scorer specified, the default will be used (see "RegisterActions",
-            //   near the top of this file)
+            return new DummySpecificReport()
+            {
+                Data = new DummyDataClass()
+                {
+                    DummyDouble = 80.08,
+                    DummyString = "8008"
+                },
+                DummyString = "d4t4!"
+            };
         }
     }
 
-    public class DummyData
+    public class DummySpecificReport : ActionSpecificReport
     {
-        public TimeSpan Duration { get; set; }
-        public int Generations { get; set; }
+        public string DummyString { get; set; }
+        public DummyDataClass Data { get; set; }
+    }
+
+    public class DummyDataClass
+    {
+        public string DummyString { get; set; }
+        public double DummyDouble { get; set; }
     }
 }

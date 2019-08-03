@@ -1,6 +1,5 @@
 ﻿using Crayon;
 using SMACD.Data;
-using SMACD.PluginHost.Resources;
 using System;
 using System.Linq;
 
@@ -20,6 +19,8 @@ namespace SMACD.CLITool
         public int TestsExecuted { get; set; }
         public int TestsPassed { get; set; }
         public int TestsFailed { get; set; }
+
+        public Workspace.Workspace Workspace { get; set; }
 
         public event DataModelCallback<FeatureModel> AfterFeatureDrawn;
 
@@ -94,7 +95,7 @@ namespace SMACD.CLITool
             indent = PrintNodeBase(indent, isLast);
             if (model.Resource != null)
             {
-                var resource = ResourceManager.Instance.GetById(model.Resource.ResourceId);
+                var resource = Workspace.Targets.GetTarget(model.Resource.ResourceId);
                 Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " +
                                   Output.BrightYellow(resource.ToString()));
             }
