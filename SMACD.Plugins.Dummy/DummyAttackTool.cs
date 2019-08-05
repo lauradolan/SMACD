@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using SMACD.Workspace;
 using SMACD.Workspace.Actions;
-using SMACD.Workspace.Actions.Attributes;
+using SMACD.Workspace.Libraries;
+using SMACD.Workspace.Libraries.Attributes;
 using SMACD.Workspace.Targets;
 using System;
 using System.Diagnostics;
@@ -15,7 +16,7 @@ namespace SMACD.Plugins.Dummy
     //   to access it. Identifiers are used inside the framework as "<type>.<name>", such as "attack.dummy". However,
     //   the framework will determine what role is most appropriate for the situation and only request the Plugin by
     //   its name-- in this case, just "dummy".
-    [ActionImplementation(ActionRoles.Producer, "dummy")]
+    [Implementation(ExtensionRoles.Producer, "dummy")]
     public class DummyAttackTool : ActionInstance
     {
         public DummyAttackTool() : base("DummyAttacker")

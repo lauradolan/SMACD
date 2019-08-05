@@ -1,4 +1,4 @@
-﻿using SMACD.Workspace.Actions;
+﻿using SMACD.Workspace.Libraries;
 using System;
 
 namespace SMACD.Plugins.Dummy

@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace SMACD.Workspace.Actions.Attributes
+namespace SMACD.Workspace.Libraries.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class ActionImplementationAttribute : Attribute
+    public class ImplementationAttribute : Attribute
     {
         /// <summary>
         /// Denotes this class as providing the implementation for an Action for the system
         /// </summary>
         /// <param name="role">Action Role</param>
         /// <param name="identifier">Local Action identifier</param>
-        public ActionImplementationAttribute(ActionRoles role, string identifier)
+        public ImplementationAttribute(ExtensionRoles role, string identifier)
         {
             Role = role;
             if (identifier.Contains('.'))
@@ -24,7 +24,7 @@ namespace SMACD.Workspace.Actions.Attributes
         /// <summary>
         /// Role of Action in the system
         /// </summary>
-        public ActionRoles Role { get; }
+        public ExtensionRoles Role { get; }
 
         /// <summary>
         /// Local, unique Identifier representing the Action within the system

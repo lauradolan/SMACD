@@ -1,13 +1,14 @@
 using Microsoft.Extensions.Logging;
 using SMACD.Workspace.Actions;
-using SMACD.Workspace.Actions.Attributes;
 using SMACD.Workspace.Artifacts;
+using SMACD.Workspace.Libraries;
+using SMACD.Workspace.Libraries.Attributes;
 using System.IO;
 
 namespace SMACD.Plugins.Dummy
 {
-    [ActionImplementation(ActionRoles.Consumer, "dummy")]
-    [TriggeredBy(ActionTriggerSources.Action, "producer.dummy")] // triggered by producer.dummy executing
+    [Implementation(ExtensionRoles.Consumer, "dummy")]
+    [TriggeredBy(TriggerSources.Action, "producer.dummy")] // triggered by producer.dummy executing
     public class DummyScorer : ActionInstance
     {
         public DummyScorer() : base("DummyScorer") { }

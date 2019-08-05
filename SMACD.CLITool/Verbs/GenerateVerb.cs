@@ -72,14 +72,14 @@ namespace SMACD.CLITool.Verbs
                                             };
                                         }).ToList(),
 
-                                    PluginPointers = Enumerable.Range(0, random.Next(1, MaxOfEach))
+                                    Actions = Enumerable.Range(0, random.Next(1, MaxOfEach))
                                         .Select(
-                                            pluginId => new PluginPointerModel
+                                            pluginId => new ActionPointerModel
                                             {
-                                                Plugin = "dummy",
-                                                PluginParameters = new Dictionary<string, string>
+                                                Action = "dummy",
+                                                Options = new Dictionary<string, string>
                                                     {{"parameter", "value"}},
-                                                Resource = new ResourcePointerModel { ResourceId = "dummyResource" }
+                                                Target = new TargetPointerModel { TargetId = "dummyResource" }
                                             }).ToList()
                                 }).ToList()
                     }).ToList()
@@ -91,7 +91,7 @@ namespace SMACD.CLITool.Verbs
                     ResourceId = "dummyResource",
                     Url = "http://localhost"
                 }
-            }.ForEach(r => serviceMap.Resources.Add((ResourceModel)r));
+            }.ForEach(r => serviceMap.Targets.Add((TargetModel)r));
 
             Logger.LogDebug("Created all elements, generating Service Map file");
             ServiceMapFile.PutServiceMap(serviceMap, ServiceMap);

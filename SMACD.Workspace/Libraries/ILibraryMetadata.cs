@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SMACD.Workspace.Actions
+namespace SMACD.Workspace.Libraries
 {
     public interface ILibraryMetadata
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SMACD.Workspace.Actions;
 using SMACD.Workspace.Artifacts;
+using SMACD.Workspace.Libraries;
 using SMACD.Workspace.Targets;
 using SMACD.Workspace.Tasks;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace SMACD.Workspace
         public ActionToolbox Actions { get; }
 
         /// <summary>
+        /// Libraries loaded in the system
+        /// </summary>
+        public LibraryToolbox Libraries { get; }
+
+        /// <summary>
         /// Targets available to act upon, and registration for new Targets
         /// </summary>
         public TargetToolbox Targets { get; }
@@ -26,6 +32,11 @@ namespace SMACD.Workspace
         /// Tasks running in this operation, and enqueue ability
         /// </summary>
         public TaskToolbox Tasks { get; }
+
+        /// <summary>
+        /// Triggers registered in this system
+        /// </summary>
+        public TriggerToolbox Triggers { get; }
 
         /// <summary>
         /// Root of artifact tree
@@ -49,7 +60,9 @@ namespace SMACD.Workspace
 
             Actions = new ActionToolbox(this);
             Targets = new TargetToolbox(this);
+            Libraries = new LibraryToolbox(this);
             Tasks = new TaskToolbox(this);
+            Triggers = new TriggerToolbox(this);
         }
     }
 }

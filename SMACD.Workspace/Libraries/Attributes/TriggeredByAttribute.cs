@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SMACD.Workspace.Actions.Attributes
+namespace SMACD.Workspace.Libraries.Attributes
 {
     /// <summary>
     /// Denotes that the Action can be triggered by either an Artifact's creation or the completion of another Action
@@ -12,7 +12,12 @@ namespace SMACD.Workspace.Actions.Attributes
         /// <summary>
         /// Source of entity which triggers the Action
         /// </summary>
-        public ActionTriggerSources TriggerSource { get; }
+        public TriggerSources TriggerSource { get; }
+
+        /// <summary>
+        /// System event which was fired (if TriggerSource is System)
+        /// </summary>
+        public SystemEvents SystemEvent { get; }
 
         /// <summary>
         /// Identifier of Action to enqueue when the Trigger is fired
@@ -29,10 +34,22 @@ namespace SMACD.Workspace.Actions.Attributes
         /// </summary>
         /// <param name="source">Trigger source</param>
         /// <param name="identifier">Identifier of triggering Action</param>
-        public TriggeredByAttribute(ActionTriggerSources source, string identifier)
+        public TriggeredByAttribute(TriggerSources source, string identifier)
         {
+            if (source == TriggerSources.System)
+                throw new Exception("Must specify System event with SystemEvents constructor overload");
             TriggerSource = source;
             Identifier = identifier;
+        }
+
+        /// <summary>
+        /// Information about the System event that triggers this Action
+        /// </summary>
+        /// <param name="systemEvent">System event</param>
+        public TriggeredByAttribute(SystemEvents systemEvent)
+        {
+            TriggerSource = TriggerSources.System;
+            SystemEvent = systemEvent;
         }
     }
 }

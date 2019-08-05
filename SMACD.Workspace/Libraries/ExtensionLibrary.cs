@@ -1,18 +1,21 @@
 ﻿using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
-using SMACD.Workspace.Actions.Attributes;
+using SMACD.Workspace.Actions;
+using SMACD.Workspace.Libraries.Attributes;
+using SMACD.Workspace.Services;
+using SMACD.Workspace.Triggers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace SMACD.Workspace.Actions
+namespace SMACD.Workspace.Libraries
 {
     /// <summary>
     /// Represents an Assembly which contains one or more Actions or Services
     /// </summary>
-    public class ActionFileProvider
+    public class ExtensionLibrary
     {
         /// <summary>
         /// Name of Library that contains Actions
@@ -54,13 +57,18 @@ namespace SMACD.Workspace.Actions
         /// </summary>
         public List<ActionDescriptor> ActionsProvided { get; } = new List<ActionDescriptor>();
 
+        /// <summary>
+        /// Services loaded from this Assembly
+        /// </summary>
+        public List<ServiceDescriptor> Services { get; } = new List<ServiceDescriptor>();
+
         private ILogger Logger { get; }
 
         /// <summary>
         /// Library File that provides Actions to the system
         /// </summary>
         /// <param name="fileName">Filename of the Library to load</param>
-        public ActionFileProvider(string fileName)
+        public ExtensionLibrary(string fileName)
         {
             FileName = fileName;
             Logger = WorkspaceToolbox.LogFactory.CreateLogger(Path.GetFileName(fileName));
@@ -72,6 +80,7 @@ namespace SMACD.Workspace.Actions
                 new[]
                 {
                     typeof(ActionInstance),
+                    typeof(ServiceInstance),
                     typeof(ILogger),
                     typeof(Workspace),
                     typeof(Targets.TargetDescriptor),
@@ -96,10 +105,10 @@ namespace SMACD.Workspace.Actions
 
             Logger.LogDebug("Loaded Library {0} v{1} by {2}", Name, Version.ToString(2), Author);
 
-            IEnumerable<Type> plugins = Assembly.GetTypes().Where(t => typeof(ActionInstance).IsAssignableFrom(t));
-            foreach (Type plugin in plugins)
+            IEnumerable<Type> extensions = Assembly.GetTypes().Where(t => typeof(ActionInstance).IsAssignableFrom(t));
+            foreach (Type plugin in extensions)
             {
-                ActionImplementationAttribute pluginInformation = plugin.GetCustomAttribute<ActionImplementationAttribute>();
+                ImplementationAttribute pluginInformation = plugin.GetCustomAttribute<ImplementationAttribute>();
                 if (pluginInformation == null)
                 {
                     Logger.LogCritical("Plugin defined in {0} does not have a PluginImplementation attribute!",
@@ -107,23 +116,36 @@ namespace SMACD.Workspace.Actions
                     continue;
                 }
 
-                List<ActionTriggerDescriptor> triggering = plugin.GetCustomAttributes<TriggeredByAttribute>()
-                    .Where(a => a.TriggerSource == ActionTriggerSources.Action)
-                    .Select(a => new ActionTriggerDescriptor()
+                List<TriggerDescriptor> triggering = plugin.GetCustomAttributes<TriggeredByAttribute>()
+                    .Where(a => a.TriggerSource == TriggerSources.Action)
+                    .Select(a => new TriggerDescriptor()
                     {
-                        TriggerSource = ActionTriggerSources.Action,
+                        TriggerSource = TriggerSources.Action,
                         TriggeringIdentifier = a.Identifier,
                         DefaultOptionsOnCreation = a.Options,
                         ActionIdentifierCreated = pluginInformation.FullIdentifier
                     }).ToList();
 
-                ActionsProvided.Add(new ActionDescriptor()
+                if (pluginInformation.Role == ExtensionRoles.Service)
                 {
-                    FullActionId = pluginInformation.FullIdentifier,
-                    ActionInstanceType = plugin,
-                    TriggeredBy = triggering.ToList()
-                });
-                Logger.LogDebug("Loaded Plugin identifier '{0}'", pluginInformation.FullIdentifier);
+                    Services.Add(new ServiceDescriptor()
+                    {
+                        FullServiceId = pluginInformation.FullIdentifier,
+                        ServiceInstanceType = plugin,
+                        TriggeredBy = triggering.ToList()
+                    });
+                    Logger.LogDebug("Loaded Service identifier '{0}'", pluginInformation.FullIdentifier);
+                }
+                else
+                {
+                    ActionsProvided.Add(new ActionDescriptor()
+                    {
+                        FullActionId = pluginInformation.FullIdentifier,
+                        ActionInstanceType = plugin,
+                        TriggeredBy = triggering.ToList()
+                    });
+                    Logger.LogDebug("Loaded Action identifier '{0}'", pluginInformation.FullIdentifier);
+                }
             }
         }
     }

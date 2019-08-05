@@ -1,30 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using SMACD.Workspace.Libraries;
+using System.Collections.Generic;
 
-namespace SMACD.Workspace.Actions
+namespace SMACD.Workspace.Triggers
 {
     /// <summary>
     /// Describes an Action that is triggered by some other action in the system
     /// </summary>
-    internal class ActionTriggerDescriptor
+    public class TriggerDescriptor
     {
         /// <summary>
         /// Identifer of the Action to be enqueued
         /// </summary>
-        internal string ActionIdentifierCreated { get; set; }
+        public string ActionIdentifierCreated { get; set; }
 
         /// <summary>
         /// Default Options to use with the Action when executed
         /// </summary>
-        internal Dictionary<string, string> DefaultOptionsOnCreation { get; set; }
+        public Dictionary<string, string> DefaultOptionsOnCreation { get; set; }
 
         /// <summary>
         /// Part of the system that produces the Trigger
         /// </summary>
-        internal ActionTriggerSources TriggerSource { get; set; }
+        public TriggerSources TriggerSource { get; set; }
 
         /// <summary>
         /// Identifier of the specific item that produces the Trigger
         /// </summary>
-        internal string TriggeringIdentifier { get; set; }
+        public string TriggeringIdentifier { get; set; }
+
+        /// <summary>
+        /// System event which was fired (if TriggerSource is System)
+        /// </summary>
+        public SystemEvents SystemEvent { get; }
     }
 }

@@ -31,17 +31,17 @@ namespace SMACD.CLITool.Verbs
             {
                 _tasksGenerated++;
                 var newIndent = treeRenderer.WriteExecutedTest("Supports Plugin type?",
-                    () => workspace.Actions.LoadedActionDescriptors.Any(d => 
-                    d.FullActionId == $"producer." + pluginPointer.Plugin), indent, isLast);
-                if (!workspace.Actions.LoadedActionDescriptors.Any(d =>
-                    d.FullActionId == $"producer." + pluginPointer.Plugin))
+                    () => workspace.Libraries.LoadedActionDescriptors.Any(d => 
+                    d.FullActionId == $"producer." + pluginPointer.Action), indent, isLast);
+                if (!workspace.Libraries.LoadedActionDescriptors.Any(d =>
+                    d.FullActionId == $"producer." + pluginPointer.Action))
                 {
                     var tests = new[]
                     {
                         Tuple.Create("ResourceModel Map contains ResourceModel?", new Func<bool?>(() =>
                         {
-                            if (pluginPointer.Resource == null) return null;
-                            return workspace.Targets.GetTarget(pluginPointer.Resource.ResourceId) != null;
+                            if (pluginPointer.Target == null) return null;
+                            return workspace.Targets.GetTarget(pluginPointer.Target.TargetId) != null;
                         }))
                     };
                     foreach (var test in tests)

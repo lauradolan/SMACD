@@ -28,9 +28,9 @@ namespace SMACD.Data
         public IList<FeatureModel> Features { get; set; } = new List<FeatureModel>();
 
         /// <summary>
-        ///     Resources stored in this Service Map
+        ///     Targets stored in this Service Map
         /// </summary>
-        public IList<ResourceModel> Resources { get; set; } = new List<ResourceModel>();
+        public IList<TargetModel> Targets { get; set; } = new List<TargetModel>();
 
         /// <summary>
         ///     Deserialize a Service Map from a given file

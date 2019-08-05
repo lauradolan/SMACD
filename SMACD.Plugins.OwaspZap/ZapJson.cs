@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
+using SMACD.Workspace.Actions;
 using System.Collections.Generic;
 
 namespace SMACD.Plugins.OwaspZap
 {
-    public class ZapJsonReport
+    public class ZapJsonReport : ActionSpecificReport
     {
         public IEnumerable<ZapJsonSite> Site { get; set; }
     }

@@ -5,34 +5,29 @@ namespace SMACD.Data
     /// <summary>
     ///     Stores information about a plugin and how to run it against an abuse case
     /// </summary>
-    public class PluginPointerModel : PointerModel, IModel
+    public class ActionPointerModel : PointerModel, IModel
     {
         /// <summary>
-        ///     Identifier for plugin to use
+        ///     Provides the unique identifier for the Action associated with this Pointer
         /// </summary>
-        public string Plugin
+        public string Action
         {
             get => TargetIdentifier;
             set => TargetIdentifier = value;
         }
 
         /// <summary>
-        ///     Parameters to pass to plugin to adjust its execution
+        ///     Parameters to pass to Action to adjust its execution
         /// </summary>
-        public Dictionary<string, string> PluginParameters
+        public Dictionary<string, string> Options
         {
             get => Parameters;
             set => Parameters = value;
         }
 
         /// <summary>
-        ///     Scorer to use instead of Plugin-provided default
+        ///     Target to be acted upon by the Action
         /// </summary>
-        public string Scorer { get; set; }
-
-        /// <summary>
-        ///     Resource to pass to plugin
-        /// </summary>
-        public ResourcePointerModel Resource { get; set; }
+        public TargetPointerModel Target { get; set; }
     }
 }

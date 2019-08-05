@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace SMACD.Data
 {
     /// <summary>
-    ///     Resource Map - Stores endpoints for an application
+    ///     Target Map - Stores Target endpoints for an application
     /// </summary>
-    public class ResourceMapFile : IModel
+    public class TargetMapFile : IModel
     {
         /// <summary>
         ///     When this file was created originally
@@ -19,8 +19,8 @@ namespace SMACD.Data
         public DateTime Updated { get; set; }
 
         /// <summary>
-        ///     Resources stored in this Resource Map
+        ///     Targets stored in this Target Map
         /// </summary>
-        public IList<ResourceModel> Resources { get; set; } = new List<ResourceModel>();
+        public IList<TargetModel> Targets { get; set; } = new List<TargetModel>();
     }
 }

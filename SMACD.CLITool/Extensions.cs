@@ -1,32 +1,33 @@
 ﻿using Crayon;
 using SMACD.Workspace.Actions;
+using SMACD.Workspace.Libraries;
 using System;
 
 namespace SMACD.CLITool
 {
     internal static class Extensions
     {
-        public static void WriteTypeColoredText(this ActionRoles type, string text) =>
+        public static void WriteTypeColoredText(this ExtensionRoles type, string text) =>
             Console.WriteLine(type.GetTypeColoredText(text));
 
-        public static string GetTypeColoredText(this ActionRoles type, string text)
+        public static string GetTypeColoredText(this ExtensionRoles type, string text)
         {
             string outputText;
             switch (type)
             {
-                case ActionRoles.Unknown:
+                case ExtensionRoles.Unknown:
                     outputText = text;
                     break;
 
-                case ActionRoles.Producer:
+                case ExtensionRoles.Producer:
                     outputText = Output.Red().Text(text);
                     break;
 
-                case ActionRoles.Consumer:
+                case ExtensionRoles.Consumer:
                     outputText = Output.Green().Text(text);
                     break;
 
-                case ActionRoles.Decider:
+                case ExtensionRoles.Decider:
                     outputText = Output.Yellow().Text(text);
                     break;
 

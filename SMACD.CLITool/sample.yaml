@@ -15,22 +15,22 @@ features:
     abuseCases:
     - name: Sample Abuse Case A1i
       description: This is the first abuse case for the first use case for the first feature!
-      pluginPointers:
-      - plugin: dummy
-        resource:
-          resourceId: resourceRoot
-      - plugin: dummy
-        resource:
-          resourceId: resourceRoot
-resources:
+      actions:
+      - action: nmap
+        target:
+          targetId: resourceRoot2
+      - action: owaspzap
+        target:
+          targetId: resourceRoot2
+targets:
 - !http
-  resourceId: resourceRoot
+  targetId: resourceRoot
   method: get
   url: http://10.0.2.5/
 - !http
-  resourceId: resourceRoot3
+  targetId: resourceRoot3
   method: get
   url: http://eshopapp.azurewebsites.net
 - !http
-  resourceId: resourceRoot2
-  url: http://192.168.1.182/
+  targetId: resourceRoot2
+  url: http://192.168.1.197:5000

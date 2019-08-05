@@ -3,11 +3,11 @@ namespace SMACD.Data
     /// <summary>
     ///     Represents a Resource resolved to its handler
     /// </summary>
-    public abstract class ResourceModel : IModel
+    public abstract class TargetModel : IModel
     {
         /// <summary>
         ///     Resource identifier
         /// </summary>
-        public string ResourceId { get; set; }
+        public string TargetId { get; set; }
     }
 }

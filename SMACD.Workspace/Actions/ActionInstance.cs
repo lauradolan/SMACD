@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using SMACD.Workspace.Libraries.Attributes;
+using SMACD.Workspace.Targets;
 using SMACD.Workspace.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace SMACD.Workspace.Actions
 {
@@ -10,6 +14,20 @@ namespace SMACD.Workspace.Actions
     /// </summary>
     public abstract class ActionInstance
     {
+        /// <summary>
+        /// All Targets that will be acted upon
+        /// </summary>
+        protected IList<TargetDescriptor> Targets =>
+            GetType().GetProperties().Where(p => typeof(TargetDescriptor).IsAssignableFrom(p.PropertyType))
+                .Select(p => p.GetValue(this)).Where(p => p != null).Cast<TargetDescriptor>().ToList();
+
+        /// <summary>
+        /// All Options for this Action
+        /// </summary>
+        protected Dictionary<string, string> Options =>
+            GetType().GetProperties().Where(p => p.GetCustomAttribute<ConfigurableAttribute>() != null)
+                .ToDictionary(info => info.Name, info => (string)Convert.ChangeType(info.GetValue(this), typeof(string)));
+
         /// <summary>
         /// Access other parts of the system
         /// </summary>

@@ -28,9 +28,9 @@ namespace SMACD.CLITool
 
         public event DataModelCallback<AbuseCaseModel> AfterAbuseCaseDrawn;
 
-        public event DataModelCallback<PluginPointerModel> AfterPluginPointerDrawn;
+        public event DataModelCallback<ActionPointerModel> AfterPluginPointerDrawn;
 
-        public event DataModelCallback<ResourceModel> AfterResourceDrawn;
+        public event DataModelCallback<TargetModel> AfterResourceDrawn;
 
         public string WriteExecutedTest(string testName, Func<bool?> testToRun, string indent = "", bool isLast = false)
         {
@@ -86,31 +86,31 @@ namespace SMACD.CLITool
             indent = PrintNodeBase(indent, isLast);
             Console.WriteLine(Output.BrightRed(model.Name));
             AfterAbuseCaseDrawn?.Invoke(indent, isLast, model);
-            foreach (var pluginPointer in model.PluginPointers)
-                PrintNode(pluginPointer, indent, model.PluginPointers.Last() == pluginPointer);
+            foreach (var pluginPointer in model.Actions)
+                PrintNode(pluginPointer, indent, model.Actions.Last() == pluginPointer);
         }
 
-        public void PrintNode(PluginPointerModel model, string indent = "", bool isLast = false)
+        public void PrintNode(ActionPointerModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
-            if (model.Resource != null)
+            if (model.Target != null)
             {
-                var resource = Workspace.Targets.GetTarget(model.Resource.ResourceId);
-                Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " +
+                var resource = Workspace.Targets.GetTarget(model.Target.TargetId);
+                Console.WriteLine(Output.BrightMagenta(model.Action) + " -> " +
                                   Output.BrightYellow(resource.ToString()));
             }
             else
             {
-                Console.WriteLine(Output.BrightMagenta(model.Plugin) + " -> " + Output.Yellow("<No ResourceModel>"));
+                Console.WriteLine(Output.BrightMagenta(model.Action) + " -> " + Output.Yellow("<No ResourceModel>"));
             }
 
             AfterPluginPointerDrawn?.Invoke(indent, isLast, model);
         }
 
-        public void PrintNode(ResourceModel model, string indent = "", bool isLast = false)
+        public void PrintNode(TargetModel model, string indent = "", bool isLast = false)
         {
             indent = PrintNodeBase(indent, isLast);
-            Console.WriteLine(model.ResourceId);
+            Console.WriteLine(model.TargetId);
             AfterResourceDrawn?.Invoke(indent, isLast, model);
         }
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SMACD.Workspace.Actions;
+using SMACD.Workspace.Artifacts;
+using SMACD.Workspace.Libraries;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -22,9 +24,14 @@ namespace SMACD.Workspace.Tasks
         public event EventHandler<ResultProvidingTaskDescriptor> TaskStarted;
 
         /// <summary>
-        /// Fired when a Task moves from Running to Complete/Faulted
+        /// Fired when a Task moves from Running to Complete
         /// </summary>
         public event EventHandler<ResultProvidingTaskDescriptor> TaskCompleted;
+
+        /// <summary>
+        /// Fired when a Task moves from Running to Faulted
+        /// </summary>
+        public event EventHandler<ResultProvidingTaskDescriptor> TaskFaulted;
 
         private ConcurrentQueue<QueuedTaskDescriptor> QueuedTasks { get; } = new ConcurrentQueue<QueuedTaskDescriptor>();
         private ConcurrentDictionary<QueuedTaskDescriptor, bool> RunningTasks { get; } = new ConcurrentDictionary<QueuedTaskDescriptor, bool>();
@@ -64,7 +71,15 @@ namespace SMACD.Workspace.Tasks
                 {
                     var sw = new Stopwatch();
                     sw.Start();
-                    result = actionInstance.Execute();
+                    try
+                    {
+                        result = actionInstance.Execute();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogCritical(ex, "Error running Action");
+                        TaskFaulted?.Invoke(this, queuedTaskDescriptor);
+                    }
                     sw.Stop();
 
                     queuedTaskDescriptor.Result = result;
@@ -75,7 +90,7 @@ namespace SMACD.Workspace.Tasks
                     CurrentWorkspace.Reports.Add(result);
                 } catch (Exception ex)
                 {
-                    Logger.LogCritical(ex, "Error running action");
+                    Logger.LogCritical(ex, "Error running Action (from harness)");
                 }
 
                 // After completion, trigger any Actions that were tripped by *this* Plugin's execution
@@ -95,10 +110,26 @@ namespace SMACD.Workspace.Tasks
             return actionInstanceTask;
         }
 
-        private void EnqueueTasksTriggeredBy(QueuedTaskDescriptor descriptor)
+        internal void EnqueueTasksTriggeredBy(Artifact artifact)
+        {
+            var descriptors = CurrentWorkspace.Triggers.GetDescriptorsByTriggeringArtifact(artifact);
+
+            foreach (var item in descriptors)
+            {
+                Enqueue(new TaskDescriptor()
+                {
+                    ActionId = item.ActionIdentifierCreated,
+                    Options = item.DefaultOptionsOnCreation,
+                    //TargetIds = descriptor.TargetIds
+                    // TODO: No support for Targets here makes this mostly useless :(
+                });
+            }
+        }
+
+        internal void EnqueueTasksTriggeredBy(QueuedTaskDescriptor descriptor)
         {
             // Toolbox finds registered Actions who have "TriggeredBy" attributes matching this
-            var actionDescriptors = CurrentWorkspace.Actions.GetTriggeredActionDescriptors(ActionTriggerSources.Action, descriptor.ActionId);
+            var actionDescriptors = CurrentWorkspace.Triggers.GetDescriptorsByTriggeringAction(descriptor.ActionId);
             foreach (var item in actionDescriptors)
             {
                 Enqueue(new TaskDescriptor()
@@ -108,8 +139,22 @@ namespace SMACD.Workspace.Tasks
                     TargetIds = descriptor.TargetIds
                 });
             }
+        }
 
-            // TODO: How to do the same with Artifacts? Those are linked to Workspace, that isn't linked here.
+        internal void EnqueueTasksTriggeredBy(SystemEvents systemEvent)
+        {
+            var descriptors = CurrentWorkspace.Triggers.GetDescriptorsByTriggeringSystemAction(systemEvent);
+
+            foreach (var item in descriptors)
+            {
+                Enqueue(new TaskDescriptor()
+                {
+                    ActionId = item.ActionIdentifierCreated,
+                    Options = item.DefaultOptionsOnCreation,
+                    //TargetIds = descriptor.TargetIds
+                    // TODO: No support for Targets here makes this mostly useless :(
+                });
+            }
         }
 
         private void RuntimeManagerStackProcessingLoop()
@@ -126,7 +171,7 @@ namespace SMACD.Workspace.Tasks
                 {
                     Thread.Sleep(500);
 
-                    if (DateTime.Now - lastLog > TimeSpan.FromSeconds(1))
+                    if (DateTime.Now - lastLog > TimeSpan.FromSeconds(10))
                     {
                         Logger.LogDebug("   🏃‍ {0}   |   ⌚ {1}   |   ✔ {2}   ", RunningTasks.Count, QueuedTasks.Count, TotalCompletedTasks);
                         lastLog = DateTime.Now;

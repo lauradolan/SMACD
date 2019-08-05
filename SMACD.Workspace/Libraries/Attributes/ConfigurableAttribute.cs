@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace SMACD.Workspace.Actions.Attributes
+namespace SMACD.Workspace.Libraries.Attributes
 {
     /// <summary>
     /// Indicates that the property can be overwritten by explicit Options

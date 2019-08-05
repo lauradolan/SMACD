@@ -3,6 +3,7 @@ using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.Workspace;
 using SMACD.Workspace.Actions;
+using SMACD.Workspace.Libraries;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace SMACD.CLITool.Verbs
             var workspace = new Workspace.Workspace(null);
 
             Console.WriteLine(Output.BrightBlue("LOADED LIBRARIES:"));
-            foreach (var loaded in workspace.Actions.LoadedActionProviders)
+            foreach (var loaded in workspace.Libraries.LoadedActionProviders)
             {
                 Console.WriteLine("· " + $"{Output.BrightGreen(loaded.Name)} by {Output.Green(loaded.Author)}");
                 Console.WriteLine("  " + Output.White().Text(loaded.FileName));
@@ -40,30 +41,7 @@ namespace SMACD.CLITool.Verbs
                 for (var i = 0; i < pluginInfo.Count; i++)
                 {
                     Console.Write(i != 0 ? "  └─ " : "  ├─ ");
-                    var outputText = "";
-                    switch (pluginInfo[i].Item2.Type)
-                    {
-                        case ActionRoles.Unknown:
-                            outputText = pluginInfo[i].Item1;
-                            break;
-
-                        case ActionRoles.Producer:
-                            outputText = Output.Red().Text(pluginInfo[i].Item1);
-                            break;
-
-                        case ActionRoles.Consumer:
-                            outputText = Output.Green().Text(pluginInfo[i].Item1);
-                            break;
-
-                        case ActionRoles.Decider:
-                            outputText = Output.Yellow().Text(pluginInfo[i].Item1);
-                            break;
-
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    Console.WriteLine(outputText);
+                    Console.WriteLine(pluginInfo[i].Item2.Type.GetTypeColoredText(pluginInfo[i].Item1));
                 }
             }
 

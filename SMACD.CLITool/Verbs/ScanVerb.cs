@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Resources;
 using System.Threading.Tasks;
@@ -69,27 +70,44 @@ namespace SMACD.CLITool.Verbs
             // Create workspace against Working Directory (artifacts stored in the dat file path provided)
             var workspace = new Workspace.Workspace(artifactRoot);
 
-            // Register Actions from Plugins
-            workspace.Actions.RegisterActionsFromDirectory(Path.Combine(
+            // Register Extension Libraries
+            workspace.Libraries.RegisterFromDirectory(Path.Combine(
                 Path.GetDirectoryName(Assembly.GetEntryAssembly().FullName),
-                "plugins"), "SMACD.Plugins.Dummy.dll"); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                "plugins"), "SMACD.Plugins.*.dll");
 
             // Import Service Map
             var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
 
             // Register Targets from Resources
-            foreach (var resourceModel in serviceMap.Resources)
+            foreach (var resourceModel in serviceMap.Targets)
             {
                 TargetDescriptor descriptor = null;
 
                 if (resourceModel is HttpResourceModel)
-                    descriptor = new HttpTarget();
+                {
+                    var http = resourceModel as HttpResourceModel;
+                    descriptor = new HttpTarget()
+                    {
+                        ResourceLocatorAddress = http.Url,
+                        ResourceAccessMode = http.Method,
+                        Fields = http.Fields,
+                        Headers = http.Headers
+                    };
+                }
                 if (resourceModel is SocketPortResourceModel)
-                    descriptor = new RawPortTarget();
+                {
+                    var socket = resourceModel as SocketPortResourceModel;
+                    descriptor = new RawPortTarget()
+                    {
+                        RemoteHost = socket.Hostname,
+                        Port = socket.Port,
+                        Protocol = Enum.Parse<ProtocolType>(socket.Protocol)
+                    };
+                }
 
-                descriptor.TargetId = resourceModel.ResourceId;
+                descriptor.TargetId = resourceModel.TargetId;
 
-                CopyProperties(resourceModel, descriptor);
+                //CopyProperties(resourceModel, descriptor);
                 workspace.Targets.RegisterTarget(descriptor);
             }
 
@@ -102,13 +120,13 @@ namespace SMACD.CLITool.Verbs
             foreach (var feature in serviceMap.Features)
                 foreach (var useCase in feature.UseCases)
                     foreach (var abuseCase in useCase.AbuseCases)
-                        foreach (var pluginPointer in abuseCase.PluginPointers)
+                        foreach (var pluginPointer in abuseCase.Actions)
                         {
                             results.Add(workspace.Tasks.Enqueue(new Workspace.Tasks.TaskDescriptor()
                             {
-                                ActionId = "producer." + pluginPointer.Plugin,
+                                ActionId = "producer." + pluginPointer.Action,
                                 Options = pluginPointer.Parameters,
-                                TargetIds = new List<string>() { pluginPointer.Resource.ResourceId }
+                                TargetIds = new List<string>() { pluginPointer.Target.TargetId }
                             }));
                         }
 
@@ -119,10 +137,6 @@ namespace SMACD.CLITool.Verbs
 
             foreach (var result in workspace.Reports)
             {
-                //Console.Write(Output.BrightWhite("Plugin: "));
-                //PluginLibrary.PluginsAvailable[result.Plugin.Identifier].PluginType.WriteTypeColoredText(
-                //    PluginLibrary.PluginsAvailable[result.Plugin.Identifier].Identifier + Environment.NewLine);
-
                 TreeDump.Dump(result, result.GeneratingTask.ActionId);
             }
 
@@ -183,7 +197,7 @@ namespace SMACD.CLITool.Verbs
             var sourceProperties = source.GetType().GetProperties();
             var destProperties = dest.GetType().GetProperties();
             var copyable = sourceProperties.Where(s =>
-                destProperties.Any(d => d.Name == s.Name && d.PropertyType == s.PropertyType));
+                destProperties.Any(d => d.Name == s.Name && d.PropertyType == s.PropertyType && d.SetMethod != null));
             foreach (var prop in copyable)
             {
                 var target = destProperties.FirstOrDefault(p => p.Name == prop.Name);

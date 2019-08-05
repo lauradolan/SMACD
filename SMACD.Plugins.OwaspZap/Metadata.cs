@@ -1,4 +1,4 @@
-﻿using SMACD.PluginHost.Plugins;
+﻿using SMACD.Workspace.Libraries;
 using System;
 
 namespace SMACD.Plugins.OwaspZap
