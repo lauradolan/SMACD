@@ -9,6 +9,6 @@
         ///   among the entire run against the target set
         /// </summary>
         public static ArtifactCorrelation Correlations(this Workspace workspace) => 
-            (ArtifactCorrelation)workspace.Artifacts;
+            new ArtifactCorrelation(workspace.Artifacts);
     }
 }

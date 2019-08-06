@@ -79,6 +79,7 @@ namespace SMACD.Workspace.Tasks
                     {
                         Logger.LogCritical(ex, "Error running Action");
                         TaskFaulted?.Invoke(this, queuedTaskDescriptor);
+                        result = new ActionSpecificReport();
                     }
                     sw.Stop();
 

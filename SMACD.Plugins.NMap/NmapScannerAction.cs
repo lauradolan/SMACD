@@ -12,6 +12,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace SMACD.Plugins.Nmap
@@ -59,9 +60,10 @@ namespace SMACD.Plugins.Nmap
         {
             using (var context = artifact.GetContext())
             {
-                var cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                var cmd = $"C:\\Progra~2\\Nmap\\nmap.exe ";
+                var cmd2 = $" --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
-                var wrapper = new ExecutionWrapper(cmd);
+                var wrapper = new ExecutionWrapper(cmd+cmd2);
                 wrapper.StandardOutputDataReceived +=
                     (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
@@ -79,10 +81,10 @@ namespace SMACD.Plugins.Nmap
                 if (!File.Exists(scanFile))
                 {
                     Logger.LogCritical("XML report from this plugin was not found! Aborting...");
-                    return xml;
+                    return null;
                 }
+                return XDocument.Load(scanFile);
             }
-            return null;
         }
 
         private NmapRunReport ScoreSingleTarget(XDocument xml)

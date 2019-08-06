@@ -1,0 +1,36 @@
+﻿created: 06-20-2019 11:55:00
+updated: 06-20-2019 11:55:00
+features:
+- name: Sample Feature A
+  description: This is the first sample feature for testing!
+  owners:
+  - name: Anthony Turner
+    email: anthturn@microsoft.com
+  useCases:
+  - name: Sample Use Case A1
+    description: This is the first use case for the first feature!
+    owners:
+    - name: Anthony Turner
+      email: anthturn@microsoft.com
+    abuseCases:
+    - name: Sample Abuse Case A1i
+      description: This is the first abuse case for the first use case for the first feature!
+      actions:
+      - action: nmap
+        target:
+          targetId: resourceRoot
+      - action: owaspzap
+        target:
+          targetId: resourceRoot2
+targets:
+- !http
+  targetId: resourceRoot
+  method: get
+  url: http://127.0.0.1/
+- !http
+  targetId: resourceRoot3
+  method: get
+  url: http://eshopapp.azurewebsites.net
+- !http
+  targetId: resourceRoot2
+  url: http://192.168.1.197:5000
