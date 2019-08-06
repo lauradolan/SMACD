@@ -7,8 +7,9 @@ using System.IO;
 
 namespace SMACD.Plugins.Dummy
 {
+    // This Action is Triggered by the execution of "producer.dummy"
     [Implementation(ExtensionRoles.Consumer, "dummy")]
-    [TriggeredBy(TriggerSources.Action, "producer.dummy")] // triggered by producer.dummy executing
+    [TriggeredBy(TriggerSources.Action, "producer.dummy")]
     public class DummyScorer : ActionInstance
     {
         public DummyScorer() : base("DummyScorer") { }
@@ -17,8 +18,7 @@ namespace SMACD.Plugins.Dummy
         {
             Logger.LogInformation("Running Dummy Scorer");
 
-            // LoadResultArtifact can be called from the Scorer instance, to load the information stored to the working
-            //   directory by SaveResultArtifact. Again, this handles resolving the working directory.
+            // Other Actions can load named Artifacts and read or write to them
             string text;
             using (var execContainer = Workspace.Artifacts["dummyBasicContainer"].AsNativeDirectoryArtifact().GetContext())
             {
@@ -26,12 +26,12 @@ namespace SMACD.Plugins.Dummy
                 Logger.LogInformation("Text: " + text);
             }
 
+            // Artifacts can be retrieved with or without strong typing
             var serializedObject = Workspace.Artifacts["dummyData"].As<ObjectArtifact>().Get();
-            //var serializedObject = ((ObjectArtifact)Workspace.Artifacts["dummyData"]).Get();
-            //var stronglyTyped = ((ObjectArtifact)Workspace.Artifacts["dummyResult"]).Get<DummyDataClass>();
             var stronglyTyped = Workspace.Artifacts["dummyResult"].As<ObjectArtifact>().Get<DummyDataClass>();
 
-            return ActionSpecificReport.Blank;
+            // If there is no report to include, just use Blank()
+            return ActionSpecificReport.Blank();
         }
     }
 }

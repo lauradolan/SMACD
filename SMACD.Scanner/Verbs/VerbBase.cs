@@ -3,7 +3,7 @@ using Serilog.Events;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SMACD.CLITool.Verbs
+namespace SMACD.Scanner.Verbs
 {
     public abstract class VerbBase
     {

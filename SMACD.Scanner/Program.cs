@@ -2,6 +2,8 @@
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using SMACD.Scanner.Helpers;
+using SMACD.Scanner.Verbs;
 using SMACD.Workspace;
 using System;
 using System.Diagnostics;
@@ -35,8 +37,10 @@ namespace SMACD.Scanner
                 args = strArgs.Split(' ');
             }
 
-            Parser.Default.ParseArguments<ScanVerb>(args)
-                .WithParsed<ScanVerb>(RunVerbLifecycle);
+            Parser.Default.ParseArguments<GenerateVerb, ScanVerb, SnoopVerb>(args)
+                .WithParsed<GenerateVerb>(RunVerbLifecycle)
+                .WithParsed<ScanVerb>(RunVerbLifecycle)
+                .WithParsed<SnoopVerb>(RunVerbLifecycle);
         }
 
         private static void RunVerbLifecycle(VerbBase verb)
@@ -62,7 +66,7 @@ namespace SMACD.Scanner
                 Branding.DrawBanner();
             }
 
-                var runningTask = verb.Execute();
+            var runningTask = verb.Execute();
             if (runningTask != null)
             {
                 while (!runningTask.IsCompleted)

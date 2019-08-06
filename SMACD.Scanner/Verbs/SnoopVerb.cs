@@ -1,14 +1,13 @@
 ﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
+using SMACD.Scanner.Helpers;
 using SMACD.Workspace;
-using SMACD.Workspace.Actions;
-using SMACD.Workspace.Libraries;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMACD.CLITool.Verbs
+namespace SMACD.Scanner.Verbs
 {
     [Verb("snoop", HelpText = "Snoop on the tool's awareness of its environment")]
     public class SnoopVerb : VerbBase

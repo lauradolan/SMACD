@@ -21,16 +21,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.0.2" />
     <PackageReference Include="Colorful.Console" Version="1.2.9" />
     <PackageReference Include="CommandLineParser" Version="2.6.0" />
     <PackageReference Include="Crayon" Version="0.0.33" />
-    <PackageReference Include="GDS.AsciiTree" Version="1.0.8" />
+    <PackageReference Include="ObjectDumper.NET" Version="2.4.19218.1" />
     <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.Enrichers.Demystify" Version="1.0.0-dev-00019" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="YamlDotNet" Version="6.1.2" />
   </ItemGroup>
 
   <ItemGroup>

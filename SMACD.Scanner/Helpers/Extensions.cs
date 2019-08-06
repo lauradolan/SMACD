@@ -1,9 +1,8 @@
 ﻿using Crayon;
-using SMACD.Workspace.Actions;
 using SMACD.Workspace.Libraries;
 using System;
 
-namespace SMACD.CLITool
+namespace SMACD.Scanner.Helpers
 {
     internal static class Extensions
     {

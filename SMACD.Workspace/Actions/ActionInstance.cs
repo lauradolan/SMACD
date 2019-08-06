@@ -61,5 +61,12 @@ namespace SMACD.Workspace.Actions
         /// Execute the Action and return the Action-specific result report
         /// </summary>
         public abstract ActionSpecificReport Execute();
+
+        /// <summary>
+        /// Validate that the running environment supports the Action; this could involve
+        ///   ensuring certain applications (such as Docker) are installed and available
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool ValidateEnvironmentReadiness() => true;
     }
 }

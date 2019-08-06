@@ -23,6 +23,6 @@ namespace SMACD.Workspace.Actions
         /// <summary>
         /// Emit a new Blank Action-Specific Report
         /// </summary>
-        public static ActionSpecificReport Blank => new ActionSpecificReport();
+        public static ActionSpecificReport Blank() => new ActionSpecificReport();
     }
 }

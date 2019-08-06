@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Data;
 using SMACD.Data.Resources;
+using SMACD.Scanner.Helpers;
 using SMACD.Workspace;
 using SMACD.Workspace.Actions;
 using SMACD.Workspace.Artifacts;
@@ -10,13 +11,13 @@ using SMACD.Workspace.Targets;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading.Tasks;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
-namespace SMACD.Scanner
+namespace SMACD.Scanner.Verbs
 {
     [Verb("scan", HelpText = "Run scan using plugins specified in a Service Map")]
     public class ScanVerb : VerbBase
@@ -47,8 +48,11 @@ namespace SMACD.Scanner
             if (!Directory.Exists(WorkingDirectory))
                 Directory.CreateDirectory(WorkingDirectory);
 
-            // Create workspace against Working Directory (artifacts stored in the dat file path provided)
+            // Create/load workspace against Working Directory (artifacts stored in the dat file path provided)
+
             var workspace = new Workspace.Workspace(artifactRoot);
+            if (File.Exists(Path.Combine(WorkingDirectory, "workspace.yaml")))
+                workspace.Load(Path.Combine(WorkingDirectory, "workspace.yaml"));
 
             // Register Extension Libraries
             workspace.Libraries.RegisterFromDirectory(Path.Combine(
@@ -87,7 +91,6 @@ namespace SMACD.Scanner
 
                 descriptor.TargetId = resourceModel.TargetId;
 
-                //CopyProperties(resourceModel, descriptor);
                 workspace.Targets.RegisterTarget(descriptor);
             }
 
@@ -114,10 +117,11 @@ namespace SMACD.Scanner
             {
                 System.Threading.Thread.Sleep(500);
             }
-            workspace.Reports.ForEach(r =>
-            {
-                r.GeneratingTask.UnbindLoops();
-            });
+
+            using (var sw = new StreamWriter(Path.Combine(WorkingDirectory, "workspace.yaml")))
+                workspace.Save(sw.BaseStream);
+
+            workspace.Unbind(); // unbind manually
 
             var json = JsonConvert.SerializeObject(workspace.Reports);
             var outputFile = Path.Combine(WorkingDirectory,
@@ -126,15 +130,15 @@ namespace SMACD.Scanner
             {
                 sw.WriteLine(json);
             }
-            Console.WriteLine(JsonConvert.SerializeObject(workspace.Reports, Formatting.Indented));
-            //Console.WriteLine(GDS.ASCII.ASCIITree.GetTree(workspace.Reports, "{GetType().Name}"));
-            //TreeDump.Dump(workspace.Reports);
+
+            if (!Silent)
+                TreeDump.Dump(workspace.Reports, "Generated Data Reports", isLast: true);
 
             //Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
             //Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
             //Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count / 2));
 
-            //Console.WriteLine("Report serialized to {0}", outputFile);
+            Logger.LogInformation("Report serialized to {0}", outputFile);
 
             //if (Threshold.HasValue)
             //{
@@ -174,15 +178,25 @@ namespace SMACD.Scanner
             foreach (var child in artifactAtGeneration.Children)
                 RunAfterLoad(child, artifactAtGeneration.Root, artifactAtGeneration);
         }
-    }
 
-    internal static class ProgramExtensions
-    {
-        internal static T AddLoadedTagMappings<T>(this T builder) where T : BuilderSkeleton<T>
+        private static string Serialize<T>(T obj)
         {
-            builder.WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpResourceModel));
-            builder.WithTagMapping("!socket", typeof(SMACD.Data.Resources.SocketPortResourceModel));
-            return builder;
+            return new SerializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpResourceModel))
+                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortResourceModel))
+                .Build()
+                .Serialize(obj);
+        }
+
+        private static T Deserialize<T>(string yaml)
+        {
+            return new DeserializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpResourceModel))
+                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortResourceModel))
+                .Build()
+                .Deserialize<T>(yaml);
         }
     }
 }

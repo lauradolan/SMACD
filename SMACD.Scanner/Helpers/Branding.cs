@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using Console = Colorful.Console;
 
-namespace SMACD.Scanner
+namespace SMACD.Scanner.Helpers
 {
     public static class Branding
     {

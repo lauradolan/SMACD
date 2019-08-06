@@ -1,11 +1,10 @@
 ﻿using Crayon;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SMACD.Scanner
+namespace SMACD.Scanner.Helpers
 {
     public static class TreeDump
     {
@@ -13,81 +12,105 @@ namespace SMACD.Scanner
         private const string _corner = " └─";
         private const string _vertical = " │ ";
         private const string _space = "   ";
-        
-        private static Type[] ValueOnlyTypes = new[] { typeof(string), typeof(TimeSpan) };
-        public static int MAX_WIDTH = 100;
+
+        private static Type[] ValueOnlyTypes = new[] { typeof(string), typeof(TimeSpan), typeof(DateTime) };
+        public static int MAX_WIDTH = Console.WindowWidth - 10;
+        public static int forcedPadding = 10;
+
+        private enum LineTypes { Normal, Collection, Minimal }
+        private static string GetLine(LineTypes type, string name, int dotsLength, string value)
+        {
+            string str = string.Empty;
+            if (type == LineTypes.Minimal)
+                str += new string(' ', name.Length + 1 + dotsLength);
+            else
+            {
+                IOutput baseColor;
+                // Numeric names  (indexes)  rendered purple
+                if (Int32.TryParse(name, out var dummy)) baseColor = Output.Magenta();
+                else baseColor = Output.White();
+
+                if (type == LineTypes.Collection) // underline collection names
+                    str += baseColor.Underline().Text(name) + " ";
+                else
+                    str += baseColor.Text(name) + " ";
+
+                str += Output.FromRgb(33, 33, 33).Text(new string('.', dotsLength)); 
+            }
+
+            if (value == null)
+                str += Output.Red().Text("<null>");
+            else
+                str += value;
+            return str;
+        }
 
         public static void Dump(object obj, string name = "", string indent = "", bool isLast = false)
         {
             var indentLen = indent.Length;
             indent = PrintNodeBase(indent, isLast);
 
+            // WRITE NULL CASE
             if (obj == null)
-                Console.WriteLine(
-                    Output.Underline().White().Text(name) +
-                    Output.FromRgb(33, 33, 33).Text(" " + new string('.', MAX_WIDTH - indent.Length - name.Length - 8) + " ") + // -8 covers spaces and '<null>'
-                    Output.Red().Dim().Text("<null>"));
+                Console.WriteLine(GetLine(LineTypes.Normal, name, MAX_WIDTH - indentLen - name.Length - 1 - "<null>".Length, null));
+
+            // RECURSE INTO COLLECTION CASE
             else if (obj.GetType().GetInterface(nameof(ICollection)) != null)
                 DumpCollection((ICollection)obj, name, indent, isLast);
+
+            // VALUE
             else if (ValueOnlyTypes.Contains(obj.GetType()) || obj.GetType().GetProperties().Length == 0)
             {
-
-                //var textWidth = MAX_WIDTH - indent.Length; // remove tree bits
-                //textWidth -= name.Length; // remove name
-                //textWidth -= _vertical.Length; // new line
-                //textWidth -= 10; // remove 10 more chars
+                var deadSpace = indentLen + 1 + name.Length + 1;
 
                 var renderedValue = obj.ToString();
-                //if (obj is string) renderedValue = $"\"{renderedValue}\"";
-                //var strings = ((string)renderedValue).WordWrap(textWidth).Split('\n');
+                if (obj is string) renderedValue = $"\"{renderedValue}\""; // format output value
 
-                //var topLine = new string('.', MAX_WIDTH - textWidth - 1 + name.Length);
-                //var nextLines = new string(' ', MAX_WIDTH - textWidth - 1 + name.Length + 10);
+                // LONG STRINGS
+                if (deadSpace + renderedValue.Length + 2 > MAX_WIDTH)
+                {
+                    var strings = ((string)renderedValue).WordWrap(
+                        MAX_WIDTH - deadSpace - 2 - forcedPadding).Split('\n');
 
-                //Console.Write(Output.Underline().White().Text(name) + " ");
-                //Console.WriteLine(Output.FromRgb(33, 33, 33).Text(topLine + " ") + strings.First());
-                //foreach (var str in strings.Skip(1))
-                //{
-                //    var fixedStr = str.Trim(' ', '\n', '\r', '\t');
-                //    if (string.IsNullOrEmpty(fixedStr)) continue;
-                //    for (int i = 0; i < indent.Length / 2 - 1; i++) Console.Write(_vertical);
-                //    //var wrapped = fixedStr.WordWrap(textWidth);
-                //    Console.WriteLine(nextLines + fixedStr);
-                //}
+                    var c = 0;
+                    foreach (var str in strings.Where(s => !string.IsNullOrEmpty(s)).Select(s => s.Trim('\r','\n','\t',' ')))
+                    {
+                        var middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - str.Length + 1;
+                        if (c++ == 0)
+                        {
+                            // <indent> <name> {...} <value>
+                            Console.WriteLine(GetLine(LineTypes.Normal, name, middleWidth, str));
+                        }
+                        else
+                        {
+                            Console.Write(indent);
+                            // <indent> <name> {   } <value>
+                            Console.WriteLine(GetLine(LineTypes.Minimal, name, middleWidth, str));
+                        }
+                    }
+                }
+                // NORMAL STRINGS
+                else
+                {
+                    var middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - renderedValue.Length + 1;
 
-                //else
-                //{
-                Console.WriteLine(
-                    Output.Underline().White().Text(name) +
-                    Output.FromRgb(33, 33, 33).Text(" " + new string('.', 64 - indent.Length - name.Length) + " ") +
-                    renderedValue);
-                //}
+                    var totalUsedSpace = deadSpace + renderedValue.Length;
+                    var freeSpace = MAX_WIDTH - totalUsedSpace;
+                    var dots = new string('.', freeSpace);
+                    Console.WriteLine(
+                        GetLine(LineTypes.Normal, name, middleWidth, renderedValue));
+                }
             }
+
+            // RECURSE INTO OBJECT
             else
                 DumpObject(obj, name, indent, isLast);
         }
 
-        private static List<string> GetLines(string str, int maxWidth)
-        {
-            if (str.Length < maxWidth) return new List<string>() { str };
-
-            var sentences = str.Split('\n').Except(new string[] { null });
-            var lines = new List<string>();
-            foreach (var sentence in sentences)
-            {
-                var tmpSentence = sentence;
-                while (tmpSentence.Length > maxWidth)
-                {
-                    lines.Add(tmpSentence.Substring(0, maxWidth));
-                    tmpSentence = tmpSentence.Substring(maxWidth);
-                }
-            }
-            return lines;
-        }
-
         private static void DumpCollection(ICollection obj, string name = "", string indent = "", bool isLast = false)
         {
-            Console.WriteLine(name);
+            Console.WriteLine(GetLine(LineTypes.Collection, name, 0, ""));
+            //Console.WriteLine(Output.Underline().White().Text(name));
             var c = 0; var l = obj.Count;
             foreach (var item in obj)
             {
@@ -101,7 +124,8 @@ namespace SMACD.Scanner
 
         private static void DumpObject(object obj, string name = "", string indent = "", bool isLast = false)
         {
-            Console.WriteLine(name);
+            Console.WriteLine(GetLine(LineTypes.Normal, name, 0, ""));
+            //Console.WriteLine(Output.Underline().White().Text(name));
             var properties = obj.GetType().GetProperties();
             foreach (var property in properties)
             {

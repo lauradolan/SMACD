@@ -3,12 +3,13 @@ using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
 using SMACD.Workspace;
+using SMACD.Scanner.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SMACD.CLITool.Verbs
+namespace SMACD.Scanner.Verbs
 {
     [Verb("generate", HelpText = "Generate a barebones sample Service Map")]
     public class GenerateVerb : VerbBase

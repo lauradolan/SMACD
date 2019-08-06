@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SMACD.CLITool
+namespace SMACD.Scanner.Helpers
 {
     internal class TaskIdEnricher : ILogEventEnricher
     {

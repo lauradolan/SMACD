@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SMACD.Workspace.Artifacts;
 using SMACD.Workspace.Libraries;
-using SMACD.Workspace.Tasks;
 using SMACD.Workspace.Triggers;
 using System;
 using System.Collections.Generic;
@@ -14,10 +13,6 @@ namespace SMACD.Workspace.Targets
     /// </summary>
     public class TriggerToolbox : WorkspaceToolbox
     {
-        public event EventHandler<TriggerDescriptor> TriggerRegistered;
-
-        private List<TriggerDescriptor> _triggers = new List<TriggerDescriptor>();
-
         internal TriggerToolbox(Workspace workspace) : base(workspace)
         {
             // Binding to these events means whenever one is fired, any Actions currently loaded
@@ -31,19 +26,10 @@ namespace SMACD.Workspace.Targets
             CurrentWorkspace.Tasks.TaskCompleted += (s, e) => { CurrentWorkspace.Tasks.EnqueueTasksTriggeredBy(SystemEvents.TaskCompleted); };
         }
 
-        /// <summary>
-        /// Register a Trigger
-        /// </summary>
-        /// <param name="triggerDescriptor">Item inheriting from TriggerDesc that describes the Target</param>
-        public void RegisterTrigger(TriggerDescriptor triggerDescriptor)
-        {
-            if (_triggers.Any(t => t == triggerDescriptor))
-            {
-                Logger.LogWarning("Trigger already registered");
-                return;
-            }
-            _triggers.Add(triggerDescriptor);
-        }
+        private List<TriggerDescriptor> Triggers =>
+            CurrentWorkspace.Libraries.LoadedActionDescriptors.SelectMany(d => d.TriggeredBy)
+            .Union(CurrentWorkspace.Libraries.LoadedServiceDescriptors.SelectMany(d => d.TriggeredBy))
+            .ToList();
 
         /// <summary>
         /// Get all Actions triggered by the execution of the given Action
@@ -51,7 +37,7 @@ namespace SMACD.Workspace.Targets
         /// <param name="triggeringAction">Triggering Actio</param>
         /// <returns></returns>
         public List<TriggerDescriptor> GetDescriptorsByTriggeringAction(string triggeringAction) =>
-            _triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.Action &&
+            Triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.Action &&
                                  t.TriggeringIdentifier == triggeringAction).ToList();
 
         /// <summary>
@@ -60,7 +46,7 @@ namespace SMACD.Workspace.Targets
         /// <param name="systemEvent">System event that triggers the Action</param>
         /// <returns></returns>
         public List<TriggerDescriptor> GetDescriptorsByTriggeringSystemAction(SystemEvents systemEvent) =>
-            _triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.System &&
+            Triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.System &&
                                  t.SystemEvent == systemEvent).ToList();
 
         /// <summary>
@@ -69,7 +55,7 @@ namespace SMACD.Workspace.Targets
         /// <param name="artifact">Artifact name and path which triggers the Action</param>
         /// <returns></returns>
         public List<TriggerDescriptor> GetDescriptorsByTriggeringArtifact(Artifact artifact) =>
-            _triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.Artifact &&
+            Triggers.Where(t => t.TriggerSource == Libraries.TriggerSources.Artifact &&
                                  t.TriggeringIdentifier == artifact.GetAddress()).ToList();
     }
 }

@@ -111,8 +111,15 @@ namespace SMACD.Workspace.Libraries
                 ImplementationAttribute pluginInformation = plugin.GetCustomAttribute<ImplementationAttribute>();
                 if (pluginInformation == null)
                 {
-                    Logger.LogCritical("Plugin defined in {0} does not have a PluginImplementation attribute!",
+                    Logger.LogCritical("Action defined in {0} does not have a Implementation attribute!",
                         plugin.Name);
+                    continue;
+                }
+
+                var instance = (ActionInstance)Activator.CreateInstance(plugin);
+                if (!instance.ValidateEnvironmentReadiness())
+                {
+                    Logger.LogCritical("Environment readiness checks failed for Extension {0}; skipping load", pluginInformation.FullIdentifier);
                     continue;
                 }
 

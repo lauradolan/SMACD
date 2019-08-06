@@ -1,6 +1,6 @@
 ﻿using Bogus;
 
-namespace SMACD.CLITool
+namespace SMACD.Scanner.Helpers
 {
     internal static class JargonGenerator
     {
