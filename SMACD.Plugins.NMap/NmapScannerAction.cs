@@ -60,10 +60,9 @@ namespace SMACD.Plugins.Nmap
         {
             using (var context = artifact.GetContext())
             {
-                var cmd = $"C:\\Progra~2\\Nmap\\nmap.exe ";
-                var cmd2 = $" --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                var cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
-                var wrapper = new ExecutionWrapper(cmd+cmd2);
+                var wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived +=
                     (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
@@ -94,6 +93,13 @@ namespace SMACD.Plugins.Nmap
             {
                 var start = xml.Root.Attributes("start").First().Value;
                 result.TimeOfExecution = DateTime.FromFileTime(long.Parse(start));
+
+                var addrChild =xml.Root.Descendants("address").FirstOrDefault();
+                if (addrChild == null)
+                {
+                    Logger.LogWarning("NMap report exists but does not contain any information about a remote host");
+                    return result;
+                }
 
                 var addr = xml.Root.Descendants("address").First().Attributes("addr").First().Value;
                 var ports = xml.Root.Descendants("ports").First();

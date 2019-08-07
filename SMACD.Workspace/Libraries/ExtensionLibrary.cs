@@ -58,9 +58,14 @@ namespace SMACD.Workspace.Libraries
         public List<ActionDescriptor> ActionsProvided { get; } = new List<ActionDescriptor>();
 
         /// <summary>
-        /// Services loaded from this Assembly
+        /// Services provided by this Assembly
         /// </summary>
         public List<ServiceDescriptor> Services { get; } = new List<ServiceDescriptor>();
+
+        /// <summary>
+        /// Services running
+        /// </summary>
+        public Dictionary<string, ServiceInstance> RunningServices { get; } = new Dictionary<string, ServiceInstance>();
 
         private ILogger Logger { get; }
 
@@ -95,7 +100,8 @@ namespace SMACD.Workspace.Libraries
                 Logger.LogCritical("Library does not contain metadata listing!");
                 throw new Exception($"Library {FileName} built without metadata interface");
             }
-
+            
+            // -- Process Metadata --
             ILibraryMetadata metadata = (ILibraryMetadata)Activator.CreateInstance(metadataType);
             Name = metadata.Name;
             Author = metadata.Author;
@@ -105,8 +111,9 @@ namespace SMACD.Workspace.Libraries
 
             Logger.LogDebug("Loaded Library {0} v{1} by {2}", Name, Version.ToString(2), Author);
 
-            IEnumerable<Type> extensions = Assembly.GetTypes().Where(t => typeof(ActionInstance).IsAssignableFrom(t));
-            foreach (Type plugin in extensions)
+            // -- Load Actions --
+            IEnumerable<Type> actionExtensions = Assembly.GetTypes().Where(t => typeof(ActionInstance).IsAssignableFrom(t));
+            foreach (Type plugin in actionExtensions)
             {
                 ImplementationAttribute pluginInformation = plugin.GetCustomAttribute<ImplementationAttribute>();
                 if (pluginInformation == null)
@@ -115,45 +122,57 @@ namespace SMACD.Workspace.Libraries
                         plugin.Name);
                     continue;
                 }
-
-                var instance = (ActionInstance)Activator.CreateInstance(plugin);
-                if (!instance.ValidateEnvironmentReadiness())
+                
+                if (!((ActionInstance)Activator.CreateInstance(plugin)).ValidateEnvironmentReadiness())
                 {
-                    Logger.LogCritical("Environment readiness checks failed for Extension {0}; skipping load", pluginInformation.FullIdentifier);
+                    Logger.LogCritical("Environment readiness checks failed for Action {0}; skipping load", pluginInformation.FullIdentifier);
                     continue;
                 }
 
-                List<TriggerDescriptor> triggering = plugin.GetCustomAttributes<TriggeredByAttribute>()
+                ActionsProvided.Add(new ActionDescriptor()
+                {
+                    FullActionId = pluginInformation.FullIdentifier,
+                    ActionInstanceType = plugin,
+                    TriggeredBy = GetItemsTriggering(plugin)
+                });
+                Logger.LogDebug("Loaded Action identifier '{0}'", pluginInformation.FullIdentifier);
+            }
+
+            // -- Load Services --
+            IEnumerable<Type> serviceExtensions = Assembly.GetTypes()
+                .Where(t => typeof(ServiceInstance).IsAssignableFrom(t));
+            foreach (Type plugin in serviceExtensions)
+            {
+                ImplementationAttribute pluginInformation = plugin.GetCustomAttribute<ImplementationAttribute>();
+                if (pluginInformation == null)
+                {
+                    Logger.LogCritical("Service defined in {0} does not have a Implementation attribute!",
+                        plugin.Name);
+                    continue;
+                }
+
+                var descriptor = new ServiceDescriptor()
+                {
+                    FullServiceId = pluginInformation.FullIdentifier,
+                    ServiceInstanceType = plugin,
+                    TriggeredBy = GetItemsTriggering(plugin)
+                };
+                
+                Logger.LogDebug("Loaded Service descriptor '{0}' (plugin not yet started)", pluginInformation.FullIdentifier);
+            }
+        }
+
+        public List<TriggerDescriptor> GetItemsTriggering(Type plugin) =>
+             plugin.GetCustomAttributes<TriggeredByAttribute>()
                     .Where(a => a.TriggerSource == TriggerSources.Action)
                     .Select(a => new TriggerDescriptor()
                     {
                         TriggerSource = TriggerSources.Action,
                         TriggeringIdentifier = a.Identifier,
                         DefaultOptionsOnCreation = a.Options,
-                        ActionIdentifierCreated = pluginInformation.FullIdentifier
+                        ActionIdentifierCreated = plugin.GetCustomAttribute<ImplementationAttribute>()
+                                                        .FullIdentifier
                     }).ToList();
 
-                if (pluginInformation.Role == ExtensionRoles.Service)
-                {
-                    Services.Add(new ServiceDescriptor()
-                    {
-                        FullServiceId = pluginInformation.FullIdentifier,
-                        ServiceInstanceType = plugin,
-                        TriggeredBy = triggering.ToList()
-                    });
-                    Logger.LogDebug("Loaded Service identifier '{0}'", pluginInformation.FullIdentifier);
-                }
-                else
-                {
-                    ActionsProvided.Add(new ActionDescriptor()
-                    {
-                        FullActionId = pluginInformation.FullIdentifier,
-                        ActionInstanceType = plugin,
-                        TriggeredBy = triggering.ToList()
-                    });
-                    Logger.LogDebug("Loaded Action identifier '{0}'", pluginInformation.FullIdentifier);
-                }
-            }
-        }
     }
 }

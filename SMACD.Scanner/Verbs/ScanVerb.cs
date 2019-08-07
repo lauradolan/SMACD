@@ -56,7 +56,7 @@ namespace SMACD.Scanner.Verbs
 
             // Register Extension Libraries
             workspace.Libraries.RegisterFromDirectory(Path.Combine(
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().FullName),
+                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
                 "plugins"), "SMACD.Plugins.*.dll");
 
             // Import Service Map

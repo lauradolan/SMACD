@@ -14,10 +14,6 @@ namespace SMACD.Scanner.Helpers
             string outputText;
             switch (type)
             {
-                case ExtensionRoles.Unknown:
-                    outputText = text;
-                    break;
-
                 case ExtensionRoles.Producer:
                     outputText = Output.Red().Text(text);
                     break;
@@ -26,7 +22,7 @@ namespace SMACD.Scanner.Helpers
                     outputText = Output.Green().Text(text);
                     break;
 
-                case ExtensionRoles.Decider:
+                case ExtensionRoles.Service:
                     outputText = Output.Yellow().Text(text);
                     break;
 

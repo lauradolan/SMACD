@@ -26,10 +26,24 @@ namespace SMACD.Workspace.Targets
             CurrentWorkspace.Tasks.TaskCompleted += (s, e) => { CurrentWorkspace.Tasks.EnqueueTasksTriggeredBy(SystemEvents.TaskCompleted); };
         }
 
+        private List<TriggerDescriptor> ManuallyRegisteredTriggers { get; } = new List<TriggerDescriptor>();
+
         private List<TriggerDescriptor> Triggers =>
             CurrentWorkspace.Libraries.LoadedActionDescriptors.SelectMany(d => d.TriggeredBy)
             .Union(CurrentWorkspace.Libraries.LoadedServiceDescriptors.SelectMany(d => d.TriggeredBy))
+            .Union(this.ManuallyRegisteredTriggers)
             .ToList();
+
+        /// <summary>
+        /// Register a TriggerDescriptor manually
+        /// </summary>
+        /// <param name="descriptor">Trigger descriptor</param>
+        public void RegisterManually(TriggerDescriptor descriptor)
+        {
+            if (Triggers.Contains(descriptor))
+                return;
+            ManuallyRegisteredTriggers.Add(descriptor);
+        }
 
         /// <summary>
         /// Get all Actions triggered by the execution of the given Action

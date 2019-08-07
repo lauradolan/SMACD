@@ -59,5 +59,10 @@ namespace SMACD.Workspace.Targets
         /// </summary>
         public Dictionary<string, string> Fields { get => Parameters; set => Parameters = value; }
         public Dictionary<string, string> Parameters { get; set; }
+
+        public override string ToString()
+        {
+            return $"HTTP {Method} {URL} ({Fields.Count} fields, {Headers.Count} headers)";
+        }
     }
 }

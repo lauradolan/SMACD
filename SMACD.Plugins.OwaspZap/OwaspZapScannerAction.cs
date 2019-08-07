@@ -8,6 +8,7 @@ using SMACD.Workspace.Customizations.Correlations;
 using SMACD.Workspace.Libraries.Attributes;
 using SMACD.Workspace.Targets;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -27,12 +28,25 @@ namespace SMACD.Plugins.OwaspZap
 
         public override ActionSpecificReport Execute()
         {
-            var nativePathArtifact = this.Workspace.Artifacts.CreateOrLoadNativePath("nmap_" + Target.TargetId);
-            RunScanner(nativePathArtifact);
-            var jsonReport = GetJsonObject(nativePathArtifact);
-            RunScorer(jsonReport);
+            try
+            {
+                var nativePathArtifact = this.Workspace.Artifacts.CreateOrLoadNativePath("nmap_" + Target.TargetId);
+                RunScanner(nativePathArtifact);
+                var jsonReport = GetJsonObject(nativePathArtifact);
+                if (jsonReport == null)
+                {
+                    Logger.LogCritical("OWASP ZAP Scanner did not produce a report; may have been a down service!");
+                    return new ZapJsonReport();
+                }
+                RunScorer(jsonReport);
 
-            return jsonReport;
+                return jsonReport;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogCritical(ex, "Error running OWASP ZAP Scanner");
+            }
+            return null;
         }
 
         private void RunScanner(NativeDirectoryArtifact nativePathArtifact)
@@ -87,6 +101,7 @@ namespace SMACD.Plugins.OwaspZap
                             {
                                 Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
                             }
+                            return report;
                         }
                     }
                     catch (Exception ex)
@@ -107,41 +122,66 @@ namespace SMACD.Plugins.OwaspZap
             foreach (var site in report.Site)
                 foreach (var alert in site.Alerts)
                 {
-                    var targets = alert.Instances.Select(i => new HttpTarget
+                    try
                     {
-                        ResourceLocatorAddress = i.Uri,
-                        ResourceAccessMode = i.Method,
-                        Fields = i.Param.Split(',').Select(set => Tuple.Create(set.Split('=')[0], set.Split('=')[1]))
-                            .ToDictionary(k => k.Item1, v => v.Item2)
-                    }).ToList();
-
-                    targets.ForEach(target =>
-                    {
-                        HttpTarget targetDescriptor;
-                        var existingTarget = Workspace.Targets.RegisteredTargets.FirstOrDefault(r =>
-                            r.Value.IsApproximateTo(ApproximationScopes.Host | ApproximationScopes.Port | ApproximationScopes.ResourceLocatorAddress, target));
-                        if (existingTarget.Key == null) // new target
-                        {
-                            Workspace.Targets.RegisterTarget(target);
-                            targetDescriptor = target;
-                        }
-                        else
-                            targetDescriptor = existingTarget.Value as HttpTarget;
-
-                        Workspace.Correlations()
-                            .WithHost(targetDescriptor.RemoteHost)
-                            .Vulnerabilities
-                            .AddVulnerability(new Vulnerability
+                        var targets = alert.Instances.Select(i => {
+                            var target = new HttpTarget
                             {
-                                Target = target,
-                                Confidence = (Vulnerability.Confidences)alert.Confidence,
-                                RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
-                                Description = alert.Desc,
-                                Occurrences = alert.Instances.Count(),
-                                Remedy = alert.Solution,
-                                ShortName = alert.Name
-                            });
-                    });
+                                ResourceLocatorAddress = i.Uri,
+                                ResourceAccessMode = i.Method,
+                                Fields = new Dictionary<string, string>()
+                            };
+                            var paramsSplit = i.Param.Split(',');
+                            foreach (var param in paramsSplit)
+                            {
+                                if (param.Contains('='))
+                                    target.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
+                                else
+                                    target.Fields.Add(param, string.Empty);
+                            }
+                            return target;
+                        }).ToList();
+
+                        targets.ForEach(target =>
+                        {
+                            if (target == null)
+                            {
+                                Logger.LogWarning("Created Target is not valid! Skipping...");
+                                return;
+                            }
+
+                            HttpTarget targetDescriptor;
+                            var existingTarget = Workspace.Targets.RegisteredTargets.FirstOrDefault(r =>
+                                r.Value.IsApproximateTo(ApproximationScopes.Host | ApproximationScopes.Port | ApproximationScopes.ResourceLocatorAddress, target));
+                            if (existingTarget.Equals(default(KeyValuePair<string, TargetDescriptor>))) // new target
+                            {
+                                var newTargetName = $"{((HttpTarget)target).Method}__{((HttpTarget)target).URL}__{new Random((int)DateTime.Now.Ticks).Next(9999, Int32.MaxValue)}";
+                                target.TargetId = System.Text.RegularExpressions.Regex.Replace(newTargetName, "^[a-zA-Z0-9-_]", "");
+                                Workspace.Targets.RegisterTarget(target);
+                                targetDescriptor = target;
+                            }
+                            else
+                                targetDescriptor = existingTarget.Value as HttpTarget;
+
+                            Workspace.Correlations()
+                                .WithHost(targetDescriptor.RemoteHost)
+                                .Vulnerabilities
+                                .AddVulnerability(new Vulnerability
+                                {
+                                    Target = target,
+                                    Confidence = (Vulnerability.Confidences)alert.Confidence,
+                                    RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
+                                    Description = alert.Desc,
+                                    Occurrences = alert.Instances.Count(),
+                                    Remedy = alert.Solution,
+                                    ShortName = alert.Name
+                                });
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogCritical(ex, "Error running correlations for scanner task");
+                    }
                 }
             // TODO: Migrate HTML report into AzDO plugin?
         }

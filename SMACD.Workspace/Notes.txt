@@ -2,7 +2,6 @@
 - Actions
 -- Producers
 -- Consumers
--- Deciders
 - Artifacts
 -- NativeDirectoryArtifact
 --- NativeDirectoryContext

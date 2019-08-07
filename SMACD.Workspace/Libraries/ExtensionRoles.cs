@@ -5,11 +5,10 @@
     /// </summary>
     public enum ExtensionRoles
     {
-        Unknown,
         Producer,
         Consumer,
-        Decider,
-        Service
+        Service,
+        Unknown
     }
 
     /// <summary>

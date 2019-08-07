@@ -28,6 +28,11 @@ namespace SMACD.Workspace
         public LibraryToolbox Libraries { get; }
 
         /// <summary>
+        /// Services running in the system
+        /// </summary>
+        public ServiceToolbox Services { get; }
+
+        /// <summary>
         /// Targets available to act upon, and registration for new Targets
         /// </summary>
         public TargetToolbox Targets { get; }
@@ -70,6 +75,8 @@ namespace SMACD.Workspace
             Libraries = new LibraryToolbox(this);
             Tasks = new TaskToolbox(this);
             Triggers = new TriggerToolbox(this);
+
+            Services = new ServiceToolbox(this);
         }
 
         internal class WorkspaceSaveStructure

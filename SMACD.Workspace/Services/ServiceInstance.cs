@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using SMACD.Workspace.Actions;
 using System;
 
 namespace SMACD.Workspace.Services
@@ -33,6 +34,13 @@ namespace SMACD.Workspace.Services
         }
 
         public abstract void Initialize();
+
+        /// <summary>
+        /// Validate that the running environment supports the Action; this could involve
+        ///   ensuring certain applications (such as Docker) are installed and available
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool ValidateEnvironmentReadiness() => true;
     }
 
     public class SystemEventPalette

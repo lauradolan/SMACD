@@ -21,5 +21,10 @@ namespace SMACD.Workspace.Targets
         /// Target port
         /// </summary>
         public int Port { get; set; }
+
+        public override string ToString()
+        {
+            return $"RAW {RemoteHost}:{Protocol.ToString().ToUpper()}/{Port}";
+        }
     }
 }

@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <!--<ItemGroup>
+    <None Remove="Plugins\Newtonsoft.Json.dll" />
+  </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Debug\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -12,13 +16,10 @@
     <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="28.0.2" />
@@ -40,9 +41,17 @@
     <ProjectReference Include="..\SMACD.Workspace\SMACD.Workspace.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Plugins\" />
-  </ItemGroup>
+  <!--<ItemGroup>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\SMACD.Plugins.AzureDevOps.dll" Link="Plugins\SMACD.Plugins.AzureDevOps.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
+    <EmbeddedResource Include="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>-->
 
   <ItemGroup>
     <None Update="sample.yaml">
@@ -50,4 +59,38 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Plugins\" />
+  </ItemGroup>
+
+  <!-- <ItemGroup Condition=" '$(Configuration)' == 'Debug' "> -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Debug\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <!-- 
+  <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Release\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Release\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Release\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Release\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup> -->
 </Project>
