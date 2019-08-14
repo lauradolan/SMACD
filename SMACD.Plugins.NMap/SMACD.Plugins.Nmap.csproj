@@ -8,11 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.ScannerEngine\SMACD.ScannerEngine.csproj" />
+    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\SMACD.SDK\SMACD.SDK.csproj" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\SMACD.CLITool\bin\Debug\netcoreapp2.2\&quot;" />
-  </Target>
 
 </Project>

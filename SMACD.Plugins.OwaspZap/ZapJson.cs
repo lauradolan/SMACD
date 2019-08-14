@@ -1,11 +1,20 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SMACD.Artifacts;
+using SMACD.SDK;
+using System.Collections.Generic;
 
 namespace SMACD.Plugins.OwaspZap
 {
-    public class ZapJsonReport
+    public class ZapJsonReport : ExtensionReport
     {
         public IEnumerable<ZapJsonSite> Site { get; set; }
+
+        public ZapJsonReport(Artifact root) : base("owaspzap", root) { }
+
+        public override string GetReportContent()
+        {
+            return "";
+        }
     }
 
     public class ZapJsonSite
