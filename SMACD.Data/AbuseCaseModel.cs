@@ -25,6 +25,6 @@ namespace SMACD.Data
         /// <summary>
         ///     Plugins that can be used to scan for this abuse case
         /// </summary>
-        public IList<PluginPointerModel> PluginPointers { get; set; } = new List<PluginPointerModel>();
+        public IList<ActionPointerModel> Actions { get; set; } = new List<ActionPointerModel>();
     }
 }

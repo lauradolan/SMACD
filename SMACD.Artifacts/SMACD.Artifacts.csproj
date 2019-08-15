@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="YamlDotNet" Version="6.1.1" />
+    <PackageReference Include="SharpSerializer" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
   </ItemGroup>
 
 </Project>
