@@ -27,8 +27,20 @@ namespace SMACD.ScanEngine
 
         private readonly Dictionary<string, Type> _actionExtensions = new Dictionary<string, Type>();
         private readonly Dictionary<TriggerDescriptor, List<Type>> _reactionExtensions = new Dictionary<TriggerDescriptor, List<Type>>();
+
+        /// <summary>
+        /// ActionExtensions provided by library
+        /// </summary>
         public ReadOnlyDictionary<string, Type> ActionExtensions => new ReadOnlyDictionary<string, Type>(_actionExtensions);
+
+        /// <summary>
+        /// ReactionExtensions grouped by Trigger requirement
+        /// </summary>
         public ReadOnlyDictionary<TriggerDescriptor, List<Type>> ReactionExtensions => new ReadOnlyDictionary<TriggerDescriptor, List<Type>>(_reactionExtensions);
+
+        /// <summary>
+        /// Types defined in the library Assembly
+        /// </summary>
         public List<Type> ProvidedTypes => _actionExtensions.Values.Select(v => v)
             .Union(_reactionExtensions.Values.SelectMany(v => v)).ToList();
 

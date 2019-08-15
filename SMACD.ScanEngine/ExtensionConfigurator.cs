@@ -9,8 +9,18 @@ using System.Reflection;
 
 namespace SMACD.ScanEngine
 {
+    /// <summary>
+    /// Configure Extensions
+    /// </summary>
     public static class ExtensionConfigurator
     {
+        /// <summary>
+        /// Configure an ActionExtension
+        /// </summary>
+        /// <param name="extension">ActionExtension to configure</param>
+        /// <param name="artifactRoot">Artifact representing target</param>
+        /// <param name="options">ActionExtension options</param>
+        /// <returns></returns>
         public static ActionExtension Configure(
             this ActionExtension extension,
             Artifact artifactRoot,
@@ -21,7 +31,12 @@ namespace SMACD.ScanEngine
             ConfigureArtifactProperty(extension, artifactRoot);
             return extension;
         }
-
+        
+        /// <summary>
+        /// Configure a ReactionExtension
+        /// </summary>
+        /// <param name="extension">ReactionExtension to configure</param>
+        /// <returns></returns>
         public static ReactionExtension Configure(
             this ReactionExtension extension)
         {

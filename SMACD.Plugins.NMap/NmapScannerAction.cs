@@ -5,7 +5,6 @@ using SMACD.SDK;
 using SMACD.SDK.Attributes;
 using SMACD.SDK.Extensions;
 using System;
-using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -27,7 +26,7 @@ namespace SMACD.Plugins.Nmap
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
             string targetIpAddress = Host.IpAddress;
-            NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("nmap_" + Host.IpAddress);
+            var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
             RunSingleTarget(nativePathArtifact, targetIpAddress);
 
             XDocument scanXml = GetScanXml(nativePathArtifact);
@@ -52,6 +51,7 @@ namespace SMACD.Plugins.Nmap
 
         private void RunSingleTarget(NativeDirectoryArtifact artifact, string targetIp)
         {
+
             using (NativeDirectoryContext context = artifact.GetContext())
             {
 //                string cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
@@ -82,7 +82,7 @@ namespace SMACD.Plugins.Nmap
 
         private NmapRunReport ScoreSingleTarget(XDocument xml)
         {
-            NmapRunReport result = new NmapRunReport(Host);
+            NmapRunReport result = new NmapRunReport();
             try
             {
                 string start = xml.Root.Attributes("start").First().Value;
@@ -118,7 +118,7 @@ namespace SMACD.Plugins.Nmap
                         });
 
                         Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)int.Parse(conf);
-                        ((IList)result.Vulnerabilities).Add(new Vulnerability
+                        result.Vulnerabilities.Add(new Vulnerability
                         {
                             Confidence = confidenceEnum,
                             RiskLevel = Vulnerability.RiskLevels.Informational,

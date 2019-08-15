@@ -7,12 +7,18 @@ namespace SMACD.Artifacts
 {
     public class HostArtifact : Artifact
     {
+        /// <summary>
+        /// Artifact Identifier
+        /// </summary>
         public override string Identifier => Hostname;
 
         private string hostname;
         private string ipAddress;
         private readonly ObservableCollection<string> aliases = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Name of Host
+        /// </summary>
         public string Hostname
         {
             get => hostname;
@@ -28,6 +34,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// IP Address of Host
+        /// </summary>
         public string IpAddress
         {
             get => ipAddress;
@@ -43,6 +52,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Aliases belonging to this Host
+        /// </summary>
         public ObservableCollection<string> Aliases => aliases;
 
         public HostArtifact()
@@ -50,6 +62,11 @@ namespace SMACD.Artifacts
             aliases.CollectionChanged += (s, e) => NotifyChanged();
         }
 
+        /// <summary>
+        /// Get a TCP port/service by its port number
+        /// </summary>
+        /// <param name="port">TCP Port number</param>
+        /// <returns></returns>
         public ServicePortArtifact this[int port]
         {
             get
@@ -93,6 +110,12 @@ namespace SMACD.Artifacts
                 Children.Add(value);
             }
         }
+
+        /// <summary>
+        /// Get a port/service by its port number and type
+        /// </summary>
+        /// <param name="protocolAndport">Protocol and port, i.e. Tcp/80</param>
+        /// <returns></returns>
         public ServicePortArtifact this[string protocolAndport]
         {
             get

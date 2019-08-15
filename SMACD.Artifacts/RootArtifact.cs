@@ -9,14 +9,33 @@ namespace SMACD.Artifacts
 {
     public class RootArtifact : Artifact
     {
+        /// <summary>
+        /// Artifact Identifier
+        /// </summary>
         public override string Identifier => "_root_";
 
+        /// <summary>
+        /// Fired when an Artifact belonging to this tree
+        /// </summary>
         public event ArtifactEventDelegate ArtifactCreated;
+
+        /// <summary>
+        /// Fired when the data of an Artifact changes
+        /// </summary>
         public event ArtifactEventDelegate ArtifactChanged;
+
+        /// <summary>
+        /// Fired when an Artifact is added to a given Artifact
+        /// </summary>
         public event ArtifactEventDelegate ArtifactChildAdded;
 
         public delegate void ArtifactEventDelegate(Artifact newOrModifiedArtifact, List<Artifact> path);
 
+        /// <summary>
+        /// Hostname or IP of resource
+        /// </summary>
+        /// <param name="hostNameOrIp">Hostname/IP</param>
+        /// <returns></returns>
         public HostArtifact this[string hostNameOrIp]
         {
             get
@@ -110,28 +129,6 @@ namespace SMACD.Artifacts
         internal void InvokeArtifactChildAdded(Artifact newChild, List<Artifact> path)
         {
             ArtifactChildAdded?.Invoke(newChild, path);
-        }
-
-        private delegate IPHostEntry GetHostEntryHandler(string ip);
-        private static IPHostEntry GetReverseDns(string ip, int timeout)
-        {
-            try
-            {
-                GetHostEntryHandler callback = new GetHostEntryHandler(Dns.GetHostEntry);
-                IAsyncResult result = callback.BeginInvoke(ip, null, null);
-                if (result.AsyncWaitHandle.WaitOne(timeout, false))
-                {
-                    return callback.EndInvoke(result);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }

@@ -8,9 +8,20 @@ namespace SMACD.ScanEngine
 {
     public class Session
     {
+        /// <summary>
+        /// Task queue
+        /// </summary>
         public TaskToolbox Tasks { get; }
+
+        /// <summary>
+        /// Artifact tree root
+        /// </summary>
         public RootArtifact Artifacts { get; }
 
+        /// <summary>
+        /// Scanning session
+        /// </summary>
+        /// <param name="rootArtifact">Root artifact</param>
         public Session(RootArtifact rootArtifact = null)
         {
             ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(

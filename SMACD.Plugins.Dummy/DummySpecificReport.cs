@@ -9,8 +9,6 @@ namespace SMACD.Plugins.Dummy
         public string DummyString { get; set; }
         public DummyDataClass Data { get; set; }
 
-        public DummySpecificReport(Artifact root) : base("dummy", root) { }
-
         public override string GetReportContent()
         {
             return "This is a dummy component used for testing.\n" +

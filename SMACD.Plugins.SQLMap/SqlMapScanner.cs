@@ -62,13 +62,13 @@ namespace SMACD.Plugins.SQLMap
 
                 if (!File.Exists(context.DirectoryWithFile("log")))
                 {
-                    return new SqlMapReport(Url);
+                    return new SqlMapReport();
                 }
 
                 logFile = File.ReadAllText(context.DirectoryWithFile("log"));
             }
 
-            SqlMapReport report = new SqlMapReport(Url);
+            SqlMapReport report = new SqlMapReport();
             List<string> issues = logFile.Split("---").Skip(1).ToList(); // first line is summary
 
             foreach (string issue in issues)

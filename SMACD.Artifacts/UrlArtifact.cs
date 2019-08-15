@@ -7,11 +7,17 @@ namespace SMACD.Artifacts
 {
     public class UrlArtifact : Artifact
     {
+        /// <summary>
+        /// Artifact Identifier
+        /// </summary>
         public override string Identifier => $"{(Method == null ? "" : $"{Method} ")}{UrlSegment}";
 
         private HttpMethod method = null;
         private string urlSegment;
 
+        /// <summary>
+        /// HTTP method used to access URL
+        /// </summary>
         public HttpMethod Method
         {
             get => method;
@@ -22,6 +28,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// URL Segment (file/directory)
+        /// </summary>
         public string UrlSegment
         {
             get => urlSegment;
@@ -32,6 +41,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Requests which can be made against this URL
+        /// </summary>
         public ObservableCollection<UrlRequestArtifact> Requests { get; set; } = new ObservableCollection<UrlRequestArtifact>();
 
         public UrlArtifact()
@@ -39,6 +51,11 @@ namespace SMACD.Artifacts
             Requests.CollectionChanged += (s, e) => NotifyChanged();
         }
 
+        /// <summary>
+        /// Get a child URL segment
+        /// </summary>
+        /// <param name="urlSegment">URL segment</param>
+        /// <returns></returns>
         public UrlArtifact this[string urlSegment]
         {
             get
@@ -59,6 +76,11 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Get entire URL from all segments (assuming this item is the last URL segment)
+        /// </summary>
+        /// <param name="url">Built URL</param>
+        /// <returns></returns>
         public string GetUrl(string url = null)
         {
             url = "/" + UrlSegment + url;

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SMACD.Artifacts;
 using SMACD.SDK;
 using System.Collections.Generic;
 
@@ -8,8 +7,6 @@ namespace SMACD.Plugins.OwaspZap
     public class ZapJsonReport : ExtensionReport
     {
         public IEnumerable<ZapJsonSite> Site { get; set; }
-
-        public ZapJsonReport(Artifact root) : base("owaspzap", root) { }
 
         public override string GetReportContent()
         {

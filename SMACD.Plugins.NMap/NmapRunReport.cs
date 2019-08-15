@@ -12,8 +12,6 @@ namespace SMACD.Plugins.Nmap
         public List<NmapPort> Ports { get; set; } = new List<NmapPort>();
         public List<Vulnerability> Vulnerabilities { get; set; } = new List<Vulnerability>();
 
-        public NmapRunReport(Artifact artifactRoot) : base("nmap", artifactRoot) { }
-
         public override string GetReportContent()
         {
             StringBuilder sb = new StringBuilder();

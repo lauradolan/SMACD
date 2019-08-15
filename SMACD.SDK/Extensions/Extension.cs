@@ -6,7 +6,18 @@ namespace SMACD.SDK.Extensions
     public abstract class Extension
     {
         protected ILogger Logger { get; private set; }
+
+        /// <summary>
+        /// Initialize Extension; called on instantiation
+        /// </summary>
         public virtual void Initialize() { }
+
+        /// <summary>
+        /// Validate the running environment is compatible with the Extension
+        /// 
+        /// This is called when the containing library is loaded.
+        /// </summary>
+        /// <returns></returns>
         public virtual bool ValidateEnvironmentReadiness()
         {
             return true;

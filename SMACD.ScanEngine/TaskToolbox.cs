@@ -43,6 +43,10 @@ namespace SMACD.ScanEngine
         /// If the Task queue is running (has any elements)
         /// </summary>
         public bool IsRunning => RunningTasks.Any() || QueuedTasks.Any();
+
+        /// <summary>
+        /// Number of tasks running and queued
+        /// </summary>
         public int Count => RunningTasks.Count + QueuedTasks.Count;
 
         protected ILogger Logger { get; } = Global.LogFactory.CreateLogger("TaskToolbox");
@@ -93,7 +97,7 @@ namespace SMACD.ScanEngine
                         result = actionInstance.Act();
                         if (result == null)
                         {
-                            result = ExtensionReport.Blank(descriptor.ActionId, descriptor.ArtifactRoot, descriptor.Options);
+                            result = ExtensionReport.Blank();
                         }
 
                         result.TaskDescriptor = queuedTaskDescriptor;
@@ -110,11 +114,7 @@ namespace SMACD.ScanEngine
                     {
                         Logger.LogCritical(ex, "Error running Action");
                         TaskFaulted?.Invoke(this, queuedTaskDescriptor);
-                        result = ExtensionReport.Error(
-                            queuedTaskDescriptor.ActionId,
-                            ex,
-                            queuedTaskDescriptor.ArtifactRoot,
-                            queuedTaskDescriptor.Options);
+                        result = ExtensionReport.Error(ex);
                         result.TaskDescriptor = queuedTaskDescriptor;
 
                         if (actionInstance != null) // only trigger if there isn't a resolution failure
@@ -132,10 +132,7 @@ namespace SMACD.ScanEngine
 
                     if (result == null)
                     {
-                        result = ExtensionReport.Blank(
-                            queuedTaskDescriptor.ActionId,
-                            queuedTaskDescriptor.ArtifactRoot,
-                            queuedTaskDescriptor.Options);
+                        result = ExtensionReport.Blank();
                     }
 
                     queuedTaskDescriptor.Result = result;

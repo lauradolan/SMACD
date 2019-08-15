@@ -5,6 +5,11 @@ namespace SMACD.Artifacts
 {
     public class HttpServicePortArtifact : ServicePortArtifact
     {
+        /// <summary>
+        /// Get a URL segment (single file or directory)
+        /// </summary>
+        /// <param name="urlSegment">Part of URL</param>
+        /// <returns></returns>
         public UrlArtifact this[string urlSegment]
         {
             get

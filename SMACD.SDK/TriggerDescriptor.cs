@@ -7,27 +7,39 @@ namespace SMACD.SDK
 {
     public class TriggerDescriptor
     {
-        public bool Inherit { get; }
-
-        public static ArtifactTriggerDescriptor ArtifactTrigger(string artifactPath, ArtifactTrigger trigger, bool inherit = false)
+        /// <summary>
+        /// Create an artifact-based trigger
+        /// </summary>
+        /// <param name="artifactPath">Artifact path</param>
+        /// <param name="trigger">Trigger operation</param>
+        /// <returns></returns>
+        public static ArtifactTriggerDescriptor ArtifactTrigger(string artifactPath, ArtifactTrigger trigger)
         {
-            return new ArtifactTriggerDescriptor(artifactPath, trigger, inherit);
+            return new ArtifactTriggerDescriptor(artifactPath, trigger);
         }
 
-        public static ExtensionTriggerDescriptor ExtensionTrigger(string extensionIdentifier, ExtensionConditionTrigger trigger, bool inherit = false)
+        /// <summary>
+        /// Create an extension-based trigger
+        /// </summary>
+        /// <param name="extensionIdentifier">Extension identifier</param>
+        /// <param name="trigger">Extension execution condition</param>
+        /// <returns></returns>
+        public static ExtensionTriggerDescriptor ExtensionTrigger(string extensionIdentifier, ExtensionConditionTrigger trigger)
         {
-            return new ExtensionTriggerDescriptor(extensionIdentifier, trigger, inherit);
+            return new ExtensionTriggerDescriptor(extensionIdentifier, trigger);
         }
 
-        public static SystemEventTriggerDescriptor SystemEventTrigger(SystemEvents trigger, bool inherit = false)
+        /// <summary>
+        /// Create a trigger activated by a SystemEvent
+        /// </summary>
+        /// <param name="trigger">System event</param>
+        /// <returns></returns>
+        public static SystemEventTriggerDescriptor SystemEventTrigger(SystemEvents trigger)
         {
-            return new SystemEventTriggerDescriptor(trigger, inherit);
+            return new SystemEventTriggerDescriptor(trigger);
         }
 
-        protected TriggerDescriptor(bool inherit)
-        {
-            Inherit = inherit;
-        }
+        protected TriggerDescriptor(){}
 
         public override bool Equals(object obj)
         {
@@ -45,12 +57,18 @@ namespace SMACD.SDK
             return base.GetHashCode();
         }
 
-        public bool PathMatches(Artifact triggeringArtifact, string path)
+        /// <summary>
+        /// Check if the Artifact's path matches the given path
+        /// </summary>
+        /// <param name="triggeringArtifact">Artifact</param>
+        /// <param name="path">Path to check against</param>
+        /// <returns></returns>
+        public static bool PathMatches(Artifact triggeringArtifact, string path)
         {
             return RecurseMatch(triggeringArtifact, path.Split("|;|").ToList());
         }
 
-        private bool RecurseMatch(Artifact artifact, List<string> pathElements)
+        private static bool RecurseMatch(Artifact artifact, List<string> pathElements)
         {
             string nextEl = pathElements.First();
             List<string> nextElements = new List<string>();
@@ -72,9 +90,14 @@ namespace SMACD.SDK
             return false;
         }
 
-        public string GeneratePath(Artifact a)
+        /// <summary>
+        /// Generate the path for a given artifact
+        /// </summary>
+        /// <param name="artifact">Artifact</param>
+        /// <returns></returns>
+        public string GeneratePath(Artifact artifact)
         {
-            List<Artifact> fullPath = a.GetPathToRoot();
+            List<Artifact> fullPath = artifact.GetPathToRoot();
             IEnumerable<Artifact> partialPath = fullPath.Where(p => !(p is RootArtifact || p is HostArtifact));
             return string.Join("|;|", partialPath.Select(i => i.Identifier));
         }
@@ -88,10 +111,22 @@ namespace SMACD.SDK
     }
     public class ArtifactTriggerDescriptor : TriggerDescriptor
     {
+        /// <summary>
+        /// Path to Artifact
+        /// </summary>
         public string ArtifactPath { get; set; }
+
+        /// <summary>
+        /// Artifact operation causing trigger
+        /// </summary>
         public ArtifactTrigger Trigger { get; set; }
 
-        public ArtifactTriggerDescriptor(string artifactPath, ArtifactTrigger trigger, bool inherit = false) : base(inherit)
+        /// <summary>
+        /// Create a descriptor for a trigger activated by an operation on an Artifact
+        /// </summary>
+        /// <param name="artifactPath">Artifact path</param>
+        /// <param name="trigger">Triggering operation</param>
+        public ArtifactTriggerDescriptor(string artifactPath, ArtifactTrigger trigger)
         {
             ArtifactPath = artifactPath;
             Trigger = trigger;
@@ -134,7 +169,12 @@ namespace SMACD.SDK
         public string ExtensionIdentifier { get; set; }
         public ExtensionConditionTrigger Trigger { get; set; }
 
-        public ExtensionTriggerDescriptor(string extensionIdentifier, ExtensionConditionTrigger trigger, bool inherit = false) : base(inherit)
+        /// <summary>
+        /// Create a descriptor for a trigger activated by execution of an Extension
+        /// </summary>
+        /// <param name="extensionIdentifier">Artifact path</param>
+        /// <param name="trigger">Triggering operation</param>
+        public ExtensionTriggerDescriptor(string extensionIdentifier, ExtensionConditionTrigger trigger)
         {
             ExtensionIdentifier = extensionIdentifier;
             Trigger = trigger;
@@ -176,9 +216,16 @@ namespace SMACD.SDK
     }
     public class SystemEventTriggerDescriptor : TriggerDescriptor
     {
+        /// <summary>
+        /// System event trigger
+        /// </summary>
         public SystemEvents SystemEvent { get; set; }
 
-        public SystemEventTriggerDescriptor(SystemEvents systemEvent, bool inherit = false) : base(inherit)
+        /// <summary>
+        /// Create a descriptor for a trigger activated by a System Event
+        /// </summary>
+        /// <param name="systemEvent">Triggering system event</param>
+        public SystemEventTriggerDescriptor(SystemEvents systemEvent)
         {
             SystemEvent = systemEvent;
         }

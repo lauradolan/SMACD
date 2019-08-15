@@ -10,8 +10,6 @@ namespace SMACD.Plugins.SQLMap
     {
         public List<SqlMapInjectionVector> InjectionVectors { get; set; } = new List<SqlMapInjectionVector>();
 
-        public SqlMapReport(Artifact root) : base("sqlmap", root) { }
-
         public override string GetReportContent()
         {
             if (!InjectionVectors.Any())

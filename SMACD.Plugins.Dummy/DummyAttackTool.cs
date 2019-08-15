@@ -121,7 +121,7 @@ namespace SMACD.Plugins.Dummy
             byte[] randomData = new byte[32];
             random.NextBytes(randomData);
 
-            return new DummySpecificReport(Host)
+            return new DummySpecificReport()
             {
                 Data = new DummyDataClass()
                 {

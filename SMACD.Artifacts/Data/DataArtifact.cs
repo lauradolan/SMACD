@@ -8,8 +8,14 @@ namespace SMACD.Artifacts.Data
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
+        /// <summary>
+        /// Pointer to a function which takes a type name and returns a Type object (based on plugin assemblies)
+        /// </summary>
         public static Func<string, Type> ResolveType { get; set; } = new Func<string, Type>((s) => null);
 
+        /// <summary>
+        /// Artifact identifier
+        /// </summary>
         public override string Identifier => Name;
 
         /// <summary>
@@ -23,7 +29,7 @@ namespace SMACD.Artifacts.Data
         public byte[] StoredData { get; set; }
 
         /// <summary>
-        /// Get a child Artifact
+        /// Get a DataArtifact child instance by its name
         /// </summary>
         /// <param name="artifactName">Artifact name</param>
         /// <returns></returns>
@@ -49,7 +55,7 @@ namespace SMACD.Artifacts.Data
         }
 
         /// <summary>
-        /// Get the Artifact cast as a specific Artifact type
+        /// Get the Artifact cast as a specific DataArtifact type
         /// </summary>
         /// <typeparam name="T">Artifact type</typeparam>
         /// <returns></returns>

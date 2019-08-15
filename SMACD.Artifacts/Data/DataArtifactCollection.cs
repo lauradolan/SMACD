@@ -19,7 +19,10 @@ namespace SMACD.Artifacts.Data
         /// </summary>
         public static event EventHandler<Artifact> ArtifactChanged;
 
-        public override string Identifier => "Data Artifacts";
+        /// <summary>
+        /// Artifact Identifier for path
+        /// </summary>
+        public override string Identifier => ".data.";
 
         public DataArtifact this[string name] => (DataArtifact)Children.FirstOrDefault(c => c.Identifier == name);
 

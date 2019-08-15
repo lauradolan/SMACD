@@ -38,7 +38,7 @@ namespace SMACD.Plugins.OwaspZap
                 if (jsonReport == null)
                 {
                     Logger.LogCritical("OWASP ZAP Scanner did not produce a report; may have been a down service!");
-                    return new ZapJsonReport(HttpService);
+                    return new ZapJsonReport();
                 }
                 RunScorer(jsonReport);
 

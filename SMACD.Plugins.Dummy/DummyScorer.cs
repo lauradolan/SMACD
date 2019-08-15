@@ -34,8 +34,8 @@ namespace SMACD.Plugins.Dummy
             // Artifacts can be retrieved with strong typing
             DummyDataClass stronglyTyped = Host.Attachments["dummyResult"].As<ObjectArtifact>().Get<DummyDataClass>();
 
-            // If there is no report to include, just use Blank()
-            return ExtensionReport.Blank("dummyReaction", Host);
+            // If there is no report to include, just use Blank() or return null
+            return ExtensionReport.Blank();
         }
     }
 }

@@ -4,7 +4,14 @@ namespace SMACD.Artifacts
 {
     public class ServicePortArtifact : Artifact
     {
+        /// <summary>
+        /// Artifact Identifier
+        /// </summary>
         public override string Identifier => $"{Protocol}/{Port}";
+
+        /// <summary>
+        /// Hostname/IP of this Service
+        /// </summary>
         public HostArtifact Host => (HostArtifact)Parent;
 
         private int port;
@@ -12,6 +19,9 @@ namespace SMACD.Artifacts
         private string serviceName;
         private string serviceBanner;
 
+        /// <summary>
+        /// Port Protocol Type
+        /// </summary>
         public ProtocolType Protocol
         {
             get => protocol;
@@ -22,6 +32,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Port number
+        /// </summary>
         public int Port
         {
             get => port;
@@ -32,6 +45,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Service name
+        /// </summary>
         public string ServiceName
         {
             get => serviceName;
@@ -42,6 +58,9 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        /// Service banner
+        /// </summary>
         public string ServiceBanner
         {
             get => serviceBanner;
