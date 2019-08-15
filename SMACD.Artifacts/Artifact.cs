@@ -54,7 +54,7 @@ namespace SMACD.Artifacts
         {
             if (!(this is DataArtifactCollection))
             {
-                Attachments = new DataArtifactCollection();
+                Attachments = new DataArtifactCollection() { Parent = this };
             }
 
             NotifyCreated();
@@ -78,6 +78,30 @@ namespace SMACD.Artifacts
             Parent = null;
             foreach (var child in Children)
                 child.Disconnect();
+
+            if (Attachments.ChildNames.Count == 0)
+                Attachments = null;
+            else
+            {
+                Attachments.Parent = null;
+                foreach (var child in Attachments.Children)
+                    child.Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Create Parent pointers in Artifact tree
+        /// </summary>
+        public void Connect(Artifact parent = null)
+        {
+            Parent = parent;
+            foreach (var child in Children)
+                child.Connect(this);
+
+            if (Attachments == null) Attachments = new DataArtifactCollection() { Parent = this };
+            Attachments.Parent = this;
+            foreach (var item in Attachments.ChildNames)
+                Attachments[item].Connect(this);
         }
 
         /// <summary>

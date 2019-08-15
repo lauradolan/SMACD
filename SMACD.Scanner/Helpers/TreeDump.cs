@@ -80,9 +80,13 @@ namespace SMACD.Scanner.Helpers
                 Console.WriteLine(GetLine(LineTypes.Normal, name, MAX_WIDTH - indentLen - name.Length - 1 - "<null>".Length, null));
             }
 
-            else if (obj.GetType().GetInterface(nameof(IDictionary)) != null)
+            //else if (obj.GetType().GetInterface(nameof(IDictionary)) != null)
+            //{
+            //    DumpCollection((ICollection)obj, name, indent, isLast);
+            //}
+            else if (obj is byte[])
             {
-                DumpCollection((ICollection)obj, name, indent, isLast);
+                Console.WriteLine(GetLine(LineTypes.Normal, name, MAX_WIDTH - indentLen - name.Length - 1 - $"{((byte[])obj).Length}B".Length, $"{((byte[])obj).Length}B"));
             }
 
             // RECURSE INTO COLLECTION CASE

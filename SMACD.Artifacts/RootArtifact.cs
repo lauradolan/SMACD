@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Polenter.Serialization;
+using SMACD.Artifacts.Data;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -48,6 +52,7 @@ namespace SMACD.Artifacts
                     return existingResult;
                 }
 
+                // Hard mode! Resolve first and check against aliases
                 List<string> aliases = new List<string>();
                 string ip = string.Empty;
                 string hostName = string.Empty;
@@ -67,7 +72,7 @@ namespace SMACD.Artifacts
                 if (entry != null)
                 {
                     aliases.AddRange(entry.Aliases);
-                    ip = entry.AddressList.FirstOrDefault().ToString();
+                    ip = entry.AddressList.FirstOrDefault()?.ToString();
                     hostName = entry.HostName;
                     if (!aliases.Contains(ip))
                     {

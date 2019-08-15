@@ -35,8 +35,10 @@ namespace SMACD.Scanner.Verbs
 
         public override async Task Execute()
         {
-            // Serialize/Deserialize "rootArtifact"
-            // Need to call pre save/load functions to sew up tree pointers
+            Logger.LogDebug("Starting ExtensionLibrary search");
+            ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
+                Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
+                "SMACD.Plugins.*.dll");
 
             // --------------------------------------------------------------------------------------------
             if (string.IsNullOrEmpty(WorkingDirectory))
@@ -44,16 +46,23 @@ namespace SMACD.Scanner.Verbs
                 WorkingDirectory = Path.Combine(Path.GetTempPath(), "wks_workingdir", DateTime.Now.ToUniversalTime().ToString("u").Replace(" ", string.Empty).Replace(':', '-'));
             }
 
-            if (!Directory.Exists(WorkingDirectory))
+            Session session = null;
+            if (File.Exists(Path.Combine(WorkingDirectory, "session")))
             {
-                Directory.CreateDirectory(WorkingDirectory);
+                Logger.LogDebug("Session file exists, opening", WorkingDirectory);
+                using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.Open, FileAccess.Read))
+                {
+                    session = new Session(stream);
+                }
             }
+            else
+            {
+                Logger.LogDebug("Session file not found in Working Directory {0}, creating new Session", WorkingDirectory);
+                if (!Directory.Exists(WorkingDirectory))
+                    Directory.CreateDirectory(WorkingDirectory);
 
-            // Create scan session
-            Session session = new Session();
-
-            //if (File.Exists(Path.Combine(WorkingDirectory, "workspace.yaml")))
-            //    workspace.Load(Path.Combine(WorkingDirectory, "workspace.yaml"));
+                session = new Session();
+            }
 
             // Import Service Map
             ServiceMapFile serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
@@ -149,6 +158,11 @@ namespace SMACD.Scanner.Verbs
             }
 
             var results = generatedTasks.Select(t => t.Result.FinalizeReport());
+
+            using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                session.Export(stream);
+            }
 
             //using (var sw = new StreamWriter(Path.Combine(WorkingDirectory, "workspace.yaml")))
             //    workspace.Save(sw.BaseStream);

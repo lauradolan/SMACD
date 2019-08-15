@@ -60,6 +60,7 @@ namespace SMACD.Scanner
                 .WriteTo.File("smacd.log", outputTemplate: currentTimeTemplate + template)
                 .CreateLogger();
             SMACD.ScanEngine.Global.LogFactory.AddSerilog(Log.Logger);
+            SMACD.SDK.Global.LogFactory.AddSerilog(Log.Logger);
 
             if (!verb.Silent)
             {
