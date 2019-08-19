@@ -5,8 +5,8 @@ Before you get started with SMACD, you will need to assemble 3 **maps**. You sho
 You will need:
 
 1. A **project map** created by your project management team that lists your project's features and their use cases. The goal for future SMACD releases is to enable ingestion of this data from common project management software.
-2. A **resource map** created by your product engineering team that lists endpoints in your system or application. The goal for future SMACD releases is to enable ingestion of this data from Swagger, etc.
-3. A [**service map**](#service-map) created by your security team by combining the project map and resource map. This map lists the potential abuse cases for each use case. You can use an [**extension**](#extensions) to scan for and test these abuse cases, then generate an [**artifact correlation tree**](#artifact-correlation-tree).
+2. A **target map** created by your product engineering team that lists endpoints in your system or application. The goal for future SMACD releases is to enable ingestion of this data from Swagger, etc.
+3. A [**service map**](#service-map) created by your security team by combining the project map and target map. This map lists the potential abuse cases for each use case. You can use an [**extension**](#extensions) to scan for and test these abuse cases, then generate an [**artifact correlation tree**](#artifact-correlation-tree).
 
 ## Service map
 
@@ -16,9 +16,9 @@ Your completed service map should look something like the following diagram:
 Feature	// "User Can Locate Items"
 └── Use Case	// "User Can Locate an Item by its Name"
     ├── Abuse Case	// "Attacker can SQL inject a Search Input"
-    │   ├── Action Extension	// "sqlmap"
-    │   └── Action Extension	// "sqlninja"
-    └── Abuse Case	// "Attacker can use old Product UPCs"
+    │   ├── Action      // "sqlmap"
+    │   └── Action	// "sqlninja"
+    └── Abuse Case     	// "Attacker can use old Product UPCs"
         └── Action Extension	// "my_custom_extension"
 ```
 

@@ -4,6 +4,49 @@ The SMACD data model integrates data about your system or application's [**featu
 
 ![Nested model of different concepts in SMACD program architecture including features, use cases, abuse cases, testing and business objects.](Assets/ObjectModel.png "SMACD data model")
 
+*The above would be a visual model of the YAML service map description below:*
+```yaml
+features:
+- name: User Can Search for Items
+  description: The user can search the product database for records
+  owners:
+  - name: Robert Smith
+    email: robert.smith@myexample.com
+  - name: Curtis Jones
+    email: curtis.k.jones@myexample.com
+  useCases:
+  - name: Search for Items by Product Name
+    description: The user can search the product database using the 'Name' field
+    owners:
+    - name: Robert Smith
+      email: robert.smith@myexample.com
+    - name: Curtis Jones
+      email: curtis.k.jones@myexample.com
+    abuseCases:
+    - name: SQL Injection in Search Field
+      description: An attacker can manipulate the search field to SQL inject the application
+      actions:
+      - action: sqlmap
+        target:
+          targetId: searchHome
+      - action: sqlninja
+        target:
+          targetId: searchHome
+targets:
+- !http
+  targetId: searchHome
+  url: http://myexample.com/search/search.aspx
+  fields:
+    searchQuery: ""
+- !http
+  targetId: searchResults
+  url: http://myexample.com/search/searchResult.aspx
+  fields:
+    searchQuery: ""
+```
+
+---
+
 The following data modelling terms are used in the SMACD CLI tool:
 
 ## Features
@@ -30,10 +73,10 @@ Abuse cases are workflows that an attacker can use to manipulate a use case into
 
 For example, to abuse a "search inventory" feature, a malicious actor might perform a SQL injection in the search form.
 
-## Plugin pointers
+## Actions
 
-Plugin pointers are data structures that contain a plugin identifier, parameters for the plugin, and a [resource pointer](#resource-pointer) to the resource being used by the plugin.
+Actions are extensions to the SMACD CLI tool which provide functionality to test or otherwise generate information about a given target. This target can be any part of the application. Part of specifying an action to take also involves specifying a [target resource](#target-resources) to the resource being used by the plugin.
 
-## Resource pointers
+## Target resources
 
-Resource pointers are data structures that contain a resource identifier, the type of resource being identified, and parameters for the resource.
+Target Resources are data structures that represent the information required to access a specific type of service. This includes a target identifier, the type of resource being identified, and parameters to access the resource.
