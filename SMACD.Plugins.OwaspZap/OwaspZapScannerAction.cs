@@ -32,7 +32,7 @@ namespace SMACD.Plugins.OwaspZap
         {
             try
             {
-                NativeDirectoryArtifact nativePathArtifact = HttpService.Attachments["nmap_" + ((HostArtifact)HttpService.Parent).IpAddress].AsNativeDirectoryArtifact();
+                NativeDirectoryArtifact nativePathArtifact = HttpService.Attachments.CreateOrLoadNativePath("owaspzap_" + ((HostArtifact)HttpService.Parent).IpAddress);
                 RunScanner(nativePathArtifact);
                 ZapJsonReport jsonReport = GetJsonObject(nativePathArtifact);
                 if (jsonReport == null)
@@ -73,10 +73,16 @@ namespace SMACD.Plugins.OwaspZap
 
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
+                string schema = string.Empty;
+                if (HttpService.Port == 443) // todo: this only detects ssl on standard ports, need to change this
+                    schema = "https";
+                else
+                    schema = "http";
+
                 Logger.LogDebug("Invoking command " + dockerCommandTemplate,
-                    context.Directory, pyScript, HttpService.Host.IpAddress, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/", JSON_REPORT_FILE, HTML_REPORT_FILE);
                 wrapper.Command = string.Format(dockerCommandTemplate,
-                    context.Directory, pyScript, HttpService.Host.IpAddress, JSON_REPORT_FILE, HTML_REPORT_FILE);
+                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/", JSON_REPORT_FILE, HTML_REPORT_FILE);
 
                 wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);

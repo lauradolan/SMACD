@@ -31,7 +31,7 @@ namespace SMACD.SDK.Extensions
             Logger = logger;
         }
 
-        protected void SetLoggerName(string name)
+        public void SetLoggerName(string name)
         {
             Logger = Global.LogFactory.CreateLogger(name);
         }

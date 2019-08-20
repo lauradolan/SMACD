@@ -86,6 +86,7 @@ namespace SMACD.ScanEngine
 
                 // Create instance and validate readiness
                 Extension instance = (Extension)Activator.CreateInstance(extension);
+                instance.SetLoggerName(metadata.ExtensionIdentifier);
                 if (!instance.ValidateEnvironmentReadiness())
                 {
                     Logger.LogCritical("Extension {0} signals that the environment is incompatible with the extension; see logs for more information", metadata.ExtensionIdentifier);

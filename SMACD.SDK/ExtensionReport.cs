@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace SMACD.SDK
 {
@@ -13,6 +10,10 @@ namespace SMACD.SDK
         public TaskDescriptor TaskDescriptor { get; set; }
 
         public TimeSpan Runtime { get; set; }
+
+        public int RawPointsScored { get; set; }
+        public int MaximumPointsAvailable { get; set; }
+        public double AdjustedScore => MaximumPointsAvailable > 0 ? (double)RawPointsScored / MaximumPointsAvailable : 0;
 
         /// <summary>
         /// Create a blank report

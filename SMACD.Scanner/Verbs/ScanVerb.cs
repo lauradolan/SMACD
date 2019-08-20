@@ -33,6 +33,7 @@ namespace SMACD.Scanner.Verbs
 
         private static ILogger<ScanVerb> Logger { get; } = SMACD.ScanEngine.Global.LogFactory.CreateLogger<ScanVerb>();
 
+        private bool workingDirectoryProvided;
         public override async Task Execute()
         {
             Logger.LogDebug("Starting ExtensionLibrary search");
@@ -43,6 +44,7 @@ namespace SMACD.Scanner.Verbs
             // --------------------------------------------------------------------------------------------
             if (string.IsNullOrEmpty(WorkingDirectory))
             {
+                workingDirectoryProvided = true;
                 WorkingDirectory = Path.Combine(Path.GetTempPath(), "wks_workingdir", DateTime.Now.ToUniversalTime().ToString("u").Replace(" ", string.Empty).Replace(':', '-'));
             }
 
@@ -62,6 +64,7 @@ namespace SMACD.Scanner.Verbs
                     Directory.CreateDirectory(WorkingDirectory);
 
                 session = new Session();
+                session.ServiceMapYaml = File.ReadAllText(ServiceMap);
             }
 
             // Import Service Map
@@ -105,11 +108,6 @@ namespace SMACD.Scanner.Verbs
                     session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"].ServiceName = "";
                 }
             }
-
-            // Copy original Service Map to Working Directory
-            File.Copy(
-                ServiceMap,
-                Path.Combine(WorkingDirectory, "input.yaml"));
 
             List<Task<ExtensionReport>> generatedTasks = new List<Task<ExtensionReport>>();
             foreach (FeatureModel feature in serviceMap.Features)
@@ -164,22 +162,9 @@ namespace SMACD.Scanner.Verbs
                 session.Export(stream);
             }
 
-            //using (var sw = new StreamWriter(Path.Combine(WorkingDirectory, "workspace.yaml")))
-            //    workspace.Save(sw.BaseStream);
-
-            //workspace.Unbind(); // unbind manually
-
-            //var json = JsonConvert.SerializeObject(workspace.Reports);
-            //var outputFile = Path.Combine(WorkingDirectory,
-            //    "summary_" + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ".json");
-            //using (var sw = new StreamWriter(outputFile))
-            //{
-            //    sw.WriteLine(json);
-            //}
-
             if (!Silent)
             {
-                TreeDump.Dump(results.ToArray(), "Generated Data Reports", isLast: true);
+                TreeDump.Dump(results.Where(r => !(r is ErroredExtensionReport)).ToArray(), "Generated Data Reports", isLast: true);
             }
 
             if (!Silent)
@@ -193,27 +178,32 @@ namespace SMACD.Scanner.Verbs
                 { }
             }
 
-            //Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
-            //Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
-            //Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count / 2));
+            if (!Silent || workingDirectoryProvided)
+                Logger.LogInformation("Report serialized to {0}", Path.Combine(WorkingDirectory, "session"));
 
-            //Logger.LogInformation("Report serialized to {0}", outputFile);
+            if (!Silent)
+            {
+                Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
+                Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
+                Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count() / 2));
+            }
 
-            //if (Threshold.HasValue)
-            //{
-            //    Logger.LogDebug("Checking threshold");
-            //    if (Threshold > results.Average(r => r.AdjustedScore))
-            //    {
-            //        Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold,
-            //            results.Average(r => r.AdjustedScore));
-            //        Environment.Exit(-1);
-            //    }
-            //    else
-            //    {
-            //        Logger.LogDebug("Passed");
-            //        Environment.Exit(0);
-            //    }
-            //}
+            if (Threshold.HasValue)
+            {
+                Logger.LogDebug("Checking threshold");
+                if (Threshold > results.Average(r => r.AdjustedScore))
+                {
+                    Logger.LogInformation("Failed threshold test! Expected: {0} / Actual: {1}", Threshold,
+                        results.Average(r => r.AdjustedScore));
+                    Console.WriteLine(results.Average(r => r.AdjustedScore));
+                    Environment.Exit(-1);
+                }
+                else
+                {
+                    Logger.LogDebug("Passed");
+                    Environment.Exit(0);
+                }
+            }
         }
 
         private UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)

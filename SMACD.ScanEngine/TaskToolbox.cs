@@ -72,7 +72,7 @@ namespace SMACD.ScanEngine
             QueuedTaskDescriptor queuedTaskDescriptor = new QueuedTaskDescriptor()
             {
                 ActionId = descriptor.ActionId,
-                Options = descriptor.Options,
+                Options = new Dictionary<string, string>(descriptor.Options),
                 ArtifactRoot = descriptor.ArtifactRoot
             };
 
@@ -94,7 +94,14 @@ namespace SMACD.ScanEngine
                             descriptor.Options,
                             descriptor.ArtifactRoot);
 
-                        result = actionInstance.Act();
+                        if (actionInstance == null)
+                        {
+                            Logger.LogCritical("Requested Action {0} is not loaded in system!", descriptor.ActionId);
+                            result = ExtensionReport.Error(new Exception($"Requested Action {descriptor.ActionId} is not loaded in system!"));
+                        }
+                        else
+                            result = actionInstance.Act();
+
                         if (result == null)
                         {
                             result = ExtensionReport.Blank();
