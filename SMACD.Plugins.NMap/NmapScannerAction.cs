@@ -5,6 +5,7 @@ using SMACD.SDK;
 using SMACD.SDK.Attributes;
 using SMACD.SDK.Extensions;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -20,6 +21,24 @@ namespace SMACD.Plugins.Nmap
     public class NmapScannerAction : ActionExtension, IOperateOnHost
     {
         public HostArtifact Host { get; set; }
+
+        public override bool ValidateEnvironmentReadiness()
+        {
+            bool result;
+            try
+            {
+                ExecutionWrapper wrapper = new ExecutionWrapper("nmap --help");
+                wrapper.Start().Wait();
+                result = !wrapper.FailedToExecute;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            if (!result)
+                Logger.LogWarning("Nmap not installed on host");
+            return result;
+        }
 
         public override ExtensionReport Act()
         {
@@ -54,8 +73,8 @@ namespace SMACD.Plugins.Nmap
 
             using (NativeDirectoryContext context = artifact.GetContext())
             {
-//                string cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
-                string cmd = $"C:\\Progra~2\\Nmap\\nmap.exe --open -6 -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                string cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+//                string cmd = $"C:\\Progra~2\\Nmap\\nmap.exe --open -6 -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
                 ExecutionWrapper wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived +=

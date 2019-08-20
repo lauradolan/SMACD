@@ -59,6 +59,11 @@ namespace SMACD.SDK
         /// </summary>
         public string StdErr { get; set; }
 
+        /// <summary>
+        /// If this process failed to execute
+        /// </summary>
+        public bool FailedToExecute { get; private set; }
+
         private ILogger Logger { get; } = Global.LogFactory.CreateLogger("ExecutionWrapper");
         private int OwnerTaskId { get; }
 
@@ -121,6 +126,13 @@ namespace SMACD.SDK
                 Process.WaitForExit();
                 Logger.TaskLogTrace(OwnerTaskId, "Process {0} completed",
                     Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
+
+                if (Process.PrivilegedProcessorTime == TimeSpan.Zero)
+                {
+                    Logger.TaskLogCritical(OwnerTaskId, "Process {0} failed to execute!",
+                        Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
+                    FailedToExecute = true;
+                }
 
                 sw.Stop();
                 ExecutionTime = sw.Elapsed;
