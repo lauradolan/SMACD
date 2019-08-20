@@ -1,11 +1,8 @@
-﻿using Polenter.Serialization;
-using SMACD.Artifacts.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -71,26 +68,24 @@ namespace SMACD.Artifacts
 
                 if (entry != null)
                 {
-                    aliases.AddRange(entry.Aliases);
+                    aliases.AddRange(entry.Aliases.Where(a => !string.IsNullOrEmpty(a)));
                     ip = entry.AddressList.FirstOrDefault()?.ToString();
                     hostName = entry.HostName;
-                    if (!aliases.Contains(ip))
+                    if (!aliases.Contains(ip) && !string.IsNullOrEmpty(ip))
                     {
                         aliases.Add(ip);
                     }
 
-                    if (!aliases.Contains(hostName))
+                    if (!aliases.Contains(hostName) && !string.IsNullOrEmpty(hostName))
                     {
                         aliases.Add(hostName);
                     }
 
-                    if (!aliases.Contains(hostNameOrIp))
+                    if (!aliases.Contains(hostNameOrIp) && !string.IsNullOrEmpty(hostNameOrIp))
                     {
                         aliases.Add(hostNameOrIp);
                     }
                 }
-
-                aliases.RemoveAll(string.IsNullOrEmpty);
 
                 if (aliases.Count == 0)
                 {
@@ -109,11 +104,18 @@ namespace SMACD.Artifacts
                     };
                     foreach (string item in aliases)
                     {
-                        if (!result.Aliases.Contains(item))
+                        if (!result.Aliases.Contains(item) && !string.IsNullOrEmpty(item))
                         {
                             result.Aliases.Add(item);
                         }
                     }
+
+                    if (string.IsNullOrEmpty(result.Hostname))
+                        result.Hostname = aliases.FirstOrDefault(a => 
+                            Regex.IsMatch(a, "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"));
+                    if (string.IsNullOrEmpty(result.IpAddress))
+                        result.IpAddress = aliases.FirstOrDefault(a => Regex.IsMatch(a, "\b(?:\\d{1,3}\\.){3}\\d{1,3}\b"));
+
                     result.BeginFiringEvents();
                     Children.Add(result);
                 }

@@ -24,7 +24,7 @@ namespace SMACD.Artifacts
             get => hostname;
             set
             {
-                if (!Aliases.Contains(value))
+                if (!Aliases.Contains(value) && !string.IsNullOrEmpty(value))
                 {
                     Aliases.Add(value);
                 }
@@ -42,7 +42,7 @@ namespace SMACD.Artifacts
             get => ipAddress;
             set
             {
-                if (!Aliases.Contains(value))
+                if (!Aliases.Contains(value) && !string.IsNullOrEmpty(value))
                 {
                     Aliases.Add(value);
                 }
