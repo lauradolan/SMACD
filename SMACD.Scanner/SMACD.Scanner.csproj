@@ -74,6 +74,9 @@
     <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.Nikto\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nikto.dll" Link="Plugins\SMACD.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.Services.Common.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.Common.dll">
