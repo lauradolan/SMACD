@@ -10,7 +10,7 @@ namespace SMACD.SDK
     /// <summary>
     /// Wraps the execution of external (system) tasks run by a plugin
     /// </summary>
-    public class ExecutionWrapper
+    public class ExecutionWrapper : IDisposable
     {
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
@@ -92,9 +92,15 @@ namespace SMACD.SDK
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
-
+                
                 Process.StartInfo = GetStartInfo(Command);
-                Process.Start();
+                if (!Process.Start())
+                {
+                    Logger.TaskLogCritical(OwnerTaskId, "Process {0} failed to execute!",
+                        Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
+                    FailedToExecute = true;
+                    return;
+                }
 
                 Logger.TaskLogTrace(OwnerTaskId, "Started process {0}",
                     Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
@@ -127,13 +133,6 @@ namespace SMACD.SDK
                 Logger.TaskLogTrace(OwnerTaskId, "Process {0} completed",
                     Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
 
-                if (Process.PrivilegedProcessorTime == TimeSpan.Zero)
-                {
-                    Logger.TaskLogCritical(OwnerTaskId, "Process {0} failed to execute!",
-                        Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
-                    FailedToExecute = true;
-                }
-
                 sw.Stop();
                 ExecutionTime = sw.Elapsed;
             });
@@ -160,5 +159,29 @@ namespace SMACD.SDK
             procStartInfo.CreateNoWindow = true;
             return procStartInfo;
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if (!Process.HasExited)
+                        Process.Kill();
+                }
+                disposedValue = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+        }
+        #endregion
     }
 }

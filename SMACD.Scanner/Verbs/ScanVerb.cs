@@ -185,7 +185,7 @@ namespace SMACD.Scanner.Verbs
             {
                 Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
                 Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
-                Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count() / 2));
+                Console.WriteLine("Median score: {0}", results.OrderBy(r => r.AdjustedScore).ElementAt(results.Count() / 2).AdjustedScore);
             }
 
             if (Threshold.HasValue)
