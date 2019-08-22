@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SMACD.ScanEngine;
 using SMACD.SDK.Triggers;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,6 +30,9 @@ namespace SMACD.Scanner.Verbs
 
             Session session = new Session();
 
+            ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
+                Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
+                "SMACD.Plugins.*.dll");
             Console.WriteLine(Output.BrightBlue("LOADED LIBRARIES:"));
             foreach (ExtensionLibrary loaded in ExtensionToolbox.Instance.ExtensionLibraries)
             {
