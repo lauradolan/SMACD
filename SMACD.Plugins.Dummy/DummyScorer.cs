@@ -3,7 +3,9 @@ using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using SMACD.SDK;
 using SMACD.SDK.Attributes;
+using SMACD.SDK.Capabilities;
 using SMACD.SDK.Extensions;
+using SMACD.SDK.Triggers;
 using System.IO;
 
 namespace SMACD.Plugins.Dummy
@@ -14,7 +16,7 @@ namespace SMACD.Plugins.Dummy
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [TriggeredBy("dummy", SDK.ExtensionConditionTrigger.Succeeds)]
+    [TriggeredBy("dummy", ExtensionConditionTrigger.Succeeds)]
     public class DummyScorer : ReactionExtension, IOperateOnHost
     {
         public HostArtifact Host { get; set; }

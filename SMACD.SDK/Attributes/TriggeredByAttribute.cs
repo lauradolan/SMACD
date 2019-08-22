@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMACD.SDK.Triggers;
+using System;
 
 namespace SMACD.SDK.Attributes
 {

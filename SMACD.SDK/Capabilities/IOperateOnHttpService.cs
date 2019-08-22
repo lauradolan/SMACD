@@ -1,6 +1,6 @@
 ﻿using SMACD.Artifacts;
 
-namespace SMACD.SDK
+namespace SMACD.SDK.Capabilities
 {
     public interface IOperateOnHttpService
     {

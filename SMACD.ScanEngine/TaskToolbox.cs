@@ -2,6 +2,7 @@
 using SMACD.Artifacts;
 using SMACD.SDK;
 using SMACD.SDK.Extensions;
+using SMACD.SDK.Triggers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

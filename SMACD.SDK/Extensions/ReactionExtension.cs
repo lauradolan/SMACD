@@ -1,4 +1,6 @@
-﻿namespace SMACD.SDK.Extensions
+﻿using SMACD.SDK.Triggers;
+
+namespace SMACD.SDK.Extensions
 {
     public abstract class ReactionExtension : Extension
     {

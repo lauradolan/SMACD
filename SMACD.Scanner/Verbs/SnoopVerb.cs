@@ -2,6 +2,7 @@
 using Crayon;
 using Microsoft.Extensions.Logging;
 using SMACD.ScanEngine;
+using SMACD.SDK.Triggers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace SMACD.Scanner.Verbs
                 }
 
                 Console.WriteLine("  " + Output.Magenta("REACTIONS:"));
-                System.Collections.Generic.List<Tuple<SDK.TriggerDescriptor, System.Collections.Generic.KeyValuePair<SDK.TriggerDescriptor, System.Collections.Generic.List<Type>>>> reactionInfo = loaded.ReactionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
+                System.Collections.Generic.List<Tuple<TriggerDescriptor, System.Collections.Generic.KeyValuePair<TriggerDescriptor, System.Collections.Generic.List<Type>>>> reactionInfo = loaded.ReactionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
                     .ToList();
 
                 for (int i = 0; i < reactionInfo.Count; i++)

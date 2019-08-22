@@ -2,6 +2,7 @@
 using SMACD.Artifacts.Data;
 using SMACD.SDK;
 using SMACD.SDK.Attributes;
+using SMACD.SDK.Capabilities;
 using SMACD.SDK.Extensions;
 using System.Collections.Generic;
 using System.IO;

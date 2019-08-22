@@ -2,6 +2,8 @@
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using SMACD.SDK;
+using SMACD.SDK.Capabilities;
+using SMACD.SDK.Triggers;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;

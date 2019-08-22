@@ -1,4 +1,4 @@
-﻿namespace SMACD.SDK
+﻿namespace SMACD.SDK.Capabilities
 {
     public interface ICanQueueTasks
     {
