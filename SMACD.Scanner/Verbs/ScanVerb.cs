@@ -73,9 +73,9 @@ namespace SMACD.Scanner.Verbs
             // Register Targets from Resources
             foreach (TargetModel resourceModel in serviceMap.Targets)
             {
-                if (resourceModel is HttpResourceModel)
+                if (resourceModel is HttpTargetModel)
                 {
-                    HttpResourceModel http = resourceModel as HttpResourceModel;
+                    HttpTargetModel http = resourceModel as HttpTargetModel;
                     Uri uri = new Uri(http.Url);
                     List<string> pieces = uri.AbsolutePath.Split('/').ToList();
                     if (session.Artifacts[uri.Host].ChildNames.Contains(uri.Port.ToString()))
@@ -102,9 +102,9 @@ namespace SMACD.Scanner.Verbs
                         Headers = new ObservableDictionary<string, string>(http.Headers)
                     });
                 }
-                if (resourceModel is SocketPortResourceModel)
+                if (resourceModel is SocketPortTargetModel)
                 {
-                    SocketPortResourceModel socket = resourceModel as SocketPortResourceModel;
+                    SocketPortTargetModel socket = resourceModel as SocketPortTargetModel;
                     session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"].ServiceName = "";
                 }
             }
@@ -118,25 +118,25 @@ namespace SMACD.Scanner.Verbs
                     {
                         foreach (ActionPointerModel pluginPointer in abuseCase.Actions)
                         {
-                            TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target.TargetId);
+                            TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
 
                             Artifact artifact = null;
-                            if (target is HttpResourceModel)
+                            if (target is HttpTargetModel)
                             {
-                                Uri uri = new Uri(((HttpResourceModel)target).Url);
+                                Uri uri = new Uri(((HttpTargetModel)target).Url);
                                 artifact = session.Artifacts[uri.Host][uri.Port];
                             }
-                            else if (target is SocketPortResourceModel)
+                            else if (target is SocketPortTargetModel)
                             {
                                 artifact = session.Artifacts
-                                    [((SocketPortResourceModel)target).Hostname]
-                                    [((SocketPortResourceModel)target).Port];
+                                    [((SocketPortTargetModel)target).Hostname]
+                                    [((SocketPortTargetModel)target).Port];
                             }
 
                             generatedTasks.Add(session.Tasks.Enqueue(new TaskDescriptor()
                             {
                                 ActionId = pluginPointer.Action,
-                                Options = pluginPointer.Parameters,
+                                Options = pluginPointer.Options,
                                 ArtifactRoot = artifact,
                                 ProjectPointer = new ProjectPointer()
                                 {
@@ -271,8 +271,8 @@ namespace SMACD.Scanner.Verbs
         {
             return new SerializerBuilder()
                 .WithNamingConvention(new CamelCaseNamingConvention())
-                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpResourceModel))
-                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortResourceModel))
+                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpTargetModel))
+                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortTargetModel))
                 .Build()
                 .Serialize(obj);
         }
@@ -281,8 +281,8 @@ namespace SMACD.Scanner.Verbs
         {
             return new DeserializerBuilder()
                 .WithNamingConvention(new CamelCaseNamingConvention())
-                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpResourceModel))
-                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortResourceModel))
+                .WithTagMapping("!http", typeof(SMACD.Data.Resources.HttpTargetModel))
+                .WithTagMapping("!raw", typeof(SMACD.Data.Resources.SocketPortTargetModel))
                 .Build()
                 .Deserialize<T>(yaml);
         }

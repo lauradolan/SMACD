@@ -79,7 +79,7 @@ namespace SMACD.Scanner.Verbs
                                                 Action = "dummy",
                                                 Options = new Dictionary<string, string>
                                                     {{"parameter", "value"}},
-                                                Target = new TargetPointerModel { TargetId = "dummyResource" }
+                                                Target = "dummyResource"
                                             }).ToList()
                                 }).ToList()
                     }).ToList()

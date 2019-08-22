@@ -81,8 +81,8 @@ namespace SMACD.Data
         {
             Dictionary<string, Type> types = new Dictionary<string, Type>
             {
-                {"!http", typeof(HttpResourceModel)},
-                {"!socketport", typeof(SocketPortResourceModel)}
+                {"!http", typeof(HttpTargetModel)},
+                {"!socketport", typeof(SocketPortTargetModel)}
             };
             foreach (KeyValuePair<string, Type> kvp in types)
             {

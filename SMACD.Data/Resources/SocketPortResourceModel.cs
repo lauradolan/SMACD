@@ -1,9 +1,9 @@
 namespace SMACD.Data.Resources
 {
     /// <summary>
-    ///     Represents a Resource resolved to its handler
+    ///     Represents a Target resolved to its handler
     /// </summary>
-    public class SocketPortResourceModel : TargetModel
+    public class SocketPortTargetModel : TargetModel
     {
         public string Hostname { get; set; }
         public string Protocol { get; set; } = "TCP";

@@ -16,17 +16,17 @@ features:
     - name: Sample Abuse Case A1i
       description: This is the first abuse case for the first use case for the first feature!
       actions:
-      - action: nmap
-        target:
-          targetId: resourceRoot
+      - action: nikto
+        target: resourceRoot
       - action: owaspzap
-        target:
-          targetId: resourceRoot
+        options:
+          aggressive: true
+        target: resourceRoot
 targets:
 - !http
   targetId: resourceRoot
   method: get
-  url: http://localhost:1234/
+  url: http://172.19.0.2/
 - !http
   targetId: dockerTarget
   url: http://172.17.0.1:1234
