@@ -15,7 +15,7 @@ namespace SMACD.Data
         /// <summary>
         ///     When this file was created originally
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
         /// <summary>
         ///     When this file was last updated

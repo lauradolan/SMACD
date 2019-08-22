@@ -2,6 +2,7 @@
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
+using SMACD.Data.Resources;
 using SMACD.Scanner.Helpers;
 using System;
 using System.Collections.Generic;
@@ -84,14 +85,12 @@ namespace SMACD.Scanner.Verbs
                                 }).ToList()
                     }).ToList()
             }).ToList().ForEach(f => serviceMap.Features.Add(f));
-            new List<object>
+
+            serviceMap.Targets.Add(new HttpTargetModel()
             {
-                new
-                {
-                    ResourceId = "dummyResource",
-                    Url = "http://localhost"
-                }
-            }.ForEach(r => serviceMap.Targets.Add((TargetModel)r));
+                TargetId = "dummyResource",
+                Url = "http://localhost"
+            });
 
             Logger.LogDebug("Created all elements, generating Service Map file");
             ServiceMapFile.PutServiceMap(serviceMap, ServiceMap);
