@@ -6,27 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Plugins\AzureDevOps\SMACD.Plugins.AzureDevOps.dll" />
-    <None Remove="Plugins\SMACD.Plugins.AzureDevOps.dll" />
-  </ItemGroup>
-
-  <!--<ItemGroup>
-    <None Remove="Plugins\Newtonsoft.Json.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Debug\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>-->
-
-  <ItemGroup>
     <PackageReference Include="Bogus" Version="28.0.2" />
     <PackageReference Include="Colorful.Console" Version="1.2.9" />
     <PackageReference Include="CommandLineParser" Version="2.6.0" />
@@ -42,124 +21,106 @@
     <PackageReference Include="YamlDotNet" Version="6.1.2" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\SMACD.Plugins.AzureDevOps.dll" Link="Plugins\SMACD.Plugins.AzureDevOps.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>-->
-
-  <!--<ItemGroup>
-    <EmbeddedResource Include="Plugins\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>-->
-
   <ItemGroup>
     <None Update="sample.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
-  <!-- <ItemGroup Condition=" '$(Configuration)' == 'Debug' "> -->
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Debug\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Debug\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.Nikto\bin\Debug\netcoreapp2.2\SMACD.Plugins.Nikto.dll" Link="Plugins\SMACD.Plugins.Nikto.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.Services.Common.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.Services.TestResults.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.TestResults.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.Services.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\System.Net.Http.Formatting.dll" Link="Plugins\AzureDevOps\System.Net.Http.Formatting.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Common.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Core.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Core.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Dashboards.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Dashboards.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Policy.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Policy.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.SourceControl.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.SourceControl.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Test.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Test.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.TestManagement.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.TestManagement.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Wiki.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Wiki.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.Work.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Work.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\System.Data.SqlClient.dll" Link="Plugins\AzureDevOps\System.Data.SqlClient.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\Debug\netcoreapp2.2\SMACD.Plugins.AzureDevOps.dll" Link="Plugins\AzureDevOps\SMACD.Plugins.AzureDevOps.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\SMACD.ScanEngine\SMACD.ScanEngine.csproj" />
     <ProjectReference Include="..\SMACD.SDK\SMACD.SDK.csproj" />
   </ItemGroup>
-  <!-- 
-  <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
-    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\Release\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
+
+  <!--+++++++++++++++++++++++++++++++PLUGINS++++++++++++++++++++++++++++++++-->
+  
+  <ItemGroup>
+    <!-- Dummy Plugin -->
+    <EmbeddedResource Include="..\SMACD.Plugins.Dummy\bin\$(Configuration)\netcoreapp2.2\SMACD.Plugins.Dummy.dll" Link="Plugins\SMACD.Plugins.Dummy.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\Release\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Nmap Plugin -->
+    <EmbeddedResource Include="..\SMACD.Plugins.Nmap\bin\$(Configuration)\netcoreapp2.2\SMACD.Plugins.Nmap.dll" Link="Plugins\SMACD.Plugins.Nmap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Release\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- OWASP ZAProxy Plugin -->
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp2.2\SMACD.Plugins.OwaspZap.dll" Link="Plugins\SMACD.Plugins.OwaspZap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\Release\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+    <EmbeddedResource Include="..\SMACD.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp2.2\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup> -->
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Nikto Plugin -->
+    <EmbeddedResource Include="..\SMACD.Plugins.Nikto\bin\$(Configuration)\netcoreapp2.2\SMACD.Plugins.Nikto.dll" Link="Plugins\SMACD.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Azure DevOps Plugin -->
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\SMACD.Plugins.AzureDevOps.dll" Link="Plugins\AzureDevOps\SMACD.Plugins.AzureDevOps.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.VisualStudio.Services.Common.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.VisualStudio.Services.TestResults.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.TestResults.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.VisualStudio.Services.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\System.Net.Http.Formatting.dll" Link="Plugins\AzureDevOps\System.Net.Http.Formatting.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Common.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Core.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Core.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Dashboards.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Dashboards.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Policy.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Policy.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.SourceControl.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.SourceControl.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Test.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Test.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.TestManagement.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.TestManagement.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Wiki.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Wiki.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.Work.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Work.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\SMACD.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp2.2\System.Data.SqlClient.dll" Link="Plugins\AzureDevOps\System.Data.SqlClient.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
