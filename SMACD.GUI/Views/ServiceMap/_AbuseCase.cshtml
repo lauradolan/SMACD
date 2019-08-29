@@ -1,0 +1,47 @@
+﻿@model SMACD.Data.AbuseCaseModel
+
+    <div class="border rounded shadow-sm" style="padding: 1em;margin-bottom: 1.5em;background-color:#FEFEFE">
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-row flex-grow-1 align-items-center">
+                <h5 class="d-flex flex-column" style="margin: 0px;">Abuse Case | @Model.Name</h5>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <div class="btn-group" role="group">
+                    <div class="dropdown btn-group" role="group">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fa fa-plus" style="margin-right: 5px;"></i></button>
+                        <div class="dropdown-menu" role="menu">
+                            @foreach (var owner in Model.Owners)
+                            {
+                                <a class="dropdown-item" role="presentation" href="#" style="padding: 4px 18px;">
+                                    <img class="border rounded-circle" src="https://www.gravatar.com/avatar/@Global.CalculateMD5Hash(owner.Email.Trim().ToLower())" style="width: auto;height: 32px;">
+                                    &nbsp; @owner.Name
+                                </a>
+                            }
+                        </div>
+                    </div><button class="btn btn-primary" type="button"><i class="fa fa-edit"></i></button><button class="btn btn-primary" type="button"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div><h6 style="margin-bottom: 20px;">@Model.Description</h6>
+        <h6 style="margin-top: 2.5em;">Actions to Execute Testing this Abuse Case</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Action Identifier</th>
+                        <th>Options</th>
+                        <th>Target Identifier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var action in Model.Actions)
+                    {
+                        <tr>
+                            <td>@action.Action</td>
+                            <td>@string.Join("<br />", action.Options.Select(o => $"{o.Key} => {o.Value}"))</td>
+                            <td>@action.Target</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

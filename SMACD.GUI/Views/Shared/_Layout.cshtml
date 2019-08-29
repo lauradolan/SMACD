@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewData["Title"] - SMACD</title>
+    <link rel="stylesheet" href="~/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    @RenderSection("Styles", required: false)
+</head>
+
+<body id="page-top" style="background-color: rgb(248,249,252);">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <nav class="navbar navbar-light navbar-expand-md navigation-clean-search" style="padding-top: 5px;padding-bottom: 5px;">
+                <div class="container">
+                    <a class="navbar-brand" href="#"><img class="tada animated" src="~/assets/img/LogoYellowDominant_128W.png" style="height: 75px;"></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav" style="margin-right: auto;">
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-sitemap"></i>&nbsp; Application Maps</a>
+                                <div class="dropdown-menu" role="menu">
+                                    <h6 class="dropdown-header" role="presentation"><i class="fa fa-gears"></i>&nbsp; Service Map</h6>
+                                        <a class="dropdown-item" role="presentation" href="/ServiceMap/ViewMap">View</a>
+                                        <a class="dropdown-item" role="presentation" href="#">Test</a>
+                                        <a class="dropdown-item" role="presentation" href="#">Validate</a>
+                                    <div class="dropdown-divider" role="presentation"></div>
+                                    <h6 class="dropdown-header" role="presentation"><i class="fa fa-briefcase"></i>&nbsp; System Map</h6>
+                                        <a class="dropdown-item" role="presentation" href="#">Generate</a><a class="dropdown-item" role="presentation" href="#">Import/Merge</a><a class="dropdown-item" role="presentation"
+                                                                                                                                                                                                                                                                                    href="#">Edit</a>
+                                    <div class="dropdown-divider" role="presentation"></div>
+                                    <h6 class="dropdown-header" role="presentation"><i class="fa fa-bullseye"></i>&nbsp; Target Map</h6>
+                                        <a class="dropdown-item" role="presentation" href="#">Generate</a><a class="dropdown-item" role="presentation" href="#">Import/Merge</a><a class="dropdown-item" role="presentation"
+                                                                                                                                                                                                                                                                                   href="#">Edit</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-clipboard"></i>&nbsp; Session</a>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="/Session/Artifacts">Artifacts</a><a class="dropdown-item" role="presentation" href="#">Reports</a></div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-globe"></i>&nbsp; Environment&nbsp;</a>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Plugins</a></div>
+                            </li>
+                        </ul>
+                        <input class="d-none" type="file" id="loadFileInput"><a class="btn btn-light d-inline-block action-button" role="button" id="loadFileButton" href="#"><i class="fa fa-file-text"></i><span id="loadedFileName" style="margin-left: 10px;">
+                            @(Global.LoadedFileName != null ? Global.LoadedFileName : "Load File")
+                        </span></a>
+                    </div>
+                </div>
+            </nav>
+            <div id="content">
+                <div class="container" style="width: 80%;margin-right: auto;margin-left: auto;">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script fixes for parallel module loading -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="~/assets/js/script.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script>if (window.module) module = window.module;</script>
+</body>
+
+</html>

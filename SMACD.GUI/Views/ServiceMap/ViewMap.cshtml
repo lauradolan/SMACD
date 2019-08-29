@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Service Map";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Service Map</h3>
+
+@foreach (var feature in Global.ServiceMap.Features)
+{
+    await Html.RenderPartialAsync("_Feature", feature);
+}

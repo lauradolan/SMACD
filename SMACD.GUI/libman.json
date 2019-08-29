@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jstree@3.3.8",
+      "destination": "wwwroot/lib/jstree/"
+    }
+  ]
+}
