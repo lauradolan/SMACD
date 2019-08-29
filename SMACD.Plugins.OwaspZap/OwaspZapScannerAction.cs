@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 
 namespace SMACD.Plugins.OwaspZap
 {
@@ -85,13 +86,54 @@ namespace SMACD.Plugins.OwaspZap
                 wrapper.Command = string.Format(dockerCommandTemplate,
                     context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/", JSON_REPORT_FILE, HTML_REPORT_FILE);
 
-                wrapper.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
-                wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+                wrapper.StandardOutputDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
+                wrapper.StandardErrorDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
 
                 wrapper.Start().Wait();
             }
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution");
+        }
+
+        private void TranslateZapLogs(int taskOwner, string logText)
+        {
+            var match = Regex.Match(logText, "[0-9]+\\s+(?<src>\\w+)\\s+(?<level>\\w+)\\s+\\[(?<code>[0-9]*)\\](?<msg>.*)");
+            if (match == null || !match.Success)
+            {
+                Logger.TaskLogDebug(taskOwner, logText);
+            }
+            else
+            {
+                var src = match.Groups["src"].Value;
+                var level = match.Groups["level"].Value;
+                var code = match.Groups["code"].Value;
+                var msg = match.Groups["msg"].Value;
+
+                // 0 is timestamp, 1 is source component, 2 is level, 3 is code, 4+ is text
+                var logEntry = $"[{src}] {msg}";
+                switch (level.Trim())
+                {
+                    case "TRACE":
+                        Logger.TaskLogTrace(taskOwner, logEntry);
+                        break;
+                    default:
+                    case "DEBUG":
+                        Logger.TaskLogDebug(taskOwner, logEntry);
+                        break;
+                    case "INFO":
+                        Logger.TaskLogInformation(taskOwner, logEntry);
+                        break;
+                    case "WARN":
+                        Logger.TaskLogWarning(taskOwner, logEntry);
+                        break;
+                    case "ERROR":
+                        Logger.TaskLogError(taskOwner, logEntry);
+                        break;
+                    case "FATAL":
+                        Logger.TaskLogCritical(taskOwner, logEntry);
+                        break;
+                }
+            }
         }
 
         private ZapJsonReport GetJsonObject(NativeDirectoryArtifact nativePathArtifact)
@@ -178,16 +220,19 @@ namespace SMACD.Plugins.OwaspZap
                             UrlArtifact inner = GeneratePathArtifacts(i);
 
                             UrlRequestArtifact artifact = new UrlRequestArtifact();
-                            string[] paramsSplit = i.Param.Split(',');
-                            foreach (string param in paramsSplit)
+                            if (i.Param != null)
                             {
-                                if (param.Contains('='))
+                                string[] paramsSplit = i.Param.Split(',');
+                                foreach (string param in paramsSplit)
                                 {
-                                    artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
-                                }
-                                else
-                                {
-                                    artifact.Fields.Add(param, string.Empty);
+                                    if (param.Contains('='))
+                                    {
+                                        artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
+                                    }
+                                    else
+                                    {
+                                        artifact.Fields.Add(param, string.Empty);
+                                    }
                                 }
                             }
 
