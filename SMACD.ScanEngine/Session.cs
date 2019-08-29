@@ -1,13 +1,17 @@
-﻿using Polenter.Serialization;
+﻿using Newtonsoft.Json;
+using Polenter.Serialization;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using SMACD.SDK;
 using SMACD.SDK.Capabilities;
 using SMACD.SDK.Triggers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
+using System.Text;
 
 namespace SMACD.ScanEngine
 {
@@ -47,13 +51,28 @@ namespace SMACD.ScanEngine
         {
             using (var decompressor = new DeflateStream(existingSession, CompressionMode.Decompress, true))
             {
-                var result = (ExportableSession)new SharpSerializer(new SharpSerializerXmlSettings()
-                {
-                    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
+                var ms = new MemoryStream();
+                decompressor.CopyTo(ms);
+                ms.Seek(0, SeekOrigin.Begin);
+
+                //var result = (ExportableSession)new SharpSerializer(new SharpSerializerXmlSettings()
+                //{
+                //    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
+                //    {
+                //        TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
+                //    }
+                //}).Deserialize(ms);
+
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<ExportableSession>(
+                    UnicodeEncoding.Unicode.GetString(ms.ToArray()),
+                    new JsonSerializerSettings()
                     {
-                        TypeNameConverter = new CustomTypeConverter()
-                    }
-                }).Deserialize(decompressor);
+                        TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+                        TypeNameHandling = TypeNameHandling.All
+                    });
+
+                ms.Seek(0, SeekOrigin.Begin);
+                var txt = System.Text.UnicodeEncoding.Unicode.GetString(ms.ToArray());
                 
                 Artifacts = result.Artifacts;
                 Reports = result.Reports;
@@ -123,17 +142,28 @@ namespace SMACD.ScanEngine
             using (var compressor = new DeflateStream(data, CompressionMode.Compress))
             {
                 Artifacts.Disconnect();
-                new SharpSerializer(new SharpSerializerXmlSettings()
-                {
-                    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
-                    {
-                        TypeNameConverter = new CustomTypeConverter()
-                    }
-                }).Serialize(new ExportableSession()
+                //new SharpSerializer(new SharpSerializerXmlSettings()
+                //{
+                //    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
+                //    {
+                //        TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
+                //    }
+                //}).Serialize(new ExportableSession()
+                //{
+                //    Artifacts = this.Artifacts,
+                //    Reports = this.Reports
+                //}, compressor);
+
+                var str = Newtonsoft.Json.JsonConvert.SerializeObject(new ExportableSession()
                 {
                     Artifacts = this.Artifacts,
                     Reports = this.Reports
-                }, compressor);
+                }, new JsonSerializerSettings() {
+                    TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+                    TypeNameHandling = TypeNameHandling.All
+                });
+                compressor.Write(UnicodeEncoding.Unicode.GetBytes(str));
+
                 Artifacts.Connect();
             }
         }

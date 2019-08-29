@@ -51,6 +51,22 @@ namespace SMACD.Artifacts
             Requests.CollectionChanged += (s, e) => NotifyChanged();
         }
 
+        public override void Disconnect()
+        {
+            if (Requests != null)
+                foreach (var req in Requests)
+                    req.Disconnect();
+            base.Disconnect();
+        }
+
+        public override void Connect(Artifact parent = null)
+        {
+            if (Requests != null)
+                foreach (var req in Requests)
+                    req.Connect(this);
+            base.Connect(parent);
+        }
+
         /// <summary>
         /// Get a child URL segment
         /// </summary>

@@ -12,7 +12,7 @@ namespace SMACD.Artifacts
         /// Parent Artifact
         /// </summary>
         public Artifact Parent { get; set; }
-        internal ObservableCollection<Artifact> Children { get; } = new ObservableCollection<Artifact>();
+        public ObservableCollection<Artifact> Children { get; set; } = new ObservableCollection<Artifact>();
 
         /// <summary>
         /// Artifact Identifier for path
@@ -27,7 +27,7 @@ namespace SMACD.Artifacts
         /// <summary>
         /// Vulnerabilities related to Artifact
         /// </summary>
-        public List<Vulnerability> Vulnerabilities { get; } = new List<Vulnerability>();
+        public List<Vulnerability> Vulnerabilities { get; set; } = new List<Vulnerability>();
 
         /// <summary>
         /// Names of children in index
@@ -73,13 +73,13 @@ namespace SMACD.Artifacts
         /// <summary>
         /// Disconnect parents in Artifact tree
         /// </summary>
-        public void Disconnect()
+        public virtual void Disconnect()
         {
             Parent = null;
             foreach (var child in Children)
                 child.Disconnect();
 
-            if (Attachments.ChildNames.Count == 0)
+            if (Attachments != null && Attachments.ChildNames.Count == 0)
                 Attachments = null;
             else
             {
@@ -92,7 +92,7 @@ namespace SMACD.Artifacts
         /// <summary>
         /// Create Parent pointers in Artifact tree
         /// </summary>
-        public void Connect(Artifact parent = null)
+        public virtual void Connect(Artifact parent = null)
         {
             Parent = parent;
             foreach (var child in Children)

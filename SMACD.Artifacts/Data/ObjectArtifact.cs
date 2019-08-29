@@ -6,6 +6,7 @@ namespace SMACD.Artifacts.Data
 {
     public class CustomTypeConverter : Polenter.Serialization.Advanced.Serializing.ITypeNameConverter
     {
+        private Func<string, Type> ExternalTypeResolver { get; set; }
         public Type ConvertToType(string typeName)
         {
             if (typeName == null)
@@ -19,12 +20,22 @@ namespace SMACD.Artifacts.Data
                 return extensionType;
             }
 
-            return Type.GetType(typeName);
+            if (Type.GetType(typeName) != null)
+                return Type.GetType(typeName);
+            
+            if (ExternalTypeResolver != null)
+                return ExternalTypeResolver(typeName);
+            else return null;
         }
 
         public string ConvertToTypeName(Type type)
         {
             return type.FullName;
+        }
+
+        public CustomTypeConverter(Func<string, Type> externalTypeResolver)
+        {
+            ExternalTypeResolver = externalTypeResolver;
         }
     }
 
@@ -45,7 +56,7 @@ namespace SMACD.Artifacts.Data
             {
                 AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
                 {
-                    TypeNameConverter = new CustomTypeConverter()
+                    TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
                 }
             }).Deserialize(new MemoryStream(StoredData));
         }
@@ -61,7 +72,7 @@ namespace SMACD.Artifacts.Data
             {
                 AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
                 {
-                    TypeNameConverter = new CustomTypeConverter()
+                    TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
                 }
             }).Deserialize(new MemoryStream(StoredData));
         }
@@ -78,7 +89,7 @@ namespace SMACD.Artifacts.Data
             {
                 AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
                 {
-                    TypeNameConverter = new CustomTypeConverter()
+                    TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
                 }
             }).Serialize(obj, ms);
             ms.Seek(0, SeekOrigin.Begin);

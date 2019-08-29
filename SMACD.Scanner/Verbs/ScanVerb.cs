@@ -34,7 +34,7 @@ namespace SMACD.Scanner.Verbs
         private static ILogger<ScanVerb> Logger { get; } = SMACD.ScanEngine.Global.LogFactory.CreateLogger<ScanVerb>();
 
         private bool workingDirectoryProvided;
-        public override async Task Execute()
+        public override Task Execute()
         {
             Logger.LogDebug("Starting ExtensionLibrary search");
             ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
@@ -174,7 +174,7 @@ namespace SMACD.Scanner.Verbs
                 {
                     TreeDump.Dump(session.Artifacts, "Artifact Correlation Tree", isLast: true);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 { }
             }
 
@@ -204,6 +204,8 @@ namespace SMACD.Scanner.Verbs
                     Environment.Exit(0);
                 }
             }
+
+            return Task.FromResult(0);
         }
 
         private UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)

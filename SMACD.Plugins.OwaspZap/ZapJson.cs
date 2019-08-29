@@ -42,8 +42,6 @@ namespace SMACD.Plugins.OwaspZap
         public string RiskDesc { get; set; }
         public string Desc { get; set; }
 
-        public IEnumerable<ZapJsonAlertInstance> Instances { get; set; }
-
         public string Count { get; set; }
         public string Solution { get; set; }
         public string OtherInfo { get; set; }
