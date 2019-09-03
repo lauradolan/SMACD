@@ -86,8 +86,6 @@ namespace SMACD.ScanEngine
         /// </summary>
         public Session()
         {
-            DataArtifact.ResolveType = new System.Func<string, System.Type>(s => ExtensionToolbox.ResolveType(s));
-
             if (Artifacts == null) Artifacts = new RootArtifact();
             BindArtifactTriggers();
 
