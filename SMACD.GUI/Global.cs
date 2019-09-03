@@ -1,12 +1,19 @@
-﻿using SMACD.Data;
+﻿using SMACD.Artifacts;
+using SMACD.Data;
+using SMACD.Data.Resources;
 using SMACD.ScanEngine;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using Xamarin.Forms.Dynamic;
 
 namespace SMACD.GUI
 {
     public static class Global
     {
+        public static bool SessionLoaded => Session != null;
+        public static bool ServiceMapLoaded => ServiceMap != null;
+
         public static string LoadedFileName { get; set; }
         public static ServiceMapFile ServiceMap { get; set; }
         public static Session Session { get; set; }
