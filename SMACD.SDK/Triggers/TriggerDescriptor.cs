@@ -80,7 +80,7 @@ namespace SMACD.SDK.Triggers
                 nextEl == artifact.Identifier)
             {
                 if (nextElements.Count == 0 ||
-                    artifact.ChildNames.Any(a => RecurseMatch(artifact.GetChildById(a), nextElements)))
+                    artifact.Children.Any(child => RecurseMatch(child, nextElements)))
                 {
                     return true;
                 }

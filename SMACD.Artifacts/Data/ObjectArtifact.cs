@@ -10,20 +10,10 @@ namespace SMACD.Artifacts.Data
         public Type ConvertToType(string typeName)
         {
             if (typeName == null)
-            {
                 return null;
-            }
-
-            Type extensionType = DataArtifact.ResolveType(typeName);
-            if (extensionType != null)
-            {
-                return extensionType;
-            }
-
-            if (Type.GetType(typeName) != null)
+            else if (Type.GetType(typeName) != null)
                 return Type.GetType(typeName);
-            
-            if (ExternalTypeResolver != null)
+            else if (ExternalTypeResolver != null)
                 return ExternalTypeResolver(typeName);
             else return null;
         }

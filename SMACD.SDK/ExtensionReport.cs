@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace SMACD.SDK
 {
@@ -51,6 +52,21 @@ namespace SMACD.SDK
             ((QueuedTaskDescriptor)TaskDescriptor).Result = null;
             return this;
         }
+
+        public virtual string Serialize()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public static ExtensionReport Deserialize(string serializedData)
+        {
+            return (ExtensionReport)JsonConvert.DeserializeObject(serializedData);
+        }
+
+        protected ExtensionReport() { }
+        protected ExtensionReport(string serializedData)
+        {
+        }
     }
 
     public class BlankExtensionReport : ExtensionReport
@@ -64,7 +80,6 @@ namespace SMACD.SDK
     public class ErroredExtensionReport : ExtensionReport
     {
         public Exception Exception { get; set; }
-
         public ErroredExtensionReport(Exception exception)
         {
             Exception = exception;

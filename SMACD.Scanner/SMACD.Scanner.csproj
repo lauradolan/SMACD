@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\SMACD.Data.Interop\SMACD.Data.Interop.csproj" />
     <ProjectReference Include="..\SMACD.ScanEngine\SMACD.ScanEngine.csproj" />
     <ProjectReference Include="..\SMACD.SDK\SMACD.SDK.csproj" />
   </ItemGroup>

@@ -30,11 +30,6 @@ namespace SMACD.Artifacts
         public List<Vulnerability> Vulnerabilities { get; set; } = new List<Vulnerability>();
 
         /// <summary>
-        /// Names of children in index
-        /// </summary>
-        public List<string> ChildNames => Children.Select(c => c.Identifier).ToList();
-
-        /// <summary>
         /// Get a child Artifact by its identifier
         /// </summary>
         /// <param name="identifier">Artifact identifier, unique to this parent</param>
@@ -52,11 +47,6 @@ namespace SMACD.Artifacts
 
         protected Artifact()
         {
-            if (!(this is DataArtifactCollection))
-            {
-                Attachments = new DataArtifactCollection() { Parent = this };
-            }
-
             NotifyCreated();
             Children.CollectionChanged += (s, e) =>
             {
@@ -78,15 +68,6 @@ namespace SMACD.Artifacts
             Parent = null;
             foreach (var child in Children)
                 child.Disconnect();
-
-            if (Attachments != null && Attachments.ChildNames.Count == 0)
-                Attachments = null;
-            else
-            {
-                Attachments.Parent = null;
-                foreach (var child in Attachments.Children)
-                    child.Disconnect();
-            }
         }
 
         /// <summary>
@@ -98,10 +79,7 @@ namespace SMACD.Artifacts
             foreach (var child in Children)
                 child.Connect(this);
 
-            if (Attachments == null) Attachments = new DataArtifactCollection() { Parent = this };
-            Attachments.Parent = this;
-            foreach (var item in Attachments.ChildNames)
-                Attachments[item].Connect(this);
+            if (Attachments == null) Attachments = new DataArtifactCollection();
         }
 
         /// <summary>

@@ -1,30 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
 namespace SMACD.Artifacts.Data
 {
-    public class DataArtifactCollection : Artifact
+    public class DataArtifactCollection : List<DataArtifact>
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
         /// <summary>
         /// Fired when Artifact is created
         /// </summary>
-        public static event EventHandler<Artifact> ArtifactCreated;
+        public static event EventHandler<DataArtifact> ArtifactCreated;
 
         /// <summary>
         /// Fired when Artifact is changed
         /// </summary>
-        public static event EventHandler<Artifact> ArtifactChanged;
+        public static event EventHandler<DataArtifact> ArtifactChanged;
 
         /// <summary>
-        /// Artifact Identifier for path
+        /// Retrieve DataArtifact by its name
         /// </summary>
-        public override string Identifier => ".data.";
-
-        public DataArtifact this[string name] => (DataArtifact)Children.FirstOrDefault(c => c.Identifier == name);
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public DataArtifact this[string name] => this.FirstOrDefault(c => c.Name == name);
 
         /// <summary>
         /// Create or load a native (system) path to allow external tools to put data into the system
@@ -39,7 +40,7 @@ namespace SMACD.Artifacts.Data
         public NativeDirectoryArtifact CreateOrLoadNativePath(string name, TimeSpan availabilityWaitTimeout = default(TimeSpan))
         {
             _lock.EnterReadLock();
-            Artifact existingChild = Children.FirstOrDefault(c => c.Identifier == name);
+            var existingChild = this[name];
             if (existingChild != null && !(existingChild is NativeDirectoryArtifact))
             {
                 throw new Exception("Native Directory handle cannot be replaced/overwritten by another storage type");
@@ -61,17 +62,13 @@ namespace SMACD.Artifacts.Data
             if (existingChild != null)
             {
                 artifact = (NativeDirectoryArtifact)existingChild;
-                ArtifactChanged?.Invoke(this, this);
+                ArtifactChanged?.Invoke(this, artifact);
             }
             else
             {
-                artifact = new NativeDirectoryArtifact(name)
-                {
-                    Parent = this
-                };
-
-                Children.Add(artifact);
-                ArtifactCreated?.Invoke(this, this);
+                artifact = new NativeDirectoryArtifact(name);
+                this.Add(artifact);
+                ArtifactCreated?.Invoke(this, artifact);
             }
 
             _lock.ExitWriteLock();
@@ -87,33 +84,9 @@ namespace SMACD.Artifacts.Data
         /// <returns></returns>
         public ObjectArtifact Save<T>(string name, T obj)
         {
-            _lock.EnterWriteLock();
-            ObjectArtifact newChild = new ObjectArtifact(name)
-            {
-                Parent = this
-            };
+            ObjectArtifact newChild = new ObjectArtifact(name);
             newChild.Set(obj);
-
-            Artifact existingChild = Children.FirstOrDefault(c => c.Identifier == name);
-            if (existingChild != null)
-            {
-                Children.Remove(existingChild);
-                foreach (Artifact child in existingChild.Children)
-                {
-                    newChild.Children.Add(child);
-                }
-
-                ArtifactChanged?.Invoke(this, this);
-            }
-            Children.Add(newChild);
-            _lock.ExitWriteLock();
-
-            if (existingChild == null)
-            {
-                ArtifactCreated?.Invoke(this, this);
-            }
-
-            return newChild;
+            return Save(newChild) as ObjectArtifact;
         }
 
         /// <summary>
@@ -122,30 +95,7 @@ namespace SMACD.Artifacts.Data
         /// <param name="name">Artifact name</param>
         /// <param name="str">String to save</param>
         /// <returns></returns>
-        public StringArtifact Save(string name, string str)
-        {
-            _lock.EnterWriteLock();
-            StringArtifact newChild = GetNewArtifact(name, str);
-            Artifact existingChild = Children.FirstOrDefault(c => c.Identifier == name);
-            if (existingChild != null)
-            {
-                Children.Remove(existingChild);
-                foreach (Artifact child in existingChild.Children)
-                {
-                    newChild.Children.Add(child);
-                }
-
-                ArtifactChanged?.Invoke(this, this);
-            }
-            Children.Add(newChild);
-            _lock.ExitWriteLock();
-            if (existingChild == null)
-            {
-                ArtifactCreated?.Invoke(this, this);
-            }
-
-            return newChild;
-        }
+        public StringArtifact Save(string name, string str) => Save(GetNewArtifact(name, str)) as StringArtifact;
 
         /// <summary>
         /// Create a child Artifact containing a byte array
@@ -153,58 +103,32 @@ namespace SMACD.Artifacts.Data
         /// <param name="name">Artifact name</param>
         /// <param name="data">Byte array to save</param>
         /// <returns></returns>
-        public Artifact Save(string name, byte[] data)
-        {
-            _lock.EnterWriteLock();
-            DataArtifact newChild = GetNewArtifact(name, data);
-            Artifact existingChild = Children.FirstOrDefault(c => c.Identifier == name);
-            if (existingChild != null)
-            {
-                Children.Remove(existingChild);
-                foreach (Artifact child in existingChild.Children)
-                {
-                    newChild.Children.Add(child);
-                }
-
-                ArtifactChanged?.Invoke(this, this);
-            }
-            Children.Add(newChild);
-            _lock.ExitWriteLock();
-            if (existingChild == null)
-            {
-                ArtifactCreated?.Invoke(this, this);
-            }
-
-            return newChild;
-        }
+        public DataArtifact Save(string name, byte[] data) => Save(GetNewArtifact(name, data));
 
         /// <summary>
         /// Create a blank child Artifact
         /// </summary>
         /// <param name="name">Artifact name</param>
         /// <returns></returns>
-        public Artifact Save(string name)
+        public DataArtifact Save(string name) => Save(GetNewArtifact(name, new byte[0]));
+
+        private DataArtifact Save(DataArtifact newChild)
         {
             _lock.EnterWriteLock();
-            DataArtifact newChild = GetNewArtifact(name, new byte[0]);
-            Artifact existingChild = Children.FirstOrDefault(c => c.Identifier == name);
+
+            DataArtifact existingChild = this[newChild.Name];
             if (existingChild != null)
             {
-                Children.Remove(existingChild);
-                foreach (Artifact child in existingChild.Children)
-                {
-                    newChild.Children.Add(child);
-                }
-
-                ArtifactChanged?.Invoke(this, this);
+                Remove(existingChild);
+                ArtifactChanged?.Invoke(this, existingChild);
             }
-            Children.Add(newChild);
+            Add(newChild);
             _lock.ExitWriteLock();
+
             if (existingChild == null)
             {
-                ArtifactCreated?.Invoke(this, this);
+                ArtifactCreated?.Invoke(this, newChild);
             }
-
             return newChild;
         }
 
@@ -212,7 +136,6 @@ namespace SMACD.Artifacts.Data
         {
             return new DataArtifact(name)
             {
-                Parent = this,
                 StoredData = data
             };
         }
@@ -221,19 +144,8 @@ namespace SMACD.Artifacts.Data
         {
             return new StringArtifact(name)
             {
-                Parent = this,
                 StoredData = Encoding.UTF8.GetBytes(data)
             };
-        }
-
-        private ObjectArtifact GetNewArtifact<T>(string name, T data)
-        {
-            ObjectArtifact artifact = new ObjectArtifact(name)
-            {
-                Parent = this
-            };
-            artifact.Set(data);
-            return artifact;
         }
     }
 }

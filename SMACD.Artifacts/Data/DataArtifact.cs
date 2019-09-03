@@ -4,20 +4,8 @@ using System.Threading;
 
 namespace SMACD.Artifacts.Data
 {
-    public class DataArtifact : Artifact
+    public class DataArtifact
     {
-        private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
-
-        /// <summary>
-        /// Pointer to a function which takes a type name and returns a Type object (based on plugin assemblies)
-        /// </summary>
-        public static Func<string, Type> ResolveType { get; set; } = new Func<string, Type>((s) => null);
-
-        /// <summary>
-        /// Artifact identifier
-        /// </summary>
-        public override string Identifier => Name;
-
         /// <summary>
         /// Name of this Artifact
         /// </summary>
@@ -27,27 +15,6 @@ namespace SMACD.Artifacts.Data
         /// Data stored in this Artifact in raw format
         /// </summary>
         public byte[] StoredData { get; set; }
-
-        /// <summary>
-        /// Get a DataArtifact child instance by its name
-        /// </summary>
-        /// <param name="artifactName">Artifact name</param>
-        /// <returns></returns>
-        public DataArtifact this[string artifactName]
-        {
-            get
-            {
-                _lock.EnterUpgradeableReadLock();
-                Artifact item = Children.FirstOrDefault(c => c.Identifier == artifactName);
-                if (item == null)
-                {
-                    return new DataArtifact(artifactName);
-                }
-
-                _lock.ExitUpgradeableReadLock();
-                return (DataArtifact)item;
-            }
-        }
 
         public DataArtifact(string name)
         {

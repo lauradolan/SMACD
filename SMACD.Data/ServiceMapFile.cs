@@ -53,6 +53,20 @@ namespace SMACD.Data
         }
 
         /// <summary>
+        ///     Deserialize a Service Map from a YAML string
+        /// </summary>
+        /// <param name="file">Service Map YAML</param>
+        /// <returns></returns>
+        public static ServiceMapFile GetServiceMapFromYaml(string yaml)
+        {
+            return new DeserializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .AddLoadedTagMappings()
+                .Build()
+                .Deserialize<ServiceMapFile>(yaml);
+        }
+
+        /// <summary>
         ///     Serialize a Service Map to a given file
         /// </summary>
         /// <param name="serviceMap">Service Map to serialize</param>

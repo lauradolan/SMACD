@@ -2,17 +2,15 @@
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Data;
+using SMACD.Data.Interop;
 using SMACD.Data.Resources;
 using SMACD.ScanEngine;
-using SMACD.Scanner.Helpers;
 using SMACD.SDK;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Xamarin.Forms.Dynamic;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -72,42 +70,7 @@ namespace SMACD.Scanner.Verbs
 
             // Register Targets from Resources
             foreach (TargetModel resourceModel in serviceMap.Targets)
-            {
-                if (resourceModel is HttpTargetModel)
-                {
-                    HttpTargetModel http = resourceModel as HttpTargetModel;
-                    Uri uri = new Uri(http.Url);
-                    List<string> pieces = uri.AbsolutePath.Split('/').ToList();
-                    if (session.Artifacts[uri.Host].ChildNames.Contains(uri.Port.ToString()))
-                    {
-                        // TODO: Do this better.
-                        ServicePortArtifact original = session.Artifacts[uri.Host][uri.Port];
-                        session.Artifacts[uri.Host][uri.Port] = new HttpServicePortArtifact()
-                        {
-                            ServiceName = original.ServiceName,
-                            ServiceBanner = original.ServiceBanner
-                        };
-                    }
-                    else
-                    {
-                        session.Artifacts[uri.Host][uri.Port] = new HttpServicePortArtifact();
-                    }
-
-                    UrlArtifact pathTip = GeneratePathArtifacts(((HttpServicePortArtifact)session.Artifacts[uri.Host][uri.Port]), uri.AbsolutePath, http.Method);
-
-                    pathTip.Requests.Add(new UrlRequestArtifact()
-                    {
-                        Parent = pathTip,
-                        Fields = new ObservableDictionary<string, string>(http.Fields),
-                        Headers = new ObservableDictionary<string, string>(http.Headers)
-                    });
-                }
-                if (resourceModel is SocketPortTargetModel)
-                {
-                    SocketPortTargetModel socket = resourceModel as SocketPortTargetModel;
-                    session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"].ServiceName = "";
-                }
-            }
+                session.RegisterTarget(resourceModel);
 
             List<Task<ExtensionReport>> generatedTasks = new List<Task<ExtensionReport>>();
             foreach (FeatureModel feature in serviceMap.Features)
@@ -156,26 +119,11 @@ namespace SMACD.Scanner.Verbs
             }
 
             var results = generatedTasks.Select(t => t.Result.FinalizeReport());
+            session.Reports.AddRange(results);
 
             using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate, FileAccess.Write))
             {
                 session.Export(stream);
-            }
-
-            if (!Silent)
-            {
-                TreeDump.Dump(results.Where(r => !(r is ErroredExtensionReport)).ToArray(), "Generated Data Reports", isLast: true);
-            }
-
-            if (!Silent)
-            {
-                session.Artifacts.Disconnect();
-                try
-                {
-                    TreeDump.Dump(session.Artifacts, "Artifact Correlation Tree", isLast: true);
-                }
-                catch (Exception)
-                { }
             }
 
             if (!Silent || workingDirectoryProvided)
@@ -207,67 +155,6 @@ namespace SMACD.Scanner.Verbs
 
             return Task.FromResult(0);
         }
-
-        private UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
-        {
-            List<string> pieces = url.Split('/').ToList();
-            pieces.RemoveAll(p => string.IsNullOrEmpty(p));
-            UrlArtifact artifact = httpService["/"];
-            foreach (string piece in pieces)
-            {
-                if (pieces.Last() == piece)
-                {
-                    if (method.ToUpper() == "GET")
-                    {
-                        artifact[piece].Method = HttpMethod.Get;
-                    }
-                    else if (method.ToUpper() == "POST")
-                    {
-                        artifact[piece].Method = HttpMethod.Post;
-                    }
-                    else if (method.ToUpper() == "PUT")
-                    {
-                        artifact[piece].Method = HttpMethod.Put;
-                    }
-                    else if (method.ToUpper() == "DELETE")
-                    {
-                        artifact[piece].Method = HttpMethod.Delete;
-                    }
-                    else if (method.ToUpper() == "HEAD")
-                    {
-                        artifact[piece].Method = HttpMethod.Head;
-                    }
-                    else if (method.ToUpper() == "TRACE")
-                    {
-                        artifact[piece].Method = HttpMethod.Trace;
-                    }
-                }
-                artifact = artifact[piece];
-            }
-            return artifact;
-        }
-
-
-        //private void RunBeforeSave(Artifact artifact)
-        //{
-        //    artifact.Root = null;
-        //    artifact.Parent = null;
-        //    foreach (var child in artifact.Children)
-        //        RunBeforeSave(child);
-        //}
-
-        //private void RunAfterLoad(Artifact artifactAtGeneration, Artifact root = null, Artifact parent = null)
-        //{
-        //    if (parent != null)
-        //        artifactAtGeneration.Parent = parent;
-        //    else
-        //        artifactAtGeneration.Root = artifactAtGeneration;
-
-        //    artifactAtGeneration.Root = root;
-
-        //    foreach (var child in artifactAtGeneration.Children)
-        //        RunAfterLoad(child, artifactAtGeneration.Root, artifactAtGeneration);
-        //}
 
         private static string Serialize<T>(T obj)
         {

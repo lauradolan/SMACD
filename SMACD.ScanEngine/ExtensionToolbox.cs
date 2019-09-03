@@ -44,7 +44,8 @@ namespace SMACD.ScanEngine
         /// <returns></returns>
         public static Type ResolveType(string typeName)
         {
-            return Instance.ExtensionLibraries.SelectMany(l => l.ProvidedTypes).FirstOrDefault(t => t.FullName == typeName);
+            return Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(typeName)).FirstOrDefault(t => t != null);
+            //return Instance.ExtensionLibraries.SelectMany(l => l.ProvidedTypes).FirstOrDefault(t => t.FullName == typeName);
         }
 
         /// <summary>
@@ -66,6 +67,24 @@ namespace SMACD.ScanEngine
         {
             _extensionLibraries.Add(new ExtensionLibrary(path));
         }
+
+        /// <summary>
+        /// Get the metadata associated with a given Extension
+        /// </summary>
+        /// <param name="identifier">Action or Reaction Extension ID</param>
+        /// <returns></returns>
+        public ExtensionAttribute GetExtensionMetadata(string identifier) =>
+            GetExtensionMetadata()
+            .FirstOrDefault(e => e.ExtensionIdentifier == identifier);
+
+        /// <summary>
+        /// Get the metadata for all loaded Extensions
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ExtensionAttribute> GetExtensionMetadata() =>
+            _actionExtensionMap.Select(a => a.Value).Union(
+            _reactionExtensionMap.SelectMany(r => r.Value))
+            .Select(t => t.GetCustomAttribute<ExtensionAttribute>());
 
         /// <summary>
         /// Emit a configured ActionExtension
