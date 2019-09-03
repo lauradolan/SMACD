@@ -1,5 +1,5 @@
-﻿using SMACD.Artifacts;
-using SMACD.SDK;
+﻿using SMACD.SDK;
+using System.Runtime.Serialization;
 
 namespace SMACD.Plugins.Dummy
 {

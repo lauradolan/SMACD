@@ -169,44 +169,6 @@ namespace SMACD.Plugins.OwaspZap
             return null;
         }
 
-        private UrlArtifact GeneratePathArtifacts(ZapJsonAlertInstance instance)
-        {
-            string[] pieces = instance.Uri.Split('/');
-            UrlArtifact artifact = HttpService["/"];
-            foreach (string piece in pieces)
-            {
-                if (pieces.Last() == piece)
-                {
-                    if (instance.Method.ToUpper() == "GET")
-                    {
-                        artifact[piece].Method = HttpMethod.Get;
-                    }
-                    else if (instance.Method.ToUpper() == "POST")
-                    {
-                        artifact[piece].Method = HttpMethod.Post;
-                    }
-                    else if (instance.Method.ToUpper() == "PUT")
-                    {
-                        artifact[piece].Method = HttpMethod.Put;
-                    }
-                    else if (instance.Method.ToUpper() == "DELETE")
-                    {
-                        artifact[piece].Method = HttpMethod.Delete;
-                    }
-                    else if (instance.Method.ToUpper() == "HEAD")
-                    {
-                        artifact[piece].Method = HttpMethod.Head;
-                    }
-                    else if (instance.Method.ToUpper() == "TRACE")
-                    {
-                        artifact[piece].Method = HttpMethod.Trace;
-                    }
-                }
-                artifact = artifact[piece];
-            }
-            return artifact;
-        }
-
         private void RunScorer(ZapJsonReport report)
         {
             foreach (ZapJsonSite site in report.Site)
@@ -217,7 +179,7 @@ namespace SMACD.Plugins.OwaspZap
                     {
                         System.Collections.Generic.List<UrlRequestArtifact> targets = alert.Instances.Select(i =>
                         {
-                            UrlArtifact inner = GeneratePathArtifacts(i);
+                            UrlArtifact inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
 
                             UrlRequestArtifact artifact = new UrlRequestArtifact();
                             if (i.Param != null)

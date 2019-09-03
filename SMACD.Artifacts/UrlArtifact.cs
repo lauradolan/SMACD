@@ -118,7 +118,10 @@ namespace SMACD.Artifacts
 
         public override string ToString()
         {
-            return $"URL Segment '{UrlSegment}'";
+            if (Children.Any())
+                return $"URL Segment '/{UrlSegment}/'";
+            else
+                return $"URL Segment '{UrlSegment}'";
         }
     }
 }

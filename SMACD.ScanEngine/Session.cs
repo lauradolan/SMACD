@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Polenter.Serialization;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using SMACD.SDK;
@@ -10,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using System.Text;
 
 namespace SMACD.ScanEngine
@@ -18,7 +16,8 @@ namespace SMACD.ScanEngine
     public class ExportableSession
     {
         public RootArtifact Artifacts { get; set; }
-        public List<ExtensionReport> Reports { get; set; } = new List<ExtensionReport>();
+        public List<string> SerializedReports { get; set; } = new List<string>();
+        public string ServiceMapYaml { get; set; }
     }
 
     public class Session
@@ -55,27 +54,25 @@ namespace SMACD.ScanEngine
                 decompressor.CopyTo(ms);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                //var result = (ExportableSession)new SharpSerializer(new SharpSerializerXmlSettings()
-                //{
-                //    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
-                //    {
-                //        TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
-                //    }
-                //}).Deserialize(ms);
-
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<ExportableSession>(
                     UnicodeEncoding.Unicode.GetString(ms.ToArray()),
                     new JsonSerializerSettings()
                     {
                         TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                        TypeNameHandling = TypeNameHandling.All
+                        TypeNameHandling = TypeNameHandling.All,
+                        SerializationBinder = new AggressiveTypeResolutionBinder()
                     });
 
                 ms.Seek(0, SeekOrigin.Begin);
                 var txt = System.Text.UnicodeEncoding.Unicode.GetString(ms.ToArray());
-                
+
                 Artifacts = result.Artifacts;
-                Reports = result.Reports;
+                try
+                {
+                    Reports = result.SerializedReports.Select(r => ExtensionReport.Deserialize(r)).ToList();
+                }
+                catch (Exception ex) { }
+                ServiceMapYaml = result.ServiceMapYaml;
 
                 Artifacts.Connect();
             }
@@ -140,25 +137,17 @@ namespace SMACD.ScanEngine
             using (var compressor = new DeflateStream(data, CompressionMode.Compress))
             {
                 Artifacts.Disconnect();
-                //new SharpSerializer(new SharpSerializerXmlSettings()
-                //{
-                //    AdvancedSettings = new Polenter.Serialization.Core.AdvancedSharpSerializerXmlSettings()
-                //    {
-                //        TypeNameConverter = new CustomTypeConverter(t => Type.GetType(t))
-                //    }
-                //}).Serialize(new ExportableSession()
-                //{
-                //    Artifacts = this.Artifacts,
-                //    Reports = this.Reports
-                //}, compressor);
 
+                var serializedReports = Reports.Select(r => r.Serialize()).ToList();
                 var str = Newtonsoft.Json.JsonConvert.SerializeObject(new ExportableSession()
                 {
                     Artifacts = this.Artifacts,
-                    Reports = this.Reports
+                    SerializedReports = serializedReports,
+                    ServiceMapYaml = this.ServiceMapYaml
                 }, new JsonSerializerSettings() {
                     TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
-                    TypeNameHandling = TypeNameHandling.All
+                    TypeNameHandling = TypeNameHandling.All,
+                    SerializationBinder = new AggressiveTypeResolutionBinder()
                 });
                 compressor.Write(UnicodeEncoding.Unicode.GetBytes(str));
 
