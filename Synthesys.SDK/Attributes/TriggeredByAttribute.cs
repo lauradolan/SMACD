@@ -1,25 +1,29 @@
-﻿using SMACD.SDK.Triggers;
-using System;
+﻿using System;
+using Synthesys.SDK.Triggers;
 
-namespace SMACD.SDK.Attributes
+namespace Synthesys.SDK.Attributes
 {
+    /// <summary>
+    /// The TriggeredByAttribute specifies that the Extension is added to the end of the Task Queue when a certain event occurs.
+    ///
+    /// This Attribute can be used multiple times on the same Extension.
+    /// </summary>
+
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class TriggeredByAttribute : Attribute
     {
-        public TriggerDescriptor Trigger { get; }
-
         /// <summary>
-        /// This Action is triggered by an operation occurring on the Artifact tree
+        /// Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
         /// </summary>
         /// <param name="artifactPath">Artifact path</param>
-        /// <param name="trigger">Trigger operation</param>
+        /// <param name="trigger">Trigger event</param>
         public TriggeredByAttribute(string artifactPath, ArtifactTrigger trigger)
         {
             Trigger = TriggerDescriptor.ArtifactTrigger(artifactPath, trigger);
         }
 
         /// <summary>
-        /// This Action is triggered by an operation occurring on the Artifact tree
+        /// Specify that the Extension is added to the end of the Task Queue when an Extension completes
         /// </summary>
         /// <param name="extensionIdentifier">Extension identifier</param>
         /// <param name="trigger">Triggering execution status</param>
@@ -29,12 +33,17 @@ namespace SMACD.SDK.Attributes
         }
 
         /// <summary>
-        /// This Action is triggered by a System Event
+        /// Specify that the Extension is added to the end of the Task Queue when a system-level event occurs
         /// </summary>
-        /// <param name="trigger">System event trigger</param>
+        /// <param name="trigger">System event Trigger</param>
         public TriggeredByAttribute(SystemEvents trigger)
         {
             Trigger = TriggerDescriptor.SystemEventTrigger(trigger);
         }
+
+        /// <summary>
+        /// Description of Trigger causing the Extension to be queued
+        /// </summary>
+        public TriggerDescriptor Trigger { get; }
     }
 }
