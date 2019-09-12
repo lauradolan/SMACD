@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
+  </ItemGroup>
+
+</Project>

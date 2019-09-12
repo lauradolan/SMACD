@@ -1,15 +1,18 @@
 ﻿using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
-using SMACD.SDK;
-using SMACD.SDK.Attributes;
-using SMACD.SDK.Capabilities;
-using SMACD.SDK.Extensions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Synthesys.SDK;
+using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Capabilities;
+using Synthesys.SDK.Extensions;
 
-namespace SMACD.Plugins.SQLMap
+namespace Synthesys.Plugins.SQLMap
 {
+    /// <summary>
+    /// sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data fetching from the database, to accessing the underlying file system and executing commands on the operating system via out-of-band connections.
+    /// </summary>
     [Extension("sqlmap",
         Name = "SQLMap SQLi Scanner",
         Version = "1.0.0",
@@ -17,8 +20,14 @@ namespace SMACD.Plugins.SQLMap
         Website = "https://github.com/anthturner/smacd")]
     public class SqlMapScanner : ActionExtension, IOperateOnUrl
     {
+        /// <summary>
+        /// If <c>TRUE</c>, SQLmap will run at Level 5/Risk Level 3 instead of the default Level 2/Risk Level 1
+        /// </summary>
         [Configurable] public bool Aggressive { get; set; } = false;
 
+        /// <summary>
+        /// URL being scanned
+        /// </summary>
         public UrlArtifact Url { get; set; }
 
         private bool _useInLocalMode = false;
@@ -103,11 +112,29 @@ namespace SMACD.Plugins.SQLMap
         }
     }
 
+    /// <summary>
+    /// A way to request a page which results in the ability to read/write otherwise protected data, execute code, etc.
+    /// </summary>
     public class SqlMapInjectionVector
     {
+        /// <summary>
+        /// Parameter that is injectable
+        /// </summary>
         public string Parameter { get; set; }
+
+        /// <summary>
+        /// Type of injection
+        /// </summary>
         public string Type { get; set; }
+
+        /// <summary>
+        /// Title of injection
+        /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Injection payload
+        /// </summary>
         public string Payload { get; set; }
     }
 }

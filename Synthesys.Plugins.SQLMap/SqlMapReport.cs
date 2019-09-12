@@ -1,10 +1,10 @@
 ﻿using SMACD.Artifacts;
-using SMACD.SDK;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Synthesys.SDK;
 
-namespace SMACD.Plugins.SQLMap
+namespace Synthesys.Plugins.SQLMap
 {
     public class SqlMapReport : ExtensionReport
     {
