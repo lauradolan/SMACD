@@ -14,7 +14,10 @@ using Synthesys.SDK.Extensions;
 namespace Synthesys.Plugins.OwaspZap
 {
     /// <summary>
-    /// The OWASP Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications. It is designed to be used by people with a wide range of security experience and as such is ideal for developers and functional testers who are new to penetration testing as well as being a useful addition to an experienced pen testers toolbox.
+    ///     The OWASP Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities
+    ///     in web applications. It is designed to be used by people with a wide range of security experience and as such is
+    ///     ideal for developers and functional testers who are new to penetration testing as well as being a useful addition
+    ///     to an experienced pen testers toolbox.
     /// </summary>
     [Extension("owaspzap",
         Name = "OWASP ZAP Scanner",
@@ -27,17 +30,19 @@ namespace Synthesys.Plugins.OwaspZap
         private const string HTML_REPORT_FILE = "report.html";
 
         /// <summary>
-        /// If <c>TRUE</c>, the "zap-full-scan" script will be used; otherwise the "zap-baseline" script is used
+        ///     If <c>TRUE</c>, the "zap-full-scan" script will be used; otherwise the "zap-baseline" script is used
         /// </summary>
-        [Configurable] public bool Aggressive { get; set; } = false;
+        [Configurable]
+        public bool Aggressive { get; set; } = false;
 
         /// <summary>
-        /// If <c>TRUE</c>, the scan will use an AJAX-aware spider
+        ///     If <c>TRUE</c>, the scan will use an AJAX-aware spider
         /// </summary>
-        [Configurable] public bool UseAjaxSpider { get; set; } = true;
+        [Configurable]
+        public bool UseAjaxSpider { get; set; } = true;
 
         /// <summary>
-        /// HTTP Service to scan
+        ///     HTTP Service to scan
         /// </summary>
         public HttpServicePortArtifact HttpService { get; set; }
 
@@ -45,14 +50,17 @@ namespace Synthesys.Plugins.OwaspZap
         {
             try
             {
-                NativeDirectoryArtifact nativePathArtifact = HttpService.Attachments.CreateOrLoadNativePath("owaspzap_" + ((HostArtifact)HttpService.Parent).IpAddress);
+                var nativePathArtifact =
+                    HttpService.Attachments.CreateOrLoadNativePath(
+                        "owaspzap_" + ((HostArtifact) HttpService.Parent).IpAddress);
                 RunScanner(nativePathArtifact);
-                ZapJsonReport jsonReport = GetJsonObject(nativePathArtifact);
+                var jsonReport = GetJsonObject(nativePathArtifact);
                 if (jsonReport == null)
                 {
                     Logger.LogCritical("OWASP ZAP Scanner did not produce a report; may have been a down service!");
                     return new ZapJsonReport();
                 }
+
                 RunScorer(jsonReport);
 
                 return jsonReport;
@@ -61,41 +69,41 @@ namespace Synthesys.Plugins.OwaspZap
             {
                 Logger.LogCritical(ex, "Error running OWASP ZAP Scanner");
             }
+
             return null;
         }
 
         private void RunScanner(NativeDirectoryArtifact nativePathArtifact)
         {
             Logger.LogInformation("Starting OWASP ZAP Scanner against {0}", HttpService);
-            ExecutionWrapper wrapper = new ExecutionWrapper();
+            var wrapper = new ExecutionWrapper();
 
-            string pyScript = Aggressive ? "zap-full-scan.py" : "zap-baseline.py";
+            var pyScript = Aggressive ? "zap-full-scan.py" : "zap-baseline.py";
 
             Logger.LogDebug("Using scanner script {0} (aggressive option is {1})", pyScript,
                 Aggressive);
 
-            string dockerCommandTemplate = "docker run " +
+            var dockerCommandTemplate = "docker run " +
                                         "-v {0}:/zap/wrk:rw " +
                                         "-u zap " +
                                         "-i ictu/zap2docker-weekly " +
                                         "{1} -t {2} -J {3} -r {4} ";
-            if (UseAjaxSpider)
-            {
-                dockerCommandTemplate += "-j ";
-            }
+            if (UseAjaxSpider) dockerCommandTemplate += "-j ";
 
-            using (NativeDirectoryContext context = nativePathArtifact.GetContext())
+            using (var context = nativePathArtifact.GetContext())
             {
-                string schema = string.Empty;
+                var schema = string.Empty;
                 if (HttpService.Port == 443) // todo: this only detects ssl on standard ports, need to change this
                     schema = "https";
                 else
                     schema = "http";
 
                 Logger.LogDebug("Invoking command " + dockerCommandTemplate,
-                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/", JSON_REPORT_FILE, HTML_REPORT_FILE);
+                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
+                    JSON_REPORT_FILE, HTML_REPORT_FILE);
                 wrapper.Command = string.Format(dockerCommandTemplate,
-                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/", JSON_REPORT_FILE, HTML_REPORT_FILE);
+                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
+                    JSON_REPORT_FILE, HTML_REPORT_FILE);
 
                 wrapper.StandardOutputDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
@@ -108,7 +116,8 @@ namespace Synthesys.Plugins.OwaspZap
 
         private void TranslateZapLogs(int taskOwner, string logText)
         {
-            var match = Regex.Match(logText, "[0-9]+\\s+(?<src>\\w+)\\s+(?<level>\\w+)\\s+\\[(?<code>[0-9]*)\\](?<msg>.*)");
+            var match = Regex.Match(logText,
+                "[0-9]+\\s+(?<src>\\w+)\\s+(?<level>\\w+)\\s+\\[(?<code>[0-9]*)\\](?<msg>.*)");
             if (match == null || !match.Success)
             {
                 Logger.TaskLogDebug(taskOwner, logText);
@@ -150,20 +159,17 @@ namespace Synthesys.Plugins.OwaspZap
         private ZapJsonReport GetJsonObject(NativeDirectoryArtifact nativePathArtifact)
         {
             ZapJsonReport report;
-            using (NativeDirectoryContext context = nativePathArtifact.GetContext())
+            using (var context = nativePathArtifact.GetContext())
             {
-                string jsonReportPath = context.DirectoryWithFile(JSON_REPORT_FILE);
+                var jsonReportPath = context.DirectoryWithFile(JSON_REPORT_FILE);
                 if (File.Exists(jsonReportPath))
-                {
                     try
                     {
-                        using (StreamReader sr = new StreamReader(jsonReportPath))
+                        using (var sr = new StreamReader(jsonReportPath))
                         {
                             report = JsonConvert.DeserializeObject<ZapJsonReport>(sr.ReadToEnd());
                             if (report == null)
-                            {
                                 Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
-                            }
                             return report;
                         }
                     }
@@ -171,74 +177,63 @@ namespace Synthesys.Plugins.OwaspZap
                     {
                         Logger.LogCritical(ex, "Error deserializing OWASP ZAP JSON output report!");
                     }
-                }
                 else
-                {
                     Logger.LogCritical("JSON report from this plugin was not found! Aborting...");
-                }
             }
+
             return null;
         }
 
         private void RunScorer(ZapJsonReport report)
         {
-            foreach (ZapJsonSite site in report.Site)
-            {
-                foreach (ZapJsonAlertWithInstances alert in site.Alerts)
+            foreach (var site in report.Site)
+            foreach (var alert in site.Alerts)
+                try
                 {
-                    try
+                    var targets = alert.Instances.Select(i =>
                     {
-                        System.Collections.Generic.List<UrlRequestArtifact> targets = alert.Instances.Select(i =>
+                        var inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
+
+                        var artifact = new UrlRequestArtifact();
+                        if (i.Param != null)
                         {
-                            UrlArtifact inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
+                            var paramsSplit = i.Param.Split(',');
+                            foreach (var param in paramsSplit)
+                                if (param.Contains('='))
+                                    artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
+                                else
+                                    artifact.Fields.Add(param, string.Empty);
+                        }
 
-                            UrlRequestArtifact artifact = new UrlRequestArtifact();
-                            if (i.Param != null)
-                            {
-                                string[] paramsSplit = i.Param.Split(',');
-                                foreach (string param in paramsSplit)
-                                {
-                                    if (param.Contains('='))
-                                    {
-                                        artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
-                                    }
-                                    else
-                                    {
-                                        artifact.Fields.Add(param, string.Empty);
-                                    }
-                                }
-                            }
+                        inner.Requests.Add(artifact);
 
-                            inner.Requests.Add(artifact);
+                        return artifact;
+                    }).ToList();
 
-                            return artifact;
-                        }).ToList();
-
-                        targets.ForEach(target =>
+                    targets.ForEach(target =>
+                    {
+                        if (target == null)
                         {
-                            if (target == null)
-                            {
-                                Logger.LogWarning("Created Target is not valid! Skipping...");
-                                return;
-                            }
+                            Logger.LogWarning("Created Target is not valid! Skipping...");
+                            return;
+                        }
 
-                            HttpService.Vulnerabilities.Add(new Vulnerability
-                            {
-                                Confidence = (Vulnerability.Confidences)alert.Confidence,
-                                RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
-                                Description = alert.Desc,
-                                Occurrences = alert.Instances.Count(),
-                                Remedy = alert.Solution,
-                                Title = alert.Name
-                            });
+                        HttpService.Vulnerabilities.Add(new Vulnerability
+                        {
+                            Confidence = (Vulnerability.Confidences) alert.Confidence,
+                            RiskLevel = (Vulnerability.RiskLevels) alert.RiskCode,
+                            Description = alert.Desc,
+                            Occurrences = alert.Instances.Count(),
+                            Remedy = alert.Solution,
+                            Title = alert.Name
                         });
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogCritical(ex, "Error running correlations for scanner task");
-                    }
+                    });
                 }
-            }
+                catch (Exception ex)
+                {
+                    Logger.LogCritical(ex, "Error running correlations for scanner task");
+                }
+
             // TODO: Migrate HTML report into AzDO plugin?
         }
     }

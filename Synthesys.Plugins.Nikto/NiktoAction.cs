@@ -12,7 +12,9 @@ using Synthesys.SDK.Extensions;
 namespace Synthesys.Plugins.Nikto
 {
     /// <summary>
-    /// Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items, including over 6700 potentially dangerous files/programs, checks for outdated versions of over 1250 servers, and version specific problems on over 270 servers.
+    ///     Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for
+    ///     multiple items, including over 6700 potentially dangerous files/programs, checks for outdated versions of over 1250
+    ///     servers, and version specific problems on over 270 servers.
     /// </summary>
     /// <remarks>Description from tools.kali.org</remarks>
     [Extension("nikto",
@@ -27,7 +29,7 @@ namespace Synthesys.Plugins.Nikto
         private const int NO_BOUND_ITEM_WEIGHT = 5;
 
         /// <summary>
-        /// HTTP Service being scanned
+        ///     HTTP Service being scanned
         /// </summary>
         public HttpServicePortArtifact HttpService { get; set; }
 
@@ -37,7 +39,7 @@ namespace Synthesys.Plugins.Nikto
             if (xml == null) return ExtensionReport.Error(new Exception("Failed to generate XML"));
 
             var scanDetails = xml.Root.Descendants("scandetails");
-            var report = new NiktoReport()
+            var report = new NiktoReport
             {
                 NiktoVersion = xml.Root.Attributes("version").First().Value,
                 ScanStart = xml.Root.Attributes("scanstart").First().Value,
@@ -59,7 +61,7 @@ namespace Synthesys.Plugins.Nikto
                 if (osvdbid > 0) report.RawPointsScored += OSVDB_BOUND_ITEM_WEIGHT;
                 else report.RawPointsScored += NO_BOUND_ITEM_WEIGHT;
 
-                var vulnerability = new Vulnerability()
+                var vulnerability = new Vulnerability
                 {
                     Title = item.Descendants("description").First().Value,
                     Occurrences = 1,
@@ -93,6 +95,7 @@ namespace Synthesys.Plugins.Nikto
                     Logger.LogCritical("XML report from this plugin was not found! Aborting...");
                     return null;
                 }
+
                 return XDocument.Load(context.DirectoryWithFile("scan.xml"));
             }
         }

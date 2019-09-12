@@ -20,7 +20,8 @@ namespace Synthesys.Plugins.Nikto
             var sb = new StringBuilder();
             sb.AppendLine($"Server Banner: {ServerBanner}");
             foreach (var vuln in Vulnerabilities)
-                sb.AppendLine($"{vuln.Title} ({vuln.Occurrences} time(s)) Confidence/Risk Level: {vuln.Confidence}/{vuln.RiskLevel}");
+                sb.AppendLine(
+                    $"{vuln.Title} ({vuln.Occurrences} time(s)) Confidence/Risk Level: {vuln.Confidence}/{vuln.RiskLevel}");
             return sb.ToString();
         }
     }
