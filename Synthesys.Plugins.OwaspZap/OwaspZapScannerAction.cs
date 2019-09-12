@@ -1,19 +1,21 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
-using SMACD.SDK;
-using SMACD.SDK.Attributes;
-using SMACD.SDK.Capabilities;
-using SMACD.SDK.Extensions;
-using System;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text.RegularExpressions;
+using Synthesys.SDK;
+using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Capabilities;
+using Synthesys.SDK.Extensions;
 
-namespace SMACD.Plugins.OwaspZap
+namespace Synthesys.Plugins.OwaspZap
 {
+    /// <summary>
+    /// The OWASP Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications. It is designed to be used by people with a wide range of security experience and as such is ideal for developers and functional testers who are new to penetration testing as well as being a useful addition to an experienced pen testers toolbox.
+    /// </summary>
     [Extension("owaspzap",
         Name = "OWASP ZAP Scanner",
         Version = "1.0.0",
@@ -24,10 +26,19 @@ namespace SMACD.Plugins.OwaspZap
         private const string JSON_REPORT_FILE = "report.json";
         private const string HTML_REPORT_FILE = "report.html";
 
+        /// <summary>
+        /// If <c>TRUE</c>, the "zap-full-scan" script will be used; otherwise the "zap-baseline" script is used
+        /// </summary>
         [Configurable] public bool Aggressive { get; set; } = false;
 
+        /// <summary>
+        /// If <c>TRUE</c>, the scan will use an AJAX-aware spider
+        /// </summary>
         [Configurable] public bool UseAjaxSpider { get; set; } = true;
 
+        /// <summary>
+        /// HTTP Service to scan
+        /// </summary>
         public HttpServicePortArtifact HttpService { get; set; }
 
         public override ExtensionReport Act()
