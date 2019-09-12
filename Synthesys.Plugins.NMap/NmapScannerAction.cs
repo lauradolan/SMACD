@@ -1,18 +1,22 @@
 ﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
-using SMACD.SDK;
-using SMACD.SDK.Attributes;
-using SMACD.SDK.Capabilities;
-using SMACD.SDK.Extensions;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Xml.Linq;
+using Synthesys.SDK;
+using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Capabilities;
+using Synthesys.SDK.Extensions;
 
-namespace SMACD.Plugins.Nmap
+namespace Synthesys.Plugins.Nmap
 {
+    /// <summary>
+    /// Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics.
+    /// </summary>
+    /// <remarks>Description from tools.kali.org</remarks>
     [Extension("nmap",
         Name = "NMap Port Scanner",
         Version = "1.0.0",
@@ -20,6 +24,9 @@ namespace SMACD.Plugins.Nmap
         Website = "https://github.com/anthturner/smacd")]
     public class NmapScannerAction : ActionExtension, IOperateOnHost
     {
+        /// <summary>
+        /// Host/IP address to scan
+        /// </summary>
         public HostArtifact Host { get; set; }
 
         public override bool ValidateEnvironmentReadiness()
@@ -59,10 +66,20 @@ namespace SMACD.Plugins.Nmap
                 }
 
                 Host[$"{port.Protocol}/{port.Port}"].ServiceName = port.Service;
-            }
-            foreach (Vulnerability vuln in report.Vulnerabilities)
-            {
-                Host.Vulnerabilities.Add(vuln);
+
+                Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)port.ServiceFingerprintConfidence;
+                Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability
+                {
+                    Confidence = confidenceEnum,
+                    RiskLevel = Vulnerability.RiskLevels.Informational,
+                    Description =
+                        $"NMap found an open port {port.Protocol} {port.Port} on {Host.Hostname}. NMap's guess for this service is {port.Service} (confidence: {port.ServiceFingerprintConfidence} - {confidenceEnum})",
+                    Occurrences = 1,
+                    Remedy =
+                        "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
+                        "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
+                    Title = $"{port.Protocol} {port.Port} open" + (port.Service == null ? "" : $" ({port.Service})"),
+                });
             }
 
             return report;
@@ -70,11 +87,9 @@ namespace SMACD.Plugins.Nmap
 
         private void RunSingleTarget(NativeDirectoryArtifact artifact, string targetIp)
         {
-
             using (NativeDirectoryContext context = artifact.GetContext())
             {
                 string cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
-//                string cmd = $"C:\\Progra~2\\Nmap\\nmap.exe --open -6 -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
                 ExecutionWrapper wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived +=
@@ -104,9 +119,6 @@ namespace SMACD.Plugins.Nmap
             NmapRunReport result = new NmapRunReport();
             try
             {
-                string start = xml.Root.Attributes("start").First().Value;
-                result.TimeOfExecution = DateTime.FromFileTime(long.Parse(start));
-
                 XElement addrChild = xml.Root.Descendants("address").FirstOrDefault();
                 if (addrChild == null)
                 {
@@ -134,20 +146,6 @@ namespace SMACD.Plugins.Nmap
                             Port = int.Parse(port),
                             Service = service,
                             ServiceFingerprintConfidence = int.Parse(conf)
-                        });
-
-                        Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)int.Parse(conf);
-                        result.Vulnerabilities.Add(new Vulnerability
-                        {
-                            Confidence = confidenceEnum,
-                            RiskLevel = Vulnerability.RiskLevels.Informational,
-                            Description =
-                                $"NMap found an open port {protocol} {port} on {addr}. NMap's guess for this service is {service} (confidence: {conf} - {confidenceEnum})",
-                            Occurrences = 1,
-                            Remedy =
-                                "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
-                                "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
-                            Title = $"{protocol} {port} open" + (service == null ? "" : $" ({service})"),
                         });
                     } catch (Exception ex) { Logger.LogCritical(ex, "Error parsing Nmap port"); }
                 }

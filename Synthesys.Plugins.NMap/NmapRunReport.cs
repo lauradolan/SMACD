@@ -1,17 +1,16 @@
-﻿using SMACD.Artifacts;
-using SMACD.SDK;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Synthesys.SDK;
 
-namespace SMACD.Plugins.Nmap
+namespace Synthesys.Plugins.Nmap
 {
     public class NmapRunReport : ExtensionReport
     {
-        public DateTime TimeOfExecution { get; set; }
+        /// <summary>
+        /// Open ports on the scanned host
+        /// </summary>
         public List<NmapPort> Ports { get; set; } = new List<NmapPort>();
-        public List<Vulnerability> Vulnerabilities { get; set; } = new List<Vulnerability>();
-
+        
         public override string GetReportContent()
         {
             StringBuilder sb = new StringBuilder();
@@ -26,9 +25,24 @@ namespace SMACD.Plugins.Nmap
 
     public class NmapPort
     {
+        /// <summary>
+        /// Network protocol (TCP, UDP, etc.)
+        /// </summary>
         public string Protocol { get; set; }
+
+        /// <summary>
+        /// Port number
+        /// </summary>
         public int Port { get; set; }
+
+        /// <summary>
+        /// Service fingerprint
+        /// </summary>
         public string Service { get; set; }
+
+        /// <summary>
+        /// Service fingerprint confidence
+        /// </summary>
         public int ServiceFingerprintConfidence { get; set; }
     }
 }
