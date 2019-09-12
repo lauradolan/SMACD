@@ -1,48 +1,69 @@
-﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
-using SMACD.SDK;
-using SMACD.SDK.Attributes;
-using SMACD.SDK.Capabilities;
-using SMACD.SDK.Extensions;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using SMACD.Artifacts;
+using SMACD.Artifacts.Data;
+using Synthesys.SDK;
+using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Capabilities;
+using Synthesys.SDK.Extensions;
 
-namespace SMACD.Plugins.Dummy
+namespace Synthesys.Plugins.Dummy
 {
-    // Use the Implementation attribute to specify what type of Extension this is and what identifier is used
-    //   to access it. Identifiers are used inside the framework as "<role>.<name>", such as here, where it would
-    //   be "producer.dummy". However, the framework will determine which role is most appropriate for the 
-    //   situation and only request the Plugin by its name-- in this case, just "dummy".
+    /// <summary>
+    /// This plugin does not do meaningful work and is meant to be an example for future Extension development.
+    /// </summary>
     [Extension("dummy",
         Name = "Dummy Action",
         Version = "1.1.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    public class DummyAttackTool : ActionExtension, IOperateOnHost, IUnderstandProjectInformation, ICanQueueTasks
+    public class DummyAction : ActionExtension, IOperateOnHost, ICanQueueTasks
     {
-        // Specify the TargetDescriptor type as needed; when the instance is created, this will be
-        //   pre-populated with the specified target descriptor. Ensure inheritance matches what
-        //   is required.
-        // For example, you may want to receive an HttpTarget *or* a RawPortTarget. You
-        //   could set the type as "TargetDescriptor", since they both fit in that general Type requirement;
-        //   they both inherit from "TargetDescriptor".
-        // You could instead write two properties; one with the type "HttpTarget" and one with "RawPortTarget".
-        public HostArtifact Host { get; set; }
-        public ProjectPointer ProjectPointer { get; set; }
-        public ITaskToolbox Tasks { get; set; }
-
-        // Options that can be configured by the Service Map must be marked with the "Configurable"
-        //   attribute. The runtime will take care of casting the string values to their proper
-        //   types. If there is a more complicated object, it's suggested to serialize that to a
-        //   string and handle the serialization in the Plugin, or flatten the structure.
+        // The options below are different options that can be used to customize the behavior of an ActionExtension.
+        
+        /// <summary>
+        /// Arbitrary configuration option in string format
+        /// </summary>
         [Configurable] public string ConfigurationOption { get; set; }
 
+        /// <summary>
+        /// Arbitrary configuration option in integer format, deserialized from a string
+        /// </summary>
         [Configurable] public int ConfigurationOption2 { get; set; }
 
+        /// <summary>
+        /// Link to the Task toolbox, which can queue Tasks
+        /// </summary>
+        public ITaskToolbox Tasks { get; set; }
+
+        /// <summary>
+        /// Hostname/IP acted upon by the ActionExtension
+        ///
+        /// This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible Targets were found, this will remain null.
+        /// </summary>
+        public HostArtifact Host { get; set; }
+
+        /// <summary>
+        /// HTTP service acted upon by the ActionExtension
+        ///
+        /// This property will only be populated if the ActionExtension is queued with an HTTP service as a Target. If no compatible Targets were found, this will remain null.
+        ///
+        /// This property provides an a more concrete implementation of ServicePortArtifact, which means if a Target is identified as an HTTP server, that Target will be referenced from both this property and the "Service" property below.
+        /// </summary>
+        public HttpServicePortArtifact HttpService { get; set; }
+
+        /// <summary>
+        /// Service acted upon by the ActionExtension, addressed via its port
+        ///
+        /// This property will only be populated if the ActionExtension is queued with an open port (service) as a Target. If no compatible Targets were found, this will remain null.
+        ///
+        /// If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the property with the closest parent Type will be referenced.
+        /// </summary>
+        public ServicePortArtifact Service { get; set; }
 
         public override ExtensionReport Act()
         {
@@ -51,14 +72,14 @@ namespace SMACD.Plugins.Dummy
             // "Logger" is a named, generic log facility that is tied into the rest of the running application
             Logger.LogInformation("I'm a log message appearing at the '{0}' level!", "Information");
 
-            // Using the "Tasks" property with ICanQueueTasks allows actions to queue subsequent actions
+            // Using the "Tasks" property with ICanQueueTasks allows the Extension to address the Task Queue
             Logger.LogInformation($"Task queue running with {Tasks.Count} items");
 
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
-            Random rng = new Random((int)DateTime.Now.Ticks);
-            int v = 0;
-            int g = 0;
+            var rng = new Random((int) DateTime.Now.Ticks);
+            var v = 0;
+            var g = 0;
             while (v < 50)
             {
                 g++;
@@ -74,8 +95,8 @@ namespace SMACD.Plugins.Dummy
                     //   to get a temporary directory where external tools can persist information to disk or read information.
                     // When the object is disposed, the content of the directory will be compressed and saved to the wrapper
                     //   Artifact. When re-using the context at another time, the directory will be re-deployed.
-                    NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("dummyBasicContainer");
-                    using (NativeDirectoryContext execContainer = nativePathArtifact.GetContext())
+                    var nativePathArtifact = new NativeDirectoryArtifact("dummyBasicContainer");
+                    using (var execContainer = nativePathArtifact.GetContext())
                     {
                         // The temporary directory name is stored in the "Directory" property of the context
                         File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
@@ -83,8 +104,8 @@ namespace SMACD.Plugins.Dummy
                         // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
                         // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
                         //   "owner" Task that spawned this external program (to correlate issues in logs)
-                        ExecutionWrapper execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
-                        ExecutionWrapper execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
+                        var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
+                        var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
                         execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
                         {
                             // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
@@ -110,7 +131,7 @@ namespace SMACD.Plugins.Dummy
 
             // Artifacts can also be some sort of object (which is serialized by the framework)
             // Workspace.Artifacts.Save("dummyData", new { str = "arbitrary!", num = 42 });
-            Host.Attachments.Save("dummyResult", new DummyDataClass()
+            Host.Attachments.Save("dummyResult", new DummyDataClass
             {
                 DummyString = "I'm a dummy string!",
                 DummyDouble = 42.42
@@ -118,13 +139,13 @@ namespace SMACD.Plugins.Dummy
 
             // Returning an Action-specific Report allows the Action to provide more information
             //   to the user than the Artifact tree
-            Random random = new Random((int)DateTime.Now.Ticks);
-            byte[] randomData = new byte[32];
+            var random = new Random((int) DateTime.Now.Ticks);
+            var randomData = new byte[32];
             random.NextBytes(randomData);
 
-            return new DummySpecificReport()
+            return new DummySpecificReport
             {
-                Data = new DummyDataClass()
+                Data = new DummyDataClass
                 {
                     DummyDouble = random.NextDouble(),
                     DummyString = BitConverter.ToString(randomData)

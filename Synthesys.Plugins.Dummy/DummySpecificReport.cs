@@ -1,7 +1,6 @@
-﻿using SMACD.SDK;
-using System.Runtime.Serialization;
+﻿using Synthesys.SDK;
 
-namespace SMACD.Plugins.Dummy
+namespace Synthesys.Plugins.Dummy
 {
     // When creating Action-specific reports, they must inherit from this framework class
     public class DummySpecificReport : ExtensionReport
@@ -12,9 +11,9 @@ namespace SMACD.Plugins.Dummy
         public override string GetReportContent()
         {
             return "This is a dummy component used for testing.\n" +
-                "Dummy String Outer:" + DummyString + "\n" +
-                "Dummy String Inner:" + Data.DummyString + "\n" +
-                "Dummy Double:" + Data.DummyDouble;
+                   "Dummy String Outer:" + DummyString + "\n" +
+                   "Dummy String Inner:" + Data.DummyString + "\n" +
+                   "Dummy Double:" + Data.DummyDouble;
         }
     }
 }
