@@ -1,0 +1,128 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
+    <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.0.2" />
+    <PackageReference Include="Colorful.Console" Version="1.2.9" />
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="Crayon" Version="0.0.33" />
+    <PackageReference Include="McMaster.NETCore.Plugins" Version="0.3.0-rc.86" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="ObjectDumper.NET" Version="2.4.19218.1" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.Enrichers.Demystify" Version="1.0.0-dev-00019" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="YamlDotNet" Version="6.1.2" />
+  </ItemGroup>
+
+  <!--+++++++++++++++++++++++++++++++PLUGINS++++++++++++++++++++++++++++++++-->
+
+  <ItemGroup>
+    <!-- Dummy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Dummy\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Dummy.dll" Link="Plugins\Synthesys.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nmap Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nmap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nmap.dll" Link="Plugins\Synthesys.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OWASP ZAProxy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.OwaspZap.dll" Link="Plugins\Synthesys.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nikto Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nikto\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nikto.dll" Link="Plugins\Synthesys.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Azure DevOps Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.AzureDevOps.dll" Link="Plugins\AzureDevOps\Synthesys.Plugins.AzureDevOps.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.VisualStudio.Services.Common.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.VisualStudio.Services.TestResults.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.TestResults.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.VisualStudio.Services.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.VisualStudio.Services.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\System.Net.Http.Formatting.dll" Link="Plugins\AzureDevOps\System.Net.Http.Formatting.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Common.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Common.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Core.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Core.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Dashboards.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Dashboards.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Policy.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Policy.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.SourceControl.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.SourceControl.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Test.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Test.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.TestManagement.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.TestManagement.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Wiki.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Wiki.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.Work.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.Work.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll" Link="Plugins\AzureDevOps\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\System.Data.SqlClient.dll" Link="Plugins\AzureDevOps\System.Data.SqlClient.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
