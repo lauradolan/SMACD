@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Synthesys;
 using System.Linq;
 
 namespace SMACD.GUI.Controllers
@@ -7,7 +8,7 @@ namespace SMACD.GUI.Controllers
     {
         public IActionResult Plugins()
         {
-            return View(SMACD.ScanEngine.ExtensionToolbox.Instance.ExtensionLibraries.ToList());
+            return View(ExtensionToolbox.Instance.ExtensionLibraries.ToList());
         }
     }
 }

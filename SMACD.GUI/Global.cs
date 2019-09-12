@@ -1,11 +1,7 @@
-﻿using SMACD.Artifacts;
-using SMACD.Data;
-using SMACD.Data.Resources;
-using SMACD.ScanEngine;
-using System.Collections.Generic;
+﻿using SMACD.Data;
+using Synthesys;
 using System.Security.Cryptography;
 using System.Text;
-using Xamarin.Forms.Dynamic;
 
 namespace SMACD.GUI
 {

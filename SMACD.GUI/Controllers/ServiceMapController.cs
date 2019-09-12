@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SMACD.ScanEngine;
-using System;
 
 namespace SMACD.GUI.Controllers
 {

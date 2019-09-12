@@ -4,23 +4,23 @@ namespace SMACD.Artifacts
 {
     public class ServicePortArtifact : Artifact
     {
+        private int port;
+        private ProtocolType protocol;
+        private string serviceBanner;
+        private string serviceName;
+
         /// <summary>
-        /// Artifact Identifier
+        ///     Artifact Identifier
         /// </summary>
         public override string Identifier => $"{Protocol}/{Port}";
 
         /// <summary>
-        /// Hostname/IP of this Service
+        ///     Hostname/IP of this Service
         /// </summary>
-        public HostArtifact Host => (HostArtifact)Parent;
-
-        private int port;
-        private ProtocolType protocol;
-        private string serviceName;
-        private string serviceBanner;
+        public HostArtifact Host => (HostArtifact) Parent;
 
         /// <summary>
-        /// Port Protocol Type
+        ///     Port Protocol Type
         /// </summary>
         public ProtocolType Protocol
         {
@@ -33,7 +33,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Port number
+        ///     Port number
         /// </summary>
         public int Port
         {
@@ -46,7 +46,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Service name
+        ///     Service name
         /// </summary>
         public string ServiceName
         {
@@ -59,7 +59,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Service banner
+        ///     Service banner
         /// </summary>
         public string ServiceBanner
         {
@@ -73,9 +73,9 @@ namespace SMACD.Artifacts
 
         public override string ToString()
         {
-            return string.IsNullOrEmpty(ServiceName) ?
-$"{Protocol}/{Port}" :
-$"Service '{ServiceName}' on {Protocol}/{Port}";
+            return string.IsNullOrEmpty(ServiceName)
+                ? $"{Protocol}/{Port}"
+                : $"Service '{ServiceName}' on {Protocol}/{Port}";
         }
     }
 }

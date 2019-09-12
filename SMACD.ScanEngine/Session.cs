@@ -92,7 +92,7 @@ namespace SMACD.ScanEngine
                     if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == id)))
                         return null;
 
-                    SDK.Extensions.ActionExtension action = ExtensionToolbox.Instance.EmitAction(id, opts, root);
+                    SDK.Extensions.ActionExtension action = ExtensionToolbox.Instance.EmitConfiguredAction(id, opts, root);
                     if (action is ICanQueueTasks)
                     {
                         ((ICanQueueTasks)action).Tasks = Tasks;

@@ -1,18 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.TeamFoundation.SourceControl.WebApi;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.Identity;
 using Microsoft.VisualStudio.Services.WebApi;
-using SMACD.SDK;
-using SMACD.SDK.Attributes;
-using SMACD.SDK.Extensions;
-using SMACD.SDK.Triggers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
+using Synthesys.SDK;
+using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Extensions;
+using Synthesys.SDK.Triggers;
 
-namespace SMACD.Services.AzureDevOps
+namespace Synthesys.Plugins.AzureDevOps
 {
     [Extension("azuredevops",
         Name = "Azure DevOps Integration",
@@ -22,11 +22,6 @@ namespace SMACD.Services.AzureDevOps
     // TODO: TRIGGERS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public class AzureDevOpsService : ReactionExtension
     {
-        public string OrganizationUrl { get; set; }
-        public string PersonalAccessToken { get; set; }
-
-        private VssConnection Connection { get; set; }
-
         public AzureDevOpsService()
         {
             OrganizationUrl = "https://dev.azure.com/myorg";
@@ -34,9 +29,16 @@ namespace SMACD.Services.AzureDevOps
 
             // Works around Assembly binding failure loading TypeConverter for these
             //   because the support Assemblies aren't in the probing path
-            TypeDescriptor.AddAttributes(typeof(IdentityDescriptor), new TypeConverterAttribute(typeof(IdentityDescriptorConverter).FullName));
-            TypeDescriptor.AddAttributes(typeof(SubjectDescriptor), new TypeConverterAttribute(typeof(SubjectDescriptorConverter).FullName));
+            TypeDescriptor.AddAttributes(typeof(IdentityDescriptor),
+                new TypeConverterAttribute(typeof(IdentityDescriptorConverter).FullName));
+            TypeDescriptor.AddAttributes(typeof(SubjectDescriptor),
+                new TypeConverterAttribute(typeof(SubjectDescriptorConverter).FullName));
         }
+
+        public string OrganizationUrl { get; set; }
+        public string PersonalAccessToken { get; set; }
+
+        private VssConnection Connection { get; set; }
 
         //public override void Configure(Workspace.Workspace workspace)
         //{
@@ -62,16 +64,17 @@ namespace SMACD.Services.AzureDevOps
         //        new VssBasicCredential(string.Empty, PersonalAccessToken));
         //}
 
-        private async Task CreatePullRequestThread(string projectId, string repositoryId, int pullRequestId, string content)
+        private async Task CreatePullRequestThread(string projectId, string repositoryId, int pullRequestId,
+            string content)
         {
-            GitHttpClient cli = Connection.GetClient<GitHttpClient>();
+            var cli = Connection.GetClient<GitHttpClient>();
             try
             {
-                GitPullRequestCommentThread result = await cli.CreateThreadAsync(new GitPullRequestCommentThread()
+                var result = await cli.CreateThreadAsync(new GitPullRequestCommentThread
                 {
-                    Comments = new List<Comment>()
+                    Comments = new List<Comment>
                     {
-                        new Comment()
+                        new Comment
                         {
                             Content = content,
                             CommentType = CommentType.System

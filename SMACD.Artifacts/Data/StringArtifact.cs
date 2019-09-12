@@ -3,14 +3,16 @@
 namespace SMACD.Artifacts.Data
 {
     /// <summary>
-    /// Represents an Artifact that contains a string
+    ///     Represents an Artifact that contains a string
     /// </summary>
     public class StringArtifact : DataArtifact
     {
-        public StringArtifact(string name) : base(name) { }
+        public StringArtifact(string name) : base(name)
+        {
+        }
 
         /// <summary>
-        /// Get the saved string
+        ///     Get the saved string
         /// </summary>
         /// <returns></returns>
         public string Get()
@@ -19,7 +21,7 @@ namespace SMACD.Artifacts.Data
         }
 
         /// <summary>
-        /// Set the saved value to the given string
+        ///     Set the saved value to the given string
         /// </summary>
         /// <param name="data">String to commit</param>
         public void Set(string data)

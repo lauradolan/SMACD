@@ -7,16 +7,21 @@ namespace SMACD.Artifacts
 {
     public class UrlArtifact : Artifact
     {
+        private HttpMethod method;
+        private string urlSegment;
+
+        public UrlArtifact()
+        {
+            Requests.CollectionChanged += (s, e) => NotifyChanged();
+        }
+
         /// <summary>
-        /// Artifact Identifier
+        ///     Artifact Identifier
         /// </summary>
         public override string Identifier => $"{(Method == null ? "" : $"{Method} ")}{UrlSegment}";
 
-        private HttpMethod method = null;
-        private string urlSegment;
-
         /// <summary>
-        /// HTTP method used to access URL
+        ///     HTTP method used to access URL
         /// </summary>
         public HttpMethod Method
         {
@@ -29,7 +34,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// URL Segment (file/directory)
+        ///     URL Segment (file/directory)
         /// </summary>
         public string UrlSegment
         {
@@ -42,13 +47,36 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Requests which can be made against this URL
+        ///     Requests which can be made against this URL
         /// </summary>
-        public ObservableCollection<UrlRequestArtifact> Requests { get; set; } = new ObservableCollection<UrlRequestArtifact>();
+        public ObservableCollection<UrlRequestArtifact> Requests { get; set; } =
+            new ObservableCollection<UrlRequestArtifact>();
 
-        public UrlArtifact()
+        /// <summary>
+        ///     Get a child URL segment
+        /// </summary>
+        /// <param name="urlSegment">URL segment</param>
+        /// <returns></returns>
+        public UrlArtifact this[string urlSegment]
         {
-            Requests.CollectionChanged += (s, e) => NotifyChanged();
+            get
+            {
+                var result = (UrlArtifact) Children.FirstOrDefault(d =>
+                    ((UrlArtifact) d).Identifier == urlSegment || ((UrlArtifact) d).UrlSegment == urlSegment);
+                if (result == null)
+                {
+                    result = new UrlArtifact
+                    {
+                        Parent = this,
+                        UrlSegment = urlSegment,
+                        Method = HttpMethod.Get
+                    };
+                    result.BeginFiringEvents();
+                    Children.Add(result);
+                }
+
+                return result;
+            }
         }
 
         public override void Disconnect()
@@ -68,32 +96,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Get a child URL segment
-        /// </summary>
-        /// <param name="urlSegment">URL segment</param>
-        /// <returns></returns>
-        public UrlArtifact this[string urlSegment]
-        {
-            get
-            {
-                UrlArtifact result = (UrlArtifact)Children.FirstOrDefault(d => ((UrlArtifact)d).Identifier == urlSegment || ((UrlArtifact)d).UrlSegment == urlSegment);
-                if (result == null)
-                {
-                    result = new UrlArtifact()
-                    {
-                        Parent = this,
-                        UrlSegment = urlSegment,
-                        Method = HttpMethod.Get
-                    };
-                    result.BeginFiringEvents();
-                    Children.Add(result);
-                }
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Get entire URL from all segments (assuming this item is the last URL segment)
+        ///     Get entire URL from all segments (assuming this item is the last URL segment)
         /// </summary>
         /// <param name="url">Built URL</param>
         /// <returns></returns>
@@ -101,27 +104,19 @@ namespace SMACD.Artifacts
         {
             url = "/" + UrlSegment + url;
             if (Parent is HttpServicePortArtifact)
-            {
-                return $"{((HttpServicePortArtifact)Parent).Host.Hostname}" +
-                    ":" + $"{((HttpServicePortArtifact)Parent).Port}" +
-                    url;
-            }
-            else if (Parent is UrlArtifact)
-            {
-                return ((UrlArtifact)Parent).GetUrl(url);
-            }
-            else
-            {
-                throw new Exception("Invalid artifact tree");
-            }
+                return $"{((HttpServicePortArtifact) Parent).Host.Hostname}" +
+                       ":" + $"{((HttpServicePortArtifact) Parent).Port}" +
+                       url;
+            if (Parent is UrlArtifact)
+                return ((UrlArtifact) Parent).GetUrl(url);
+            throw new Exception("Invalid artifact tree");
         }
 
         public override string ToString()
         {
             if (Children.Any())
                 return $"URL Segment '/{UrlSegment}/'";
-            else
-                return $"URL Segment '{UrlSegment}'";
+            return $"URL Segment '{UrlSegment}'";
         }
     }
 }

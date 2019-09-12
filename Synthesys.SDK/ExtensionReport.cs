@@ -1,23 +1,46 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace SMACD.SDK
+namespace Synthesys.SDK
 {
     public abstract class ExtensionReport
     {
+        protected ExtensionReport()
+        {
+        }
+
+        protected ExtensionReport(string serializedData)
+        {
+        }
+
         /// <summary>
-        /// Task descriptor generating the Extension instance
+        ///     Task descriptor generating the Extension instance
         /// </summary>
         public TaskDescriptor TaskDescriptor { get; set; }
 
+        /// <summary>
+        ///     How long the Extension took to execute
+        /// </summary>
         public TimeSpan Runtime { get; set; }
 
+        /// <summary>
+        ///     Number of points scored on the Extension's own scale
+        /// </summary>
         public int RawPointsScored { get; set; }
-        public int MaximumPointsAvailable { get; set; }
-        public double AdjustedScore => MaximumPointsAvailable > 0 ? (double)RawPointsScored / MaximumPointsAvailable : 0;
 
         /// <summary>
-        /// Create a blank report
+        ///     Maximum number of points available on the Extension's own scale
+        /// </summary>
+        public int MaximumPointsAvailable { get; set; }
+
+        /// <summary>
+        ///     Adjusted score out of 1.0
+        /// </summary>
+        public double AdjustedScore =>
+            MaximumPointsAvailable > 0 ? (double) RawPointsScored / MaximumPointsAvailable : 0;
+
+        /// <summary>
+        ///     Create a blank report
         /// </summary>
         /// <returns></returns>
         public static ExtensionReport Blank()
@@ -26,7 +49,7 @@ namespace SMACD.SDK
         }
 
         /// <summary>
-        /// Create an error-containing report
+        ///     Create an error-containing report
         /// </summary>
         /// <param name="ex">Exception generated</param>
         /// <returns></returns>
@@ -36,20 +59,20 @@ namespace SMACD.SDK
         }
 
         /// <summary>
-        /// Generate a string representative of the report object's content
+        ///     Generate a string representative of the report object's content
         /// </summary>
         /// <returns></returns>
         public abstract string GetReportContent();
 
         /// <summary>
-        /// Finalize report by disconnecting TaskDescriptor from recursive loops
+        ///     Finalize report by disconnecting TaskDescriptor from recursive loops
         /// </summary>
         /// <returns></returns>
         public ExtensionReport FinalizeReport()
         {
             TaskDescriptor.ArtifactRoot = null;
-            ((QueuedTaskDescriptor)TaskDescriptor).ActionTask = null;
-            ((QueuedTaskDescriptor)TaskDescriptor).Result = null;
+            ((QueuedTaskDescriptor) TaskDescriptor).ActionTask = null;
+            ((QueuedTaskDescriptor) TaskDescriptor).Result = null;
             return this;
         }
 
@@ -60,12 +83,7 @@ namespace SMACD.SDK
 
         public static ExtensionReport Deserialize(string serializedData)
         {
-            return (ExtensionReport)JsonConvert.DeserializeObject(serializedData);
-        }
-
-        protected ExtensionReport() { }
-        protected ExtensionReport(string serializedData)
-        {
+            return (ExtensionReport) JsonConvert.DeserializeObject(serializedData);
         }
     }
 
@@ -79,11 +97,12 @@ namespace SMACD.SDK
 
     public class ErroredExtensionReport : ExtensionReport
     {
-        public Exception Exception { get; set; }
         public ErroredExtensionReport(Exception exception)
         {
             Exception = exception;
         }
+
+        public Exception Exception { get; set; }
 
         public override string GetReportContent()
         {

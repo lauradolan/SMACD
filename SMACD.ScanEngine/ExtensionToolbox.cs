@@ -93,9 +93,9 @@ namespace SMACD.ScanEngine
         /// <param name="options">Options for Action</param>
         /// <param name="artifactRoot">Artifact root</param>
         /// <returns></returns>
-        public ActionExtension EmitAction(string actionIdentifier, Dictionary<string, string> options, Artifact artifactRoot)
+        public ActionExtension EmitConfiguredAction(string actionIdentifier, Dictionary<string, string> options, Artifact artifactRoot)
         {
-            ActionExtension instance = EmitConfiguredActionExtension(actionIdentifier, artifactRoot).Configure(artifactRoot, options);
+            ActionExtension instance = EmitAction(actionIdentifier).Configure(artifactRoot, options);
             if (!instance.ValidateEnvironmentReadiness())
             {
                 Logger.LogCritical("Environment readiness checks failed for Action Extension {0}", actionIdentifier);
@@ -108,9 +108,8 @@ namespace SMACD.ScanEngine
         /// Emit an ActionExtension
         /// </summary>
         /// <param name="extensionIdentifier">Action identifier</param>
-        /// <param name="artifactRoot">Artifact root</param>
         /// <returns></returns>
-        public ActionExtension EmitConfiguredActionExtension(string extensionIdentifier, Artifact artifactRoot)
+        public ActionExtension EmitAction(string extensionIdentifier)
         {
             if (!_actionExtensionMap.ContainsKey(extensionIdentifier))
             {

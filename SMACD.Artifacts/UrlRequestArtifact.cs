@@ -1,20 +1,25 @@
 ﻿using System;
-using Xamarin.Forms.Dynamic;
 
 namespace SMACD.Artifacts
 {
     public class UrlRequestArtifact : Artifact
     {
-        /// <summary>
-        /// Artifact Identifier
-        /// </summary>
-        public override string Identifier => $"{HashCode.Combine(fields, headers)}";
-
         private ObservableDictionary<string, string> fields = new ObservableDictionary<string, string>();
         private ObservableDictionary<string, string> headers = new ObservableDictionary<string, string>();
 
+        public UrlRequestArtifact()
+        {
+            fields.CollectionChanged += (s, e) => NotifyChanged();
+            headers.CollectionChanged += (s, e) => NotifyChanged();
+        }
+
         /// <summary>
-        /// Fields to be sent with request
+        ///     Artifact Identifier
+        /// </summary>
+        public override string Identifier => $"{HashCode.Combine(fields, headers)}";
+
+        /// <summary>
+        ///     Fields to be sent with request
         /// </summary>
         public ObservableDictionary<string, string> Fields
         {
@@ -27,7 +32,7 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        /// Headers to be sent with request
+        ///     Headers to be sent with request
         /// </summary>
         public ObservableDictionary<string, string> Headers
         {
@@ -39,15 +44,9 @@ namespace SMACD.Artifacts
             }
         }
 
-        public UrlRequestArtifact()
-        {
-            fields.CollectionChanged += (s, e) => NotifyChanged();
-            headers.CollectionChanged += (s, e) => NotifyChanged();
-        }
-
         public override string ToString()
         {
-            return $"URL Request";
+            return "URL Request";
         }
     }
 }

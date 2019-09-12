@@ -1,13 +1,17 @@
-﻿using SMACD.Artifacts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using SMACD.Artifacts;
 
-namespace SMACD.SDK.Triggers
+namespace Synthesys.SDK.Triggers
 {
     public class TriggerDescriptor
     {
+        protected TriggerDescriptor()
+        {
+        }
+
         /// <summary>
-        /// Create an artifact-based trigger
+        ///     Create an artifact-based trigger
         /// </summary>
         /// <param name="artifactPath">Artifact path</param>
         /// <param name="trigger">Trigger operation</param>
@@ -18,18 +22,19 @@ namespace SMACD.SDK.Triggers
         }
 
         /// <summary>
-        /// Create an extension-based trigger
+        ///     Create an extension-based trigger
         /// </summary>
         /// <param name="extensionIdentifier">Extension identifier</param>
         /// <param name="trigger">Extension execution condition</param>
         /// <returns></returns>
-        public static ExtensionTriggerDescriptor ExtensionTrigger(string extensionIdentifier, ExtensionConditionTrigger trigger)
+        public static ExtensionTriggerDescriptor ExtensionTrigger(string extensionIdentifier,
+            ExtensionConditionTrigger trigger)
         {
             return new ExtensionTriggerDescriptor(extensionIdentifier, trigger);
         }
 
         /// <summary>
-        /// Create a trigger activated by a SystemEvent
+        ///     Create a trigger activated by a SystemEvent
         /// </summary>
         /// <param name="trigger">System event</param>
         /// <returns></returns>
@@ -38,15 +43,11 @@ namespace SMACD.SDK.Triggers
             return new SystemEventTriggerDescriptor(trigger);
         }
 
-        protected TriggerDescriptor(){}
-
         public override bool Equals(object obj)
         {
             if (obj.GetType() != GetType() ||
                 !(obj is TriggerDescriptor))
-            {
                 return false;
-            }
 
             return true;
         }
@@ -57,7 +58,7 @@ namespace SMACD.SDK.Triggers
         }
 
         /// <summary>
-        /// Check if the Artifact's path matches the given path
+        ///     Check if the Artifact's path matches the given path
         /// </summary>
         /// <param name="triggeringArtifact">Artifact</param>
         /// <param name="path">Path to check against</param>
@@ -69,35 +70,28 @@ namespace SMACD.SDK.Triggers
 
         private static bool RecurseMatch(Artifact artifact, List<string> pathElements)
         {
-            string nextEl = pathElements.First();
-            List<string> nextElements = new List<string>();
-            if (pathElements.Count > 1)
-            {
-                nextElements = new List<string>(pathElements.Skip(1));
-            }
+            var nextEl = pathElements.First();
+            var nextElements = new List<string>();
+            if (pathElements.Count > 1) nextElements = new List<string>(pathElements.Skip(1));
 
             if (nextEl == "*" ||
                 nextEl == artifact.Identifier)
-            {
                 if (nextElements.Count == 0 ||
                     artifact.Children.Any(child => RecurseMatch(child, nextElements)))
-                {
                     return true;
-                }
-            }
 
             return false;
         }
 
         /// <summary>
-        /// Generate the path for a given artifact
+        ///     Generate the path for a given artifact
         /// </summary>
         /// <param name="artifact">Artifact</param>
         /// <returns></returns>
         public string GeneratePath(Artifact artifact)
         {
-            List<Artifact> fullPath = artifact.GetPathToRoot();
-            IEnumerable<Artifact> partialPath = fullPath.Where(p => !(p is RootArtifact || p is HostArtifact));
+            var fullPath = artifact.GetPathToRoot();
+            var partialPath = fullPath.Where(p => !(p is RootArtifact || p is HostArtifact));
             return string.Join("|;|", partialPath.Select(i => i.Identifier));
         }
     }

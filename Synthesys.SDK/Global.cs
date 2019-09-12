@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace SMACD.SDK
+namespace Synthesys.SDK
 {
     public static class Global
     {

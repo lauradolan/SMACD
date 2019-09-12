@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SMACD.SDK.Triggers
+namespace Synthesys.SDK.Triggers
 {
     public enum ArtifactTrigger
     {
@@ -8,20 +8,11 @@ namespace SMACD.SDK.Triggers
         IsUpdated,
         AddsChild
     }
+
     public class ArtifactTriggerDescriptor : TriggerDescriptor
     {
         /// <summary>
-        /// Path to Artifact
-        /// </summary>
-        public string ArtifactPath { get; set; }
-
-        /// <summary>
-        /// Artifact operation causing trigger
-        /// </summary>
-        public ArtifactTrigger Trigger { get; set; }
-
-        /// <summary>
-        /// Create a descriptor for a trigger activated by an operation on an Artifact
+        ///     Create a descriptor for a trigger activated by an operation on an Artifact
         /// </summary>
         /// <param name="artifactPath">Artifact path</param>
         /// <param name="trigger">Triggering operation</param>
@@ -31,6 +22,16 @@ namespace SMACD.SDK.Triggers
             Trigger = trigger;
         }
 
+        /// <summary>
+        ///     Path to Artifact
+        /// </summary>
+        public string ArtifactPath { get; set; }
+
+        /// <summary>
+        ///     Artifact operation causing trigger
+        /// </summary>
+        public ArtifactTrigger Trigger { get; set; }
+
         public override string ToString()
         {
             return $"Artifact Trigger ({ArtifactPath} {Trigger.ToString()})";
@@ -38,16 +39,10 @@ namespace SMACD.SDK.Triggers
 
         public override bool Equals(object obj)
         {
-            if (!base.Equals(obj))
-            {
-                return false;
-            }
+            if (!base.Equals(obj)) return false;
 
-            ArtifactTriggerDescriptor castDescriptor = obj as ArtifactTriggerDescriptor;
-            if (castDescriptor.ArtifactPath == ArtifactPath && castDescriptor.Trigger == Trigger)
-            {
-                return true;
-            }
+            var castDescriptor = obj as ArtifactTriggerDescriptor;
+            if (castDescriptor.ArtifactPath == ArtifactPath && castDescriptor.Trigger == Trigger) return true;
 
             return false;
         }

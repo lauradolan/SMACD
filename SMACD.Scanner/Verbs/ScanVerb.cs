@@ -2,9 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Data;
-using SMACD.Data.Interop;
 using SMACD.Data.Resources;
-using SMACD.ScanEngine;
 using SMACD.SDK;
 using System;
 using System.Collections.Generic;
@@ -29,7 +27,7 @@ namespace SMACD.Scanner.Verbs
             "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
 
-        private static ILogger<ScanVerb> Logger { get; } = SMACD.ScanEngine.Global.LogFactory.CreateLogger<ScanVerb>();
+        private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
         private bool workingDirectoryProvided;
         public override Task Execute()

@@ -1,21 +1,21 @@
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
-namespace SMACD.SDK
+namespace Synthesys.SDK
 {
     /// <summary>
-    /// Wraps the execution of external (system) tasks run by a plugin
+    ///     Wraps the execution of external (system) tasks run by a plugin
     /// </summary>
     public class ExecutionWrapper : IDisposable
     {
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
         /// <summary>
-        /// A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
+        ///     A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
         /// </summary>
         public static ConcurrentDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
 
@@ -30,37 +30,37 @@ namespace SMACD.SDK
         }
 
         /// <summary>
-        /// Task wrapping this execution
+        ///     Task wrapping this execution
         /// </summary>
         public Task RuntimeTask { get; private set; } = Task.FromResult(0);
 
         /// <summary>
-        /// Command being executed
+        ///     Command being executed
         /// </summary>
         public string Command { get; set; }
 
         /// <summary>
-        /// Duration of last execution
+        ///     Duration of last execution
         /// </summary>
         public TimeSpan ExecutionTime { get; private set; }
 
         /// <summary>
-        /// Process object executing this command
+        ///     Process object executing this command
         /// </summary>
         private Process Process { get; } = new Process();
 
         /// <summary>
-        /// Standard output from last execution
+        ///     Standard output from last execution
         /// </summary>
         public string StdOut { get; set; }
 
         /// <summary>
-        /// Standard error from last execution
+        ///     Standard error from last execution
         /// </summary>
         public string StdErr { get; set; }
 
         /// <summary>
-        /// If this process failed to execute
+        ///     If this process failed to execute
         /// </summary>
         public bool FailedToExecute { get; private set; }
 
@@ -68,31 +68,29 @@ namespace SMACD.SDK
         private int OwnerTaskId { get; }
 
         /// <summary>
-        /// Fired when data is written to STDOUT
+        ///     Fired when data is written to STDOUT
         /// </summary>
         public event ExternalProcessDataReceived StandardOutputDataReceived;
 
         /// <summary>
-        /// Fired when data is written to STDERR
+        ///     Fired when data is written to STDERR
         /// </summary>
         public event ExternalProcessDataReceived StandardErrorDataReceived;
 
         /// <summary>
-        /// Execute the command, wrapped by a Task
+        ///     Execute the command, wrapped by a Task
         /// </summary>
         /// <returns></returns>
         public Task Start()
         {
             if (string.IsNullOrEmpty(Command))
-            {
                 throw new Exception("Command was not set but execution has been requested");
-            }
 
             RuntimeTask = Task.Run(() =>
             {
-                Stopwatch sw = new Stopwatch();
+                var sw = new Stopwatch();
                 sw.Start();
-                
+
                 Process.StartInfo = GetStartInfo(Command);
                 if (!Process.Start())
                 {
@@ -110,20 +108,14 @@ namespace SMACD.SDK
 
                 Process.OutputDataReceived += (s, e) =>
                 {
-                    if (e.Data == null)
-                    {
-                        return;
-                    }
+                    if (e.Data == null) return;
 
                     StdOut += e.Data + Environment.NewLine;
                     StandardOutputDataReceived?.Invoke(s, OwnerTaskId, e.Data);
                 };
                 Process.ErrorDataReceived += (s, e) =>
                 {
-                    if (e.Data == null)
-                    {
-                        return;
-                    }
+                    if (e.Data == null) return;
 
                     StdErr += e.Data + Environment.NewLine;
                     StandardErrorDataReceived?.Invoke(s, OwnerTaskId, e.Data);
@@ -142,16 +134,12 @@ namespace SMACD.SDK
 
         private ProcessStartInfo GetStartInfo(string cmd)
         {
-            string escapedArgs = cmd.Replace("\"", "\\\"");
+            var escapedArgs = cmd.Replace("\"", "\\\"");
             ProcessStartInfo procStartInfo;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
                 procStartInfo = new ProcessStartInfo("cmd", "/c " + escapedArgs);
-            }
             else
-            {
                 procStartInfo = new ProcessStartInfo("/bin/bash", $"-c \"{escapedArgs}\"");
-            }
 
             procStartInfo.RedirectStandardOutput = true;
             procStartInfo.RedirectStandardError = true;
@@ -161,17 +149,16 @@ namespace SMACD.SDK
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+
+        private bool disposedValue; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
-                {
                     if (!Process.HasExited)
                         Process.Kill();
-                }
                 disposedValue = true;
             }
         }
@@ -182,6 +169,7 @@ namespace SMACD.SDK
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
+
         #endregion
     }
 }

@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SMACD.Artifacts;
 using SMACD.Data;
-using SMACD.Data.Interop;
-using SMACD.ScanEngine;
+using Synthesys;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,7 +44,7 @@ namespace SMACD.GUI.Controllers
                     {
                         using (var fs = new FileStream(filePath, FileMode.Open))
                         {
-                            Global.Session = new SMACD.ScanEngine.Session(fs);
+                            Global.Session = new Session(fs);
                             Global.ServiceMap = ServiceMapFile.GetServiceMapFromYaml(Global.Session.ServiceMapYaml);
                             foreach (var target in Global.ServiceMap.Targets)
                                 Global.Session.RegisterTarget(target);

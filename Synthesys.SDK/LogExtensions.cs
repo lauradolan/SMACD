@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Text;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 
-namespace SMACD.SDK
+namespace Synthesys.SDK
 {
     public static class LogExtensions
     {
@@ -11,7 +11,7 @@ namespace SMACD.SDK
         {
             ExecutionWrapper.Maps.TryAdd(Thread.CurrentThread.ManagedThreadId, taskId);
             command();
-            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out int dummy);
+            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out var dummy);
         }
 
         public static void TaskLogCritical(this ILogger logger, int taskId, string message, params object[] parameters)
@@ -54,13 +54,10 @@ namespace SMACD.SDK
         {
             try
             {
-                byte[] hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
-                StringBuilder ret = new StringBuilder();
+                var hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
+                var ret = new StringBuilder();
 
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    ret.Append(hash[i].ToString("x2"));
-                }
+                for (var i = 0; i < hash.Length; i++) ret.Append(hash[i].ToString("x2"));
 
                 return ret.ToString();
             }

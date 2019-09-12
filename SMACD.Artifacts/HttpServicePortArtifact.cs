@@ -6,7 +6,7 @@ namespace SMACD.Artifacts
     public class HttpServicePortArtifact : ServicePortArtifact
     {
         /// <summary>
-        /// Get a URL segment (single file or directory)
+        ///     Get a URL segment (single file or directory)
         /// </summary>
         /// <param name="urlSegment">Part of URL</param>
         /// <returns></returns>
@@ -14,10 +14,11 @@ namespace SMACD.Artifacts
         {
             get
             {
-                UrlArtifact result = (UrlArtifact)Children.FirstOrDefault(d => ((UrlArtifact)d).Identifier == urlSegment || ((UrlArtifact)d).UrlSegment == urlSegment);
+                var result = (UrlArtifact) Children.FirstOrDefault(d =>
+                    ((UrlArtifact) d).Identifier == urlSegment || ((UrlArtifact) d).UrlSegment == urlSegment);
                 if (result == null)
                 {
-                    result = new UrlArtifact()
+                    result = new UrlArtifact
                     {
                         Parent = this,
                         UrlSegment = urlSegment,
@@ -26,6 +27,7 @@ namespace SMACD.Artifacts
                     result.BeginFiringEvents();
                     Children.Add(result);
                 }
+
                 return result;
             }
         }
