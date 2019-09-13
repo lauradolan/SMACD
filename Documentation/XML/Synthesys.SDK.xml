@@ -5,163 +5,167 @@
     </assembly>
     <members>
         <member name="T:Synthesys.SDK.Attributes.ConfigurableAttribute">
-             <summary>
-             The ConfigurableAttribute specifies that the decorated property is configurable when the Extension is queued.
-            
-             A Dictionary{string,string} is used to configure each Extensions, where the key is the string name of the Configurable property, and the value is the string representation of the property's value. When the framework invokes this Extension, it will cast the string value to the given Type.
-             </summary>
+            <summary>
+                The ConfigurableAttribute specifies that the decorated property is configurable when the Extension is queued.
+                A Dictionary{string,string} is used to configure each Extensions, where the key is the string name of the
+                Configurable property, and the value is the string representation of the property's value. When the framework
+                invokes this Extension, it will cast the string value to the given Type.
+            </summary>
         </member>
         <member name="M:Synthesys.SDK.Attributes.ConfigurableAttribute.#ctor(System.String)">
             <summary>
-            Specify that the decorated property is configurable when the Extension is queued
+                Specify that the decorated property is configurable when the Extension is queued
             </summary>
             <summary>
-            Items marked with this Attribute can be configured when the Extension is executed.
+                Items marked with this Attribute can be configured when the Extension is executed.
             </summary>
             <remarks>Automatically populated by caller</remarks>
             <param name="name">Name of Configurable property (auto-generated from caller)</param>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ConfigurableAttribute.Name">
             <summary>
-            Name of the Configurable property
+                Name of the Configurable property
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Attributes.ExtensionAttribute">
             <summary>
-            The ExtensionAttribute specifies the unique name used to address the Extension within the system and metadata about the Extension and author
+                The ExtensionAttribute specifies the unique name used to address the Extension within the system and metadata about
+                the Extension and author
             </summary>
         </member>
         <member name="M:Synthesys.SDK.Attributes.ExtensionAttribute.#ctor(System.String)">
             <summary>
-            Specify that this class implements an Extension
+                Specify that this class implements an Extension
             </summary>
             <param name="extensionId">System-unique string to identify this Extension in logs and when being manually queued</param>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.ExtensionIdentifier">
             <summary>
-            System-unique string to identify this Extension in logs and when being manually queued. Once this is set, changing it will break data objects dependent on this Extension.
+                System-unique string to identify this Extension in logs and when being manually queued. Once this is set, changing
+                it will break data objects dependent on this Extension.
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.Name">
             <summary>
-            Display-friendly name of the Extension
+                Display-friendly name of the Extension
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.Author">
             <summary>
-            Person or people who developed the Extension
+                Person or people who developed the Extension
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.Version">
             <summary>
-            Version of the Extension
+                Version of the Extension
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.VersionObj">
             <summary>
-            Version of the Extension, as a Version object
+                Version of the Extension, as a Version object
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.Website">
             <summary>
-            Location where more information and updates about this Extension can be found
+                Location where more information and updates about this Extension can be found
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Attributes.ExtensionAttribute.Description">
             <summary>
-            How and what the Extension accomplishes in more detail
+                How and what the Extension accomplishes in more detail
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Attributes.TriggeredByAttribute">
-             <summary>
-             The TriggeredByAttribute specifies that the Extension is added to the end of the Task Queue when a certain event occurs.
-            
-             This Attribute can be used multiple times on the same Extension.
-             </summary>
+            <summary>
+                The TriggeredByAttribute specifies that the Extension is added to the end of the Task Queue when a certain event
+                occurs.
+                This Attribute can be used multiple times on the same Extension.
+            </summary>
         </member>
         <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
             <summary>
-            Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
+                Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
             </summary>
             <param name="artifactPath">Artifact path</param>
             <param name="trigger">Trigger event</param>
         </member>
         <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger,System.Boolean)">
             <summary>
-            Specify that the Extension is added to the end of the Task Queue when an Extension completes
+                Specify that the Extension is added to the end of the Task Queue when an Extension completes
             </summary>
             <param name="extensionIdentifier">Extension identifier</param>
             <param name="trigger">Triggering execution status</param>
         </member>
         <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(Synthesys.SDK.Triggers.SystemEvents)">
             <summary>
-            Specify that the Extension is added to the end of the Task Queue when a system-level event occurs
+                Specify that the Extension is added to the end of the Task Queue when a system-level event occurs
             </summary>
             <param name="trigger">System event Trigger</param>
         </member>
         <member name="P:Synthesys.SDK.Attributes.TriggeredByAttribute.Trigger">
             <summary>
-            Description of Trigger causing the Extension to be queued
+                Description of Trigger causing the Extension to be queued
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.ICanQueueTasks">
             <summary>
-            ICanQueueTasks indicates that the Extension needs to interface with the Task Queue
+                ICanQueueTasks indicates that the Extension needs to interface with the Task Queue
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.ICanQueueTasks.Tasks">
             <summary>
-            Framework-populated reference to the Task Queue
+                Framework-populated reference to the Task Queue
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHost">
             <summary>
-            IOperateOnHost indicates that the Extension acts upon a single host
+                IOperateOnHost indicates that the Extension acts upon a single host
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHost.Host">
             <summary>
-            Framework-populated reference to the Host Artifact
+                Framework-populated reference to the Host Artifact
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHostPort">
             <summary>
-            ICanQueueTasks indicates that the Extension acts upon an unknown service (by port)
+                ICanQueueTasks indicates that the Extension acts upon an unknown service (by port)
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Port">
             <summary>
-            Framework-populated reference to the ServicePort Artifact
+                Framework-populated reference to the ServicePort Artifact
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHttpService">
             <summary>
-            IOperateOnHttpService indicates that the Extension acts upon a web server
+                IOperateOnHttpService indicates that the Extension acts upon a web server
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService">
             <summary>
-            Framework-populated reference to the HttpServicePort Artifact
+                Framework-populated reference to the HttpServicePort Artifact
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnUrl">
             <summary>
-            IOperateOnUrl indicates that the Extension acts upon a URL
+                IOperateOnUrl indicates that the Extension acts upon a URL
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnUrl.Url">
             <summary>
-            Framework-populated reference to the URL artifact
+                Framework-populated reference to the URL artifact
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IUnderstandProjectInformation">
             <summary>
-            IUnderstandProjectInformation indicates that the Extension needs to know what business object is related to its instance.
+                IUnderstandProjectInformation indicates that the Extension needs to know what business object is related to its
+                instance.
             </summary>
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer">
             <summary>
-            Framework-populated reference to the project information
+                Framework-populated reference to the project information
             </summary>
         </member>
         <member name="T:Synthesys.SDK.ExecutionWrapper">
@@ -277,18 +281,21 @@
         </member>
         <member name="T:Synthesys.SDK.Extensions.ActionExtension">
             <summary>
-            An ActionExtension is generated from known information about a system. ActionExtensions are imported into the Artifact Tree in the same way as any discovered data. The intent is for the framework to use the information generated by ActionExtensions to create ReactionExtensions.
+                An ActionExtension is generated from known information about a system. ActionExtensions are imported into the
+                Artifact Tree in the same way as any discovered data. The intent is for the framework to use the information
+                generated by ActionExtensions to create ReactionExtensions.
             </summary>
         </member>
         <member name="M:Synthesys.SDK.Extensions.ActionExtension.Act">
             <summary>
-            This method is called when the ActionExtension is popped from the Task Queue and executed
+                This method is called when the ActionExtension is popped from the Task Queue and executed
             </summary>
             <returns></returns>
         </member>
         <member name="T:Synthesys.SDK.Extensions.Extension">
             <summary>
-            An Extension is some function, which can either be an Action or a Reaction, which executes with the intent of populating the Artifact Tree with additional data.
+                An Extension is some function, which can either be an Action or a Reaction, which executes with the intent of
+                populating the Artifact Tree with additional data.
             </summary>
         </member>
         <member name="M:Synthesys.SDK.Extensions.Extension.Initialize">
@@ -297,31 +304,50 @@
             </summary>
         </member>
         <member name="M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness">
-             <summary>
-             Called when the Extension is loaded, to check if the runtime environment supports what the Extension requires to execute.
-            
-             Any application validation/dependency checks should happen here, but it is not required.
-             </summary>
-             <returns></returns>
+            <summary>
+                Called when the Extension is loaded, to check if the runtime environment supports what the Extension requires to
+                execute.
+                Any application validation/dependency checks should happen here, but it is not required.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Synthesys.SDK.Extensions.ReactionExtension">
-             A ReactionExtension is added to the end of the Task Queue when some given event occurs during the scan process. The concept behind ReactionExtensions is to enrich the Artifact Tree and, in doing so, trigger other ReactionExtensions.
-            
-             ReactionExtensions can be triggered by:
-             <list type="bullet">
-             <item><description>ActionExtension completes or fails</description></item>
-             <item><description>Artifact Tree element has a child added to it</description></item>
-             <item><description>Artifact Tree element changes</description></item>
-             <item><description>Artifact Tree element is created</description></item>
-             <item><description>Task is started by the Task Queue</description></item>
-             <item><description>Task is completed</description></item>
-             <item><description>Task is added to the Task Queue</description></item>
-             <item><description>Task Queue is completely drained</description></item>
-             </list>
+            <summary>
+                A ReactionExtension is added to the end of the Task Queue when some given event occurs during the scan process. The
+                concept behind ReactionExtensions is to enrich the Artifact Tree and, in doing so, trigger other
+                ReactionExtensions.
+                ReactionExtensions can be triggered by:
+                <list type="bullet">
+                    <item>
+                        <description>ActionExtension completes or fails</description>
+                    </item>
+                    <item>
+                        <description>Artifact Tree element has a child added to it</description>
+                    </item>
+                    <item>
+                        <description>Artifact Tree element changes</description>
+                    </item>
+                    <item>
+                        <description>Artifact Tree element is created</description>
+                    </item>
+                    <item>
+                        <description>Task is started by the Task Queue</description>
+                    </item>
+                    <item>
+                        <description>Task is completed</description>
+                    </item>
+                    <item>
+                        <description>Task is added to the Task Queue</description>
+                    </item>
+                    <item>
+                        <description>Task Queue is completely drained</description>
+                    </item>
+                </list>
+            </summary>
         </member>
         <member name="M:Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)">
             <summary>
-            This method is called when the ReactionExtension is popped from the Task Queue and executed
+                This method is called when the ReactionExtension is popped from the Task Queue and executed
             </summary>
             <param name="trigger">Trigger causing the ReactionExtension to fire</param>
             <returns></returns>

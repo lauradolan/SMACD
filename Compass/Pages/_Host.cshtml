@@ -6,13 +6,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Compass</title>
     <base href="~/" />
-    @*<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-        <link href="css/site.css" rel="stylesheet" />*@
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="blazorise.css" rel="stylesheet" />
     <link href="blazorise.bootstrap.css" rel="stylesheet" />
@@ -20,22 +19,27 @@
     <link href="blazorise.sidebar.css" rel="stylesheet" />
     <link href="blazorise.snackbar.css" rel="stylesheet" />
 
-
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=cbd4f5c92c7a6cb66944607c0d122e8b">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css?h=03ab36d1dde930b7d44a712f19075641">
+    <link rel="stylesheet" href="/assets/css/styles.min.css?h=1d1e44163b9909ce695264cc128df009">
 </head>
-<body>
-    <app>
-        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
-    </app>
+<body id="page-top">
+    @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Script fixes for parallel module loading -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
-    <script src="blazorise.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="/assets/js/script.min.js?h=5f9b75209a5bec2eae9db1b514298205"></script>
+
+<script src="blazorise.js"></script>
     <script src="blazorise.bootstrap.js"></script>
     <script src="blazorise.charts.js"></script>
-
     <script src="_framework/blazor.server.js"></script>
 
+    <script>if (window.module) module = window.module;</script>
 </body>
 </html>
