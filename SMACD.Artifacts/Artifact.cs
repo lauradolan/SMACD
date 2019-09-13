@@ -36,7 +36,7 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Data attachments to Artifact
         /// </summary>
-        public DataArtifactCollection Attachments { get; set; }
+        public DataArtifactCollection Attachments { get; set; } = new DataArtifactCollection();
 
         /// <summary>
         ///     Vulnerabilities related to Artifact

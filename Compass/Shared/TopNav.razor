@@ -4,7 +4,7 @@
 @inject IFileReaderService fileReaderService;
 @{
     var vulnerabilities = Program.GetAllVulnerabilities();
-    var score = Program.Session != null ? Math.Floor(Program.Session.Reports.Average(r => r.AdjustedScore)) : 0;
+    var score = Program.Session != null && Program.Session.Reports.Any() ? Math.Floor(Program.Session.Reports.Average(r => r.AdjustedScore)) : 0;
     var numReports = Program.Session != null ? Program.Session.Reports.Count : 0;
 
     string scoreColor = "";
@@ -52,11 +52,14 @@
                     @foreach (var vuln in vulnerabilities.OrderByDescending(v => v.RiskLevel).Take(5))
                     {
                         <VulnerabilitySummary Vulnerability=@vuln />
-                        <a class="text-center dropdown-item small text-gray-500" href="#">Show All</a>
                     }
                     @if (vulnerabilities.Count == 0)
                     {
                         <a class="text-center dropdown-item small text-gray-500" href="#">No Vulnerabilities Found</a>
+                    }
+                    else
+                    {
+                        <a class="text-center dropdown-item small text-gray-500" href="#">Show All</a>
                     }
 
                 </div>
