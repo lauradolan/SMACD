@@ -33,6 +33,10 @@
     "resource": [
       {
         "files": [
+          "android-chrome-**",
+          "apple-touch-icon",
+          "favicon.ico",
+          "site.webmanifest",
           "images/**",
           "images/favicon.ico"
         ]
@@ -53,7 +57,7 @@
       "_appTitle": "SMACD.io",
       "_appFooter": "&copy; 2019 Anthony Turner<br />This website and the associated libraries are MIT-licensed and may be redistributed under those terms.",
       "_appLogoPath": "images/Logo48.png",
-      "_appFaviconPath": "images/favicon.ico"
+      "_appFaviconPath": "favicon.ico"
     },
     "dest": "_site",
     "globalMetadataFiles": [],
