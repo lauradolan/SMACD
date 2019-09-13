@@ -3,8 +3,8 @@
     {
       "src": [
         {
-          "files": [ "**/**.csproj" ],
-          "exclude": [ "Compass/**", "Synthesys/**" ],
+          "files": ["**/**.csproj"],
+          "exclude": ["Compass/**", "Synthesys/**"],
           "src": "D:/SMACD"
         }
       ],
@@ -54,7 +54,8 @@
     ],
     "globalMetadata": {
       "_appTitle": "SMACD.io",
-      "_appFooter": "&copy; 2019 Anthony Turner<br />This website and the associated libraries are MIT-licensed and may be redistributed under those terms.",
+      "_appFooter":
+        "&copy; 2019 Anthony Turner<br />This website and the associated libraries are MIT-licensed and may be redistributed under those terms.",
       "_appLogoPath": "images/Logo48.png",
       "_appFaviconPath": "favicon.ico"
     },

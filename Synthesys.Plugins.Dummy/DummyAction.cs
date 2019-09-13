@@ -14,7 +14,7 @@ using Synthesys.SDK.Extensions;
 namespace Synthesys.Plugins.Dummy
 {
     /// <summary>
-    /// This plugin does not do meaningful work and is meant to be an example for future Extension development.
+    ///     This plugin does not do meaningful work and is meant to be an example for future Extension development.
     /// </summary>
     [Extension("dummy",
         Name = "Dummy Action",
@@ -24,46 +24,49 @@ namespace Synthesys.Plugins.Dummy
     public class DummyAction : ActionExtension, IOperateOnHost, ICanQueueTasks
     {
         // The options below are different options that can be used to customize the behavior of an ActionExtension.
-        
-        /// <summary>
-        /// Arbitrary configuration option in string format
-        /// </summary>
-        [Configurable] public string ConfigurationOption { get; set; }
 
         /// <summary>
-        /// Arbitrary configuration option in integer format, deserialized from a string
+        ///     Arbitrary configuration option in string format
         /// </summary>
-        [Configurable] public int ConfigurationOption2 { get; set; }
+        [Configurable]
+        public string ConfigurationOption { get; set; }
 
         /// <summary>
-        /// Link to the Task toolbox, which can queue Tasks
+        ///     Arbitrary configuration option in integer format, deserialized from a string
         /// </summary>
-        public ITaskToolbox Tasks { get; set; }
+        [Configurable]
+        public int ConfigurationOption2 { get; set; }
 
         /// <summary>
-        /// Hostname/IP acted upon by the ActionExtension
-        ///
-        /// This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible Targets were found, this will remain null.
-        /// </summary>
-        public HostArtifact Host { get; set; }
-
-        /// <summary>
-        /// HTTP service acted upon by the ActionExtension
-        ///
-        /// This property will only be populated if the ActionExtension is queued with an HTTP service as a Target. If no compatible Targets were found, this will remain null.
-        ///
-        /// This property provides an a more concrete implementation of ServicePortArtifact, which means if a Target is identified as an HTTP server, that Target will be referenced from both this property and the "Service" property below.
+        ///     HTTP service acted upon by the ActionExtension
+        ///     This property will only be populated if the ActionExtension is queued with an HTTP service as a Target. If no
+        ///     compatible Targets were found, this will remain null.
+        ///     This property provides an a more concrete implementation of ServicePortArtifact, which means if a Target is
+        ///     identified as an HTTP server, that Target will be referenced from both this property and the "Service" property
+        ///     below.
         /// </summary>
         public HttpServicePortArtifact HttpService { get; set; }
 
         /// <summary>
-        /// Service acted upon by the ActionExtension, addressed via its port
-        ///
-        /// This property will only be populated if the ActionExtension is queued with an open port (service) as a Target. If no compatible Targets were found, this will remain null.
-        ///
-        /// If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the property with the closest parent Type will be referenced.
+        ///     Service acted upon by the ActionExtension, addressed via its port
+        ///     This property will only be populated if the ActionExtension is queued with an open port (service) as a Target. If
+        ///     no compatible Targets were found, this will remain null.
+        ///     If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the
+        ///     property with the closest parent Type will be referenced.
         /// </summary>
         public ServicePortArtifact Service { get; set; }
+
+        /// <summary>
+        ///     Link to the Task toolbox, which can queue Tasks
+        /// </summary>
+        public ITaskToolbox Tasks { get; set; }
+
+        /// <summary>
+        ///     Hostname/IP acted upon by the ActionExtension
+        ///     This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible
+        ///     Targets were found, this will remain null.
+        /// </summary>
+        public HostArtifact Host { get; set; }
 
         public override ExtensionReport Act()
         {

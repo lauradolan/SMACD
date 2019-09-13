@@ -12,7 +12,7 @@ using Synthesys.SDK.Triggers;
 namespace Synthesys.Plugins.Dummy
 {
     /// <summary>
-    /// This plugin does not do meaningful work and is meant to be an example for future Extension development.
+    ///     This plugin does not do meaningful work and is meant to be an example for future Extension development.
     /// </summary>
     [Extension("dummyReaction",
         Name = "Dummy Reaction",
@@ -23,24 +23,23 @@ namespace Synthesys.Plugins.Dummy
     public class DummyReaction : ReactionExtension, IOperateOnHost, IUnderstandProjectInformation
     {
         /// <summary>
-        /// Hostname/IP which is acted upon by the ReactionExtension. This value is populated by the framework.
+        ///     Hostname/IP which is acted upon by the ReactionExtension. This value is populated by the framework.
         /// </summary>
         public HostArtifact Host { get; set; }
 
         /// <summary>
-        /// Information about the business elements used to call this ReactionExtension.
-        ///
-        /// This is used to identify what business elements are linked to a technical implementation
+        ///     Information about the business elements used to call this ReactionExtension.
+        ///     This is used to identify what business elements are linked to a technical implementation
         /// </summary>
         public ProjectPointer ProjectPointer { get; set; }
 
         /// <summary>
-        /// This method is called when the Extension is popped from the Task Queue and executed
+        ///     This method is called when the Extension is popped from the Task Queue and executed
         /// </summary>
         /// <param name="trigger">Trigger causing the ReactionExtension to fire</param>
         /// <returns></returns>
         public override ExtensionReport React(TriggerDescriptor trigger)
-        { 
+        {
             // A Logger is populated by the framework and attached to the calling executable
             Logger.LogInformation("Executing Dummy Reaction from Trigger {0}", trigger);
 
@@ -51,6 +50,7 @@ namespace Synthesys.Plugins.Dummy
                 text = File.ReadAllText(execContainer.DirectoryWithFile("test.dat"));
                 Logger.LogInformation("Text Inside Using: " + text);
             }
+
             Logger.LogInformation("Text Outside Using: " + text);
 
             // Artifacts can be retrieved with strong typing
