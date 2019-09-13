@@ -33,9 +33,12 @@
     "resource": [
       {
         "files": [
-          "android-chrome-**",
-          "apple-touch-icon",
+          "*.png",
           "favicon.ico",
+          "favicon-*.png",
+          "mstile-*.png",
+          "safari-pinned-tab.svg",
+          "browserconfig.xml",
           "site.webmanifest",
           "images/**",
           "images/favicon.ico"
