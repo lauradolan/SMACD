@@ -1,0 +1,515 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SMACD.Artifacts</name>
+    </assembly>
+    <members>
+        <member name="P:SMACD.Artifacts.Artifact.Parent">
+            <summary>
+                Parent Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.Identifier">
+            <summary>
+                Artifact Identifier for path
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.Attachments">
+            <summary>
+                Data attachments to Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.Vulnerabilities">
+            <summary>
+                Vulnerabilities related to Artifact
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.GetChildById(System.String)">
+            <summary>
+                Get a child Artifact by its identifier
+            </summary>
+            <param name="identifier">Artifact identifier, unique to this parent</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.Disconnect">
+            <summary>
+                Disconnect parents in Artifact tree
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.Connect(SMACD.Artifacts.Artifact)">
+            <summary>
+                Create Parent pointers in Artifact tree
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.GetPathToRoot(System.Collections.Generic.List{SMACD.Artifacts.Artifact})">
+            <summary>
+                Get a List of Artifacts that represent the path back to the root element, root-first
+            </summary>
+            <param name="path">Artifact path built so far</param>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.DataArtifact.Name">
+            <summary>
+                Name of this Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.DataArtifact.StoredData">
+            <summary>
+                Data stored in this Artifact in raw format
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifact.As``1">
+            <summary>
+                Get the Artifact cast as a specific DataArtifact type
+            </summary>
+            <typeparam name="T">Artifact type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifact.AsStringArtifact">
+            <summary>
+                Get this as a string-containing Artifact
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifact.AsObjectArtifact">
+            <summary>
+                Get this as an object-containing Artifact
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifact.AsNativeDirectoryArtifact">
+            <summary>
+                Get this as a native directory-providing Artifact
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.DataArtifactCollection.Item(System.String)">
+            <summary>
+                Retrieve DataArtifact by its name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="E:SMACD.Artifacts.Data.DataArtifactCollection.ArtifactCreated">
+            <summary>
+                Fired when Artifact is created
+            </summary>
+        </member>
+        <member name="E:SMACD.Artifacts.Data.DataArtifactCollection.ArtifactChanged">
+            <summary>
+                Fired when Artifact is changed
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifactCollection.CreateOrLoadNativePath(System.String,System.TimeSpan)">
+            <summary>
+                Create or load a native (system) path to allow external tools to put data into the system
+                via a local path. This is zipped when the underlying context is disposed.
+                Only one context can be opened at a time, but this method will allow the caller to specify
+                (if desired) a duration, in seconds, to wait until the resource becomes available.
+            </summary>
+            <param name="name">Artifact name</param>
+            <param name="availabilityWaitTimeout">Time to wait if the context is already opened</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifactCollection.Save``1(System.String,``0)">
+            <summary>
+                Create a child Artifact containing a serialized object
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="name">Artifact name</param>
+            <param name="obj">Object to save</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifactCollection.Save(System.String,System.String)">
+            <summary>
+                Create a child Artifact containing a string
+            </summary>
+            <param name="name">Artifact name</param>
+            <param name="str">String to save</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifactCollection.Save(System.String,System.Byte[])">
+            <summary>
+                Create a child Artifact containing a byte array
+            </summary>
+            <param name="name">Artifact name</param>
+            <param name="data">Byte array to save</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.DataArtifactCollection.Save(System.String)">
+            <summary>
+                Create a blank child Artifact
+            </summary>
+            <param name="name">Artifact name</param>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.Data.NativeDirectoryArtifact">
+            <summary>
+                Represents an Artifact that provides a system directory for collecting files
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.NativeDirectoryArtifact.HasActiveDispatchedContext">
+            <summary>
+                If the Artifact has dispatched a Context
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.NativeDirectoryArtifact.GetContext">
+            <summary>
+                Get a directory Context to collect files locally; when the context is disposed, the directory will be
+                automatically ZIPped and saved to the Artifact's StoredData buffer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.NativeDirectoryContext.Directory">
+            <summary>
+                Directory path allocated by this Context to store files and directories
+                in; contents will be compressed in full upon Context disposal
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.NativeDirectoryContext.DirectoryWithFile(System.String)">
+            <summary>
+                Directory path and a filename concatenated together
+            </summary>
+            <param name="fileName">File name</param>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.Data.ObjectArtifact">
+            <summary>
+                Represents an Artifact that contains a serialized object
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.ObjectArtifact.Get">
+            <summary>
+                Get a deserialized instance of the object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.ObjectArtifact.Get``1">
+            <summary>
+                Get a deserialized instance of the object (strongly typed)
+            </summary>
+            <typeparam name="T">Deserialized object's Type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.ObjectArtifact.Set``1(``0)">
+            <summary>
+                Set the value of the Artifact to a given object, which will be JSON serialized
+            </summary>
+            <typeparam name="T">Type of object</typeparam>
+            <param name="obj">Object to serialize</param>
+        </member>
+        <member name="T:SMACD.Artifacts.Data.StringArtifact">
+            <summary>
+                Represents an Artifact that contains a string
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.StringArtifact.Get">
+            <summary>
+                Get the saved string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Data.StringArtifact.Set(System.String)">
+            <summary>
+                Set the saved value to the given string
+            </summary>
+            <param name="data">String to commit</param>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.Identifier">
+            <summary>
+                Artifact Identifier
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.Hostname">
+            <summary>
+                Name of Host
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.IpAddress">
+            <summary>
+                IP Address of Host
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.Aliases">
+            <summary>
+                Aliases belonging to this Host
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.Item(System.Int32)">
+            <summary>
+                Get a TCP port/service by its port number
+            </summary>
+            <param name="port">TCP Port number</param>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.HostArtifact.Item(System.String)">
+            <summary>
+                Get a port/service by its port number and type
+            </summary>
+            <param name="protocolAndport">Protocol and port, i.e. Tcp/80</param>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Item(System.String)">
+            <summary>
+                Get a URL segment (single file or directory)
+            </summary>
+            <param name="urlSegment">Part of URL</param>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.ObservableDictionary`2">
+            <summary>
+                Provides a dictionary for use with data binding.
+            </summary>
+            <typeparam name="TKey">Specifies the type of the keys in this collection.</typeparam>
+            <typeparam name="TValue">Specifies the type of the values in this collection.</typeparam>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.#ctor">
+            <summary>
+                Initializes an instance of the class.
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+                Initializes an instance of the class using another dictionary as
+                the key/value store.
+            </summary>
+        </member>
+        <member name="E:SMACD.Artifacts.ObservableDictionary`2.CollectionChanged">
+            <summary>Event raised when the collection changes.</summary>
+        </member>
+        <member name="E:SMACD.Artifacts.ObservableDictionary`2.PropertyChanged">
+            <summary>Event raised when a property on the collection changes.</summary>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.RaisePropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+                Allows derived classes to raise custom property changed events.
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.Add(`0,`1)">
+            <summary>
+                Adds an element with the provided key and value to the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </summary>
+            <param name="key">The object to use as the key of the element to add.</param>
+            <param name="value">The object to use as the value of the element to add.</param>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.ContainsKey(`0)">
+            <summary>
+                Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the
+                specified key.
+            </summary>
+            <param name="key">The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</param>
+            <returns>
+                true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the key; otherwise,
+                false.
+            </returns>
+        </member>
+        <member name="P:SMACD.Artifacts.ObservableDictionary`2.Keys">
+            <summary>
+                Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the
+                <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </summary>
+            <returns>
+                An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the object that implements
+                <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </returns>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.Remove(`0)">
+            <summary>
+                Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </summary>
+            <param name="key">The key of the element to remove.</param>
+            <returns>
+                true if the element is successfully removed; otherwise, false.  This method also returns false if
+                <paramref name="key" /> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </returns>
+        </member>
+        <member name="M:SMACD.Artifacts.ObservableDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+                Gets the value associated with the specified key.
+            </summary>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">
+                When this method returns, the value associated with the specified key, if the key is found;
+                otherwise, the default value for the type of the <paramref name="value" /> parameter. This parameter is passed
+                uninitialized.
+            </param>
+            <returns>
+                true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element
+                with the specified key; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:SMACD.Artifacts.ObservableDictionary`2.Values">
+            <summary>
+                Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the
+                <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </summary>
+            <returns>
+                An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the object that
+                implements <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            </returns>
+        </member>
+        <member name="P:SMACD.Artifacts.ObservableDictionary`2.Item(`0)">
+            <summary>
+                Gets or sets the element with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.ProjectPointer.Feature">
+            <summary>
+                Feature which creates the Action
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ProjectPointer.UseCase">
+            <summary>
+                Use Case which creates the Action
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ProjectPointer.AbuseCase">
+            <summary>
+                Abuse Case which creates the Action
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.RootArtifact.Identifier">
+            <summary>
+                Artifact Identifier
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.RootArtifact.Item(System.String)">
+            <summary>
+                Hostname or IP of resource
+            </summary>
+            <param name="hostNameOrIp">Hostname/IP</param>
+            <returns></returns>
+        </member>
+        <member name="E:SMACD.Artifacts.RootArtifact.ArtifactCreated">
+            <summary>
+                Fired when an Artifact belonging to this tree
+            </summary>
+        </member>
+        <member name="E:SMACD.Artifacts.RootArtifact.ArtifactChanged">
+            <summary>
+                Fired when the data of an Artifact changes
+            </summary>
+        </member>
+        <member name="E:SMACD.Artifacts.RootArtifact.ArtifactChildAdded">
+            <summary>
+                Fired when an Artifact is added to a given Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.Identifier">
+            <summary>
+                Artifact Identifier
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.Host">
+            <summary>
+                Hostname/IP of this Service
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.Protocol">
+            <summary>
+                Port Protocol Type
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.Port">
+            <summary>
+                Port number
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ServiceName">
+            <summary>
+                Service name
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ServiceBanner">
+            <summary>
+                Service banner
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlArtifact.Identifier">
+            <summary>
+                Artifact Identifier
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlArtifact.Method">
+            <summary>
+                HTTP method used to access URL
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlArtifact.UrlSegment">
+            <summary>
+                URL Segment (file/directory)
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlArtifact.Requests">
+            <summary>
+                Requests which can be made against this URL
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlArtifact.Item(System.String)">
+            <summary>
+                Get a child URL segment
+            </summary>
+            <param name="urlSegment">URL segment</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.UrlArtifact.GetUrl(System.String)">
+            <summary>
+                Get entire URL from all segments (assuming this item is the last URL segment)
+            </summary>
+            <param name="url">Built URL</param>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Identifier">
+            <summary>
+                Artifact Identifier
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Fields">
+            <summary>
+                Fields to be sent with request
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Headers">
+            <summary>
+                Headers to be sent with request
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.RiskLevel">
+            <summary>
+                Risk Level of the Vulnerability
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.Confidence">
+            <summary>
+                Confidence the attacker has in the Vulnerability
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.Occurrences">
+            <summary>
+                Number of times the Vulnerability occurs
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.Title">
+            <summary>
+                Title of Vulnerability
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.Description">
+            <summary>
+                Vulnerability's description
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.Remedy">
+            <summary>
+                Remedy for Vulnerability (if any)
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Vulnerability.AdditionalInformation">
+            <summary>
+                Additional information about vulnerability
+            </summary>
+        </member>
+    </members>
+</doc>

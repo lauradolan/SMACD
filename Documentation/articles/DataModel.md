@@ -2,7 +2,7 @@
 
 The SMACD data model integrates data about your system or application's [**features**](#features), [**use cases**](#use-cases), possible [**abuse cases**](#abuse-cases), [**plugin pointers**](#plugin-pointers) and [**resource pointers**](#resource-pointers).
 
-![Nested model of different concepts in SMACD program architecture including features, use cases, abuse cases, testing and business objects.](Assets/ObjectModel.png "SMACD data model")
+![Nested model of different concepts in SMACD program architecture including features, use cases, abuse cases, testing and business objects.](../images/ObjectModel.png "SMACD data model")
 
 *The above would be a visual model of the YAML service map description below:*
 ```yaml

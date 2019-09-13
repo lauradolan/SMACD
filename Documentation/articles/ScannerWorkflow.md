@@ -24,4 +24,4 @@ The SMACD scanner workflow is as follows:
     3. Any **data attachments** generated during the scanning process
     4. The **artifact correlation tree**
 
-![Workflow of SMACD CLI tool ingesting the service map and creating a tree of possible vulnerabilities based on given abuse cases.](Assets/Workflow.png "SMACD CLI tool workflow diagram")
+![Workflow of SMACD CLI tool ingesting the service map and creating a tree of possible vulnerabilities based on given abuse cases.](../images/Workflow.png "SMACD CLI tool workflow diagram")
