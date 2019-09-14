@@ -7,6 +7,7 @@
     <PackageReference Include="Blazorise.Bootstrap" Version="0.8.4" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.4" />
     <PackageReference Include="ElectronNET.API" Version="5.22.14" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview9.19423.4" />
     <PackageReference Include="Tewr.Blazor.FileReader" Version="0.15.0.19248" />
   </ItemGroup>
   <ItemGroup>
@@ -19,5 +20,37 @@
     <Content Update="electron.manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <!--+++++++++++++++++++++++++++++++PLUGINS++++++++++++++++++++++++++++++++-->
+
+  <ItemGroup>
+    <!-- Dummy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Dummy\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Dummy.dll" Link="Plugins\Synthesys.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nmap Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nmap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nmap.dll" Link="Plugins\Synthesys.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OWASP ZAProxy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.OwaspZap.dll" Link="Plugins\Synthesys.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nikto Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nikto\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nikto.dll" Link="Plugins\Synthesys.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

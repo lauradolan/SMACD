@@ -1,0 +1,21 @@
+﻿@page "/plugins"
+@using System.Reflection
+@using Synthesys
+@using Synthesys.SDK.Attributes
+<h3>Action Extensions</h3>
+<small>Action Extensions are explicitly executed based on known information. They can originate from an Abuse Case in the Service Map, or be added to the queue by another Extension.</small>
+<div class="card-group">
+    @foreach (var action in ExtensionToolbox.Instance.ExtensionLibraries.SelectMany(l => l.ActionExtensions))
+    {
+        <Plugin ExtensionIdentifier="@action.Key" />
+    }
+</div>
+<h3>Reaction Extensions</h3>
+<small>Reaction Extensions are added to the Task Queue when a given Trigger occurs during the scan process. These can enrich data, queue other Extensions, or offload information to external systems.</small>
+<div class="card-group">
+    @foreach (var reaction in ExtensionToolbox.Instance.ExtensionLibraries.SelectMany(l => l.ReactionExtensions.SelectMany(e => e.Value)))
+    {
+        var id = reaction.GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier;
+        <Plugin ExtensionIdentifier="@id" />
+    }
+</div>

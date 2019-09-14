@@ -7,7 +7,7 @@
   "build": {
     "appId": "com.Compass.app",
     "productName": "Compass",
-    "copyright": "Copyright © 2019",
+    "copyright": "Copyright © 2019 Anthony Turner",
     "buildVersion": "1.0.0",
     "compression": "maximum",
     "directories": {
