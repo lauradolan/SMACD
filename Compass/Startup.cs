@@ -31,7 +31,6 @@ namespace Compass
             services.AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,83 @@
+﻿@using SMACD.Artifacts
+@inherits LayoutComponentBase
+
+<div id="wrapper">
+    <LeftNav />
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <TopNav />
+            <div class="d-flex">
+                <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
+                    @if (Artifact == null)
+                    {
+                        <p><em>Loading...</em></p>
+                    }
+                    else
+                    {
+                        <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;">
+                            <ArtifactTreeNode Artifact="@Artifact" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+                        </ul>
+                    }
+                </div>
+                <div class="container flex-row flex-grow-1">
+                    @DynamicFragment
+                </div>
+            </div>
+        </div>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+
+@functions {
+
+    [Parameter]
+    public Artifact Artifact { get; set; } = Program.Session?.Artifacts;
+
+    private RenderFragment DynamicFragment { get; set; }
+
+    void IdentifierClicked(Artifact artifact)
+    {
+        Artifact = artifact;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        DynamicFragment = builder =>
+        {
+            var asm = System.Reflection.Assembly.GetAssembly(typeof(Artifact));
+            var types = asm.GetTypes();
+            Type componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
+            if (componentType != null)
+            {
+                builder.OpenComponent(0, componentType);
+                builder.CloseComponent();
+            }
+            else
+            {
+                builder.OpenComponent(0, Type.GetType("_DefaultArtifactView_razor"));
+                builder.AddAttribute(1, "Artifact", Artifact);
+                builder.CloseComponent();
+            }
+        };
+        return Task.FromResult(0);
+    }
+
+    protected Task InitializeArtifact()
+    {
+        DynamicFragment = builder =>
+        {
+            Type componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
+            if (componentType != null)
+            {
+                builder.OpenComponent(0, componentType);
+                builder.CloseComponent();
+            }
+            else
+            {
+                builder.OpenComponent(0, Type.GetType("_DefaultArtifactView_razor"));
+                builder.AddAttribute(1, "Artifact", Artifact);
+                builder.CloseComponent();
+            }
+        };
+        return Task.FromResult(0);
+    }
+}

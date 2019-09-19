@@ -39,6 +39,20 @@ namespace Synthesys
         protected ILogger Logger { get; } = Global.LogFactory.CreateLogger("TaskToolbox");
 
         /// <summary>
+        /// Resolve an ActionExtension or ReactionExtension from its ExtensionIdentifier
+        /// </summary>
+        /// <param name="extensionId"></param>
+        /// <returns></returns>
+        public Extension ResolveExtensionFromId(string extensionId)
+        {
+            if (_actionExtensionMap.ContainsKey(extensionId))
+                return EmitAction(extensionId);
+            else
+                return GetReactionInstance(_extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
+                    t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionId)).FirstOrDefault(i => i != null));
+        }
+
+        /// <summary>
         ///     Resolve Type against Types provided by loaded libraries
         /// </summary>
         /// <param name="typeName">Type to resolve</param>

@@ -11,8 +11,12 @@
 }
 
 @{
-    var action = ExtensionToolbox.Instance.EmitAction(ExtensionIdentifier);
-    var triggers = action.GetType().GetCustomAttributes<TriggeredByAttribute>().ToList();
+    var action = ExtensionToolbox.Instance.ResolveExtensionFromId(ExtensionIdentifier);
+    var triggers = new List<TriggeredByAttribute>();
+    if (action != null)
+    {
+        triggers = action.GetType().GetCustomAttributes<TriggeredByAttribute>().ToList();
+    }
 }
 
 <div class="card m-3">

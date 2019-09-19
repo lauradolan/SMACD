@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using Microsoft.AspNetCore.Blazor;
 using SMACD.Artifacts.Data;
 
 namespace SMACD.Artifacts
@@ -17,7 +19,7 @@ namespace SMACD.Artifacts
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
                     foreach (var item in e.NewItems)
-                        NotifyChildAdded((Artifact) item);
+                        NotifyChildAdded((Artifact)item);
             };
         }
 
@@ -52,6 +54,16 @@ namespace SMACD.Artifacts
         {
             return Children.FirstOrDefault(c => c.Identifier == identifier);
         }
+
+        /// <summary>
+        /// An Action which can be registered by the Extension to return a text summary of the Artifact
+        /// </summary>
+        public virtual string ArtifactTextSummary { get; } = string.Empty;
+
+        /// <summary>
+        /// An Action which can be registered by the Extension to return an HTML component to view artifact
+        /// </summary>
+        public virtual string ArtifactSummaryViewTypeName { get; } = null;
 
         internal void BeginFiringEvents()
         {

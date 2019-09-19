@@ -1,0 +1,47 @@
+﻿@using SMACD.Artifacts
+    <li>
+        <span>
+            @if (Artifact.Children.Any() && IsExpanded)
+            {
+                <i @onclick="SwitchExpansion" class="fa fa-minus" style="margin-right: 0.5em;"></i>
+            }
+            else if (Artifact.Children.Any())
+            {
+                <i @onclick="SwitchExpansion" class="fa fa-plus" style="margin-right: 0.5em;"></i>
+            }
+            else
+            {
+                <i class="fa fa-puzzle-piece" style="margin-right: 0.5em;"></i>
+            }
+            <a href="javascript:return false;" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
+            @Artifact.Identifier
+            </a>
+            <span class="text-right d-inline float-right">(@Artifact.Vulnerabilities.Count)</span>
+        </span>
+        @if (Artifact.Children.Any() && IsExpanded)
+            {
+            <ul>
+                @foreach (var child in Artifact.Children)
+            {
+                    <ArtifactTreeNode Artifact="@child" />
+            }
+            </ul>
+            }
+    </li>
+
+@functions {
+
+    [Parameter]
+    public Artifact Artifact { get; set; }
+
+    [Parameter]
+    public EventCallback<Artifact> IdentifierClicked { get; set; }
+
+    [Parameter]
+    public bool IsExpanded { get; set; } = false;
+
+    public void SwitchExpansion()
+    {
+        IsExpanded = !IsExpanded;
+    }
+}

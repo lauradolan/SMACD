@@ -1,0 +1,46 @@
+﻿@page "/artifacts"
+@layout LayoutWithTree
+@using SMACD.Artifacts
+@using Blazor
+
+<h2>Artifacts</h2>
+<Card>
+    <CardBody>
+        <CardTitle Size="7">@Artifact.Identifier</CardTitle>
+        @if (string.IsNullOrEmpty(ArtifactDescription))
+        { 
+            <CardText>@ArtifactDescription</CardText>
+        }
+        <Button Color="Color.Warning" @onclick="PruneTree">Prune</Button>
+    </CardBody>
+</Card>
+
+@functions {
+
+    [Parameter]
+    public Artifact Artifact { get; set; } = Program.Session?.Artifacts;
+
+    private string ArtifactDescription { get; set; } = string.Empty;
+
+    public void PruneTree()
+    {
+        PruneTree(Artifact);
+    }
+    private void PruneTree(Artifact target)
+    {
+        target.Disconnect();
+        foreach (var child in Artifact.Children)
+            PruneTree(child);
+    }
+}
+
+@code {
+    protected override Task OnInitializedAsync()
+    {
+        if (Artifact.ArtifactTextSummary != null)
+        {
+            ArtifactDescription = Artifact.ArtifactTextSummary;
+        }
+        return base.OnInitializedAsync();
+    }
+}

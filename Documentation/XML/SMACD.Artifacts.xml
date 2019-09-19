@@ -31,6 +31,16 @@
             <param name="identifier">Artifact identifier, unique to this parent</param>
             <returns></returns>
         </member>
+        <member name="P:SMACD.Artifacts.Artifact.ArtifactTextSummary">
+            <summary>
+            An Action which can be registered by the Extension to return a text summary of the Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.ArtifactSummaryViewTypeName">
+            <summary>
+            An Action which can be registered by the Extension to return an HTML component to view artifact
+            </summary>
+        </member>
         <member name="M:SMACD.Artifacts.Artifact.Disconnect">
             <summary>
                 Disconnect parents in Artifact tree

@@ -4,11 +4,12 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.8.4" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.4" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.8.5" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.5" />
     <PackageReference Include="ElectronNET.API" Version="5.22.14" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview9.19423.4" />
-    <PackageReference Include="Tewr.Blazor.FileReader" Version="0.15.0.19248" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0-rc1.19456.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-rc1.19456.10" />
+    <PackageReference Include="Tewr.Blazor.FileReader" Version="0.16.0.19262" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
@@ -52,5 +53,9 @@
     <EmbeddedResource Include="..\Synthesys.Plugins.Nikto\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nikto.dll" Link="Plugins\Synthesys.Plugins.Nikto.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\js\script.min.js" />
   </ItemGroup>
 </Project>

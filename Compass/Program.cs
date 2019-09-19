@@ -34,7 +34,7 @@ namespace Compass
         public static void Main(string[] args)
         {
             Synthesys.ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
-                Path.Combine(RuntimeEnvironment.GetRuntimeDirectory(), "Plugins"),
+                Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
                 "Synthesys.Plugins.*.dll", true);
 
             CreateHostBuilder(args).Build().Run();
