@@ -50,6 +50,8 @@ namespace SMACD.Artifacts
             }
         }
 
+        public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.HostArtifactView";
+
         /// <summary>
         ///     Aliases belonging to this Host
         /// </summary>

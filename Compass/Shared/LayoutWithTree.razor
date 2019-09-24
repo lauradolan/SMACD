@@ -8,14 +8,17 @@
             <TopNav />
             <div class="d-flex">
                 <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
-                    @if (Artifact == null)
+                    @if (Program.Session == null || Program.Session.Artifacts == null)
                     {
                         <p><em>Loading...</em></p>
                     }
                     else
                     {
-                        <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;">
-                            <ArtifactTreeNode Artifact="@Artifact" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+                        <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;color:#fff">
+                            @foreach (var item in Program.Session.Artifacts.Children)
+                            {
+                                <ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+                            }
                         </ul>
                     }
                 </div>
@@ -37,46 +40,49 @@
     void IdentifierClicked(Artifact artifact)
     {
         Artifact = artifact;
+        if (!(artifact is RootArtifact))
+            InitializeArtifact();
     }
 
-    protected override Task OnInitializedAsync()
-    {
-        DynamicFragment = builder =>
-        {
-            var asm = System.Reflection.Assembly.GetAssembly(typeof(Artifact));
-            var types = asm.GetTypes();
-            Type componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
-            if (componentType != null)
-            {
-                builder.OpenComponent(0, componentType);
-                builder.CloseComponent();
-            }
-            else
-            {
-                builder.OpenComponent(0, Type.GetType("_DefaultArtifactView_razor"));
-                builder.AddAttribute(1, "Artifact", Artifact);
-                builder.CloseComponent();
-            }
-        };
-        return Task.FromResult(0);
-    }
+    protected override Task OnInitializedAsync() => InitializeArtifact();
 
     protected Task InitializeArtifact()
     {
+        if (Artifact == null)
+            return Task.FromResult(0);
+
         DynamicFragment = builder =>
         {
-            Type componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
-            if (componentType != null)
+            Type componentType = null;
+            if (!string.IsNullOrEmpty(Artifact.ArtifactSummaryViewTypeName))
             {
-                builder.OpenComponent(0, componentType);
-                builder.CloseComponent();
+                // Gotta find that view!
+
+                // First, see if we can resolve this cheaply.
+                componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
+
+                // Try resolving inside the Artifacts assembly
+                if (componentType == null && Artifact.ArtifactSummaryViewTypeName.Contains(".Artifacts."))
+                {
+                    componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.Artifacts.Views.DefaultArtifactView)).GetType(Artifact.ArtifactSummaryViewTypeName);
+                }
+
+                // Try resolving inside the loaded extensions
+                if (componentType == null)
+                {
+                    componentType = Synthesys.ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.ArtifactSummaryViewTypeName)).FirstOrDefault(a => a != null);
+                }
             }
-            else
-            {
-                builder.OpenComponent(0, Type.GetType("_DefaultArtifactView_razor"));
+
+            if (componentType == null)
+                componentType = typeof(SMACD.Artifacts.Views.DefaultArtifactView);
+
+            builder.OpenComponent(0, componentType);
+            if (!(Artifact is RootArtifact))
                 builder.AddAttribute(1, "Artifact", Artifact);
-                builder.CloseComponent();
-            }
+            else
+                builder.AddAttribute(1, "Artifact", (object)null);
+            builder.CloseComponent();
         };
         return Task.FromResult(0);
     }

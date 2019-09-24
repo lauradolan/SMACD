@@ -4,6 +4,21 @@
 @using Blazor
 
 <h2>Artifacts</h2>
+@foreach (var artifact in Program.Session.Artifacts.Children)
+{
+    if (artifact is RootArtifact)
+    {
+        <RootArtifactView />
+    }
+    else if (string.IsNullOrEmpty(artifact.ArtifactSummaryViewTypeName))
+    {
+        <DefaultArtifactView />
+    }
+    else
+    {
+
+    }
+}
 <Card>
     <CardBody>
         <CardTitle Size="7">@Artifact.Identifier</CardTitle>

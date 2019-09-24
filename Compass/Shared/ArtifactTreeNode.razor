@@ -13,7 +13,7 @@
             {
                 <i class="fa fa-puzzle-piece" style="margin-right: 0.5em;"></i>
             }
-            <a href="javascript:return false;" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
+            <a href="javascript:void(0)" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
             @Artifact.Identifier
             </a>
             <span class="text-right d-inline float-right">(@Artifact.Vulnerabilities.Count)</span>
@@ -23,7 +23,7 @@
             <ul>
                 @foreach (var child in Artifact.Children)
             {
-                    <ArtifactTreeNode Artifact="@child" />
+                    <ArtifactTreeNode Artifact="@child" IdentifierClicked="@IdentifierClicked" />
             }
             </ul>
             }

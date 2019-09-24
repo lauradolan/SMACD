@@ -1,0 +1,43 @@
+﻿<div class="text-center pt-2">
+    <h2>Host (Server)</h2>
+    <p>This Artifact represents a single hostname/IP address of the target application</p>
+
+    @if (string.IsNullOrEmpty(SerializedData))
+    {
+        <p class="pt-3 pb-2">Below is the information available:</p>
+        <pre class="text-left">
+            @SerializedData
+        </pre>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public HostArtifact Artifact { get; set; }
+
+    private string SerializedData { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Artifact != null)
+        {
+            var originalParent = Artifact.Parent;
+            Artifact.Disconnect();
+            SerializedData = Newtonsoft.Json.JsonConvert.SerializeObject(Artifact, new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            });
+            Artifact.Connect(originalParent);
+        }
+        else
+            SerializedData = string.Empty;
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        OnInitialized();
+        return Task.FromResult(0);
+    }
+}
