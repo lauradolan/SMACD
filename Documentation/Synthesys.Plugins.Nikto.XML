@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Synthesys.Plugins.Nikto</name>
+    </assembly>
+    <members>
+        <member name="T:Synthesys.Plugins.Nikto.NiktoAction">
+            <summary>
+                Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for
+                multiple items, including over 6700 potentially dangerous files/programs, checks for outdated versions of over 1250
+                servers, and version specific problems on over 270 servers.
+            </summary>
+            <remarks>Description from tools.kali.org</remarks>
+        </member>
+        <member name="P:Synthesys.Plugins.Nikto.NiktoAction.HttpService">
+            <summary>
+                HTTP Service being scanned
+            </summary>
+        </member>
+    </members>
+</doc>

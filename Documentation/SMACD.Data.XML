@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SMACD.Data</name>
+    </assembly>
+    <members>
+        <member name="T:SMACD.Data.AbuseCaseModel">
+            <summary>
+                Represents an Abuse Case: a way an attacker can abuse a resource to break a use case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.Actions">
+            <summary>
+                Plugins that can be used to scan for this abuse case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.Name">
+            <summary>
+                Name of abuse case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.Description">
+            <summary>
+                Description of how abuse case works
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.Owners">
+            <summary>
+                Business owners of this abuse case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.BusinessRisk">
+            <summary>
+                Relative level of risk for this Abuse Case in comparison to other Abuse Cases for this Use Case
+                A high business risk may indicate that the Abuse Case could access sensitive data
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.AbuseCaseModel.TechnicalRisk">
+            <summary>
+                Relative level of technical risk for this Abuse Case in comparison to other Abuse Cases for this Use Case
+                A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
+                associated with this Abuse Case
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.ActionPointerModel">
+            <summary>
+                Stores information about a plugin and how to run it against an abuse case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ActionPointerModel.Action">
+            <summary>
+                Provides the unique identifier for the Action associated with this Pointer
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ActionPointerModel.Options">
+            <summary>
+                Parameters to pass to Action to adjust its execution
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ActionPointerModel.Target">
+            <summary>
+                Target to be acted upon by the Action
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.FeatureModel">
+            <summary>
+                Represents a Feature: A group of Use Cases that, together, accomplish a larger functional task
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.UseCases">
+            <summary>
+                Use Cases that make up the Feature
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.Name">
+            <summary>
+                Name of the Feature
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.Description">
+            <summary>
+                Description of what the Feature does
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.Owners">
+            <summary>
+                Business owners for the Feature
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.BusinessRisk">
+            <summary>
+                Relative level of risk for this Feature in comparison to other Features
+                A high business risk may indicate that the Feature could access sensitive data
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.FeatureModel.TechnicalRisk">
+            <summary>
+                Relative level of technical risk for this Feature in comparison to other Features
+                A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
+                associated with this Feature
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.IBusinessEntityModel.Name">
+            <summary>
+                Name of business entity
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.IBusinessEntityModel.Description">
+            <summary>
+                Description of business entity
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.IBusinessEntityModel.Owners">
+            <summary>
+                Business owners for this entity
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.IBusinessEntityModel.BusinessRisk">
+            <summary>
+                Relative level of risk for this entity in comparison to other entities in this generation
+                A high business risk may indicate that the entity manages sensitive data
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.IBusinessEntityModel.TechnicalRisk">
+            <summary>
+                Relative level of technical risk for this entity in comparison to other entities in this generation
+                A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
+                associated with this entity
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.OwnerPointerModel">
+            <summary>
+                Stores information about a business owner
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.OwnerPointerModel.Name">
+            <summary>
+                Name of the owner
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.OwnerPointerModel.Email">
+            <summary>
+                Contact e-mail for the owner
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.Resources.HttpTargetModel">
+            <summary>
+                Represents a Target resolved to its handler
+            </summary>
+        </member>
+        <member name="F:SMACD.Data.Resources.HttpTargetModel.Fields">
+            <summary>
+                Field values to send when POSTing to this URL
+            </summary>
+        </member>
+        <member name="F:SMACD.Data.Resources.HttpTargetModel.Headers">
+            <summary>
+                Headers to send when accessing this URL (regardless of Method)
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.Resources.HttpTargetModel.Method">
+            <summary>
+                Method used to query the URL
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.Resources.HttpTargetModel.Url">
+            <summary>
+                URL being accessed by Target
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.Resources.SocketPortTargetModel">
+            <summary>
+                Represents a Target resolved to its handler
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.Resources.SocketPortTargetModel.Hostname">
+            <summary>
+                Hostname or IP address of system to connect to
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.Resources.SocketPortTargetModel.Protocol">
+            <summary>
+                Protocol used to connect (default is TCP)
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.Resources.SocketPortTargetModel.Port">
+            <summary>
+                Port number to connect to
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.ServiceMapFile">
+            <summary>
+                Service Map - Stores both Features and Resources for an application's test
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.Created">
+            <summary>
+                When this file was created originally
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.Updated">
+            <summary>
+                When this file was last updated
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.Features">
+            <summary>
+                Features stored in this Project Map
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.Targets">
+            <summary>
+                Targets stored in this Service Map
+            </summary>
+        </member>
+        <member name="M:SMACD.Data.ServiceMapFile.GetServiceMap(System.String)">
+            <summary>
+                Deserialize a Service Map from a given file
+            </summary>
+            <param name="file">File containing Service Map</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Data.ServiceMapFile.GetServiceMapFromYaml(System.String)">
+            <summary>
+                Deserialize a Service Map from a YAML string
+            </summary>
+            <param name="file">Service Map YAML</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Data.ServiceMapFile.PutServiceMap(SMACD.Data.ServiceMapFile,System.String)">
+            <summary>
+                Serialize a Service Map to a given file
+            </summary>
+            <param name="serviceMap">Service Map to serialize</param>
+            <param name="file">File to serialize Service Map to</param>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Data.TargetModel">
+            <summary>
+                Represents a Resource resolved to its handler
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.TargetModel.TargetId">
+            <summary>
+                Resource identifier
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.UseCaseModel">
+            <summary>
+                Represents a Use Case: A process executed by a user to accomplish a task as a part of a Feature
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.AbuseCases">
+            <summary>
+                Abuse cases that can be done to misuse this use case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.Name">
+            <summary>
+                Name of the use case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.Description">
+            <summary>
+                Description of what the use case does
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.Owners">
+            <summary>
+                Business owners of this use case
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.BusinessRisk">
+            <summary>
+                Relative level of risk for this Use Case in comparison to other Use Cases for this Feature
+                A high business risk may indicate that the Use Case could access sensitive data
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.UseCaseModel.TechnicalRisk">
+            <summary>
+                Relative level of technical risk for this Use Case in comparison to other Use Cases for this Feature
+                A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
+                associated with this Use Case
+            </summary>
+        </member>
+    </members>
+</doc>

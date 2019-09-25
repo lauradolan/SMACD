@@ -18,7 +18,7 @@ namespace SMACD.Artifacts
         public override string Identifier => "_root_";
 
         public override string ArtifactTextSummary => "Root Artifact. This element does not carry data or vulnerabilities.";
-        public override string ArtifactSummaryViewTypeName => "RootArtifactView.razor_";
+        public override string ArtifactSummaryViewTypeName => "RootArtifactView";
 
         /// <summary>
         ///     Hostname or IP of resource

@@ -225,22 +225,6 @@
             </summary>
             <param name="data">String to commit</param>
         </member>
-        <member name="T:SMACD.Artifacts.HostArtifact">
-            <summary>
-            Represents a single host (server) involved in some part of the application
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:SMACD.Artifacts.HostArtifact.ArtifactTextSummary" -->
-        <member name="P:SMACD.Artifacts.HostArtifact.ArtifactSummaryViewTypeName">
-            <summary>
-            An Action which can be registered by the Extension to return an HTML component to view artifact
-            </summary>
-        </member>
-        <member name="M:SMACD.Artifacts.HostArtifact.#ctor">
-            <summary>
-            Represents a single host (server) involved in some part of the application
-            </summary>
-        </member>
         <member name="P:SMACD.Artifacts.HostArtifact.Identifier">
             <summary>
                 Artifact Identifier

@@ -54,7 +54,7 @@ namespace Synthesys.Plugins.Nmap
         {
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
-            var targetIpAddress = Host.IpAddress;
+            var targetIpAddress = Host.Aliases.FirstOrDefault(a => !string.IsNullOrEmpty(a));
             var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
             RunSingleTarget(nativePathArtifact, targetIpAddress);
 

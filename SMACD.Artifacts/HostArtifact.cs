@@ -5,14 +5,31 @@ using System.Net.Sockets;
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    /// Represents a single host (server) involved in some part of the application
+    /// </summary>
     public class HostArtifact : Artifact
     {
         private string hostname;
         private string ipAddress;
 
+        // <summary>
+        /// An Action which can be registered by the Extension to return a text summary of the Artifact
+        /// </summary>
+        public override string ArtifactTextSummary { get; }
+
+        /// <summary>
+        /// An Action which can be registered by the Extension to return an HTML component to view artifact
+        /// </summary>
+        public override string ArtifactSummaryViewTypeName => "HostArtifactView";
+
+        /// <summary>
+        /// Represents a single host (server) involved in some part of the application
+        /// </summary>
         public HostArtifact()
         {
             Aliases.CollectionChanged += (s, e) => NotifyChanged();
+            ArtifactTextSummary = $"{Identifier} has the following aliases: {string.Join(", ", Aliases)}";
         }
 
         /// <summary>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Synthesys.Plugins.Dummy</name>
+    </assembly>
+    <members>
+        <member name="T:Synthesys.Plugins.Dummy.DummyAction">
+            <summary>
+                This plugin does not do meaningful work and is meant to be an example for future Extension development.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.ConfigurationOption">
+            <summary>
+                Arbitrary configuration option in string format
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.ConfigurationOption2">
+            <summary>
+                Arbitrary configuration option in integer format, deserialized from a string
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.HttpService">
+            <summary>
+                HTTP service acted upon by the ActionExtension
+                This property will only be populated if the ActionExtension is queued with an HTTP service as a Target. If no
+                compatible Targets were found, this will remain null.
+                This property provides an a more concrete implementation of ServicePortArtifact, which means if a Target is
+                identified as an HTTP server, that Target will be referenced from both this property and the "Service" property
+                below.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.Service">
+            <summary>
+                Service acted upon by the ActionExtension, addressed via its port
+                This property will only be populated if the ActionExtension is queued with an open port (service) as a Target. If
+                no compatible Targets were found, this will remain null.
+                If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the
+                property with the closest parent Type will be referenced.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.Tasks">
+            <summary>
+                Link to the Task toolbox, which can queue Tasks
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyAction.Host">
+            <summary>
+                Hostname/IP acted upon by the ActionExtension
+                This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible
+                Targets were found, this will remain null.
+            </summary>
+        </member>
+        <member name="T:Synthesys.Plugins.Dummy.DummyReaction">
+            <summary>
+                This plugin does not do meaningful work and is meant to be an example for future Extension development.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyReaction.Host">
+            <summary>
+                Hostname/IP which is acted upon by the ReactionExtension. This value is populated by the framework.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Dummy.DummyReaction.ProjectPointer">
+            <summary>
+                Information about the business elements used to call this ReactionExtension.
+                This is used to identify what business elements are linked to a technical implementation
+            </summary>
+        </member>
+        <member name="M:Synthesys.Plugins.Dummy.DummyReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)">
+            <summary>
+                This method is called when the Extension is popped from the Task Queue and executed
+            </summary>
+            <param name="trigger">Trigger causing the ReactionExtension to fire</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -12,10 +12,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.2.1" />
+    <PackageReference Include="Bogus" Version="28.3.1" />
     <PackageReference Include="Colorful.Console" Version="1.2.9" />
     <PackageReference Include="CommandLineParser" Version="2.6.0" />
-    <PackageReference Include="Crayon" Version="0.0.34" />
+    <PackageReference Include="Crayon" Version="0.0.38" />
     <PackageReference Include="McMaster.NETCore.Plugins" Version="0.3.0-rc.86" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0-rc1.19456.10" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -125,5 +125,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>

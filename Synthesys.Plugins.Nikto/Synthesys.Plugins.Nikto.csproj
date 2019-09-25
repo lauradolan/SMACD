@@ -2,10 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\SMACD\Documentation\XML\Synthesys.Plugins.Nikto.xml</DocumentationFile>
+    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.Nikto.XML</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

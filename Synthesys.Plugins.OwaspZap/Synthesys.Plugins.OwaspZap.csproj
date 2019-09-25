@@ -3,10 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\SMACD\Documentation\XML\Synthesys.Plugins.OwaspZap.xml</DocumentationFile>
+    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.OwaspZap.XML</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
