@@ -21,7 +21,7 @@ namespace SMACD.Artifacts
         /// <summary>
         /// An Action which can be registered by the Extension to return an HTML component to view artifact
         /// </summary>
-        public override string ArtifactSummaryViewTypeName => "HostArtifactView";
+        public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.HostArtifactView";
 
         /// <summary>
         /// Represents a single host (server) involved in some part of the application
@@ -66,8 +66,6 @@ namespace SMACD.Artifacts
                 NotifyChanged();
             }
         }
-
-        public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.HostArtifactView";
 
         /// <summary>
         ///     Aliases belonging to this Host

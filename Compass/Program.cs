@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using SMACD.Data;
 using ElectronNET.API;
 using SMACD.Artifacts;
+using System.Reflection;
 
 namespace Compass
 {
@@ -34,7 +34,7 @@ namespace Compass
         public static void Main(string[] args)
         {
             Synthesys.ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
-                Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
+                Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Plugins"),
                 "Synthesys.Plugins.*.dll", true);
 
             CreateHostBuilder(args).Build().Run();

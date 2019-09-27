@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compass", "Compass\Compass.
 		{80D3D0FB-7C54-4034-A8BC-9A3293B1694D} = {80D3D0FB-7C54-4034-A8BC-9A3293B1694D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMACD.Artifacts.Views", "SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj", "{2405318B-79E2-4376-A68F-70D869002059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMACD.Artifacts.Views", "SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj", "{2405318B-79E2-4376-A68F-70D869002059}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

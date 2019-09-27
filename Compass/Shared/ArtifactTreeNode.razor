@@ -13,10 +13,10 @@
             {
                 <i class="fa fa-puzzle-piece" style="margin-right: 0.5em;"></i>
             }
-            <a href="javascript:void(0)" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
+            <a class="text-light" href="javascript:void(0)" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
             @Artifact.Identifier
             </a>
-            <span class="text-right d-inline float-right">(@Artifact.Vulnerabilities.Count)</span>
+            <span class="text-right d-inline float-right text-light">(@Artifact.Vulnerabilities.Count)</span>
         </span>
         @if (Artifact.Children.Any() && IsExpanded)
             {

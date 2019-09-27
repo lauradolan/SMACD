@@ -1,0 +1,26 @@
+﻿    <Card Class="pt-2">
+        <CardHeader>@ServicePortArtifact.Host @($"{ServicePortArtifact.Protocol}/{ServicePortArtifact.Port}")</CardHeader>
+        <CardBody>
+            <CardTitle Size="5">Service/Port Artifact</CardTitle>
+            <CardText>
+                @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceName))
+                {
+                    <p>The service has been fingerprinted as <pre>@ServicePortArtifact.ServiceName</pre></p>
+                }
+                @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceBanner))
+                {
+                    <p>The service has a banner of:<br /><pre>@ServicePortArtifact.ServiceBanner</pre></p>
+                }
+                <VulnerabilityDisplay Vulnerabilities="@ServicePortArtifact.Vulnerabilities" />
+            </CardText>
+        </CardBody>
+    </Card>
+
+
+@code
+{
+    [Parameter]
+    public Artifact Artifact { get; set; }
+
+    public ServicePortArtifact ServicePortArtifact => Artifact as ServicePortArtifact;
+}

@@ -1,43 +1,20 @@
-﻿<div class="text-center pt-2">
-    <h2>Host (Server)</h2>
-    <p>This Artifact represents a single hostname/IP address of the target application</p>
+﻿    <Card Class="pt-2">
+        <CardHeader>@HostArtifact.Hostname (@HostArtifact.IpAddress)</CardHeader>
+        <CardBody>
+            <CardTitle Size="5">Host Artifact</CardTitle>
+            <CardText>
+                There are @HostArtifact.Children.Count services (ports open) running on this host.
 
-    @if (string.IsNullOrEmpty(SerializedData))
-    {
-        <p class="pt-3 pb-2">Below is the information available:</p>
-        <pre class="text-left">
-            @SerializedData
-        </pre>
-    }
-</div>
+                <VulnerabilityDisplay Vulnerabilities="@HostArtifact.Vulnerabilities" />
+            </CardText>
+        </CardBody>
+    </Card>
+
 
 @code
 {
     [Parameter]
-    public HostArtifact Artifact { get; set; }
+    public Artifact Artifact { get; set; }
 
-    private string SerializedData { get; set; }
-
-    protected override void OnInitialized()
-    {
-        if (Artifact != null)
-        {
-            var originalParent = Artifact.Parent;
-            Artifact.Disconnect();
-            SerializedData = Newtonsoft.Json.JsonConvert.SerializeObject(Artifact, new Newtonsoft.Json.JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
-                Formatting = Newtonsoft.Json.Formatting.Indented
-            });
-            Artifact.Connect(originalParent);
-        }
-        else
-            SerializedData = string.Empty;
-    }
-
-    protected override Task OnInitializedAsync()
-    {
-        OnInitialized();
-        return Task.FromResult(0);
-    }
+    public HostArtifact HostArtifact => Artifact as HostArtifact;
 }

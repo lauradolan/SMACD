@@ -423,6 +423,12 @@
                 Fired when an Artifact is added to a given Artifact
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "P:SMACD.Artifacts.ServicePortArtifact.ArtifactTextSummary" -->
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ArtifactSummaryViewTypeName">
+            <summary>
+            An Action which can be registered by the Extension to return an HTML component to view artifact
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.ServicePortArtifact.Identifier">
             <summary>
                 Artifact Identifier

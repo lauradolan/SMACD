@@ -9,6 +9,16 @@ namespace SMACD.Artifacts
         private string serviceBanner;
         private string serviceName;
 
+        // <summary>
+        /// An Action which can be registered by the Extension to return a text summary of the Artifact
+        /// </summary>
+        public override string ArtifactTextSummary { get; }
+
+        /// <summary>
+        /// An Action which can be registered by the Extension to return an HTML component to view artifact
+        /// </summary>
+        public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.ServicePortArtifactView";
+
         /// <summary>
         ///     Artifact Identifier
         /// </summary>
