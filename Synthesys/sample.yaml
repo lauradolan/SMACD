@@ -18,10 +18,10 @@ features:
       actions:
       - action: nmap
         target: acunetix_sample
+      - action: nikto
+        target: acunetix_sample
       - action: owaspzap
         target: acunetix_sample
-        options:
-          aggressive: true
 targets:
 - !http
   targetId: resourceRoot

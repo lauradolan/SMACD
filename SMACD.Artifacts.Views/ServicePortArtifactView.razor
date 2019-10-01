@@ -3,11 +3,11 @@
 </div>
 <div class="row">
     <div class="col-md-6 col-xl-9 mb-4">
-        <div class="card shadow border-left-success py-2">
+        <div class="card shadow border-left-warning py-2">
             <div class="card-body">
                 <div class="row align-items-center no-gutters">
                     <div class="col mr-2">
-                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Service Banner</span></div>
+                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Service Banner</span></div>
                         <div class="text-dark mb-0 text-monospace">
                             @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceBanner))
                             {
@@ -46,6 +46,22 @@
             </div>
         </div>
     </div>
+    @if (!string.IsNullOrEmpty(ServicePortArtifact.ProductName))
+    {
+        <div class="col-md-6 col-xl-9 mb-4">
+            <div class="card shadow border-left-success py-2">
+                <div class="card-body">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Product</span></div>
+                            <div class="text-dark mb-0 text-monospace"><span>@ServicePortArtifact.ProductName @ServicePortArtifact.ProductVersion</span></div>
+                        </div>
+                        <div class="col-auto"><i class="fas fa-archive fa-2x text-gray-300"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <div class="row">
     <div class="col">

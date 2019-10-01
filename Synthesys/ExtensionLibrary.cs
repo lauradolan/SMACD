@@ -13,6 +13,9 @@ using Synthesys.SDK.Triggers;
 
 namespace Synthesys
 {
+    /// <summary>
+    ///     Encapsulates functionality of the system in the form of Extensions
+    /// </summary>
     public class ExtensionLibrary
     {
         private readonly Dictionary<string, Type> _actionExtensions = new Dictionary<string, Type>();

@@ -459,6 +459,16 @@
                 Service banner
             </summary>
         </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ProductName">
+            <summary>
+                Name of product providing the Service
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ProductVersion">
+            <summary>
+                Version of product providing the Service
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.UrlArtifact.Identifier">
             <summary>
                 Artifact Identifier

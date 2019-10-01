@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
@@ -59,14 +60,22 @@ namespace Synthesys.Plugins.Nmap
             RunSingleTarget(nativePathArtifact, targetIpAddress);
 
             var scanXml = GetScanXml(nativePathArtifact);
-            var report = ScoreSingleTarget(scanXml);
+            var nmapReport = ScoreSingleTarget(scanXml);
 
-            foreach (var port in report.Ports)
+            var report = new ExtensionReport();
+            report.ReportViewName = typeof(NmapReportView).FullName;
+            report.ReportSummaryName = typeof(NmapReportSummary).FullName;
+            report.SetExtensionSpecificReport(nmapReport);
+            //report.Attachments["report"] = JsonConvert.SerializeObject(nmapReport);
+
+            foreach (var port in nmapReport.Ports)
             {
                 if (new[] {"httpd"}.Contains(port.Service))
                     Host[$"{port.Protocol}/{port.Port}"] = new HttpServicePortArtifact();
 
                 Host[$"{port.Protocol}/{port.Port}"].ServiceName = port.Service;
+                Host[$"{port.Protocol}/{port.Port}"].ProductName = port.ProductName;
+                Host[$"{port.Protocol}/{port.Port}"].ProductVersion = port.ProductVersion;
 
                 var confidenceEnum = (Vulnerability.Confidences) port.ServiceFingerprintConfidence;
                 Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability
@@ -90,7 +99,7 @@ namespace Synthesys.Plugins.Nmap
         {
             using (var context = artifact.GetContext())
             {
-                var cmd = $"nmap --open -T4 -PN {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                var cmd = $"nmap --open -T4 -PN -A {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
                 var wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived +=
@@ -141,13 +150,25 @@ namespace Synthesys.Plugins.Nmap
                         var service = serviceDetail.Attributes("name").First().Value;
                         var conf = serviceDetail.Attributes("conf").First().Value;
 
+                        var product = serviceDetail.Attributes("product").First().Value;
+                        var productVersion = serviceDetail.Attributes("version").First().Value;
+                        var extraInfo = serviceDetail.Attributes("extrainfo").First().Value;
+
+                        var osType = serviceDetail.Attributes("ostype").First().Value;
+
                         result.Ports.Add(new NmapPort
                         {
                             Protocol = Enum.Parse<ProtocolType>(protocol, true).ToString(),
                             Port = int.Parse(port),
                             Service = service,
-                            ServiceFingerprintConfidence = int.Parse(conf)
+                            ServiceFingerprintConfidence = int.Parse(conf),
+                            ProductName = product,
+                            ProductVersion = productVersion,
+                            ExtraInfo = extraInfo
                         });
+
+                        if (!result.OperatingSystemFingerprintCandidates.Contains(osType))
+                            result.OperatingSystemFingerprintCandidates.Add(osType);
                     }
                     catch (Exception ex)
                     {

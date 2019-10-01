@@ -1,0 +1,47 @@
+﻿<div class="text-center pt-2 row">
+    <h4>OWASP ZAP Report - @Report.TaskDescriptor.ArtifactRoot</h4>
+</div>
+
+@foreach (var hostItem in ZapReport.Site)
+{
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="text-primary font-weight-bold m-0">@hostItem.Name Errors</h6>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (var alert in hostItem.Alerts)
+            {
+                <li class="list-group-item">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col mr-2">
+                            <h6 class="mb-0"><strong>@alert.Alert</strong></h6><span class="text-xs">@EmitHtml(alert.Desc)</span>
+                        </div>
+                        <div class="col-auto">
+                            @if (alert.RiskCode == 1)
+                            {<span class="badge badge-primary">@alert.Count</span>}
+                            @if (alert.RiskCode == 2)
+                            {<span class="badge badge-info">@alert.Count</span>}
+                            @if (alert.RiskCode == 3)
+                            {<span class="badge badge-warning">@alert.Count</span>}
+                            @if (alert.RiskCode == 4)
+                            {<span class="badge badge-danger">@alert.Count</span>}
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public Synthesys.SDK.ExtensionReport Report { get; set; }
+
+    public ZapJsonReport ZapReport => Report.GetExtensionSpecificReport<ZapJsonReport>();
+
+    public RenderFragment EmitHtml(string html) => builder =>
+    {
+        builder.AddMarkupContent(0, html);
+    };
+}

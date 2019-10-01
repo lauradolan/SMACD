@@ -48,29 +48,33 @@ namespace Synthesys.Plugins.OwaspZap
 
         public override ExtensionReport Act()
         {
+            ZapJsonReport jsonReport = null;
             try
             {
                 var nativePathArtifact =
                     HttpService.Attachments.CreateOrLoadNativePath(
                         "owaspzap_" + ((HostArtifact) HttpService.Parent).IpAddress);
                 RunScanner(nativePathArtifact);
-                var jsonReport = GetJsonObject(nativePathArtifact);
+                jsonReport = GetJsonObject(nativePathArtifact);
                 if (jsonReport == null)
                 {
                     Logger.LogCritical("OWASP ZAP Scanner did not produce a report; may have been a down service!");
-                    return new ZapJsonReport();
+                    return ExtensionReport.Error(new Exception("Scanner did not produce report"));
                 }
 
                 RunScorer(jsonReport);
-
-                return jsonReport;
             }
             catch (Exception ex)
             {
                 Logger.LogCritical(ex, "Error running OWASP ZAP Scanner");
             }
 
-            return null;
+            var report = new ExtensionReport();
+            report.ReportSummaryName = typeof(OwaspZapReportSummary).FullName;
+            report.ReportViewName = typeof(OwaspZapReportView).FullName;
+            report.SetExtensionSpecificReport(jsonReport);
+
+            return report;
         }
 
         private void RunScanner(NativeDirectoryArtifact nativePathArtifact)

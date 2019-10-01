@@ -54,7 +54,7 @@ namespace Synthesys.Verbs
                 using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.Open,
                     FileAccess.Read))
                 {
-                    session = new Session(stream);
+                    session = Session.Import(stream);
                 }
             }
             else

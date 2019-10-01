@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using SMACD.Artifacts;
 
@@ -11,6 +12,19 @@ namespace Synthesys.SDK
             var pieces = url.Split('/').ToList();
             pieces.RemoveAll(p => string.IsNullOrEmpty(p));
             var artifact = httpService["/"];
+
+            var queryParameters = new Dictionary<string, string>();
+            if (pieces.Count > 0 && pieces.Last().Contains('?'))
+            {
+                var actualPiece = pieces.Last().Split('?')[0];
+                var query = pieces.Last().Split('?')[1];
+                var queryItems = query.Split('&').ToList();
+                queryItems.ForEach(q => queryParameters.Add(q.Split('=')[0], q.Split('=')[1]));
+
+                pieces.RemoveAt(pieces.Count - 1);
+                pieces.Add(actualPiece);
+            }
+
             foreach (var piece in pieces)
             {
                 if (pieces.Last() == piece)

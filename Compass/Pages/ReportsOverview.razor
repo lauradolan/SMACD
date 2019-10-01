@@ -5,11 +5,9 @@
 @if (Program.Session != null)
 {
     var c = 0;
-    for (var i = 0; i < Program.Session.Reports.Count(r => string.IsNullOrEmpty(r.ReportSummaryName)); i++)
+    foreach (var report in Program.Session.Reports.Where(r => !string.IsNullOrEmpty(r.ReportSummaryName)))
     {
-
-        var report = Program.ExportedSession.SerializedReports[c]
-        <a href="/reports/@c">
+        <a href="/reports/@(c++)">
             @RenderDynamicSummary(report)
         </a>
     }

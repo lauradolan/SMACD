@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SMACD.Artifacts;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
@@ -39,7 +40,10 @@ namespace Synthesys.Plugins.Nikto
             if (xml == null) return ExtensionReport.Error(new Exception("Failed to generate XML"));
 
             var scanDetails = xml.Root.Descendants("scandetails");
-            var report = new NiktoReport
+
+            // Create report (general and specific)
+            var report = new ExtensionReport();
+            var niktoReport = new NiktoReport
             {
                 NiktoVersion = xml.Root.Attributes("version").First().Value,
                 ScanStart = xml.Root.Attributes("scanstart").First().Value,
@@ -48,9 +52,14 @@ namespace Synthesys.Plugins.Nikto
                 SiteName = scanDetails.Attributes("sitename").First().Value
             };
 
+            report.ReportSummaryName = typeof(NiktoReportSummary).FullName;
+            report.ReportViewName = typeof(NiktoReportView).FullName;
+            report.SetExtensionSpecificReport(niktoReport);
+
             var itemsTested = scanDetails.Descendants("statistics").Attributes("itemstested").First().Value;
             report.MaximumPointsAvailable = int.Parse(itemsTested) * BASE_ITEM_WEIGHT;
 
+            // Create one record per vulnerability detected
             foreach (var item in scanDetails.Descendants("item"))
             {
                 var osvdbid = int.Parse(item.Attributes("osvdbid").First().Value);

@@ -90,66 +90,8 @@ namespace Synthesys
                 var reports = new List<ExtensionReport>();
                 try
                 {
-                    var sw = new Stopwatch();
-                    sw.Start();
-                    ActionExtension actionInstance = null;
-                    try
-                    {
-                        actionInstance = getAction(
-                            descriptor,
-                            descriptor.ActionId,
-                            descriptor.Options,
-                            descriptor.ArtifactRoot);
-
-                        if (actionInstance == null)
-                        {
-                            Logger.LogCritical("Requested Action {0} is not loaded in system!", descriptor.ActionId);
-                            reports.Add(ExtensionReport.Error(
-                                new Exception($"Requested Action {descriptor.ActionId} is not loaded in system!")));
-                        }
-                        else
-                        {
-                            reports.Add(actionInstance.Act());
-                        }
-
-                        if (!reports.Any()) reports.Add(ExtensionReport.Blank());
-
-                        reports.ForEach(r => r.TaskDescriptor = queuedTaskDescriptor);
-
-                        var triggered = getReactions(descriptor, actionInstance, ExtensionConditionTrigger.Succeeds);
-                        foreach (var item in triggered)
-                            reports.Add(item.React(TriggerDescriptor.ExtensionTrigger(
-                                descriptor.ActionId,
-                                ExtensionConditionTrigger.Succeeds)));
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogCritical(ex, "Error running Action");
-                        TaskFaulted?.Invoke(this, queuedTaskDescriptor);
-                        reports.Add(ExtensionReport.Error(ex));
-                        reports.ForEach(r => r.TaskDescriptor = queuedTaskDescriptor);
-
-                        if (actionInstance != null) // only trigger if there isn't a resolution failure
-                        {
-                            var triggered = getReactions(descriptor, actionInstance, ExtensionConditionTrigger.Fails);
-                            foreach (var item in triggered)
-                                item.React(TriggerDescriptor.ExtensionTrigger(
-                                    descriptor.ActionId,
-                                    ExtensionConditionTrigger.Fails));
-                        }
-                    }
-
-                    sw.Stop();
-
-                    if (!reports.Any()) reports.Add(ExtensionReport.Blank());
-
-                    queuedTaskDescriptor.Result = reports.First();
-
-                    reports.ForEach(r =>
-                    {
-                        r.TaskDescriptor = queuedTaskDescriptor;
-                        r.Runtime = sw.Elapsed;
-                    });
+                    reports = ExecuteSingleTask(queuedTaskDescriptor);
+                    queuedTaskDescriptor.Results = reports;
                 }
                 catch (Exception ex)
                 {
@@ -168,6 +110,80 @@ namespace Synthesys
             RuntimeManagerStackProcessingLoop();
 
             return actionInstanceTask;
+        }
+
+        /// <summary>
+        ///     Execute a single queued Task and return its generated Reports, including from Reactions
+        /// </summary>
+        /// <param name="descriptor">Task Descriptor</param>
+        /// <returns></returns>
+        private List<ExtensionReport> ExecuteSingleTask(QueuedTaskDescriptor descriptor)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+
+            var reports = new List<ExtensionReport>();
+            ActionExtension actionInstance = null;
+            bool succeeded = false;
+            try
+            {
+                actionInstance = getAction(
+                    descriptor,
+                    descriptor.ActionId,
+                    descriptor.Options,
+                    descriptor.ArtifactRoot);
+
+                if (actionInstance == null)
+                {
+                    Logger.LogCritical("Requested Action {0} is not loaded in system!", descriptor.ActionId);
+                    reports.Add(ExtensionReport.Error(
+                        new Exception($"Requested Action {descriptor.ActionId} is not loaded in system!")));
+                }
+                else
+                {
+                    reports.Add(actionInstance.Act());
+                }
+
+                if (!reports.Any()) reports.Add(ExtensionReport.Blank());
+
+                succeeded = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogCritical(ex, "Error running Action");
+                TaskFaulted?.Invoke(this, descriptor);
+                reports.Add(ExtensionReport.Error(ex));
+
+                succeeded = false;
+            }
+
+            // If the Action was resolved, run any Triggers
+            if (actionInstance != null)
+            {
+                var triggered = getReactions(descriptor, actionInstance, ExtensionConditionTrigger.Fails);
+                foreach (var item in triggered)
+                {
+                    // todo: Reaction Options are not distinguished from Action options, so we have to ground it here
+                    item.Configure(descriptor.ArtifactRoot, new Dictionary<string, string>());
+
+                    var report = item.React(TriggerDescriptor.ExtensionTrigger(
+                        descriptor.ActionId,
+                        succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails));
+
+                    reports.Add(report);
+                }
+            }
+
+            sw.Stop();
+
+            // Apply TaskDescriptor and Runtime to Reports
+            reports.ForEach(r => 
+            {
+                r.TaskDescriptor = descriptor;
+                r.Runtime = sw.Elapsed;
+            });
+
+            return reports;
         }
 
         private void RuntimeManagerStackProcessingLoop()
@@ -195,7 +211,7 @@ namespace Synthesys
                             $"| {"Action ID".PadRight(24)} | {"Target IDs".PadRight(24)} | {"Status".PadLeft(10)} | {"Resulted?".PadLeft(9)} |");
                         foreach (var item in RunningTasks)
                             Logger.LogTrace(
-                                $"| {item.Key.ActionId.PadRight(24)} | {string.Join(", ", item.Key.ArtifactRoot).PadRight(24)} | {item.Key.ActionTask.Status.ToString().PadLeft(10)} | {(item.Key.Result != null).ToString().PadLeft(9)} |");
+                                $"| {item.Key.ActionId.PadRight(24)} | {string.Join(", ", item.Key.ArtifactRoot).PadRight(24)} | {item.Key.ActionTask.Status.ToString().PadLeft(10)} | {(item.Key.Results != null).ToString().PadLeft(9)} |");
 
                         Logger.LogTrace(new string('#', totalWidth));
                     }

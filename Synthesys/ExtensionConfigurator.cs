@@ -17,11 +17,11 @@ namespace Synthesys
         private static ILogger Logger { get; } = Global.LogFactory.CreateLogger("ExtensionConfigurator");
 
         /// <summary>
-        ///     Configure an ActionExtension
+        ///     Configure an Extension
         /// </summary>
-        /// <param name="extension">ActionExtension to configure</param>
+        /// <param name="extension">Extension to configure</param>
         /// <param name="artifactRoot">Artifact representing target</param>
-        /// <param name="options">ActionExtension options</param>
+        /// <param name="options">Extension options</param>
         /// <returns></returns>
         public static Extension Configure(
             this Extension extension,
@@ -31,20 +31,31 @@ namespace Synthesys
             extension.SetLoggerName(extension.GetType().Name);
             ConfigureExtensionOptions(extension, options);
             ConfigureArtifactProperty(extension, artifactRoot);
+
+            var metadata = extension.GetType().GetCustomAttribute<ExtensionAttribute>();
+
+            if (!extension.ValidateEnvironmentReadiness())
+            {
+                Logger.LogCritical("Environment readiness checks failed for Extension type {0}", metadata.ExtensionIdentifier);
+                return null;
+            }
+
+            if (extension is ReactionExtension)
+            {
+                Logger.LogInformation("Running Initialize routine on Reaction Extension {0}", metadata.ExtensionIdentifier);
+                ((ReactionExtension)extension).Initialize();
+                Logger.LogInformation("Completed Initialize routine on Reaction Extension {0}", metadata.ExtensionIdentifier);
+            }
+
             return extension;
         }
 
         /// <summary>
-        ///     Configure a ReactionExtension
+        ///     Applies matching values to properties marked as [Configurable]
         /// </summary>
-        /// <param name="extension">ReactionExtension to configure</param>
+        /// <param name="extensionInstance">Extension to configure</param>
+        /// <param name="options">Options to apply</param>
         /// <returns></returns>
-        public static ReactionExtension Configure(
-            this ReactionExtension extension)
-        {
-            return extension;
-        }
-
         private static Extension ConfigureExtensionOptions(Extension extensionInstance,
             Dictionary<string, string> options)
         {
@@ -74,6 +85,12 @@ namespace Synthesys
             return extensionInstance;
         }
 
+        /// <summary>
+        ///     Applies Artifact anchor to the appropriate Type-matched property in the Extension
+        /// </summary>
+        /// <param name="extensionInstance">Extension to configure</param>
+        /// <param name="resourceArtifact">Artifact to connect</param>
+        /// <returns></returns>
         private static Extension ConfigureArtifactProperty(Extension extensionInstance, Artifact resourceArtifact)
         {
             var artifactProperties = extensionInstance.GetType().GetProperties().Where(p =>

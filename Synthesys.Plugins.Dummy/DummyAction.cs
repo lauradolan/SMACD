@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
@@ -140,21 +141,22 @@ namespace Synthesys.Plugins.Dummy
                 DummyDouble = 42.42
             });
 
-            // Returning an Action-specific Report allows the Action to provide more information
-            //   to the user than the Artifact tree
+            // Returning an ExtensionReport with Attachments allows the Action to provide more information
+            //   to the user (than the Artifact tree) during later review
             var random = new Random((int) DateTime.Now.Ticks);
             var randomData = new byte[32];
             random.NextBytes(randomData);
 
-            return new DummySpecificReport
+            var report = new ExtensionReport();
+            report.ReportSummaryName = typeof(DummyReportSummary).FullName;
+            report.ReportViewName = typeof(DummyReportView).FullName;
+            report.SetExtensionSpecificReport(new DummyDataClass()
             {
-                Data = new DummyDataClass
-                {
-                    DummyDouble = random.NextDouble(),
-                    DummyString = BitConverter.ToString(randomData)
-                },
-                DummyString = "d4t4!"
-            };
+                DummyDouble = random.NextDouble(),
+                DummyString = BitConverter.ToString(randomData)
+            });
+
+            return report;
         }
     }
 

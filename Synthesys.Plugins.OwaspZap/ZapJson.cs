@@ -1,20 +1,14 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Synthesys.SDK;
 
 namespace Synthesys.Plugins.OwaspZap
 {
-    public class ZapJsonReport : ExtensionReport
+    public class ZapJsonReport
     {
         /// <summary>
         ///     Sites (generally only one)
         /// </summary>
         public IEnumerable<ZapJsonSite> Site { get; set; }
-
-        public override string GetReportContent()
-        {
-            return "";
-        }
     }
 
     public class ZapJsonSite

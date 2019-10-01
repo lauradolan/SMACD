@@ -14,7 +14,6 @@ namespace Compass
         public static string LoadedFileName { get; set; }
         public static ServiceMapFile ServiceMap { get; set; }
         public static Synthesys.Session Session { get; set; }
-        public static Synthesys.ExportableSession ExportedSession { get; set; }
 
         public static List<Vulnerability> GetAllVulnerabilities()
         {

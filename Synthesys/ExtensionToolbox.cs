@@ -39,28 +39,17 @@ namespace Synthesys
         protected ILogger Logger { get; } = Global.LogFactory.CreateLogger("TaskToolbox");
 
         /// <summary>
-        /// Resolve an ActionExtension or ReactionExtension from its ExtensionIdentifier
+        ///     Resolve an ActionExtension or ReactionExtension from its Extension identifier
         /// </summary>
-        /// <param name="extensionId"></param>
+        /// <param name="extensionId">Extension identifier</param>
         /// <returns></returns>
         public Extension ResolveExtensionFromId(string extensionId)
         {
             if (_actionExtensionMap.ContainsKey(extensionId))
                 return EmitAction(extensionId);
             else
-                return GetReactionInstance(_extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
+                return EmitReaction(_extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
                     t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionId)).FirstOrDefault(i => i != null));
-        }
-
-        /// <summary>
-        ///     Resolve Type against Types provided by loaded libraries
-        /// </summary>
-        /// <param name="typeName">Type to resolve</param>
-        /// <returns></returns>
-        public static Type ResolveType(string typeName)
-        {
-            return Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(typeName)).FirstOrDefault(t => t != null);
-            //return Instance.ExtensionLibraries.SelectMany(l => l.ProvidedTypes).FirstOrDefault(t => t.FullName == typeName);
         }
 
         /// <summary>
@@ -108,26 +97,6 @@ namespace Synthesys
         }
 
         /// <summary>
-        ///     Emit a configured ActionExtension
-        /// </summary>
-        /// <param name="actionIdentifier">Action identifier</param>
-        /// <param name="options">Options for Action</param>
-        /// <param name="artifactRoot">Artifact root</param>
-        /// <returns></returns>
-        public ActionExtension EmitConfiguredAction(string actionIdentifier, Dictionary<string, string> options,
-            Artifact artifactRoot)
-        {
-            var instance = EmitAction(actionIdentifier).Configure(artifactRoot, options);
-            if (!instance.ValidateEnvironmentReadiness())
-            {
-                Logger.LogCritical("Environment readiness checks failed for Action Extension {0}", actionIdentifier);
-                return null;
-            }
-
-            return instance as ActionExtension;
-        }
-
-        /// <summary>
         ///     Emit an ActionExtension
         /// </summary>
         /// <param name="extensionIdentifier">Action identifier</param>
@@ -144,26 +113,6 @@ namespace Synthesys
             return (ActionExtension) Activator.CreateInstance(_actionExtensionMap[extensionIdentifier]);
         }
 
-        private ReactionExtension GetReactionInstance(Type type)
-        {
-            var metadata = type.GetCustomAttribute<ExtensionAttribute>();
-            var instance = (ReactionExtension) Activator.CreateInstance(type);
-            instance.Configure();
-
-            if (!instance.ValidateEnvironmentReadiness())
-            {
-                Logger.LogCritical("Environment readiness checks failed for Reaction Extension {0}",
-                    metadata.ExtensionIdentifier);
-                return null;
-            }
-
-            Logger.LogInformation("Running Initialize routine on Reaction Extension {0}", metadata.ExtensionIdentifier);
-            instance.Initialize();
-            Logger.LogInformation("Completed Initialize routine on Reaction Extension {0}",
-                metadata.ExtensionIdentifier);
-            return instance;
-        }
-
         /// <summary>
         ///     Get a list of ReactionExtensions triggered by an action performed on a given Artifact
         /// </summary>
@@ -178,7 +127,7 @@ namespace Synthesys
                             ((ArtifactTriggerDescriptor) m.Key).Trigger == trigger &&
                             TriggerDescriptor.PathMatches(triggeringArtifact,
                                 ((ArtifactTriggerDescriptor) m.Key).ArtifactPath))
-                .SelectMany(m => m.Value.Select(v => GetReactionInstance(v)))
+                .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }
 
@@ -196,11 +145,10 @@ namespace Synthesys
                             ((ExtensionTriggerDescriptor) m.Key).Trigger == trigger &&
                             ((ExtensionTriggerDescriptor) m.Key).ExtensionIdentifier ==
                             triggeringExtension.GetType().GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier)
-                .SelectMany(m => m.Value.Select(v => GetReactionInstance(v)))
+                .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }
-
-
+        
         /// <summary>
         ///     Get a list of ReactionExtensions triggered by a system event
         /// </summary>
@@ -211,8 +159,18 @@ namespace Synthesys
             return _reactionExtensionMap
                 .Where(m => m.Key is ExtensionTriggerDescriptor &&
                             ((SystemEventTriggerDescriptor) m.Key).SystemEvent == triggeringEvent)
-                .SelectMany(m => m.Value.Select(v => GetReactionInstance(v)))
+                .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
+        }
+
+        /// <summary>
+        ///     Emit a non-contextualized instance of a ReactionExtension (expects Type to exist and inherit from ReactionExtension)
+        /// </summary>
+        /// <param name="type">ReactionExtension Type</param>
+        /// <returns></returns>
+        private ReactionExtension EmitReaction(Type type)
+        {
+            return (ReactionExtension)Activator.CreateInstance(type);
         }
     }
 }

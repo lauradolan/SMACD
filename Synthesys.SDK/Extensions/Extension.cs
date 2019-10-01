@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Synthesys.SDK.Extensions
 {
@@ -29,14 +28,10 @@ namespace Synthesys.SDK.Extensions
             return true;
         }
 
-        // Do not allow compiler to optimize out set method, since it's only 
-        //   called in reflection
-        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private void BindCoreFeatures(ILogger logger)
-        {
-            Logger = logger;
-        }
-
+        /// <summary>
+        ///     Create a new Logger with a given name for this Extension
+        /// </summary>
+        /// <param name="name">Logger name</param>
         public void SetLoggerName(string name)
         {
             Logger = Global.LogFactory.CreateLogger(name);

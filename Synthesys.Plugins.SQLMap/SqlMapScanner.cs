@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
@@ -66,12 +67,12 @@ namespace Synthesys.Plugins.SQLMap
                 var execution = new ExecutionWrapper(cmd);
                 execution.Start().Wait();
 
-                if (!File.Exists(context.DirectoryWithFile("log"))) return new SqlMapReport();
+                if (!File.Exists(context.DirectoryWithFile("log"))) return ExtensionReport.Blank();
 
                 logFile = File.ReadAllText(context.DirectoryWithFile("log"));
             }
 
-            var report = new SqlMapReport();
+            var sqlMapReport = new SqlMapReport();
             var issues = logFile.Split("---").Skip(1).ToList(); // first line is summary
 
             foreach (var issue in issues)
@@ -100,8 +101,11 @@ namespace Synthesys.Plugins.SQLMap
                     }
                 }
 
-                report.InjectionVectors.Add(vector);
+                sqlMapReport.InjectionVectors.Add(vector);
             }
+
+            var report = new ExtensionReport();
+            report.SetExtensionSpecificReport(sqlMapReport);
 
             return report;
         }

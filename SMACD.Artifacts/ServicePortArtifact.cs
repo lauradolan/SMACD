@@ -8,6 +8,8 @@ namespace SMACD.Artifacts
         private ProtocolType protocol;
         private string serviceBanner;
         private string serviceName;
+        private string productName;
+        private string productVersion;
 
         // <summary>
         /// An Action which can be registered by the Extension to return a text summary of the Artifact
@@ -77,6 +79,32 @@ namespace SMACD.Artifacts
             set
             {
                 serviceBanner = value;
+                NotifyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     Name of product providing the Service
+        /// </summary>
+        public string ProductName
+        {
+            get => productName;
+            set
+            {
+                productName = value;
+                NotifyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     Version of product providing the Service
+        /// </summary>
+        public string ProductVersion
+        {
+            get => productVersion;
+            set
+            {
+                productVersion = value;
                 NotifyChanged();
             }
         }

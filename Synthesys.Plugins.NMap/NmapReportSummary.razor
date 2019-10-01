@@ -20,5 +20,5 @@
     [Parameter]
     public Synthesys.SDK.ExtensionReport Report { get; set; }
 
-    public NmapRunReport NmapReport => Report as NmapRunReport;
+    public NmapRunReport NmapReport => Report.GetExtensionSpecificReport<NmapRunReport>();
 }

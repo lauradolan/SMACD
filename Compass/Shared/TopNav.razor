@@ -128,10 +128,9 @@
                 }
                 else
                 {
-                    Program.Session = new Synthesys.Session(memoryStream);
+                    Program.Session = Synthesys.Session.Import(memoryStream);
                     Program.ServiceMap = ServiceMapFile.GetServiceMapFromYaml(Program.Session.ServiceMapYaml);
                     memoryStream.Seek(0, SeekOrigin.Begin);
-                    Program.ExportedSession = Synthesys.Session.DecompressRawExportableSession(memoryStream);
                 }
             }
             Program.LoadedFileName = Path.GetFileName(fileInfo.Name);

@@ -4,6 +4,10 @@ using Newtonsoft.Json.Serialization;
 
 namespace Synthesys
 {
+    /// <summary>
+    ///     Provides a more aggressive (computationally complex) avenue of Type resolution.
+    ///     This is necessary to facilitate late-loaded libraries (Extensions) and their Types to be serialized cleanly.
+    /// </summary>
     public class AggressiveTypeResolutionBinder : ISerializationBinder
     {
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)

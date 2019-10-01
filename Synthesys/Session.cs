@@ -13,16 +13,14 @@ using Synthesys.SDK.Triggers;
 
 namespace Synthesys
 {
-    public class ExportableSession
-    {
-        public RootArtifact Artifacts { get; set; }
-        public List<string> SerializedReports { get; set; } = new List<string>();
-        public string ServiceMapYaml { get; set; }
-    }
-
     public class Session
     {
-        public static ExportableSession DecompressRawExportableSession(Stream existingSession)
+        /// <summary>
+        ///     Create a Session from a previously exported Session
+        /// </summary>
+        /// <param name="existingSession">Previously exported Session</param>
+        /// <returns>Imported and linked Session</returns>
+        public static Session Import(Stream existingSession)
         {
             using (var decompressor = new DeflateStream(existingSession, CompressionMode.Decompress, true))
             {
@@ -30,7 +28,7 @@ namespace Synthesys
                 decompressor.CopyTo(ms);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                var result = JsonConvert.DeserializeObject<ExportableSession>(
+                var result = JsonConvert.DeserializeObject<Session>(
                     Encoding.Unicode.GetString(ms.ToArray()),
                     new JsonSerializerSettings
                     {
@@ -39,30 +37,10 @@ namespace Synthesys
                         SerializationBinder = new AggressiveTypeResolutionBinder()
                     });
 
+                result.BindArtifactTriggers();
+
                 return result;
             }
-        }
-
-        /// <summary>
-        ///     Create a Session from an exported Session
-        /// </summary>
-        /// <param name="existingSession">Exported Session stream</param>
-        public Session(Stream existingSession)
-        {
-            var result = DecompressRawExportableSession(existingSession);
-
-            Artifacts = result.Artifacts;
-            try
-            {
-                Reports = result.SerializedReports.Select(r => ExtensionReport.Deserialize(r)).ToList();
-            }
-            catch (Exception ex)
-            {
-            }
-
-            ServiceMapYaml = result.ServiceMapYaml;
-
-            Artifacts.Connect();
         }
 
         /// <summary>
@@ -76,17 +54,16 @@ namespace Synthesys
             Tasks = new TaskToolbox(
                 (descriptor, id, opts, root) =>
                 {
-                    if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == id))
-                    )
+                    if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == id)))
                         return null;
 
-                    var action = ExtensionToolbox.Instance.EmitConfiguredAction(id, opts, root);
+                    var action = ExtensionToolbox.Instance.EmitAction(id).Configure(root, opts);
                     if (action is ICanQueueTasks) ((ICanQueueTasks) action).Tasks = Tasks;
 
                     if (action is IUnderstandProjectInformation)
                         ((IUnderstandProjectInformation) action).ProjectPointer = descriptor.ProjectPointer;
 
-                    return action;
+                    return action as ActionExtension;
                 },
                 (descriptor, ext, trigger) =>
                 {
@@ -112,6 +89,7 @@ namespace Synthesys
         /// <summary>
         ///     Task queue
         /// </summary>
+        [JsonIgnore]
         public TaskToolbox Tasks { get; }
 
         /// <summary>
@@ -138,14 +116,7 @@ namespace Synthesys
             using (var compressor = new DeflateStream(data, CompressionMode.Compress))
             {
                 Artifacts.Disconnect();
-
-                var serializedReports = Reports.Select(r => r.Serialize()).ToList();
-                var str = JsonConvert.SerializeObject(new ExportableSession
-                {
-                    Artifacts = Artifacts,
-                    SerializedReports = serializedReports,
-                    ServiceMapYaml = ServiceMapYaml
-                }, new JsonSerializerSettings
+                var str = JsonConvert.SerializeObject(this, new JsonSerializerSettings
                 {
                     TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
                     TypeNameHandling = TypeNameHandling.All,
