@@ -1,0 +1,41 @@
+﻿@using Blazorise.DataGrid
+
+<div class="text-center pt-2 row">
+    <h4>Nmap Report - @Report.TaskDescriptor.ArtifactRoot</h4>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">Open Ports</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <DataGrid TItem="NmapPort"
+                              Data="@NmapReport.Ports"
+                              @bind-SelectedRow="@SelectedPort">
+                        <DataGridCommandColumn TItem="NmapPort" />
+                        <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Port)" Caption="Port" AllowSort="true" />
+                        <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Protocol)" Caption="Protocol" AllowSort="true" />
+                        <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Service)" Caption="Service" AllowSort="true" />
+                        <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.ServiceFingerprintConfidence)" Caption="Confidence" AllowSort="true">
+                            <DisplayTemplate>
+                                @($"%{context.ServiceFingerprintConfidence}")
+                            </DisplayTemplate>
+                        </DataGridColumn>
+                    </DataGrid>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+@code
+{
+    [Parameter]
+    public Synthesys.SDK.ExtensionReport Report { get; set; }
+
+    public NmapRunReport NmapReport => Report as NmapRunReport;
+
+    public NmapPort SelectedPort { get; set; }
+}

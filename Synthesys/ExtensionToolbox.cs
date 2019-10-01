@@ -124,7 +124,7 @@ namespace Synthesys
                 return null;
             }
 
-            return instance;
+            return instance as ActionExtension;
         }
 
         /// <summary>

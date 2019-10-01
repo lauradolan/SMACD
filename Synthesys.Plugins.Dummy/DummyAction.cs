@@ -98,7 +98,7 @@ namespace Synthesys.Plugins.Dummy
                     //   to get a temporary directory where external tools can persist information to disk or read information.
                     // When the object is disposed, the content of the directory will be compressed and saved to the wrapper
                     //   Artifact. When re-using the context at another time, the directory will be re-deployed.
-                    var nativePathArtifact = new NativeDirectoryArtifact("dummyBasicContainer");
+                    var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("dummyBasicContainer");
                     using (var execContainer = nativePathArtifact.GetContext())
                     {
                         // The temporary directory name is stored in the "Directory" property of the context

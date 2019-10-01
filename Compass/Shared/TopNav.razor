@@ -96,7 +96,7 @@
                     <i class="fa fa-angle-down"></i>
                 </a>                <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
                                          role="menu">
-                    <a class="dropdown-item" role="presentation" onclick="$('#inputTypeFileElement').click(); return false;" href="#"><i class="fas fa-upload fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Load File</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-pencil-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Generate New File</a>
+                    <a class="dropdown-item" role="presentation" onclick="$('#inputTypeFileElement').click(); return false;" href="javascript:return false;"><i class="fas fa-upload fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Load File</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-pencil-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Generate New File</a>
                     <div class="dropdown-divider" role="presentation"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-briefcase fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Update System Map</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-bullseye fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Update Target Map</a>
                 </div>
             </li>
@@ -130,6 +130,8 @@
                 {
                     Program.Session = new Synthesys.Session(memoryStream);
                     Program.ServiceMap = ServiceMapFile.GetServiceMapFromYaml(Program.Session.ServiceMapYaml);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    Program.ExportedSession = Synthesys.Session.DecompressRawExportableSession(memoryStream);
                 }
             }
             Program.LoadedFileName = Path.GetFileName(fileInfo.Name);

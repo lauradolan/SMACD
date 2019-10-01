@@ -4,17 +4,18 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.8.5" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.5" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.8.6.1" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.6.1" />
     <PackageReference Include="ElectronNET.API" Version="5.22.14" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0-rc1.19456.10" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-rc1.19456.10" />
-    <PackageReference Include="Tewr.Blazor.FileReader" Version="0.16.0.19262" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Tewr.Blazor.FileReader" Version="1.0.0.19267" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
+    <ProjectReference Include="..\Synthesys.Plugins.Nmap\Synthesys.Plugins.Nmap.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
     <ProjectReference Include="..\Synthesys\Synthesys.csproj" />
   </ItemGroup>

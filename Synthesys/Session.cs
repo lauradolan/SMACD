@@ -22,11 +22,7 @@ namespace Synthesys
 
     public class Session
     {
-        /// <summary>
-        ///     Create a Session from an exported Session
-        /// </summary>
-        /// <param name="existingSession">Exported Session stream</param>
-        public Session(Stream existingSession)
+        public static ExportableSession DecompressRawExportableSession(Stream existingSession)
         {
             using (var decompressor = new DeflateStream(existingSession, CompressionMode.Decompress, true))
             {
@@ -43,22 +39,30 @@ namespace Synthesys
                         SerializationBinder = new AggressiveTypeResolutionBinder()
                     });
 
-                ms.Seek(0, SeekOrigin.Begin);
-                var txt = Encoding.Unicode.GetString(ms.ToArray());
-
-                Artifacts = result.Artifacts;
-                try
-                {
-                    Reports = result.SerializedReports.Select(r => ExtensionReport.Deserialize(r)).ToList();
-                }
-                catch (Exception ex)
-                {
-                }
-
-                ServiceMapYaml = result.ServiceMapYaml;
-
-                Artifacts.Connect();
+                return result;
             }
+        }
+
+        /// <summary>
+        ///     Create a Session from an exported Session
+        /// </summary>
+        /// <param name="existingSession">Exported Session stream</param>
+        public Session(Stream existingSession)
+        {
+            var result = DecompressRawExportableSession(existingSession);
+
+            Artifacts = result.Artifacts;
+            try
+            {
+                Reports = result.SerializedReports.Select(r => ExtensionReport.Deserialize(r)).ToList();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            ServiceMapYaml = result.ServiceMapYaml;
+
+            Artifacts.Connect();
         }
 
         /// <summary>
@@ -93,10 +97,12 @@ namespace Synthesys
 
                     foreach (var reaction in reactions)
                     {
-                        if (reaction is ICanQueueTasks) ((ICanQueueTasks) reaction).Tasks = Tasks;
+                        // todo: reaction options?
+                        var configuredReaction = reaction.Configure(descriptor.ArtifactRoot, new Dictionary<string, string>()) as ReactionExtension;
 
-                        if (reaction is IUnderstandProjectInformation)
-                            ((IUnderstandProjectInformation) reaction).ProjectPointer = descriptor.ProjectPointer;
+                        if (configuredReaction is ICanQueueTasks) ((ICanQueueTasks)configuredReaction).Tasks = Tasks;
+                        if (configuredReaction is IUnderstandProjectInformation)
+                            ((IUnderstandProjectInformation)configuredReaction).ProjectPointer = descriptor.ProjectPointer;
                     }
 
                     return reactions;

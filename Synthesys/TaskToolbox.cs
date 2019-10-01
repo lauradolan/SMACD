@@ -74,7 +74,7 @@ namespace Synthesys
         /// </summary>
         /// <param name="descriptor">Task Descriptor to enqueue</param>
         /// <returns>Task which resolves to the Action-Specific Report</returns>
-        public Task<ExtensionReport> Enqueue(TaskDescriptor descriptor)
+        public Task<List<ExtensionReport>> Enqueue(TaskDescriptor descriptor)
         {
             var queuedTaskDescriptor = new QueuedTaskDescriptor
             {
@@ -84,10 +84,10 @@ namespace Synthesys
             };
 
             var reactions = new List<ReactionExtension>();
-            var actionInstanceTask = new Task<ExtensionReport>(() =>
+            var actionInstanceTask = new Task<List<ExtensionReport>>(() =>
             {
                 TaskStarted?.Invoke(this, queuedTaskDescriptor);
-                ExtensionReport result = null;
+                var reports = new List<ExtensionReport>();
                 try
                 {
                     var sw = new Stopwatch();
@@ -104,30 +104,30 @@ namespace Synthesys
                         if (actionInstance == null)
                         {
                             Logger.LogCritical("Requested Action {0} is not loaded in system!", descriptor.ActionId);
-                            result = ExtensionReport.Error(
-                                new Exception($"Requested Action {descriptor.ActionId} is not loaded in system!"));
+                            reports.Add(ExtensionReport.Error(
+                                new Exception($"Requested Action {descriptor.ActionId} is not loaded in system!")));
                         }
                         else
                         {
-                            result = actionInstance.Act();
+                            reports.Add(actionInstance.Act());
                         }
 
-                        if (result == null) result = ExtensionReport.Blank();
+                        if (!reports.Any()) reports.Add(ExtensionReport.Blank());
 
-                        result.TaskDescriptor = queuedTaskDescriptor;
+                        reports.ForEach(r => r.TaskDescriptor = queuedTaskDescriptor);
 
                         var triggered = getReactions(descriptor, actionInstance, ExtensionConditionTrigger.Succeeds);
                         foreach (var item in triggered)
-                            item.React(TriggerDescriptor.ExtensionTrigger(
+                            reports.Add(item.React(TriggerDescriptor.ExtensionTrigger(
                                 descriptor.ActionId,
-                                ExtensionConditionTrigger.Succeeds));
+                                ExtensionConditionTrigger.Succeeds)));
                     }
                     catch (Exception ex)
                     {
                         Logger.LogCritical(ex, "Error running Action");
                         TaskFaulted?.Invoke(this, queuedTaskDescriptor);
-                        result = ExtensionReport.Error(ex);
-                        result.TaskDescriptor = queuedTaskDescriptor;
+                        reports.Add(ExtensionReport.Error(ex));
+                        reports.ForEach(r => r.TaskDescriptor = queuedTaskDescriptor);
 
                         if (actionInstance != null) // only trigger if there isn't a resolution failure
                         {
@@ -141,12 +141,15 @@ namespace Synthesys
 
                     sw.Stop();
 
-                    if (result == null) result = ExtensionReport.Blank();
+                    if (!reports.Any()) reports.Add(ExtensionReport.Blank());
 
-                    queuedTaskDescriptor.Result = result;
+                    queuedTaskDescriptor.Result = reports.First();
 
-                    result.TaskDescriptor = queuedTaskDescriptor;
-                    result.Runtime = sw.Elapsed;
+                    reports.ForEach(r =>
+                    {
+                        r.TaskDescriptor = queuedTaskDescriptor;
+                        r.Runtime = sw.Elapsed;
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -157,7 +160,7 @@ namespace Synthesys
                 RunningTasks.TryRemove(queuedTaskDescriptor, out var dummy);
                 TotalCompletedTasks++;
 
-                return result;
+                return reports;
             });
 
             queuedTaskDescriptor.ActionTask = actionInstanceTask;

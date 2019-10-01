@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Synthesys.SDK
@@ -35,6 +36,6 @@ namespace Synthesys.SDK
         /// </summary>
         /// <param name="descriptor">Task Descriptor for new Task</param>
         /// <returns></returns>
-        Task<ExtensionReport> Enqueue(TaskDescriptor descriptor);
+        Task<List<ExtensionReport>> Enqueue(TaskDescriptor descriptor);
     }
 }

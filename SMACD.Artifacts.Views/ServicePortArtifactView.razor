@@ -1,21 +1,57 @@
-﻿    <Card Class="pt-2">
-        <CardHeader>@ServicePortArtifact.Host @($"{ServicePortArtifact.Protocol}/{ServicePortArtifact.Port}")</CardHeader>
-        <CardBody>
-            <CardTitle Size="5">Service/Port Artifact</CardTitle>
-            <CardText>
-                @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceName))
-                {
-                    <p>The service has been fingerprinted as <pre>@ServicePortArtifact.ServiceName</pre></p>
-                }
-                @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceBanner))
-                {
-                    <p>The service has a banner of:<br /><pre>@ServicePortArtifact.ServiceBanner</pre></p>
-                }
-                <VulnerabilityDisplay Vulnerabilities="@ServicePortArtifact.Vulnerabilities" />
-            </CardText>
-        </CardBody>
-    </Card>
-
+﻿<div class="d-sm-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-dark mb-0">@ServicePortArtifact.Host @($"{ServicePortArtifact.Protocol}/{ServicePortArtifact.Port}")</h3><i class="fas da-2x fa-plug"></i>
+</div>
+<div class="row">
+    <div class="col-md-6 col-xl-9 mb-4">
+        <div class="card shadow border-left-success py-2">
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col mr-2">
+                        <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Service Banner</span></div>
+                        <div class="text-dark mb-0 text-monospace">
+                            @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceBanner))
+                            {
+                                <span>@ServicePortArtifact</span>
+                            }
+                            else
+                            {
+                                <span>-No Banner Provided-</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-envelope-open-text fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-4">
+        <div class="card shadow border-left-primary py-2">
+            <div class="card-body">
+                <div class="row align-items-center no-gutters">
+                    <div class="col mr-2">
+                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Fingerprint</span></div>
+                        <div class="text-dark font-weight-bold h5 mb-0">
+                            @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceName))
+                            {
+                                <span>@ServicePortArtifact.ServiceName</span>
+                            }
+                            else
+                            {
+                                <span>Unknown</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <VulnerabilityDisplay Vulnerabilities="@ServicePortArtifact.Vulnerabilities" />
+    </div>
+</div>
 
 @code
 {

@@ -43,6 +43,6 @@ namespace Synthesys.SDK
 
     public class QueuedTaskDescriptor : ResultProvidingTaskDescriptor
     {
-        public Task<ExtensionReport> ActionTask { get; set; }
+        public Task<List<ExtensionReport>> ActionTask { get; set; }
     }
 }

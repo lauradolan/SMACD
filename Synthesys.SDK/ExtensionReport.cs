@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Synthesys.SDK
 {
-    public abstract class ExtensionReport
+    public class ExtensionReport
     {
         protected ExtensionReport()
         {
@@ -34,6 +34,16 @@ namespace Synthesys.SDK
         public int MaximumPointsAvailable { get; set; }
 
         /// <summary>
+        ///     Name of the View describing this ExtensionReport
+        /// </summary>
+        public virtual string ReportViewName => null;
+
+        /// <summary>
+        ///     Name of the summary control to represent this ExtensionReport
+        /// </summary>
+        public virtual string ReportSummaryName => null;
+
+        /// <summary>
         ///     Adjusted score out of 1.0
         /// </summary>
         public double AdjustedScore =>
@@ -62,7 +72,7 @@ namespace Synthesys.SDK
         ///     Generate a string representative of the report object's content
         /// </summary>
         /// <returns></returns>
-        public abstract string GetReportContent();
+        public virtual string GetReportContent() => "Report is Empty";
 
         /// <summary>
         ///     Finalize report by disconnecting TaskDescriptor from recursive loops
@@ -78,13 +88,23 @@ namespace Synthesys.SDK
 
         public virtual string Serialize()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full
+            });
         }
 
-        public static ExtensionReport Deserialize(string serializedData)
+        protected virtual ExtensionReport DeserializeFromString(string serializedData)
         {
-            return (ExtensionReport) JsonConvert.DeserializeObject(serializedData);
+            return (ExtensionReport)JsonConvert.DeserializeObject(serializedData, new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full
+            });
         }
+
+        public static ExtensionReport Deserialize(string serializedData) => new ExtensionReport().DeserializeFromString(serializedData);
     }
 
     public class BlankExtensionReport : ExtensionReport

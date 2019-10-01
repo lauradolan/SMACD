@@ -23,8 +23,8 @@ namespace Synthesys
         /// <param name="artifactRoot">Artifact representing target</param>
         /// <param name="options">ActionExtension options</param>
         /// <returns></returns>
-        public static ActionExtension Configure(
-            this ActionExtension extension,
+        public static Extension Configure(
+            this Extension extension,
             Artifact artifactRoot,
             Dictionary<string, string> options)
         {

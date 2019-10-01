@@ -1,4 +1,5 @@
-﻿using Synthesys.SDK;
+﻿using Newtonsoft.Json;
+using Synthesys.SDK;
 
 namespace Synthesys.Plugins.Dummy
 {
@@ -8,6 +9,9 @@ namespace Synthesys.Plugins.Dummy
         public string DummyString { get; set; }
         public DummyDataClass Data { get; set; }
 
+        public override string ReportSummaryName => typeof(DummyReportSummary).FullName;
+        public override string ReportViewName => typeof(DummyReportView).FullName;
+
         public override string GetReportContent()
         {
             return "This is a dummy component used for testing.\n" +
@@ -15,5 +19,8 @@ namespace Synthesys.Plugins.Dummy
                    "Dummy String Inner:" + Data.DummyString + "\n" +
                    "Dummy Double:" + Data.DummyDouble;
         }
+
+        protected override ExtensionReport DeserializeFromString(string serializedData) =>
+            JsonConvert.DeserializeObject<DummySpecificReport>(serializedData);
     }
 }

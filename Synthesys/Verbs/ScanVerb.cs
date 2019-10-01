@@ -75,7 +75,7 @@ namespace Synthesys.Verbs
             foreach (var resourceModel in serviceMap.Targets)
                 session.RegisterTarget(resourceModel);
 
-            var generatedTasks = new List<Task<ExtensionReport>>();
+            var generatedTasks = new List<Task<List<ExtensionReport>>>();
             foreach (var feature in serviceMap.Features)
             foreach (var useCase in feature.UseCases)
             foreach (var abuseCase in useCase.AbuseCases)
@@ -112,7 +112,7 @@ namespace Synthesys.Verbs
 
             while (session.Tasks.IsRunning) Thread.Sleep(500);
 
-            var results = generatedTasks.Select(t => t.Result.FinalizeReport());
+            var results = generatedTasks.SelectMany(t => t.Result.Select(r => r.FinalizeReport()));
             session.Reports.AddRange(results);
 
             using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate,

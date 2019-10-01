@@ -54,7 +54,7 @@ namespace Synthesys.Plugins.Dummy
             Logger.LogInformation("Text Outside Using: " + text);
 
             // Artifacts can be retrieved with strong typing
-            var stronglyTyped = Host.Attachments["dummyResult"].As<ObjectArtifact>().Get<DummyDataClass>();
+            var stronglyTyped = Host.Attachments["dummyResult"].AsObjectArtifact().Get<DummyDataClass>();
 
             try
             {

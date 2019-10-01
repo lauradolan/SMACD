@@ -1,0 +1,54 @@
+﻿@page "/reports"
+@layout MainLayout
+@using Synthesys.SDK
+
+@if (Program.Session != null)
+{
+    var c = 0;
+    for (var i = 0; i < Program.Session.Reports.Count(r => string.IsNullOrEmpty(r.ReportSummaryName)); i++)
+    {
+
+        var report = Program.ExportedSession.SerializedReports[c]
+        <a href="/reports/@c">
+            @RenderDynamicSummary(report)
+        </a>
+    }
+}
+@code
+{
+    protected RenderFragment RenderDynamicSummary(ExtensionReport report) => builder =>
+    {
+        builder.OpenComponent(1, GetComponentType(report.ReportSummaryName));
+        builder.AddAttribute(2, "Report", report);
+        builder.CloseComponent();
+    };
+
+    private Type GetComponentType(string name)
+    {
+        Type componentType = null;
+        if (!string.IsNullOrEmpty(name))
+        {
+            // Gotta find that view!
+
+            // First, see if we can resolve this cheaply.
+            componentType = Type.GetType(name);
+
+            // Try resolving inside the Artifacts assembly
+            if (componentType == null && name.Contains(".Artifacts."))
+            {
+                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.Artifacts.Views.DefaultArtifactView)).GetType(name);
+            }
+
+            // Try resolving inside the loaded extensions
+            if (componentType == null)
+            {
+                componentType = Synthesys.ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(name)).FirstOrDefault(a => a != null);
+            }
+        }
+
+        if (componentType == null) // TODO: Change default!
+            componentType = typeof(SMACD.Artifacts.Views.DefaultArtifactView);
+
+        return componentType;
+    }
+}

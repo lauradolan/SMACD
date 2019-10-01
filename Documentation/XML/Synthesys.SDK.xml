@@ -249,6 +249,16 @@
                 Maximum number of points available on the Extension's own scale
             </summary>
         </member>
+        <member name="P:Synthesys.SDK.ExtensionReport.ReportViewName">
+            <summary>
+                Name of the View describing this ExtensionReport
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.ExtensionReport.ReportSummaryName">
+            <summary>
+                Name of the summary control to represent this ExtensionReport
+            </summary>
+        </member>
         <member name="P:Synthesys.SDK.ExtensionReport.AdjustedScore">
             <summary>
                 Adjusted score out of 1.0
