@@ -15,6 +15,22 @@ namespace Compass
         public static ServiceMapFile ServiceMap { get; set; }
         public static Synthesys.Session Session { get; set; }
 
+        public static List<Vulnerability> GetAllVulnerabilitiesIn(Artifact artifact)
+        {
+            var list = new List<Vulnerability>();
+            GetAllVulnerabilitiesIn(artifact, ref list);
+            return list;
+        }
+
+        private static void GetAllVulnerabilitiesIn(Artifact artifact, ref List<Vulnerability> vulnerabilities)
+        {
+            vulnerabilities.AddRange(artifact.Vulnerabilities);
+            foreach (var child in artifact.Children)
+            {
+                GetAllVulnerabilitiesIn(child, ref vulnerabilities);
+            }
+        }
+
         public static List<Vulnerability> GetAllVulnerabilities()
         {
             var result = new List<Vulnerability>();

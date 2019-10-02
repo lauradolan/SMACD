@@ -3,20 +3,22 @@
         <span>
             @if (Artifact.Children.Any() && IsExpanded)
             {
-                <i @onclick="SwitchExpansion" class="fa fa-minus" style="margin-right: 0.5em;"></i>
+                <i @onclick="SwitchExpansion" class="fa fa-minus text-light" style="margin-right: 0.5em;"></i>
             }
             else if (Artifact.Children.Any())
             {
-                <i @onclick="SwitchExpansion" class="fa fa-plus" style="margin-right: 0.5em;"></i>
+                <i @onclick="SwitchExpansion" class="fa fa-plus text-light" style="margin-right: 0.5em;"></i>
             }
             else
             {
-                <i class="fa fa-puzzle-piece" style="margin-right: 0.5em;"></i>
+                <i class="fa fa-puzzle-piece text-info" style="margin-right: 0.5em;"></i>
             }
             <a class="text-light" href="javascript:void(0)" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
             @Artifact.Identifier
             </a>
-            <span class="text-right d-inline float-right text-light">(@Artifact.Vulnerabilities.Count)</span>
+            <span class="text-right d-inline float-right">
+                (<span class="text-info">@Artifact.Vulnerabilities.Count<i class="fa fa-bug"></i></span>&nbsp;<span class="text-warning">@Artifact.Children.Sum(v => Program.GetAllVulnerabilitiesIn(v).Count)<i class="fa fa-sort-down"></i></span>)
+            </span>
         </span>
         @if (Artifact.Children.Any() && IsExpanded)
             {
