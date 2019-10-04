@@ -10,6 +10,7 @@ using SMACD.Artifacts;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
+using Synthesys.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -36,7 +37,7 @@ namespace Synthesys.Verbs
         {
             Logger.LogDebug("Starting ExtensionLibrary search");
             ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
-                Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"),
                 "Synthesys.Plugins.*.dll");
 
             // --------------------------------------------------------------------------------------------
@@ -96,18 +97,16 @@ namespace Synthesys.Verbs
                         [((SocketPortTargetModel) target).Port];
                 }
 
-                generatedTasks.Add(session.Tasks.Enqueue(new TaskDescriptor
-                {
-                    ActionId = pluginPointer.Action,
-                    Options = pluginPointer.Options,
-                    ArtifactRoot = artifact,
-                    ProjectPointer = new ProjectPointer
+                generatedTasks.Add(session.Tasks.Enqueue(pluginPointer.Action,
+                    artifact,
+                    pluginPointer.Options,
+                    new ProjectPointer
                     {
                         Feature = feature,
                         UseCase = useCase,
                         AbuseCase = abuseCase
                     }
-                }));
+                ));
             }
 
             while (session.Tasks.IsRunning) Thread.Sleep(500);

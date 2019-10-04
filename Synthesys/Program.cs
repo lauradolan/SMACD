@@ -58,6 +58,7 @@ namespace Synthesys
                 .CreateLogger();
             Global.LogFactory.AddSerilog(Log.Logger);
             SDK.Global.LogFactory.AddSerilog(Log.Logger);
+            Tasks.Global.LogFactory.AddSerilog(Log.Logger);
 
             if (!verb.Silent)
             {

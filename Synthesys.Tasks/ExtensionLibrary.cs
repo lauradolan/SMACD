@@ -11,7 +11,7 @@ using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
 
-namespace Synthesys
+namespace Synthesys.Tasks
 {
     /// <summary>
     ///     Encapsulates functionality of the system in the form of Extensions

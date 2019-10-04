@@ -9,7 +9,7 @@ using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
 
-namespace Synthesys
+namespace Synthesys.Tasks
 {
     public class ExtensionToolbox
     {

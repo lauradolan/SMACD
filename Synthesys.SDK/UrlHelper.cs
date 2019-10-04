@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Web;
 using SMACD.Artifacts;
 
 namespace Synthesys.SDK
@@ -9,40 +10,50 @@ namespace Synthesys.SDK
     {
         public static UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
         {
-            var pieces = url.Split('/').ToList();
-            pieces.RemoveAll(p => string.IsNullOrEmpty(p));
+            if (!url.StartsWith("http"))
+                url = "http://" + httpService.Host.Hostname + ":" + httpService.Port + url;
+
+            var uri = new Uri(url);
+
+            var scheme = uri.Scheme;
+            var host = uri.Host;
+            var pieces = uri.AbsolutePath.Split('/').ToList();
+            var queryParameters = HttpUtility.ParseQueryString(uri.Query);
+
+            // Create path through tree based on path pieces
             var artifact = httpService["/"];
-
-            var queryParameters = new Dictionary<string, string>();
-            if (pieces.Count > 0 && pieces.Last().Contains('?'))
-            {
-                var actualPiece = pieces.Last().Split('?')[0];
-                var query = pieces.Last().Split('?')[1];
-                var queryItems = query.Split('&').ToList();
-                queryItems.ForEach(q => queryParameters.Add(q.Split('=')[0], q.Split('=')[1]));
-
-                pieces.RemoveAt(pieces.Count - 1);
-                pieces.Add(actualPiece);
-            }
-
             foreach (var piece in pieces)
             {
-                if (pieces.Last() == piece)
-                {
-                    if (method.ToUpper() == "GET")
-                        artifact[piece].Method = HttpMethod.Get;
-                    else if (method.ToUpper() == "POST")
-                        artifact[piece].Method = HttpMethod.Post;
-                    else if (method.ToUpper() == "PUT")
-                        artifact[piece].Method = HttpMethod.Put;
-                    else if (method.ToUpper() == "DELETE")
-                        artifact[piece].Method = HttpMethod.Delete;
-                    else if (method.ToUpper() == "HEAD")
-                        artifact[piece].Method = HttpMethod.Head;
-                    else if (method.ToUpper() == "TRACE") artifact[piece].Method = HttpMethod.Trace;
-                }
-
                 artifact = artifact[piece];
+            }
+
+            // Assign HTTP Verb to last piece before query parameters
+            if (!string.IsNullOrEmpty(method))
+            {
+                if (method.ToUpper() == "GET")
+                    artifact.Method = HttpMethod.Get;
+                else if (method.ToUpper() == "POST")
+                    artifact.Method = HttpMethod.Post;
+                else if (method.ToUpper() == "PUT")
+                    artifact.Method = HttpMethod.Put;
+                else if (method.ToUpper() == "DELETE")
+                    artifact.Method = HttpMethod.Delete;
+                else if (method.ToUpper() == "HEAD")
+                    artifact.Method = HttpMethod.Head;
+                else if (method.ToUpper() == "TRACE") artifact.Method = HttpMethod.Trace;
+            }
+
+            foreach (var key in queryParameters.AllKeys)
+            {
+                artifact.Requests.Add(new UrlRequestArtifact()
+                {
+                    Fields = new ObservableDictionary<string, string>()
+                    {
+                        {
+                            key, queryParameters[key]
+                        }
+                    }
+                });
             }
 
             return artifact;

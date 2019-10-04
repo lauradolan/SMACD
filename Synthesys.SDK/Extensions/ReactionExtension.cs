@@ -1,4 +1,8 @@
-﻿using Synthesys.SDK.Triggers;
+﻿using Synthesys.SDK.Attributes;
+using Synthesys.SDK.Triggers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Synthesys.SDK.Extensions
 {
@@ -42,5 +46,10 @@ namespace Synthesys.SDK.Extensions
         /// <param name="trigger">Trigger causing the ReactionExtension to fire</param>
         /// <returns></returns>
         public abstract ExtensionReport React(TriggerDescriptor trigger);
+
+        /// <summary>
+        ///     Retrieve a list of Triggers which cause this Extension to react
+        /// </summary>
+        public List<TriggeredByAttribute> Triggers => GetType().GetCustomAttributes<TriggeredByAttribute>().ToList();
     }
 }

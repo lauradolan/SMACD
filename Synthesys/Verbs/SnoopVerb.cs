@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
+using Synthesys.Tasks;
 
 namespace Synthesys.Verbs
 {

@@ -10,6 +10,7 @@ using Synthesys.SDK;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using Synthesys.Tasks;
 
 namespace Synthesys
 {
@@ -50,47 +51,13 @@ namespace Synthesys
         {
             if (Artifacts == null) Artifacts = new RootArtifact();
             BindArtifactTriggers();
-
-            Tasks = new TaskToolbox(
-                (descriptor, id, opts, root) =>
-                {
-                    if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == id)))
-                        return null;
-
-                    var action = ExtensionToolbox.Instance.EmitAction(id).Configure(root, opts);
-                    if (action is ICanQueueTasks) ((ICanQueueTasks) action).Tasks = Tasks;
-
-                    if (action is IUnderstandProjectInformation)
-                        ((IUnderstandProjectInformation) action).ProjectPointer = descriptor.ProjectPointer;
-
-                    return action as ActionExtension;
-                },
-                (descriptor, ext, trigger) =>
-                {
-                    var reactions = new List<ReactionExtension>();
-                    if (ext == null) return reactions;
-
-                    reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(ext, trigger));
-
-                    foreach (var reaction in reactions)
-                    {
-                        // todo: reaction options?
-                        var configuredReaction = reaction.Configure(descriptor.ArtifactRoot, new Dictionary<string, string>()) as ReactionExtension;
-
-                        if (configuredReaction is ICanQueueTasks) ((ICanQueueTasks)configuredReaction).Tasks = Tasks;
-                        if (configuredReaction is IUnderstandProjectInformation)
-                            ((IUnderstandProjectInformation)configuredReaction).ProjectPointer = descriptor.ProjectPointer;
-                    }
-
-                    return reactions;
-                });
         }
 
         /// <summary>
         ///     Task queue
         /// </summary>
         [JsonIgnore]
-        public TaskToolbox Tasks { get; }
+        public TaskToolbox Tasks { get; } = new TaskToolbox();
 
         /// <summary>
         ///     Artifact tree root

@@ -18,10 +18,6 @@ features:
       actions:
       - action: nmap
         target: acunetix_sample
-      - action: nikto
-        target: acunetix_sample
-      - action: owaspzap
-        target: acunetix_sample
 targets:
 - !http
   targetId: resourceRoot
@@ -33,3 +29,6 @@ targets:
 - !http
   targetId: dockerTarget
   url: http://172.17.0.1:1234
+- !http
+  targetId: local
+  url: http://127.0.0.1/

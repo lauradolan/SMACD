@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SMACD.Artifacts;
+using Synthesys.SDK;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Synthesys.SDK
+namespace Synthesys.Tasks
 {
     public interface ITaskToolbox
     {
@@ -19,23 +21,23 @@ namespace Synthesys.SDK
         /// <summary>
         ///     Fired when Task is completed
         /// </summary>
-        event EventHandler<ResultProvidingTaskDescriptor> TaskCompleted;
+        event EventHandler<RuntimeTaskDescriptor> TaskCompleted;
 
         /// <summary>
         ///     Fired when Task is faulted (errored)
         /// </summary>
-        event EventHandler<ResultProvidingTaskDescriptor> TaskFaulted;
+        event EventHandler<RuntimeTaskDescriptor> TaskFaulted;
 
         /// <summary>
         ///     Fired when Task is started
         /// </summary>
-        event EventHandler<ResultProvidingTaskDescriptor> TaskStarted;
+        event EventHandler<RuntimeTaskDescriptor> TaskStarted;
 
         /// <summary>
         ///     Enqueue a new Task
         /// </summary>
         /// <param name="descriptor">Task Descriptor for new Task</param>
         /// <returns></returns>
-        Task<List<ExtensionReport>> Enqueue(TaskDescriptor descriptor);
+        Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
     }
 }

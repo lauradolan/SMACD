@@ -1,5 +1,6 @@
 ﻿@page "/artifacts"
 @layout LayoutWithoutPadding
+@using Synthesys.Tasks
 @using SMACD.Artifacts
 
 <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
@@ -61,7 +62,7 @@
             // Try resolving inside the loaded extensions
             if (componentType == null)
             {
-                componentType = Synthesys.ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.ArtifactSummaryViewTypeName)).FirstOrDefault(a => a != null);
+                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.ArtifactSummaryViewTypeName)).FirstOrDefault(a => a != null);
             }
         }
 

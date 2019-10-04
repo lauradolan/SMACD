@@ -2,6 +2,8 @@
 @using System.Reflection
 @using Synthesys
 @using Synthesys.SDK.Attributes
+@using Synthesys.Tasks
+
 <h3>Action Extensions</h3>
 <small>Action Extensions are explicitly executed based on known information. They can originate from an Abuse Case in the Service Map, or be added to the queue by another Extension.</small>
 <div class="card-group">
@@ -18,11 +20,11 @@
         var id = reaction.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier;
         if (id != null)
         {
-            <Plugin ExtensionIdentifier="@id"/>
+            <Plugin ExtensionIdentifier="@id" />
         }
         else
-        { 
-        <div role="alert" class="alert alert-danger"><span><strong>Alert</strong> An Extension was loaded by Type @reaction.FullName that does not have an ExtensionAttribute defined and is therefore not addressable. This is a developer error.</span></div>
+        {
+            <div role="alert" class="alert alert-danger"><span><strong>Alert</strong> An Extension was loaded by Type @reaction.FullName that does not have an ExtensionAttribute defined and is therefore not addressable. This is a developer error.</span></div>
         }
     }
 </div>

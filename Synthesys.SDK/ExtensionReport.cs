@@ -14,7 +14,22 @@ namespace Synthesys.SDK
         /// <summary>
         ///     Task descriptor generating the Extension instance
         /// </summary>
-        public TaskDescriptor TaskDescriptor { get; set; }
+        //public TaskDescriptor TaskDescriptor { get; set; }
+
+        /// <summary>
+        ///     Identifier of Extension which created this Report
+        /// </summary>
+        public string ExtensionIdentifier { get; set; }
+
+        /// <summary>
+        ///     List of paths to Artifacts that were registered with the Extension
+        /// </summary>
+        public List<string> AffectedArtifactPaths { get; set; } = new List<string>();
+
+        /// <summary>
+        ///     Pointer to Service Map entry which spawned the creation of this report
+        /// </summary>
+        public ProjectPointer ProjectPointer { get; set; }
 
         /// <summary>
         ///     How long the Extension took to execute
@@ -115,8 +130,9 @@ namespace Synthesys.SDK
         {
             // TODO: Handle reattachments so we don't orphan reports away from their artifact anchors
             //TaskDescriptor.ArtifactRoot = null;
-            ((QueuedTaskDescriptor) TaskDescriptor).ActionTask = null;
-            ((QueuedTaskDescriptor) TaskDescriptor).Results = null;
+            
+            // TODO: Anything left to finalize?
+
             return this;
         }
     }

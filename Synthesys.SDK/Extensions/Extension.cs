@@ -1,4 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
+using Synthesys.SDK.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Synthesys.SDK.Extensions
 {
@@ -36,5 +41,36 @@ namespace Synthesys.SDK.Extensions
         {
             Logger = Global.LogFactory.CreateLogger(name);
         }
+
+        /// <summary>
+        ///     Retrieve the Extension's metadata information
+        /// </summary>
+        public ExtensionAttribute Metadata => GetType().GetCustomAttribute<ExtensionAttribute>();
+
+        /// <summary>
+        ///     Retrieve a list of all properties in the Extension marked "Configurable"
+        /// </summary>
+        public List<PropertyInfo> ConfigurableProperties => GetType().GetProperties(BindingFlags.Instance).Where(p => p.GetCustomAttribute<ConfigurableAttribute>() != null).ToList();
+
+        /// <summary>
+        ///     Retrieve a dictionary of all (string) properties and their values
+        /// </summary>
+        public Dictionary<string, object> ConfigurablePropertyValues =>
+            GetType().GetProperties(BindingFlags.Instance).Where(p => p.GetCustomAttribute<ConfigurableAttribute>() != null)
+            .ToDictionary(
+                k => k.Name,
+                v => v.GetValue(this));
+
+        /// <summary>
+        ///     Default Summary view for this Extension.
+        ///     This can be overridden by specifying an alternate view in the ExtensionReport
+        /// </summary>
+        public Type DefaultSummaryView => GetType().GetCustomAttribute<UseGraphicalViewsAttribute>()?.SummaryView;
+
+        /// <summary>
+        ///     Default Detail view for this Extension.
+        ///     This can be overridden by specifying an alternate view in the ExtensionReport
+        /// </summary>
+        public Type DefaultDetailView => GetType().GetCustomAttribute<UseGraphicalViewsAttribute>()?.DetailView;
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/reports"
 @layout MainLayout
 @using Synthesys.SDK
+@using Synthesys.Tasks
 
 @if (Program.Session != null)
 {
@@ -16,7 +17,11 @@
 {
     protected RenderFragment RenderDynamicSummary(ExtensionReport report) => builder =>
     {
-        builder.OpenComponent(1, GetComponentType(report.ReportSummaryName));
+        if (!string.IsNullOrEmpty(report.ReportViewName))
+            builder.OpenComponent(1, GetComponentType(report.ReportSummaryName));
+        else
+            builder.OpenComponent(1, 
+                ExtensionToolbox.Instance.EmitAction(report.ExtensionIdentifier).DefaultSummaryView);
         builder.AddAttribute(2, "Report", report);
         builder.CloseComponent();
     };
@@ -40,7 +45,7 @@
             // Try resolving inside the loaded extensions
             if (componentType == null)
             {
-                componentType = Synthesys.ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(name)).FirstOrDefault(a => a != null);
+                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(name)).FirstOrDefault(a => a != null);
             }
         }
 

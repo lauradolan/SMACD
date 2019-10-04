@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compass", "Compass\Compass.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMACD.Artifacts.Views", "SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj", "{2405318B-79E2-4376-A68F-70D869002059}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesys.Tasks", "Synthesys.Tasks\Synthesys.Tasks.csproj", "{2814E17D-10F6-4BD9-820B-2875176738D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{2405318B-79E2-4376-A68F-70D869002059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2405318B-79E2-4376-A68F-70D869002059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2405318B-79E2-4376-A68F-70D869002059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2814E17D-10F6-4BD9-820B-2875176738D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2814E17D-10F6-4BD9-820B-2875176738D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2814E17D-10F6-4BD9-820B-2875176738D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2814E17D-10F6-4BD9-820B-2875176738D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{F763E75D-08E4-4077-92AE-43A74DE40349} = {408E378A-D08F-419F-B970-7BCC839510A5}
 		{13799302-EB26-4C0C-8B98-C8CEFC426ACA} = {A61D26B6-750B-4BD2-9248-CFDF38DF7379}
 		{2405318B-79E2-4376-A68F-70D869002059} = {5D968566-9536-4558-9686-AC107A79869D}
+		{2814E17D-10F6-4BD9-820B-2875176738D8} = {408E378A-D08F-419F-B970-7BCC839510A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73249C41-2490-4A52-B639-60FB96435BD4}

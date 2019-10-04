@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using SMACD.Data;
 using ElectronNET.API;
 using SMACD.Artifacts;
+using Synthesys.Tasks;
 using System.Reflection;
 
 namespace Compass
@@ -49,7 +50,7 @@ namespace Compass
 
         public static void Main(string[] args)
         {
-            Synthesys.ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
+            ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
                 Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Plugins"),
                 "Synthesys.Plugins.*.dll", true);
 

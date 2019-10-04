@@ -4,13 +4,13 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.Tasks;
+using Synthesys.Tasks.Attributes;
 
 namespace Synthesys.Plugins.Dummy
 {

@@ -7,7 +7,7 @@ using SMACD.Artifacts;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 
-namespace Synthesys
+namespace Synthesys.Tasks
 {
     /// <summary>
     ///     Configure Extensions
@@ -29,8 +29,8 @@ namespace Synthesys
             Dictionary<string, string> options)
         {
             extension.SetLoggerName(extension.GetType().Name);
-            ConfigureExtensionOptions(extension, options);
-            ConfigureArtifactProperty(extension, artifactRoot);
+            ApplyConfigurableOptions(extension, options);
+            ApplyArtifactProperty(extension, artifactRoot);
 
             var metadata = extension.GetType().GetCustomAttribute<ExtensionAttribute>();
 
@@ -56,7 +56,7 @@ namespace Synthesys
         /// <param name="extensionInstance">Extension to configure</param>
         /// <param name="options">Options to apply</param>
         /// <returns></returns>
-        private static Extension ConfigureExtensionOptions(Extension extensionInstance,
+        private static Extension ApplyConfigurableOptions(Extension extensionInstance,
             Dictionary<string, string> options)
         {
             var actionInstancePropertyTypes = extensionInstance.GetType().GetProperties();
@@ -91,7 +91,7 @@ namespace Synthesys
         /// <param name="extensionInstance">Extension to configure</param>
         /// <param name="resourceArtifact">Artifact to connect</param>
         /// <returns></returns>
-        private static Extension ConfigureArtifactProperty(Extension extensionInstance, Artifact resourceArtifact)
+        private static Extension ApplyArtifactProperty(Extension extensionInstance, Artifact resourceArtifact)
         {
             var artifactProperties = extensionInstance.GetType().GetProperties().Where(p =>
                 typeof(Artifact).IsAssignableFrom(p.PropertyType)).ToArray();

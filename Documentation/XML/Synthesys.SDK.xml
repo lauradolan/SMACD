@@ -107,15 +107,29 @@
                 Description of Trigger causing the Extension to be queued
             </summary>
         </member>
-        <member name="T:Synthesys.SDK.Capabilities.ICanQueueTasks">
+        <member name="T:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute">
             <summary>
-                ICanQueueTasks indicates that the Extension needs to interface with the Task Queue
+                The TriggeredByAttribute specifies that the Extension is added to the end of the Task Queue when a certain event
+                occurs.
+                This Attribute can be used multiple times on the same Extension.
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.Capabilities.ICanQueueTasks.Tasks">
+        <member name="P:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.DetailView">
             <summary>
-                Framework-populated reference to the Task Queue
+                Class of Razor component providing a full-page, detailed report
             </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.SummaryView">
+            <summary>
+                Class of Razor component providing a button or similar to showcase key elements about the Extension results
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.#ctor(System.Type,System.Type)">
+            <summary>
+                Specify the Razor component names which can be used to show a summary control and/or detailed view
+            </summary>
+            <param name="detailView">Class of Razor component providing a full-page, detailed report</param>
+            <param name="summaryView">Class of Razor component providing a button or similar to showcase key elements about the Extension results</param>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHost">
             <summary>
@@ -235,9 +249,19 @@
                 This is a generalized container--Extensions should use the "SerializedExtensionSpecificReport" property to store more specific information for report viewing.
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.ExtensionReport.TaskDescriptor">
+        <member name="P:Synthesys.SDK.ExtensionReport.ExtensionIdentifier">
             <summary>
-                Task descriptor generating the Extension instance
+                Identifier of Extension which created this Report
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.ExtensionReport.AffectedArtifactPaths">
+            <summary>
+                List of paths to Artifacts that were registered with the Extension
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.ExtensionReport.ProjectPointer">
+            <summary>
+                Pointer to Service Map entry which spawned the creation of this report
             </summary>
         </member>
         <member name="P:Synthesys.SDK.ExtensionReport.Runtime">
@@ -356,6 +380,33 @@
             </summary>
             <param name="name">Logger name</param>
         </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.Metadata">
+            <summary>
+                Retrieve the Extension's metadata information
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.ConfigurableProperties">
+            <summary>
+                Retrieve a list of all properties in the Extension marked "Configurable"
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.ConfigurablePropertyValues">
+            <summary>
+                Retrieve a dictionary of all (string) properties and their values
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.DefaultSummaryView">
+            <summary>
+                Default Summary view for this Extension.
+                This can be overridden by specifying an alternate view in the ExtensionReport
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.DefaultDetailView">
+            <summary>
+                Default Detail view for this Extension.
+                This can be overridden by specifying an alternate view in the ExtensionReport
+            </summary>
+        </member>
         <member name="T:Synthesys.SDK.Extensions.ReactionExtension">
             <summary>
                 A ReactionExtension is added to the end of the Task Queue when some given event occurs during the scan process. The
@@ -396,6 +447,11 @@
             </summary>
             <param name="trigger">Trigger causing the ReactionExtension to fire</param>
             <returns></returns>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.ReactionExtension.Triggers">
+            <summary>
+                Retrieve a list of Triggers which cause this Extension to react
+            </summary>
         </member>
         <member name="F:Synthesys.SDK.HostCommands.HostCommand.Maps">
             <summary>
@@ -458,79 +514,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="P:Synthesys.SDK.ITaskToolbox.IsRunning">
-            <summary>
-                If the Task queue is running
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ITaskToolbox.Count">
-            <summary>
-                Number of queued and running Tasks
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ITaskToolbox.TaskCompleted">
-            <summary>
-                Fired when Task is completed
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ITaskToolbox.TaskFaulted">
-            <summary>
-                Fired when Task is faulted (errored)
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ITaskToolbox.TaskStarted">
-            <summary>
-                Fired when Task is started
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.ITaskToolbox.Enqueue(Synthesys.SDK.TaskDescriptor)">
-            <summary>
-                Enqueue a new Task
-            </summary>
-            <param name="descriptor">Task Descriptor for new Task</param>
-            <returns></returns>
-        </member>
         <member name="M:Synthesys.SDK.LogExtensions.SHA1(System.String)">
             <summary>
                 Calculate SHA1 hash of a string (not cryptographically safe operation!)
             </summary>
             <param name="str">String to hash</param>
             <returns></returns>
-        </member>
-        <member name="T:Synthesys.SDK.TaskDescriptor">
-            <summary>
-                Task descriptor used to submit a Task to be run
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.TaskDescriptor.ActionId">
-            <summary>
-                Action identifier
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.TaskDescriptor.Options">
-            <summary>
-                Options to be configured on Action
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.TaskDescriptor.ArtifactRoot">
-            <summary>
-                Root Artifact under which data will be placed
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.TaskDescriptor.ProjectPointer">
-            <summary>
-                Pointer to business elements (project elements)
-            </summary>
-        </member>
-        <member name="T:Synthesys.SDK.ResultProvidingTaskDescriptor">
-            <summary>
-                Task descriptor that includes a Result from a Task
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ResultProvidingTaskDescriptor.Results">
-            <summary>
-                Reports generated by Action and triggered Reactions
-            </summary>
         </member>
         <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
             <summary>

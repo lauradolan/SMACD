@@ -1,5 +1,5 @@
 ﻿<div class="text-center pt-2 row">
-    <h4>OWASP ZAP Report - @Report.TaskDescriptor.ArtifactRoot</h4>
+    <h4>OWASP ZAP Report - @string.Join(", ", Report.AffectedArtifactPaths)</h4>
 </div>
 
 @foreach (var hostItem in ZapReport.Site)

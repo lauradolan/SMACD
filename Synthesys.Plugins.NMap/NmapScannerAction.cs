@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
@@ -25,6 +24,7 @@ namespace Synthesys.Plugins.Nmap
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
+    [UseGraphicalViews(typeof(NmapReportView), typeof(NmapReportSummary))]
     public class NmapScannerAction : ActionExtension, IOperateOnHost
     {
         /// <summary>
@@ -52,7 +52,7 @@ namespace Synthesys.Plugins.Nmap
         }
 
         public override ExtensionReport Act()
-        {
+        { 
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
             var targetIpAddress = Host.Aliases.FirstOrDefault(a => !string.IsNullOrEmpty(a));
@@ -66,7 +66,6 @@ namespace Synthesys.Plugins.Nmap
             report.ReportViewName = typeof(NmapReportView).FullName;
             report.ReportSummaryName = typeof(NmapReportSummary).FullName;
             report.SetExtensionSpecificReport(nmapReport);
-            //report.Attachments["report"] = JsonConvert.SerializeObject(nmapReport);
 
             foreach (var port in nmapReport.Ports)
             {
@@ -130,31 +129,31 @@ namespace Synthesys.Plugins.Nmap
             var result = new NmapRunReport();
             try
             {
-                var addrChild = xml.Root.Descendants("address").FirstOrDefault();
-                if (addrChild == null)
+                var hostChild = xml.Root.Descendants("host").FirstOrDefault();
+                if (hostChild == null)
                 {
                     Logger.LogWarning("NMap report exists but does not contain any information about a remote host");
                     return result;
                 }
 
-                var addr = xml.Root.Descendants("address").First().Attributes("addr").First().Value;
-                var ports = xml.Root.Descendants("ports").First();
+                var addr = (string)hostChild.Descendants("address").First().Attribute("addr");
+                var ports = hostChild.Descendants("ports").First();
                 foreach (var portDetail in ports.Descendants("port"))
                     try
                     {
                         var portInfo = portDetail.Attributes();
-                        var protocol = portDetail.Attributes("protocol").First().Value;
-                        var port = portDetail.Attributes("portid").First().Value;
+                        var protocol = (string)portDetail.Attribute("protocol");
+                        var port = (string)portDetail.Attribute("portid");
 
                         var serviceDetail = portDetail.Descendants("service").First();
-                        var service = serviceDetail.Attributes("name").First().Value;
-                        var conf = serviceDetail.Attributes("conf").First().Value;
+                        var service = (string)serviceDetail.Attribute("name");
+                        var conf = (string)serviceDetail.Attribute("conf");
 
-                        var product = serviceDetail.Attributes("product").First().Value;
-                        var productVersion = serviceDetail.Attributes("version").First().Value;
-                        var extraInfo = serviceDetail.Attributes("extrainfo").First().Value;
+                        var product = (string)serviceDetail.Attribute("product");
+                        var productVersion = (string)serviceDetail.Attribute("version");
+                        var extraInfo = (string)serviceDetail.Attribute("extrainfo");
 
-                        var osType = serviceDetail.Attributes("ostype").First().Value;
+                        var osType = (string)serviceDetail.Attribute("ostype");
 
                         result.Ports.Add(new NmapPort
                         {
