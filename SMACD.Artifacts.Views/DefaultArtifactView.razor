@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json
 @using Newtonsoft.Json.Linq
+@inject Microsoft.JSInterop.IJSRuntime JsRuntime
 
 @if (Artifact != null)
 {
@@ -50,7 +51,7 @@
                         @if (!string.IsNullOrEmpty(SerializedData))
                         {
                             <pre>
-                                <code>
+                            <code class="language-json">
                                     @SerializedData
                                 </code>
                             </pre>
@@ -88,7 +89,7 @@ else
 
     public bool IsShowingJsonDetail { get; set; }
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (Artifact != null)
         {
@@ -105,6 +106,6 @@ else
         else
             SerializedData = string.Empty;
 
-        return Task.FromResult(0);
+        var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
     }
 }

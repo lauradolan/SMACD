@@ -58,6 +58,11 @@
             <param name="path">Artifact path built so far</param>
             <returns></returns>
         </member>
+        <member name="T:SMACD.Artifacts.Data.DataArtifact.DataArtifactTypes">
+            <summary>
+            Possible encapsulated data types owned by a Data Artifact
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.Data.DataArtifact.Name">
             <summary>
                 Name of this Artifact
@@ -66,6 +71,11 @@
         <member name="P:SMACD.Artifacts.Data.DataArtifact.StoredData">
             <summary>
                 Data stored in this Artifact in raw format
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Data.DataArtifact.ArtifactType">
+            <summary>
+            Type of Data Artifact
             </summary>
         </member>
         <member name="M:SMACD.Artifacts.Data.DataArtifact.As``1">

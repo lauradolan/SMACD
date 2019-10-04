@@ -2,6 +2,17 @@
 {
     public class DataArtifact
     {
+        /// <summary>
+        /// Possible encapsulated data types owned by a Data Artifact
+        /// </summary>
+        public enum DataArtifactTypes
+        {
+            Unknown,
+            Object,
+            String,
+            VFS
+        }
+
         public DataArtifact(string name)
         {
             Name = name;
@@ -16,6 +27,23 @@
         ///     Data stored in this Artifact in raw format
         /// </summary>
         public byte[] StoredData { get; set; }
+
+        /// <summary>
+        /// Type of Data Artifact
+        /// </summary>
+        public DataArtifactTypes ArtifactType
+        {
+            get
+            {
+                if (this is ObjectArtifact)
+                    return DataArtifactTypes.Object;
+                if (this is StringArtifact)
+                    return DataArtifactTypes.String;
+                if (this is NativeDirectoryArtifact)
+                    return DataArtifactTypes.VFS;
+                return DataArtifactTypes.Unknown;
+            }
+        }
 
         /// <summary>
         ///     Get the Artifact cast as a specific DataArtifact type
