@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -7,12 +6,9 @@ using System.Text;
 using Newtonsoft.Json;
 using SMACD.Artifacts;
 using Synthesys.SDK;
-using Synthesys.SDK.Capabilities;
-using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
-using Synthesys.Tasks;
 
-namespace Synthesys
+namespace Synthesys.Tasks
 {
     public class Session
     {

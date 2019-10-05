@@ -1,6 +1,8 @@
 ﻿@using System.IO
 @using Blazor.FileReader
 @using SMACD.Data
+@using Synthesys.Tasks;
+
 @inject IFileReaderService fileReaderService;
 @{
     var vulnerabilities = Program.GetAllVulnerabilities();
@@ -123,12 +125,12 @@
                     {
                         var yaml = sr.ReadToEnd();
                         Program.ServiceMap = SMACD.Data.ServiceMapFile.GetServiceMapFromYaml(yaml);
-                        Program.Session = new Synthesys.Session { ServiceMapYaml = yaml };
+                        Program.Session = new Session { ServiceMapYaml = yaml };
                     }
                 }
                 else
                 {
-                    Program.Session = Synthesys.Session.Import(memoryStream);
+                    Program.Session = Session.Import(memoryStream);
                     Program.ServiceMap = ServiceMapFile.GetServiceMapFromYaml(Program.Session.ServiceMapYaml);
                     memoryStream.Seek(0, SeekOrigin.Begin);
                 }

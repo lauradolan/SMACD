@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json.Serialization;
 
-namespace Synthesys
+namespace Synthesys.Tasks
 {
     /// <summary>
     ///     Provides a more aggressive (computationally complex) avenue of Type resolution.

@@ -4,6 +4,7 @@ using SMACD.Artifacts;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
+using Synthesys.Tasks;
 
 namespace Synthesys
 {

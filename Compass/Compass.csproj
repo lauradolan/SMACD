@@ -15,9 +15,8 @@
     <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
-    <ProjectReference Include="..\Synthesys.Plugins.Nmap\Synthesys.Plugins.Nmap.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
-    <ProjectReference Include="..\Synthesys\Synthesys.csproj" />
+    <ProjectReference Include="..\Synthesys.Tasks\Synthesys.Tasks.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="electron.manifest.json">
