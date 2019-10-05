@@ -4,7 +4,19 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RazorLanguage>3.0</RazorLanguage>
     <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.Nmap.XML</DocumentationFile>
+    <Authors>Anthony Turner</Authors>
+    <Product>Nmap Web Scanner Plugin for Synthesys</Product>
+    <Description>Implements a wrapper around the Nmap port scanner to provide data in Synthesys scans</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/anthturner/SMACD</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Blazorise.DataGrid" Version="0.8.6.1" />

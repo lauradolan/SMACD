@@ -3,7 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <DocumentationFile>..\Documentation\XML\SMACD.Data.XML</DocumentationFile>
+    <Authors>Anthony Turner</Authors>
+    <Product>SMACD Data Structure Provider</Product>
+    <Description>Defines the data structure for a SMACD Service Map</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/anthturner/SMACD</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />

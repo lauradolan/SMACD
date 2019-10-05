@@ -3,7 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>Anthony Turner</Authors>
+    <Product>Synthesys Vulnerability Scanner</Product>
+    <Description>Synthesys uses a Service Map to provide known information, which is used to seed data for a complex application vulnerability scan. This tool will optionally implement a threshold to allow for integration of this system with other automation. The tool outputs a Session file, which can be later imported to Compass to view the detailed results.</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/anthturner/SMACD</PackageProjectUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
