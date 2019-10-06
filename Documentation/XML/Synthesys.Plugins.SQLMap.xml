@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Synthesys.Plugins.SQLMap</name>
+    </assembly>
+    <members>
+        <member name="T:Synthesys.Plugins.SQLMap.SqlMapInjectionVector">
+            <summary>
+                A way to request a page which results in the ability to read/write otherwise protected data, execute code, etc.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter">
+            <summary>
+                Parameter that is injectable
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type">
+            <summary>
+                Type of injection
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title">
+            <summary>
+                Title of injection
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload">
+            <summary>
+                Injection payload
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapReport.InjectionVectors">
+            <summary>
+                Points where a SQL injection can succeed
+            </summary>
+        </member>
+        <member name="T:Synthesys.Plugins.SQLMap.SqlMapScanner">
+            <summary>
+                sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL
+                injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features
+                for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data
+                fetching from the database, to accessing the underlying file system and executing commands on the operating system
+                via out-of-band connections.
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapScanner.Aggressive">
+            <summary>
+                If <c>TRUE</c>, SQLmap will run at Level 5/Risk Level 3 instead of the default Level 2/Risk Level 1
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.SQLMap.SqlMapScanner.Url">
+            <summary>
+                URL being scanned
+            </summary>
+        </member>
+    </members>
+</doc>

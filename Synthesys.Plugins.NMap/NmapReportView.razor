@@ -1,0 +1,75 @@
+﻿@using Blazorise.DataGrid
+
+    <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-dark mb-0">Nmap Scan - X.X.X.X</h3><i class="fas fa-server"></i>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-7 mb-4">
+                <div class="card shadow border-left-success py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Server Aliases</span></div>
+                                <div class="text-dark mb-0 text-monospace small"><span>@string.Join(", ", Report.AffectedArtifactPaths)</span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-clone fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-5 mb-4">
+                <div class="card shadow border-left-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col offset-xl-0 mr-2">
+                                <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>OS Fingerprint</span></div>
+                                <div class="text-dark text-monospace mb-0 small"><span>@string.Join(", ", NmapReport.OperatingSystemFingerprintCandidates.Distinct())</span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="text-primary font-weight-bold m-0">Ports Open</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <DataGrid TItem="NmapPort"
+                                        Data="@NmapReport.Ports"
+                                        @bind-SelectedRow="@SelectedPort">
+                                <DataGridCommandColumn TItem="NmapPort" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Port)" Caption="Port" AllowSort="true" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Protocol)" Caption="Protocol" AllowSort="true" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Service)" Caption="Service" AllowSort="true" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.ProductName)" Caption="Product" AllowSort="true" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.ProductVersion)" Caption="Version" AllowSort="true" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.ExtraInfo)" Caption="Extra Info" AllowSort="false" />
+                                <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.ServiceFingerprintConfidence)" Caption="Confidence" AllowSort="true" />
+                            </DataGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <SMACD.Artifacts.Views.VulnerabilityDisplay Vulnerabilities="@Report.Vulnerabilities"/>
+            </div>
+        </div>
+    </div>
+    
+@code
+{
+    [Parameter]
+    public Synthesys.SDK.ExtensionReport Report { get; set; }
+
+    public NmapRunReport NmapReport => Report.GetExtensionSpecificReport<NmapRunReport>();
+
+    public NmapPort SelectedPort { get; set; }
+}

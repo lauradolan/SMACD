@@ -1,0 +1,46 @@
+﻿    <div class="container-fluid">
+        <div class="d-sm-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-dark mb-0">Nikto Scan - @string.Join(", ", Report.AffectedArtifactPaths)</h3><i class="fas fa-server"></i>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-7 mb-4">
+                <div class="card shadow border-left-success py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Server Banner</span></div>
+                                <div class="text-dark mb-0 text-monospace small"><span>@NiktoReport.ServerBanner</span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-clone fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-5 mb-4">
+                <div class="card shadow border-left-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col offset-xl-0 mr-2">
+                                <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Site Name</span></div>
+                                <div class="text-dark text-monospace mb-0 small"><span>@NiktoReport.SiteName</span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-cogs fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <SMACD.Artifacts.Views.VulnerabilityDisplay Vulnerabilities="@Report.Vulnerabilities"/>
+            </div>
+        </div>
+    </div>
+    
+@code
+{
+    [Parameter]
+    public Synthesys.SDK.ExtensionReport Report { get; set; }
+
+    public NiktoReport NiktoReport => Report.GetExtensionSpecificReport<NiktoReport>();
+}

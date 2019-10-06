@@ -1,0 +1,15 @@
+﻿@page "/servicemap"
+@{
+    if (Program.ServiceMap == null)
+    {
+        <p>No Service Map loaded.</p>
+        return;
+    }
+}
+
+<div role="tablist" id="accordion-1">
+    @foreach (var feature in Program.ServiceMap.Features)
+    {
+        <Feature FeatureModel="@feature"></Feature>
+    }
+</div>

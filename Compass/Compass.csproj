@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Authors>Anthony Turner</Authors>
+    <Product>Compass Data Explorer</Product>
+    <Description>Compass is a cross-platform GUI tool which manages Service Maps, Reports, and Artifacts from SMACD/Synthesys</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/anthturner/SMACD</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.8.6.1" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.8.6.1" />
+    <PackageReference Include="ElectronNET.API" Version="5.22.14" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Tewr.Blazor.FileReader" Version="1.1.0.19274" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
+    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
+    <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
+    <ProjectReference Include="..\Synthesys.Tasks\Synthesys.Tasks.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="electron.manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <!--+++++++++++++++++++++++++++++++PLUGINS++++++++++++++++++++++++++++++++-->
+
+  <ItemGroup>
+    <!-- Dummy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Dummy\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Dummy.dll" Link="Plugins\Synthesys.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nmap Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nmap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nmap.dll" Link="Plugins\Synthesys.Plugins.Nmap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OWASP ZAProxy Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.OwaspZap.dll" Link="Plugins\Synthesys.Plugins.OwaspZap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Synthesys.Plugins.OwaspZap\bin\$(Configuration)\netcoreapp3.0\Newtonsoft.Json.dll" Link="Plugins\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Nikto Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.Nikto\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nikto.dll" Link="Plugins\Synthesys.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\js\script.min.js" />
+  </ItemGroup>
+</Project>

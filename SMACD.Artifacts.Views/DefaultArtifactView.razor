@@ -1,0 +1,111 @@
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+
+@if (Artifact != null)
+{
+    <div class="row text-center pt-2">
+        <div class="col">
+            <h2>Artifact without Visualizer</h2>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <p class="pt-2">The artifact <code>@Artifact.NiceIdentifier</code> either requested a Visualizer that was not loaded, or does not have a preferred Visualizer.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <VulnerabilityDisplay Vulnerabilities="Artifact.Vulnerabilities" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <DataAttachmentDisplay Attachments="Artifact.Attachments" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 col-xl-12">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">JSON Detail</h6>
+                    <div class="dropdown no-arrow">
+                        <button class="btn btn-link btn-sm" type="button" @onclick="(() => IsShowingJsonDetail = !IsShowingJsonDetail)">
+                            @if (IsShowingJsonDetail)
+                            {
+                                <i class="fas fa-sort-up text-gray-400"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort-down text-gray-400"></i>
+                            }
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (IsShowingJsonDetail)
+                    {
+                        @if (!string.IsNullOrEmpty(SerializedData))
+                        {
+                            <pre>
+                            <code class="language-json">
+                                    @SerializedData
+                                </code>
+                            </pre>
+                        }
+                        else
+                        {
+                            <strong class="text-warning">This item does not have JSON detail available</strong>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row text-center pt-2">
+        <div class="col">
+            <h2>Select an Artifact to Inspect</h2>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <p class="pt-2">Use the tree on the left to explore the application as understood by the scan results.</p>
+        </div>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public Artifact Artifact { get; set; }
+
+    private string SerializedData { get; set; }
+
+    public bool IsShowingJsonDetail { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Artifact != null)
+        {
+            var originalParent = Artifact.Parent;
+            Artifact.Disconnect();
+
+            SerializedData = Newtonsoft.Json.JsonConvert.SerializeObject(Artifact, new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            }).Trim();
+            Artifact.Connect(originalParent);
+        }
+        else
+            SerializedData = string.Empty;
+
+        var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
+    }
+}

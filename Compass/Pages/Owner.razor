@@ -1,0 +1,12 @@
+﻿@using SMACD.Data
+@code
+{
+
+    [Parameter]
+    public OwnerPointerModel OwnerModel { get; set; }
+
+}
+
+<a class="dropdown-item" role="presentation" href="#" style="padding: 4px 18px;">
+    <img class="border rounded-circle" src="https://www.gravatar.com/avatar/Global.CalculateMD5Hash(@OwnerModel.Email.Trim().ToLower())" style="width: auto; height: 32px;">&nbsp; @OwnerModel.Name
+</a>

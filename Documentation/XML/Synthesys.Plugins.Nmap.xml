@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Synthesys.Plugins.Nmap</name>
+    </assembly>
+    <members>
+        <member name="P:Synthesys.Plugins.Nmap.NmapRunReport.Ports">
+            <summary>
+                Open ports on the scanned host
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.Protocol">
+            <summary>
+                Network protocol (TCP, UDP, etc.)
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.Port">
+            <summary>
+                Port number
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.Service">
+            <summary>
+                Service fingerprint
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence">
+            <summary>
+                Service fingerprint confidence
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.ProductName">
+            <summary>
+                Product name
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.ProductVersion">
+            <summary>
+                Product version
+            </summary>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapPort.ExtraInfo">
+            <summary>
+                Any additional info NMap understands about the service
+            </summary>
+        </member>
+        <member name="T:Synthesys.Plugins.Nmap.NmapScannerAction">
+            <summary>
+                Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services
+                (application name and version) those hosts are offering, what operating systems (and OS versions) they are running,
+                what type of packet filters/firewalls are in use, and dozens of other characteristics.
+            </summary>
+            <remarks>Description from tools.kali.org</remarks>
+        </member>
+        <member name="P:Synthesys.Plugins.Nmap.NmapScannerAction.Host">
+            <summary>
+                Host/IP address to scan
+            </summary>
+        </member>
+    </members>
+</doc>

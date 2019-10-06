@@ -1,20 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-
-namespace SMACD.Artifacts.Data
+﻿namespace SMACD.Artifacts.Data
 {
     public class DataArtifact
     {
         /// <summary>
-        /// Name of this Artifact
+        /// Possible encapsulated data types owned by a Data Artifact
         /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Data stored in this Artifact in raw format
-        /// </summary>
-        public byte[] StoredData { get; set; }
+        public enum DataArtifactTypes
+        {
+            Unknown,
+            Object,
+            String,
+            VFS
+        }
 
         public DataArtifact(string name)
         {
@@ -22,17 +19,44 @@ namespace SMACD.Artifacts.Data
         }
 
         /// <summary>
-        /// Get the Artifact cast as a specific DataArtifact type
+        ///     Name of this Artifact
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        ///     Data stored in this Artifact in raw format
+        /// </summary>
+        public byte[] StoredData { get; set; }
+
+        /// <summary>
+        /// Type of Data Artifact
+        /// </summary>
+        public DataArtifactTypes ArtifactType
+        {
+            get
+            {
+                if (this is ObjectArtifact)
+                    return DataArtifactTypes.Object;
+                if (this is StringArtifact)
+                    return DataArtifactTypes.String;
+                if (this is NativeDirectoryArtifact)
+                    return DataArtifactTypes.VFS;
+                return DataArtifactTypes.Unknown;
+            }
+        }
+
+        /// <summary>
+        ///     Get the Artifact cast as a specific DataArtifact type
         /// </summary>
         /// <typeparam name="T">Artifact type</typeparam>
         /// <returns></returns>
         public T As<T>() where T : DataArtifact
         {
-            return (T)this;
+            return (T) this;
         }
 
         /// <summary>
-        /// Get this as a string-containing Artifact
+        ///     Get this as a string-containing Artifact
         /// </summary>
         /// <returns></returns>
         public StringArtifact AsStringArtifact()
@@ -41,7 +65,7 @@ namespace SMACD.Artifacts.Data
         }
 
         /// <summary>
-        /// Get this as an object-containing Artifact
+        ///     Get this as an object-containing Artifact
         /// </summary>
         /// <returns></returns>
         public ObjectArtifact AsObjectArtifact()
@@ -50,7 +74,7 @@ namespace SMACD.Artifacts.Data
         }
 
         /// <summary>
-        /// Get this as a native directory-providing Artifact
+        ///     Get this as a native directory-providing Artifact
         /// </summary>
         /// <returns></returns>
         public NativeDirectoryArtifact AsNativeDirectoryArtifact()

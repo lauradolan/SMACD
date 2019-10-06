@@ -5,8 +5,13 @@ namespace SMACD.Data
     /// <summary>
     ///     Represents an Abuse Case: a way an attacker can abuse a resource to break a use case
     /// </summary>
-    public class AbuseCaseModel : IModel
+    public class AbuseCaseModel : IBusinessEntityModel, IModel
     {
+        /// <summary>
+        ///     Plugins that can be used to scan for this abuse case
+        /// </summary>
+        public IList<ActionPointerModel> Actions { get; set; } = new List<ActionPointerModel>();
+
         /// <summary>
         ///     Name of abuse case
         /// </summary>
@@ -23,8 +28,16 @@ namespace SMACD.Data
         public IList<OwnerPointerModel> Owners { get; set; } = new List<OwnerPointerModel>();
 
         /// <summary>
-        ///     Plugins that can be used to scan for this abuse case
+        ///     Relative level of risk for this Abuse Case in comparison to other Abuse Cases for this Use Case
+        ///     A high business risk may indicate that the Abuse Case could access sensitive data
         /// </summary>
-        public IList<ActionPointerModel> Actions { get; set; } = new List<ActionPointerModel>();
+        public int BusinessRisk { get; set; }
+
+        /// <summary>
+        ///     Relative level of technical risk for this Abuse Case in comparison to other Abuse Cases for this Use Case
+        ///     A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
+        ///     associated with this Abuse Case
+        /// </summary>
+        public int TechnicalRisk { get; set; }
     }
 }

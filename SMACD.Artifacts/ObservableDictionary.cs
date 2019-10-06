@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace Xamarin.Forms.Dynamic
+namespace SMACD.Artifacts
 {
     /// <summary>
-    /// Provides a dictionary for use with data binding.
+    ///     Provides a dictionary for use with data binding.
     /// </summary>
     /// <typeparam name="TKey">Specifies the type of the keys in this collection.</typeparam>
     /// <typeparam name="TValue">Specifies the type of the values in this collection.</typeparam>
@@ -16,14 +16,8 @@ namespace Xamarin.Forms.Dynamic
     {
         private readonly IDictionary<TKey, TValue> dictionary;
 
-        /// <summary>Event raised when the collection changes.</summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
-
-        /// <summary>Event raised when a property on the collection changes.</summary>
-        public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
-
         /// <summary>
-        /// Initializes an instance of the class.
+        ///     Initializes an instance of the class.
         /// </summary>
         public ObservableDictionary()
             : this(new Dictionary<TKey, TValue>())
@@ -31,13 +25,19 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Initializes an instance of the class using another dictionary as 
-        /// the key/value store.
+        ///     Initializes an instance of the class using another dictionary as
+        ///     the key/value store.
         /// </summary>
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
         {
             this.dictionary = dictionary;
         }
+
+        /// <summary>Event raised when the collection changes.</summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged = (sender, args) => { };
+
+        /// <summary>Event raised when a property on the collection changes.</summary>
+        public event PropertyChangedEventHandler PropertyChanged = (sender, args) => { };
 
         private void AddWithNotification(KeyValuePair<TKey, TValue> item)
         {
@@ -57,7 +57,7 @@ namespace Xamarin.Forms.Dynamic
 
         private bool RemoveWithNotification(TKey key)
         {
-            if (dictionary.TryGetValue(key, out TValue value) && dictionary.Remove(key))
+            if (dictionary.TryGetValue(key, out var value) && dictionary.Remove(key))
             {
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
                     new KeyValuePair<TKey, TValue>(key, value)));
@@ -73,7 +73,7 @@ namespace Xamarin.Forms.Dynamic
 
         private void UpdateWithNotification(TKey key, TValue value)
         {
-            if (dictionary.TryGetValue(key, out TValue existing))
+            if (dictionary.TryGetValue(key, out var existing))
             {
                 dictionary[key] = value;
 
@@ -89,7 +89,7 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Allows derived classes to raise custom property changed events.
+        ///     Allows derived classes to raise custom property changed events.
         /// </summary>
         protected void RaisePropertyChanged(PropertyChangedEventArgs args)
         {
@@ -99,7 +99,7 @@ namespace Xamarin.Forms.Dynamic
         #region IDictionary<TKey,TValue> Members
 
         /// <summary>
-        /// Adds an element with the provided key and value to the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        ///     Adds an element with the provided key and value to the <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
         /// <param name="key">The object to use as the key of the element to add.</param>
         /// <param name="value">The object to use as the value of the element to add.</param>
@@ -109,11 +109,13 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key.
+        ///     Determines whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the
+        ///     specified key.
         /// </summary>
         /// <param name="key">The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</param>
         /// <returns>
-        /// true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the key; otherwise, false.
+        ///     true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the key; otherwise,
+        ///     false.
         /// </returns>
         public bool ContainsKey(TKey key)
         {
@@ -121,17 +123,22 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        ///     Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the
+        ///     <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
-        /// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
+        /// <returns>
+        ///     An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the object that implements
+        ///     <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        /// </returns>
         public ICollection<TKey> Keys => dictionary.Keys;
 
         /// <summary>
-        /// Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        ///     Removes the element with the specified key from the <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
         /// <param name="key">The key of the element to remove.</param>
         /// <returns>
-        /// true if the element is successfully removed; otherwise, false.  This method also returns false if <paramref name="key" /> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        ///     true if the element is successfully removed; otherwise, false.  This method also returns false if
+        ///     <paramref name="key" /> was not found in the original <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </returns>
         public bool Remove(TKey key)
         {
@@ -139,12 +146,17 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Gets the value associated with the specified key.
+        ///     Gets the value associated with the specified key.
         /// </summary>
         /// <param name="key">The key whose value to get.</param>
-        /// <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value" /> parameter. This parameter is passed uninitialized.</param>
+        /// <param name="value">
+        ///     When this method returns, the value associated with the specified key, if the key is found;
+        ///     otherwise, the default value for the type of the <paramref name="value" /> parameter. This parameter is passed
+        ///     uninitialized.
+        /// </param>
         /// <returns>
-        /// true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key; otherwise, false.
+        ///     true if the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element
+        ///     with the specified key; otherwise, false.
         /// </returns>
         public bool TryGetValue(TKey key, out TValue value)
         {
@@ -152,13 +164,17 @@ namespace Xamarin.Forms.Dynamic
         }
 
         /// <summary>
-        /// Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        ///     Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the
+        ///     <see cref="T:System.Collections.Generic.IDictionary`2" />.
         /// </summary>
-        /// <returns>An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the object that implements <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
+        /// <returns>
+        ///     An <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the object that
+        ///     implements <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        /// </returns>
         public ICollection<TValue> Values => dictionary.Values;
 
         /// <summary>
-        /// Gets or sets the element with the specified key.
+        ///     Gets or sets the element with the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns></returns>
