@@ -1,56 +1,29 @@
-﻿using System;
+﻿using SMACD.Artifacts.Metadata;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    ///     Represents a segment of a URL
+    /// </summary>
     public class UrlArtifact : Artifact
     {
-        private HttpMethod method;
-        private string urlSegment;
-
-        public UrlArtifact()
-        {
-            Requests.CollectionChanged += (s, e) => NotifyChanged();
-        }
+        /// <summary>
+        ///     URL metadata
+        /// </summary>
+        public Versionable<UrlMetadata> Metadata { get; set; } = new Versionable<UrlMetadata>();
 
         /// <summary>
-        ///     Artifact Identifier
+        ///     String representing this segment of a URL
         /// </summary>
-        public override string Identifier => $"{(Method == null ? "" : $"{Method} ")}{UrlSegment}";
-
-        /// <summary>
-        ///     HTTP method used to access URL
-        /// </summary>
-        public HttpMethod Method
-        {
-            get => method;
-            set
-            {
-                method = value;
-                NotifyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     URL Segment (file/directory)
-        /// </summary>
-        public string UrlSegment
-        {
-            get => urlSegment;
-            set
-            {
-                urlSegment = value;
-                NotifyChanged();
-            }
-        }
+        public string UrlSegment => Identifiers.FirstOrDefault();
 
         /// <summary>
         ///     Requests which can be made against this URL
         /// </summary>
-        public ObservableCollection<UrlRequestArtifact> Requests { get; set; } =
-            new ObservableCollection<UrlRequestArtifact>();
+        public ObservableCollection<UrlRequestArtifact> Requests { get; set; } = new ObservableCollection<UrlRequestArtifact>();
 
         /// <summary>
         ///     Get a child URL segment
@@ -61,16 +34,11 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var result = (UrlArtifact) Children.FirstOrDefault(d =>
-                    ((UrlArtifact) d).Identifier == urlSegment || ((UrlArtifact) d).UrlSegment == urlSegment);
+                var result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
                 if (result == null)
                 {
-                    result = new UrlArtifact
-                    {
-                        Parent = this,
-                        UrlSegment = urlSegment,
-                        Method = HttpMethod.Get
-                    };
+                    result = new UrlArtifact { Parent = this };
+                    result.Identifiers.Add(urlSegment);
                     result.BeginFiringEvents();
                     Children.Add(result);
                 }
@@ -79,20 +47,12 @@ namespace SMACD.Artifacts
             }
         }
 
-        public override void Disconnect()
+        /// <summary>
+        ///     Represents a segment of a URL
+        /// </summary>
+        public UrlArtifact()
         {
-            if (Requests != null)
-                foreach (var req in Requests)
-                    req.Disconnect();
-            base.Disconnect();
-        }
-
-        public override void Connect(Artifact parent = null)
-        {
-            if (Requests != null)
-                foreach (var req in Requests)
-                    req.Connect(this);
-            base.Connect(parent);
+            Requests.CollectionChanged += (s, e) => NotifyChanged();
         }
 
         /// <summary>
@@ -112,6 +72,10 @@ namespace SMACD.Artifacts
             throw new Exception("Invalid artifact tree");
         }
 
+        /// <summary>
+        ///     String representation of URL segment
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             if (Children.Any())

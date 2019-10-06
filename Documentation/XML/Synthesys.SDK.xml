@@ -107,30 +107,6 @@
                 Description of Trigger causing the Extension to be queued
             </summary>
         </member>
-        <member name="T:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute">
-            <summary>
-                The TriggeredByAttribute specifies that the Extension is added to the end of the Task Queue when a certain event
-                occurs.
-                This Attribute can be used multiple times on the same Extension.
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.DetailView">
-            <summary>
-                Class of Razor component providing a full-page, detailed report
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.SummaryView">
-            <summary>
-                Class of Razor component providing a button or similar to showcase key elements about the Extension results
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.Attributes.UseGraphicalViewsAttribute.#ctor(System.Type,System.Type)">
-            <summary>
-                Specify the Razor component names which can be used to show a summary control and/or detailed view
-            </summary>
-            <param name="detailView">Class of Razor component providing a full-page, detailed report</param>
-            <param name="summaryView">Class of Razor component providing a button or similar to showcase key elements about the Extension results</param>
-        </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHost">
             <summary>
                 IOperateOnHost indicates that the Extension acts upon a single host
@@ -395,18 +371,6 @@
                 Retrieve a dictionary of all (string) properties and their values
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.Extensions.Extension.DefaultSummaryView">
-            <summary>
-                Default Summary view for this Extension.
-                This can be overridden by specifying an alternate view in the ExtensionReport
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.Extensions.Extension.DefaultDetailView">
-            <summary>
-                Default Detail view for this Extension.
-                This can be overridden by specifying an alternate view in the ExtensionReport
-            </summary>
-        </member>
         <member name="T:Synthesys.SDK.Extensions.ReactionExtension">
             <summary>
                 A ReactionExtension is added to the end of the Task Queue when some given event occurs during the scan process. The
@@ -556,6 +520,16 @@
                 System event trigger
             </summary>
         </member>
+        <member name="T:Synthesys.SDK.Triggers.TriggerDescriptor">
+            <summary>
+                Describes a wrapper around an event and its details, to pass to ReactionExtensions
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.#ctor">
+            <summary>
+                Describes a wrapper around an event and its details, to pass to ReactionExtensions
+            </summary>
+        </member>
         <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
             <summary>
                 Create an artifact-based trigger
@@ -593,6 +567,20 @@
             </summary>
             <param name="artifact">Artifact</param>
             <returns></returns>
+        </member>
+        <member name="T:Synthesys.SDK.UrlHelper">
+            <summary>
+                Functions to work with URLs in the Artifact correlation tree
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.UrlHelper.GeneratePathArtifacts(SMACD.Artifacts.HttpServicePortArtifact,System.String,System.String)">
+            <summary>
+                Generate artifacts under the given Artifact for each segment of a given URL and request method
+            </summary>
+            <param name="httpService">Base artifact</param>
+            <param name="url">URL to create data from</param>
+            <param name="method">HTTP request method</param>
+            <returns>Artifact representing leaf of URL</returns>
         </member>
     </members>
 </doc>

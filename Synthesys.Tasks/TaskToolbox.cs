@@ -142,7 +142,7 @@ namespace Synthesys.Tasks
 
                 reports.ForEach(r => {
                     r.Runtime = sw.Elapsed;
-                    r.AffectedArtifactPaths.Add(string.Join("//", rootArtifact.GetPathToRoot().Select(a => a.Identifier)));
+                    r.AffectedArtifactPaths.Add(string.Join(Artifact.PATH_SEPARATOR, rootArtifact.GetNodesToRoot().Select(a => a.UUID)));
                 });
 
                 return reports;

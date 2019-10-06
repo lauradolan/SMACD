@@ -8,17 +8,22 @@ using System.Threading.Tasks;
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    ///     Represents the root of an Artifact correlation tree
+    /// </summary>
     public class RootArtifact : Artifact
     {
+        /// <summary>
+        ///     Delegate used to describe an affected Artifact when an Event occurs
+        /// </summary>
+        /// <param name="newOrModifiedArtifact">Affected artifact</param>
+        /// <param name="path">Path to affected artifact</param>
         public delegate void ArtifactEventDelegate(Artifact newOrModifiedArtifact, List<Artifact> path);
 
         /// <summary>
-        ///     Artifact Identifier
+        ///     An Action which can be registered by the Extension to return an HTML component to view artifact
         /// </summary>
-        public override string Identifier => "_root_";
-
-        public override string ArtifactTextSummary => "Root Artifact. This element does not carry data or vulnerabilities.";
-        public override string ArtifactSummaryViewTypeName => "RootArtifactView";
+        public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.RootArtifactView";
 
         /// <summary>
         ///     Hostname or IP of resource
@@ -30,8 +35,7 @@ namespace SMACD.Artifacts
             get
             {
                 // Try to short-circuit doing a lot more work by checking the n+1 case
-                var existingResult = (HostArtifact) Children.FirstOrDefault(h =>
-                    ((HostArtifact) h).Aliases.Contains(hostNameOrIp));
+                var existingResult = (HostArtifact)Children.FirstOrDefault(h => h.Identifiers.Contains(hostNameOrIp));
                 if (existingResult != null) return existingResult;
 
                 // Hard mode! Resolve first and check against aliases
@@ -68,8 +72,7 @@ namespace SMACD.Artifacts
 
                 if (aliases.Count == 0) aliases.Add(hostNameOrIp);
 
-                var result = (HostArtifact) Children.FirstOrDefault(h =>
-                    ((HostArtifact) h).Aliases.Any(a => aliases.Contains(a)));
+                var result = (HostArtifact) Children.FirstOrDefault(h => h.Identifiers.Any(a => aliases.Contains(a)));
                 if (result == null)
                 {
                     result = new HostArtifact
@@ -78,9 +81,9 @@ namespace SMACD.Artifacts
                         IpAddress = ip,
                         Hostname = hostName
                     };
-                    foreach (var item in aliases)
-                        if (!result.Aliases.Contains(item) && !string.IsNullOrEmpty(item))
-                            result.Aliases.Add(item);
+                    foreach (var item in aliases.Distinct())
+                        if (!result.Identifiers.Contains(item) && !string.IsNullOrEmpty(item))
+                            result.Identifiers.Add(item);
 
                     if (string.IsNullOrEmpty(result.Hostname))
                         result.Hostname = aliases.FirstOrDefault(a =>
@@ -113,16 +116,36 @@ namespace SMACD.Artifacts
         /// </summary>
         public event ArtifactEventDelegate ArtifactChildAdded;
 
+        /// <summary>
+        ///     Represents the root of an Artifact correlation tree
+        /// </summary>
+        public RootArtifact() => Identifiers.Add("_root_");
+
+        /// <summary>
+        ///     Invoke the ArtifactCreated event
+        /// </summary>
+        /// <param name="newArtifact">Created Artifact</param>
+        /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactCreated(Artifact newArtifact, List<Artifact> path)
         {
             ArtifactCreated?.Invoke(newArtifact, path);
         }
 
+        /// <summary>
+        ///     Invoke the ArtifactChanged event
+        /// </summary>
+        /// <param name="changedArtifact">Artifact changed</param>
+        /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactChanged(Artifact changedArtifact, List<Artifact> path)
         {
             ArtifactChanged?.Invoke(changedArtifact, path);
         }
 
+        /// <summary>
+        ///     Invoke the ArtifactChildAdded event
+        /// </summary>
+        /// <param name="newChild">Newly added child Artifact</param>
+        /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactChildAdded(Artifact newChild, List<Artifact> path)
         {
             ArtifactChildAdded?.Invoke(newChild, path);

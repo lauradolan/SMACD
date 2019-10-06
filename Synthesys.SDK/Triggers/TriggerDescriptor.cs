@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SMACD.Artifacts;
 
 namespace Synthesys.SDK.Triggers
 {
+    /// <summary>
+    ///     Describes a wrapper around an event and its details, to pass to ReactionExtensions
+    /// </summary>
     public class TriggerDescriptor
     {
+        /// <summary>
+        ///     Describes a wrapper around an event and its details, to pass to ReactionExtensions
+        /// </summary>
         protected TriggerDescriptor()
         {
         }
@@ -43,20 +50,6 @@ namespace Synthesys.SDK.Triggers
             return new SystemEventTriggerDescriptor(trigger);
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj.GetType() != GetType() ||
-                !(obj is TriggerDescriptor))
-                return false;
-
-            return true;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         /// <summary>
         ///     Check if the Artifact's path matches the given path
         /// </summary>
@@ -65,19 +58,18 @@ namespace Synthesys.SDK.Triggers
         /// <returns></returns>
         public static bool PathMatches(Artifact triggeringArtifact, string path)
         {
-            return RecurseMatch(triggeringArtifact, path.Split("|;|").ToList());
+            return PathMatches(triggeringArtifact, path.Split(Artifact.PATH_SEPARATOR).ToList());
         }
 
-        private static bool RecurseMatch(Artifact artifact, List<string> pathElements)
+        private static bool PathMatches(Artifact artifact, List<string> pathElements)
         {
             var nextEl = pathElements.First();
             var nextElements = new List<string>();
             if (pathElements.Count > 1) nextElements = new List<string>(pathElements.Skip(1));
 
-            if (nextEl == "*" ||
-                nextEl == artifact.Identifier)
+            if (nextEl == "*" || artifact.UUID == Guid.Parse(nextEl))
                 if (nextElements.Count == 0 ||
-                    artifact.Children.Any(child => RecurseMatch(child, nextElements)))
+                    artifact.Children.Any(child => PathMatches(child, nextElements)))
                     return true;
 
             return false;
@@ -88,11 +80,6 @@ namespace Synthesys.SDK.Triggers
         /// </summary>
         /// <param name="artifact">Artifact</param>
         /// <returns></returns>
-        public string GeneratePath(Artifact artifact)
-        {
-            var fullPath = artifact.GetPathToRoot();
-            var partialPath = fullPath.Where(p => !(p is RootArtifact || p is HostArtifact));
-            return string.Join("|;|", partialPath.Select(i => i.Identifier));
-        }
+        public static string GeneratePath(Artifact artifact) => artifact.GetUUIDPathToRoot();
     }
 }

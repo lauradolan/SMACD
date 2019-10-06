@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using SMACD.Artifacts;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
@@ -52,6 +51,8 @@ namespace Synthesys.Plugins.Nikto
                 SiteName = scanDetails.Attributes("sitename").First().Value
             };
 
+            HttpService.Metadata.Set(new SMACD.Artifacts.Metadata.ServicePortMetadata() { ServiceBanner = niktoReport.ServerBanner }, "nikto", DataProviderSpecificity.ServiceSpecificScanner);
+
             report.ReportSummaryName = typeof(NiktoReportSummary).FullName;
             report.ReportViewName = typeof(NiktoReportView).FullName;
             report.SetExtensionSpecificReport(niktoReport);
@@ -92,7 +93,7 @@ namespace Synthesys.Plugins.Nikto
             using (var context = HttpService.Attachments.CreateOrLoadNativePath("nikto").GetContext())
             using (var wrapper = new ExecutionWrapper(
                 "nikto " +
-                "-Display 1234EP " +
+                "-Display 1234P " +
                 $"-host http://{HttpService.Host.Hostname}:{HttpService.Port} " +
                 $"-o {context.DirectoryWithFile("scan.xml")} " +
                 "-Format xml"))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Sockets;
 using SMACD.Artifacts;
 using SMACD.Data;
 using SMACD.Data.Resources;
@@ -17,19 +18,16 @@ namespace Synthesys
                 var http = resourceModel as HttpTargetModel;
                 var uri = new Uri(http.Url);
                 var pieces = uri.AbsolutePath.Split('/').ToList();
-                if (session.Artifacts[uri.Host].Children.Any(c => c.Identifier == uri.Port.ToString()))
+
+                var serviceBase = session.Artifacts[uri.Host][uri.Port];
+                if (!(serviceBase is HttpServicePortArtifact))
                 {
-                    // TODO: Do this better.
-                    var original = session.Artifacts[uri.Host][uri.Port];
-                    session.Artifacts[uri.Host][uri.Port] = new HttpServicePortArtifact
-                    {
-                        ServiceName = original.ServiceName,
-                        ServiceBanner = original.ServiceBanner
-                    };
-                }
-                else
-                {
-                    session.Artifacts[uri.Host][uri.Port] = new HttpServicePortArtifact();
+                    var httpArtifact = new HttpServicePortArtifact() { Parent = session.Artifacts[uri.Host] };
+                    httpArtifact.Identifiers.Add($"{ProtocolType.Tcp.ToString()}/{uri.Port}");
+                    session.Artifacts[uri.Host][uri.Port] = httpArtifact;
+                    
+                    var httpBase = session.Artifacts[uri.Host][uri.Port];
+                    httpBase.Metadata.Set(serviceBase.Metadata, "_known_", DataProviderSpecificity.Explicit);
                 }
 
                 var pathTip = UrlHelper.GeneratePathArtifacts(
@@ -46,7 +44,7 @@ namespace Synthesys
             if (resourceModel is SocketPortTargetModel)
             {
                 var socket = resourceModel as SocketPortTargetModel;
-                session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"].ServiceName = "";
+                session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"] = new ServicePortArtifact();
             }
         }
     }

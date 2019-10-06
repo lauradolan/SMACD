@@ -4,19 +4,39 @@
         <name>SMACD.Artifacts</name>
     </assembly>
     <members>
+        <member name="T:SMACD.Artifacts.Artifact">
+            <summary>
+                Represents a single node in an Artifact correlation tree, including its metadata and evidence
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.Artifact.Parent">
             <summary>
                 Parent Artifact
             </summary>
         </member>
-        <member name="P:SMACD.Artifacts.Artifact.Identifier">
+        <member name="P:SMACD.Artifacts.Artifact.Children">
+            <summary>
+                Children of Artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.Identifiers">
             <summary>
                 Artifact Identifier for path
             </summary>
         </member>
+        <member name="P:SMACD.Artifacts.Artifact.NiceIdentifier">
+            <summary>
+                Get nice-name identifier for Artifact (first non-UUID)
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Artifact.UUID">
+            <summary>
+                Unique identifier
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.Artifact.Attachments">
             <summary>
-                Data attachments to Artifact
+                Data attachments providing evidence of correlating data pertaining to Artifact
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.Artifact.Vulnerabilities">
@@ -24,21 +44,21 @@
                 Vulnerabilities related to Artifact
             </summary>
         </member>
-        <member name="M:SMACD.Artifacts.Artifact.GetChildById(System.String)">
+        <member name="P:SMACD.Artifacts.Artifact.Item(System.Guid)">
             <summary>
                 Get a child Artifact by its identifier
             </summary>
-            <param name="identifier">Artifact identifier, unique to this parent</param>
+            <param name="uuid">Artifact UUID</param>
             <returns></returns>
-        </member>
-        <member name="P:SMACD.Artifacts.Artifact.ArtifactTextSummary">
-            <summary>
-            An Action which can be registered by the Extension to return a text summary of the Artifact
-            </summary>
         </member>
         <member name="P:SMACD.Artifacts.Artifact.ArtifactSummaryViewTypeName">
             <summary>
-            An Action which can be registered by the Extension to return an HTML component to view artifact
+                An Action which can be registered by the Extension to return an HTML component to view artifact
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.#ctor">
+            <summary>
+                Represents a single node in an Artifact correlation tree, including its metadata and evidence
             </summary>
         </member>
         <member name="M:SMACD.Artifacts.Artifact.Disconnect">
@@ -51,12 +71,46 @@
                 Create Parent pointers in Artifact tree
             </summary>
         </member>
-        <member name="M:SMACD.Artifacts.Artifact.GetPathToRoot(System.Collections.Generic.List{SMACD.Artifacts.Artifact})">
+        <member name="M:SMACD.Artifacts.Artifact.GetNodeByRelativeUUIDPath(System.String)">
             <summary>
-                Get a List of Artifacts that represent the path back to the root element, root-first
+                Returns the leaf Artifact associated with a given UUID path
             </summary>
-            <param name="path">Artifact path built so far</param>
+            <param name="path"></param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.GetDisplayPathToRoot">
+            <summary>
+                Get the string representing each element from here to the root, using their identifier text
+            </summary>
+            <returns>String representing each element from here to the root, using their identifier text</returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.GetUUIDPathToRoot">
+            <summary>
+                Get the string representing each element from here to the root, using their UUID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.GetNodesToRoot">
+            <summary>
+                Get a list of nodes between this node and the root node
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.NotifyChanged">
+            <summary>
+                Notify root element to fire an ArtifactChanged event
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.NotifyChildAdded(SMACD.Artifacts.Artifact)">
+            <summary>
+                Notify root element to fire an ArtifactChildAdded event
+            </summary>
+            <param name="newChild">Child added</param>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.NotifyCreated">
+            <summary>
+                Notify root element to fire an ArtifactCreated event
+            </summary>
         </member>
         <member name="T:SMACD.Artifacts.Data.DataArtifact.DataArtifactTypes">
             <summary>
@@ -240,20 +294,14 @@
             Represents a single host (server) involved in some part of the application
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:SMACD.Artifacts.HostArtifact.ArtifactTextSummary" -->
         <member name="P:SMACD.Artifacts.HostArtifact.ArtifactSummaryViewTypeName">
             <summary>
             An Action which can be registered by the Extension to return an HTML component to view artifact
             </summary>
         </member>
-        <member name="M:SMACD.Artifacts.HostArtifact.#ctor">
+        <member name="P:SMACD.Artifacts.HostArtifact.Metadata">
             <summary>
-            Represents a single host (server) involved in some part of the application
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.HostArtifact.Identifier">
-            <summary>
-                Artifact Identifier
+                Host metadata
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.Hostname">
@@ -264,11 +312,6 @@
         <member name="P:SMACD.Artifacts.HostArtifact.IpAddress">
             <summary>
                 IP Address of Host
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.HostArtifact.Aliases">
-            <summary>
-                Aliases belonging to this Host
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.Item(System.Int32)">
@@ -282,15 +325,67 @@
             <summary>
                 Get a port/service by its port number and type
             </summary>
-            <param name="protocolAndport">Protocol and port, i.e. Tcp/80</param>
+            <param name="protocolAndPort">Protocol and port, i.e. Tcp/80</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.HostArtifact.ToString">
+            <summary>
+                String representation of host
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.HttpServicePortArtifact">
+            <summary>
+                Represents an HTTP service accessible via a specific protocol and port
+            </summary>
         </member>
         <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Item(System.String)">
             <summary>
-                Get a URL segment (single file or directory)
+                Get a child URL segment
             </summary>
-            <param name="urlSegment">Part of URL</param>
+            <param name="urlSegment">URL segment</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.HttpServicePortArtifact.ToString">
+            <summary>
+                String representation of HTTP Service artifact
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.HostMetadata.OperatingSystem">
+            <summary>
+                Operating System of Host
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.ServicePortMetadata.ServiceName">
+            <summary>
+                Service name
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.ServicePortMetadata.ServiceBanner">
+            <summary>
+                Service banner
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.ServicePortMetadata.ProductName">
+            <summary>
+                Name of product providing the Service
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.ServicePortMetadata.ProductVersion">
+            <summary>
+                Version of product providing the Service
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.UrlMetadata.IsDirectoryIndexable">
+            <summary>
+                If the URL segment provides a directory index
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.Metadata.UrlRequestMetadata.ResultHtml">
+            <summary>
+                HTML generated from executing the URL with the given parameters
+            </summary>
         </member>
         <member name="T:SMACD.Artifacts.ObservableDictionary`2">
             <summary>
@@ -391,6 +486,11 @@
             <param name="key">The key.</param>
             <returns></returns>
         </member>
+        <member name="T:SMACD.Artifacts.ProjectPointer">
+            <summary>
+                Describes a location in a Service Map which precipitated an event
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.ProjectPointer.Feature">
             <summary>
                 Feature which creates the Action
@@ -406,9 +506,21 @@
                 Abuse Case which creates the Action
             </summary>
         </member>
-        <member name="P:SMACD.Artifacts.RootArtifact.Identifier">
+        <member name="T:SMACD.Artifacts.RootArtifact">
             <summary>
-                Artifact Identifier
+                Represents the root of an Artifact correlation tree
+            </summary>
+        </member>
+        <member name="T:SMACD.Artifacts.RootArtifact.ArtifactEventDelegate">
+            <summary>
+                Delegate used to describe an affected Artifact when an Event occurs
+            </summary>
+            <param name="newOrModifiedArtifact">Affected artifact</param>
+            <param name="path">Path to affected artifact</param>
+        </member>
+        <member name="P:SMACD.Artifacts.RootArtifact.ArtifactSummaryViewTypeName">
+            <summary>
+                An Action which can be registered by the Extension to return an HTML component to view artifact
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.RootArtifact.Item(System.String)">
@@ -433,15 +545,45 @@
                 Fired when an Artifact is added to a given Artifact
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:SMACD.Artifacts.ServicePortArtifact.ArtifactTextSummary" -->
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.ArtifactSummaryViewTypeName">
+        <member name="M:SMACD.Artifacts.RootArtifact.#ctor">
             <summary>
-            An Action which can be registered by the Extension to return an HTML component to view artifact
+                Represents the root of an Artifact correlation tree
             </summary>
         </member>
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.Identifier">
+        <member name="M:SMACD.Artifacts.RootArtifact.InvokeArtifactCreated(SMACD.Artifacts.Artifact,System.Collections.Generic.List{SMACD.Artifacts.Artifact})">
             <summary>
-                Artifact Identifier
+                Invoke the ArtifactCreated event
+            </summary>
+            <param name="newArtifact">Created Artifact</param>
+            <param name="path">Path to new Artifact</param>
+        </member>
+        <member name="M:SMACD.Artifacts.RootArtifact.InvokeArtifactChanged(SMACD.Artifacts.Artifact,System.Collections.Generic.List{SMACD.Artifacts.Artifact})">
+            <summary>
+                Invoke the ArtifactChanged event
+            </summary>
+            <param name="changedArtifact">Artifact changed</param>
+            <param name="path">Path to new Artifact</param>
+        </member>
+        <member name="M:SMACD.Artifacts.RootArtifact.InvokeArtifactChildAdded(SMACD.Artifacts.Artifact,System.Collections.Generic.List{SMACD.Artifacts.Artifact})">
+            <summary>
+                Invoke the ArtifactChildAdded event
+            </summary>
+            <param name="newChild">Newly added child Artifact</param>
+            <param name="path">Path to new Artifact</param>
+        </member>
+        <member name="T:SMACD.Artifacts.ServicePortArtifact">
+            <summary>
+                Represents a port accessible via a specific protocol, and its service information
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.ArtifactSummaryViewTypeName">
+            <summary>
+                An Action which can be registered by the Extension to return an HTML component to view artifact
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.ServicePortArtifact.Metadata">
+            <summary>
+                Service Port metadata
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.ServicePortArtifact.Host">
@@ -459,39 +601,25 @@
                 Port number
             </summary>
         </member>
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.ServiceName">
+        <member name="M:SMACD.Artifacts.ServicePortArtifact.ToString">
             <summary>
-                Service name
+                String representation of Service Port Artifact
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.UrlArtifact">
+            <summary>
+                Represents a segment of a URL
             </summary>
         </member>
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.ServiceBanner">
+        <member name="P:SMACD.Artifacts.UrlArtifact.Metadata">
             <summary>
-                Service banner
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.ProductName">
-            <summary>
-                Name of product providing the Service
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.ServicePortArtifact.ProductVersion">
-            <summary>
-                Version of product providing the Service
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.UrlArtifact.Identifier">
-            <summary>
-                Artifact Identifier
-            </summary>
-        </member>
-        <member name="P:SMACD.Artifacts.UrlArtifact.Method">
-            <summary>
-                HTTP method used to access URL
+                URL metadata
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.UrlArtifact.UrlSegment">
             <summary>
-                URL Segment (file/directory)
+                String representing this segment of a URL
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.UrlArtifact.Requests">
@@ -506,6 +634,11 @@
             <param name="urlSegment">URL segment</param>
             <returns></returns>
         </member>
+        <member name="M:SMACD.Artifacts.UrlArtifact.#ctor">
+            <summary>
+                Represents a segment of a URL
+            </summary>
+        </member>
         <member name="M:SMACD.Artifacts.UrlArtifact.GetUrl(System.String)">
             <summary>
                 Get entire URL from all segments (assuming this item is the last URL segment)
@@ -513,9 +646,25 @@
             <param name="url">Built URL</param>
             <returns></returns>
         </member>
-        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Identifier">
+        <member name="M:SMACD.Artifacts.UrlArtifact.ToString">
             <summary>
-                Artifact Identifier
+                String representation of URL segment
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.UrlRequestArtifact">
+            <summary>
+                Represents a request to a URL
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Metadata">
+            <summary>
+                URL request metadata
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.UrlRequestArtifact.Method">
+            <summary>
+                HTTP method used to access URL
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.UrlRequestArtifact.Fields">
@@ -527,6 +676,17 @@
             <summary>
                 Headers to be sent with request
             </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.UrlRequestArtifact.#ctor">
+            <summary>
+                Represents a request to a URL
+            </summary>
+        </member>
+        <member name="M:SMACD.Artifacts.UrlRequestArtifact.ToString">
+            <summary>
+                String representation of URL Request
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:SMACD.Artifacts.Vulnerability.RiskLevel">
             <summary>

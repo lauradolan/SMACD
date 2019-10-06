@@ -60,17 +60,5 @@ namespace Synthesys.SDK.Extensions
             .ToDictionary(
                 k => k.Name,
                 v => v.GetValue(this));
-
-        /// <summary>
-        ///     Default Summary view for this Extension.
-        ///     This can be overridden by specifying an alternate view in the ExtensionReport
-        /// </summary>
-        public Type DefaultSummaryView => GetType().GetCustomAttribute<UseGraphicalViewsAttribute>()?.SummaryView;
-
-        /// <summary>
-        ///     Default Detail view for this Extension.
-        ///     This can be overridden by specifying an alternate view in the ExtensionReport
-        /// </summary>
-        public Type DefaultDetailView => GetType().GetCustomAttribute<UseGraphicalViewsAttribute>()?.DetailView;
     }
 }

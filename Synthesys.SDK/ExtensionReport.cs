@@ -12,11 +12,6 @@ namespace Synthesys.SDK
     public sealed class ExtensionReport
     {
         /// <summary>
-        ///     Task descriptor generating the Extension instance
-        /// </summary>
-        //public TaskDescriptor TaskDescriptor { get; set; }
-
-        /// <summary>
         ///     Identifier of Extension which created this Report
         /// </summary>
         public string ExtensionIdentifier { get; set; }

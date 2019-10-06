@@ -209,29 +209,20 @@ namespace Synthesys.Plugins.OwaspZap
                                     artifact.Fields.Add(param, string.Empty);
                         }
 
-                        inner.Requests.Add(artifact);
-
-                        return artifact;
-                    }).ToList();
-
-                    targets.ForEach(target =>
-                    {
-                        if (target == null)
+                        inner.Vulnerabilities.Add(new Vulnerability
                         {
-                            Logger.LogWarning("Created Target is not valid! Skipping...");
-                            return;
-                        }
-
-                        HttpService.Vulnerabilities.Add(new Vulnerability
-                        {
-                            Confidence = (Vulnerability.Confidences) alert.Confidence,
-                            RiskLevel = (Vulnerability.RiskLevels) alert.RiskCode,
+                            Confidence = (Vulnerability.Confidences)alert.Confidence,
+                            RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
                             Description = alert.Desc,
                             Occurrences = alert.Instances.Count(),
                             Remedy = alert.Solution,
                             Title = alert.Name
                         });
-                    });
+
+                        inner.Requests.Add(artifact);
+
+                        return artifact;
+                    }).ToList();
                 }
                 catch (Exception ex)
                 {

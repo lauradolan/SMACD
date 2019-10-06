@@ -2,6 +2,9 @@
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    ///     Describes a location in a Service Map which precipitated an event
+    /// </summary>
     public class ProjectPointer
     {
         /// <summary>

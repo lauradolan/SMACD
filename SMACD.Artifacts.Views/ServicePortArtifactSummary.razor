@@ -4,9 +4,9 @@
             <div class="col mr-2">
                 <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>@ServicePortArtifact.Host @($"{ServicePortArtifact.Protocol}/{ServicePortArtifact.Port}")</span></div>
                 <div class="text-dark text-monospace h7 mb-0">
-                    @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceName))
+                    @if (!string.IsNullOrEmpty(Metadata.ServiceName))
                     {
-                        <span>Running Service '@ServicePortArtifact.ServiceName'</span>
+                        <span>Running Service '@Metadata.ServiceName'</span>
                     }
                     else
                     {
@@ -24,4 +24,5 @@
     [Parameter]
     public Artifact Artifact { get; set; }
     public ServicePortArtifact ServicePortArtifact => Artifact as ServicePortArtifact;
+    public Metadata.ServicePortMetadata Metadata => ServicePortArtifact?.Metadata;
 }

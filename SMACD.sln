@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.89
@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compass", "Compass\Compass.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMACD.Artifacts.Views", "SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj", "{2405318B-79E2-4376-A68F-70D869002059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesys.Tasks", "Synthesys.Tasks\Synthesys.Tasks.csproj", "{2814E17D-10F6-4BD9-820B-2875176738D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synthesys.Tasks", "Synthesys.Tasks\Synthesys.Tasks.csproj", "{2814E17D-10F6-4BD9-820B-2875176738D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

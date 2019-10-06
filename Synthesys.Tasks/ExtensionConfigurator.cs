@@ -105,7 +105,7 @@ namespace Synthesys.Tasks
             foreach (var artifactProperty in artifactProperties)
             {
                 Artifact value = null;
-                value = resourceArtifact.GetPathToRoot()
+                value = resourceArtifact.GetNodesToRoot()
                     .FirstOrDefault(a => a.GetType() == artifactProperty.PropertyType);
                 if (value != null) artifactProperty.SetValue(extensionInstance, value);
             }

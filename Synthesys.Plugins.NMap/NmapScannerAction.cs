@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
+using SMACD.Artifacts.Metadata;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -24,7 +25,6 @@ namespace Synthesys.Plugins.Nmap
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [UseGraphicalViews(typeof(NmapReportView), typeof(NmapReportSummary))]
     public class NmapScannerAction : ActionExtension, IOperateOnHost
     {
         /// <summary>
@@ -55,9 +55,8 @@ namespace Synthesys.Plugins.Nmap
         { 
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
-            var targetIpAddress = Host.Aliases.FirstOrDefault(a => !string.IsNullOrEmpty(a));
             var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
-            RunSingleTarget(nativePathArtifact, targetIpAddress);
+            RunSingleTarget(nativePathArtifact, Host.IpAddress);
 
             var scanXml = GetScanXml(nativePathArtifact);
             var nmapReport = ScoreSingleTarget(scanXml);
@@ -72,9 +71,16 @@ namespace Synthesys.Plugins.Nmap
                 if (new[] {"httpd"}.Contains(port.Service))
                     Host[$"{port.Protocol}/{port.Port}"] = new HttpServicePortArtifact();
 
-                Host[$"{port.Protocol}/{port.Port}"].ServiceName = port.Service;
-                Host[$"{port.Protocol}/{port.Port}"].ProductName = port.ProductName;
-                Host[$"{port.Protocol}/{port.Port}"].ProductVersion = port.ProductVersion;
+                Host[$"{port.Protocol}/{port.Port}"].Metadata.Set(
+                    new ServicePortMetadata()
+                    {
+                        ServiceName = port.Service,
+                        ProductName = port.ProductName,
+                        ProductVersion = port.ProductVersion
+                    },
+                    "nmap",
+                    DataProviderSpecificity.GeneralPurposeScanner,
+                    port.ServiceFingerprintConfidence / 3.0d);
 
                 var confidenceEnum = (Vulnerability.Confidences) port.ServiceFingerprintConfidence;
                 Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability

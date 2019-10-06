@@ -1,30 +1,24 @@
-﻿using System.Net.Sockets;
+﻿using SMACD.Artifacts.Metadata;
+using System;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    ///     Represents a port accessible via a specific protocol, and its service information
+    /// </summary>
     public class ServicePortArtifact : Artifact
     {
-        private int port;
-        private ProtocolType protocol;
-        private string serviceBanner;
-        private string serviceName;
-        private string productName;
-        private string productVersion;
-
-        // <summary>
-        /// An Action which can be registered by the Extension to return a text summary of the Artifact
-        /// </summary>
-        public override string ArtifactTextSummary { get; }
-
         /// <summary>
-        /// An Action which can be registered by the Extension to return an HTML component to view artifact
+        ///     An Action which can be registered by the Extension to return an HTML component to view artifact
         /// </summary>
         public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.ServicePortArtifactView";
 
         /// <summary>
-        ///     Artifact Identifier
+        ///     Service Port metadata
         /// </summary>
-        public override string Identifier => $"{Protocol}/{Port}";
+        public Versionable<ServicePortMetadata> Metadata { get; set; } = new Versionable<ServicePortMetadata>();
 
         /// <summary>
         ///     Hostname/IP of this Service
@@ -36,11 +30,15 @@ namespace SMACD.Artifacts
         /// </summary>
         public ProtocolType Protocol
         {
-            get => protocol;
-            set
+            get
             {
-                protocol = value;
-                NotifyChanged();
+                foreach (var identifier in Identifiers)
+                {
+                    var match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
+                    if (!match.Success) continue;
+                    return Enum.Parse<ProtocolType>(match.Groups["protocol"].Value);
+                }
+                return ProtocolType.Unspecified;
             }
         }
 
@@ -49,71 +47,27 @@ namespace SMACD.Artifacts
         /// </summary>
         public int Port
         {
-            get => port;
-            set
+            get
             {
-                port = value;
-                NotifyChanged();
+                foreach (var identifier in Identifiers)
+                {
+                    var match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
+                    if (!match.Success) continue;
+                    return Int32.Parse(match.Groups["port"].Value);
+                }
+                return 0;
             }
         }
 
         /// <summary>
-        ///     Service name
+        ///     String representation of Service Port Artifact
         /// </summary>
-        public string ServiceName
-        {
-            get => serviceName;
-            set
-            {
-                serviceName = value;
-                NotifyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Service banner
-        /// </summary>
-        public string ServiceBanner
-        {
-            get => serviceBanner;
-            set
-            {
-                serviceBanner = value;
-                NotifyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Name of product providing the Service
-        /// </summary>
-        public string ProductName
-        {
-            get => productName;
-            set
-            {
-                productName = value;
-                NotifyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Version of product providing the Service
-        /// </summary>
-        public string ProductVersion
-        {
-            get => productVersion;
-            set
-            {
-                productVersion = value;
-                NotifyChanged();
-            }
-        }
-
+        /// <returns></returns>
         public override string ToString()
         {
-            return string.IsNullOrEmpty(ServiceName)
+            return Metadata.Coalesced() == null
                 ? $"{Protocol}/{Port}"
-                : $"Service '{ServiceName}' on {Protocol}/{Port}";
+                : $"Service '{((ServicePortMetadata)Metadata).ServiceName}' on {Protocol}/{Port}";
         }
     }
 }

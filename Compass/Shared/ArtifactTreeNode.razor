@@ -14,7 +14,7 @@
                 <i class="fa fa-puzzle-piece text-info" style="margin-right: 0.5em;"></i>
             }
             <a class="text-light" href="javascript:void(0)" @onclick="(() => IdentifierClicked.InvokeAsync(Artifact))">
-            @Artifact.Identifier
+            @Artifact.NiceIdentifier
             </a>
             <span class="text-right d-inline float-right">
                 (<span class="text-info">@Artifact.Vulnerabilities.Count<i class="fa fa-bug"></i></span>&nbsp;<span class="text-warning">@Artifact.Children.Sum(v => Program.GetAllVulnerabilitiesIn(v).Count)<i class="fa fa-sort-down"></i></span>)

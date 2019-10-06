@@ -1,29 +1,26 @@
 ﻿using System.Linq;
-using System.Net.Http;
 
 namespace SMACD.Artifacts
 {
+    /// <summary>
+    ///     Represents an HTTP service accessible via a specific protocol and port
+    /// </summary>
     public class HttpServicePortArtifact : ServicePortArtifact
     {
         /// <summary>
-        ///     Get a URL segment (single file or directory)
+        ///     Get a child URL segment
         /// </summary>
-        /// <param name="urlSegment">Part of URL</param>
+        /// <param name="urlSegment">URL segment</param>
         /// <returns></returns>
         public UrlArtifact this[string urlSegment]
         {
             get
             {
-                var result = (UrlArtifact) Children.FirstOrDefault(d =>
-                    ((UrlArtifact) d).Identifier == urlSegment || ((UrlArtifact) d).UrlSegment == urlSegment);
+                var result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
                 if (result == null)
                 {
-                    result = new UrlArtifact
-                    {
-                        Parent = this,
-                        UrlSegment = urlSegment,
-                        Method = HttpMethod.Get
-                    };
+                    result = new UrlArtifact { Parent = this };
+                    result.Identifiers.Add(urlSegment);
                     result.BeginFiringEvents();
                     Children.Add(result);
                 }
@@ -32,9 +29,13 @@ namespace SMACD.Artifacts
             }
         }
 
+        /// <summary>
+        ///     String representation of HTTP Service artifact
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return $"HTTP Service on port {Protocol}/{Port} ({ServiceName})";
+            return $"HTTP Service on port {Protocol}/{Port}";
         }
     }
 }

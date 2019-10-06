@@ -9,9 +9,9 @@
                     <div class="col mr-2">
                         <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Service Banner</span></div>
                         <div class="text-dark mb-0 text-monospace">
-                            @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceBanner))
+                            @if (!string.IsNullOrEmpty(Metadata.ServiceBanner))
                             {
-                                <span>@ServicePortArtifact</span>
+                                <span>@Metadata.ServiceBanner</span>
                             }
                             else
                             {
@@ -31,9 +31,9 @@
                     <div class="col mr-2">
                         <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Fingerprint</span></div>
                         <div class="text-dark font-weight-bold h5 mb-0">
-                            @if (!string.IsNullOrEmpty(ServicePortArtifact.ServiceName))
+                            @if (!string.IsNullOrEmpty(Metadata.ServiceName))
                             {
-                                <span>@ServicePortArtifact.ServiceName</span>
+                                <span>@Metadata.ServiceName</span>
                             }
                             else
                             {
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    @if (!string.IsNullOrEmpty(ServicePortArtifact.ProductName))
+    @if (!string.IsNullOrEmpty(Metadata.ProductName))
     {
         <div class="col-md-6 col-xl-9 mb-4">
             <div class="card shadow border-left-success py-2">
@@ -54,7 +54,7 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col mr-2">
                             <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Product</span></div>
-                            <div class="text-dark mb-0 text-monospace"><span>@ServicePortArtifact.ProductName @ServicePortArtifact.ProductVersion</span></div>
+                            <div class="text-dark mb-0 text-monospace"><span>@Metadata.ProductName @Metadata.ProductVersion</span></div>
                         </div>
                         <div class="col-auto"><i class="fas fa-archive fa-2x text-gray-300"></i></div>
                     </div>
@@ -79,6 +79,6 @@
 {
     [Parameter]
     public Artifact Artifact { get; set; }
-
     public ServicePortArtifact ServicePortArtifact => Artifact as ServicePortArtifact;
+    public Metadata.ServicePortMetadata Metadata => ServicePortArtifact?.Metadata;
 }

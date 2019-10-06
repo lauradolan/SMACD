@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using SMACD.Artifacts.Metadata;
+using System;
 using System.Linq;
 using System.Net.Sockets;
 
@@ -10,46 +10,23 @@ namespace SMACD.Artifacts
     /// </summary>
     public class HostArtifact : Artifact
     {
-        private string hostname;
-        private string ipAddress;
-
-        // <summary>
-        /// An Action which can be registered by the Extension to return a text summary of the Artifact
-        /// </summary>
-        public override string ArtifactTextSummary { get; }
-
         /// <summary>
         /// An Action which can be registered by the Extension to return an HTML component to view artifact
         /// </summary>
         public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.HostArtifactView";
 
         /// <summary>
-        /// Represents a single host (server) involved in some part of the application
+        ///     Host metadata
         /// </summary>
-        public HostArtifact()
-        {
-            Aliases.CollectionChanged += (s, e) => NotifyChanged();
-            ArtifactTextSummary = $"{Identifier} has the following aliases: {string.Join(", ", Aliases)}";
-        }
-
-        /// <summary>
-        ///     Artifact Identifier
-        /// </summary>
-        public override string Identifier => Hostname;
+        public Versionable<UrlMetadata> Metadata { get; set; } = new Versionable<UrlMetadata>();
 
         /// <summary>
         ///     Name of Host
         /// </summary>
         public string Hostname
         {
-            get => hostname;
-            set
-            {
-                if (!Aliases.Contains(value) && !string.IsNullOrEmpty(value)) Aliases.Add(value);
-
-                hostname = value;
-                NotifyChanged();
-            }
+            get => Identifiers.Where(i => !Guid.TryParse(i, out var dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.Dns);
+            set { if (!Identifiers.Contains(value)) Identifiers.Add(value); }
         }
 
         /// <summary>
@@ -57,20 +34,9 @@ namespace SMACD.Artifacts
         /// </summary>
         public string IpAddress
         {
-            get => ipAddress;
-            set
-            {
-                if (!Aliases.Contains(value) && !string.IsNullOrEmpty(value)) Aliases.Add(value);
-
-                ipAddress = value;
-                NotifyChanged();
-            }
+            get => Identifiers.Where(i => !Guid.TryParse(i, out var dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.IPv4);
+            set { if (!Identifiers.Contains(value)) Identifiers.Add(value); }
         }
-
-        /// <summary>
-        ///     Aliases belonging to this Host
-        /// </summary>
-        public ObservableCollection<string> Aliases { get; } = new ObservableCollection<string>();
 
         /// <summary>
         ///     Get a TCP port/service by its port number
@@ -81,15 +47,11 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var result = (ServicePortArtifact) Children.FirstOrDefault(p => ((ServicePortArtifact) p).Port == port);
+                var result = this[$"{ProtocolType.Tcp.ToString()}/{port}"];
                 if (result == null)
                 {
-                    result = new ServicePortArtifact
-                    {
-                        Parent = this,
-                        Port = port,
-                        Protocol = ProtocolType.Tcp
-                    };
+                    result = new ServicePortArtifact { Parent = this };
+                    result.Identifiers.Add($"{ProtocolType.Tcp.ToString()}/{port}");
                     result.BeginFiringEvents();
                     Children.Add(result);
                 }
@@ -98,16 +60,8 @@ namespace SMACD.Artifacts
             }
             set
             {
-                var existing = (ServicePortArtifact) Children.FirstOrDefault(p =>
-                    ((ServicePortArtifact) p).Port == port &&
-                    ((ServicePortArtifact) p).Protocol == ProtocolType.Tcp);
+                var existing = this[$"{value.Protocol}/{port}"];
                 if (existing != null) Children.Remove(existing);
-
-                value.Parent = this;
-                if (value.Port == 0) value.Port = port;
-
-                if (value.Protocol == ProtocolType.Unspecified) value.Protocol = ProtocolType.Tcp;
-
                 value.BeginFiringEvents();
                 Children.Add(value);
             }
@@ -116,21 +70,22 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Get a port/service by its port number and type
         /// </summary>
-        /// <param name="protocolAndport">Protocol and port, i.e. Tcp/80</param>
+        /// <param name="protocolAndPort">Protocol and port, i.e. Tcp/80</param>
         /// <returns></returns>
-        public ServicePortArtifact this[string protocolAndport]
+        public ServicePortArtifact this[string protocolAndPort]
         {
             get
             {
-                var protocol = Enum.Parse<ProtocolType>(protocolAndport.Split('/')[0]);
-                var port = int.Parse(protocolAndport.Split('/')[1]);
+                var protocol = Enum.Parse<ProtocolType>(protocolAndPort.Split('/')[0]);
+                var port = int.Parse(protocolAndPort.Split('/')[1]);
 
                 var result = (ServicePortArtifact) Children.FirstOrDefault(p =>
                     ((ServicePortArtifact) p).Port == port &&
                     ((ServicePortArtifact) p).Protocol == protocol);
                 if (result == null)
                 {
-                    result = new ServicePortArtifact {Port = port, Protocol = protocol, Parent = this};
+                    result = new ServicePortArtifact { Parent = this };
+                    result.Identifiers.Add($"{protocol}/{port}");
                     Children.Add(result);
                 }
 
@@ -138,22 +93,18 @@ namespace SMACD.Artifacts
             }
             set
             {
-                var existing = (ServicePortArtifact) Children.FirstOrDefault(p =>
-                    ((ServicePortArtifact) p).Port == int.Parse(protocolAndport.Split('/')[1]) &&
-                    ((ServicePortArtifact) p).Protocol == Enum.Parse<ProtocolType>(protocolAndport.Split('/')[0]));
+                var existing = this[protocolAndPort];
                 if (existing != null) Children.Remove(existing);
-
-                value.Parent = this;
-                if (value.Port == 0) value.Port = int.Parse(protocolAndport.Split('/')[1]);
-
-                if (value.Protocol == ProtocolType.Unspecified)
-                    value.Protocol = Enum.Parse<ProtocolType>(protocolAndport.Split('/')[0]);
 
                 value.BeginFiringEvents();
                 Children.Add(value);
             }
         }
 
+        /// <summary>
+        ///     String representation of host
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Host {Hostname} ({IpAddress})";

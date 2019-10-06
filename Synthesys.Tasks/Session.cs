@@ -31,7 +31,8 @@ namespace Synthesys.Tasks
                     {
                         TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
                         TypeNameHandling = TypeNameHandling.All,
-                        SerializationBinder = new AggressiveTypeResolutionBinder()
+                        SerializationBinder = new AggressiveTypeResolutionBinder(),
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
 
                 result.BindArtifactTriggers();
@@ -83,7 +84,8 @@ namespace Synthesys.Tasks
                 {
                     TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
                     TypeNameHandling = TypeNameHandling.All,
-                    SerializationBinder = new AggressiveTypeResolutionBinder()
+                    SerializationBinder = new AggressiveTypeResolutionBinder(),
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
                 compressor.Write(Encoding.Unicode.GetBytes(str));
 
@@ -99,7 +101,7 @@ namespace Synthesys.Tasks
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.IsUpdated);
                 foreach (var item in triggered)
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join("|;|", path.Select(p => p.Identifier)),
+                        string.Join(Artifact.PATH_SEPARATOR, path.Select(p => p.UUID)),
                         ArtifactTrigger.IsUpdated));
             };
             Artifacts.ArtifactChildAdded += (artifact, path) =>
@@ -109,7 +111,7 @@ namespace Synthesys.Tasks
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.AddsChild);
                 foreach (var item in triggered)
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join("|;|", path.Skip(1).Select(p => p.Identifier)),
+                        string.Join(Artifact.PATH_SEPARATOR, path.Skip(1).Select(p => p.UUID)),
                         ArtifactTrigger.AddsChild)); // note Skip(1), same reason as above
             };
             Artifacts.ArtifactCreated += (artifact, path) =>
@@ -118,7 +120,7 @@ namespace Synthesys.Tasks
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.IsCreated);
                 foreach (var item in triggered)
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join("|;|", path.Select(p => p.Identifier)),
+                        string.Join(Artifact.PATH_SEPARATOR, path.Select(p => p.UUID)),
                         ArtifactTrigger.IsCreated));
             };
         }

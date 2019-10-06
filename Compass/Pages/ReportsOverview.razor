@@ -18,12 +18,11 @@
     protected RenderFragment RenderDynamicSummary(ExtensionReport report) => builder =>
     {
         if (!string.IsNullOrEmpty(report.ReportViewName))
+        {
             builder.OpenComponent(1, GetComponentType(report.ReportSummaryName));
-        else
-            builder.OpenComponent(1, 
-                ExtensionToolbox.Instance.EmitAction(report.ExtensionIdentifier).DefaultSummaryView);
-        builder.AddAttribute(2, "Report", report);
-        builder.CloseComponent();
+            builder.AddAttribute(2, "Report", report);
+            builder.CloseComponent();
+        }
     };
 
     private Type GetComponentType(string name)

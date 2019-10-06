@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Web;
 using SMACD.Artifacts;
 
 namespace Synthesys.SDK
 {
+    /// <summary>
+    ///     Functions to work with URLs in the Artifact correlation tree
+    /// </summary>
     public static class UrlHelper
     {
+        /// <summary>
+        ///     Generate artifacts under the given Artifact for each segment of a given URL and request method
+        /// </summary>
+        /// <param name="httpService">Base artifact</param>
+        /// <param name="url">URL to create data from</param>
+        /// <param name="method">HTTP request method</param>
+        /// <returns>Artifact representing leaf of URL</returns>
         public static UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
         {
             if (!url.StartsWith("http"))
@@ -17,7 +26,7 @@ namespace Synthesys.SDK
 
             var scheme = uri.Scheme;
             var host = uri.Host;
-            var pieces = uri.AbsolutePath.Split('/').ToList();
+            var pieces = uri.AbsolutePath.Split('/').Where(e => !string.IsNullOrEmpty(e)).ToList();
             var queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
             // Create path through tree based on path pieces
@@ -27,34 +36,14 @@ namespace Synthesys.SDK
                 artifact = artifact[piece];
             }
 
-            // Assign HTTP Verb to last piece before query parameters
-            if (!string.IsNullOrEmpty(method))
-            {
-                if (method.ToUpper() == "GET")
-                    artifact.Method = HttpMethod.Get;
-                else if (method.ToUpper() == "POST")
-                    artifact.Method = HttpMethod.Post;
-                else if (method.ToUpper() == "PUT")
-                    artifact.Method = HttpMethod.Put;
-                else if (method.ToUpper() == "DELETE")
-                    artifact.Method = HttpMethod.Delete;
-                else if (method.ToUpper() == "HEAD")
-                    artifact.Method = HttpMethod.Head;
-                else if (method.ToUpper() == "TRACE") artifact.Method = HttpMethod.Trace;
-            }
+            // "artifact" is leaf URL, create request here
+            var request = new UrlRequestArtifact();
 
-            foreach (var key in queryParameters.AllKeys)
-            {
-                artifact.Requests.Add(new UrlRequestArtifact()
-                {
-                    Fields = new ObservableDictionary<string, string>()
-                    {
-                        {
-                            key, queryParameters[key]
-                        }
-                    }
-                });
-            }
+            foreach (var key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
+                request.Fields[key] = queryParameters[key];
+
+            request.Identifiers.Add($"{method.ToUpper()} ({HashCode.Combine(request.Fields, request.Headers)})");
+            artifact.Requests.Add(request);
 
             return artifact;
         }

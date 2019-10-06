@@ -20,7 +20,7 @@ namespace SMACD.Data.Resources
         /// <summary>
         ///     Method used to query the URL
         /// </summary>
-        public string Method { get; set; }
+        public string Method { get; set; } = "GET";
 
         /// <summary>
         ///     URL being accessed by Target
