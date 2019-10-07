@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Synthesys.Tasks;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Synthesys.Verbs
 {
@@ -27,45 +27,55 @@ namespace Synthesys.Verbs
 
             Console.WriteLine(Environment.NewLine);
 
-            var session = new Session();
+            Session session = new Session();
 
             ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
                 Path.Combine(Directory.GetCurrentDirectory(), "Plugins"),
                 "Synthesys.Plugins.*.dll");
             Console.WriteLine(Output.BrightBlue("LOADED LIBRARIES:"));
-            foreach (var loaded in ExtensionToolbox.Instance.ExtensionLibraries)
+            foreach (ExtensionLibrary loaded in ExtensionToolbox.Instance.ExtensionLibraries)
             {
                 Console.WriteLine("· " + $"{Output.BrightGreen(loaded.FileName)}");
                 Console.WriteLine("  " + Output.White().Text(loaded.Assembly.FullName));
                 Console.WriteLine("  " + Output.Magenta("ACTIONS:"));
-                var actionInfo = loaded.ActionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
+                System.Collections.Generic.List<Tuple<string, System.Collections.Generic.KeyValuePair<string, Type>>> actionInfo = loaded.ActionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
                     .ToList();
 
-                for (var i = 0; i < actionInfo.Count; i++)
+                for (int i = 0; i < actionInfo.Count; i++)
                 {
                     if (actionInfo.Count == 1)
+                    {
                         Console.Write("  └─ ");
+                    }
                     else
+                    {
                         Console.Write(i != 0 ? "  └─ " : "  ├─ ");
+                    }
 
                     Console.WriteLine(Output.BrightGreen(actionInfo[i].Item1) + " runs " +
                                       Output.BrightBlue(actionInfo[i].Item2.Value.FullName));
                 }
 
                 Console.WriteLine("  " + Output.Magenta("REACTIONS:"));
-                var reactionInfo = loaded.ReactionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
+                System.Collections.Generic.List<Tuple<SDK.Triggers.TriggerDescriptor, System.Collections.Generic.KeyValuePair<SDK.Triggers.TriggerDescriptor, System.Collections.Generic.List<Type>>>> reactionInfo = loaded.ReactionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
                     .ToList();
 
-                for (var i = 0; i < reactionInfo.Count; i++)
+                for (int i = 0; i < reactionInfo.Count; i++)
                 {
                     if (reactionInfo.Count == 1)
+                    {
                         Console.Write("  └─ ");
+                    }
                     else
+                    {
                         Console.Write(i != 0 ? "  └─ " : "  ├─ ");
+                    }
 
-                    foreach (var reaction in reactionInfo[i].Item2.Value)
+                    foreach (Type reaction in reactionInfo[i].Item2.Value)
+                    {
                         Console.WriteLine(Output.BrightGreen(reaction.FullName) + " via " +
                                           Output.BrightBlue(reactionInfo[i].Item1.ToString()));
+                    }
                 }
 
                 Console.WriteLine();

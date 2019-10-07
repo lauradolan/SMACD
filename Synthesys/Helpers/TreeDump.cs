@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Crayon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using Crayon;
 
 namespace Synthesys.Helpers
 {
@@ -15,13 +15,13 @@ namespace Synthesys.Helpers
         private const string _vertical = " │ ";
         private const string _space = "   ";
 
-        private static readonly Type[] ValueOnlyTypes = {typeof(string), typeof(TimeSpan), typeof(DateTime)};
+        private static readonly Type[] ValueOnlyTypes = { typeof(string), typeof(TimeSpan), typeof(DateTime) };
         public static int MAX_WIDTH = Console.WindowWidth - 10;
         public static int forcedPadding = 10;
 
         private static string GetLine(LineTypes type, string name, int dotsLength, string value)
         {
-            var str = string.Empty;
+            string str = string.Empty;
             if (type == LineTypes.Minimal)
             {
                 str += new string(' ', name.Length + 1 + dotsLength);
@@ -30,23 +30,35 @@ namespace Synthesys.Helpers
             {
                 IOutput baseColor;
                 // Numeric names  (indexes)  rendered purple
-                if (int.TryParse(name, out var dummy))
+                if (int.TryParse(name, out int dummy))
+                {
                     baseColor = Output.Magenta();
+                }
                 else
+                {
                     baseColor = Output.White();
+                }
 
                 if (type == LineTypes.Collection) // underline collection names
+                {
                     str += baseColor.Underline().Text(name) + " ";
+                }
                 else
+                {
                     str += baseColor.Text(name) + " ";
+                }
 
                 str += Output.FromRgb(33, 33, 33).Text(new string('.', dotsLength));
             }
 
             if (value == null)
+            {
                 str += Output.Red().Text("<null>");
+            }
             else
+            {
                 str += value;
+            }
 
             return str;
         }
@@ -55,9 +67,11 @@ namespace Synthesys.Helpers
         {
             // SPECIAL CASE
             if (obj is HttpMethod)
+            {
                 obj = obj.ToString();
+            }
 
-            var indentLen = indent.Length;
+            int indentLen = indent.Length;
             indent = PrintNodeBase(indent, isLast);
 
             // WRITE NULL CASE
@@ -74,35 +88,38 @@ namespace Synthesys.Helpers
             else if (obj is byte[])
             {
                 Console.WriteLine(GetLine(LineTypes.Normal, name,
-                    MAX_WIDTH - indentLen - name.Length - 1 - $"{((byte[]) obj).Length}B".Length,
-                    $"{((byte[]) obj).Length}B"));
+                    MAX_WIDTH - indentLen - name.Length - 1 - $"{((byte[])obj).Length}B".Length,
+                    $"{((byte[])obj).Length}B"));
             }
 
             // RECURSE INTO COLLECTION CASE
             else if (obj.GetType().GetInterface(nameof(ICollection)) != null)
             {
-                DumpCollection((ICollection) obj, name, indent, isLast);
+                DumpCollection((ICollection)obj, name, indent, isLast);
             }
 
             // VALUE
             else if (ValueOnlyTypes.Contains(obj.GetType()) || obj.GetType().GetProperties().Length == 0)
             {
-                var deadSpace = indentLen + 1 + name.Length + 1;
+                int deadSpace = indentLen + 1 + name.Length + 1;
 
-                var renderedValue = obj.ToString();
-                if (obj is string) renderedValue = $"\"{renderedValue}\""; // format output value
+                string renderedValue = obj.ToString();
+                if (obj is string)
+                {
+                    renderedValue = $"\"{renderedValue}\""; // format output value
+                }
 
                 // LONG STRINGS
                 if (deadSpace + renderedValue.Length + 2 > MAX_WIDTH)
                 {
-                    var strings = renderedValue.WordWrap(
+                    string[] strings = renderedValue.WordWrap(
                         MAX_WIDTH - deadSpace - 2 - forcedPadding).Split('\n');
 
-                    var c = 0;
-                    foreach (var str in strings.Where(s => !string.IsNullOrEmpty(s))
+                    int c = 0;
+                    foreach (string str in strings.Where(s => !string.IsNullOrEmpty(s))
                         .Select(s => s.Trim('\r', '\n', '\t', ' ')))
                     {
-                        var middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - str.Length + 1;
+                        int middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - str.Length + 1;
                         if (c++ == 0)
                         {
                             // <indent> <name> {...} <value>
@@ -119,11 +136,11 @@ namespace Synthesys.Helpers
                 // NORMAL STRINGS
                 else
                 {
-                    var middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - renderedValue.Length + 1;
+                    int middleWidth = MAX_WIDTH - indentLen - $" {name} ".Length - renderedValue.Length + 1;
 
-                    var totalUsedSpace = deadSpace + renderedValue.Length;
-                    var freeSpace = MAX_WIDTH - totalUsedSpace;
-                    var dots = new string('.', freeSpace);
+                    int totalUsedSpace = deadSpace + renderedValue.Length;
+                    int freeSpace = MAX_WIDTH - totalUsedSpace;
+                    string dots = new string('.', freeSpace);
                     Console.WriteLine(
                         GetLine(LineTypes.Normal, name, middleWidth, renderedValue));
                 }
@@ -140,38 +157,49 @@ namespace Synthesys.Helpers
         {
             Console.WriteLine(GetLine(LineTypes.Collection, name, 0, ""));
             //Console.WriteLine(Output.Underline().White().Text(name));
-            var c = 0;
-            var l = obj.Count;
-            foreach (var item in obj)
+            int c = 0;
+            int l = obj.Count;
+            foreach (object item in obj)
+            {
                 Dump(
                     item,
                     c.ToString(),
                     indent,
                     c++ >= l - 1);
+            }
         }
 
         private static void DumpObject(object obj, string name = "", string indent = "", bool isLast = false)
         {
             Console.WriteLine(GetLine(LineTypes.Normal, name, 0, ""));
             //Console.WriteLine(Output.Underline().White().Text(name));
-            var properties = obj.GetType().GetProperties();
-            foreach (var property in properties)
+            System.Reflection.PropertyInfo[] properties = obj.GetType().GetProperties();
+            foreach (System.Reflection.PropertyInfo property in properties)
             {
-                if (property.Name == "Parent") continue;
+                if (property.Name == "Parent")
+                {
+                    continue;
+                }
+
                 if (property.GetIndexParameters().Length > 0)
                 {
                     if (property.GetIndexParameters()[0].ParameterType == typeof(int))
+                    {
                         continue;
+                    }
+
                     if (obj.GetType().GetProperty("ChildNames") != null)
                     {
-                        var childNames = (List<string>) obj.GetType().GetProperty("ChildNames").GetValue(obj);
-                        foreach (var child in childNames)
+                        List<string> childNames = (List<string>)obj.GetType().GetProperty("ChildNames").GetValue(obj);
+                        foreach (string child in childNames)
+                        {
                             Dump(
                                 property.GetValue(obj,
-                                    new[] {Convert.ChangeType(child, property.GetIndexParameters()[0].ParameterType)}),
+                                    new[] { Convert.ChangeType(child, property.GetIndexParameters()[0].ParameterType) }),
                                 property.Name + $"[{child}]",
                                 indent,
                                 childNames.Last() == child);
+                        }
                     }
                     else
                     {
@@ -232,37 +260,54 @@ namespace Synthesys.Helpers
         public static string WordWrap(this string text, int width)
         {
             int pos, next;
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             // Lucidity check
-            if (width < 1) return text;
+            if (width < 1)
+            {
+                return text;
+            }
 
             // Parse each line of text
             for (pos = 0; pos < text.Length; pos = next)
             {
                 // Find end of line
-                var eol = text.IndexOf(Environment.NewLine, pos);
+                int eol = text.IndexOf(Environment.NewLine, pos);
                 if (eol == -1)
+                {
                     next = eol = text.Length;
+                }
                 else
+                {
                     next = eol + Environment.NewLine.Length;
+                }
 
                 // Copy this line of text, breaking into smaller lines as needed
                 if (eol > pos)
+                {
                     do
                     {
-                        var len = eol - pos;
-                        if (len > width) len = BreakLine(text, pos, width);
+                        int len = eol - pos;
+                        if (len > width)
+                        {
+                            len = BreakLine(text, pos, width);
+                        }
 
                         sb.Append(text, pos, len);
                         sb.Append(Environment.NewLine);
 
                         // Trim whitespace following break
                         pos += len;
-                        while (pos < eol && char.IsWhiteSpace(text[pos])) pos++;
+                        while (pos < eol && char.IsWhiteSpace(text[pos]))
+                        {
+                            pos++;
+                        }
                     } while (eol > pos);
+                }
                 else
+                {
                     sb.Append(Environment.NewLine); // Empty line
+                }
             }
 
             return sb.ToString();
@@ -279,14 +324,23 @@ namespace Synthesys.Helpers
         private static int BreakLine(string text, int pos, int max)
         {
             // Find last whitespace in line
-            var i = max;
-            while (i >= 0 && !char.IsWhiteSpace(text[pos + i])) i--;
+            int i = max;
+            while (i >= 0 && !char.IsWhiteSpace(text[pos + i]))
+            {
+                i--;
+            }
 
             // If no whitespace found, break at maximum length
-            if (i < 0) return max;
+            if (i < 0)
+            {
+                return max;
+            }
 
             // Find start of whitespace
-            while (i >= 0 && char.IsWhiteSpace(text[pos + i])) i--;
+            while (i >= 0 && char.IsWhiteSpace(text[pos + i]))
+            {
+                i--;
+            }
 
             // Return length of text before whitespace
             return i + 1;

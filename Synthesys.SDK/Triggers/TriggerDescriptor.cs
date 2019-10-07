@@ -1,7 +1,7 @@
-﻿using System;
+﻿using SMACD.Artifacts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using SMACD.Artifacts;
 
 namespace Synthesys.SDK.Triggers
 {
@@ -26,6 +26,17 @@ namespace Synthesys.SDK.Triggers
         public static ArtifactTriggerDescriptor ArtifactTrigger(string artifactPath, ArtifactTrigger trigger)
         {
             return new ArtifactTriggerDescriptor(artifactPath, trigger);
+        }
+
+        /// <summary>
+        ///     Create an artifact-based trigger
+        /// </summary>
+        /// <param name="artifact">Artifact instance</param>
+        /// <param name="trigger">Trigger operation</param>
+        /// <returns></returns>
+        public static ArtifactTriggerDescriptor ArtifactTrigger(Artifact artifact, ArtifactTrigger trigger)
+        {
+            return new ArtifactTriggerDescriptor(artifact, trigger);
         }
 
         /// <summary>
@@ -63,14 +74,31 @@ namespace Synthesys.SDK.Triggers
 
         private static bool PathMatches(Artifact artifact, List<string> pathElements)
         {
-            var nextEl = pathElements.First();
-            var nextElements = new List<string>();
-            if (pathElements.Count > 1) nextElements = new List<string>(pathElements.Skip(1));
+            string nextEl = pathElements.First();
+            List<string> nextElements = new List<string>();
+            if (pathElements.Count > 1)
+            {
+                nextElements = new List<string>(pathElements.Skip(1));
+            }
 
-            if (nextEl == "*" || artifact.UUID == Guid.Parse(nextEl))
+            if (nextEl.Contains('{') && nextEl.Contains('}')) // specified <something>{type} to expect a given type
+            {
+                var expectedTypeName = nextEl.Split('{')[1].Split('}')[0];
+                var expectedType = Type.GetType(expectedTypeName);
+                if (!expectedType.IsAssignableFrom(artifact.GetType()))
+                    return false;
+                nextEl = nextEl.Substring(0, nextEl.IndexOf('{')+1);
+            }
+
+            if (nextEl == "%") return true; // % terminates all processing (n-field wildcard)
+            if (nextEl == "*" || artifact.UUID == Guid.Parse(nextEl)) // * is 1-field wildcard
+            {
                 if (nextElements.Count == 0 ||
                     artifact.Children.Any(child => PathMatches(child, nextElements)))
+                {
                     return true;
+                }
+            }
 
             return false;
         }
@@ -80,6 +108,9 @@ namespace Synthesys.SDK.Triggers
         /// </summary>
         /// <param name="artifact">Artifact</param>
         /// <returns></returns>
-        public static string GeneratePath(Artifact artifact) => artifact.GetUUIDPathToRoot();
+        public static string GeneratePath(Artifact artifact)
+        {
+            return artifact.GetUUIDPathToRoot();
+        }
     }
 }

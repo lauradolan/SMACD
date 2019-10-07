@@ -16,7 +16,7 @@ namespace SMACD.Artifacts.Data
         /// <summary>
         ///     If the Artifact has dispatched a Context
         /// </summary>
-        public bool HasActiveDispatchedContext => _contextRef != null && _contextRef.TryGetTarget(out var dummy);
+        public bool HasActiveDispatchedContext => _contextRef != null && _contextRef.TryGetTarget(out NativeDirectoryContext dummy);
 
         /// <summary>
         ///     Get a directory Context to collect files locally; when the context is disposed, the directory will be
@@ -25,7 +25,7 @@ namespace SMACD.Artifacts.Data
         /// <returns></returns>
         public NativeDirectoryContext GetContext()
         {
-            var context = new NativeDirectoryContext(StoredData);
+            NativeDirectoryContext context = new NativeDirectoryContext(StoredData);
             context.Disposing += (s, e) =>
             {
                 _contextRef = null;

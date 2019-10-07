@@ -76,6 +76,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- SQLMap Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.SQLMap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.SQLMap.dll" Link="Plugins\Synthesys.Plugins.SQLMap.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Azure DevOps Plugin -->
     <EmbeddedResource Include="..\Synthesys.Plugins.AzureDevOps\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.AzureDevOps.dll" Link="Plugins\AzureDevOps\Synthesys.Plugins.AzureDevOps.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

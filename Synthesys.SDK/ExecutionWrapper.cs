@@ -1,9 +1,9 @@
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace Synthesys.SDK
 {
@@ -84,11 +84,13 @@ namespace Synthesys.SDK
         public Task Start()
         {
             if (string.IsNullOrEmpty(Command))
+            {
                 throw new Exception("Command was not set but execution has been requested");
+            }
 
             RuntimeTask = Task.Run(() =>
             {
-                var sw = new Stopwatch();
+                Stopwatch sw = new Stopwatch();
                 sw.Start();
 
                 Process.StartInfo = GetStartInfo(Command);
@@ -108,14 +110,20 @@ namespace Synthesys.SDK
 
                 Process.OutputDataReceived += (s, e) =>
                 {
-                    if (e.Data == null) return;
+                    if (e.Data == null)
+                    {
+                        return;
+                    }
 
                     StdOut += e.Data + Environment.NewLine;
                     StandardOutputDataReceived?.Invoke(s, OwnerTaskId, e.Data);
                 };
                 Process.ErrorDataReceived += (s, e) =>
                 {
-                    if (e.Data == null) return;
+                    if (e.Data == null)
+                    {
+                        return;
+                    }
 
                     StdErr += e.Data + Environment.NewLine;
                     StandardErrorDataReceived?.Invoke(s, OwnerTaskId, e.Data);
@@ -134,12 +142,16 @@ namespace Synthesys.SDK
 
         private ProcessStartInfo GetStartInfo(string cmd)
         {
-            var escapedArgs = cmd.Replace("\"", "\\\"");
+            string escapedArgs = cmd.Replace("\"", "\\\"");
             ProcessStartInfo procStartInfo;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
                 procStartInfo = new ProcessStartInfo("cmd", "/c " + escapedArgs);
+            }
             else
+            {
                 procStartInfo = new ProcessStartInfo("/bin/bash", $"-c \"{escapedArgs}\"");
+            }
 
             procStartInfo.RedirectStandardOutput = true;
             procStartInfo.RedirectStandardError = true;
@@ -157,8 +169,13 @@ namespace Synthesys.SDK
             if (!disposedValue)
             {
                 if (disposing)
+                {
                     if (!Process.HasExited)
+                    {
                         Process.Kill();
+                    }
+                }
+
                 disposedValue = true;
             }
         }

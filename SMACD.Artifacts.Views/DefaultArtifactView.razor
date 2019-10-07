@@ -93,15 +93,11 @@ else
     {
         if (Artifact != null)
         {
-            var originalParent = Artifact.Parent;
-            Artifact.Disconnect();
-
             SerializedData = Newtonsoft.Json.JsonConvert.SerializeObject(Artifact, new Newtonsoft.Json.JsonSerializerSettings()
             {
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
                 Formatting = Newtonsoft.Json.Formatting.Indented
             }).Trim();
-            Artifact.Connect(originalParent);
         }
         else
             SerializedData = string.Empty;

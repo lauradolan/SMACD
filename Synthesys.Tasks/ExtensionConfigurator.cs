@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Synthesys.Tasks
 {
@@ -32,7 +32,7 @@ namespace Synthesys.Tasks
             ApplyConfigurableOptions(extension, options);
             ApplyArtifactProperty(extension, artifactRoot);
 
-            var metadata = extension.GetType().GetCustomAttribute<ExtensionAttribute>();
+            ExtensionAttribute metadata = extension.GetType().GetCustomAttribute<ExtensionAttribute>();
 
             if (!extension.ValidateEnvironmentReadiness())
             {
@@ -59,12 +59,12 @@ namespace Synthesys.Tasks
         private static Extension ApplyConfigurableOptions(Extension extensionInstance,
             Dictionary<string, string> options)
         {
-            var actionInstancePropertyTypes = extensionInstance.GetType().GetProperties();
+            PropertyInfo[] actionInstancePropertyTypes = extensionInstance.GetType().GetProperties();
 
-            foreach (var pair in options)
+            foreach (KeyValuePair<string, string> pair in options)
             {
                 // Look for the [Configurable] attribute on the property and set the property from the options dictionary if it was found
-                var propertyIsConfigurable =
+                PropertyInfo propertyIsConfigurable =
                     actionInstancePropertyTypes.FirstOrDefault(t =>
                         t.Name.Equals(pair.Key, StringComparison.OrdinalIgnoreCase) &&
                         t.GetCustomAttribute<ConfigurableAttribute>() != null);
@@ -93,7 +93,7 @@ namespace Synthesys.Tasks
         /// <returns></returns>
         private static Extension ApplyArtifactProperty(Extension extensionInstance, Artifact resourceArtifact)
         {
-            var artifactProperties = extensionInstance.GetType().GetProperties().Where(p =>
+            PropertyInfo[] artifactProperties = extensionInstance.GetType().GetProperties().Where(p =>
                 typeof(Artifact).IsAssignableFrom(p.PropertyType)).ToArray();
 
             if (!artifactProperties.Any())
@@ -102,12 +102,15 @@ namespace Synthesys.Tasks
                 return extensionInstance;
             }
 
-            foreach (var artifactProperty in artifactProperties)
+            foreach (PropertyInfo artifactProperty in artifactProperties)
             {
                 Artifact value = null;
                 value = resourceArtifact.GetNodesToRoot()
                     .FirstOrDefault(a => a.GetType() == artifactProperty.PropertyType);
-                if (value != null) artifactProperty.SetValue(extensionInstance, value);
+                if (value != null)
+                {
+                    artifactProperty.SetValue(extensionInstance, value);
+                }
             }
 
             return extensionInstance;

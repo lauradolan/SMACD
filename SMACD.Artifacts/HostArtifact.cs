@@ -11,7 +11,7 @@ namespace SMACD.Artifacts
     public class HostArtifact : Artifact
     {
         /// <summary>
-        /// An Action which can be registered by the Extension to return an HTML component to view artifact
+        ///     An Action which can be registered by the Extension to return an HTML component to view artifact
         /// </summary>
         public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.HostArtifactView";
 
@@ -25,8 +25,14 @@ namespace SMACD.Artifacts
         /// </summary>
         public string Hostname
         {
-            get => Identifiers.Where(i => !Guid.TryParse(i, out var dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.Dns);
-            set { if (!Identifiers.Contains(value)) Identifiers.Add(value); }
+            get => Identifiers.Where(i => !Guid.TryParse(i, out Guid dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.Dns);
+            set
+            {
+                if (!Identifiers.Contains(value))
+                {
+                    Identifiers.Add(value);
+                }
+            }
         }
 
         /// <summary>
@@ -34,8 +40,14 @@ namespace SMACD.Artifacts
         /// </summary>
         public string IpAddress
         {
-            get => Identifiers.Where(i => !Guid.TryParse(i, out var dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.IPv4);
-            set { if (!Identifiers.Contains(value)) Identifiers.Add(value); }
+            get => Identifiers.Where(i => !Guid.TryParse(i, out Guid dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.IPv4);
+            set
+            {
+                if (!Identifiers.Contains(value))
+                {
+                    Identifiers.Add(value);
+                }
+            }
         }
 
         /// <summary>
@@ -47,7 +59,7 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var result = this[$"{ProtocolType.Tcp.ToString()}/{port}"];
+                ServicePortArtifact result = this[$"{ProtocolType.Tcp.ToString()}/{port}"];
                 if (result == null)
                 {
                     result = new ServicePortArtifact { Parent = this };
@@ -60,8 +72,12 @@ namespace SMACD.Artifacts
             }
             set
             {
-                var existing = this[$"{value.Protocol}/{port}"];
-                if (existing != null) Children.Remove(existing);
+                ServicePortArtifact existing = this[$"{value.Protocol}/{port}"];
+                if (existing != null)
+                {
+                    Children.Remove(existing);
+                }
+
                 value.BeginFiringEvents();
                 Children.Add(value);
             }
@@ -76,12 +92,12 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var protocol = Enum.Parse<ProtocolType>(protocolAndPort.Split('/')[0]);
-                var port = int.Parse(protocolAndPort.Split('/')[1]);
+                ProtocolType protocol = Enum.Parse<ProtocolType>(protocolAndPort.Split('/')[0]);
+                int port = int.Parse(protocolAndPort.Split('/')[1]);
 
-                var result = (ServicePortArtifact) Children.FirstOrDefault(p =>
-                    ((ServicePortArtifact) p).Port == port &&
-                    ((ServicePortArtifact) p).Protocol == protocol);
+                ServicePortArtifact result = (ServicePortArtifact)Children.FirstOrDefault(p =>
+                   ((ServicePortArtifact)p).Port == port &&
+                   ((ServicePortArtifact)p).Protocol == protocol);
                 if (result == null)
                 {
                     result = new ServicePortArtifact { Parent = this };
@@ -93,8 +109,11 @@ namespace SMACD.Artifacts
             }
             set
             {
-                var existing = this[protocolAndPort];
-                if (existing != null) Children.Remove(existing);
+                ServicePortArtifact existing = this[protocolAndPort];
+                if (existing != null)
+                {
+                    Children.Remove(existing);
+                }
 
                 value.BeginFiringEvents();
                 Children.Add(value);

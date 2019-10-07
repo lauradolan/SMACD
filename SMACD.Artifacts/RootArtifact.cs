@@ -35,20 +35,23 @@ namespace SMACD.Artifacts
             get
             {
                 // Try to short-circuit doing a lot more work by checking the n+1 case
-                var existingResult = (HostArtifact)Children.FirstOrDefault(h => h.Identifiers.Contains(hostNameOrIp));
-                if (existingResult != null) return existingResult;
+                HostArtifact existingResult = (HostArtifact)Children.FirstOrDefault(h => h.Identifiers.Contains(hostNameOrIp));
+                if (existingResult != null)
+                {
+                    return existingResult;
+                }
 
                 // Hard mode! Resolve first and check against aliases
-                var aliases = new List<string>();
-                var ip = string.Empty;
-                var hostName = string.Empty;
+                List<string> aliases = new List<string>();
+                string ip = string.Empty;
+                string hostName = string.Empty;
 
                 // Dns.GetHostEntry uses OS DNS timeout, which can be *really* long (i.e. seconds)
                 IPHostEntry entry = null;
                 try
                 {
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    var task = Task.Run(() => entry = Dns.GetHostEntry(hostNameOrIp), cancellationTokenSource.Token);
+                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                    Task<IPHostEntry> task = Task.Run(() => entry = Dns.GetHostEntry(hostNameOrIp), cancellationTokenSource.Token);
                     Task.Delay(1000).ContinueWith(a =>
                             cancellationTokenSource.Cancel())
                         .Wait();
@@ -62,17 +65,28 @@ namespace SMACD.Artifacts
                     aliases.AddRange(entry.Aliases.Where(a => !string.IsNullOrEmpty(a)));
                     ip = entry.AddressList.FirstOrDefault()?.ToString();
                     hostName = entry.HostName;
-                    if (!aliases.Contains(ip) && !string.IsNullOrEmpty(ip)) aliases.Add(ip);
+                    if (!aliases.Contains(ip) && !string.IsNullOrEmpty(ip))
+                    {
+                        aliases.Add(ip);
+                    }
 
-                    if (!aliases.Contains(hostName) && !string.IsNullOrEmpty(hostName)) aliases.Add(hostName);
+                    if (!aliases.Contains(hostName) && !string.IsNullOrEmpty(hostName))
+                    {
+                        aliases.Add(hostName);
+                    }
 
                     if (!aliases.Contains(hostNameOrIp) && !string.IsNullOrEmpty(hostNameOrIp))
+                    {
                         aliases.Add(hostNameOrIp);
+                    }
                 }
 
-                if (aliases.Count == 0) aliases.Add(hostNameOrIp);
+                if (aliases.Count == 0)
+                {
+                    aliases.Add(hostNameOrIp);
+                }
 
-                var result = (HostArtifact) Children.FirstOrDefault(h => h.Identifiers.Any(a => aliases.Contains(a)));
+                HostArtifact result = (HostArtifact)Children.FirstOrDefault(h => h.Identifiers.Any(a => aliases.Contains(a)));
                 if (result == null)
                 {
                     result = new HostArtifact
@@ -81,17 +95,26 @@ namespace SMACD.Artifacts
                         IpAddress = ip,
                         Hostname = hostName
                     };
-                    foreach (var item in aliases.Distinct())
+                    foreach (string item in aliases.Distinct())
+                    {
                         if (!result.Identifiers.Contains(item) && !string.IsNullOrEmpty(item))
+                        {
                             result.Identifiers.Add(item);
+                        }
+                    }
 
                     if (string.IsNullOrEmpty(result.Hostname))
+                    {
                         result.Hostname = aliases.FirstOrDefault(a =>
                             Regex.IsMatch(a,
                                 "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"));
+                    }
+
                     if (string.IsNullOrEmpty(result.IpAddress))
+                    {
                         result.IpAddress =
                             aliases.FirstOrDefault(a => Regex.IsMatch(a, "\b(?:\\d{1,3}\\.){3}\\d{1,3}\b"));
+                    }
 
                     result.BeginFiringEvents();
                     Children.Add(result);
@@ -119,7 +142,10 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Represents the root of an Artifact correlation tree
         /// </summary>
-        public RootArtifact() => Identifiers.Add("_root_");
+        public RootArtifact()
+        {
+            Identifiers.Add("_root_");
+        }
 
         /// <summary>
         ///     Invoke the ArtifactCreated event

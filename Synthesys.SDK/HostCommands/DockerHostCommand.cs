@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using Docker.DotNet;
-using Docker.DotNet.Models;
-using Microsoft.Extensions.Logging;
 
 namespace Synthesys.SDK.HostCommands
 {
@@ -48,16 +48,20 @@ namespace Synthesys.SDK.HostCommands
         {
             DockerClient client;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
                 client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient();
+            }
             else
+            {
                 client = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+            }
 
-            var container = await client.Containers.CreateContainerAsync(ContainerParameters);
+            CreateContainerResponse container = await client.Containers.CreateContainerAsync(ContainerParameters);
             ContainerId = container.ID;
 
             await client.Containers.StartContainerExecAsync(ContainerId);
 
-            var stdoutStream = await client.Containers.AttachContainerAsync(ContainerId, false,
+            MultiplexedStream stdoutStream = await client.Containers.AttachContainerAsync(ContainerId, false,
                 new ContainerAttachParameters
                 {
                     Stdout = true,
@@ -65,7 +69,7 @@ namespace Synthesys.SDK.HostCommands
                     Stdin = false,
                     Stream = true
                 });
-            var stderrStream = await client.Containers.AttachContainerAsync(ContainerId, false,
+            MultiplexedStream stderrStream = await client.Containers.AttachContainerAsync(ContainerId, false,
                 new ContainerAttachParameters
                 {
                     Stdout = false,
@@ -81,21 +85,23 @@ namespace Synthesys.SDK.HostCommands
 
         private async Task ReadLoop(MultiplexedStream multiplexedStream, Action<string> action)
         {
-            var dockerBuffer = new byte[4096];
+            byte[] dockerBuffer = new byte[4096];
             try
             {
                 while (true)
                 {
                     Array.Clear(dockerBuffer, 0, dockerBuffer.Length);
-                    var dockerReadResult = await multiplexedStream.ReadOutputAsync(dockerBuffer, 0, dockerBuffer.Length,
+                    MultiplexedStream.ReadResult dockerReadResult = await multiplexedStream.ReadOutputAsync(dockerBuffer, 0, dockerBuffer.Length,
                         default);
 
                     if (dockerReadResult.EOF)
+                    {
                         break;
+                    }
 
                     if (dockerReadResult.Count > 0)
                     {
-                        var segment = new ArraySegment<byte>(dockerBuffer, 0, dockerReadResult.Count);
+                        ArraySegment<byte> segment = new ArraySegment<byte>(dockerBuffer, 0, dockerReadResult.Count);
                         action(Encoding.ASCII.GetString(segment.Array, 0, segment.Count));
                     }
                     else

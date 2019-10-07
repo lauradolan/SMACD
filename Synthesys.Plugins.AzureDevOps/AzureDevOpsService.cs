@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.TeamFoundation.SourceControl.WebApi;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.Identity;
@@ -11,6 +7,10 @@ using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Synthesys.Plugins.AzureDevOps
 {
@@ -67,10 +67,10 @@ namespace Synthesys.Plugins.AzureDevOps
         private async Task CreatePullRequestThread(string projectId, string repositoryId, int pullRequestId,
             string content)
         {
-            var cli = Connection.GetClient<GitHttpClient>();
+            GitHttpClient cli = Connection.GetClient<GitHttpClient>();
             try
             {
-                var result = await cli.CreateThreadAsync(new GitPullRequestCommentThread
+                GitPullRequestCommentThread result = await cli.CreateThreadAsync(new GitPullRequestCommentThread
                 {
                     Comments = new List<Comment>
                     {

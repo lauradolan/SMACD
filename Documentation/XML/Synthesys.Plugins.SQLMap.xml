@@ -29,6 +29,11 @@
                 Injection payload
             </summary>
         </member>
+        <member name="T:Synthesys.Plugins.SQLMap.SqlMapReaction">
+            <summary>
+            Creates SQLmap Tasks when URLArtifacts with GET/POST fields are found
+            </summary>
+        </member>
         <member name="P:Synthesys.Plugins.SQLMap.SqlMapReport.InjectionVectors">
             <summary>
                 Points where a SQL injection can succeed

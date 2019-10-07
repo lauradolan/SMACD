@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SMACD.Artifacts;
+using System;
 
 namespace Synthesys.SDK.Triggers
 {
@@ -23,6 +24,23 @@ namespace Synthesys.SDK.Triggers
         }
 
         /// <summary>
+        ///     Create a descriptor for a trigger activated by an operation on an Artifact
+        /// </summary>
+        /// <param name="artifact">Artifact instance</param>
+        /// <param name="trigger">Triggering operation</param>
+        public ArtifactTriggerDescriptor(Artifact artifact, ArtifactTrigger trigger)
+        {
+            Artifact = artifact;
+            ArtifactPath = artifact.GetUUIDPathToRoot();;
+            Trigger = trigger;
+        }
+
+        /// <summary>
+        ///     Artifact Instance
+        /// </summary>
+        public Artifact Artifact { get; set; }
+
+        /// <summary>
         ///     Path to Artifact
         /// </summary>
         public string ArtifactPath { get; set; }
@@ -34,22 +52,33 @@ namespace Synthesys.SDK.Triggers
 
         public override string ToString()
         {
-            return $"Artifact Trigger ({ArtifactPath} {Trigger.ToString()})";
+            if (Artifact != null)
+                return $"Artifact Trigger ({Artifact.GetUUIDPathToRoot()} {Trigger.ToString()})";
+            return $"Artifact Trigger Path {ArtifactPath} {Trigger.ToString()}";
         }
 
         public override bool Equals(object obj)
         {
-            if (!base.Equals(obj)) return false;
+            if (!base.Equals(obj))
+            {
+                return false;
+            }
 
-            var castDescriptor = obj as ArtifactTriggerDescriptor;
-            if (castDescriptor.ArtifactPath == ArtifactPath && castDescriptor.Trigger == Trigger) return true;
+            ArtifactTriggerDescriptor castDescriptor = obj as ArtifactTriggerDescriptor;
+            if (castDescriptor.Artifact == Artifact && castDescriptor.Trigger == Trigger)
+            {
+                return true;
+            }
 
             return false;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(ArtifactPath, Trigger);
+            if (Artifact != null)
+                return HashCode.Combine(Artifact.GetUUIDPathToRoot(), Trigger);
+            else
+                return HashCode.Combine(ArtifactPath, Trigger);
         }
     }
 }

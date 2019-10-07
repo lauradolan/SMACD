@@ -21,18 +21,32 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var method = Identifiers.First();
+                string method = Identifiers.First();
                 if (method.ToUpper() == "GET")
+                {
                     return HttpMethod.Get;
+                }
                 else if (method.ToUpper() == "POST")
+                {
                     return HttpMethod.Post;
+                }
                 else if (method.ToUpper() == "PUT")
+                {
                     return HttpMethod.Put;
+                }
                 else if (method.ToUpper() == "DELETE")
+                {
                     return HttpMethod.Delete;
+                }
                 else if (method.ToUpper() == "HEAD")
+                {
                     return HttpMethod.Head;
-                else if (method.ToUpper() == "TRACE") return HttpMethod.Trace;
+                }
+                else if (method.ToUpper() == "TRACE")
+                {
+                    return HttpMethod.Trace;
+                }
+
                 return null;
             }
         }

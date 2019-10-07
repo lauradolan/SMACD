@@ -57,7 +57,7 @@ namespace SMACD.Artifacts
 
         private bool RemoveWithNotification(TKey key)
         {
-            if (dictionary.TryGetValue(key, out var value) && dictionary.Remove(key))
+            if (dictionary.TryGetValue(key, out TValue value) && dictionary.Remove(key))
             {
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
                     new KeyValuePair<TKey, TValue>(key, value)));
@@ -73,7 +73,7 @@ namespace SMACD.Artifacts
 
         private void UpdateWithNotification(TKey key, TValue value)
         {
-            if (dictionary.TryGetValue(key, out var existing))
+            if (dictionary.TryGetValue(key, out TValue existing))
             {
                 dictionary[key] = value;
 

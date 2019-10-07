@@ -1,9 +1,9 @@
-﻿using System;
+﻿using SMACD.Artifacts.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using SMACD.Artifacts.Data;
 
 namespace SMACD.Artifacts
 {
@@ -33,7 +33,7 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Get nice-name identifier for Artifact (first non-UUID)
         /// </summary>
-        public string NiceIdentifier => Identifiers.FirstOrDefault(i => !Guid.TryParse(i, out var dummy));
+        public string NiceIdentifier => Identifiers.FirstOrDefault(i => !Guid.TryParse(i, out Guid dummy));
 
         /// <summary>
         ///     Unique identifier
@@ -68,14 +68,20 @@ namespace SMACD.Artifacts
         protected Artifact()
         {
             if (!Identifiers.Contains(UUID.ToString()))
+            {
                 Identifiers.Add(UUID.ToString());
+            }
 
             NotifyCreated();
             Children.CollectionChanged += (s, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
-                    foreach (var item in e.NewItems)
+                {
+                    foreach (object item in e.NewItems)
+                    {
                         NotifyChildAdded((Artifact)item);
+                    }
+                }
             };
         }
 
@@ -85,27 +91,20 @@ namespace SMACD.Artifacts
         }
 
         /// <summary>
-        ///     Disconnect parents in Artifact tree
-        /// </summary>
-        public virtual void Disconnect()
-        {
-            return; // TODO -- this might break everything -- ###################################&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#############################
-            Parent = null;
-            foreach (var child in Children)
-                child.Disconnect();
-        }
-
-        /// <summary>
         ///     Create Parent pointers in Artifact tree
         /// </summary>
         public virtual void Connect(Artifact parent = null)
         {
-            return; // TODO -- this might break everything -- ###################################&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#############################
             Parent = parent;
-            foreach (var child in Children)
+            foreach (Artifact child in Children)
+            {
                 child.Connect(this);
+            }
 
-            if (Attachments == null) Attachments = new DataArtifactCollection();
+            if (Attachments == null)
+            {
+                Attachments = new DataArtifactCollection();
+            }
         }
 
         /// <summary>
@@ -115,17 +114,21 @@ namespace SMACD.Artifacts
         /// <returns></returns>
         public Artifact GetNodeByRelativeUUIDPath(string path)
         {
-            var pathElements = path.Split(PATH_SEPARATOR).Where(p => p != null).ToList();
-            if (pathElements.First() == this.UUID.ToString())
-                pathElements.RemoveAt(0);
-
-            var node = this;
-            foreach (var element in pathElements)
+            List<string> pathElements = path.Split(PATH_SEPARATOR).Where(p => p != null).ToList();
+            if (pathElements.First() == UUID.ToString())
             {
-                var uuid = Guid.Parse(element);
+                pathElements.RemoveAt(0);
+            }
+
+            Artifact node = this;
+            foreach (string element in pathElements)
+            {
+                Guid uuid = Guid.Parse(element);
                 node = node.Children.FirstOrDefault(c => c.UUID == uuid);
                 if (node == null)
+                {
                     throw new Exception($"Path not valid. Element '{element}' failed");
+                }
             }
             return node;
         }
@@ -134,13 +137,19 @@ namespace SMACD.Artifacts
         ///     Get the string representing each element from here to the root, using their identifier text
         /// </summary>
         /// <returns>String representing each element from here to the root, using their identifier text</returns>
-        public string GetDisplayPathToRoot() => string.Join(PATH_SEPARATOR, GetNodesToRoot().Select(n => n.Identifiers.First()));
+        public string GetDisplayPathToRoot()
+        {
+            return string.Join(PATH_SEPARATOR, GetNodesToRoot().Select(n => n.Identifiers.First()));
+        }
 
         /// <summary>
         ///     Get the string representing each element from here to the root, using their UUID
         /// </summary>
         /// <returns></returns>
-        public string GetUUIDPathToRoot() => string.Join(PATH_SEPARATOR, GetNodesToRoot().Select(n => n.UUID.ToString()));
+        public string GetUUIDPathToRoot()
+        {
+            return string.Join(PATH_SEPARATOR, GetNodesToRoot().Select(n => n.UUID.ToString()));
+        }
 
         /// <summary>
         ///     Get a list of nodes between this node and the root node
@@ -148,7 +157,7 @@ namespace SMACD.Artifacts
         /// <returns></returns>
         public List<Artifact> GetNodesToRoot()
         {
-            var nodes = new List<Artifact>();
+            List<Artifact> nodes = new List<Artifact>();
             Artifact node = this;
             while (node != null)
             {
@@ -162,25 +171,41 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Notify root element to fire an ArtifactChanged event
         /// </summary>
-        protected void NotifyChanged() => InvokeOnRoot((path, root, leaf) => root.InvokeArtifactChanged(leaf, path));
+        protected void NotifyChanged()
+        {
+            InvokeOnRoot((path, root, leaf) => root.InvokeArtifactChanged(leaf, path));
+        }
 
         /// <summary>
         ///     Notify root element to fire an ArtifactChildAdded event
         /// </summary>
         /// <param name="newChild">Child added</param>
-        protected void NotifyChildAdded(Artifact newChild) => InvokeOnRoot((path, root, leaf) => root.InvokeArtifactChildAdded(newChild, path));
+        protected void NotifyChildAdded(Artifact newChild)
+        {
+            InvokeOnRoot((path, root, leaf) => root.InvokeArtifactChildAdded(newChild, path));
+        }
 
         /// <summary>
         ///     Notify root element to fire an ArtifactCreated event
         /// </summary>
-        protected void NotifyCreated() => InvokeOnRoot((path, root, leaf) => root.InvokeArtifactCreated(leaf, path));
+        protected void NotifyCreated()
+        {
+            InvokeOnRoot((path, root, leaf) => root.InvokeArtifactCreated(leaf, path));
+        }
 
         private void InvokeOnRoot(Action<List<Artifact>, RootArtifact, Artifact> action)
         {
-            if (!firingEvents) return;
-            if (!(this is RootArtifact) && Parent == null) return;
+            if (!firingEvents)
+            {
+                return;
+            }
 
-            var path = GetNodesToRoot();
+            if (!(this is RootArtifact) && Parent == null)
+            {
+                return;
+            }
+
+            List<Artifact> path = GetNodesToRoot();
             action(path, path.First() as RootArtifact, path.Last());
         }
     }

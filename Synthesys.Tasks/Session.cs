@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SMACD.Artifacts;
 using Synthesys.SDK;
 using Synthesys.SDK.Triggers;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace Synthesys.Tasks
 {
@@ -19,13 +18,13 @@ namespace Synthesys.Tasks
         /// <returns>Imported and linked Session</returns>
         public static Session Import(Stream existingSession)
         {
-            using (var decompressor = new DeflateStream(existingSession, CompressionMode.Decompress, true))
+            using (DeflateStream decompressor = new DeflateStream(existingSession, CompressionMode.Decompress, true))
             {
-                var ms = new MemoryStream();
+                MemoryStream ms = new MemoryStream();
                 decompressor.CopyTo(ms);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                var result = JsonConvert.DeserializeObject<Session>(
+                Session result = JsonConvert.DeserializeObject<Session>(
                     Encoding.Unicode.GetString(ms.ToArray()),
                     new JsonSerializerSettings
                     {
@@ -35,6 +34,7 @@ namespace Synthesys.Tasks
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
 
+                result.Artifacts.Connect();
                 result.BindArtifactTriggers();
 
                 return result;
@@ -46,7 +46,11 @@ namespace Synthesys.Tasks
         /// </summary>
         public Session()
         {
-            if (Artifacts == null) Artifacts = new RootArtifact();
+            if (Artifacts == null)
+            {
+                Artifacts = new RootArtifact();
+            }
+
             BindArtifactTriggers();
         }
 
@@ -77,10 +81,9 @@ namespace Synthesys.Tasks
         /// <param name="data">Stream to contain Session data</param>
         public void Export(Stream data)
         {
-            using (var compressor = new DeflateStream(data, CompressionMode.Compress))
+            using (DeflateStream compressor = new DeflateStream(data, CompressionMode.Compress))
             {
-                Artifacts.Disconnect();
-                var str = JsonConvert.SerializeObject(this, new JsonSerializerSettings
+                string str = JsonConvert.SerializeObject(this, new JsonSerializerSettings
                 {
                     TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
                     TypeNameHandling = TypeNameHandling.All,
@@ -88,8 +91,6 @@ namespace Synthesys.Tasks
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 });
                 compressor.Write(Encoding.Unicode.GetBytes(str));
-
-                Artifacts.Connect();
             }
         }
 
@@ -97,31 +98,37 @@ namespace Synthesys.Tasks
         {
             Artifacts.ArtifactChanged += (artifact, path) =>
             {
-                var triggered =
+                List<SDK.Extensions.ReactionExtension> triggered =
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.IsUpdated);
-                foreach (var item in triggered)
+                foreach (SDK.Extensions.ReactionExtension item in triggered)
+                {
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join(Artifact.PATH_SEPARATOR, path.Select(p => p.UUID)),
+                        artifact,
                         ArtifactTrigger.IsUpdated));
+                }
             };
             Artifacts.ArtifactChildAdded += (artifact, path) =>
             {
                 artifact = artifact.Parent; // this event returns the child
-                var triggered =
+                List<SDK.Extensions.ReactionExtension> triggered =
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.AddsChild);
-                foreach (var item in triggered)
+                foreach (SDK.Extensions.ReactionExtension item in triggered)
+                {
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join(Artifact.PATH_SEPARATOR, path.Skip(1).Select(p => p.UUID)),
-                        ArtifactTrigger.AddsChild)); // note Skip(1), same reason as above
+                        artifact,
+                        ArtifactTrigger.AddsChild));
+                }
             };
             Artifacts.ArtifactCreated += (artifact, path) =>
             {
-                var triggered =
+                List<SDK.Extensions.ReactionExtension> triggered =
                     ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, ArtifactTrigger.IsCreated);
-                foreach (var item in triggered)
+                foreach (SDK.Extensions.ReactionExtension item in triggered)
+                {
                     item.React(TriggerDescriptor.ArtifactTrigger(
-                        string.Join(Artifact.PATH_SEPARATOR, path.Select(p => p.UUID)),
+                        artifact,
                         ArtifactTrigger.IsCreated));
+                }
             };
         }
     }

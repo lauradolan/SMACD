@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
@@ -11,6 +6,12 @@ using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.Tasks;
 using Synthesys.Tasks.Attributes;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Synthesys.Plugins.Dummy
 {
@@ -79,11 +80,11 @@ namespace Synthesys.Plugins.Dummy
             // Using the "Tasks" property with ICanQueueTasks allows the Extension to address the Task Queue
             Logger.LogInformation($"Task queue running with {Tasks.Count} items");
 
-            var sw = new Stopwatch();
+            Stopwatch sw = new Stopwatch();
             sw.Start();
-            var rng = new Random((int) DateTime.Now.Ticks);
-            var v = 0;
-            var g = 0;
+            Random rng = new Random((int)DateTime.Now.Ticks);
+            int v = 0;
+            int g = 0;
             while (v < 50)
             {
                 g++;
@@ -99,8 +100,8 @@ namespace Synthesys.Plugins.Dummy
                     //   to get a temporary directory where external tools can persist information to disk or read information.
                     // When the object is disposed, the content of the directory will be compressed and saved to the wrapper
                     //   Artifact. When re-using the context at another time, the directory will be re-deployed.
-                    var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("dummyBasicContainer");
-                    using (var execContainer = nativePathArtifact.GetContext())
+                    SMACD.Artifacts.Data.NativeDirectoryArtifact nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("dummyBasicContainer");
+                    using (SMACD.Artifacts.Data.NativeDirectoryContext execContainer = nativePathArtifact.GetContext())
                     {
                         // The temporary directory name is stored in the "Directory" property of the context
                         File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
@@ -108,8 +109,8 @@ namespace Synthesys.Plugins.Dummy
                         // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
                         // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
                         //   "owner" Task that spawned this external program (to correlate issues in logs)
-                        var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
-                        var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
+                        ExecutionWrapper execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
+                        ExecutionWrapper execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
                         execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
                         {
                             // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
@@ -130,6 +131,18 @@ namespace Synthesys.Plugins.Dummy
                 }
             }
 
+            var root = Host.Parent as RootArtifact;
+            var http = new HttpServicePortArtifact();
+            root["127.0.0.1"]["Tcp/80"] = http;
+            var request = new UrlRequestArtifact()
+            {
+                Parent = http["/"]["test"],
+
+            };
+            request.Identifiers.Add("GET");
+            http["/"]["test"].Requests.Add(request);
+
+
             sw.Stop();
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 
@@ -143,13 +156,15 @@ namespace Synthesys.Plugins.Dummy
 
             // Returning an ExtensionReport with Attachments allows the Action to provide more information
             //   to the user (than the Artifact tree) during later review
-            var random = new Random((int) DateTime.Now.Ticks);
-            var randomData = new byte[32];
+            Random random = new Random((int)DateTime.Now.Ticks);
+            byte[] randomData = new byte[32];
             random.NextBytes(randomData);
 
-            var report = new ExtensionReport();
-            report.ReportSummaryName = typeof(DummyReportSummary).FullName;
-            report.ReportViewName = typeof(DummyReportView).FullName;
+            ExtensionReport report = new ExtensionReport
+            {
+                ReportSummaryName = typeof(DummyReportSummary).FullName,
+                ReportViewName = typeof(DummyReportView).FullName
+            };
             report.SetExtensionSpecificReport(new DummyDataClass()
             {
                 DummyDouble = random.NextDouble(),

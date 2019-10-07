@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using Synthesys.SDK;
-using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
 using Synthesys.Tasks.Attributes;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Synthesys.Tasks
 {
@@ -65,23 +63,32 @@ namespace Synthesys.Tasks
         /// </summary>
         /// <param name="descriptor">Task Descriptor to enqueue</param>
         /// <returns>Task which resolves to the Action-Specific Report</returns>
-        public Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr=null)
+        public Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
         {
             if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == actionIdentifier)))
+            {
                 return null;
+            }
 
-            var actionExtension = ExtensionToolbox.Instance.EmitAction(actionIdentifier).Configure(rootArtifact, options) as ActionExtension;
-            if (actionExtension is ICanQueueTasks)                  ((ICanQueueTasks)actionExtension).Tasks = this;
-            if (actionExtension is IUnderstandProjectInformation)   ((IUnderstandProjectInformation)actionExtension).ProjectPointer = serviceMapItemPtr;
+            ActionExtension actionExtension = ExtensionToolbox.Instance.EmitAction(actionIdentifier).Configure(rootArtifact, options) as ActionExtension;
+            if (actionExtension is ICanQueueTasks)
+            {
+                ((ICanQueueTasks)actionExtension).Tasks = this;
+            }
 
-            var reactions = new List<ReactionExtension>();
-            var runtimeTaskDescriptor = new RuntimeTaskDescriptor() { Artifact = rootArtifact, Extension = actionExtension };
+            if (actionExtension is IUnderstandProjectInformation)
+            {
+                ((IUnderstandProjectInformation)actionExtension).ProjectPointer = serviceMapItemPtr;
+            }
+
+            List<ReactionExtension> reactions = new List<ReactionExtension>();
+            RuntimeTaskDescriptor runtimeTaskDescriptor = new RuntimeTaskDescriptor() { Artifact = rootArtifact, Extension = actionExtension };
             runtimeTaskDescriptor.Task = new Task<List<ExtensionReport>>(() =>
             {
                 TaskStarted?.Invoke(this, runtimeTaskDescriptor);
-                var reports = new List<ExtensionReport>();
+                List<ExtensionReport> reports = new List<ExtensionReport>();
                 bool succeeded = false;
-                var sw = new Stopwatch();
+                Stopwatch sw = new Stopwatch();
                 try
                 {
                     sw.Start();
@@ -109,29 +116,36 @@ namespace Synthesys.Tasks
                 }
 
                 TaskCompleted?.Invoke(this, runtimeTaskDescriptor);
-                RunningTasks.TryRemove(runtimeTaskDescriptor, out var dummy);
+                RunningTasks.TryRemove(runtimeTaskDescriptor, out bool dummy);
                 TotalCompletedTasks++;
-                
+
                 // If the Action was resolved, run any Triggers
                 if (actionExtension != null)
                 {
-                    var reactions = new List<ReactionExtension>();
+                    List<ReactionExtension> reactions = new List<ReactionExtension>();
                     reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(actionExtension, succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails));
 
-                    foreach (var reaction in reactions)
+                    foreach (ReactionExtension reaction in reactions)
                     {
                         // todo: reaction options?
-                        var configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;
+                        ReactionExtension configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;
 
-                        if (configuredReaction is ICanQueueTasks)                   ((ICanQueueTasks)configuredReaction).Tasks = this;
-                        if (configuredReaction is IUnderstandProjectInformation)    ((IUnderstandProjectInformation)configuredReaction).ProjectPointer = serviceMapItemPtr;
+                        if (configuredReaction is ICanQueueTasks)
+                        {
+                            ((ICanQueueTasks)configuredReaction).Tasks = this;
+                        }
+
+                        if (configuredReaction is IUnderstandProjectInformation)
+                        {
+                            ((IUnderstandProjectInformation)configuredReaction).ProjectPointer = serviceMapItemPtr;
+                        }
                     }
-                    foreach (var item in reactions)
+                    foreach (ReactionExtension item in reactions)
                     {
                         // todo: Reaction Options are not distinguished from Action options, so we have to ground it here
                         item.Configure(rootArtifact, new Dictionary<string, string>());
 
-                        var report = item.React(TriggerDescriptor.ExtensionTrigger(
+                        ExtensionReport report = item.React(TriggerDescriptor.ExtensionTrigger(
                             actionIdentifier,
                             succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails));
                         report.ExtensionIdentifier = item.Metadata.ExtensionIdentifier;
@@ -140,7 +154,8 @@ namespace Synthesys.Tasks
                     }
                 }
 
-                reports.ForEach(r => {
+                reports.ForEach(r =>
+                {
                     r.Runtime = sw.Elapsed;
                     r.AffectedArtifactPaths.Add(string.Join(Artifact.PATH_SEPARATOR, rootArtifact.GetNodesToRoot().Select(a => a.UUID)));
                 });
@@ -156,11 +171,14 @@ namespace Synthesys.Tasks
 
         private void RuntimeManagerStackProcessingLoop()
         {
-            if (TaskManagerWorker != null) return;
+            if (TaskManagerWorker != null)
+            {
+                return;
+            }
 
             TaskManagerWorker = Task.Run(() =>
             {
-                var lastLog = DateTime.Now;
+                DateTime lastLog = DateTime.Now;
                 while (IsRunning)
                 {
                     Thread.Sleep(500);
@@ -171,18 +189,20 @@ namespace Synthesys.Tasks
                             TotalCompletedTasks);
                         lastLog = DateTime.Now;
 
-                        var totalWidth = 24 + 24 + 10 + 9 + 13; // 13 is the bars and extra spaces
-                        var headerWidth = totalWidth - " RUNNING TASKS ".Length;
+                        int totalWidth = 24 + 24 + 10 + 9 + 13; // 13 is the bars and extra spaces
+                        int headerWidth = totalWidth - " RUNNING TASKS ".Length;
                         Logger.LogTrace($"{new string('#', headerWidth / 2 + 1)} RUNNING TASKS {new string('#', headerWidth / 2)}");
-                        foreach (var item in RunningTasks)
+                        foreach (KeyValuePair<RuntimeTaskDescriptor, bool> item in RunningTasks)
+                        {
                             Logger.LogTrace($"Action '{item.Key.Extension.GetType().Name}' operating on {item.Key.Artifact}");
+                        }
 
                         Logger.LogTrace(new string('#', totalWidth));
                     }
 
                     if (RunningTasks.Count < MAXIMUM_CONCURRENT_ACTIONS && !QueuedTasks.IsEmpty)
                     {
-                        QueuedTasks.TryDequeue(out var task);
+                        QueuedTasks.TryDequeue(out RuntimeTaskDescriptor task);
                         RunningTasks.TryAdd(task, false);
                         task.Task.Start();
                     }

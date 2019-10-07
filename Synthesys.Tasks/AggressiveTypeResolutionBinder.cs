@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Linq;
-using Newtonsoft.Json.Serialization;
 
 namespace Synthesys.Tasks
 {
@@ -18,11 +18,14 @@ namespace Synthesys.Tasks
 
         public Type BindToType(string assemblyName, string typeName)
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var attempt = assemblies.FirstOrDefault(a => a.GetName().Name == assemblyName)?.GetType(typeName);
+            System.Reflection.Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Type attempt = assemblies.FirstOrDefault(a => a.GetName().Name == assemblyName)?.GetType(typeName);
             if (attempt == null)
+            {
                 attempt = AppDomain.CurrentDomain.GetAssemblies().Select(a => a.GetType(typeName))
                     .FirstOrDefault(t => t != null);
+            }
+
             return attempt;
         }
     }

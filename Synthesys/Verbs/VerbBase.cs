@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Serilog.Events;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Synthesys.Verbs
 {
@@ -19,11 +19,14 @@ namespace Synthesys.Verbs
 
         protected IList<string> SplitIntoLines(string targetString, int maxLength)
         {
-            var str = (string) targetString.Clone();
-            if (str.Length <= maxLength) return new List<string> {str};
+            string str = (string)targetString.Clone();
+            if (str.Length <= maxLength)
+            {
+                return new List<string> { str };
+            }
 
-            var result = new List<string>();
-            var start = 0;
+            List<string> result = new List<string>();
+            int start = 0;
             while (start < str.Length - 1)
             {
                 result.Add(str.Substring(start, maxLength));

@@ -2,39 +2,32 @@
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
-using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.Triggers;
+using Synthesys.Tasks;
+using Synthesys.Tasks.Attributes;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 
 namespace Synthesys.Plugins.SQLMap
 {
     /// <summary>
-    ///     sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL
-    ///     injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features
-    ///     for the ultimate penetration tester and a broad range of switches lasting from database fingerprinting, over data
-    ///     fetching from the database, to accessing the underlying file system and executing commands on the operating system
-    ///     via out-of-band connections.
+    /// Creates SQLmap Tasks when URLArtifacts with GET/POST fields are found
     /// </summary>
-    [Extension("sqlmap",
+    [Extension("sqlmap_field_reaction",
         Name = "SQLMap SQLi Scanner",
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    public class SqlMapScanner : ActionExtension, IOperateOnUrl
+    [TriggeredBy("*//*{HttpServicePortArtifact}//%", ArtifactTrigger.IsCreated)]
+    public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     {
         private bool _useInLocalMode;
-
-        /// <summary>
-        ///     If <c>TRUE</c>, SQLmap will run at Level 5/Risk Level 3 instead of the default Level 2/Risk Level 1
-        /// </summary>
-        [Configurable]
-        public bool Aggressive { get; set; } = false;
-
-        /// <summary>
-        ///     URL being scanned
-        /// </summary>
-        public UrlArtifact Url { get; set; }
+        public ITaskToolbox Tasks { get; set; }
 
         public override bool ValidateEnvironmentReadiness()
         {
@@ -48,11 +41,32 @@ namespace Synthesys.Plugins.SQLMap
             return true;
         }
 
-        public override ExtensionReport Act()
+        public override ExtensionReport React(TriggerDescriptor trigger)
+        {
+            var descriptor = trigger as ArtifactTriggerDescriptor;
+            if (descriptor.Artifact is UrlRequestArtifact)
+            {
+                var urlRequestArtifact = (UrlRequestArtifact)descriptor.Artifact;
+                var urlArtifact = urlRequestArtifact.Parent as UrlArtifact;
+                var url = urlArtifact.GetUrl();
+
+                if (urlRequestArtifact.Method == HttpMethod.Get)
+                {
+                    return Execute(url + "?" + string.Join('&', urlRequestArtifact.Fields.Keys.Select(k => $"{k}=1")));
+                }
+                else if (urlRequestArtifact.Method == HttpMethod.Post)
+                {
+                    return Execute(url + " " + string.Join(' ', urlRequestArtifact.Fields.Keys.Select(k => $"-p {k}")));
+                }
+            }
+            return ExtensionReport.Blank();
+        }
+
+        public ExtensionReport Execute(string target)
         {
             string logFile;
 
-            NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("sqlmap-" + Url.GetUrl());
+            NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("sqlmap-" + HashCode.Combine(target));
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
                 string dir = context.Directory;
@@ -62,9 +76,11 @@ namespace Synthesys.Plugins.SQLMap
                 {
                     baseCmd = "sqlmap";
                 }
+                
+                var Aggressive = false; // todo: reaction config
 
                 string cmd = baseCmd +
-                          $" --url={Url.GetUrl()}" +
+                          $" --url={target}" +
                           " --batch --flush-session --banner" +
                           (_useInLocalMode ? " --output-dir=" + dir : " --output-dir=/data") +
                           (Aggressive ? " --level=5 --risk=3" : " --level=2 --risk=1");

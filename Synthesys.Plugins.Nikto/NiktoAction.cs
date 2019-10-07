@@ -1,13 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
+using SMACD.Artifacts.Metadata;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using System;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Synthesys.Plugins.Nikto
 {
@@ -35,14 +36,17 @@ namespace Synthesys.Plugins.Nikto
 
         public override ExtensionReport Act()
         {
-            var xml = ExecuteScanner();
-            if (xml == null) return ExtensionReport.Error(new Exception("Failed to generate XML"));
+            XDocument xml = ExecuteScanner();
+            if (xml == null)
+            {
+                return ExtensionReport.Error(new Exception("Failed to generate XML"));
+            }
 
-            var scanDetails = xml.Root.Descendants("scandetails");
+            System.Collections.Generic.IEnumerable<XElement> scanDetails = xml.Root.Descendants("scandetails");
 
             // Create report (general and specific)
-            var report = new ExtensionReport();
-            var niktoReport = new NiktoReport
+            ExtensionReport report = new ExtensionReport();
+            NiktoReport niktoReport = new NiktoReport
             {
                 NiktoVersion = xml.Root.Attributes("version").First().Value,
                 ScanStart = xml.Root.Attributes("scanstart").First().Value,
@@ -51,27 +55,33 @@ namespace Synthesys.Plugins.Nikto
                 SiteName = scanDetails.Attributes("sitename").First().Value
             };
 
-            HttpService.Metadata.Set(new SMACD.Artifacts.Metadata.ServicePortMetadata() { ServiceBanner = niktoReport.ServerBanner }, "nikto", DataProviderSpecificity.ServiceSpecificScanner);
+            ((ServicePortArtifact)HttpService).Metadata.Set(new ServicePortMetadata() { ServiceBanner = niktoReport.ServerBanner }, "nikto", DataProviderSpecificity.ServiceSpecificScanner);
 
             report.ReportSummaryName = typeof(NiktoReportSummary).FullName;
             report.ReportViewName = typeof(NiktoReportView).FullName;
             report.SetExtensionSpecificReport(niktoReport);
 
-            var itemsTested = scanDetails.Descendants("statistics").Attributes("itemstested").First().Value;
+            string itemsTested = scanDetails.Descendants("statistics").Attributes("itemstested").First().Value;
             report.MaximumPointsAvailable = int.Parse(itemsTested) * BASE_ITEM_WEIGHT;
 
             // Create one record per vulnerability detected
-            foreach (var item in scanDetails.Descendants("item"))
+            foreach (XElement item in scanDetails.Descendants("item"))
             {
-                var osvdbid = int.Parse(item.Attributes("osvdbid").First().Value);
-                var link = item.Descendants("namelink").First().Value;
-                var method = item.Attributes("method").First().Value;
-                var urlLeaf = UrlHelper.GeneratePathArtifacts(HttpService, link, method);
+                int osvdbid = int.Parse(item.Attributes("osvdbid").First().Value);
+                string link = item.Descendants("namelink").First().Value;
+                string method = item.Attributes("method").First().Value;
+                UrlArtifact urlLeaf = UrlHelper.GeneratePathArtifacts(HttpService, link, method);
 
-                if (osvdbid > 0) report.RawPointsScored += OSVDB_BOUND_ITEM_WEIGHT;
-                else report.RawPointsScored += NO_BOUND_ITEM_WEIGHT;
+                if (osvdbid > 0)
+                {
+                    report.RawPointsScored += OSVDB_BOUND_ITEM_WEIGHT;
+                }
+                else
+                {
+                    report.RawPointsScored += NO_BOUND_ITEM_WEIGHT;
+                }
 
-                var vulnerability = new Vulnerability
+                Vulnerability vulnerability = new Vulnerability
                 {
                     Title = item.Descendants("description").First().Value,
                     Occurrences = 1,
@@ -90,8 +100,8 @@ namespace Synthesys.Plugins.Nikto
 
         private XDocument ExecuteScanner()
         {
-            using (var context = HttpService.Attachments.CreateOrLoadNativePath("nikto").GetContext())
-            using (var wrapper = new ExecutionWrapper(
+            using (SMACD.Artifacts.Data.NativeDirectoryContext context = HttpService.Attachments.CreateOrLoadNativePath("nikto").GetContext())
+            using (ExecutionWrapper wrapper = new ExecutionWrapper(
                 "nikto " +
                 "-Display 1234P " +
                 $"-host http://{HttpService.Host.Hostname}:{HttpService.Port} " +

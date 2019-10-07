@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Xml.Linq;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using SMACD.Artifacts.Metadata;
@@ -11,6 +6,11 @@ using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net.Sockets;
+using System.Xml.Linq;
 
 namespace Synthesys.Plugins.Nmap
 {
@@ -37,39 +37,46 @@ namespace Synthesys.Plugins.Nmap
             bool result;
             try
             {
-                var wrapper = new ExecutionWrapper("nmap --help");
+                ExecutionWrapper wrapper = new ExecutionWrapper("nmap --help");
                 wrapper.Start().Wait();
                 result = !wrapper.FailedToExecute;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 result = false;
             }
 
             if (!result)
+            {
                 Logger.LogWarning("Nmap not installed on host");
+            }
+
             return result;
         }
 
         public override ExtensionReport Act()
-        { 
+        {
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
-            var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
+            NativeDirectoryArtifact nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
             RunSingleTarget(nativePathArtifact, Host.IpAddress);
 
-            var scanXml = GetScanXml(nativePathArtifact);
-            var nmapReport = ScoreSingleTarget(scanXml);
+            XDocument scanXml = GetScanXml(nativePathArtifact);
+            NmapRunReport nmapReport = ScoreSingleTarget(scanXml);
 
-            var report = new ExtensionReport();
-            report.ReportViewName = typeof(NmapReportView).FullName;
-            report.ReportSummaryName = typeof(NmapReportSummary).FullName;
+            ExtensionReport report = new ExtensionReport
+            {
+                ReportViewName = typeof(NmapReportView).FullName,
+                ReportSummaryName = typeof(NmapReportSummary).FullName
+            };
             report.SetExtensionSpecificReport(nmapReport);
 
-            foreach (var port in nmapReport.Ports)
+            foreach (NmapPort port in nmapReport.Ports)
             {
-                if (new[] {"httpd"}.Contains(port.Service))
+                if (new[] { "httpd" }.Contains(port.Service))
+                {
                     Host[$"{port.Protocol}/{port.Port}"] = new HttpServicePortArtifact();
+                }
 
                 Host[$"{port.Protocol}/{port.Port}"].Metadata.Set(
                     new ServicePortMetadata()
@@ -82,7 +89,7 @@ namespace Synthesys.Plugins.Nmap
                     DataProviderSpecificity.GeneralPurposeScanner,
                     port.ServiceFingerprintConfidence / 3.0d);
 
-                var confidenceEnum = (Vulnerability.Confidences) port.ServiceFingerprintConfidence;
+                Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)port.ServiceFingerprintConfidence;
                 Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability
                 {
                     Confidence = confidenceEnum,
@@ -102,11 +109,11 @@ namespace Synthesys.Plugins.Nmap
 
         private void RunSingleTarget(NativeDirectoryArtifact artifact, string targetIp)
         {
-            using (var context = artifact.GetContext())
+            using (NativeDirectoryContext context = artifact.GetContext())
             {
-                var cmd = $"nmap --open -T4 -PN -A {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                string cmd = $"nmap --open -T4 -PN -A {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
 
-                var wrapper = new ExecutionWrapper(cmd);
+                ExecutionWrapper wrapper = new ExecutionWrapper(cmd);
                 wrapper.StandardOutputDataReceived +=
                     (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
                 wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
@@ -117,9 +124,9 @@ namespace Synthesys.Plugins.Nmap
         private XDocument GetScanXml(NativeDirectoryArtifact target)
         {
             Logger.LogDebug("Searching for scan XML output file");
-            using (var context = target.GetContext())
+            using (NativeDirectoryContext context = target.GetContext())
             {
-                var scanFile = context.DirectoryWithFile("scan.xml");
+                string scanFile = context.DirectoryWithFile("scan.xml");
                 if (!File.Exists(scanFile))
                 {
                     Logger.LogCritical("XML report from this plugin was not found! Aborting...");
@@ -132,34 +139,35 @@ namespace Synthesys.Plugins.Nmap
 
         private NmapRunReport ScoreSingleTarget(XDocument xml)
         {
-            var result = new NmapRunReport();
+            NmapRunReport result = new NmapRunReport();
             try
             {
-                var hostChild = xml.Root.Descendants("host").FirstOrDefault();
+                XElement hostChild = xml.Root.Descendants("host").FirstOrDefault();
                 if (hostChild == null)
                 {
                     Logger.LogWarning("NMap report exists but does not contain any information about a remote host");
                     return result;
                 }
 
-                var addr = (string)hostChild.Descendants("address").First().Attribute("addr");
-                var ports = hostChild.Descendants("ports").First();
-                foreach (var portDetail in ports.Descendants("port"))
+                string addr = (string)hostChild.Descendants("address").First().Attribute("addr");
+                XElement ports = hostChild.Descendants("ports").First();
+                foreach (XElement portDetail in ports.Descendants("port"))
+                {
                     try
                     {
-                        var portInfo = portDetail.Attributes();
-                        var protocol = (string)portDetail.Attribute("protocol");
-                        var port = (string)portDetail.Attribute("portid");
+                        System.Collections.Generic.IEnumerable<XAttribute> portInfo = portDetail.Attributes();
+                        string protocol = (string)portDetail.Attribute("protocol");
+                        string port = (string)portDetail.Attribute("portid");
 
-                        var serviceDetail = portDetail.Descendants("service").First();
-                        var service = (string)serviceDetail.Attribute("name");
-                        var conf = (string)serviceDetail.Attribute("conf");
+                        XElement serviceDetail = portDetail.Descendants("service").First();
+                        string service = (string)serviceDetail.Attribute("name");
+                        string conf = (string)serviceDetail.Attribute("conf");
 
-                        var product = (string)serviceDetail.Attribute("product");
-                        var productVersion = (string)serviceDetail.Attribute("version");
-                        var extraInfo = (string)serviceDetail.Attribute("extrainfo");
+                        string product = (string)serviceDetail.Attribute("product");
+                        string productVersion = (string)serviceDetail.Attribute("version");
+                        string extraInfo = (string)serviceDetail.Attribute("extrainfo");
 
-                        var osType = (string)serviceDetail.Attribute("ostype");
+                        string osType = (string)serviceDetail.Attribute("ostype");
 
                         result.Ports.Add(new NmapPort
                         {
@@ -173,12 +181,15 @@ namespace Synthesys.Plugins.Nmap
                         });
 
                         if (!result.OperatingSystemFingerprintCandidates.Contains(osType))
+                        {
                             result.OperatingSystemFingerprintCandidates.Add(osType);
+                        }
                     }
                     catch (Exception ex)
                     {
                         Logger.LogCritical(ex, "Error parsing Nmap port");
                     }
+                }
             }
             catch (Exception ex)
             {

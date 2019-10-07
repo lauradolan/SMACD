@@ -33,10 +33,16 @@ namespace Synthesys.SDK.Triggers
 
         public override bool Equals(object obj)
         {
-            if (!base.Equals(obj)) return false;
+            if (!base.Equals(obj))
+            {
+                return false;
+            }
 
-            var castDescriptor = obj as SystemEventTriggerDescriptor;
-            if (castDescriptor.SystemEvent == SystemEvent) return true;
+            SystemEventTriggerDescriptor castDescriptor = obj as SystemEventTriggerDescriptor;
+            if (castDescriptor.SystemEvent == SystemEvent)
+            {
+                return true;
+            }
 
             return false;
         }

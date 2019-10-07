@@ -1,7 +1,7 @@
+using SMACD.Data.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using SMACD.Data.Resources;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -40,7 +40,7 @@ namespace SMACD.Data
         public static ServiceMapFile GetServiceMap(string file)
         {
             ServiceMapFile serviceMap;
-            using (var sr = new StreamReader(file))
+            using (StreamReader sr = new StreamReader(file))
             {
                 serviceMap = new DeserializerBuilder()
                     .WithNamingConvention(new CamelCaseNamingConvention())
@@ -77,7 +77,7 @@ namespace SMACD.Data
             // Change the metadata to reflect this updated version
             serviceMap.Updated = DateTime.Now;
 
-            using (var sr = new StreamWriter(file))
+            using (StreamWriter sr = new StreamWriter(file))
             {
                 new SerializerBuilder()
                     .WithNamingConvention(new CamelCaseNamingConvention())
@@ -93,12 +93,15 @@ namespace SMACD.Data
         internal static T AddLoadedTagMappings<T>(this T builder)
             where T : BuilderSkeleton<T>
         {
-            var types = new Dictionary<string, Type>
+            Dictionary<string, Type> types = new Dictionary<string, Type>
             {
                 {"!http", typeof(HttpTargetModel)},
                 {"!socketport", typeof(SocketPortTargetModel)}
             };
-            foreach (var kvp in types) builder = builder.WithTagMapping(kvp.Key, kvp.Value);
+            foreach (KeyValuePair<string, Type> kvp in types)
+            {
+                builder = builder.WithTagMapping(kvp.Key, kvp.Value);
+            }
 
             return builder;
         }

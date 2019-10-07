@@ -34,7 +34,7 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
+                UrlArtifact result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
                 if (result == null)
                 {
                     result = new UrlArtifact { Parent = this };
@@ -64,11 +64,17 @@ namespace SMACD.Artifacts
         {
             url = "/" + UrlSegment + url;
             if (Parent is HttpServicePortArtifact)
-                return $"{((HttpServicePortArtifact) Parent).Host.Hostname}" +
-                       ":" + $"{((HttpServicePortArtifact) Parent).Port}" +
+            {
+                return $"{((HttpServicePortArtifact)Parent).Host.Hostname}" +
+                       ":" + $"{((HttpServicePortArtifact)Parent).Port}" +
                        url;
+            }
+
             if (Parent is UrlArtifact)
-                return ((UrlArtifact) Parent).GetUrl(url);
+            {
+                return ((UrlArtifact)Parent).GetUrl(url);
+            }
+
             throw new Exception("Invalid artifact tree");
         }
 
@@ -79,7 +85,10 @@ namespace SMACD.Artifacts
         public override string ToString()
         {
             if (Children.Any())
+            {
                 return $"URL Segment '/{UrlSegment}/'";
+            }
+
             return $"URL Segment '{UrlSegment}'";
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SMACD.Artifacts.Metadata;
+using System.Linq;
 
 namespace SMACD.Artifacts
 {
@@ -8,6 +9,11 @@ namespace SMACD.Artifacts
     public class HttpServicePortArtifact : ServicePortArtifact
     {
         /// <summary>
+        ///     HTTP Service Metadata
+        /// </summary>
+        public new Versionable<HttpServicePortMetadata> Metadata { get; set; } = new Versionable<HttpServicePortMetadata>();
+
+        /// <summary>
         ///     Get a child URL segment
         /// </summary>
         /// <param name="urlSegment">URL segment</param>
@@ -16,7 +22,7 @@ namespace SMACD.Artifacts
         {
             get
             {
-                var result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
+                UrlArtifact result = (UrlArtifact)Children.FirstOrDefault(d => d.Identifiers.Contains(urlSegment));
                 if (result == null)
                 {
                     result = new UrlArtifact { Parent = this };

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using McMaster.NETCore.Plugins;
+﻿using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace Synthesys.Tasks
 {
@@ -33,7 +33,7 @@ namespace Synthesys.Tasks
             Logger = Global.LogFactory.CreateLogger(Path.GetFileName(fileName));
 
             Logger.LogDebug("Beginning to process Plugin library {0}", FileName);
-            var loader = PluginLoader.CreateFromAssemblyFile(
+            PluginLoader loader = PluginLoader.CreateFromAssemblyFile(
                 FileName,
                 new[]
                 {
@@ -77,8 +77,8 @@ namespace Synthesys.Tasks
 
         private void PopulatePlugins()
         {
-            var allExtensions = Assembly.GetTypes().Where(t => typeof(Extension).IsAssignableFrom(t) && !t.IsAbstract);
-            foreach (var extension in allExtensions)
+            IEnumerable<Type> allExtensions = Assembly.GetTypes().Where(t => typeof(Extension).IsAssignableFrom(t) && !t.IsAbstract);
+            foreach (Type extension in allExtensions)
             {
                 // Check for [Extension] metadata
                 if (extension.GetCustomAttribute<ExtensionAttribute>() == null)
@@ -89,12 +89,12 @@ namespace Synthesys.Tasks
                 }
 
                 // Load metadata
-                var metadata = extension.GetCustomAttribute<ExtensionAttribute>();
+                ExtensionAttribute metadata = extension.GetCustomAttribute<ExtensionAttribute>();
                 Logger.LogDebug("Loaded Extension {0} v{1} by {2}", metadata.Name, metadata.VersionObj.ToString(2),
                     metadata.Author);
 
                 // Create instance and validate readiness
-                var instance = (Extension) Activator.CreateInstance(extension);
+                Extension instance = (Extension)Activator.CreateInstance(extension);
                 instance.SetLoggerName(metadata.ExtensionIdentifier);
                 if (!instance.ValidateEnvironmentReadiness())
                 {
@@ -120,11 +120,14 @@ namespace Synthesys.Tasks
                 if (instance is ReactionExtension)
                 {
                     Logger.LogDebug("Binding Triggers for {0} ...", metadata.ExtensionIdentifier);
-                    foreach (var trigger in extension.GetCustomAttributes<TriggeredByAttribute>()
+                    foreach (TriggerDescriptor trigger in extension.GetCustomAttributes<TriggeredByAttribute>()
                         .Select(t => t.Trigger))
                     {
                         Logger.LogDebug("Binding Trigger {0} to {1}", trigger.ToString(), metadata.ExtensionIdentifier);
-                        if (!_reactionExtensions.ContainsKey(trigger)) _reactionExtensions[trigger] = new List<Type>();
+                        if (!_reactionExtensions.ContainsKey(trigger))
+                        {
+                            _reactionExtensions[trigger] = new List<Type>();
+                        }
 
                         _reactionExtensions[trigger].Add(extension);
                     }

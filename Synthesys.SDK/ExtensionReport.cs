@@ -45,7 +45,7 @@ namespace Synthesys.SDK
         ///     Adjusted score out of 1.0
         /// </summary>
         public double AdjustedScore =>
-            MaximumPointsAvailable > 0 ? (double) RawPointsScored / MaximumPointsAvailable : 0;
+            MaximumPointsAvailable > 0 ? (double)RawPointsScored / MaximumPointsAvailable : 0;
 
         /// <summary>
         ///     Name of the View describing this ExtensionReport
@@ -125,7 +125,7 @@ namespace Synthesys.SDK
         {
             // TODO: Handle reattachments so we don't orphan reports away from their artifact anchors
             //TaskDescriptor.ArtifactRoot = null;
-            
+
             // TODO: Anything left to finalize?
 
             return this;

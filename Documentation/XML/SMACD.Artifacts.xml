@@ -61,11 +61,6 @@
                 Represents a single node in an Artifact correlation tree, including its metadata and evidence
             </summary>
         </member>
-        <member name="M:SMACD.Artifacts.Artifact.Disconnect">
-            <summary>
-                Disconnect parents in Artifact tree
-            </summary>
-        </member>
         <member name="M:SMACD.Artifacts.Artifact.Connect(SMACD.Artifacts.Artifact)">
             <summary>
                 Create Parent pointers in Artifact tree
@@ -296,7 +291,7 @@
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.ArtifactSummaryViewTypeName">
             <summary>
-            An Action which can be registered by the Extension to return an HTML component to view artifact
+                An Action which can be registered by the Extension to return an HTML component to view artifact
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.Metadata">
@@ -337,6 +332,11 @@
         <member name="T:SMACD.Artifacts.HttpServicePortArtifact">
             <summary>
                 Represents an HTTP service accessible via a specific protocol and port
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Metadata">
+            <summary>
+                HTTP Service Metadata
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Item(System.String)">

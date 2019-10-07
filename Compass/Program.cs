@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using System.IO;
+using ElectronNET.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using SMACD.Data;
-using ElectronNET.API;
 using SMACD.Artifacts;
+using SMACD.Data;
 using Synthesys.Tasks;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace Compass
@@ -18,7 +18,7 @@ namespace Compass
 
         public static List<Vulnerability> GetAllVulnerabilitiesIn(Artifact artifact)
         {
-            var list = new List<Vulnerability>();
+            List<Vulnerability> list = new List<Vulnerability>();
             GetAllVulnerabilitiesIn(artifact, ref list);
             return list;
         }
@@ -26,7 +26,7 @@ namespace Compass
         private static void GetAllVulnerabilitiesIn(Artifact artifact, ref List<Vulnerability> vulnerabilities)
         {
             vulnerabilities.AddRange(artifact.Vulnerabilities);
-            foreach (var child in artifact.Children)
+            foreach (Artifact child in artifact.Children)
             {
                 GetAllVulnerabilitiesIn(child, ref vulnerabilities);
             }
@@ -34,18 +34,27 @@ namespace Compass
 
         public static List<Vulnerability> GetAllVulnerabilities()
         {
-            var result = new List<Vulnerability>();
+            List<Vulnerability> result = new List<Vulnerability>();
             if (Session != null)
+            {
                 Get(Session.Artifacts, ref result);
+            }
+
             return result;
         }
 
         private static void Get(Artifact a, ref List<Vulnerability> list)
         {
-            if (list == null) list = new List<Vulnerability>();
+            if (list == null)
+            {
+                list = new List<Vulnerability>();
+            }
+
             list.AddRange(a.Vulnerabilities);
-            foreach (var child in a.Children)
+            foreach (Artifact child in a.Children)
+            {
                 Get(child, ref list);
+            }
         }
 
         public static void Main(string[] args)
@@ -57,14 +66,16 @@ namespace Compass
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseEnvironment(Environments.Development)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
-                    webBuilder.UseElectron(args);
-                });
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+.UseEnvironment(Environments.Development)
+.ConfigureWebHostDefaults(webBuilder =>
+{
+    webBuilder.UseStartup<Startup>();
+    webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
+    webBuilder.UseElectron(args);
+});
+        }
     }
 }

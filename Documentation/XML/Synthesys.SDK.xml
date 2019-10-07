@@ -492,6 +492,18 @@
             <param name="artifactPath">Artifact path</param>
             <param name="trigger">Triggering operation</param>
         </member>
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(SMACD.Artifacts.Artifact,Synthesys.SDK.Triggers.ArtifactTrigger)">
+            <summary>
+                Create a descriptor for a trigger activated by an operation on an Artifact
+            </summary>
+            <param name="artifact">Artifact instance</param>
+            <param name="trigger">Triggering operation</param>
+        </member>
+        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.Artifact">
+            <summary>
+                Artifact Instance
+            </summary>
+        </member>
         <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.ArtifactPath">
             <summary>
                 Path to Artifact
@@ -535,6 +547,14 @@
                 Create an artifact-based trigger
             </summary>
             <param name="artifactPath">Artifact path</param>
+            <param name="trigger">Trigger operation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.Artifacts.Artifact,Synthesys.SDK.Triggers.ArtifactTrigger)">
+            <summary>
+                Create an artifact-based trigger
+            </summary>
+            <param name="artifact">Artifact instance</param>
             <param name="trigger">Trigger operation</param>
             <returns></returns>
         </member>

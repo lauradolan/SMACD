@@ -1,7 +1,7 @@
-﻿using System;
+﻿using SMACD.Artifacts;
+using System;
 using System.Linq;
 using System.Web;
-using SMACD.Artifacts;
 
 namespace Synthesys.SDK
 {
@@ -20,27 +20,31 @@ namespace Synthesys.SDK
         public static UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
         {
             if (!url.StartsWith("http"))
+            {
                 url = "http://" + httpService.Host.Hostname + ":" + httpService.Port + url;
+            }
 
-            var uri = new Uri(url);
+            Uri uri = new Uri(url);
 
-            var scheme = uri.Scheme;
-            var host = uri.Host;
-            var pieces = uri.AbsolutePath.Split('/').Where(e => !string.IsNullOrEmpty(e)).ToList();
-            var queryParameters = HttpUtility.ParseQueryString(uri.Query);
+            string scheme = uri.Scheme;
+            string host = uri.Host;
+            System.Collections.Generic.List<string> pieces = uri.AbsolutePath.Split('/').Where(e => !string.IsNullOrEmpty(e)).ToList();
+            System.Collections.Specialized.NameValueCollection queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
             // Create path through tree based on path pieces
-            var artifact = httpService["/"];
-            foreach (var piece in pieces)
+            UrlArtifact artifact = httpService["/"];
+            foreach (string piece in pieces)
             {
                 artifact = artifact[piece];
             }
 
             // "artifact" is leaf URL, create request here
-            var request = new UrlRequestArtifact();
+            UrlRequestArtifact request = new UrlRequestArtifact();
 
-            foreach (var key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
+            foreach (string key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
+            {
                 request.Fields[key] = queryParameters[key];
+            }
 
             request.Identifiers.Add($"{method.ToUpper()} ({HashCode.Combine(request.Fields, request.Headers)})");
             artifact.Requests.Add(request);

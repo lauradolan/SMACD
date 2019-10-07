@@ -31,11 +31,17 @@ namespace Synthesys.SDK.Triggers
 
         public override bool Equals(object obj)
         {
-            if (!base.Equals(obj)) return false;
+            if (!base.Equals(obj))
+            {
+                return false;
+            }
 
-            var castDescriptor = obj as ExtensionTriggerDescriptor;
+            ExtensionTriggerDescriptor castDescriptor = obj as ExtensionTriggerDescriptor;
             if (castDescriptor.ExtensionIdentifier == ExtensionIdentifier &&
-                castDescriptor.Trigger == Trigger) return true;
+                castDescriptor.Trigger == Trigger)
+            {
+                return true;
+            }
 
             return false;
         }

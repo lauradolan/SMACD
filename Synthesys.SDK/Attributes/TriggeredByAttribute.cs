@@ -1,5 +1,5 @@
-﻿using System;
-using Synthesys.SDK.Triggers;
+﻿using Synthesys.SDK.Triggers;
+using System;
 
 namespace Synthesys.SDK.Attributes
 {

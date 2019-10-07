@@ -11,7 +11,7 @@ namespace SMACD.Artifacts.Data
             StoredData = data;
             if (StoredData != null && StoredData.Length > 0)
             {
-                var zipFile = Path.GetTempFileName();
+                string zipFile = Path.GetTempFileName();
                 File.WriteAllBytes(zipFile, StoredData);
                 ZipFile.ExtractToDirectory(zipFile, Directory);
                 File.Delete(zipFile);
@@ -21,7 +21,7 @@ namespace SMACD.Artifacts.Data
         internal NativeDirectoryContext()
         {
             Directory = Path.Combine(Path.GetTempPath(), "wks",
-                new Random((int) DateTime.Now.Ticks).Next(1024, int.MaxValue).ToString());
+                new Random((int)DateTime.Now.Ticks).Next(1024, int.MaxValue).ToString());
             System.IO.Directory.CreateDirectory(Directory);
         }
 
@@ -53,7 +53,7 @@ namespace SMACD.Artifacts.Data
         {
             if (!disposedValue)
             {
-                var target = Path.GetTempFileName();
+                string target = Path.GetTempFileName();
                 File.Delete(target);
                 ZipFile.CreateFromDirectory(Directory, target);
                 StoredData = File.ReadAllBytes(target);

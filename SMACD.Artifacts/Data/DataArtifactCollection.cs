@@ -39,24 +39,31 @@ namespace SMACD.Artifacts.Data
         public NativeDirectoryArtifact CreateOrLoadNativePath(string name, TimeSpan availabilityWaitTimeout = default)
         {
             _lock.EnterReadLock();
-            var existingChild = this[name];
+            DataArtifact existingChild = this[name];
             if (existingChild != null && !(existingChild is NativeDirectoryArtifact))
+            {
                 throw new Exception("Native Directory handle cannot be replaced/overwritten by another storage type");
+            }
 
             _lock.ExitReadLock();
 
-            if (availabilityWaitTimeout == default) availabilityWaitTimeout = TimeSpan.FromSeconds(0);
+            if (availabilityWaitTimeout == default)
+            {
+                availabilityWaitTimeout = TimeSpan.FromSeconds(0);
+            }
 
             if (!_lock.TryEnterWriteLock(availabilityWaitTimeout))
+            {
                 throw new Exception("Native Directory handle has an active context for this identifier" +
                                     (availabilityWaitTimeout != default
                                         ? " and timeout of " + availabilityWaitTimeout + " expired"
                                         : ""));
+            }
 
             NativeDirectoryArtifact artifact = null;
             if (existingChild != null)
             {
-                artifact = (NativeDirectoryArtifact) existingChild;
+                artifact = (NativeDirectoryArtifact)existingChild;
                 ArtifactChanged?.Invoke(this, artifact);
             }
             else
@@ -79,7 +86,7 @@ namespace SMACD.Artifacts.Data
         /// <returns></returns>
         public ObjectArtifact Save<T>(string name, T obj)
         {
-            var newChild = new ObjectArtifact(name);
+            ObjectArtifact newChild = new ObjectArtifact(name);
             newChild.Set(obj);
             return Save(newChild) as ObjectArtifact;
         }
@@ -120,7 +127,7 @@ namespace SMACD.Artifacts.Data
         {
             _lock.EnterWriteLock();
 
-            var existingChild = this[newChild.Name];
+            DataArtifact existingChild = this[newChild.Name];
             if (existingChild != null)
             {
                 Remove(existingChild);
@@ -130,7 +137,11 @@ namespace SMACD.Artifacts.Data
             Add(newChild);
             _lock.ExitWriteLock();
 
-            if (existingChild == null) ArtifactCreated?.Invoke(this, newChild);
+            if (existingChild == null)
+            {
+                ArtifactCreated?.Invoke(this, newChild);
+            }
+
             return newChild;
         }
 

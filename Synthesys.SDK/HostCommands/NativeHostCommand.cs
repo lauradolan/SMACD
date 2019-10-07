@@ -27,10 +27,18 @@ namespace Synthesys.SDK.HostCommands
 
         public bool ValidateCommandExists()
         {
-            if (ProcessStartInfo == null) return false;
+            if (ProcessStartInfo == null)
+            {
+                return false;
+            }
+
             if (!File.Exists(Path.Combine(
                 ProcessStartInfo.WorkingDirectory,
-                ProcessStartInfo.FileName))) return false;
+                ProcessStartInfo.FileName)))
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -41,11 +49,13 @@ namespace Synthesys.SDK.HostCommands
         public Task Start()
         {
             if (ProcessStartInfo == null)
+            {
                 throw new Exception("ProcessStartInfo was not set but execution has been requested");
+            }
 
             RuntimeTask = Task.Run(() =>
             {
-                var sw = new Stopwatch();
+                Stopwatch sw = new Stopwatch();
                 sw.Start();
 
                 if (!Process.Start())
@@ -85,8 +95,13 @@ namespace Synthesys.SDK.HostCommands
             if (!disposedValue)
             {
                 if (disposing)
+                {
                     if (!Process.HasExited)
+                    {
                         Process.Kill();
+                    }
+                }
+
                 disposedValue = true;
             }
         }

@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
@@ -8,6 +6,8 @@ using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
+using System.IO;
 
 namespace Synthesys.Plugins.Dummy
 {
@@ -45,7 +45,7 @@ namespace Synthesys.Plugins.Dummy
 
             // Data Artifacts can be entire directories, so that external applications can make use of that file data
             string text;
-            using (var execContainer = Host.Attachments["dummyBasicContainer"].AsNativeDirectoryArtifact().GetContext())
+            using (NativeDirectoryContext execContainer = Host.Attachments["dummyBasicContainer"].AsNativeDirectoryArtifact().GetContext())
             {
                 text = File.ReadAllText(execContainer.DirectoryWithFile("test.dat"));
                 Logger.LogInformation("Text Inside Using: " + text);
@@ -54,7 +54,7 @@ namespace Synthesys.Plugins.Dummy
             Logger.LogInformation("Text Outside Using: " + text);
 
             // Artifacts can be retrieved with strong typing
-            var stronglyTyped = Host.Attachments["dummyResult"].AsObjectArtifact().Get<DummyDataClass>();
+            DummyDataClass stronglyTyped = Host.Attachments["dummyResult"].AsObjectArtifact().Get<DummyDataClass>();
 
             try
             {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace Synthesys.SDK.HostCommands
 {
@@ -76,13 +76,21 @@ namespace Synthesys.SDK.HostCommands
 
         protected void HandleStdOut(string text)
         {
-            if (CaptureStdOut) StdOut += $"{text}{Environment.NewLine}";
+            if (CaptureStdOut)
+            {
+                StdOut += $"{text}{Environment.NewLine}";
+            }
+
             StandardOutputDataReceived?.Invoke(this, OwnerTaskId, text);
         }
 
         protected void HandleStdErr(string text)
         {
-            if (CaptureStdErr) StdErr += $"{text}{Environment.NewLine}";
+            if (CaptureStdErr)
+            {
+                StdErr += $"{text}{Environment.NewLine}";
+            }
+
             StandardErrorDataReceived?.Invoke(this, OwnerTaskId, text);
         }
     }

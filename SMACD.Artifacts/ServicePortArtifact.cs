@@ -23,7 +23,7 @@ namespace SMACD.Artifacts
         /// <summary>
         ///     Hostname/IP of this Service
         /// </summary>
-        public HostArtifact Host => (HostArtifact) Parent;
+        public HostArtifact Host => (HostArtifact)Parent;
 
         /// <summary>
         ///     Port Protocol Type
@@ -32,10 +32,14 @@ namespace SMACD.Artifacts
         {
             get
             {
-                foreach (var identifier in Identifiers)
+                foreach (string identifier in Identifiers)
                 {
-                    var match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
-                    if (!match.Success) continue;
+                    Match match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
+                    if (!match.Success)
+                    {
+                        continue;
+                    }
+
                     return Enum.Parse<ProtocolType>(match.Groups["protocol"].Value);
                 }
                 return ProtocolType.Unspecified;
@@ -49,11 +53,15 @@ namespace SMACD.Artifacts
         {
             get
             {
-                foreach (var identifier in Identifiers)
+                foreach (string identifier in Identifiers)
                 {
-                    var match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
-                    if (!match.Success) continue;
-                    return Int32.Parse(match.Groups["port"].Value);
+                    Match match = Regex.Match(identifier, "(?<protocol>[A-Za-z]*)\\/(?<port>[0-9]*)");
+                    if (!match.Success)
+                    {
+                        continue;
+                    }
+
+                    return int.Parse(match.Groups["port"].Value);
                 }
                 return 0;
             }

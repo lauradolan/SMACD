@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using CommandLine;
+﻿using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
 using Synthesys.Tasks;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -52,7 +52,7 @@ namespace Synthesys.Verbs
             if (File.Exists(Path.Combine(WorkingDirectory, "session")))
             {
                 Logger.LogDebug("Session file exists, opening", WorkingDirectory);
-                using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.Open,
+                using (FileStream stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.Open,
                     FileAccess.Read))
                 {
                     session = Session.Import(stream);
@@ -63,65 +63,82 @@ namespace Synthesys.Verbs
                 Logger.LogDebug("Session file not found in Working Directory {0}, creating new Session",
                     WorkingDirectory);
                 if (!Directory.Exists(WorkingDirectory))
+                {
                     Directory.CreateDirectory(WorkingDirectory);
+                }
 
-                session = new Session();
-                session.ServiceMapYaml = File.ReadAllText(ServiceMap);
+                session = new Session
+                {
+                    ServiceMapYaml = File.ReadAllText(ServiceMap)
+                };
             }
 
             // Import Service Map
-            var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
+            ServiceMapFile serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
 
             // Register Targets from Resources
-            foreach (var resourceModel in serviceMap.Targets)
-                session.RegisterTarget(resourceModel);
-
-            var generatedTasks = new List<Task<List<ExtensionReport>>>();
-            foreach (var feature in serviceMap.Features)
-            foreach (var useCase in feature.UseCases)
-            foreach (var abuseCase in useCase.AbuseCases)
-            foreach (var pluginPointer in abuseCase.Actions)
+            foreach (TargetModel resourceModel in serviceMap.Targets)
             {
-                var target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
-
-                Artifact artifact = null;
-                if (target is HttpTargetModel)
-                {
-                    var uri = new Uri(((HttpTargetModel) target).Url);
-                    artifact = session.Artifacts[uri.Host][uri.Port];
-                }
-                else if (target is SocketPortTargetModel)
-                {
-                    artifact = session.Artifacts
-                            [((SocketPortTargetModel) target).Hostname]
-                        [((SocketPortTargetModel) target).Port];
-                }
-
-                generatedTasks.Add(session.Tasks.Enqueue(pluginPointer.Action,
-                    artifact,
-                    pluginPointer.Options,
-                    new ProjectPointer
-                    {
-                        Feature = feature,
-                        UseCase = useCase,
-                        AbuseCase = abuseCase
-                    }
-                ));
+                session.RegisterTarget(resourceModel);
             }
 
-            while (session.Tasks.IsRunning) Thread.Sleep(500);
+            List<Task<List<ExtensionReport>>> generatedTasks = new List<Task<List<ExtensionReport>>>();
+            foreach (FeatureModel feature in serviceMap.Features)
+            {
+                foreach (UseCaseModel useCase in feature.UseCases)
+                {
+                    foreach (AbuseCaseModel abuseCase in useCase.AbuseCases)
+                    {
+                        foreach (ActionPointerModel pluginPointer in abuseCase.Actions)
+                        {
+                            TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
 
-            var results = generatedTasks.SelectMany(t => t.Result.Select(r => r.FinalizeReport()));
+                            Artifact artifact = null;
+                            if (target is HttpTargetModel)
+                            {
+                                Uri uri = new Uri(((HttpTargetModel)target).Url);
+                                artifact = session.Artifacts[uri.Host][uri.Port];
+                            }
+                            else if (target is SocketPortTargetModel)
+                            {
+                                artifact = session.Artifacts
+                                        [((SocketPortTargetModel)target).Hostname]
+                                    [((SocketPortTargetModel)target).Port];
+                            }
+
+                            generatedTasks.Add(session.Tasks.Enqueue(pluginPointer.Action,
+                                artifact,
+                                pluginPointer.Options,
+                                new ProjectPointer
+                                {
+                                    Feature = feature,
+                                    UseCase = useCase,
+                                    AbuseCase = abuseCase
+                                }
+                            ));
+                        }
+                    }
+                }
+            }
+
+            while (session.Tasks.IsRunning)
+            {
+                Thread.Sleep(500);
+            }
+
+            IEnumerable<ExtensionReport> results = generatedTasks.SelectMany(t => t.Result.Select(r => r.FinalizeReport()));
             session.Reports.AddRange(results);
 
-            using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate,
+            using (FileStream stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate,
                 FileAccess.Write))
             {
                 session.Export(stream);
             }
 
             if (!Silent || workingDirectoryProvided)
+            {
                 Logger.LogInformation("Report serialized to {0}", Path.Combine(WorkingDirectory, "session"));
+            }
 
             if (!Silent)
             {

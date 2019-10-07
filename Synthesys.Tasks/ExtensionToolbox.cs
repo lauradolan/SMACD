@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SMACD.Artifacts;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace Synthesys.Tasks
 {
@@ -46,10 +46,14 @@ namespace Synthesys.Tasks
         public Extension ResolveExtensionFromId(string extensionId)
         {
             if (_actionExtensionMap.ContainsKey(extensionId))
+            {
                 return EmitAction(extensionId);
+            }
             else
+            {
                 return EmitReaction(_extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
                     t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionId)).FirstOrDefault(i => i != null));
+            }
         }
 
         /// <summary>
@@ -110,7 +114,7 @@ namespace Synthesys.Tasks
                 return null;
             }
 
-            return (ActionExtension) Activator.CreateInstance(_actionExtensionMap[extensionIdentifier]);
+            return (ActionExtension)Activator.CreateInstance(_actionExtensionMap[extensionIdentifier]);
         }
 
         /// <summary>
@@ -124,9 +128,9 @@ namespace Synthesys.Tasks
         {
             return _reactionExtensionMap
                 .Where(m => m.Key is ArtifactTriggerDescriptor &&
-                            ((ArtifactTriggerDescriptor) m.Key).Trigger == trigger &&
+                            ((ArtifactTriggerDescriptor)m.Key).Trigger == trigger &&
                             TriggerDescriptor.PathMatches(triggeringArtifact,
-                                ((ArtifactTriggerDescriptor) m.Key).ArtifactPath))
+                                ((ArtifactTriggerDescriptor)m.Key).ArtifactPath))
                 .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }
@@ -142,13 +146,13 @@ namespace Synthesys.Tasks
         {
             return _reactionExtensionMap
                 .Where(m => m.Key is ExtensionTriggerDescriptor &&
-                            ((ExtensionTriggerDescriptor) m.Key).Trigger == trigger &&
-                            ((ExtensionTriggerDescriptor) m.Key).ExtensionIdentifier ==
+                            ((ExtensionTriggerDescriptor)m.Key).Trigger == trigger &&
+                            ((ExtensionTriggerDescriptor)m.Key).ExtensionIdentifier ==
                             triggeringExtension.GetType().GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier)
                 .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }
-        
+
         /// <summary>
         ///     Get a list of ReactionExtensions triggered by a system event
         /// </summary>
@@ -158,7 +162,7 @@ namespace Synthesys.Tasks
         {
             return _reactionExtensionMap
                 .Where(m => m.Key is ExtensionTriggerDescriptor &&
-                            ((SystemEventTriggerDescriptor) m.Key).SystemEvent == triggeringEvent)
+                            ((SystemEventTriggerDescriptor)m.Key).SystemEvent == triggeringEvent)
                 .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Polenter.Serialization;
+﻿using Polenter.Serialization;
 using Polenter.Serialization.Advanced.Serializing;
 using Polenter.Serialization.Core;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace SMACD.Artifacts.Data
 {
@@ -12,9 +12,15 @@ namespace SMACD.Artifacts.Data
         public Type ConvertToType(string typeName)
         {
             if (typeName == null)
+            {
                 return null;
+            }
+
             if (Type.GetType(typeName) != null)
+            {
                 return Type.GetType(typeName);
+            }
+
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(d => d.GetTypes()).FirstOrDefault(t => t.FullName == typeName);
         }
 
@@ -55,7 +61,7 @@ namespace SMACD.Artifacts.Data
         /// <returns></returns>
         public T Get<T>()
         {
-            return (T) new SharpSerializer(new SharpSerializerXmlSettings
+            return (T)new SharpSerializer(new SharpSerializerXmlSettings
             {
                 AdvancedSettings = new AdvancedSharpSerializerXmlSettings
                 {
@@ -71,7 +77,7 @@ namespace SMACD.Artifacts.Data
         /// <param name="obj">Object to serialize</param>
         public void Set<T>(T obj)
         {
-            var ms = new MemoryStream();
+            MemoryStream ms = new MemoryStream();
             new SharpSerializer(new SharpSerializerXmlSettings
             {
                 AdvancedSettings = new AdvancedSharpSerializerXmlSettings

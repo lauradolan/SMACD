@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Net.Sockets;
-using SMACD.Artifacts;
+﻿using SMACD.Artifacts;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
 using Synthesys.Tasks;
+using System;
+using System.Linq;
+using System.Net.Sockets;
 
 namespace Synthesys
 {
@@ -15,23 +15,23 @@ namespace Synthesys
         {
             if (resourceModel is HttpTargetModel)
             {
-                var http = resourceModel as HttpTargetModel;
-                var uri = new Uri(http.Url);
-                var pieces = uri.AbsolutePath.Split('/').ToList();
+                HttpTargetModel http = resourceModel as HttpTargetModel;
+                Uri uri = new Uri(http.Url);
+                System.Collections.Generic.List<string> pieces = uri.AbsolutePath.Split('/').ToList();
 
-                var serviceBase = session.Artifacts[uri.Host][uri.Port];
+                ServicePortArtifact serviceBase = session.Artifacts[uri.Host][uri.Port];
                 if (!(serviceBase is HttpServicePortArtifact))
                 {
-                    var httpArtifact = new HttpServicePortArtifact() { Parent = session.Artifacts[uri.Host] };
+                    HttpServicePortArtifact httpArtifact = new HttpServicePortArtifact() { Parent = session.Artifacts[uri.Host] };
                     httpArtifact.Identifiers.Add($"{ProtocolType.Tcp.ToString()}/{uri.Port}");
                     session.Artifacts[uri.Host][uri.Port] = httpArtifact;
-                    
-                    var httpBase = session.Artifacts[uri.Host][uri.Port];
+
+                    ServicePortArtifact httpBase = session.Artifacts[uri.Host][uri.Port];
                     httpBase.Metadata.Set(serviceBase.Metadata, "_known_", DataProviderSpecificity.Explicit);
                 }
 
-                var pathTip = UrlHelper.GeneratePathArtifacts(
-                    (HttpServicePortArtifact) session.Artifacts[uri.Host][uri.Port], uri.AbsolutePath, http.Method);
+                UrlArtifact pathTip = UrlHelper.GeneratePathArtifacts(
+                    (HttpServicePortArtifact)session.Artifacts[uri.Host][uri.Port], uri.AbsolutePath, http.Method);
 
                 pathTip.Requests.Add(new UrlRequestArtifact
                 {
@@ -43,7 +43,7 @@ namespace Synthesys
 
             if (resourceModel is SocketPortTargetModel)
             {
-                var socket = resourceModel as SocketPortTargetModel;
+                SocketPortTargetModel socket = resourceModel as SocketPortTargetModel;
                 session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"] = new ServicePortArtifact();
             }
         }

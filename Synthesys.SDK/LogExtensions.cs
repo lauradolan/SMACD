@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Text;
 using System.Threading;
-using Microsoft.Extensions.Logging;
 
 namespace Synthesys.SDK
 {
@@ -11,7 +11,7 @@ namespace Synthesys.SDK
         {
             ExecutionWrapper.Maps.TryAdd(Thread.CurrentThread.ManagedThreadId, taskId);
             command();
-            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out var dummy);
+            ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out int dummy);
         }
 
         public static void TaskLogCritical(this ILogger logger, int taskId, string message, params object[] parameters)
@@ -54,10 +54,13 @@ namespace Synthesys.SDK
         {
             try
             {
-                var hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
-                var ret = new StringBuilder();
+                byte[] hash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes(str));
+                StringBuilder ret = new StringBuilder();
 
-                for (var i = 0; i < hash.Length; i++) ret.Append(hash[i].ToString("x2"));
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    ret.Append(hash[i].ToString("x2"));
+                }
 
                 return ret.ToString();
             }

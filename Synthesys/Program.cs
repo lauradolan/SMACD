@@ -1,13 +1,13 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using CommandLine;
+﻿using CommandLine;
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Synthesys.Helpers;
 using Synthesys.Verbs;
+using System;
+using System.Diagnostics;
+using System.Text;
+using System.Threading;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Synthesys
@@ -30,8 +30,11 @@ namespace Synthesys
             if (Debugger.IsAttached || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SMACD_DEBUG")))
             {
                 Console.Write(Output.Underline().Green().Text("Enter arguments:") + " ");
-                var strArgs = "";
-                while (string.IsNullOrEmpty(strArgs)) strArgs = Console.ReadLine().Trim();
+                string strArgs = "";
+                while (string.IsNullOrEmpty(strArgs))
+                {
+                    strArgs = Console.ReadLine().Trim();
+                }
 
                 args = strArgs.Split(' ');
             }
@@ -44,8 +47,8 @@ namespace Synthesys
 
         private static void RunVerbLifecycle(VerbBase verb)
         {
-            var currentTimeTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} ";
-            var template = "[{Level:u3}<{TaskId}>@{SourceContext}] {Message:lj} {NewLine}{Exception}";
+            string currentTimeTemplate = "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} ";
+            string template = "[{Level:u3}<{TaskId}>@{SourceContext}] {Message:lj} {NewLine}{Exception}";
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .Enrich.WithDemystifiedStackTraces()
@@ -67,18 +70,27 @@ namespace Synthesys
                 Branding.DrawBanner();
             }
 
-            var runningTask = verb.Execute();
+            System.Threading.Tasks.Task runningTask = verb.Execute();
             if (runningTask != null)
             {
-                while (!runningTask.IsCompleted) Thread.Sleep(100);
+                while (!runningTask.IsCompleted)
+                {
+                    Thread.Sleep(100);
+                }
 
                 if (runningTask.Exception != null)
                 {
                     if (runningTask.Exception is AggregateException)
-                        foreach (var item in runningTask.Exception.InnerExceptions)
+                    {
+                        foreach (Exception item in runningTask.Exception.InnerExceptions)
+                        {
                             Logger.LogCritical(item, "Error running task");
+                        }
+                    }
                     else
+                    {
                         Logger.LogCritical(runningTask.Exception, "Error running task");
+                    }
                 }
 
                 Logger.LogDebug("Application complete");

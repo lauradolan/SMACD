@@ -36,11 +36,20 @@
             get
             {
                 if (this is ObjectArtifact)
+                {
                     return DataArtifactTypes.Object;
+                }
+
                 if (this is StringArtifact)
+                {
                     return DataArtifactTypes.String;
+                }
+
                 if (this is NativeDirectoryArtifact)
+                {
                     return DataArtifactTypes.VFS;
+                }
+
                 return DataArtifactTypes.Unknown;
             }
         }
@@ -52,7 +61,7 @@
         /// <returns></returns>
         public T As<T>() where T : DataArtifact
         {
-            return (T) this;
+            return (T)this;
         }
 
         /// <summary>
