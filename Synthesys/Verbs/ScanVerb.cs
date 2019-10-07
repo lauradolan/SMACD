@@ -73,6 +73,9 @@ namespace Synthesys.Verbs
                 };
             }
 
+            // Don't fire events during data load
+            session.Artifacts.SuppressEventFiring = true;
+
             // Import Service Map
             ServiceMapFile serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
 
@@ -81,6 +84,10 @@ namespace Synthesys.Verbs
             {
                 session.RegisterTarget(resourceModel);
             }
+
+            // Restore Artifact event firing
+            session.Artifacts.SuppressEventFiring = false;
+
 
             List<Task<List<ExtensionReport>>> generatedTasks = new List<Task<List<ExtensionReport>>>();
             foreach (FeatureModel feature in serviceMap.Features)

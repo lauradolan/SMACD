@@ -1,5 +1,6 @@
 ﻿using SMACD.Artifacts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
@@ -46,8 +47,7 @@ namespace Synthesys.SDK
                 request.Fields[key] = queryParameters[key];
             }
 
-            request.Identifiers.Add($"{method.ToUpper()} ({HashCode.Combine(request.Fields, request.Headers)})");
-            artifact.Requests.Add(request);
+            artifact.AddRequest(method, request.Fields, new Dictionary<string, string>());
 
             return artifact;
         }

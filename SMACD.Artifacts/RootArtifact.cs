@@ -26,6 +26,11 @@ namespace SMACD.Artifacts
         public override string ArtifactSummaryViewTypeName => "SMACD.Artifacts.Views.RootArtifactView";
 
         /// <summary>
+        ///     Whether or not to suppress Artifact tree related events (useful during data loads or when responsiveness is not desired)
+        /// </summary>
+        public bool SuppressEventFiring { get; set; } = false;
+
+        /// <summary>
         ///     Hostname or IP of resource
         /// </summary>
         /// <param name="hostNameOrIp">Hostname/IP</param>
@@ -52,9 +57,7 @@ namespace SMACD.Artifacts
                 {
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                     Task<IPHostEntry> task = Task.Run(() => entry = Dns.GetHostEntry(hostNameOrIp), cancellationTokenSource.Token);
-                    Task.Delay(1000).ContinueWith(a =>
-                            cancellationTokenSource.Cancel())
-                        .Wait();
+                    Task.Delay(1000).ContinueWith(a => cancellationTokenSource.Cancel()).Wait();
                 }
                 catch (Exception)
                 {
@@ -154,7 +157,8 @@ namespace SMACD.Artifacts
         /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactCreated(Artifact newArtifact, List<Artifact> path)
         {
-            ArtifactCreated?.Invoke(newArtifact, path);
+            if (!SuppressEventFiring)
+                ArtifactCreated?.Invoke(newArtifact, path);
         }
 
         /// <summary>
@@ -164,7 +168,8 @@ namespace SMACD.Artifacts
         /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactChanged(Artifact changedArtifact, List<Artifact> path)
         {
-            ArtifactChanged?.Invoke(changedArtifact, path);
+            if (!SuppressEventFiring)
+                ArtifactChanged?.Invoke(changedArtifact, path);
         }
 
         /// <summary>
@@ -174,7 +179,8 @@ namespace SMACD.Artifacts
         /// <param name="path">Path to new Artifact</param>
         internal void InvokeArtifactChildAdded(Artifact newChild, List<Artifact> path)
         {
-            ArtifactChildAdded?.Invoke(newChild, path);
+            if (!SuppressEventFiring)
+                ArtifactChildAdded?.Invoke(newChild, path);
         }
     }
 }

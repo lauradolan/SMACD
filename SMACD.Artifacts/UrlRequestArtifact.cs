@@ -1,5 +1,4 @@
 ﻿using SMACD.Artifacts.Metadata;
-using System.Linq;
 using System.Net.Http;
 
 namespace SMACD.Artifacts
@@ -21,7 +20,7 @@ namespace SMACD.Artifacts
         {
             get
             {
-                string method = Identifiers.First();
+                string method = NiceIdentifier;
                 if (method.ToUpper() == "GET")
                 {
                     return HttpMethod.Get;

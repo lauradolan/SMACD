@@ -78,6 +78,9 @@ namespace SMACD.Artifacts
                     Children.Remove(existing);
                 }
 
+                if (!value.Identifiers.Contains($"{value.Protocol}/{port}"))
+                    value.Identifiers.Add($"{value.Protocol}/{port}");
+
                 value.BeginFiringEvents();
                 Children.Add(value);
             }
@@ -114,6 +117,9 @@ namespace SMACD.Artifacts
                 {
                     Children.Remove(existing);
                 }
+
+                if (!value.Identifiers.Contains(protocolAndPort))
+                    value.Identifiers.Add(protocolAndPort);
 
                 value.BeginFiringEvents();
                 Children.Add(value);

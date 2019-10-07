@@ -573,14 +573,6 @@
             <param name="trigger">System event</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.PathMatches(SMACD.Artifacts.Artifact,System.String)">
-            <summary>
-                Check if the Artifact's path matches the given path
-            </summary>
-            <param name="triggeringArtifact">Artifact</param>
-            <param name="path">Path to check against</param>
-            <returns></returns>
-        </member>
         <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.Artifacts.Artifact)">
             <summary>
                 Generate the path for a given artifact

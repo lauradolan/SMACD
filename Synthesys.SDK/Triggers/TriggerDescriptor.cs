@@ -1,7 +1,4 @@
 ﻿using SMACD.Artifacts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Synthesys.SDK.Triggers
 {
@@ -59,48 +56,6 @@ namespace Synthesys.SDK.Triggers
         public static SystemEventTriggerDescriptor SystemEventTrigger(SystemEvents trigger)
         {
             return new SystemEventTriggerDescriptor(trigger);
-        }
-
-        /// <summary>
-        ///     Check if the Artifact's path matches the given path
-        /// </summary>
-        /// <param name="triggeringArtifact">Artifact</param>
-        /// <param name="path">Path to check against</param>
-        /// <returns></returns>
-        public static bool PathMatches(Artifact triggeringArtifact, string path)
-        {
-            return PathMatches(triggeringArtifact, path.Split(Artifact.PATH_SEPARATOR).ToList());
-        }
-
-        private static bool PathMatches(Artifact artifact, List<string> pathElements)
-        {
-            string nextEl = pathElements.First();
-            List<string> nextElements = new List<string>();
-            if (pathElements.Count > 1)
-            {
-                nextElements = new List<string>(pathElements.Skip(1));
-            }
-
-            if (nextEl.Contains('{') && nextEl.Contains('}')) // specified <something>{type} to expect a given type
-            {
-                var expectedTypeName = nextEl.Split('{')[1].Split('}')[0];
-                var expectedType = Type.GetType(expectedTypeName);
-                if (!expectedType.IsAssignableFrom(artifact.GetType()))
-                    return false;
-                nextEl = nextEl.Substring(0, nextEl.IndexOf('{')+1);
-            }
-
-            if (nextEl == "%") return true; // % terminates all processing (n-field wildcard)
-            if (nextEl == "*" || artifact.UUID == Guid.Parse(nextEl)) // * is 1-field wildcard
-            {
-                if (nextElements.Count == 0 ||
-                    artifact.Children.Any(child => PathMatches(child, nextElements)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SMACD.Artifacts
 {
@@ -12,6 +13,10 @@ namespace SMACD.Artifacts
     /// </summary>
     public abstract class Artifact
     {
+        public const string SINGLE_GENERATION_WILDCARD = "*";
+        public const string N_GENERATION_WILDCARD = "**";
+        public static string[] CONTROL_CHARS = new string[] { SINGLE_GENERATION_WILDCARD, N_GENERATION_WILDCARD };
+
         public const string PATH_SEPARATOR = "//";
         private bool firingEvents;
 
@@ -72,7 +77,6 @@ namespace SMACD.Artifacts
                 Identifiers.Add(UUID.ToString());
             }
 
-            NotifyCreated();
             Children.CollectionChanged += (s, e) =>
             {
                 if (e.Action == NotifyCollectionChangedAction.Add)
@@ -88,6 +92,7 @@ namespace SMACD.Artifacts
         internal void BeginFiringEvents()
         {
             firingEvents = true;
+            NotifyCreated(); // deferred call to this to ensure events are wired up first
         }
 
         /// <summary>
@@ -166,6 +171,99 @@ namespace SMACD.Artifacts
             }
             nodes.Reverse();
             return nodes;
+        }
+
+        /// <summary>
+        ///     If the Artifact can be described by the given string path (may contain wildcards, etc)
+        /// </summary>
+        /// <param name="path">Path to test</param>
+        /// <returns><c>TRUE</c> if the path describes the Artifact, otherwise <c>FALSE</c></returns>
+        public bool IsDescribedByPath(string path)
+        {
+            var pathSegments = path.Split(Artifact.PATH_SEPARATOR);
+            var artifactPathToRoot = GetNodesToRoot();
+            var segmentIndex = 0;
+            bool insideMultiGenerationalWildcard = false;
+
+            foreach (var element in artifactPathToRoot)
+            {
+                // Bounds-check path segment
+                if (segmentIndex > pathSegments.Length - 1)
+                {
+                    if (pathSegments.Last() == N_GENERATION_WILDCARD) return true;
+                    return false;
+                }
+                var thisPathSegment = pathSegments[segmentIndex];
+
+                // True/False if type specified, otherwise null
+                var typeConstraintResult = MeetsTypeConstraints(element, thisPathSegment, out thisPathSegment);
+                // True/False if non-wildcard specified, otherwise null
+                var nameConstraintResult = MeetsNamingConstraints(element, thisPathSegment);
+                var specificConstraintsMet = (typeConstraintResult.HasValue && typeConstraintResult.Value == true) ||
+                                             (nameConstraintResult.HasValue && nameConstraintResult.Value == true);
+
+                // If specific constraints were met for this node/segment, any long wildcards end
+                if (specificConstraintsMet)
+                    insideMultiGenerationalWildcard = false;
+
+                // Didn't meet specific constraints but still inside wildcard
+                if (insideMultiGenerationalWildcard)
+                    continue;
+
+                if (thisPathSegment == SINGLE_GENERATION_WILDCARD && typeConstraintResult.GetValueOrDefault(true))
+                {
+                    segmentIndex++;
+                    continue;
+                }
+                else if (thisPathSegment == N_GENERATION_WILDCARD && typeConstraintResult.GetValueOrDefault(true))
+                {
+                    insideMultiGenerationalWildcard = true;
+                    segmentIndex++;
+                    continue;
+                }
+                else if (typeConstraintResult.GetValueOrDefault(true) && nameConstraintResult.GetValueOrDefault(true))
+                {
+                    segmentIndex++;
+                    continue;
+                }
+            }
+            if (segmentIndex > pathSegments.Length - 1)
+                return true;
+            return false;
+        }
+
+        private static bool? MeetsTypeConstraints(Artifact element, string thisPathSegment, out string newTestString)
+        {
+            var matchTypeEnforcement = Regex.Match(thisPathSegment, "\\{(?<type>\\S+)\\}(?<name>\\S+)");
+            if (matchTypeEnforcement.Success)
+            {
+                // Rewrite segment without Type enforcement
+                newTestString = matchTypeEnforcement.Groups["name"].Value;
+
+                // todo: cache-back type lookups, otherwise this will become VERY expensive
+                var expectedTypeName = matchTypeEnforcement.Groups["type"].Value;
+                var asm = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.DefinedTypes.Any(t => t.Name == expectedTypeName || t.FullName == expectedTypeName));
+                if (asm == null)
+                    throw new Exception($"Trigger Path required type safety check against expected type {expectedTypeName}, which does not exist");
+                var expectedType = asm.DefinedTypes.First(t => t.Name == expectedTypeName || t.FullName == expectedTypeName).UnderlyingSystemType;
+
+                return expectedType.IsAssignableFrom(element.GetType());
+            }
+            newTestString = thisPathSegment;
+            return null;
+        }
+
+        private static bool? MeetsNamingConstraints(Artifact element, string thisPathSegment)
+        {
+            if (!CONTROL_CHARS.Contains(thisPathSegment))
+            {
+                // Convert to Regex to support ?/* (1-char/n-char) wildcards
+                var regexTest = "^" + Regex.Escape(thisPathSegment).Replace("\\?", ".").Replace("\\*", ".*") + "$";
+                if (element.Identifiers.Any(i => Regex.IsMatch(i, regexTest)))
+                    return true;
+                return false;
+            }
+            return null;
         }
 
         /// <summary>

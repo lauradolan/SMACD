@@ -129,8 +129,7 @@ namespace Synthesys.Tasks
             return _reactionExtensionMap
                 .Where(m => m.Key is ArtifactTriggerDescriptor &&
                             ((ArtifactTriggerDescriptor)m.Key).Trigger == trigger &&
-                            TriggerDescriptor.PathMatches(triggeringArtifact,
-                                ((ArtifactTriggerDescriptor)m.Key).ArtifactPath))
+                            triggeringArtifact.IsDescribedByPath(((ArtifactTriggerDescriptor)m.Key).ArtifactPath))
                 .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }

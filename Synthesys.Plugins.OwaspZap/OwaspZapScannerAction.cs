@@ -243,9 +243,7 @@ namespace Synthesys.Plugins.OwaspZap
                             Title = alert.Name
                         });
 
-                        inner.Requests.Add(artifact);
-
-                        return artifact;
+                        return inner.AddRequest(i.Method, artifact.Fields, artifact.Headers);
                     }).ToList();
                     }
                     catch (Exception ex)

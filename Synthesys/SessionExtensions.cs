@@ -33,12 +33,7 @@ namespace Synthesys
                 UrlArtifact pathTip = UrlHelper.GeneratePathArtifacts(
                     (HttpServicePortArtifact)session.Artifacts[uri.Host][uri.Port], uri.AbsolutePath, http.Method);
 
-                pathTip.Requests.Add(new UrlRequestArtifact
-                {
-                    Parent = pathTip,
-                    Fields = new ObservableDictionary<string, string>(http.Fields),
-                    Headers = new ObservableDictionary<string, string>(http.Headers)
-                });
+                pathTip.AddRequest("GET", http.Fields, http.Headers);
             }
 
             if (resourceModel is SocketPortTargetModel)

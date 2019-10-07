@@ -1,4 +1,5 @@
-﻿using SMACD.Artifacts;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.Artifacts;
 using SMACD.Artifacts.Data;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
@@ -7,11 +8,9 @@ using Synthesys.SDK.Triggers;
 using Synthesys.Tasks;
 using Synthesys.Tasks.Attributes;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 
 namespace Synthesys.Plugins.SQLMap
 {
@@ -23,7 +22,7 @@ namespace Synthesys.Plugins.SQLMap
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [TriggeredBy("*//*{HttpServicePortArtifact}//%", ArtifactTrigger.IsCreated)]
+    [TriggeredBy("**//{UrlRequestArtifact}*", ArtifactTrigger.IsCreated)]
     public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     {
         private bool _useInLocalMode;
@@ -43,6 +42,8 @@ namespace Synthesys.Plugins.SQLMap
 
         public override ExtensionReport React(TriggerDescriptor trigger)
         {
+            Logger.LogWarning($"FIRED SQLMAP REACTION - {trigger}");
+
             var descriptor = trigger as ArtifactTriggerDescriptor;
             if (descriptor.Artifact is UrlRequestArtifact)
             {
