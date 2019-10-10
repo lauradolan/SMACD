@@ -1,6 +1,6 @@
 ﻿using McMaster.NETCore.Plugins;
 using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
@@ -38,7 +38,7 @@ namespace Synthesys.Tasks
                 new[]
                 {
                     typeof(Extension),
-                    typeof(Artifact),
+                    typeof(AppTreeNode),
                     typeof(ILogger)
                 });
             Assembly = loader.LoadDefaultAssembly();

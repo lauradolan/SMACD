@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Capabilities
 {
@@ -8,8 +8,8 @@ namespace Synthesys.SDK.Capabilities
     public interface IOperateOnUrl
     {
         /// <summary>
-        ///     Framework-populated reference to the URL artifact
+        ///     Framework-populated reference to the URL node
         /// </summary>
-        UrlArtifact Url { get; set; }
+        UrlNode Url { get; set; }
     }
 }

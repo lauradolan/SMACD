@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Capabilities
 {
@@ -8,8 +8,8 @@ namespace Synthesys.SDK.Capabilities
     public interface IOperateOnHost
     {
         /// <summary>
-        ///     Framework-populated reference to the Host Artifact
+        ///     Framework-populated reference to the Host Node
         /// </summary>
-        HostArtifact Host { get; set; }
+        HostNode Host { get; set; }
     }
 }

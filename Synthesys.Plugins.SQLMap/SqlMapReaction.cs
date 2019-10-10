@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
+using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
@@ -22,7 +22,7 @@ namespace Synthesys.Plugins.SQLMap
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [TriggeredBy("**//{UrlRequestArtifact}*", ArtifactTrigger.IsCreated)]
+    [TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)]
     public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     {
         private bool _useInLocalMode;
@@ -45,11 +45,11 @@ namespace Synthesys.Plugins.SQLMap
             Logger.LogWarning($"FIRED SQLMAP REACTION - {trigger}");
 
             var descriptor = trigger as ArtifactTriggerDescriptor;
-            if (descriptor.Artifact is UrlRequestArtifact)
+            if (descriptor.Node is UrlRequestNode)
             {
-                var urlRequestArtifact = (UrlRequestArtifact)descriptor.Artifact;
-                var urlArtifact = urlRequestArtifact.Parent as UrlArtifact;
-                var url = urlArtifact.GetUrl();
+                var urlRequestArtifact = (UrlRequestNode)descriptor.Node;
+                var urlArtifact = urlRequestArtifact.Parent as UrlNode;
+                var url = urlArtifact.GetEntireUrl();
 
                 if (urlRequestArtifact.Method == HttpMethod.Get)
                 {
@@ -67,7 +67,7 @@ namespace Synthesys.Plugins.SQLMap
         {
             string logFile;
 
-            NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("sqlmap-" + HashCode.Combine(target));
+            NativeDirectoryEvidence nativePathArtifact = new NativeDirectoryEvidence("sqlmap-" + HashCode.Combine(target));
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
                 string dir = context.Directory;

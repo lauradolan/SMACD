@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Capabilities
 {

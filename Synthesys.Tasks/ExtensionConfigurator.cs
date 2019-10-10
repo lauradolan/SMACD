@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using System;
@@ -25,7 +25,7 @@ namespace Synthesys.Tasks
         /// <returns></returns>
         public static Extension Configure(
             this Extension extension,
-            Artifact artifactRoot,
+            AppTreeNode artifactRoot,
             Dictionary<string, string> options)
         {
             extension.SetLoggerName(extension.GetType().Name);
@@ -91,10 +91,10 @@ namespace Synthesys.Tasks
         /// <param name="extensionInstance">Extension to configure</param>
         /// <param name="resourceArtifact">Artifact to connect</param>
         /// <returns></returns>
-        private static Extension ApplyArtifactProperty(Extension extensionInstance, Artifact resourceArtifact)
+        private static Extension ApplyArtifactProperty(Extension extensionInstance, AppTreeNode resourceArtifact)
         {
             PropertyInfo[] artifactProperties = extensionInstance.GetType().GetProperties().Where(p =>
-                typeof(Artifact).IsAssignableFrom(p.PropertyType)).ToArray();
+                typeof(AppTreeNode).IsAssignableFrom(p.PropertyType)).ToArray();
 
             if (!artifactProperties.Any())
             {
@@ -104,8 +104,8 @@ namespace Synthesys.Tasks
 
             foreach (PropertyInfo artifactProperty in artifactProperties)
             {
-                Artifact value = null;
-                value = resourceArtifact.GetNodesToRoot()
+                AppTreeNode value = null;
+                value = resourceArtifact.GetPath()
                     .FirstOrDefault(a => a.GetType() == artifactProperty.PropertyType);
                 if (value != null)
                 {

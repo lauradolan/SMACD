@@ -703,6 +703,61 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:SMACD.Artifacts.Vulnerability">
+            <summary>
+                Represents a generalized Vulnerability found by one or more scanners
+            </summary>
+        </member>
+        <member name="T:SMACD.Artifacts.Vulnerability.Confidences">
+            <summary>
+                Confidence in the accuracy of this Vulnerability
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.FalsePositive">
+            <summary>
+                False Positive
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.Low">
+            <summary>
+                Low confidence
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.Medium">
+            <summary>
+                Medium confidence
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.High">
+            <summary>
+                High confidence
+            </summary>
+        </member>
+        <member name="T:SMACD.Artifacts.Vulnerability.RiskLevels">
+            <summary>
+                Level of risk incurred through this Vulnerability
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Informational">
+            <summary>
+                Informational only
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Low">
+            <summary>
+                Low risk
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Medium">
+            <summary>
+                Medium risk
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.High">
+            <summary>
+                High risk
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.Vulnerability.RiskLevel">
             <summary>
                 Risk Level of the Vulnerability

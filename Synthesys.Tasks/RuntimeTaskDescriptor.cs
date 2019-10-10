@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 using Synthesys.SDK;
 using Synthesys.SDK.Extensions;
 using System.Collections.Generic;
@@ -10,6 +10,6 @@ namespace Synthesys.Tasks
     {
         public Task<List<ExtensionReport>> Task { get; set; }
         public Extension Extension { get; set; }
-        public Artifact Artifact { get; set; }
+        public AppTreeNode Artifact { get; set; }
     }
 }

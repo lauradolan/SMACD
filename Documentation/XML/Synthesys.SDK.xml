@@ -82,7 +82,7 @@
                 This Attribute can be used multiple times on the same Extension.
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
                 Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
             </summary>
@@ -114,7 +114,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHost.Host">
             <summary>
-                Framework-populated reference to the Host Artifact
+                Framework-populated reference to the Host Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHostPort">
@@ -122,9 +122,9 @@
                 ICanQueueTasks indicates that the Extension acts upon an unknown service (by port)
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Port">
+        <member name="P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Service">
             <summary>
-                Framework-populated reference to the ServicePort Artifact
+                Framework-populated reference to the Service Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHttpService">
@@ -134,7 +134,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService">
             <summary>
-                Framework-populated reference to the HttpServicePort Artifact
+                Framework-populated reference to the HttpService Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnUrl">
@@ -144,7 +144,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnUrl.Url">
             <summary>
-                Framework-populated reference to the URL artifact
+                Framework-populated reference to the URL node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IUnderstandProjectInformation">
@@ -485,26 +485,26 @@
             <param name="str">String to hash</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
-                Create a descriptor for a trigger activated by an operation on an Artifact
+                Create a descriptor for a trigger activated by an operation on a node in the Application Tree
             </summary>
-            <param name="artifactPath">Artifact path</param>
+            <param name="nodePath">Application Tree node path</param>
             <param name="trigger">Triggering operation</param>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(SMACD.Artifacts.Artifact,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
-                Create a descriptor for a trigger activated by an operation on an Artifact
+                Create a descriptor for a trigger activated by an operation on a node in the Application Tree
             </summary>
-            <param name="artifact">Artifact instance</param>
+            <param name="node">Application Tree node instance</param>
             <param name="trigger">Triggering operation</param>
         </member>
-        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.Artifact">
+        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.Node">
             <summary>
                 Artifact Instance
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.ArtifactPath">
+        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.NodePath">
             <summary>
                 Path to Artifact
             </summary>
@@ -542,19 +542,19 @@
                 Describes a wrapper around an event and its details, to pass to ReactionExtensions
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
                 Create an artifact-based trigger
             </summary>
-            <param name="artifactPath">Artifact path</param>
+            <param name="nodePath">Node path</param>
             <param name="trigger">Trigger operation</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.Artifacts.Artifact,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
                 Create an artifact-based trigger
             </summary>
-            <param name="artifact">Artifact instance</param>
+            <param name="node">Node instance</param>
             <param name="trigger">Trigger operation</param>
             <returns></returns>
         </member>
@@ -573,11 +573,11 @@
             <param name="trigger">System event</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.Artifacts.Artifact)">
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)">
             <summary>
                 Generate the path for a given artifact
             </summary>
-            <param name="artifact">Artifact</param>
+            <param name="node">Artifact</param>
             <returns></returns>
         </member>
         <member name="T:Synthesys.SDK.UrlHelper">
@@ -585,7 +585,7 @@
                 Functions to work with URLs in the Artifact correlation tree
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.UrlHelper.GeneratePathArtifacts(SMACD.Artifacts.HttpServicePortArtifact,System.String,System.String)">
+        <member name="M:Synthesys.SDK.UrlHelper.GeneratePathArtifacts(SMACD.AppTree.HttpServiceNode,System.String,System.String)">
             <summary>
                 Generate artifacts under the given Artifact for each segment of a given URL and request method
             </summary>

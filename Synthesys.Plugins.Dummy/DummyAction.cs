@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -9,7 +10,6 @@ using Synthesys.Tasks.Attributes;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,7 +47,7 @@ namespace Synthesys.Plugins.Dummy
         ///     identified as an HTTP server, that Target will be referenced from both this property and the "Service" property
         ///     below.
         /// </summary>
-        public HttpServicePortArtifact HttpService { get; set; }
+        public HttpServiceNode HttpService { get; set; }
 
         /// <summary>
         ///     Service acted upon by the ActionExtension, addressed via its port
@@ -56,7 +56,7 @@ namespace Synthesys.Plugins.Dummy
         ///     If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the
         ///     property with the closest parent Type will be referenced.
         /// </summary>
-        public ServicePortArtifact Service { get; set; }
+        public ServiceNode Service { get; set; }
 
         /// <summary>
         ///     Link to the Task toolbox, which can queue Tasks
@@ -68,7 +68,7 @@ namespace Synthesys.Plugins.Dummy
         ///     This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible
         ///     Targets were found, this will remain null.
         /// </summary>
-        public HostArtifact Host { get; set; }
+        public HostNode Host { get; set; }
 
         public override ExtensionReport Act()
         {
@@ -100,8 +100,8 @@ namespace Synthesys.Plugins.Dummy
                     //   to get a temporary directory where external tools can persist information to disk or read information.
                     // When the object is disposed, the content of the directory will be compressed and saved to the wrapper
                     //   Artifact. When re-using the context at another time, the directory will be re-deployed.
-                    SMACD.Artifacts.Data.NativeDirectoryArtifact nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("dummyBasicContainer");
-                    using (SMACD.Artifacts.Data.NativeDirectoryContext execContainer = nativePathArtifact.GetContext())
+                    NativeDirectoryEvidence nativePathArtifact = Host.Evidence.CreateOrLoadNativePath("dummyBasicContainer");
+                    using (NativeDirectoryContext execContainer = nativePathArtifact.GetContext())
                     {
                         // The temporary directory name is stored in the "Directory" property of the context
                         File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
@@ -131,24 +131,12 @@ namespace Synthesys.Plugins.Dummy
                 }
             }
 
-            var root = Host.Parent as RootArtifact;
-            var http = new HttpServicePortArtifact();
-            root["127.0.0.1"]["Tcp/80"] = http;
-            var request = new UrlRequestArtifact()
-            {
-                Parent = http["/"]["test"],
-
-            };
-            request.Identifiers.Add("GET");
-            http["/"]["test"].Requests.Add(request);
-
-
             sw.Stop();
             Logger.LogInformation("Completed in {0}", sw.Elapsed);
 
             // Artifacts can also be some sort of object (which is serialized by the framework)
             // Workspace.Artifacts.Save("dummyData", new { str = "arbitrary!", num = 42 });
-            Host.Attachments.Save("dummyResult", new DummyDataClass
+            Host.Evidence.Save("dummyResult", new DummyDataClass
             {
                 DummyString = "I'm a dummy string!",
                 DummyDouble = 42.42

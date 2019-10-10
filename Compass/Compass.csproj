@@ -24,8 +24,8 @@
     <PackageReference Include="Tewr.Blazor.FileReader" Version="1.1.0.19274" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
-    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\SMACD.AppTree.Views\SMACD.AppTree.Views.csproj" />
+    <ProjectReference Include="..\SMACD.AppTree\SMACD.AppTree.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
     <ProjectReference Include="..\Synthesys.Tasks\Synthesys.Tasks.csproj" />

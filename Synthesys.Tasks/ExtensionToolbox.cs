@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
@@ -123,13 +123,13 @@ namespace Synthesys.Tasks
         /// <param name="triggeringArtifact">Artifact causing the trigger</param>
         /// <param name="trigger">Trigger action type</param>
         /// <returns></returns>
-        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(Artifact triggeringArtifact,
-            ArtifactTrigger trigger)
+        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(AppTreeNode triggeringArtifact,
+            AppTreeNodeEvents trigger)
         {
             return _reactionExtensionMap
                 .Where(m => m.Key is ArtifactTriggerDescriptor &&
                             ((ArtifactTriggerDescriptor)m.Key).Trigger == trigger &&
-                            triggeringArtifact.IsDescribedByPath(((ArtifactTriggerDescriptor)m.Key).ArtifactPath))
+                            triggeringArtifact.IsDescribedByPath(((ArtifactTriggerDescriptor)m.Key).NodePath))
                 .SelectMany(m => m.Value.Select(v => EmitReaction(v)))
                 .ToList();
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
+using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -44,16 +44,14 @@ namespace Synthesys.Plugins.OwaspZap
         /// <summary>
         ///     HTTP Service to scan
         /// </summary>
-        public HttpServicePortArtifact HttpService { get; set; }
+        public HttpServiceNode HttpService { get; set; }
 
         public override ExtensionReport Act()
         {
             ZapJsonReport jsonReport = null;
             try
             {
-                NativeDirectoryArtifact nativePathArtifact =
-                    HttpService.Attachments.CreateOrLoadNativePath(
-                        "owaspzap_" + ((HostArtifact)HttpService.Parent).IpAddress);
+                NativeDirectoryEvidence nativePathArtifact = HttpService.Evidence.CreateOrLoadNativePath("owaspzap_" + HttpService.NiceIdentifier);
                 RunScanner(nativePathArtifact);
                 jsonReport = GetJsonObject(nativePathArtifact);
                 if (jsonReport == null)
@@ -79,7 +77,7 @@ namespace Synthesys.Plugins.OwaspZap
             return report;
         }
 
-        private void RunScanner(NativeDirectoryArtifact nativePathArtifact)
+        private void RunScanner(NativeDirectoryEvidence nativePathEvidence)
         {
             Logger.LogInformation("Starting OWASP ZAP Scanner against {0}", HttpService);
             ExecutionWrapper wrapper = new ExecutionWrapper();
@@ -99,7 +97,7 @@ namespace Synthesys.Plugins.OwaspZap
                 dockerCommandTemplate += "-j ";
             }
 
-            using (NativeDirectoryContext context = nativePathArtifact.GetContext())
+            using (NativeDirectoryContext context = nativePathEvidence.GetContext())
             {
                 string schema = string.Empty;
                 if (HttpService.Port == 443) // todo: this only detects ssl on standard ports, need to change this
@@ -169,7 +167,7 @@ namespace Synthesys.Plugins.OwaspZap
             }
         }
 
-        private ZapJsonReport GetJsonObject(NativeDirectoryArtifact nativePathArtifact)
+        private ZapJsonReport GetJsonObject(NativeDirectoryEvidence nativePathArtifact)
         {
             ZapJsonReport report;
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
@@ -212,11 +210,11 @@ namespace Synthesys.Plugins.OwaspZap
                 {
                     try
                     {
-                        System.Collections.Generic.List<UrlRequestArtifact> targets = alert.Instances.Select(i =>
+                        System.Collections.Generic.List<UrlRequestNode> targets = alert.Instances.Select(i =>
                     {
-                        UrlArtifact inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
+                        UrlNode inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
 
-                        UrlRequestArtifact artifact = new UrlRequestArtifact();
+                        UrlRequestNode artifact = new UrlRequestNode();
                         if (i.Param != null)
                         {
                             string[] paramsSplit = i.Param.Split(',');

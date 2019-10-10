@@ -1,5 +1,5 @@
-﻿using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
+﻿using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -34,7 +34,7 @@ namespace Synthesys.Plugins.SQLMap
         /// <summary>
         ///     URL being scanned
         /// </summary>
-        public UrlArtifact Url { get; set; }
+        public UrlNode Url { get; set; }
 
         public override bool ValidateEnvironmentReadiness()
         {
@@ -52,7 +52,7 @@ namespace Synthesys.Plugins.SQLMap
         {
             string logFile;
 
-            NativeDirectoryArtifact nativePathArtifact = new NativeDirectoryArtifact("sqlmap-" + Url.GetUrl());
+            NativeDirectoryEvidence nativePathArtifact = new NativeDirectoryEvidence("sqlmap-" + Url.GetEntireUrl());
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
                 string dir = context.Directory;
@@ -64,7 +64,7 @@ namespace Synthesys.Plugins.SQLMap
                 }
 
                 string cmd = baseCmd +
-                          $" --url={Url.GetUrl()}" +
+                          $" --url={Url.GetEntireUrl()}" +
                           " --batch --flush-session --banner" +
                           (_useInLocalMode ? " --output-dir=" + dir : " --output-dir=/data") +
                           (Aggressive ? " --level=5 --risk=3" : " --level=2 --risk=1");

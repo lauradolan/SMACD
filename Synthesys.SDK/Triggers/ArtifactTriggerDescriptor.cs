@@ -1,9 +1,9 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 using System;
 
 namespace Synthesys.SDK.Triggers
 {
-    public enum ArtifactTrigger
+    public enum AppTreeNodeEvents
     {
         IsCreated,
         IsUpdated,
@@ -13,48 +13,48 @@ namespace Synthesys.SDK.Triggers
     public class ArtifactTriggerDescriptor : TriggerDescriptor
     {
         /// <summary>
-        ///     Create a descriptor for a trigger activated by an operation on an Artifact
+        ///     Create a descriptor for a trigger activated by an operation on a node in the Application Tree
         /// </summary>
-        /// <param name="artifactPath">Artifact path</param>
+        /// <param name="nodePath">Application Tree node path</param>
         /// <param name="trigger">Triggering operation</param>
-        public ArtifactTriggerDescriptor(string artifactPath, ArtifactTrigger trigger)
+        public ArtifactTriggerDescriptor(string nodePath, AppTreeNodeEvents trigger)
         {
-            ArtifactPath = artifactPath;
+            NodePath = nodePath;
             Trigger = trigger;
         }
 
         /// <summary>
-        ///     Create a descriptor for a trigger activated by an operation on an Artifact
+        ///     Create a descriptor for a trigger activated by an operation on a node in the Application Tree
         /// </summary>
-        /// <param name="artifact">Artifact instance</param>
+        /// <param name="node">Application Tree node instance</param>
         /// <param name="trigger">Triggering operation</param>
-        public ArtifactTriggerDescriptor(Artifact artifact, ArtifactTrigger trigger)
+        public ArtifactTriggerDescriptor(AppTreeNode node, AppTreeNodeEvents trigger)
         {
-            Artifact = artifact;
-            ArtifactPath = artifact.GetUUIDPathToRoot();;
+            Node = node;
+            NodePath = node.GetUUIDPath();
             Trigger = trigger;
         }
 
         /// <summary>
         ///     Artifact Instance
         /// </summary>
-        public Artifact Artifact { get; set; }
+        public AppTreeNode Node { get; set; }
 
         /// <summary>
         ///     Path to Artifact
         /// </summary>
-        public string ArtifactPath { get; set; }
+        public string NodePath { get; set; }
 
         /// <summary>
         ///     Artifact operation causing trigger
         /// </summary>
-        public ArtifactTrigger Trigger { get; set; }
+        public AppTreeNodeEvents Trigger { get; set; }
 
         public override string ToString()
         {
-            if (Artifact != null)
-                return $"Artifact Trigger ({Artifact.GetUUIDPathToRoot()} {Trigger.ToString()})";
-            return $"Artifact Trigger Path {ArtifactPath} {Trigger.ToString()}";
+            if (Node != null)
+                return $"Artifact Trigger ({Node.GetUUIDPath()} {Trigger.ToString()})";
+            return $"Artifact Trigger Path {NodePath} {Trigger.ToString()}";
         }
 
         public override bool Equals(object obj)
@@ -65,7 +65,7 @@ namespace Synthesys.SDK.Triggers
             }
 
             ArtifactTriggerDescriptor castDescriptor = obj as ArtifactTriggerDescriptor;
-            if (castDescriptor.Artifact == Artifact && castDescriptor.Trigger == Trigger)
+            if (castDescriptor.Node == Node && castDescriptor.Trigger == Trigger)
             {
                 return true;
             }
@@ -75,10 +75,10 @@ namespace Synthesys.SDK.Triggers
 
         public override int GetHashCode()
         {
-            if (Artifact != null)
-                return HashCode.Combine(Artifact.GetUUIDPathToRoot(), Trigger);
+            if (Node != null)
+                return HashCode.Combine(Node.GetUUIDPath(), Trigger);
             else
-                return HashCode.Combine(ArtifactPath, Trigger);
+                return HashCode.Combine(NodePath, Trigger);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Metadata;
+using SMACD.AppTree;
+using SMACD.AppTree.Details;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -32,7 +33,7 @@ namespace Synthesys.Plugins.Nikto
         /// <summary>
         ///     HTTP Service being scanned
         /// </summary>
-        public HttpServicePortArtifact HttpService { get; set; }
+        public HttpServiceNode HttpService { get; set; }
 
         public override ExtensionReport Act()
         {
@@ -55,7 +56,7 @@ namespace Synthesys.Plugins.Nikto
                 SiteName = scanDetails.Attributes("sitename").First().Value
             };
 
-            ((ServicePortArtifact)HttpService).Metadata.Set(new ServicePortMetadata() { ServiceBanner = niktoReport.ServerBanner }, "nikto", DataProviderSpecificity.ServiceSpecificScanner);
+            HttpService.Detail.Set(new HttpServiceDetails() { ServiceBanner = niktoReport.ServerBanner }, "nikto", DataProviderSpecificity.ServiceSpecificScanner);
 
             report.ReportSummaryName = typeof(NiktoReportSummary).FullName;
             report.ReportViewName = typeof(NiktoReportView).FullName;
@@ -70,7 +71,7 @@ namespace Synthesys.Plugins.Nikto
                 int osvdbid = int.Parse(item.Attributes("osvdbid").First().Value);
                 string link = item.Descendants("namelink").First().Value;
                 string method = item.Attributes("method").First().Value;
-                UrlArtifact urlLeaf = UrlHelper.GeneratePathArtifacts(HttpService, link, method);
+                UrlNode urlLeaf = UrlHelper.GeneratePathArtifacts(HttpService, link, method);
 
                 if (osvdbid > 0)
                 {
@@ -100,7 +101,7 @@ namespace Synthesys.Plugins.Nikto
 
         private XDocument ExecuteScanner()
         {
-            using (SMACD.Artifacts.Data.NativeDirectoryContext context = HttpService.Attachments.CreateOrLoadNativePath("nikto").GetContext())
+            using (NativeDirectoryContext context = HttpService.Evidence.CreateOrLoadNativePath("nikto").GetContext())
             using (ExecutionWrapper wrapper = new ExecutionWrapper(
                 "nikto " +
                 "-Display 1234P " +

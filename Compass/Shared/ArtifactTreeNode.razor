@@ -1,4 +1,4 @@
-﻿@using SMACD.Artifacts
+﻿@using SMACD.AppTree
     <li>
         <span>
             @if (Artifact.Children.Any() && IsExpanded)
@@ -34,10 +34,10 @@
 @functions {
 
     [Parameter]
-    public Artifact Artifact { get; set; }
+    public AppTreeNode Artifact { get; set; }
 
     [Parameter]
-    public EventCallback<Artifact> IdentifierClicked { get; set; }
+    public EventCallback<AppTreeNode> IdentifierClicked { get; set; }
 
     [Parameter]
     public bool IsExpanded { get; set; } = false;

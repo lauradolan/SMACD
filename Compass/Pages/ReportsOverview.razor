@@ -38,7 +38,7 @@
             // Try resolving inside the Artifacts assembly
             if (componentType == null && name.Contains(".Artifacts."))
             {
-                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.Artifacts.Views.DefaultArtifactView)).GetType(name);
+                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.AppTree.Views.DefaultArtifactView)).GetType(name);
             }
 
             // Try resolving inside the loaded extensions
@@ -49,7 +49,7 @@
         }
 
         if (componentType == null) // TODO: Change default!
-            componentType = typeof(SMACD.Artifacts.Views.DefaultArtifactView);
+            componentType = typeof(SMACD.AppTree.Views.DefaultArtifactView);
 
         return componentType;
     }

@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace Synthesys.SDK
         /// <param name="url">URL to create data from</param>
         /// <param name="method">HTTP request method</param>
         /// <returns>Artifact representing leaf of URL</returns>
-        public static UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
+        public static UrlNode GeneratePathArtifacts(HttpServiceNode httpService, string url, string method)
         {
             if (!url.StartsWith("http"))
             {
@@ -33,14 +33,14 @@ namespace Synthesys.SDK
             System.Collections.Specialized.NameValueCollection queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
             // Create path through tree based on path pieces
-            UrlArtifact artifact = httpService["/"];
+            UrlNode artifact = httpService["/"];
             foreach (string piece in pieces)
             {
                 artifact = artifact[piece];
             }
 
             // "artifact" is leaf URL, create request here
-            UrlRequestArtifact request = new UrlRequestArtifact();
+            UrlRequestNode request = new UrlRequestNode();
 
             foreach (string key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
             {

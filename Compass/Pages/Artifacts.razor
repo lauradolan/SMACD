@@ -1,7 +1,7 @@
 ﻿@page "/artifacts"
 @layout LayoutWithoutPadding
 @using Synthesys.Tasks
-@using SMACD.Artifacts
+@using SMACD.AppTree
 
 <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
     @if (Program.Session == null || Program.Session.Artifacts == null)
@@ -24,10 +24,10 @@
 
 @code {
     [Parameter]
-    public Artifact Artifact { get; set; } = Program.Session?.Artifacts;
+    public AppTreeNode Artifact { get; set; } = Program.Session?.Artifacts;
 
 
-    public void IdentifierClicked(Artifact artifact)
+    public void IdentifierClicked(AppTreeNode artifact)
     {
         Artifact = artifact;
         this.StateHasChanged();
@@ -36,7 +36,7 @@
     RenderFragment CreateDynamicComponent() => builder =>
     {
         builder.OpenComponent(1, GetComponentType());
-        if (!(Artifact is RootArtifact))
+        if (!(Artifact is RootNode))
             builder.AddAttribute(2, "Artifact", Artifact);
         else
             builder.AddAttribute(2, "Artifact", (object)null);
@@ -46,28 +46,28 @@
     private Type GetComponentType()
     {
         Type componentType = null;
-        if (!string.IsNullOrEmpty(Artifact.ArtifactSummaryViewTypeName))
+        if (!string.IsNullOrEmpty(Artifact.NodeViewName))
         {
             // Gotta find that view!
 
             // First, see if we can resolve this cheaply.
-            componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
+            componentType = Type.GetType(Artifact.NodeViewName);
 
             // Try resolving inside the Artifacts assembly
-            if (componentType == null && Artifact.ArtifactSummaryViewTypeName.Contains(".Artifacts."))
+            if (componentType == null && Artifact.NodeViewName.Contains(".AppTree."))
             {
-                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.Artifacts.Views.DefaultArtifactView)).GetType(Artifact.ArtifactSummaryViewTypeName);
+                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.AppTree.Views.DefaultArtifactView)).GetType(Artifact.NodeViewName);
             }
 
             // Try resolving inside the loaded extensions
             if (componentType == null)
             {
-                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.ArtifactSummaryViewTypeName)).FirstOrDefault(a => a != null);
+                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.NodeViewName)).FirstOrDefault(a => a != null);
             }
         }
 
         if (componentType == null)
-            componentType = typeof(SMACD.Artifacts.Views.DefaultArtifactView);
+            componentType = typeof(SMACD.AppTree.Views.DefaultArtifactView);
 
         return componentType;
     }

@@ -5,7 +5,7 @@
         {
           "files": ["**/**.csproj"],
           "exclude": ["Compass/**", "Synthesys/**"],
-          "src": "D:/SMACD"
+          "src": "C:/SMACD"
         }
       ],
       "dest": "sdk",

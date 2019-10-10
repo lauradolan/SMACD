@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using System;
 using System.Collections.Generic;
 

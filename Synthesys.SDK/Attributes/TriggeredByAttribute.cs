@@ -16,7 +16,7 @@ namespace Synthesys.SDK.Attributes
         /// </summary>
         /// <param name="artifactPath">Artifact path</param>
         /// <param name="trigger">Trigger event</param>
-        public TriggeredByAttribute(string artifactPath, ArtifactTrigger trigger)
+        public TriggeredByAttribute(string artifactPath, AppTreeNodeEvents trigger)
         {
             Trigger = TriggerDescriptor.ArtifactTrigger(artifactPath, trigger);
         }

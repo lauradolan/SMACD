@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 using Synthesys.SDK;
 using System;
 using System.Collections.Generic;
@@ -38,6 +38,6 @@ namespace Synthesys.Tasks
         /// </summary>
         /// <param name="descriptor">Task Descriptor for new Task</param>
         /// <returns></returns>
-        Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
+        Task<List<ExtensionReport>> Enqueue(string actionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
     }
 }

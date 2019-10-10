@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
@@ -100,7 +100,7 @@ namespace Synthesys.Verbs
                         {
                             TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
 
-                            Artifact artifact = null;
+                            AppTreeNode artifact = null;
                             if (target is HttpTargetModel)
                             {
                                 Uri uri = new Uri(((HttpTargetModel)target).Url);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
-using SMACD.Artifacts.Metadata;
+using SMACD.AppTree;
+using SMACD.AppTree.Details;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
@@ -30,7 +30,7 @@ namespace Synthesys.Plugins.Nmap
         /// <summary>
         ///     Host/IP address to scan
         /// </summary>
-        public HostArtifact Host { get; set; }
+        public HostNode Host { get; set; }
 
         public override bool ValidateEnvironmentReadiness()
         {
@@ -58,7 +58,7 @@ namespace Synthesys.Plugins.Nmap
         {
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
 
-            NativeDirectoryArtifact nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
+            NativeDirectoryEvidence nativePathArtifact = Host.Evidence.CreateOrLoadNativePath("nmap_" + Host.IpAddress);
             RunSingleTarget(nativePathArtifact, Host.IpAddress);
 
             XDocument scanXml = GetScanXml(nativePathArtifact);
@@ -73,13 +73,14 @@ namespace Synthesys.Plugins.Nmap
 
             foreach (NmapPort port in nmapReport.Ports)
             {
+                ServiceNode serviceNode = null;
                 if (new[] { "httpd" }.Contains(port.Service))
                 {
-                    Host[$"{port.Protocol}/{port.Port}"] = new HttpServicePortArtifact();
+                    Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode();
                 }
 
-                Host[$"{port.Protocol}/{port.Port}"].Metadata.Set(
-                    new ServicePortMetadata()
+                Host[$"{port.Protocol}/{port.Port}"].Detail.Set(
+                    new ServiceDetails()
                     {
                         ServiceName = port.Service,
                         ProductName = port.ProductName,
@@ -107,7 +108,7 @@ namespace Synthesys.Plugins.Nmap
             return report;
         }
 
-        private void RunSingleTarget(NativeDirectoryArtifact artifact, string targetIp)
+        private void RunSingleTarget(NativeDirectoryEvidence artifact, string targetIp)
         {
             using (NativeDirectoryContext context = artifact.GetContext())
             {
@@ -121,7 +122,7 @@ namespace Synthesys.Plugins.Nmap
             }
         }
 
-        private XDocument GetScanXml(NativeDirectoryArtifact target)
+        private XDocument GetScanXml(NativeDirectoryEvidence target)
         {
             Logger.LogDebug("Searching for scan XML output file");
             using (NativeDirectoryContext context = target.GetContext())

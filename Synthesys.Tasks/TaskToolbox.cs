@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+using SMACD.AppTree;
 using Synthesys.SDK;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
@@ -63,7 +63,7 @@ namespace Synthesys.Tasks
         /// </summary>
         /// <param name="descriptor">Task Descriptor to enqueue</param>
         /// <returns>Task which resolves to the Action-Specific Report</returns>
-        public Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+        public Task<List<ExtensionReport>> Enqueue(string actionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
         {
             if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == actionIdentifier)))
             {
@@ -157,7 +157,7 @@ namespace Synthesys.Tasks
                 reports.ForEach(r =>
                 {
                     r.Runtime = sw.Elapsed;
-                    r.AffectedArtifactPaths.Add(string.Join(Artifact.PATH_SEPARATOR, rootArtifact.GetNodesToRoot().Select(a => a.UUID)));
+                    r.AffectedArtifactPaths.Add(rootArtifact.GetUUIDPath());
                 });
 
                 return reports;

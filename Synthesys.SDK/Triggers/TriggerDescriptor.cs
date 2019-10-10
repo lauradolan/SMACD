@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Triggers
 {
@@ -17,23 +17,23 @@ namespace Synthesys.SDK.Triggers
         /// <summary>
         ///     Create an artifact-based trigger
         /// </summary>
-        /// <param name="artifactPath">Artifact path</param>
+        /// <param name="nodePath">Node path</param>
         /// <param name="trigger">Trigger operation</param>
         /// <returns></returns>
-        public static ArtifactTriggerDescriptor ArtifactTrigger(string artifactPath, ArtifactTrigger trigger)
+        public static ArtifactTriggerDescriptor ArtifactTrigger(string nodePath, AppTreeNodeEvents trigger)
         {
-            return new ArtifactTriggerDescriptor(artifactPath, trigger);
+            return new ArtifactTriggerDescriptor(nodePath, trigger);
         }
 
         /// <summary>
         ///     Create an artifact-based trigger
         /// </summary>
-        /// <param name="artifact">Artifact instance</param>
+        /// <param name="node">Node instance</param>
         /// <param name="trigger">Trigger operation</param>
         /// <returns></returns>
-        public static ArtifactTriggerDescriptor ArtifactTrigger(Artifact artifact, ArtifactTrigger trigger)
+        public static ArtifactTriggerDescriptor ArtifactTrigger(AppTreeNode node, AppTreeNodeEvents trigger)
         {
-            return new ArtifactTriggerDescriptor(artifact, trigger);
+            return new ArtifactTriggerDescriptor(node, trigger);
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace Synthesys.SDK.Triggers
         /// <summary>
         ///     Generate the path for a given artifact
         /// </summary>
-        /// <param name="artifact">Artifact</param>
+        /// <param name="node">Artifact</param>
         /// <returns></returns>
-        public static string GeneratePath(Artifact artifact)
+        public static string GeneratePath(AppTreeNode node)
         {
-            return artifact.GetUUIDPathToRoot();
+            return node.GetUUIDPath();
         }
     }
 }

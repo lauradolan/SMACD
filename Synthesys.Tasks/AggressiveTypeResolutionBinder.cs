@@ -10,12 +10,24 @@ namespace Synthesys.Tasks
     /// </summary>
     public class AggressiveTypeResolutionBinder : ISerializationBinder
     {
+        /// <summary>
+        ///     Get the AssemblyName and TypeName of a given Type
+        /// </summary>
+        /// <param name="serializedType">Type to investigate</param>
+        /// <param name="assemblyName">Assembly name</param>
+        /// <param name="typeName">Type name</param>
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
             assemblyName = null;
             typeName = serializedType.FullName;
         }
 
+        /// <summary>
+        ///     Get the runtime Type described by a given Assembly and Type
+        /// </summary>
+        /// <param name="assemblyName">Assembly name</param>
+        /// <param name="typeName">Type name</param>
+        /// <returns>Resolved runtime Type</returns>
         public Type BindToType(string assemblyName, string typeName)
         {
             System.Reflection.Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
