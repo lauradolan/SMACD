@@ -1,14 +1,14 @@
-﻿using System;
+﻿using SMACD.AppTree.Details;
+using System;
 using System.Linq;
 using System.Net.Sockets;
-using SMACD.AppTree.Details;
 
 namespace SMACD.AppTree
 {
     /// <summary>
     ///     Represents a single host (server) involved in some part of the application
     /// </summary>
-    public class HostNode : AppTreeNode, IAppTreeNode<Details.HostDetails>
+    public class HostNode : AppTreeNode, IAppTreeNode<HostDetails>
     {
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
@@ -23,7 +23,7 @@ namespace SMACD.AppTree
             get => Identifiers.Where(i => !Guid.TryParse(i, out Guid dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.Dns);
             set
             {
-                if (!Identifiers.Contains(value))
+                if (!Identifiers.Contains(value) && !string.IsNullOrEmpty(value))
                 {
                     Identifiers.Add(value);
                 }
@@ -38,7 +38,7 @@ namespace SMACD.AppTree
             get => Identifiers.Where(i => !Guid.TryParse(i, out Guid dummy)).FirstOrDefault(a => Uri.CheckHostName(a) == UriHostNameType.IPv4);
             set
             {
-                if (!Identifiers.Contains(value))
+                if (!Identifiers.Contains(value) && !string.IsNullOrEmpty(value))
                 {
                     Identifiers.Add(value);
                 }
@@ -76,9 +76,9 @@ namespace SMACD.AppTree
                 ServiceNode result = ChildrenAre<ServiceNode>().FirstOrDefault(n => n.Port == port && n.Protocol == protocol);
                 if (result == null)
                 {
-                    var newEntry = new ServiceNode() { Parent = this };
-                    newEntry.Identifiers.Add($"{protocol}/{port}");
-                    Children.Add(newEntry);
+                    result = new ServiceNode() { Parent = this };
+                    result.Identifiers.Add($"{protocol}/{port}");
+                    Children.Add(result);
                 }
 
                 return result;
@@ -88,12 +88,17 @@ namespace SMACD.AppTree
                 ProtocolType protocol = Enum.Parse<ProtocolType>(protocolAndPort.Split('/')[0]);
                 int port = int.Parse(protocolAndPort.Split('/')[1]);
 
-                var existing = Children.FirstOrDefault(c => c.Identifiers.Contains($"{protocol}/{port}"));
+                AppTreeNode existing = Children.FirstOrDefault(c => c.Identifiers.Contains($"{protocol}/{port}"));
                 if (existing != null)
+                {
                     Children.Remove(existing);
+                }
 
                 if (value.Identifiers.Contains($"{protocol}/{port}"))
+                {
                     value.Identifiers.Add($"{protocol}/{port}");
+                }
+
                 Children.Add(value);
             }
         }

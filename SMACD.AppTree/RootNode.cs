@@ -37,11 +37,14 @@ namespace SMACD.AppTree
         {
             get
             {
-                var existingResult = ChildrenAre<HostNode>(n => n.Identifiers.Contains(hostNameOrIp)).FirstOrDefault();
-                if (existingResult != null) return existingResult;
+                HostNode existingResult = ChildrenAre<HostNode>(n => n.Identifiers.Contains(hostNameOrIp)).FirstOrDefault();
+                if (existingResult != null)
+                {
+                    return existingResult;
+                }
 
                 // Hard mode! Resolve first and check against aliases
-                var resolvedAliases = new List<string>();
+                List<string> resolvedAliases = new List<string>();
                 string ip = string.Empty;
                 string hostName = string.Empty;
 
@@ -60,16 +63,26 @@ namespace SMACD.AppTree
                 if (entry != null)
                 {
                     resolvedAliases.AddRange(entry.Aliases.Where(a => !string.IsNullOrEmpty(a)));
-                    
+
                     ip = entry.AddressList.FirstOrDefault()?.ToString();
                     hostName = entry.HostName;
-                    if (!resolvedAliases.Contains(ip) && !string.IsNullOrEmpty(ip)) resolvedAliases.Add(ip);
-                    if (!resolvedAliases.Contains(hostName) && !string.IsNullOrEmpty(hostName)) resolvedAliases.Add(hostName);
+                    if (!resolvedAliases.Contains(ip) && !string.IsNullOrEmpty(ip))
+                    {
+                        resolvedAliases.Add(ip);
+                    }
+
+                    if (!resolvedAliases.Contains(hostName) && !string.IsNullOrEmpty(hostName))
+                    {
+                        resolvedAliases.Add(hostName);
+                    }
                 }
 
-                if (!resolvedAliases.Contains(hostNameOrIp) && !string.IsNullOrEmpty(hostNameOrIp)) Identifiers.Add(hostNameOrIp);
+                if (!resolvedAliases.Contains(hostNameOrIp) && !string.IsNullOrEmpty(hostNameOrIp))
+                {
+                    resolvedAliases.Add(hostNameOrIp);
+                }
 
-                var result = ChildrenAre<HostNode>(n => n.Identifiers.Any(i => resolvedAliases.Contains(i))).FirstOrDefault();
+                HostNode result = ChildrenAre<HostNode>(n => n.Identifiers.Any(i => resolvedAliases.Contains(i))).FirstOrDefault();
                 if (result == null)
                 {
                     result = new HostNode
@@ -82,7 +95,10 @@ namespace SMACD.AppTree
                     {
                         if (!result.Identifiers.Contains(item) && !string.IsNullOrEmpty(item))
                         {
-                            result.Identifiers.Add(item);
+                            if (!string.IsNullOrEmpty(item))
+                            {
+                                result.Identifiers.Add(item);
+                            }
                         }
                     }
                     Children.Add(result);
@@ -90,16 +106,6 @@ namespace SMACD.AppTree
 
                 return result;
             }
-        }
-
-        /// <summary>
-        ///     Attach Parent properties for each Node
-        /// </summary>
-        /// <param name="parent">Parent node</param>
-        public void Connect(AppTreeNode parent = null)
-        {
-            Parent = parent;
-            foreach (var item in Children) Connect(this);
         }
 
         /// <summary>
@@ -132,7 +138,9 @@ namespace SMACD.AppTree
         internal void InvokeTreeNodeCreated(AppTreeNode newTreeNode)
         {
             if (!SuppressEventFiring)
+            {
                 ArtifactCreated?.Invoke(newTreeNode);
+            }
         }
 
         /// <summary>
@@ -142,7 +150,9 @@ namespace SMACD.AppTree
         internal void InvokeTreeNodeChanged(AppTreeNode changedTreeNode)
         {
             if (!SuppressEventFiring)
+            {
                 ArtifactChanged?.Invoke(changedTreeNode);
+            }
         }
 
         /// <summary>
@@ -152,7 +162,9 @@ namespace SMACD.AppTree
         internal void InvokeTreeChildAdded(AppTreeNode nodeAddingChild)
         {
             if (!SuppressEventFiring)
+            {
                 ArtifactChildAdded?.Invoke(nodeAddingChild);
+            }
         }
     }
 }

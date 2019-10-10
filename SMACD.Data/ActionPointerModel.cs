@@ -22,6 +22,10 @@ namespace SMACD.Data
         /// </summary>
         public string Target { get; set; }
 
+        /// <summary>
+        ///     String representation of Action with configuration
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Action: '{Action}' | Target: '{Target}' | Params: " +

@@ -44,12 +44,12 @@ namespace Synthesys.Plugins.SQLMap
         {
             Logger.LogWarning($"FIRED SQLMAP REACTION - {trigger}");
 
-            var descriptor = trigger as ArtifactTriggerDescriptor;
+            ArtifactTriggerDescriptor descriptor = trigger as ArtifactTriggerDescriptor;
             if (descriptor.Node is UrlRequestNode)
             {
-                var urlRequestArtifact = (UrlRequestNode)descriptor.Node;
-                var urlArtifact = urlRequestArtifact.Parent as UrlNode;
-                var url = urlArtifact.GetEntireUrl();
+                UrlRequestNode urlRequestArtifact = (UrlRequestNode)descriptor.Node;
+                UrlNode urlArtifact = urlRequestArtifact.Parent as UrlNode;
+                string url = urlArtifact.GetEntireUrl();
 
                 if (urlRequestArtifact.Method == HttpMethod.Get)
                 {
@@ -77,8 +77,8 @@ namespace Synthesys.Plugins.SQLMap
                 {
                     baseCmd = "sqlmap";
                 }
-                
-                var Aggressive = false; // todo: reaction config
+
+                bool Aggressive = false; // todo: reaction config
 
                 string cmd = baseCmd +
                           $" --url={target}" +

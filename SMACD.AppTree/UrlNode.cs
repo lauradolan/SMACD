@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using SMACD.AppTree.Details;
+using System.Collections.Generic;
 using System.Linq;
-using SMACD.AppTree.Details;
 
 namespace SMACD.AppTree
 {
     /// <summary>
     ///     Represents a single URL segment (directory or file) in some part of the application
     /// </summary>
-    public class UrlNode : AppTreeNode, IAppTreeNode<Details.UrlDetails>
+    public class UrlNode : AppTreeNode, IAppTreeNode<UrlDetails>
     {
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
@@ -43,7 +43,7 @@ namespace SMACD.AppTree
         {
             get
             {
-                var result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
+                UrlNode result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
                     result = new UrlNode { Parent = this };
@@ -63,10 +63,18 @@ namespace SMACD.AppTree
         /// <param name="headers">Headers to send</param>
         public UrlRequestNode AddRequest(string method, IDictionary<string, string> fields, IDictionary<string, string> headers)
         {
-            var result = new UrlRequestNode() { Parent = this };
+            UrlRequestNode result = new UrlRequestNode() { Parent = this };
             result.Identifiers.Add($"{method.ToString().ToUpper()} ({string.Join(", ", fields.Keys)}) ({string.Join(", ", fields.Select(f => $"{f.Key} => {f.Value}"))})");
-            foreach (var kvp in fields) result.Fields.Add(kvp.Key, kvp.Value);
-            foreach (var kvp in headers) result.Headers.Add(kvp.Key, kvp.Value);
+            foreach (KeyValuePair<string, string> kvp in fields)
+            {
+                result.Fields.Add(kvp.Key, kvp.Value);
+            }
+
+            foreach (KeyValuePair<string, string> kvp in headers)
+            {
+                result.Headers.Add(kvp.Key, kvp.Value);
+            }
+
             Children.Add(result);
             return result;
         }
@@ -77,9 +85,9 @@ namespace SMACD.AppTree
         /// <returns></returns>
         public string GetEntireUrl()
         {
-            var path = this.GetPath();
-            var service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
-            var url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
+            List<AppTreeNode> path = GetPath();
+            HttpServiceNode service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
+            string url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
             return $"{service.Host.Hostname}:{service.Port}/{url}";
         }
 
@@ -89,7 +97,7 @@ namespace SMACD.AppTree
         /// <returns></returns>
         public override string ToString()
         {
-            if (Children.Any())
+            if (Children.Any() && UrlSegment != "/")
             {
                 return $"URL Segment '/{UrlSegment}/'";
             }

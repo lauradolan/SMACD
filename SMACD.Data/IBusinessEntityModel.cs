@@ -2,6 +2,9 @@
 
 namespace SMACD.Data
 {
+    /// <summary>
+    ///     Represents a business entity in the system, which tracks ownership and risk from a project management perspective
+    /// </summary>
     public interface IBusinessEntityModel
     {
         /// <summary>

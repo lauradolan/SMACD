@@ -75,6 +75,12 @@
             <param name="uuid">Artifact UUID</param>
             <returns></returns>
         </member>
+        <member name="M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)">
+            <summary>
+                Attach Parent properties for each Node
+            </summary>
+            <param name="parent">Parent node</param>
+        </member>
         <member name="M:SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)">
             <summary>
                 Returns the leaf Artifact associated with a given UUID path
@@ -550,17 +556,22 @@
                 Represents an HTTP service accessible via a specific protocol and port
             </summary>
         </member>
+        <member name="P:SMACD.AppTree.HttpServiceNode.NodeViewName">
+            <summary>
+                A Razor component view which can be used to visualize the content of a given node
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.HttpServiceNode.Detail">
+            <summary>
+                Details around an HTTP Service
+            </summary>
+        </member>
         <member name="P:SMACD.AppTree.HttpServiceNode.Item(System.String)">
             <summary>
                 Get a child URL segment
             </summary>
             <param name="urlSegment">URL segment</param>
             <returns></returns>
-        </member>
-        <member name="P:SMACD.AppTree.HttpServiceNode.Detail">
-            <summary>
-                Details around an HTTP Service
-            </summary>
         </member>
         <member name="M:SMACD.AppTree.HttpServiceNode.ToString">
             <summary>
@@ -715,12 +726,6 @@
             <param name="hostNameOrIp">Hostname/IP</param>
             <returns></returns>
         </member>
-        <member name="M:SMACD.AppTree.RootNode.Connect(SMACD.AppTree.AppTreeNode)">
-            <summary>
-                Attach Parent properties for each Node
-            </summary>
-            <param name="parent">Parent node</param>
-        </member>
         <member name="E:SMACD.AppTree.RootNode.ArtifactCreated">
             <summary>
                 Fired when an Artifact belonging to this tree
@@ -764,14 +769,34 @@
                 Represents a single service, listening on a port of a Host
             </summary>
         </member>
+        <member name="T:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes">
+            <summary>
+                Service types which are known by the system for investigation
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Unknown">
+            <summary>
+                Service fingerprint failed
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Http">
+            <summary>
+                Web (HTTP/S) service
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.ServiceNode.NodeViewName">
+            <summary>
+                A Razor component view which can be used to visualize the content of a given node
+            </summary>
+        </member>
         <member name="P:SMACD.AppTree.ServiceNode.Host">
             <summary>
                 Hostname/IP of this Service
             </summary>
         </member>
-        <member name="P:SMACD.AppTree.ServiceNode.Detail">
+        <member name="P:SMACD.AppTree.ServiceNode.ServiceNodeType">
             <summary>
-                Details around a Service
+                Specific type of the service node for more information
             </summary>
         </member>
         <member name="P:SMACD.AppTree.ServiceNode.Protocol">
@@ -782,6 +807,11 @@
         <member name="P:SMACD.AppTree.ServiceNode.Port">
             <summary>
                 Port number
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.ServiceNode.Detail">
+            <summary>
+                Details around a Service
             </summary>
         </member>
         <member name="M:SMACD.AppTree.ServiceNode.ToString">
@@ -857,11 +887,6 @@
                 A Razor component view which can be used to visualize the content of a given node
             </summary>
         </member>
-        <member name="P:SMACD.AppTree.UrlRequestNode.Detail">
-            <summary>
-                Details around a URL segment
-            </summary>
-        </member>
         <member name="P:SMACD.AppTree.UrlRequestNode.Url">
             <summary>
                 Entire URL associated with this request
@@ -882,12 +907,22 @@
                 Headers to be sent with request
             </summary>
         </member>
+        <member name="P:SMACD.AppTree.UrlRequestNode.Detail">
+            <summary>
+                Details around a URL segment
+            </summary>
+        </member>
         <member name="P:SMACD.AppTree.UrlRequestNode.Item(System.String)">
             <summary>
                 Get a child URL segment
             </summary>
             <param name="urlSegment">URL segment</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.AppTree.UrlRequestNode.#ctor">
+            <summary>
+                Represents a single request to a URL in some part of the application
+            </summary>
         </member>
         <member name="M:SMACD.AppTree.UrlRequestNode.GetEntireUrl">
             <summary>

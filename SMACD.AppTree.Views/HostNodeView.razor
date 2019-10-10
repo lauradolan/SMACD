@@ -37,7 +37,7 @@
 
 <div class="row">
     <div class="col">
-        <DataAttachmentDisplay Attachments="@Artifact.Evidence" />
+        <EvidenceDisplay EvidenceCollection="@Artifact.Evidence" />
     </div>
 </div>
 
@@ -46,7 +46,7 @@
     <CardGroup Class="pt-2">
         @foreach (var item in HostArtifact.Children)
         {
-            <ServicePortArtifactSummary Artifact="@item" />
+            <ServiceNodeSummary Artifact="@item" />
         }
     </CardGroup>
 }

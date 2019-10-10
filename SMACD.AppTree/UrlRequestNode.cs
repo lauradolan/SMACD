@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using SMACD.AppTree.Details;
+using System.Linq;
 using System.Net.Http;
-using SMACD.AppTree.Details;
 
 namespace SMACD.AppTree
 {
@@ -15,11 +15,6 @@ namespace SMACD.AppTree
         public override string NodeViewName => "SMACD.Artifacts.Views.UrlRequestNodeView";
 
         /// <summary>
-        ///     Details around a URL segment
-        /// </summary>
-        public Versionable<UrlRequestDetails> Detail { get; set; } = new Versionable<UrlRequestDetails>();
-
-        /// <summary>
         ///     Entire URL associated with this request
         /// </summary>
         public string Url => (Parent as UrlNode).GetEntireUrl();
@@ -31,6 +26,11 @@ namespace SMACD.AppTree
         {
             get
             {
+                if (string.IsNullOrEmpty(NiceIdentifier))
+                {
+                    return null;
+                }
+
                 string method = NiceIdentifier.Split(' ')[0];
                 if (method.ToUpper() == "GET")
                 {
@@ -72,6 +72,11 @@ namespace SMACD.AppTree
         public ObservableDictionary<string, string> Headers { get; set; } = new ObservableDictionary<string, string>();
 
         /// <summary>
+        ///     Details around a URL segment
+        /// </summary>
+        public Versionable<UrlRequestDetails> Detail { get; set; } = new Versionable<UrlRequestDetails>();
+
+        /// <summary>
         ///     Get a child URL segment
         /// </summary>
         /// <param name="urlSegment">URL segment</param>
@@ -80,7 +85,7 @@ namespace SMACD.AppTree
         {
             get
             {
-                var result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
+                UrlNode result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
                     result = new UrlNode { Parent = this };
@@ -92,6 +97,9 @@ namespace SMACD.AppTree
             }
         }
 
+        /// <summary>
+        ///     Represents a single request to a URL in some part of the application
+        /// </summary>
         public UrlRequestNode()
         {
             Fields.CollectionChanged += (s, e) => NotifyChanged();
@@ -104,9 +112,9 @@ namespace SMACD.AppTree
         /// <returns></returns>
         public string GetEntireUrl()
         {
-            var path = this.GetPath();
-            var service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
-            var url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
+            System.Collections.Generic.List<AppTreeNode> path = GetPath();
+            HttpServiceNode service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
+            string url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
             return $"{service.Host.Hostname}:{service.Port}/{url}";
         }
 
@@ -114,6 +122,9 @@ namespace SMACD.AppTree
         ///     String representation of URL segment
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => $"{Method} Request Against '{Url}'";
+        public override string ToString()
+        {
+            return $"{Method} Request Against '{Url}'";
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace SMACD.AppTree
         ///     Specificity of the data provider contributing the data
         /// </summary>
         public DataProviderSpecificity ProviderSpecificity { get; set; } = DataProviderSpecificity.Unknown;
-        
+
         /// <summary>
         ///     Overall score of confidence in this version of the data, based on the confidence and specificity of provider
         /// </summary>

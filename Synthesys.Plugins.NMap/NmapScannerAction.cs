@@ -73,7 +73,6 @@ namespace Synthesys.Plugins.Nmap
 
             foreach (NmapPort port in nmapReport.Ports)
             {
-                ServiceNode serviceNode = null;
                 if (new[] { "httpd" }.Contains(port.Service))
                 {
                     Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode();

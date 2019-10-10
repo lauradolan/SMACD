@@ -1,13 +1,23 @@
-﻿using System.Linq;
-using SMACD.AppTree.Details;
+﻿using SMACD.AppTree.Details;
+using System.Linq;
 
 namespace SMACD.AppTree
 {
     /// <summary>
     ///     Represents an HTTP service accessible via a specific protocol and port
     /// </summary>
-    public class HttpServiceNode : ServiceNode, IAppTreeNode<Details.HttpServiceDetails>
+    public class HttpServiceNode : ServiceNode, IAppTreeNode<HttpServiceDetails>
     {
+        /// <summary>
+        ///     A Razor component view which can be used to visualize the content of a given node
+        /// </summary>
+        public override string NodeViewName => "SMACD.Artifacts.Views.HttpServiceNodeView";
+
+        /// <summary>
+        ///     Details around an HTTP Service
+        /// </summary>
+        public new Versionable<HttpServiceDetails> Detail { get; set; } = new Versionable<HttpServiceDetails>();
+
         /// <summary>
         ///     Get a child URL segment
         /// </summary>
@@ -28,11 +38,6 @@ namespace SMACD.AppTree
                 return result;
             }
         }
-
-        /// <summary>
-        ///     Details around an HTTP Service
-        /// </summary>
-        public Versionable<HttpServiceDetails> Detail { get; set; } = new Versionable<HttpServiceDetails>();
 
         /// <summary>
         ///     String representation of HTTP Service artifact

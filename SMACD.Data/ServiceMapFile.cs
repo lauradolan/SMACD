@@ -43,7 +43,7 @@ namespace SMACD.Data
             using (StreamReader sr = new StreamReader(file))
             {
                 serviceMap = new DeserializerBuilder()
-                    .WithNamingConvention(new CamelCaseNamingConvention())
+                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
                     .AddLoadedTagMappings()
                     .Build()
                     .Deserialize<ServiceMapFile>(sr);
@@ -55,12 +55,12 @@ namespace SMACD.Data
         /// <summary>
         ///     Deserialize a Service Map from a YAML string
         /// </summary>
-        /// <param name="file">Service Map YAML</param>
+        /// <param name="yaml">Service Map YAML</param>
         /// <returns></returns>
         public static ServiceMapFile GetServiceMapFromYaml(string yaml)
         {
             return new DeserializerBuilder()
-                .WithNamingConvention(new CamelCaseNamingConvention())
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .AddLoadedTagMappings()
                 .Build()
                 .Deserialize<ServiceMapFile>(yaml);
@@ -80,7 +80,7 @@ namespace SMACD.Data
             using (StreamWriter sr = new StreamWriter(file))
             {
                 new SerializerBuilder()
-                    .WithNamingConvention(new CamelCaseNamingConvention())
+                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
                     .AddLoadedTagMappings()
                     .Build()
                     .Serialize(sr, serviceMap);

@@ -56,7 +56,7 @@
             // Try resolving inside the Artifacts assembly
             if (componentType == null && Artifact.NodeViewName.Contains(".AppTree."))
             {
-                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.AppTree.Views.DefaultArtifactView)).GetType(Artifact.NodeViewName);
+                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.AppTree.Views.DefaultNodeView)).GetType(Artifact.NodeViewName);
             }
 
             // Try resolving inside the loaded extensions
@@ -67,7 +67,7 @@
         }
 
         if (componentType == null)
-            componentType = typeof(SMACD.AppTree.Views.DefaultArtifactView);
+            componentType = typeof(SMACD.AppTree.Views.DefaultNodeView);
 
         return componentType;
     }

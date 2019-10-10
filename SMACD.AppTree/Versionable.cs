@@ -183,11 +183,14 @@ namespace SMACD.AppTree
             {
                 foreach (System.Reflection.PropertyInfo property in typeof(TData).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
                 {
-                    var valueToMerge = property.GetValue(layer);
+                    object valueToMerge = property.GetValue(layer);
                     object defaultValue = property.PropertyType.IsValueType ? Activator.CreateInstance(property.PropertyType) : null;
 
                     if (valueToMerge.Equals(defaultValue))
+                    {
                         continue;
+                    }
+
                     property.SetValue(coalesced, valueToMerge);
                 }
             }

@@ -11,14 +11,46 @@ namespace SMACD.AppTree
     public class ServiceNode : AppTreeNode, IAppTreeNode<ServiceDetails>
     {
         /// <summary>
+        ///     Service types which are known by the system for investigation
+        /// </summary>
+        public enum KnownServiceNodeTypes
+        {
+            /// <summary>
+            ///     Service fingerprint failed
+            /// </summary>
+            Unknown,
+
+            /// <summary>
+            ///     Web (HTTP/S) service
+            /// </summary>
+            Http
+        }
+
+        /// <summary>
+        ///     A Razor component view which can be used to visualize the content of a given node
+        /// </summary>
+        public override string NodeViewName => "SMACD.Artifacts.Views.ServiceNodeView";
+
+        /// <summary>
         ///     Hostname/IP of this Service
         /// </summary>
         public HostNode Host => (HostNode)Parent;
 
         /// <summary>
-        ///     Details around a Service
+        ///     Specific type of the service node for more information
         /// </summary>
-        public Versionable<ServiceDetails> Detail { get; set; } = new Versionable<ServiceDetails>();
+        public KnownServiceNodeTypes ServiceNodeType
+        {
+            get
+            {
+                if (this is HttpServiceNode)
+                {
+                    return KnownServiceNodeTypes.Http;
+                }
+
+                return KnownServiceNodeTypes.Unknown;
+            }
+        }
 
         /// <summary>
         ///     Port Protocol Type
@@ -61,6 +93,12 @@ namespace SMACD.AppTree
                 return 0;
             }
         }
+
+        /// <summary>
+        ///     Details around a Service
+        /// </summary>
+        public Versionable<ServiceDetails> Detail { get; set; } = new Versionable<ServiceDetails>();
+
 
         /// <summary>
         ///     String representation of Service Port Artifact

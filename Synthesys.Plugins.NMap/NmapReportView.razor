@@ -1,4 +1,5 @@
 ﻿@using Blazorise.DataGrid
+@using SMACD.AppTree.Views
 
     <div class="container-fluid">
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
@@ -59,7 +60,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <SMACD.Artifacts.Views.VulnerabilityDisplay Vulnerabilities="@Report.Vulnerabilities"/>
+                <VulnerabilityDisplay Vulnerabilities="@Report.Vulnerabilities"/>
             </div>
         </div>
     </div>

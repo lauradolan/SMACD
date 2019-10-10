@@ -53,7 +53,10 @@ namespace Synthesys.SDK.Triggers
         public override string ToString()
         {
             if (Node != null)
+            {
                 return $"Artifact Trigger ({Node.GetUUIDPath()} {Trigger.ToString()})";
+            }
+
             return $"Artifact Trigger Path {NodePath} {Trigger.ToString()}";
         }
 
@@ -76,9 +79,13 @@ namespace Synthesys.SDK.Triggers
         public override int GetHashCode()
         {
             if (Node != null)
+            {
                 return HashCode.Combine(Node.GetUUIDPath(), Trigger);
+            }
             else
+            {
                 return HashCode.Combine(NodePath, Trigger);
+            }
         }
     }
 }
