@@ -143,7 +143,7 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
-        ///     Convert the Versionable<TData> to its native TData
+        ///     Convert the Versionable to its native TData
         /// </summary>
         /// <param name="v">Versionable data</param>
         public static implicit operator TData(Versionable<TData> v)

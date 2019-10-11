@@ -8,7 +8,7 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace SMACD.Data
 {
     /// <summary>
-    ///     Service Map - Stores both Features and Resources for an application's test
+    ///     Service Map - Stores Features and Resources for an application's test, as well as environment settings
     /// </summary>
     public class ServiceMapFile : IModel
     {
@@ -21,6 +21,11 @@ namespace SMACD.Data
         ///     When this file was last updated
         /// </summary>
         public DateTime Updated { get; set; }
+        
+        /// <summary>
+        ///     Configuration options for applications using this Service Map
+        /// </summary>
+        public EnvironmentSettings EnvironmentSettings { get; set; } = new EnvironmentSettings();
 
         /// <summary>
         ///     Features stored in this Project Map

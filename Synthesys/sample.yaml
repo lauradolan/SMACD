@@ -16,7 +16,11 @@ features:
     - name: Sample Abuse Case A1i
       description: This is the first abuse case for the first use case for the first feature!
       actions:
-      - action: dummy
+      - action: nmap
+        target: resourceRoot
+      - action: nikto
+        target: resourceRoot
+      - action: owaspzap
         target: resourceRoot
 targets:
 - !http

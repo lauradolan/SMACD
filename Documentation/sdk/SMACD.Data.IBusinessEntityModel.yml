@@ -1,0 +1,349 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.Data.IBusinessEntityModel
+  commentId: T:SMACD.Data.IBusinessEntityModel
+  id: IBusinessEntityModel
+  parent: SMACD.Data
+  children:
+  - SMACD.Data.IBusinessEntityModel.BusinessRisk
+  - SMACD.Data.IBusinessEntityModel.Description
+  - SMACD.Data.IBusinessEntityModel.Name
+  - SMACD.Data.IBusinessEntityModel.Owners
+  - SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  langs:
+  - csharp
+  - vb
+  name: IBusinessEntityModel
+  nameWithType: IBusinessEntityModel
+  fullName: SMACD.Data.IBusinessEntityModel
+  type: Interface
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IBusinessEntityModel
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 7
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRepresents a business entity in the system, which tracks ownership and risk from a project management perspective\n"
+  example: []
+  syntax:
+    content: public interface IBusinessEntityModel
+    content.vb: Public Interface IBusinessEntityModel
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: SMACD.Data.IBusinessEntityModel.Name
+  commentId: P:SMACD.Data.IBusinessEntityModel.Name
+  id: Name
+  parent: SMACD.Data.IBusinessEntityModel
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: IBusinessEntityModel.Name
+  fullName: SMACD.Data.IBusinessEntityModel.Name
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Name
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 12
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nName of business entity\n"
+  example: []
+  syntax:
+    content: string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Property Name As String
+  overload: SMACD.Data.IBusinessEntityModel.Name*
+  modifiers.csharp:
+  - get
+  - set
+- uid: SMACD.Data.IBusinessEntityModel.Description
+  commentId: P:SMACD.Data.IBusinessEntityModel.Description
+  id: Description
+  parent: SMACD.Data.IBusinessEntityModel
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: IBusinessEntityModel.Description
+  fullName: SMACD.Data.IBusinessEntityModel.Description
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Description
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 17
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nDescription of business entity\n"
+  example: []
+  syntax:
+    content: string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Property Description As String
+  overload: SMACD.Data.IBusinessEntityModel.Description*
+  modifiers.csharp:
+  - get
+  - set
+- uid: SMACD.Data.IBusinessEntityModel.Owners
+  commentId: P:SMACD.Data.IBusinessEntityModel.Owners
+  id: Owners
+  parent: SMACD.Data.IBusinessEntityModel
+  langs:
+  - csharp
+  - vb
+  name: Owners
+  nameWithType: IBusinessEntityModel.Owners
+  fullName: SMACD.Data.IBusinessEntityModel.Owners
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Owners
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 22
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nBusiness owners for this entity\n"
+  example: []
+  syntax:
+    content: IList<OwnerPointerModel> Owners { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+    content.vb: Property Owners As IList(Of OwnerPointerModel)
+  overload: SMACD.Data.IBusinessEntityModel.Owners*
+  modifiers.csharp:
+  - get
+  - set
+- uid: SMACD.Data.IBusinessEntityModel.BusinessRisk
+  commentId: P:SMACD.Data.IBusinessEntityModel.BusinessRisk
+  id: BusinessRisk
+  parent: SMACD.Data.IBusinessEntityModel
+  langs:
+  - csharp
+  - vb
+  name: BusinessRisk
+  nameWithType: IBusinessEntityModel.BusinessRisk
+  fullName: SMACD.Data.IBusinessEntityModel.BusinessRisk
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: BusinessRisk
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 28
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRelative level of risk for this entity in comparison to other entities in this generation\nA high business risk may indicate that the entity manages sensitive data\n"
+  example: []
+  syntax:
+    content: int BusinessRisk { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Property BusinessRisk As Integer
+  overload: SMACD.Data.IBusinessEntityModel.BusinessRisk*
+  modifiers.csharp:
+  - get
+  - set
+- uid: SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  commentId: P:SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  id: TechnicalRisk
+  parent: SMACD.Data.IBusinessEntityModel
+  langs:
+  - csharp
+  - vb
+  name: TechnicalRisk
+  nameWithType: IBusinessEntityModel.TechnicalRisk
+  fullName: SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/IBusinessEntityModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TechnicalRisk
+    path: ../SMACD.Data/IBusinessEntityModel.cs
+    startLine: 35
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRelative level of technical risk for this entity in comparison to other entities in this generation\nA high technical risk may indicate that there is a low degree of complexity to technically attack the targets\nassociated with this entity\n"
+  example: []
+  syntax:
+    content: int TechnicalRisk { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Property TechnicalRisk As Integer
+  overload: SMACD.Data.IBusinessEntityModel.TechnicalRisk*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data
+- uid: SMACD.Data.IBusinessEntityModel.Name*
+  commentId: Overload:SMACD.Data.IBusinessEntityModel.Name
+  name: Name
+  nameWithType: IBusinessEntityModel.Name
+  fullName: SMACD.Data.IBusinessEntityModel.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.Data.IBusinessEntityModel.Description*
+  commentId: Overload:SMACD.Data.IBusinessEntityModel.Description
+  name: Description
+  nameWithType: IBusinessEntityModel.Description
+  fullName: SMACD.Data.IBusinessEntityModel.Description
+- uid: SMACD.Data.IBusinessEntityModel.Owners*
+  commentId: Overload:SMACD.Data.IBusinessEntityModel.Owners
+  name: Owners
+  nameWithType: IBusinessEntityModel.Owners
+  fullName: SMACD.Data.IBusinessEntityModel.Owners
+- uid: System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+  commentId: T:System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<OwnerPointerModel>
+  nameWithType: IList<OwnerPointerModel>
+  fullName: System.Collections.Generic.IList<SMACD.Data.OwnerPointerModel>
+  nameWithType.vb: IList(Of OwnerPointerModel)
+  fullName.vb: System.Collections.Generic.IList(Of SMACD.Data.OwnerPointerModel)
+  name.vb: IList(Of OwnerPointerModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.Data.OwnerPointerModel
+    name: OwnerPointerModel
+    nameWithType: OwnerPointerModel
+    fullName: SMACD.Data.OwnerPointerModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.Data.OwnerPointerModel
+    name: OwnerPointerModel
+    nameWithType: OwnerPointerModel
+    fullName: SMACD.Data.OwnerPointerModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: SMACD.Data.IBusinessEntityModel.BusinessRisk*
+  commentId: Overload:SMACD.Data.IBusinessEntityModel.BusinessRisk
+  name: BusinessRisk
+  nameWithType: IBusinessEntityModel.BusinessRisk
+  fullName: SMACD.Data.IBusinessEntityModel.BusinessRisk
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: SMACD.Data.IBusinessEntityModel.TechnicalRisk*
+  commentId: Overload:SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  name: TechnicalRisk
+  nameWithType: IBusinessEntityModel.TechnicalRisk
+  fullName: SMACD.Data.IBusinessEntityModel.TechnicalRisk

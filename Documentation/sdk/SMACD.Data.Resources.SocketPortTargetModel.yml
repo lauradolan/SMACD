@@ -1,0 +1,519 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.Data.Resources.SocketPortTargetModel
+  commentId: T:SMACD.Data.Resources.SocketPortTargetModel
+  id: SocketPortTargetModel
+  parent: SMACD.Data.Resources
+  children:
+  - SMACD.Data.Resources.SocketPortTargetModel.Hostname
+  - SMACD.Data.Resources.SocketPortTargetModel.Port
+  - SMACD.Data.Resources.SocketPortTargetModel.Protocol
+  langs:
+  - csharp
+  - vb
+  name: SocketPortTargetModel
+  nameWithType: SocketPortTargetModel
+  fullName: SMACD.Data.Resources.SocketPortTargetModel
+  type: Class
+  source:
+    remote:
+      path: SMACD.Data/Resources/SocketPortResourceModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SocketPortTargetModel
+    path: ../SMACD.Data/Resources/SocketPortResourceModel.cs
+    startLine: 5
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data.Resources
+  summary: "\nRepresents a Target resolved to its handler\n"
+  example: []
+  syntax:
+    content: 'public class SocketPortTargetModel : TargetModel, IModel'
+    content.vb: >-
+      Public Class SocketPortTargetModel
+
+          Inherits TargetModel
+
+          Implements IModel
+  inheritance:
+  - System.Object
+  - SMACD.Data.TargetModel
+  implements:
+  - SMACD.Data.IModel
+  inheritedMembers:
+  - SMACD.Data.TargetModel.TargetId
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Hostname
+  commentId: P:SMACD.Data.Resources.SocketPortTargetModel.Hostname
+  id: Hostname
+  parent: SMACD.Data.Resources.SocketPortTargetModel
+  langs:
+  - csharp
+  - vb
+  name: Hostname
+  nameWithType: SocketPortTargetModel.Hostname
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Hostname
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/Resources/SocketPortResourceModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Hostname
+    path: ../SMACD.Data/Resources/SocketPortResourceModel.cs
+    startLine: 10
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data.Resources
+  summary: "\nHostname or IP address of system to connect to\n"
+  example: []
+  syntax:
+    content: public string Hostname { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Hostname As String
+  overload: SMACD.Data.Resources.SocketPortTargetModel.Hostname*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Protocol
+  commentId: P:SMACD.Data.Resources.SocketPortTargetModel.Protocol
+  id: Protocol
+  parent: SMACD.Data.Resources.SocketPortTargetModel
+  langs:
+  - csharp
+  - vb
+  name: Protocol
+  nameWithType: SocketPortTargetModel.Protocol
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Protocol
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/Resources/SocketPortResourceModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Protocol
+    path: ../SMACD.Data/Resources/SocketPortResourceModel.cs
+    startLine: 15
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data.Resources
+  summary: "\nProtocol used to connect (default is TCP)\n"
+  example: []
+  syntax:
+    content: public string Protocol { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Protocol As String
+  overload: SMACD.Data.Resources.SocketPortTargetModel.Protocol*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Port
+  commentId: P:SMACD.Data.Resources.SocketPortTargetModel.Port
+  id: Port
+  parent: SMACD.Data.Resources.SocketPortTargetModel
+  langs:
+  - csharp
+  - vb
+  name: Port
+  nameWithType: SocketPortTargetModel.Port
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Port
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/Resources/SocketPortResourceModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Port
+    path: ../SMACD.Data/Resources/SocketPortResourceModel.cs
+    startLine: 20
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data.Resources
+  summary: "\nPort number to connect to\n"
+  example: []
+  syntax:
+    content: public int Port { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Port As Integer
+  overload: SMACD.Data.Resources.SocketPortTargetModel.Port*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: SMACD.Data.Resources
+  commentId: N:SMACD.Data.Resources
+  name: SMACD.Data.Resources
+  nameWithType: SMACD.Data.Resources
+  fullName: SMACD.Data.Resources
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: SMACD.Data.TargetModel
+  commentId: T:SMACD.Data.TargetModel
+  parent: SMACD.Data
+  name: TargetModel
+  nameWithType: TargetModel
+  fullName: SMACD.Data.TargetModel
+- uid: SMACD.Data.IModel
+  commentId: T:SMACD.Data.IModel
+  parent: SMACD.Data
+  name: IModel
+  nameWithType: IModel
+  fullName: SMACD.Data.IModel
+- uid: SMACD.Data.TargetModel.TargetId
+  commentId: P:SMACD.Data.TargetModel.TargetId
+  parent: SMACD.Data.TargetModel
+  name: TargetId
+  nameWithType: TargetModel.TargetId
+  fullName: SMACD.Data.TargetModel.TargetId
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Hostname*
+  commentId: Overload:SMACD.Data.Resources.SocketPortTargetModel.Hostname
+  name: Hostname
+  nameWithType: SocketPortTargetModel.Hostname
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Hostname
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Protocol*
+  commentId: Overload:SMACD.Data.Resources.SocketPortTargetModel.Protocol
+  name: Protocol
+  nameWithType: SocketPortTargetModel.Protocol
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Protocol
+- uid: SMACD.Data.Resources.SocketPortTargetModel.Port*
+  commentId: Overload:SMACD.Data.Resources.SocketPortTargetModel.Port
+  name: Port
+  nameWithType: SocketPortTargetModel.Port
+  fullName: SMACD.Data.Resources.SocketPortTargetModel.Port
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

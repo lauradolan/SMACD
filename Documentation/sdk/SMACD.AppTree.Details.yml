@@ -1,0 +1,52 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Details
+  commentId: N:SMACD.AppTree.Details
+  id: SMACD.AppTree.Details
+  children:
+  - SMACD.AppTree.Details.HostDetails
+  - SMACD.AppTree.Details.HttpServiceDetails
+  - SMACD.AppTree.Details.ServiceDetails
+  - SMACD.AppTree.Details.UrlDetails
+  - SMACD.AppTree.Details.UrlRequestDetails
+  langs:
+  - csharp
+  - vb
+  name: SMACD.AppTree.Details
+  nameWithType: SMACD.AppTree.Details
+  fullName: SMACD.AppTree.Details
+  type: Namespace
+  assemblies:
+  - SMACD.AppTree
+references:
+- uid: SMACD.AppTree.Details.HostDetails
+  commentId: T:SMACD.AppTree.Details.HostDetails
+  name: HostDetails
+  nameWithType: HostDetails
+  fullName: SMACD.AppTree.Details.HostDetails
+- uid: SMACD.AppTree.Details.HttpServiceDetails
+  commentId: T:SMACD.AppTree.Details.HttpServiceDetails
+  name: HttpServiceDetails
+  nameWithType: HttpServiceDetails
+  fullName: SMACD.AppTree.Details.HttpServiceDetails
+- uid: SMACD.AppTree.Details.ServiceDetails
+  commentId: T:SMACD.AppTree.Details.ServiceDetails
+  parent: SMACD.AppTree.Details
+  name: ServiceDetails
+  nameWithType: ServiceDetails
+  fullName: SMACD.AppTree.Details.ServiceDetails
+- uid: SMACD.AppTree.Details.UrlDetails
+  commentId: T:SMACD.AppTree.Details.UrlDetails
+  name: UrlDetails
+  nameWithType: UrlDetails
+  fullName: SMACD.AppTree.Details.UrlDetails
+- uid: SMACD.AppTree.Details.UrlRequestDetails
+  commentId: T:SMACD.AppTree.Details.UrlRequestDetails
+  name: UrlRequestDetails
+  nameWithType: UrlRequestDetails
+  fullName: SMACD.AppTree.Details.UrlRequestDetails
+- uid: SMACD.AppTree.Details
+  commentId: N:SMACD.AppTree.Details
+  name: SMACD.AppTree.Details
+  nameWithType: SMACD.AppTree.Details
+  fullName: SMACD.AppTree.Details

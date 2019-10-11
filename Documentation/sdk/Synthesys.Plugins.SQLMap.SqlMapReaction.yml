@@ -1,0 +1,1013 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapReaction
+  id: SqlMapReaction
+  parent: Synthesys.Plugins.SQLMap
+  children:
+  - Synthesys.Plugins.SQLMap.SqlMapReaction.Execute(System.String)
+  - Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  - Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+  - Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
+  langs:
+  - csharp
+  - vb
+  name: SqlMapReaction
+  nameWithType: SqlMapReaction
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SqlMapReaction
+    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+    startLine: 19
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nCreates SQLmap Tasks when URLArtifacts with GET/POST fields are found\n"
+  example: []
+  syntax:
+    content: >-
+      [Extension("sqlmap_field_reaction", Name = "SQLMap SQLi Scanner", Version = "1.0.0", Author = "Anthony Turner", Website = "https://github.com/anthturner/smacd")]
+
+      [TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)]
+
+      public class SqlMapReaction : ReactionExtension, ICanQueueTasks
+    content.vb: >-
+      <Extension("sqlmap_field_reaction", Name:="SQLMap SQLi Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
+
+      <TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)>
+
+      Public Class SqlMapReaction
+          Inherits ReactionExtension
+          Implements ICanQueueTasks
+  inheritance:
+  - System.Object
+  - Synthesys.SDK.Extensions.Extension
+  - Synthesys.SDK.Extensions.ReactionExtension
+  implements:
+  - Synthesys.Tasks.Attributes.ICanQueueTasks
+  inheritedMembers:
+  - Synthesys.SDK.Extensions.ReactionExtension.Triggers
+  - Synthesys.SDK.Extensions.Extension.Logger
+  - Synthesys.SDK.Extensions.Extension.Initialize
+  - Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+  - Synthesys.SDK.Extensions.Extension.Metadata
+  - Synthesys.SDK.Extensions.Extension.ConfigurableProperties
+  - Synthesys.SDK.Extensions.Extension.ConfigurablePropertyValues
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  extensionMethods:
+  - Synthesys.SDK.Extensions.Extension.Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  attributes:
+  - type: Synthesys.SDK.Attributes.ExtensionAttribute
+    ctor: Synthesys.SDK.Attributes.ExtensionAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: sqlmap_field_reaction
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: SQLMap SQLi Scanner
+    - name: Version
+      type: System.String
+      value: 1.0.0
+    - name: Author
+      type: System.String
+      value: Anthony Turner
+    - name: Website
+      type: System.String
+      value: https://github.com/anthturner/smacd
+  - type: Synthesys.SDK.Attributes.TriggeredByAttribute
+    ctor: Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    arguments:
+    - type: System.String
+      value: '**//{UrlRequestArtifact}*'
+    - type: Synthesys.SDK.Triggers.AppTreeNodeEvents
+      value: 0
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+  commentId: P:Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+  id: Tasks
+  parent: Synthesys.Plugins.SQLMap.SqlMapReaction
+  langs:
+  - csharp
+  - vb
+  name: Tasks
+  nameWithType: SqlMapReaction.Tasks
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Tasks
+    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+    startLine: 28
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  syntax:
+    content: public ITaskToolbox Tasks { get; set; }
+    parameters: []
+    return:
+      type: Synthesys.Tasks.ITaskToolbox
+    content.vb: Public Property Tasks As ITaskToolbox
+  overload: Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks*
+  implements:
+  - Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
+  commentId: M:Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
+  id: ValidateEnvironmentReadiness
+  parent: Synthesys.Plugins.SQLMap.SqlMapReaction
+  langs:
+  - csharp
+  - vb
+  name: ValidateEnvironmentReadiness()
+  nameWithType: SqlMapReaction.ValidateEnvironmentReadiness()
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ValidateEnvironmentReadiness
+    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+    startLine: 30
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  syntax:
+    content: public override bool ValidateEnvironmentReadiness()
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function ValidateEnvironmentReadiness As Boolean
+  overridden: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  overload: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  commentId: M:Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  id: React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  parent: Synthesys.Plugins.SQLMap.SqlMapReaction
+  langs:
+  - csharp
+  - vb
+  name: React(TriggerDescriptor)
+  nameWithType: SqlMapReaction.React(TriggerDescriptor)
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: React
+    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+    startLine: 42
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  syntax:
+    content: public override ExtensionReport React(TriggerDescriptor trigger)
+    parameters:
+    - id: trigger
+      type: Synthesys.SDK.Triggers.TriggerDescriptor
+    return:
+      type: Synthesys.SDK.ExtensionReport
+    content.vb: Public Overrides Function React(trigger As TriggerDescriptor) As ExtensionReport
+  overridden: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  overload: Synthesys.Plugins.SQLMap.SqlMapReaction.React*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.Execute(System.String)
+  commentId: M:Synthesys.Plugins.SQLMap.SqlMapReaction.Execute(System.String)
+  id: Execute(System.String)
+  parent: Synthesys.Plugins.SQLMap.SqlMapReaction
+  langs:
+  - csharp
+  - vb
+  name: Execute(String)
+  nameWithType: SqlMapReaction.Execute(String)
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.Execute(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Execute
+    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
+    startLine: 65
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  syntax:
+    content: public ExtensionReport Execute(string target)
+    parameters:
+    - id: target
+      type: System.String
+    return:
+      type: Synthesys.SDK.ExtensionReport
+    content.vb: Public Function Execute(target As String) As ExtensionReport
+  overload: Synthesys.Plugins.SQLMap.SqlMapReaction.Execute*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.SQLMap
+  commentId: N:Synthesys.Plugins.SQLMap
+  name: Synthesys.Plugins.SQLMap
+  nameWithType: Synthesys.Plugins.SQLMap
+  fullName: Synthesys.Plugins.SQLMap
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Synthesys.SDK.Extensions.Extension
+  commentId: T:Synthesys.SDK.Extensions.Extension
+  parent: Synthesys.SDK.Extensions
+  name: Extension
+  nameWithType: Extension
+  fullName: Synthesys.SDK.Extensions.Extension
+- uid: Synthesys.SDK.Extensions.ReactionExtension
+  commentId: T:Synthesys.SDK.Extensions.ReactionExtension
+  parent: Synthesys.SDK.Extensions
+  name: ReactionExtension
+  nameWithType: ReactionExtension
+  fullName: Synthesys.SDK.Extensions.ReactionExtension
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks
+  commentId: T:Synthesys.Tasks.Attributes.ICanQueueTasks
+  parent: Synthesys.Tasks.Attributes
+  name: ICanQueueTasks
+  nameWithType: ICanQueueTasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks
+- uid: Synthesys.SDK.Extensions.ReactionExtension.Triggers
+  commentId: P:Synthesys.SDK.Extensions.ReactionExtension.Triggers
+  parent: Synthesys.SDK.Extensions.ReactionExtension
+  name: Triggers
+  nameWithType: ReactionExtension.Triggers
+  fullName: Synthesys.SDK.Extensions.ReactionExtension.Triggers
+- uid: Synthesys.SDK.Extensions.Extension.Logger
+  commentId: P:Synthesys.SDK.Extensions.Extension.Logger
+  parent: Synthesys.SDK.Extensions.Extension
+  name: Logger
+  nameWithType: Extension.Logger
+  fullName: Synthesys.SDK.Extensions.Extension.Logger
+- uid: Synthesys.SDK.Extensions.Extension.Initialize
+  commentId: M:Synthesys.SDK.Extensions.Extension.Initialize
+  parent: Synthesys.SDK.Extensions.Extension
+  name: Initialize()
+  nameWithType: Extension.Initialize()
+  fullName: Synthesys.SDK.Extensions.Extension.Initialize()
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.Extension.Initialize
+    name: Initialize
+    nameWithType: Extension.Initialize
+    fullName: Synthesys.SDK.Extensions.Extension.Initialize
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.Extension.Initialize
+    name: Initialize
+    nameWithType: Extension.Initialize
+    fullName: Synthesys.SDK.Extensions.Extension.Initialize
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+  commentId: M:Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+  parent: Synthesys.SDK.Extensions.Extension
+  isExternal: true
+  name: SetLoggerName(String)
+  nameWithType: Extension.SetLoggerName(String)
+  fullName: Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+    name: SetLoggerName
+    nameWithType: Extension.SetLoggerName
+    fullName: Synthesys.SDK.Extensions.Extension.SetLoggerName
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
+    name: SetLoggerName
+    nameWithType: Extension.SetLoggerName
+    fullName: Synthesys.SDK.Extensions.Extension.SetLoggerName
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Extensions.Extension.Metadata
+  commentId: P:Synthesys.SDK.Extensions.Extension.Metadata
+  parent: Synthesys.SDK.Extensions.Extension
+  name: Metadata
+  nameWithType: Extension.Metadata
+  fullName: Synthesys.SDK.Extensions.Extension.Metadata
+- uid: Synthesys.SDK.Extensions.Extension.ConfigurableProperties
+  commentId: P:Synthesys.SDK.Extensions.Extension.ConfigurableProperties
+  parent: Synthesys.SDK.Extensions.Extension
+  name: ConfigurableProperties
+  nameWithType: Extension.ConfigurableProperties
+  fullName: Synthesys.SDK.Extensions.Extension.ConfigurableProperties
+- uid: Synthesys.SDK.Extensions.Extension.ConfigurablePropertyValues
+  commentId: P:Synthesys.SDK.Extensions.Extension.ConfigurablePropertyValues
+  parent: Synthesys.SDK.Extensions.Extension
+  name: ConfigurablePropertyValues
+  nameWithType: Extension.ConfigurablePropertyValues
+  fullName: Synthesys.SDK.Extensions.Extension.ConfigurablePropertyValues
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Extensions.Extension.Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  commentId: M:Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  parent: Synthesys.Tasks.ExtensionConfigurator
+  definition: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  name: Configure(AppTreeNode, Dictionary<String, String>)
+  nameWithType: ExtensionConfigurator.Configure(AppTreeNode, Dictionary<String, String>)
+  fullName: Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary<System.String, System.String>)
+  nameWithType.vb: ExtensionConfigurator.Configure(AppTreeNode, Dictionary(Of String, String))
+  fullName.vb: Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary(Of System.String, System.String))
+  name.vb: Configure(AppTreeNode, Dictionary(Of String, String))
+  spec.csharp:
+  - uid: Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+    name: Configure
+    nameWithType: ExtensionConfigurator.Configure
+    fullName: Synthesys.Tasks.ExtensionConfigurator.Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.Tasks.ExtensionConfigurator.Configure(SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+    name: Configure
+    nameWithType: ExtensionConfigurator.Configure
+    fullName: Synthesys.Tasks.ExtensionConfigurator.Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.SDK.Extensions
+  commentId: N:Synthesys.SDK.Extensions
+  name: Synthesys.SDK.Extensions
+  nameWithType: Synthesys.SDK.Extensions
+  fullName: Synthesys.SDK.Extensions
+- uid: Synthesys.Tasks.Attributes
+  commentId: N:Synthesys.Tasks.Attributes
+  name: Synthesys.Tasks.Attributes
+  nameWithType: Synthesys.Tasks.Attributes
+  fullName: Synthesys.Tasks.Attributes
+- uid: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  commentId: M:Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+  isExternal: true
+  name: Configure(Extension, AppTreeNode, Dictionary<String, String>)
+  nameWithType: ExtensionConfigurator.Configure(Extension, AppTreeNode, Dictionary<String, String>)
+  fullName: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary<System.String, System.String>)
+  nameWithType.vb: ExtensionConfigurator.Configure(Extension, AppTreeNode, Dictionary(Of String, String))
+  fullName.vb: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary(Of System.String, System.String))
+  name.vb: Configure(Extension, AppTreeNode, Dictionary(Of String, String))
+  spec.csharp:
+  - uid: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+    name: Configure
+    nameWithType: ExtensionConfigurator.Configure
+    fullName: Synthesys.Tasks.ExtensionConfigurator.Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Extensions.Extension
+    name: Extension
+    nameWithType: Extension
+    fullName: Synthesys.SDK.Extensions.Extension
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
+    name: Configure
+    nameWithType: ExtensionConfigurator.Configure
+    fullName: Synthesys.Tasks.ExtensionConfigurator.Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Extensions.Extension
+    name: Extension
+    nameWithType: Extension
+    fullName: Synthesys.SDK.Extensions.Extension
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Tasks.ExtensionConfigurator
+  commentId: T:Synthesys.Tasks.ExtensionConfigurator
+  parent: Synthesys.Tasks
+  name: ExtensionConfigurator
+  nameWithType: ExtensionConfigurator
+  fullName: Synthesys.Tasks.ExtensionConfigurator
+- uid: Synthesys.Tasks
+  commentId: N:Synthesys.Tasks
+  name: Synthesys.Tasks
+  nameWithType: Synthesys.Tasks
+  fullName: Synthesys.Tasks
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+  name: Tasks
+  nameWithType: SqlMapReaction.Tasks
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  commentId: P:Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  parent: Synthesys.Tasks.Attributes.ICanQueueTasks
+  name: Tasks
+  nameWithType: ICanQueueTasks.Tasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+- uid: Synthesys.Tasks.ITaskToolbox
+  commentId: T:Synthesys.Tasks.ITaskToolbox
+  parent: Synthesys.Tasks
+  name: ITaskToolbox
+  nameWithType: ITaskToolbox
+  fullName: Synthesys.Tasks.ITaskToolbox
+- uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  parent: Synthesys.SDK.Extensions.Extension
+  name: ValidateEnvironmentReadiness()
+  nameWithType: Extension.ValidateEnvironmentReadiness()
+  fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness()
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
+  name: ValidateEnvironmentReadiness
+  nameWithType: SqlMapReaction.ValidateEnvironmentReadiness
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  commentId: M:Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  parent: Synthesys.SDK.Extensions.ReactionExtension
+  name: React(TriggerDescriptor)
+  nameWithType: ReactionExtension.React(TriggerDescriptor)
+  fullName: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+    name: React
+    nameWithType: ReactionExtension.React
+    fullName: Synthesys.SDK.Extensions.ReactionExtension.React
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+    name: React
+    nameWithType: ReactionExtension.React
+    fullName: Synthesys.SDK.Extensions.ReactionExtension.React
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.React*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapReaction.React
+  name: React
+  nameWithType: SqlMapReaction.React
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.React
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+- uid: Synthesys.SDK.ExtensionReport
+  commentId: T:Synthesys.SDK.ExtensionReport
+  parent: Synthesys.SDK
+  name: ExtensionReport
+  nameWithType: ExtensionReport
+  fullName: Synthesys.SDK.ExtensionReport
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.Execute*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapReaction.Execute
+  name: Execute
+  nameWithType: SqlMapReaction.Execute
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.Execute
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

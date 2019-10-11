@@ -55,7 +55,7 @@ Triggers originate from an extension when:
 * A specific extension (determined by its identifier) is run and **succeeds**
 * A specific extension (determined by its identifier) is run and **fails**
 
-### System events triggers
+### System event triggers
 
 Triggers originate from system events when:
 

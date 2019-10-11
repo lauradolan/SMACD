@@ -10,15 +10,38 @@ using System.Threading.Tasks;
 
 namespace Synthesys.SDK.HostCommands
 {
+    /// <summary>
+    ///     Represents a mount between the host and a Docker container
+    /// </summary>
     public class DockerHostMount
     {
+        /// <summary>
+        ///     Path on host
+        /// </summary>
         public string LocalPath { get; set; }
+
+        /// <summary>
+        ///     Path inside container
+        /// </summary>
         public string ContainerPath { get; set; }
+
+        /// <summary>
+        ///     If the mount is read-only
+        /// </summary>
         public bool IsReadOnly { get; set; }
     }
 
+    /// <summary>
+    ///     Represents a command run to execute a Docker container
+    /// </summary>
     public class DockerHostCommand : HostCommand, IDisposable
     {
+        /// <summary>
+        ///     Represents a command run to execute a Docker container
+        /// </summary>
+        /// <param name="image">Image name</param>
+        /// <param name="mounts">Mounts for container</param>
+        /// <param name="user">User to execute container as</param>
         public DockerHostCommand(string image, IEnumerable<DockerHostMount> mounts, string user) : this(
             new CreateContainerParameters
             {
@@ -36,26 +59,42 @@ namespace Synthesys.SDK.HostCommands
         {
         }
 
+        /// <summary>
+        ///     Represents a command run to execute a Docker container
+        /// </summary>
+        /// <param name="containerParameters">Container parameters for new container</param>
         public DockerHostCommand(CreateContainerParameters containerParameters)
         {
             ContainerParameters = containerParameters;
         }
 
+        /// <summary>
+        ///     Parameters to be used during the creation of the Docker container
+        /// </summary>
         public CreateContainerParameters ContainerParameters { get; }
+
+        /// <summary>
+        ///     Container identifier name
+        /// </summary>
         public string ContainerId { get; private set; }
 
+        /// <summary>
+        ///     Start container task
+        /// </summary>
+        /// <returns></returns>
         public async Task Start()
         {
-            DockerClient client;
+            Uri uri = null;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient();
+                uri = new Uri("npipe://./pipe/docker_engine");
             }
             else
             {
-                client = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+                uri = new Uri("unix:///var/run/docker.sock");
             }
 
+            using var client = new DockerClientConfiguration(uri).CreateClient();
             CreateContainerResponse container = await client.Containers.CreateContainerAsync(ContainerParameters);
             ContainerId = container.ID;
 
@@ -79,8 +118,9 @@ namespace Synthesys.SDK.HostCommands
                 });
             //var multiplexedStream = await client.Containers.StartAndAttachContainerExecAsync(ContainerId, false);
 
-            Task.Run(() => ReadLoop(stdoutStream, s => HandleStdOut(s)));
-            Task.Run(() => ReadLoop(stderrStream, s => HandleStdErr(s)));
+
+            _ = Task.Run(() => ReadLoop(stdoutStream, s => HandleStdOut(s)));
+            _ = Task.Run(() => ReadLoop(stderrStream, s => HandleStdErr(s)));
         }
 
         private async Task ReadLoop(MultiplexedStream multiplexedStream, Action<string> action)
@@ -113,6 +153,7 @@ namespace Synthesys.SDK.HostCommands
             catch (Exception ex)
             {
                 Logger.LogError(ex, "Failure during Read from Docker Exec to WebSocket");
+                throw ex;
             }
         }
 
@@ -121,36 +162,28 @@ namespace Synthesys.SDK.HostCommands
 
         private bool disposedValue; // To detect redundant calls
 
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
+        /// <param name="disposing">Currently disposing?</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~DockerHostCommand()
-        // {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
 
         #endregion

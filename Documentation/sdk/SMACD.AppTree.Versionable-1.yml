@@ -1,0 +1,1241 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Versionable`1
+  commentId: T:SMACD.AppTree.Versionable`1
+  id: Versionable`1
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.Versionable`1.#ctor
+  - SMACD.AppTree.Versionable`1.#ctor(`0,SMACD.AppTree.DataVersionDescriptor)
+  - SMACD.AppTree.Versionable`1.#ctor(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  - SMACD.AppTree.Versionable`1.Coalesced
+  - SMACD.AppTree.Versionable`1.CoalesceFunction
+  - SMACD.AppTree.Versionable`1.Item(System.Guid)
+  - SMACD.AppTree.Versionable`1.op_Implicit(SMACD.AppTree.Versionable{`0})~`0
+  - SMACD.AppTree.Versionable`1.Set(`0,SMACD.AppTree.DataVersionDescriptor)
+  - SMACD.AppTree.Versionable`1.Set(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  - SMACD.AppTree.Versionable`1.ToString
+  - SMACD.AppTree.Versionable`1.UnderlyingCollection
+  langs:
+  - csharp
+  - vb
+  name: Versionable<TData>
+  nameWithType: Versionable<TData>
+  fullName: SMACD.AppTree.Versionable<TData>
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Versionable
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 48
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents data which can be [partially] written to by multiple sources and coalesced to a single object\n"
+  example: []
+  syntax:
+    content: 'public class Versionable<TData> : Versionable where TData : new()'
+    typeParameters:
+    - id: TData
+    content.vb: >-
+      Public Class Versionable(Of TData As New)
+          Inherits Versionable
+  inheritance:
+  - System.Object
+  - SMACD.AppTree.Versionable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  nameWithType.vb: Versionable(Of TData)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+  fullName.vb: SMACD.AppTree.Versionable(Of TData)
+  name.vb: Versionable(Of TData)
+- uid: SMACD.AppTree.Versionable`1.CoalesceFunction
+  commentId: P:SMACD.AppTree.Versionable`1.CoalesceFunction
+  id: CoalesceFunction
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: CoalesceFunction
+  nameWithType: Versionable<TData>.CoalesceFunction
+  fullName: SMACD.AppTree.Versionable<TData>.CoalesceFunction
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: CoalesceFunction
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 53
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nCoalesce function; Default function orders layers by score and writes non-null values\n"
+  example: []
+  syntax:
+    content: public static Func<List<Tuple<DataVersionDescriptor, TData>>, TData> CoalesceFunction { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,{TData}}},{TData}}
+    content.vb: Public Shared Property CoalesceFunction As Func(Of List(Of Tuple(Of DataVersionDescriptor, TData)), TData)
+  overload: SMACD.AppTree.Versionable`1.CoalesceFunction*
+  nameWithType.vb: Versionable(Of TData).CoalesceFunction
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).CoalesceFunction
+- uid: SMACD.AppTree.Versionable`1.UnderlyingCollection
+  commentId: P:SMACD.AppTree.Versionable`1.UnderlyingCollection
+  id: UnderlyingCollection
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: UnderlyingCollection
+  nameWithType: Versionable<TData>.UnderlyingCollection
+  fullName: SMACD.AppTree.Versionable<TData>.UnderlyingCollection
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: UnderlyingCollection
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 58
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nUnderlying collection containing each version of data\n"
+  example: []
+  syntax:
+    content: public List<Tuple<DataVersionDescriptor, TData>> UnderlyingCollection { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,{TData}}}
+    content.vb: Public Property UnderlyingCollection As List(Of Tuple(Of DataVersionDescriptor, TData))
+  overload: SMACD.AppTree.Versionable`1.UnderlyingCollection*
+  nameWithType.vb: Versionable(Of TData).UnderlyingCollection
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).UnderlyingCollection
+- uid: SMACD.AppTree.Versionable`1.Item(System.Guid)
+  commentId: P:SMACD.AppTree.Versionable`1.Item(System.Guid)
+  id: Item(System.Guid)
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Item[Guid]
+  nameWithType: Versionable<TData>.Item[Guid]
+  fullName: SMACD.AppTree.Versionable<TData>.Item[System.Guid]
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: this[]
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 65
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a copy of data by its Version ID\n"
+  example: []
+  syntax:
+    content: public TData this[Guid uuid] { get; }
+    parameters:
+    - id: uuid
+      type: System.Guid
+      description: Version ID
+    return:
+      type: '{TData}'
+      description: ''
+    content.vb: Public ReadOnly Property Item(uuid As Guid) As TData
+  overload: SMACD.AppTree.Versionable`1.Item*
+  nameWithType.vb: Versionable(Of TData).Item(Guid)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Item(System.Guid)
+  name.vb: Item(Guid)
+- uid: SMACD.AppTree.Versionable`1.#ctor(`0,SMACD.AppTree.DataVersionDescriptor)
+  commentId: M:SMACD.AppTree.Versionable`1.#ctor(`0,SMACD.AppTree.DataVersionDescriptor)
+  id: '#ctor(`0,SMACD.AppTree.DataVersionDescriptor)'
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Versionable(TData, DataVersionDescriptor)
+  nameWithType: Versionable<TData>.Versionable(TData, DataVersionDescriptor)
+  fullName: SMACD.AppTree.Versionable<TData>.Versionable(TData, SMACD.AppTree.DataVersionDescriptor)
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 83
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents data which can be [partially] written to by multiple sources and coalesced to a single object\n"
+  example: []
+  syntax:
+    content: public Versionable(TData data, DataVersionDescriptor dataVersionDescriptor)
+    parameters:
+    - id: data
+      type: '{TData}'
+      description: Initial version of data
+    - id: dataVersionDescriptor
+      type: SMACD.AppTree.DataVersionDescriptor
+      description: Initial data version descriptor
+    content.vb: Public Sub New(data As TData, dataVersionDescriptor As DataVersionDescriptor)
+  overload: SMACD.AppTree.Versionable`1.#ctor*
+  nameWithType.vb: Versionable(Of TData).Versionable(TData, DataVersionDescriptor)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Versionable(TData, SMACD.AppTree.DataVersionDescriptor)
+- uid: SMACD.AppTree.Versionable`1.#ctor(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  commentId: M:SMACD.AppTree.Versionable`1.#ctor(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  id: '#ctor(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)'
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Versionable(TData, String, DataProviderSpecificity, Double)
+  nameWithType: Versionable<TData>.Versionable(TData, String, DataProviderSpecificity, Double)
+  fullName: SMACD.AppTree.Versionable<TData>.Versionable(TData, System.String, SMACD.AppTree.DataProviderSpecificity, System.Double)
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 95
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents data which can be [partially] written to by multiple sources and coalesced to a single object\n"
+  example: []
+  syntax:
+    content: public Versionable(TData data, string extensionIdentifier, DataProviderSpecificity dataProviderSpecificity, double confidence = 1)
+    parameters:
+    - id: data
+      type: '{TData}'
+      description: Initial version of data
+    - id: extensionIdentifier
+      type: System.String
+      description: Extension identifier
+    - id: dataProviderSpecificity
+      type: SMACD.AppTree.DataProviderSpecificity
+      description: Specificity of data provider
+    - id: confidence
+      type: System.Double
+      description: Confidence in data accuracy
+    content.vb: Public Sub New(data As TData, extensionIdentifier As String, dataProviderSpecificity As DataProviderSpecificity, confidence As Double = 1)
+  overload: SMACD.AppTree.Versionable`1.#ctor*
+  nameWithType.vb: Versionable(Of TData).Versionable(TData, String, DataProviderSpecificity, Double)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Versionable(TData, System.String, SMACD.AppTree.DataProviderSpecificity, System.Double)
+- uid: SMACD.AppTree.Versionable`1.#ctor
+  commentId: M:SMACD.AppTree.Versionable`1.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Versionable()
+  nameWithType: Versionable<TData>.Versionable()
+  fullName: SMACD.AppTree.Versionable<TData>.Versionable()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 102
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents data which can be [partially] written to by multiple sources and coalesced to a single object\n"
+  example: []
+  syntax:
+    content: public Versionable()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.Versionable`1.#ctor*
+  nameWithType.vb: Versionable(Of TData).Versionable()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Versionable()
+- uid: SMACD.AppTree.Versionable`1.Set(`0,SMACD.AppTree.DataVersionDescriptor)
+  commentId: M:SMACD.AppTree.Versionable`1.Set(`0,SMACD.AppTree.DataVersionDescriptor)
+  id: Set(`0,SMACD.AppTree.DataVersionDescriptor)
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Set(TData, DataVersionDescriptor)
+  nameWithType: Versionable<TData>.Set(TData, DataVersionDescriptor)
+  fullName: SMACD.AppTree.Versionable<TData>.Set(TData, SMACD.AppTree.DataVersionDescriptor)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Set
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 111
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAdd a version of data based on a given object and version descriptor\n"
+  example: []
+  syntax:
+    content: public void Set(TData data, DataVersionDescriptor dataVersionDescriptor)
+    parameters:
+    - id: data
+      type: '{TData}'
+      description: Data to add
+    - id: dataVersionDescriptor
+      type: SMACD.AppTree.DataVersionDescriptor
+      description: Descriptor of version for this data payload
+    content.vb: Public Sub Set(data As TData, dataVersionDescriptor As DataVersionDescriptor)
+  overload: SMACD.AppTree.Versionable`1.Set*
+  nameWithType.vb: Versionable(Of TData).Set(TData, DataVersionDescriptor)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Set(TData, SMACD.AppTree.DataVersionDescriptor)
+- uid: SMACD.AppTree.Versionable`1.Set(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  commentId: M:SMACD.AppTree.Versionable`1.Set(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  id: Set(`0,System.String,SMACD.AppTree.DataProviderSpecificity,System.Double)
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Set(TData, String, DataProviderSpecificity, Double)
+  nameWithType: Versionable<TData>.Set(TData, String, DataProviderSpecificity, Double)
+  fullName: SMACD.AppTree.Versionable<TData>.Set(TData, System.String, SMACD.AppTree.DataProviderSpecificity, System.Double)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Set
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 130
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAdd a version of data based on a given object and version descriptor\n"
+  example: []
+  syntax:
+    content: public void Set(TData data, string extensionIdentifier, DataProviderSpecificity dataProviderSpecificity, double confidence = 1)
+    parameters:
+    - id: data
+      type: '{TData}'
+      description: Data to add
+    - id: extensionIdentifier
+      type: System.String
+      description: Extension identifier
+    - id: dataProviderSpecificity
+      type: SMACD.AppTree.DataProviderSpecificity
+      description: Specificity of data provider
+    - id: confidence
+      type: System.Double
+      description: Confidence in data accuracy
+    content.vb: Public Sub Set(data As TData, extensionIdentifier As String, dataProviderSpecificity As DataProviderSpecificity, confidence As Double = 1)
+  overload: SMACD.AppTree.Versionable`1.Set*
+  nameWithType.vb: Versionable(Of TData).Set(TData, String, DataProviderSpecificity, Double)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Set(TData, System.String, SMACD.AppTree.DataProviderSpecificity, System.Double)
+- uid: SMACD.AppTree.Versionable`1.Coalesced
+  commentId: M:SMACD.AppTree.Versionable`1.Coalesced
+  id: Coalesced
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Coalesced()
+  nameWithType: Versionable<TData>.Coalesced()
+  fullName: SMACD.AppTree.Versionable<TData>.Coalesced()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Coalesced
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 139
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a flattened copy of the Versionable which represents the &quot;best&quot; and most &quot;complete&quot; data available from all version layers\n"
+  example: []
+  syntax:
+    content: public TData Coalesced()
+    return:
+      type: '{TData}'
+      description: ''
+    content.vb: Public Function Coalesced As TData
+  overload: SMACD.AppTree.Versionable`1.Coalesced*
+  nameWithType.vb: Versionable(Of TData).Coalesced()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Coalesced()
+- uid: SMACD.AppTree.Versionable`1.op_Implicit(SMACD.AppTree.Versionable{`0})~`0
+  commentId: M:SMACD.AppTree.Versionable`1.op_Implicit(SMACD.AppTree.Versionable{`0})~`0
+  id: op_Implicit(SMACD.AppTree.Versionable{`0})~`0
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: Implicit(Versionable<TData> to TData)
+  nameWithType: Versionable<TData>.Implicit(Versionable<TData> to TData)
+  fullName: SMACD.AppTree.Versionable<TData>.Implicit(SMACD.AppTree.Versionable<TData> to TData)
+  type: Operator
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: op_Implicit
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 148
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nConvert the Versionable to its native TData\n"
+  example: []
+  syntax:
+    content: public static implicit operator TData(Versionable<TData> v)
+    parameters:
+    - id: v
+      type: SMACD.AppTree.Versionable`1
+      description: Versionable data
+    return:
+      type: '{TData}'
+    content.vb: Public Shared Widening Operator CType(v As Versionable(Of TData)) As TData
+  overload: SMACD.AppTree.Versionable`1.op_Implicit*
+  nameWithType.vb: Versionable(Of TData).Widening(Versionable(Of TData) to TData)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Widening(SMACD.AppTree.Versionable(Of TData) to TData)
+  name.vb: Widening(Versionable(Of TData) to TData)
+- uid: SMACD.AppTree.Versionable`1.ToString
+  commentId: M:SMACD.AppTree.Versionable`1.ToString
+  id: ToString
+  parent: SMACD.AppTree.Versionable`1
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: Versionable<TData>.ToString()
+  fullName: SMACD.AppTree.Versionable<TData>.ToString()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ToString
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 157
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nString representation of coalesced value\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: SMACD.AppTree.Versionable`1.ToString*
+  nameWithType.vb: Versionable(Of TData).ToString()
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).ToString()
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: SMACD.AppTree.Versionable
+  commentId: T:SMACD.AppTree.Versionable
+  parent: SMACD.AppTree
+  name: Versionable
+  nameWithType: Versionable
+  fullName: SMACD.AppTree.Versionable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.Versionable`1.CoalesceFunction*
+  commentId: Overload:SMACD.AppTree.Versionable`1.CoalesceFunction
+  name: CoalesceFunction
+  nameWithType: Versionable<TData>.CoalesceFunction
+  fullName: SMACD.AppTree.Versionable<TData>.CoalesceFunction
+  nameWithType.vb: Versionable(Of TData).CoalesceFunction
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).CoalesceFunction
+- uid: System.Func{System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,{TData}}},{TData}}
+  commentId: T:System.Func{System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,`0}},`0}
+  parent: System
+  definition: System.Func`2
+  name: Func<List<Tuple<DataVersionDescriptor, TData>>, TData>
+  nameWithType: Func<List<Tuple<DataVersionDescriptor, TData>>, TData>
+  fullName: System.Func<System.Collections.Generic.List<System.Tuple<SMACD.AppTree.DataVersionDescriptor, TData>>, TData>
+  nameWithType.vb: Func(Of List(Of Tuple(Of DataVersionDescriptor, TData)), TData)
+  fullName.vb: System.Func(Of System.Collections.Generic.List(Of System.Tuple(Of SMACD.AppTree.DataVersionDescriptor, TData)), TData)
+  name.vb: Func(Of List(Of Tuple(Of DataVersionDescriptor, TData)), TData)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.DataVersionDescriptor
+    name: DataVersionDescriptor
+    nameWithType: DataVersionDescriptor
+    fullName: SMACD.AppTree.DataVersionDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.DataVersionDescriptor
+    name: DataVersionDescriptor
+    nameWithType: DataVersionDescriptor
+    fullName: SMACD.AppTree.DataVersionDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Versionable`1.UnderlyingCollection*
+  commentId: Overload:SMACD.AppTree.Versionable`1.UnderlyingCollection
+  name: UnderlyingCollection
+  nameWithType: Versionable<TData>.UnderlyingCollection
+  fullName: SMACD.AppTree.Versionable<TData>.UnderlyingCollection
+  nameWithType.vb: Versionable(Of TData).UnderlyingCollection
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).UnderlyingCollection
+- uid: System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,{TData}}}
+  commentId: T:System.Collections.Generic.List{System.Tuple{SMACD.AppTree.DataVersionDescriptor,`0}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Tuple<DataVersionDescriptor, TData>>
+  nameWithType: List<Tuple<DataVersionDescriptor, TData>>
+  fullName: System.Collections.Generic.List<System.Tuple<SMACD.AppTree.DataVersionDescriptor, TData>>
+  nameWithType.vb: List(Of Tuple(Of DataVersionDescriptor, TData))
+  fullName.vb: System.Collections.Generic.List(Of System.Tuple(Of SMACD.AppTree.DataVersionDescriptor, TData))
+  name.vb: List(Of Tuple(Of DataVersionDescriptor, TData))
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.DataVersionDescriptor
+    name: DataVersionDescriptor
+    nameWithType: DataVersionDescriptor
+    fullName: SMACD.AppTree.DataVersionDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Tuple`2
+    name: Tuple
+    nameWithType: Tuple
+    fullName: System.Tuple
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.DataVersionDescriptor
+    name: DataVersionDescriptor
+    nameWithType: DataVersionDescriptor
+    fullName: SMACD.AppTree.DataVersionDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: SMACD.AppTree.Versionable`1.Item*
+  commentId: Overload:SMACD.AppTree.Versionable`1.Item
+  name: Item
+  nameWithType: Versionable<TData>.Item
+  fullName: SMACD.AppTree.Versionable<TData>.Item
+  nameWithType.vb: Versionable(Of TData).Item
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Item
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: '{TData}'
+  commentId: '!:TData'
+  definition: TData
+  name: TData
+  nameWithType: TData
+  fullName: TData
+- uid: TData
+  name: TData
+  nameWithType: TData
+  fullName: TData
+- uid: SMACD.AppTree.Versionable`1.#ctor*
+  commentId: Overload:SMACD.AppTree.Versionable`1.#ctor
+  name: Versionable
+  nameWithType: Versionable<TData>.Versionable
+  fullName: SMACD.AppTree.Versionable<TData>.Versionable
+  nameWithType.vb: Versionable(Of TData).Versionable
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Versionable
+- uid: SMACD.AppTree.DataVersionDescriptor
+  commentId: T:SMACD.AppTree.DataVersionDescriptor
+  parent: SMACD.AppTree
+  name: DataVersionDescriptor
+  nameWithType: DataVersionDescriptor
+  fullName: SMACD.AppTree.DataVersionDescriptor
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.DataProviderSpecificity
+  commentId: T:SMACD.AppTree.DataProviderSpecificity
+  parent: SMACD.AppTree
+  name: DataProviderSpecificity
+  nameWithType: DataProviderSpecificity
+  fullName: SMACD.AppTree.DataProviderSpecificity
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: SMACD.AppTree.Versionable`1.Set*
+  commentId: Overload:SMACD.AppTree.Versionable`1.Set
+  name: Set
+  nameWithType: Versionable<TData>.Set
+  fullName: SMACD.AppTree.Versionable<TData>.Set
+  nameWithType.vb: Versionable(Of TData).Set
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Set
+- uid: SMACD.AppTree.Versionable`1.Coalesced*
+  commentId: Overload:SMACD.AppTree.Versionable`1.Coalesced
+  name: Coalesced
+  nameWithType: Versionable<TData>.Coalesced
+  fullName: SMACD.AppTree.Versionable<TData>.Coalesced
+  nameWithType.vb: Versionable(Of TData).Coalesced
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Coalesced
+- uid: SMACD.AppTree.Versionable`1.op_Implicit*
+  commentId: Overload:SMACD.AppTree.Versionable`1.op_Implicit
+  name: Implicit
+  nameWithType: Versionable<TData>.Implicit
+  fullName: SMACD.AppTree.Versionable<TData>.Implicit
+  nameWithType.vb: Versionable(Of TData).Widening
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).Widening
+  name.vb: Widening
+- uid: SMACD.AppTree.Versionable`1
+  commentId: T:SMACD.AppTree.Versionable`1
+  parent: SMACD.AppTree
+  name: Versionable<TData>
+  nameWithType: Versionable<TData>
+  fullName: SMACD.AppTree.Versionable<TData>
+  nameWithType.vb: Versionable(Of TData)
+  fullName.vb: SMACD.AppTree.Versionable(Of TData)
+  name.vb: Versionable(Of TData)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Versionable`1.ToString*
+  commentId: Overload:SMACD.AppTree.Versionable`1.ToString
+  name: ToString
+  nameWithType: Versionable<TData>.ToString
+  fullName: SMACD.AppTree.Versionable<TData>.ToString
+  nameWithType.vb: Versionable(Of TData).ToString
+  fullName.vb: SMACD.AppTree.Versionable(Of TData).ToString

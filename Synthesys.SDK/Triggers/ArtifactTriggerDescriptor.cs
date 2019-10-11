@@ -3,13 +3,30 @@ using System;
 
 namespace Synthesys.SDK.Triggers
 {
+    /// <summary>
+    ///     Events which can be fired by nodes in the AppTree
+    /// </summary>
     public enum AppTreeNodeEvents
     {
+        /// <summary>
+        ///     Fired when a node is created
+        /// </summary>
         IsCreated,
+
+        /// <summary>
+        ///     Fired when the data in a node is changed
+        /// </summary>
         IsUpdated,
+
+        /// <summary>
+        ///     Fired when a child node is added to another node
+        /// </summary>
         AddsChild
     }
 
+    /// <summary>
+    ///     Descriptor for a trigger activated by an operation on a node in the Application Tree
+    /// </summary>
     public class ArtifactTriggerDescriptor : TriggerDescriptor
     {
         /// <summary>
@@ -50,6 +67,10 @@ namespace Synthesys.SDK.Triggers
         /// </summary>
         public AppTreeNodeEvents Trigger { get; set; }
 
+        /// <summary>
+        ///     String representation of Artifact Trigger
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             if (Node != null)
@@ -60,6 +81,11 @@ namespace Synthesys.SDK.Triggers
             return $"Artifact Trigger Path {NodePath} {Trigger.ToString()}";
         }
 
+        /// <summary>
+        ///     If an Artifact Trigger matches another
+        /// </summary>
+        /// <param name="obj">Artifact trigger to compare</param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (!base.Equals(obj))
@@ -68,7 +94,7 @@ namespace Synthesys.SDK.Triggers
             }
 
             ArtifactTriggerDescriptor castDescriptor = obj as ArtifactTriggerDescriptor;
-            if (castDescriptor.Node == Node && castDescriptor.Trigger == Trigger)
+            if (castDescriptor.NodePath == NodePath && castDescriptor.Trigger == Trigger)
             {
                 return true;
             }
@@ -76,6 +102,10 @@ namespace Synthesys.SDK.Triggers
             return false;
         }
 
+        /// <summary>
+        ///     Get hash code from path and trigger type
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             if (Node != null)

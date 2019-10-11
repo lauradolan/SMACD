@@ -20,7 +20,7 @@ namespace Synthesys.Verbs
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Output.BrightBlue("HOST ENVIRONMENT:"));
-            Console.Write(Output.BrightWhite("SMACD CLI Tool running on "));
+            Console.Write(Output.BrightWhite($"Synthesys {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version} running on "));
             Console.Write(Output.BrightGreen(Environment.MachineName));
             Console.Write(" running ");
             Console.Write(Output.BrightMagenta(Environment.OSVersion.ToString()));
@@ -56,7 +56,9 @@ namespace Synthesys.Verbs
                                       Output.BrightBlue(actionInfo[i].Item2.Value.FullName));
                 }
 
-                Console.WriteLine("  " + Output.Magenta("REACTIONS:"));
+                if (loaded.ReactionExtensions.Any())
+                    Console.WriteLine("  " + Output.Magenta("REACTIONS:"));
+
                 System.Collections.Generic.List<Tuple<SDK.Triggers.TriggerDescriptor, System.Collections.Generic.KeyValuePair<SDK.Triggers.TriggerDescriptor, System.Collections.Generic.List<Type>>>> reactionInfo = loaded.ReactionExtensions.Select(p => Tuple.Create(p.Key, p)).OrderBy(p => p.Item1)
                     .ToList();
 

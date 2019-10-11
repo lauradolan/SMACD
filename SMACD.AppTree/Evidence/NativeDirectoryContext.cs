@@ -59,6 +59,10 @@ namespace SMACD.AppTree.Evidence
 
         private bool disposedValue; // To detect redundant calls
 
+        /// <summary>
+        ///     Dispose of context
+        /// </summary>
+        /// <param name="disposing">Currently disposing?</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -73,11 +77,17 @@ namespace SMACD.AppTree.Evidence
             }
         }
 
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
         ~NativeDirectoryContext()
         {
             Dispose(false);
         }
 
+        /// <summary>
+        ///     Dispose of context
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

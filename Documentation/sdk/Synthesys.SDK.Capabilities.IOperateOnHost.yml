@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IOperateOnHost
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHost
+  id: IOperateOnHost
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  langs:
+  - csharp
+  - vb
+  name: IOperateOnHost
+  nameWithType: IOperateOnHost
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHost
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHost.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IOperateOnHost
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHost.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nIOperateOnHost indicates that the Extension acts upon a single host\n"
+  example: []
+  syntax:
+    content: public interface IOperateOnHost
+    content.vb: Public Interface IOperateOnHost
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  commentId: P:Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  id: Host
+  parent: Synthesys.SDK.Capabilities.IOperateOnHost
+  langs:
+  - csharp
+  - vb
+  name: Host
+  nameWithType: IOperateOnHost.Host
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHost.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Host
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHost.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the Host Node\n"
+  example: []
+  syntax:
+    content: HostNode Host { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.HostNode
+    content.vb: Property Host As HostNode
+  overload: Synthesys.SDK.Capabilities.IOperateOnHost.Host*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IOperateOnHost.Host*
+  commentId: Overload:Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  name: Host
+  nameWithType: IOperateOnHost.Host
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHost.Host
+- uid: SMACD.AppTree.HostNode
+  commentId: T:SMACD.AppTree.HostNode
+  parent: SMACD.AppTree
+  name: HostNode
+  nameWithType: HostNode
+  fullName: SMACD.AppTree.HostNode
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

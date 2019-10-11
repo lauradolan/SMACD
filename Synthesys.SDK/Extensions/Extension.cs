@@ -12,6 +12,9 @@ namespace Synthesys.SDK.Extensions
     /// </summary>
     public abstract class Extension
     {
+        /// <summary>
+        ///     Extension logger
+        /// </summary>
         protected ILogger Logger { get; private set; }
 
         /// <summary>

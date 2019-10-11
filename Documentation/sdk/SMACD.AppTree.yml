@@ -1,0 +1,257 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  id: SMACD.AppTree
+  children:
+  - SMACD.AppTree.AppTreeNode
+  - SMACD.AppTree.DataProviderSpecificity
+  - SMACD.AppTree.DataVersionDescriptor
+  - SMACD.AppTree.HostNode
+  - SMACD.AppTree.HttpServiceNode
+  - SMACD.AppTree.IAppTreeNode`1
+  - SMACD.AppTree.ObservableDictionary`2
+  - SMACD.AppTree.ProjectPointer
+  - SMACD.AppTree.RootNode
+  - SMACD.AppTree.RootNode.ArtifactEventDelegate
+  - SMACD.AppTree.ServiceNode
+  - SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  - SMACD.AppTree.UrlNode
+  - SMACD.AppTree.UrlRequestNode
+  - SMACD.AppTree.Versionable
+  - SMACD.AppTree.Versionable`1
+  - SMACD.AppTree.Vulnerability
+  - SMACD.AppTree.Vulnerability.Confidences
+  - SMACD.AppTree.Vulnerability.RiskLevels
+  langs:
+  - csharp
+  - vb
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+  type: Namespace
+  assemblies:
+  - SMACD.AppTree
+references:
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+- uid: SMACD.AppTree.IAppTreeNode`1
+  commentId: T:SMACD.AppTree.IAppTreeNode`1
+  name: IAppTreeNode<TDetailPayload>
+  nameWithType: IAppTreeNode<TDetailPayload>
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload)
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload)
+  name.vb: IAppTreeNode(Of TDetailPayload)
+  spec.csharp:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.DataVersionDescriptor
+  commentId: T:SMACD.AppTree.DataVersionDescriptor
+  parent: SMACD.AppTree
+  name: DataVersionDescriptor
+  nameWithType: DataVersionDescriptor
+  fullName: SMACD.AppTree.DataVersionDescriptor
+- uid: SMACD.AppTree.HostNode
+  commentId: T:SMACD.AppTree.HostNode
+  parent: SMACD.AppTree
+  name: HostNode
+  nameWithType: HostNode
+  fullName: SMACD.AppTree.HostNode
+- uid: SMACD.AppTree.HttpServiceNode
+  commentId: T:SMACD.AppTree.HttpServiceNode
+  parent: SMACD.AppTree
+  name: HttpServiceNode
+  nameWithType: HttpServiceNode
+  fullName: SMACD.AppTree.HttpServiceNode
+- uid: SMACD.AppTree.ObservableDictionary`2
+  commentId: T:SMACD.AppTree.ObservableDictionary`2
+  name: ObservableDictionary<TKey, TValue>
+  nameWithType: ObservableDictionary<TKey, TValue>
+  fullName: SMACD.AppTree.ObservableDictionary<TKey, TValue>
+  nameWithType.vb: ObservableDictionary(Of TKey, TValue)
+  fullName.vb: SMACD.AppTree.ObservableDictionary(Of TKey, TValue)
+  name.vb: ObservableDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: SMACD.AppTree.ObservableDictionary`2
+    name: ObservableDictionary
+    nameWithType: ObservableDictionary
+    fullName: SMACD.AppTree.ObservableDictionary
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.ObservableDictionary`2
+    name: ObservableDictionary
+    nameWithType: ObservableDictionary
+    fullName: SMACD.AppTree.ObservableDictionary
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.ProjectPointer
+  commentId: T:SMACD.AppTree.ProjectPointer
+  parent: SMACD.AppTree
+  name: ProjectPointer
+  nameWithType: ProjectPointer
+  fullName: SMACD.AppTree.ProjectPointer
+- uid: SMACD.AppTree.RootNode
+  commentId: T:SMACD.AppTree.RootNode
+  parent: SMACD.AppTree
+  name: RootNode
+  nameWithType: RootNode
+  fullName: SMACD.AppTree.RootNode
+- uid: SMACD.AppTree.RootNode.ArtifactEventDelegate
+  commentId: T:SMACD.AppTree.RootNode.ArtifactEventDelegate
+  parent: SMACD.AppTree
+  name: RootNode.ArtifactEventDelegate
+  nameWithType: RootNode.ArtifactEventDelegate
+  fullName: SMACD.AppTree.RootNode.ArtifactEventDelegate
+- uid: SMACD.AppTree.ServiceNode
+  commentId: T:SMACD.AppTree.ServiceNode
+  parent: SMACD.AppTree
+  name: ServiceNode
+  nameWithType: ServiceNode
+  fullName: SMACD.AppTree.ServiceNode
+- uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  commentId: T:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  parent: SMACD.AppTree
+  name: ServiceNode.KnownServiceNodeTypes
+  nameWithType: ServiceNode.KnownServiceNodeTypes
+  fullName: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+- uid: SMACD.AppTree.UrlNode
+  commentId: T:SMACD.AppTree.UrlNode
+  parent: SMACD.AppTree
+  name: UrlNode
+  nameWithType: UrlNode
+  fullName: SMACD.AppTree.UrlNode
+- uid: SMACD.AppTree.UrlRequestNode
+  commentId: T:SMACD.AppTree.UrlRequestNode
+  parent: SMACD.AppTree
+  name: UrlRequestNode
+  nameWithType: UrlRequestNode
+  fullName: SMACD.AppTree.UrlRequestNode
+- uid: SMACD.AppTree.DataProviderSpecificity
+  commentId: T:SMACD.AppTree.DataProviderSpecificity
+  parent: SMACD.AppTree
+  name: DataProviderSpecificity
+  nameWithType: DataProviderSpecificity
+  fullName: SMACD.AppTree.DataProviderSpecificity
+- uid: SMACD.AppTree.Versionable
+  commentId: T:SMACD.AppTree.Versionable
+  parent: SMACD.AppTree
+  name: Versionable
+  nameWithType: Versionable
+  fullName: SMACD.AppTree.Versionable
+- uid: SMACD.AppTree.Versionable`1
+  commentId: T:SMACD.AppTree.Versionable`1
+  parent: SMACD.AppTree
+  name: Versionable<TData>
+  nameWithType: Versionable<TData>
+  fullName: SMACD.AppTree.Versionable<TData>
+  nameWithType.vb: Versionable(Of TData)
+  fullName.vb: SMACD.AppTree.Versionable(Of TData)
+  name.vb: Versionable(Of TData)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Vulnerability
+  commentId: T:SMACD.AppTree.Vulnerability
+  parent: SMACD.AppTree
+  name: Vulnerability
+  nameWithType: Vulnerability
+  fullName: SMACD.AppTree.Vulnerability
+- uid: SMACD.AppTree.Vulnerability.Confidences
+  commentId: T:SMACD.AppTree.Vulnerability.Confidences
+  parent: SMACD.AppTree
+  name: Vulnerability.Confidences
+  nameWithType: Vulnerability.Confidences
+  fullName: SMACD.AppTree.Vulnerability.Confidences
+- uid: SMACD.AppTree.Vulnerability.RiskLevels
+  commentId: T:SMACD.AppTree.Vulnerability.RiskLevels
+  parent: SMACD.AppTree
+  name: Vulnerability.RiskLevels
+  nameWithType: Vulnerability.RiskLevels
+  fullName: SMACD.AppTree.Vulnerability.RiskLevels
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

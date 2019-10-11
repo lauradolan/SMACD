@@ -5,6 +5,9 @@ using System.Threading;
 
 namespace Synthesys.SDK
 {
+    /// <summary>
+    ///     Extensions to the log function to allow a binding between external processes and their encapsulating threads
+    /// </summary>
     public static class LogExtensions
     {
         private static void WrappedLogCommand(int taskId, string hash, Action command)
@@ -14,32 +17,74 @@ namespace Synthesys.SDK
             ExecutionWrapper.Maps.TryRemove(Thread.CurrentThread.ManagedThreadId, out int dummy);
         }
 
+        /// <summary>
+        ///     Log a message at the CRITICAL level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogCritical(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogCritical(message, parameters));
         }
 
+        /// <summary>
+        ///     Log a message at the DEBUG level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogDebug(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogDebug(message, parameters));
         }
 
+        /// <summary>
+        ///     Log a message at the ERROR level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogError(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogError(message, parameters));
         }
 
+        /// <summary>
+        ///     Log a message at the INFORMATION level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogInformation(this ILogger logger, int taskId, string message,
             params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogInformation(message, parameters));
         }
 
+        /// <summary>
+        ///     Log a message at the TRACE level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogTrace(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogTrace(message, parameters));
         }
 
+        /// <summary>
+        ///     Log a message at the WARNING level
+        /// </summary>
+        /// <param name="logger">Logger to invoke</param>
+        /// <param name="taskId">Task ID to correlate to thread</param>
+        /// <param name="message">Message to log</param>
+        /// <param name="parameters">Parameters for message template</param>
         public static void TaskLogWarning(this ILogger logger, int taskId, string message, params object[] parameters)
         {
             WrappedLogCommand(taskId, message.SHA1(), () => logger.LogWarning(message, parameters));

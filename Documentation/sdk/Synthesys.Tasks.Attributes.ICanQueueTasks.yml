@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks
+  commentId: T:Synthesys.Tasks.Attributes.ICanQueueTasks
+  id: ICanQueueTasks
+  parent: Synthesys.Tasks.Attributes
+  children:
+  - Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  langs:
+  - csharp
+  - vb
+  name: ICanQueueTasks
+  nameWithType: ICanQueueTasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.Tasks/Attributes/ICanQueueTasks.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ICanQueueTasks
+    path: ../Synthesys.Tasks/Attributes/ICanQueueTasks.cs
+    startLine: 5
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks.Attributes
+  summary: "\nICanQueueTasks indicates that the Extension needs to interface with the Task Queue\n"
+  example: []
+  syntax:
+    content: public interface ICanQueueTasks
+    content.vb: Public Interface ICanQueueTasks
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  commentId: P:Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  id: Tasks
+  parent: Synthesys.Tasks.Attributes.ICanQueueTasks
+  langs:
+  - csharp
+  - vb
+  name: Tasks
+  nameWithType: ICanQueueTasks.Tasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/Attributes/ICanQueueTasks.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Tasks
+    path: ../Synthesys.Tasks/Attributes/ICanQueueTasks.cs
+    startLine: 10
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks.Attributes
+  summary: "\nFramework-populated reference to the Task Queue\n"
+  example: []
+  syntax:
+    content: ITaskToolbox Tasks { get; set; }
+    parameters: []
+    return:
+      type: Synthesys.Tasks.ITaskToolbox
+    content.vb: Property Tasks As ITaskToolbox
+  overload: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.Tasks.Attributes
+  commentId: N:Synthesys.Tasks.Attributes
+  name: Synthesys.Tasks.Attributes
+  nameWithType: Synthesys.Tasks.Attributes
+  fullName: Synthesys.Tasks.Attributes
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks*
+  commentId: Overload:Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  name: Tasks
+  nameWithType: ICanQueueTasks.Tasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+- uid: Synthesys.Tasks.ITaskToolbox
+  commentId: T:Synthesys.Tasks.ITaskToolbox
+  parent: Synthesys.Tasks
+  name: ITaskToolbox
+  nameWithType: ITaskToolbox
+  fullName: Synthesys.Tasks.ITaskToolbox
+- uid: Synthesys.Tasks
+  commentId: N:Synthesys.Tasks
+  name: Synthesys.Tasks
+  nameWithType: Synthesys.Tasks
+  fullName: Synthesys.Tasks

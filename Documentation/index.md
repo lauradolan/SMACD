@@ -12,10 +12,10 @@ The intent of SMACD is to *empower developers to test their own code for securit
 2. **Product engineering**, which provides a list of target endpoints and inputs to implement the features and use cases. This perspective helps model how the system or application actually functions.
 3. **Security engineering**, which brainstorms counter-use cases (possible abuse cases) in which attackers can abuse features in the system. This perspective helps model how the system or application's design differs from its implementation.
 
-You can [get started with SMACD](guides/GetStarted.html) by using the CLI tool (**SMACD.Scanner**) or developing your own extensions to integrate with SMACD.
+You can [get started with SMACD](guides/GetStarted.md) by using the CLI tool (**SMACD.Scanner**) or developing your own extensions to integrate with SMACD.
 
 ## Documentation
 
-- [Get started with SMACD](guides/GetStarted.html)
-- [SMACD data model](guides/DataModel.html)
-- [SMACD scanner workflow](guides/ScannerWorkflow.html)
+- [Get started with SMACD](guides/GetStarted.md)
+- [SMACD data model](guides/DataModel.md)
+- [SMACD scanner workflow](guides/ScannerWorkflow.md)

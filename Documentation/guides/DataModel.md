@@ -1,6 +1,6 @@
 # SMACD data model
 
-The SMACD data model integrates data about your system or application's [**features**](#features), [**use cases**](#use-cases), possible [**abuse cases**](#abuse-cases), [**plugin pointers**](#plugin-pointers) and [**resource pointers**](#resource-pointers).
+The SMACD data model integrates data about your system or application's [**features**](#features), [**use cases**](#use-cases), possible [**abuse cases**](#abuse-cases), [**actions**](#actions) and [**resources**](#target-resources).
 
 ![Nested model of different concepts in SMACD program architecture including features, use cases, abuse cases, testing and business objects.](../images/ObjectModel.png "SMACD data model")
 

@@ -1,5 +1,8 @@
 ﻿namespace SMACD.AppTree.Evidence
 {
+    /// <summary>
+    ///     Wraps supporting evidence data
+    /// </summary>
     public class Evidence
     {
         /// <summary>
@@ -7,9 +10,24 @@
         /// </summary>
         public enum EvidenceTypes
         {
+            /// <summary>
+            ///     Unknown type
+            /// </summary>
             Unknown,
+
+            /// <summary>
+            ///     Object evidence
+            /// </summary>
             Object,
+
+            /// <summary>
+            ///     String evidence
+            /// </summary>
             String,
+
+            /// <summary>
+            ///     Virtual file system evidence
+            /// </summary>
             VFS
         }
 

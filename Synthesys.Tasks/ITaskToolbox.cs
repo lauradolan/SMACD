@@ -36,7 +36,10 @@ namespace Synthesys.Tasks
         /// <summary>
         ///     Enqueue a new Task
         /// </summary>
-        /// <param name="descriptor">Task Descriptor for new Task</param>
+        /// <param name="actionIdentifier">ActionExtension identifier</param>
+        /// <param name="rootArtifact">AppTreeNode to be used as the root of the Action</param>
+        /// <param name="options">ActionExtension options</param>
+        /// <param name="serviceMapItemPtr">Pointer to element in Service Map queuing this Action</param>
         /// <returns></returns>
         Task<List<ExtensionReport>> Enqueue(string actionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
     }

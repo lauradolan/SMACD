@@ -1,0 +1,79 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+  commentId: T:Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+  id: ExecutionWrapper.ExternalProcessDataReceived
+  parent: Synthesys.SDK
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ExecutionWrapper.ExternalProcessDataReceived
+  nameWithType: ExecutionWrapper.ExternalProcessDataReceived
+  fullName: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+  type: Delegate
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExternalProcessDataReceived
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 20
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nInvoked when an external process generates data\n"
+  example: []
+  syntax:
+    content: public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
+    parameters:
+    - id: sender
+      type: System.Object
+      description: Sender object
+    - id: ownerTaskId
+      type: System.Int32
+      description: Task ID of owner
+    - id: data
+      type: System.String
+      description: Data generated
+    content.vb: Public Delegate Sub ExternalProcessDataReceived(sender As Object, ownerTaskId As Integer, data As String)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

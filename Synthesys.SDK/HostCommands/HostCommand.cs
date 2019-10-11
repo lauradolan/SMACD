@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Synthesys.SDK.HostCommands
 {
+    /// <summary>
+    ///     Command executed on the host running the application
+    /// </summary>
     public abstract class HostCommand
     {
+        /// <summary>
+        ///     Invoked when an external process generates data
+        /// </summary>
+        /// <param name="sender">Sender object</param>
+        /// <param name="ownerTaskId">Task ID of owner</param>
+        /// <param name="data">Data generated</param>
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
         /// <summary>
@@ -15,13 +24,23 @@ namespace Synthesys.SDK.HostCommands
         /// </summary>
         public static ConcurrentDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
 
+        /// <summary>
+        ///     Command executed on the host running the application
+        /// </summary>
         protected HostCommand()
         {
             OwnerTaskId = Task.CurrentId.GetValueOrDefault(-1);
             Logger = Global.LogFactory.CreateLogger(GetType().Name);
         }
 
+        /// <summary>
+        ///     Logger for command
+        /// </summary>
         protected ILogger Logger { get; }
+
+        /// <summary>
+        ///     Task ID of owner
+        /// </summary>
         protected int OwnerTaskId { get; }
 
         /// <summary>
@@ -33,11 +52,6 @@ namespace Synthesys.SDK.HostCommands
         ///     Duration of last execution
         /// </summary>
         public TimeSpan ExecutionTime { get; protected set; }
-
-        /// <summary>
-        ///     Process object executing this command
-        /// </summary>
-        private Process Process { get; } = new Process();
 
         /// <summary>
         ///     If STDOUT should be captured and stored in StdOut property
@@ -74,6 +88,10 @@ namespace Synthesys.SDK.HostCommands
         /// </summary>
         public event ExternalProcessDataReceived StandardErrorDataReceived;
 
+        /// <summary>
+        ///     Route STDOUT to buffer and event
+        /// </summary>
+        /// <param name="text">STDOUT text</param>
         protected void HandleStdOut(string text)
         {
             if (CaptureStdOut)
@@ -84,6 +102,10 @@ namespace Synthesys.SDK.HostCommands
             StandardOutputDataReceived?.Invoke(this, OwnerTaskId, text);
         }
 
+        /// <summary>
+        ///     Route STDERR to buffer and event
+        /// </summary>
+        /// <param name="text">STDERR text</param>
         protected void HandleStdErr(string text)
         {
             if (CaptureStdErr)

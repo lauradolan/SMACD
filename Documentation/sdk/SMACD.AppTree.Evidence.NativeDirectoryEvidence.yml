@@ -1,0 +1,639 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  id: NativeDirectoryEvidence
+  parent: SMACD.AppTree.Evidence
+  children:
+  - SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor(System.String)
+  - SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext
+  - SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+  langs:
+  - csharp
+  - vb
+  name: NativeDirectoryEvidence
+  nameWithType: NativeDirectoryEvidence
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NativeDirectoryEvidence
+    path: ../SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+    startLine: 7
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nRepresents Evidence that provides a system directory for collecting files\n"
+  example: []
+  syntax:
+    content: 'public class NativeDirectoryEvidence : Evidence'
+    content.vb: >-
+      Public Class NativeDirectoryEvidence
+          Inherits Evidence
+  inheritance:
+  - System.Object
+  - SMACD.AppTree.Evidence.Evidence
+  inheritedMembers:
+  - SMACD.AppTree.Evidence.Evidence.Name
+  - SMACD.AppTree.Evidence.Evidence.StoredData
+  - SMACD.AppTree.Evidence.Evidence.EvidenceType
+  - SMACD.AppTree.Evidence.Evidence.As``1
+  - SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  - SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  - SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor(System.String)
+  commentId: M:SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  langs:
+  - csharp
+  - vb
+  name: NativeDirectoryEvidence(String)
+  nameWithType: NativeDirectoryEvidence.NativeDirectoryEvidence(String)
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.NativeDirectoryEvidence(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+    startLine: 15
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nRepresents Evidence that provides a system directory for collecting files\n"
+  example: []
+  syntax:
+    content: public NativeDirectoryEvidence(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: Evidence name
+    content.vb: Public Sub New(name As String)
+  overload: SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+  commentId: P:SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+  id: HasActiveDispatchedContext
+  parent: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  langs:
+  - csharp
+  - vb
+  name: HasActiveDispatchedContext
+  nameWithType: NativeDirectoryEvidence.HasActiveDispatchedContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HasActiveDispatchedContext
+    path: ../SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+    startLine: 22
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nIf the Evidence has dispatched a Context\n"
+  example: []
+  syntax:
+    content: public bool HasActiveDispatchedContext { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property HasActiveDispatchedContext As Boolean
+  overload: SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext
+  commentId: M:SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext
+  id: GetContext
+  parent: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  langs:
+  - csharp
+  - vb
+  name: GetContext()
+  nameWithType: NativeDirectoryEvidence.GetContext()
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetContext
+    path: ../SMACD.AppTree/Evidence/NativeDirectoryEvidence.cs
+    startLine: 29
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nGet a directory Context to collect files locally; when the context is disposed, the directory will be\nautomatically ZIPped and saved to the Evidence&apos;s StoredData buffer\n"
+  example: []
+  syntax:
+    content: public NativeDirectoryContext GetContext()
+    return:
+      type: SMACD.AppTree.Evidence.NativeDirectoryContext
+      description: ''
+    content.vb: Public Function GetContext As NativeDirectoryContext
+  overload: SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: SMACD.AppTree.Evidence.Evidence
+  commentId: T:SMACD.AppTree.Evidence.Evidence
+  parent: SMACD.AppTree.Evidence
+  name: Evidence
+  nameWithType: Evidence
+  fullName: SMACD.AppTree.Evidence.Evidence
+- uid: SMACD.AppTree.Evidence.Evidence.Name
+  commentId: P:SMACD.AppTree.Evidence.Evidence.Name
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: Name
+  nameWithType: Evidence.Name
+  fullName: SMACD.AppTree.Evidence.Evidence.Name
+- uid: SMACD.AppTree.Evidence.Evidence.StoredData
+  commentId: P:SMACD.AppTree.Evidence.Evidence.StoredData
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: StoredData
+  nameWithType: Evidence.StoredData
+  fullName: SMACD.AppTree.Evidence.Evidence.StoredData
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceType
+  commentId: P:SMACD.AppTree.Evidence.Evidence.EvidenceType
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: EvidenceType
+  nameWithType: Evidence.EvidenceType
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceType
+- uid: SMACD.AppTree.Evidence.Evidence.As``1
+  commentId: M:SMACD.AppTree.Evidence.Evidence.As``1
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: As<T>()
+  nameWithType: Evidence.As<T>()
+  fullName: SMACD.AppTree.Evidence.Evidence.As<T>()
+  nameWithType.vb: Evidence.As(Of T)()
+  fullName.vb: SMACD.AppTree.Evidence.Evidence.As(Of T)()
+  name.vb: As(Of T)()
+  spec.csharp:
+  - uid: SMACD.AppTree.Evidence.Evidence.As``1
+    name: As<T>
+    nameWithType: Evidence.As<T>
+    fullName: SMACD.AppTree.Evidence.Evidence.As<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.Evidence.Evidence.As``1
+    name: As(Of T)
+    nameWithType: Evidence.As(Of T)
+    fullName: SMACD.AppTree.Evidence.Evidence.As(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: AsStringEvidence()
+  nameWithType: Evidence.AsStringEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsStringEvidence()
+  spec.csharp:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+    name: AsStringEvidence
+    nameWithType: Evidence.AsStringEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+    name: AsStringEvidence
+    nameWithType: Evidence.AsStringEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: AsObjectEvidence()
+  nameWithType: Evidence.AsObjectEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence()
+  spec.csharp:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+    name: AsObjectEvidence
+    nameWithType: Evidence.AsObjectEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+    name: AsObjectEvidence
+    nameWithType: Evidence.AsObjectEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  name: AsNativeDirectoryEvidence()
+  nameWithType: Evidence.AsNativeDirectoryEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence()
+  spec.csharp:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+    name: AsNativeDirectoryEvidence
+    nameWithType: Evidence.AsNativeDirectoryEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+    name: AsNativeDirectoryEvidence
+    nameWithType: Evidence.AsNativeDirectoryEvidence
+    fullName: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor*
+  commentId: Overload:SMACD.AppTree.Evidence.NativeDirectoryEvidence.#ctor
+  name: NativeDirectoryEvidence
+  nameWithType: NativeDirectoryEvidence.NativeDirectoryEvidence
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.NativeDirectoryEvidence
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext*
+  commentId: Overload:SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+  name: HasActiveDispatchedContext
+  nameWithType: NativeDirectoryEvidence.HasActiveDispatchedContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.HasActiveDispatchedContext
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext*
+  commentId: Overload:SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext
+  name: GetContext
+  nameWithType: NativeDirectoryEvidence.GetContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence.GetContext
+- uid: SMACD.AppTree.Evidence.NativeDirectoryContext
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryContext
+  parent: SMACD.AppTree.Evidence
+  name: NativeDirectoryContext
+  nameWithType: NativeDirectoryContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryContext

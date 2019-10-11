@@ -1,0 +1,188 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  commentId: T:SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  id: Evidence.EvidenceTypes
+  parent: SMACD.AppTree.Evidence
+  children:
+  - SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Object
+  - SMACD.AppTree.Evidence.Evidence.EvidenceTypes.String
+  - SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Unknown
+  - SMACD.AppTree.Evidence.Evidence.EvidenceTypes.VFS
+  langs:
+  - csharp
+  - vb
+  name: Evidence.EvidenceTypes
+  nameWithType: Evidence.EvidenceTypes
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  type: Enum
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: EvidenceTypes
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 10
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nPossible encapsulated data types expressed in Evidence\n"
+  example: []
+  syntax:
+    content: public enum EvidenceTypes
+    content.vb: Public Enum EvidenceTypes
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Unknown
+  commentId: F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Unknown
+  id: Unknown
+  parent: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: Evidence.EvidenceTypes.Unknown
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Unknown
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Unknown
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 15
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nUnknown type\n"
+  example: []
+  syntax:
+    content: Unknown = 0
+    return:
+      type: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Object
+  commentId: F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Object
+  id: Object
+  parent: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  langs:
+  - csharp
+  - vb
+  name: Object
+  nameWithType: Evidence.EvidenceTypes.Object
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Object
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Object
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 20
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nObject evidence\n"
+  example: []
+  syntax:
+    content: Object = 1
+    return:
+      type: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.String
+  commentId: F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.String
+  id: String
+  parent: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  langs:
+  - csharp
+  - vb
+  name: String
+  nameWithType: Evidence.EvidenceTypes.String
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.String
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: String
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 25
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nString evidence\n"
+  example: []
+  syntax:
+    content: String = 2
+    return:
+      type: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.VFS
+  commentId: F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.VFS
+  id: VFS
+  parent: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  langs:
+  - csharp
+  - vb
+  name: VFS
+  nameWithType: Evidence.EvidenceTypes.VFS
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes.VFS
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: VFS
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 30
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nVirtual file system evidence\n"
+  example: []
+  syntax:
+    content: VFS = 3
+    return:
+      type: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  commentId: T:SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  parent: SMACD.AppTree.Evidence
+  name: Evidence.EvidenceTypes
+  nameWithType: Evidence.EvidenceTypes
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes

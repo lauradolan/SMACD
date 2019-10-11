@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.AzureDevOps.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>Azure DevOps Plugin for Synthesys</Product>
     <Description>Integrates some data functionality from Azure DevOps with Synthesys scans</Description>

@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.SQLMap.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>SQLMap Plugin for Synthesys</Product>
     <Description>Implements a wrapper around the SQLMap tool to provide data in Synthesys scans</Description>

@@ -1,0 +1,1868 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  id: AppTreeNode
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.AppTreeNode.Children
+  - SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  - SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  - SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  - SMACD.AppTree.AppTreeNode.Evidence
+  - SMACD.AppTree.AppTreeNode.GetDisplayPath
+  - SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  - SMACD.AppTree.AppTreeNode.GetPath
+  - SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  - SMACD.AppTree.AppTreeNode.GetUUIDPath
+  - SMACD.AppTree.AppTreeNode.Identifiers
+  - SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  - SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  - SMACD.AppTree.AppTreeNode.NiceIdentifier
+  - SMACD.AppTree.AppTreeNode.NodeViewName
+  - SMACD.AppTree.AppTreeNode.NotifyChanged
+  - SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  - SMACD.AppTree.AppTreeNode.NotifyCreated
+  - SMACD.AppTree.AppTreeNode.Parent
+  - SMACD.AppTree.AppTreeNode.Root
+  - SMACD.AppTree.AppTreeNode.UUID
+  - SMACD.AppTree.AppTreeNode.Vulnerabilities
+  langs:
+  - csharp
+  - vb
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AppTreeNode
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 12
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single node in a tree, including all navigation properties\n"
+  example: []
+  syntax:
+    content: public class AppTreeNode
+    content.vb: Public Class AppTreeNode
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - SMACD.AppTree.HostNode
+  - SMACD.AppTree.RootNode
+  - SMACD.AppTree.ServiceNode
+  - SMACD.AppTree.UrlNode
+  - SMACD.AppTree.UrlRequestNode
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.AppTree.AppTreeNode.Root
+  commentId: P:SMACD.AppTree.AppTreeNode.Root
+  id: Root
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Root
+  nameWithType: AppTreeNode.Root
+  fullName: SMACD.AppTree.AppTreeNode.Root
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Root
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 22
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRoot Artifact\n"
+  example: []
+  syntax:
+    content: public RootNode Root { get; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.RootNode
+    content.vb: Public ReadOnly Property Root As RootNode
+  overload: SMACD.AppTree.AppTreeNode.Root*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.AppTreeNode.Parent
+  commentId: P:SMACD.AppTree.AppTreeNode.Parent
+  id: Parent
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Parent
+  nameWithType: AppTreeNode.Parent
+  fullName: SMACD.AppTree.AppTreeNode.Parent
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Parent
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 27
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nParent Artifact\n"
+  example: []
+  syntax:
+    content: public AppTreeNode Parent { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.AppTreeNode
+    content.vb: Public Property Parent As AppTreeNode
+  overload: SMACD.AppTree.AppTreeNode.Parent*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.Children
+  commentId: P:SMACD.AppTree.AppTreeNode.Children
+  id: Children
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Children
+  nameWithType: AppTreeNode.Children
+  fullName: SMACD.AppTree.AppTreeNode.Children
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Children
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 32
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nChildren of Artifact\n"
+  example: []
+  syntax:
+    content: public ObservableCollection<AppTreeNode> Children { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.ObservableCollection{SMACD.AppTree.AppTreeNode}
+    content.vb: Public Property Children As ObservableCollection(Of AppTreeNode)
+  overload: SMACD.AppTree.AppTreeNode.Children*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  commentId: M:SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  id: ChildrenAre``1
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: ChildrenAre<TChild>()
+  nameWithType: AppTreeNode.ChildrenAre<TChild>()
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ChildrenAre
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 39
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet only Artifact Children of a specific type\n"
+  example: []
+  syntax:
+    content: public IReadOnlyCollection<TChild> ChildrenAre<TChild>()
+    typeParameters:
+    - id: TChild
+      description: Artifact child type
+    return:
+      type: System.Collections.Generic.IReadOnlyCollection{{TChild}}
+      description: ''
+    content.vb: Public Function ChildrenAre(Of TChild) As IReadOnlyCollection(Of TChild)
+  overload: SMACD.AppTree.AppTreeNode.ChildrenAre*
+  nameWithType.vb: AppTreeNode.ChildrenAre(Of TChild)()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)()
+  name.vb: ChildrenAre(Of TChild)()
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  commentId: M:SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  id: ChildrenAre``1(System.Predicate{``0})
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: ChildrenAre<TChild>(Predicate<TChild>)
+  nameWithType: AppTreeNode.ChildrenAre<TChild>(Predicate<TChild>)
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>(System.Predicate<TChild>)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ChildrenAre
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 49
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet predicate-matching Artifact Children of a specific type\n"
+  example: []
+  syntax:
+    content: public IReadOnlyCollection<TChild> ChildrenAre<TChild>(Predicate<TChild> predicate)
+    parameters:
+    - id: predicate
+      type: System.Predicate{{TChild}}
+    typeParameters:
+    - id: TChild
+      description: Artifact child type
+    return:
+      type: System.Collections.Generic.IReadOnlyCollection{{TChild}}
+      description: ''
+    content.vb: Public Function ChildrenAre(Of TChild)(predicate As Predicate(Of TChild)) As IReadOnlyCollection(Of TChild)
+  overload: SMACD.AppTree.AppTreeNode.ChildrenAre*
+  nameWithType.vb: AppTreeNode.ChildrenAre(Of TChild)(Predicate(Of TChild))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)(System.Predicate(Of TChild))
+  name.vb: ChildrenAre(Of TChild)(Predicate(Of TChild))
+- uid: SMACD.AppTree.AppTreeNode.Identifiers
+  commentId: P:SMACD.AppTree.AppTreeNode.Identifiers
+  id: Identifiers
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Identifiers
+  nameWithType: AppTreeNode.Identifiers
+  fullName: SMACD.AppTree.AppTreeNode.Identifiers
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Identifiers
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 60
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nArtifact Identifier for path\n"
+  example: []
+  syntax:
+    content: public List<string> Identifiers { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public ReadOnly Property Identifiers As List(Of String)
+  overload: SMACD.AppTree.AppTreeNode.Identifiers*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.AppTreeNode.NiceIdentifier
+  commentId: P:SMACD.AppTree.AppTreeNode.NiceIdentifier
+  id: NiceIdentifier
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: NiceIdentifier
+  nameWithType: AppTreeNode.NiceIdentifier
+  fullName: SMACD.AppTree.AppTreeNode.NiceIdentifier
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NiceIdentifier
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 65
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet nice-name identifier for Artifact (first non-UUID)\n"
+  example: []
+  syntax:
+    content: public string NiceIdentifier { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NiceIdentifier As String
+  overload: SMACD.AppTree.AppTreeNode.NiceIdentifier*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.AppTreeNode.UUID
+  commentId: P:SMACD.AppTree.AppTreeNode.UUID
+  id: UUID
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: UUID
+  nameWithType: AppTreeNode.UUID
+  fullName: SMACD.AppTree.AppTreeNode.UUID
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: UUID
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 70
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nUnique identifier\n"
+  example: []
+  syntax:
+    content: public Guid UUID { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property UUID As Guid
+  overload: SMACD.AppTree.AppTreeNode.UUID*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.Evidence
+  commentId: P:SMACD.AppTree.AppTreeNode.Evidence
+  id: Evidence
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Evidence
+  nameWithType: AppTreeNode.Evidence
+  fullName: SMACD.AppTree.AppTreeNode.Evidence
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Evidence
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 77
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nData attachments providing evidence of correlating data pertaining to Artifact\n"
+  example: []
+  syntax:
+    content: public EvidenceCollection Evidence { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.Evidence.EvidenceCollection
+    content.vb: Public Property Evidence As EvidenceCollection
+  overload: SMACD.AppTree.AppTreeNode.Evidence*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.Vulnerabilities
+  commentId: P:SMACD.AppTree.AppTreeNode.Vulnerabilities
+  id: Vulnerabilities
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Vulnerabilities
+  nameWithType: AppTreeNode.Vulnerabilities
+  fullName: SMACD.AppTree.AppTreeNode.Vulnerabilities
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Vulnerabilities
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 82
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nVulnerabilities related to Artifact\n"
+  example: []
+  syntax:
+    content: public List<Vulnerability> Vulnerabilities { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+    content.vb: Public Property Vulnerabilities As List(Of Vulnerability)
+  overload: SMACD.AppTree.AppTreeNode.Vulnerabilities*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.NodeViewName
+  commentId: P:SMACD.AppTree.AppTreeNode.NodeViewName
+  id: NodeViewName
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: NodeViewName
+  nameWithType: AppTreeNode.NodeViewName
+  fullName: SMACD.AppTree.AppTreeNode.NodeViewName
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NodeViewName
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 87
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nA Razor component view which can be used to visualize the content of a given node\n"
+  example: []
+  syntax:
+    content: public virtual string NodeViewName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overridable ReadOnly Property NodeViewName As String
+  overload: SMACD.AppTree.AppTreeNode.NodeViewName*
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  modifiers.vb:
+  - Public
+  - Overridable
+  - ReadOnly
+- uid: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  commentId: P:SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  id: Item(System.Guid)
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Item[Guid]
+  nameWithType: AppTreeNode.Item[Guid]
+  fullName: SMACD.AppTree.AppTreeNode.Item[System.Guid]
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: this[]
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 94
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a child Artifact by its identifier\n"
+  example: []
+  syntax:
+    content: public AppTreeNode this[Guid uuid] { get; }
+    parameters:
+    - id: uuid
+      type: System.Guid
+      description: Artifact UUID
+    return:
+      type: SMACD.AppTree.AppTreeNode
+      description: ''
+    content.vb: Public ReadOnly Property Item(uuid As Guid) As AppTreeNode
+  overload: SMACD.AppTree.AppTreeNode.Item*
+  nameWithType.vb: AppTreeNode.Item(Guid)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  name.vb: Item(Guid)
+- uid: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  commentId: M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  id: Connect(SMACD.AppTree.AppTreeNode)
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: Connect(AppTreeNode)
+  nameWithType: AppTreeNode.Connect(AppTreeNode)
+  fullName: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Connect
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 100
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAttach Parent properties for each Node\n"
+  example: []
+  syntax:
+    content: public void Connect(AppTreeNode parent = null)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.AppTreeNode
+      description: Parent node
+    content.vb: Public Sub Connect(parent As AppTreeNode = Nothing)
+  overload: SMACD.AppTree.AppTreeNode.Connect*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  commentId: M:SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  id: GetNodeByRelativeUUIDPath(System.String)
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: GetNodeByRelativeUUIDPath(String)
+  nameWithType: AppTreeNode.GetNodeByRelativeUUIDPath(String)
+  fullName: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetNodeByRelativeUUIDPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 114
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nReturns the leaf Artifact associated with a given UUID path\n"
+  example: []
+  syntax:
+    content: public AppTreeNode GetNodeByRelativeUUIDPath(string path)
+    parameters:
+    - id: path
+      type: System.String
+      description: UUID Path relative to this node
+    return:
+      type: SMACD.AppTree.AppTreeNode
+      description: ''
+    content.vb: Public Function GetNodeByRelativeUUIDPath(path As String) As AppTreeNode
+  overload: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  commentId: M:SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  id: GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: GetPath(Func<AppTreeNode, String>)
+  nameWithType: AppTreeNode.GetPath(Func<AppTreeNode, String>)
+  fullName: SMACD.AppTree.AppTreeNode.GetPath(System.Func<SMACD.AppTree.AppTreeNode, System.String>)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 140
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a string representing an element from each node heading toward the root node\n"
+  example: []
+  syntax:
+    content: public string GetPath(Func<AppTreeNode, string> selector)
+    parameters:
+    - id: selector
+      type: System.Func{SMACD.AppTree.AppTreeNode,System.String}
+      description: Selector for element&apos;s path string
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Function GetPath(selector As Func(Of AppTreeNode, String)) As String
+  overload: SMACD.AppTree.AppTreeNode.GetPath*
+  nameWithType.vb: AppTreeNode.GetPath(Func(Of AppTreeNode, String))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.AppTreeNode.GetPath(System.Func(Of SMACD.AppTree.AppTreeNode, System.String))
+  name.vb: GetPath(Func(Of AppTreeNode, String))
+- uid: SMACD.AppTree.AppTreeNode.GetDisplayPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetDisplayPath
+  id: GetDisplayPath
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: GetDisplayPath()
+  nameWithType: AppTreeNode.GetDisplayPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetDisplayPath()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetDisplayPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 149
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet the string representing each element from here to the root, using their identifier text\n"
+  example: []
+  syntax:
+    content: public string GetDisplayPath()
+    return:
+      type: System.String
+      description: String representing each element from here to the root, using their identifier text
+    content.vb: Public Function GetDisplayPath As String
+  overload: SMACD.AppTree.AppTreeNode.GetDisplayPath*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.GetUUIDPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetUUIDPath
+  id: GetUUIDPath
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: GetUUIDPath()
+  nameWithType: AppTreeNode.GetUUIDPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetUUIDPath()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetUUIDPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 158
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet the string representing each element from here to the root, using their UUID\n"
+  example: []
+  syntax:
+    content: public string GetUUIDPath()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Function GetUUIDPath As String
+  overload: SMACD.AppTree.AppTreeNode.GetUUIDPath*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.GetPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetPath
+  id: GetPath
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: GetPath()
+  nameWithType: AppTreeNode.GetPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetPath()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 167
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a list of nodes between this node and the root node, inclusive\n"
+  example: []
+  syntax:
+    content: public List<AppTreeNode> GetPath()
+    return:
+      type: System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+      description: ''
+    content.vb: Public Function GetPath As List(Of AppTreeNode)
+  overload: SMACD.AppTree.AppTreeNode.GetPath*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  commentId: M:SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  id: IsDescribedByPath(System.String)
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: IsDescribedByPath(String)
+  nameWithType: AppTreeNode.IsDescribedByPath(String)
+  fullName: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IsDescribedByPath
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 185
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nIf the Artifact can be described by the given string path (may contain wildcards, etc)\n"
+  example: []
+  syntax:
+    content: public bool IsDescribedByPath(string path)
+    parameters:
+    - id: path
+      type: System.String
+      description: Path to test
+    return:
+      type: System.Boolean
+      description: <code>TRUE</code> if the path describes the Artifact, otherwise <code>FALSE</code>
+    content.vb: Public Function IsDescribedByPath(path As String) As Boolean
+  overload: SMACD.AppTree.AppTreeNode.IsDescribedByPath*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.AppTreeNode.NotifyChanged
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyChanged
+  id: NotifyChanged
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: NotifyChanged()
+  nameWithType: AppTreeNode.NotifyChanged()
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChanged()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NotifyChanged
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 293
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nNotify root element to fire an ArtifactChanged event\n"
+  example: []
+  syntax:
+    content: protected void NotifyChanged()
+    content.vb: Protected Sub NotifyChanged
+  overload: SMACD.AppTree.AppTreeNode.NotifyChanged*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  id: NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: NotifyChildAdded(AppTreeNode)
+  nameWithType: AppTreeNode.NotifyChildAdded(AppTreeNode)
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NotifyChildAdded
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 302
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nNotify root element to fire an ArtifactChildAdded event\n"
+  example: []
+  syntax:
+    content: protected void NotifyChildAdded(AppTreeNode newChild)
+    parameters:
+    - id: newChild
+      type: SMACD.AppTree.AppTreeNode
+      description: Child added
+    content.vb: Protected Sub NotifyChildAdded(newChild As AppTreeNode)
+  overload: SMACD.AppTree.AppTreeNode.NotifyChildAdded*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: SMACD.AppTree.AppTreeNode.NotifyCreated
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyCreated
+  id: NotifyCreated
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: NotifyCreated()
+  nameWithType: AppTreeNode.NotifyCreated()
+  fullName: SMACD.AppTree.AppTreeNode.NotifyCreated()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NotifyCreated
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 310
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nNotify root element to fire an ArtifactCreated event\n"
+  example: []
+  syntax:
+    content: protected void NotifyCreated()
+    content.vb: Protected Sub NotifyCreated
+  overload: SMACD.AppTree.AppTreeNode.NotifyCreated*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.AppTreeNode.Root*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Root
+  name: Root
+  nameWithType: AppTreeNode.Root
+  fullName: SMACD.AppTree.AppTreeNode.Root
+- uid: SMACD.AppTree.RootNode
+  commentId: T:SMACD.AppTree.RootNode
+  parent: SMACD.AppTree
+  name: RootNode
+  nameWithType: RootNode
+  fullName: SMACD.AppTree.RootNode
+- uid: SMACD.AppTree.AppTreeNode.Parent*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Parent
+  name: Parent
+  nameWithType: AppTreeNode.Parent
+  fullName: SMACD.AppTree.AppTreeNode.Parent
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+- uid: SMACD.AppTree.AppTreeNode.Children*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Children
+  name: Children
+  nameWithType: AppTreeNode.Children
+  fullName: SMACD.AppTree.AppTreeNode.Children
+- uid: System.Collections.ObjectModel.ObservableCollection{SMACD.AppTree.AppTreeNode}
+  commentId: T:System.Collections.ObjectModel.ObservableCollection{SMACD.AppTree.AppTreeNode}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.ObservableCollection`1
+  name: ObservableCollection<AppTreeNode>
+  nameWithType: ObservableCollection<AppTreeNode>
+  fullName: System.Collections.ObjectModel.ObservableCollection<SMACD.AppTree.AppTreeNode>
+  nameWithType.vb: ObservableCollection(Of AppTreeNode)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of SMACD.AppTree.AppTreeNode)
+  name.vb: ObservableCollection(Of AppTreeNode)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    nameWithType: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    nameWithType: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.ObservableCollection`1
+  commentId: T:System.Collections.ObjectModel.ObservableCollection`1
+  isExternal: true
+  name: ObservableCollection<T>
+  nameWithType: ObservableCollection<T>
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>
+  nameWithType.vb: ObservableCollection(Of T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T)
+  name.vb: ObservableCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    nameWithType: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
+    name: ObservableCollection
+    nameWithType: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.ChildrenAre
+  name: ChildrenAre
+  nameWithType: AppTreeNode.ChildrenAre
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre
+- uid: System.Collections.Generic.IReadOnlyCollection{{TChild}}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  name: IReadOnlyCollection<TChild>
+  nameWithType: IReadOnlyCollection<TChild>
+  fullName: System.Collections.Generic.IReadOnlyCollection<TChild>
+  nameWithType.vb: IReadOnlyCollection(Of TChild)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of TChild)
+  name.vb: IReadOnlyCollection(Of TChild)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Predicate{{TChild}}
+  commentId: T:System.Predicate{``0}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<TChild>
+  nameWithType: Predicate<TChild>
+  fullName: System.Predicate<TChild>
+  nameWithType.vb: Predicate(Of TChild)
+  fullName.vb: System.Predicate(Of TChild)
+  name.vb: Predicate(Of TChild)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.Identifiers*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Identifiers
+  name: Identifiers
+  nameWithType: AppTreeNode.Identifiers
+  fullName: SMACD.AppTree.AppTreeNode.Identifiers
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<String>
+  nameWithType: List<String>
+  fullName: System.Collections.Generic.List<System.String>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of System.String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NiceIdentifier*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.NiceIdentifier
+  name: NiceIdentifier
+  nameWithType: AppTreeNode.NiceIdentifier
+  fullName: SMACD.AppTree.AppTreeNode.NiceIdentifier
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.AppTreeNode.UUID*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.UUID
+  name: UUID
+  nameWithType: AppTreeNode.UUID
+  fullName: SMACD.AppTree.AppTreeNode.UUID
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: SMACD.AppTree.AppTreeNode.Evidence*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Evidence
+  name: Evidence
+  nameWithType: AppTreeNode.Evidence
+  fullName: SMACD.AppTree.AppTreeNode.Evidence
+- uid: SMACD.AppTree.Evidence.EvidenceCollection
+  commentId: T:SMACD.AppTree.Evidence.EvidenceCollection
+  parent: SMACD.AppTree.Evidence
+  name: EvidenceCollection
+  nameWithType: EvidenceCollection
+  fullName: SMACD.AppTree.Evidence.EvidenceCollection
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+- uid: SMACD.AppTree.AppTreeNode.Vulnerabilities*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Vulnerabilities
+  name: Vulnerabilities
+  nameWithType: AppTreeNode.Vulnerabilities
+  fullName: SMACD.AppTree.AppTreeNode.Vulnerabilities
+- uid: System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+  commentId: T:System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Vulnerability>
+  nameWithType: List<Vulnerability>
+  fullName: System.Collections.Generic.List<SMACD.AppTree.Vulnerability>
+  nameWithType.vb: List(Of Vulnerability)
+  fullName.vb: System.Collections.Generic.List(Of SMACD.AppTree.Vulnerability)
+  name.vb: List(Of Vulnerability)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.Vulnerability
+    name: Vulnerability
+    nameWithType: Vulnerability
+    fullName: SMACD.AppTree.Vulnerability
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.Vulnerability
+    name: Vulnerability
+    nameWithType: Vulnerability
+    fullName: SMACD.AppTree.Vulnerability
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NodeViewName*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.NodeViewName
+  name: NodeViewName
+  nameWithType: AppTreeNode.NodeViewName
+  fullName: SMACD.AppTree.AppTreeNode.NodeViewName
+- uid: SMACD.AppTree.AppTreeNode.Item*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Item
+  name: Item
+  nameWithType: AppTreeNode.Item
+  fullName: SMACD.AppTree.AppTreeNode.Item
+- uid: SMACD.AppTree.AppTreeNode.Connect*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.Connect
+  name: Connect
+  nameWithType: AppTreeNode.Connect
+  fullName: SMACD.AppTree.AppTreeNode.Connect
+- uid: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath
+  name: GetNodeByRelativeUUIDPath
+  nameWithType: AppTreeNode.GetNodeByRelativeUUIDPath
+  fullName: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath
+- uid: SMACD.AppTree.AppTreeNode.GetPath*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.GetPath
+  name: GetPath
+  nameWithType: AppTreeNode.GetPath
+  fullName: SMACD.AppTree.AppTreeNode.GetPath
+- uid: System.Func{SMACD.AppTree.AppTreeNode,System.String}
+  commentId: T:System.Func{SMACD.AppTree.AppTreeNode,System.String}
+  parent: System
+  definition: System.Func`2
+  name: Func<AppTreeNode, String>
+  nameWithType: Func<AppTreeNode, String>
+  fullName: System.Func<SMACD.AppTree.AppTreeNode, System.String>
+  nameWithType.vb: Func(Of AppTreeNode, String)
+  fullName.vb: System.Func(Of SMACD.AppTree.AppTreeNode, System.String)
+  name.vb: Func(Of AppTreeNode, String)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetDisplayPath*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.GetDisplayPath
+  name: GetDisplayPath
+  nameWithType: AppTreeNode.GetDisplayPath
+  fullName: SMACD.AppTree.AppTreeNode.GetDisplayPath
+- uid: SMACD.AppTree.AppTreeNode.GetUUIDPath*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.GetUUIDPath
+  name: GetUUIDPath
+  nameWithType: AppTreeNode.GetUUIDPath
+  fullName: SMACD.AppTree.AppTreeNode.GetUUIDPath
+- uid: System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+  commentId: T:System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<AppTreeNode>
+  nameWithType: List<AppTreeNode>
+  fullName: System.Collections.Generic.List<SMACD.AppTree.AppTreeNode>
+  nameWithType.vb: List(Of AppTreeNode)
+  fullName.vb: System.Collections.Generic.List(Of SMACD.AppTree.AppTreeNode)
+  name.vb: List(Of AppTreeNode)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.IsDescribedByPath*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.IsDescribedByPath
+  name: IsDescribedByPath
+  nameWithType: AppTreeNode.IsDescribedByPath
+  fullName: SMACD.AppTree.AppTreeNode.IsDescribedByPath
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: SMACD.AppTree.AppTreeNode.NotifyChanged*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.NotifyChanged
+  name: NotifyChanged
+  nameWithType: AppTreeNode.NotifyChanged
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChanged
+- uid: SMACD.AppTree.AppTreeNode.NotifyChildAdded*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.NotifyChildAdded
+  name: NotifyChildAdded
+  nameWithType: AppTreeNode.NotifyChildAdded
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChildAdded
+- uid: SMACD.AppTree.AppTreeNode.NotifyCreated*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.NotifyCreated
+  name: NotifyCreated
+  nameWithType: AppTreeNode.NotifyCreated
+  fullName: SMACD.AppTree.AppTreeNode.NotifyCreated

@@ -1,0 +1,758 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Evidence.Evidence
+  commentId: T:SMACD.AppTree.Evidence.Evidence
+  id: Evidence
+  parent: SMACD.AppTree.Evidence
+  children:
+  - SMACD.AppTree.Evidence.Evidence.#ctor(System.String)
+  - SMACD.AppTree.Evidence.Evidence.As``1
+  - SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  - SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  - SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  - SMACD.AppTree.Evidence.Evidence.EvidenceType
+  - SMACD.AppTree.Evidence.Evidence.Name
+  - SMACD.AppTree.Evidence.Evidence.StoredData
+  langs:
+  - csharp
+  - vb
+  name: Evidence
+  nameWithType: Evidence
+  fullName: SMACD.AppTree.Evidence.Evidence
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Evidence
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 5
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nWraps supporting evidence data\n"
+  example: []
+  syntax:
+    content: public class Evidence
+    content.vb: Public Class Evidence
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  - SMACD.AppTree.Evidence.ObjectEvidence
+  - SMACD.AppTree.Evidence.StringEvidence
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.AppTree.Evidence.Evidence.#ctor(System.String)
+  commentId: M:SMACD.AppTree.Evidence.Evidence.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: Evidence(String)
+  nameWithType: Evidence.Evidence(String)
+  fullName: SMACD.AppTree.Evidence.Evidence.Evidence(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 37
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nWraps supporting evidence data\n"
+  example: []
+  syntax:
+    content: public Evidence(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: Name of Evidence item
+    content.vb: Public Sub New(name As String)
+  overload: SMACD.AppTree.Evidence.Evidence.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.Evidence.Name
+  commentId: P:SMACD.AppTree.Evidence.Evidence.Name
+  id: Name
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Evidence.Name
+  fullName: SMACD.AppTree.Evidence.Evidence.Name
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Name
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 45
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nName of this Evidence item\n"
+  example: []
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: SMACD.AppTree.Evidence.Evidence.Name*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.Evidence.StoredData
+  commentId: P:SMACD.AppTree.Evidence.Evidence.StoredData
+  id: StoredData
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: StoredData
+  nameWithType: Evidence.StoredData
+  fullName: SMACD.AppTree.Evidence.Evidence.StoredData
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StoredData
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 50
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nData stored in this Evidence item in raw format\n"
+  example: []
+  syntax:
+    content: public byte[] StoredData { get; set; }
+    parameters: []
+    return:
+      type: System.Byte[]
+    content.vb: Public Property StoredData As Byte()
+  overload: SMACD.AppTree.Evidence.Evidence.StoredData*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceType
+  commentId: P:SMACD.AppTree.Evidence.Evidence.EvidenceType
+  id: EvidenceType
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: EvidenceType
+  nameWithType: Evidence.EvidenceType
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceType
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: EvidenceType
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 55
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nType of Evidence item\n"
+  example: []
+  syntax:
+    content: public Evidence.EvidenceTypes EvidenceType { get; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+    content.vb: Public ReadOnly Property EvidenceType As Evidence.EvidenceTypes
+  overload: SMACD.AppTree.Evidence.Evidence.EvidenceType*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.Evidence.Evidence.As``1
+  commentId: M:SMACD.AppTree.Evidence.Evidence.As``1
+  id: As``1
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: As<T>()
+  nameWithType: Evidence.As<T>()
+  fullName: SMACD.AppTree.Evidence.Evidence.As<T>()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: As
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 83
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nGet the Evidence cast as a specific Evidence type\n"
+  example: []
+  syntax:
+    content: >-
+      public T As<T>()
+          where T : Evidence
+    typeParameters:
+    - id: T
+      description: Artifact type
+    return:
+      type: '{T}'
+      description: ''
+    content.vb: Public Function As(Of T As Evidence) As T
+  overload: SMACD.AppTree.Evidence.Evidence.As*
+  nameWithType.vb: Evidence.As(Of T)()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.Evidence.Evidence.As(Of T)()
+  name.vb: As(Of T)()
+- uid: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  id: AsStringEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: AsStringEvidence()
+  nameWithType: Evidence.AsStringEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsStringEvidence()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AsStringEvidence
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 92
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nGet this as a string-containing Artifact\n"
+  example: []
+  syntax:
+    content: public StringEvidence AsStringEvidence()
+    return:
+      type: SMACD.AppTree.Evidence.StringEvidence
+      description: ''
+    content.vb: Public Function AsStringEvidence As StringEvidence
+  overload: SMACD.AppTree.Evidence.Evidence.AsStringEvidence*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  id: AsObjectEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: AsObjectEvidence()
+  nameWithType: Evidence.AsObjectEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AsObjectEvidence
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 101
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nGet this as an object-containing Artifact\n"
+  example: []
+  syntax:
+    content: public ObjectEvidence AsObjectEvidence()
+    return:
+      type: SMACD.AppTree.Evidence.ObjectEvidence
+      description: ''
+    content.vb: Public Function AsObjectEvidence As ObjectEvidence
+  overload: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  commentId: M:SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  id: AsNativeDirectoryEvidence
+  parent: SMACD.AppTree.Evidence.Evidence
+  langs:
+  - csharp
+  - vb
+  name: AsNativeDirectoryEvidence()
+  nameWithType: Evidence.AsNativeDirectoryEvidence()
+  fullName: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/Evidence/Evidence.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AsNativeDirectoryEvidence
+    path: ../SMACD.AppTree/Evidence/Evidence.cs
+    startLine: 110
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Evidence
+  summary: "\nGet this as a native directory-providing Artifact\n"
+  example: []
+  syntax:
+    content: public NativeDirectoryEvidence AsNativeDirectoryEvidence()
+    return:
+      type: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+      description: ''
+    content.vb: Public Function AsNativeDirectoryEvidence As NativeDirectoryEvidence
+  overload: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.Evidence.Evidence.#ctor*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.#ctor
+  name: Evidence
+  nameWithType: Evidence.Evidence
+  fullName: SMACD.AppTree.Evidence.Evidence.Evidence
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.Evidence.Evidence.Name*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.Name
+  name: Name
+  nameWithType: Evidence.Name
+  fullName: SMACD.AppTree.Evidence.Evidence.Name
+- uid: SMACD.AppTree.Evidence.Evidence.StoredData*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.StoredData
+  name: StoredData
+  nameWithType: Evidence.StoredData
+  fullName: SMACD.AppTree.Evidence.Evidence.StoredData
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceType*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.EvidenceType
+  name: EvidenceType
+  nameWithType: Evidence.EvidenceType
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceType
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  commentId: T:SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  parent: SMACD.AppTree.Evidence
+  name: Evidence.EvidenceTypes
+  nameWithType: Evidence.EvidenceTypes
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+- uid: SMACD.AppTree.Evidence.Evidence.As*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.As
+  name: As
+  nameWithType: Evidence.As
+  fullName: SMACD.AppTree.Evidence.Evidence.As
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: SMACD.AppTree.Evidence.Evidence.AsStringEvidence*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+  name: AsStringEvidence
+  nameWithType: Evidence.AsStringEvidence
+  fullName: SMACD.AppTree.Evidence.Evidence.AsStringEvidence
+- uid: SMACD.AppTree.Evidence.StringEvidence
+  commentId: T:SMACD.AppTree.Evidence.StringEvidence
+  parent: SMACD.AppTree.Evidence
+  name: StringEvidence
+  nameWithType: StringEvidence
+  fullName: SMACD.AppTree.Evidence.StringEvidence
+- uid: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+  name: AsObjectEvidence
+  nameWithType: Evidence.AsObjectEvidence
+  fullName: SMACD.AppTree.Evidence.Evidence.AsObjectEvidence
+- uid: SMACD.AppTree.Evidence.ObjectEvidence
+  commentId: T:SMACD.AppTree.Evidence.ObjectEvidence
+  parent: SMACD.AppTree.Evidence
+  name: ObjectEvidence
+  nameWithType: ObjectEvidence
+  fullName: SMACD.AppTree.Evidence.ObjectEvidence
+- uid: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence*
+  commentId: Overload:SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+  name: AsNativeDirectoryEvidence
+  nameWithType: Evidence.AsNativeDirectoryEvidence
+  fullName: SMACD.AppTree.Evidence.Evidence.AsNativeDirectoryEvidence
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  parent: SMACD.AppTree.Evidence
+  name: NativeDirectoryEvidence
+  nameWithType: NativeDirectoryEvidence
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence

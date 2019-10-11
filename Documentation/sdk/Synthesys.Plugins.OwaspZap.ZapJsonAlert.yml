@@ -1,0 +1,960 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  id: ZapJsonAlert
+  parent: Synthesys.Plugins.OwaspZap
+  children:
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  langs:
+  - csharp
+  - vb
+  name: ZapJsonAlert
+  nameWithType: ZapJsonAlert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ZapJsonAlert
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 53
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  syntax:
+    content: public class ZapJsonAlert
+    content.vb: Public Class ZapJsonAlert
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  id: PluginId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: PluginId
+  nameWithType: ZapJsonAlert.PluginId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: PluginId
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 58
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nPlugin which created the alert\n"
+  example: []
+  syntax:
+    content: public string PluginId { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PluginId As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  id: Alert
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Alert
+  nameWithType: ZapJsonAlert.Alert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Alert
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 63
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nAlert type\n"
+  example: []
+  syntax:
+    content: public string Alert { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Alert As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  id: Name
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: ZapJsonAlert.Name
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Name
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 68
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nName of alert\n"
+  example: []
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  id: RiskCode
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: RiskCode
+  nameWithType: ZapJsonAlert.RiskCode
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: RiskCode
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 73
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nRisk code for alert\n"
+  example: []
+  syntax:
+    content: public int RiskCode { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RiskCode As Integer
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  id: Confidence
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Confidence
+  nameWithType: ZapJsonAlert.Confidence
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Confidence
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 78
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nConfidence for alert\n"
+  example: []
+  syntax:
+    content: public int Confidence { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Confidence As Integer
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  id: RiskDesc
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: RiskDesc
+  nameWithType: ZapJsonAlert.RiskDesc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: RiskDesc
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 83
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nDescription of risk\n"
+  example: []
+  syntax:
+    content: public string RiskDesc { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RiskDesc As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  id: Desc
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Desc
+  nameWithType: ZapJsonAlert.Desc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Desc
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 88
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nDescription of vulnerability\n"
+  example: []
+  syntax:
+    content: public string Desc { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Desc As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  id: Count
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: ZapJsonAlert.Count
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Count
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 93
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nNumber of occurrences of alert\n"
+  example: []
+  syntax:
+    content: public string Count { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Count As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  id: Solution
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Solution
+  nameWithType: ZapJsonAlert.Solution
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Solution
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 98
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nSolution to remedy the alert\n"
+  example: []
+  syntax:
+    content: public string Solution { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Solution As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  id: OtherInfo
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: OtherInfo
+  nameWithType: ZapJsonAlert.OtherInfo
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: OtherInfo
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 103
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nAdditional information\n"
+  example: []
+  syntax:
+    content: public string OtherInfo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property OtherInfo As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  id: Reference
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: Reference
+  nameWithType: ZapJsonAlert.Reference
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Reference
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 108
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nReference URL\n"
+  example: []
+  syntax:
+    content: public string Reference { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Reference As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  id: CWEId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: CWEId
+  nameWithType: ZapJsonAlert.CWEId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: CWEId
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 113
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nCWE (Common Weakness Enumeration) ID (if any)\n"
+  example: []
+  syntax:
+    content: public string CWEId { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CWEId As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  id: WASCId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: WASCId
+  nameWithType: ZapJsonAlert.WASCId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: WASCId
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 118
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nWASC (Web Application Security Consortium) ID (if any)\n"
+  example: []
+  syntax:
+    content: public string WASCId { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property WASCId As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  id: SourceId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  langs:
+  - csharp
+  - vb
+  name: SourceId
+  nameWithType: ZapJsonAlert.SourceId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SourceId
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 123
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nSource ID\n"
+  example: []
+  syntax:
+    content: public string SourceId { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SourceId As String
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.OwaspZap
+  commentId: N:Synthesys.Plugins.OwaspZap
+  name: Synthesys.Plugins.OwaspZap
+  nameWithType: Synthesys.Plugins.OwaspZap
+  fullName: Synthesys.Plugins.OwaspZap
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  name: PluginId
+  nameWithType: ZapJsonAlert.PluginId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  name: Alert
+  nameWithType: ZapJsonAlert.Alert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  name: Name
+  nameWithType: ZapJsonAlert.Name
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  name: RiskCode
+  nameWithType: ZapJsonAlert.RiskCode
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  name: Confidence
+  nameWithType: ZapJsonAlert.Confidence
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  name: RiskDesc
+  nameWithType: ZapJsonAlert.RiskDesc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  name: Desc
+  nameWithType: ZapJsonAlert.Desc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  name: Count
+  nameWithType: ZapJsonAlert.Count
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  name: Solution
+  nameWithType: ZapJsonAlert.Solution
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  name: OtherInfo
+  nameWithType: ZapJsonAlert.OtherInfo
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  name: Reference
+  nameWithType: ZapJsonAlert.Reference
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  name: CWEId
+  nameWithType: ZapJsonAlert.CWEId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  name: WASCId
+  nameWithType: ZapJsonAlert.WASCId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  name: SourceId
+  nameWithType: ZapJsonAlert.SourceId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId

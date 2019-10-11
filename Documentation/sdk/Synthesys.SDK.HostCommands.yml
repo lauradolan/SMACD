@@ -1,0 +1,53 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.HostCommands
+  commentId: N:Synthesys.SDK.HostCommands
+  id: Synthesys.SDK.HostCommands
+  children:
+  - Synthesys.SDK.HostCommands.DockerHostCommand
+  - Synthesys.SDK.HostCommands.DockerHostMount
+  - Synthesys.SDK.HostCommands.HostCommand
+  - Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  - Synthesys.SDK.HostCommands.NativeHostCommand
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK.HostCommands
+  nameWithType: Synthesys.SDK.HostCommands
+  fullName: Synthesys.SDK.HostCommands
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.HostCommands.DockerHostMount
+  commentId: T:Synthesys.SDK.HostCommands.DockerHostMount
+  name: DockerHostMount
+  nameWithType: DockerHostMount
+  fullName: Synthesys.SDK.HostCommands.DockerHostMount
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand
+  commentId: T:Synthesys.SDK.HostCommands.DockerHostCommand
+  name: DockerHostCommand
+  nameWithType: DockerHostCommand
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand
+- uid: Synthesys.SDK.HostCommands.HostCommand
+  commentId: T:Synthesys.SDK.HostCommands.HostCommand
+  parent: Synthesys.SDK.HostCommands
+  name: HostCommand
+  nameWithType: HostCommand
+  fullName: Synthesys.SDK.HostCommands.HostCommand
+- uid: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  commentId: T:Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  parent: Synthesys.SDK.HostCommands
+  name: HostCommand.ExternalProcessDataReceived
+  nameWithType: HostCommand.ExternalProcessDataReceived
+  fullName: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+- uid: Synthesys.SDK.HostCommands.NativeHostCommand
+  commentId: T:Synthesys.SDK.HostCommands.NativeHostCommand
+  name: NativeHostCommand
+  nameWithType: NativeHostCommand
+  fullName: Synthesys.SDK.HostCommands.NativeHostCommand
+- uid: Synthesys.SDK.HostCommands
+  commentId: N:Synthesys.SDK.HostCommands
+  name: Synthesys.SDK.HostCommands
+  nameWithType: Synthesys.SDK.HostCommands
+  fullName: Synthesys.SDK.HostCommands

@@ -1,0 +1,302 @@
+### YamlMime:TableOfContent
+- uid: SMACD.AppTree
+  name: SMACD.AppTree
+  items:
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+  - uid: SMACD.AppTree.DataProviderSpecificity
+    name: DataProviderSpecificity
+  - uid: SMACD.AppTree.DataVersionDescriptor
+    name: DataVersionDescriptor
+  - uid: SMACD.AppTree.HostNode
+    name: HostNode
+  - uid: SMACD.AppTree.HttpServiceNode
+    name: HttpServiceNode
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode<TDetailPayload>
+    name.vb: IAppTreeNode(Of TDetailPayload)
+  - uid: SMACD.AppTree.ObservableDictionary`2
+    name: ObservableDictionary<TKey, TValue>
+    name.vb: ObservableDictionary(Of TKey, TValue)
+  - uid: SMACD.AppTree.ProjectPointer
+    name: ProjectPointer
+  - uid: SMACD.AppTree.RootNode
+    name: RootNode
+  - uid: SMACD.AppTree.RootNode.ArtifactEventDelegate
+    name: RootNode.ArtifactEventDelegate
+  - uid: SMACD.AppTree.ServiceNode
+    name: ServiceNode
+  - uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+    name: ServiceNode.KnownServiceNodeTypes
+  - uid: SMACD.AppTree.UrlNode
+    name: UrlNode
+  - uid: SMACD.AppTree.UrlRequestNode
+    name: UrlRequestNode
+  - uid: SMACD.AppTree.Versionable
+    name: Versionable
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable<TData>
+    name.vb: Versionable(Of TData)
+  - uid: SMACD.AppTree.Vulnerability
+    name: Vulnerability
+  - uid: SMACD.AppTree.Vulnerability.Confidences
+    name: Vulnerability.Confidences
+  - uid: SMACD.AppTree.Vulnerability.RiskLevels
+    name: Vulnerability.RiskLevels
+- uid: SMACD.AppTree.Details
+  name: SMACD.AppTree.Details
+  items:
+  - uid: SMACD.AppTree.Details.HostDetails
+    name: HostDetails
+  - uid: SMACD.AppTree.Details.HttpServiceDetails
+    name: HttpServiceDetails
+  - uid: SMACD.AppTree.Details.ServiceDetails
+    name: ServiceDetails
+  - uid: SMACD.AppTree.Details.UrlDetails
+    name: UrlDetails
+  - uid: SMACD.AppTree.Details.UrlRequestDetails
+    name: UrlRequestDetails
+- uid: SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  items:
+  - uid: SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder
+    name: AggressiveTypeResolutionBinder
+  - uid: SMACD.AppTree.Evidence.Evidence
+    name: Evidence
+  - uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+    name: Evidence.EvidenceTypes
+  - uid: SMACD.AppTree.Evidence.EvidenceCollection
+    name: EvidenceCollection
+  - uid: SMACD.AppTree.Evidence.NativeDirectoryContext
+    name: NativeDirectoryContext
+  - uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+    name: NativeDirectoryEvidence
+  - uid: SMACD.AppTree.Evidence.ObjectEvidence
+    name: ObjectEvidence
+  - uid: SMACD.AppTree.Evidence.StringEvidence
+    name: StringEvidence
+- uid: SMACD.AppTree.Views
+  name: SMACD.AppTree.Views
+  items:
+  - uid: SMACD.AppTree.Views._Imports
+    name: _Imports
+  - uid: SMACD.AppTree.Views.DefaultNodeView
+    name: DefaultNodeView
+  - uid: SMACD.AppTree.Views.EvidenceDisplay
+    name: EvidenceDisplay
+  - uid: SMACD.AppTree.Views.HostNodeView
+    name: HostNodeView
+  - uid: SMACD.AppTree.Views.RootNodeView
+    name: RootNodeView
+  - uid: SMACD.AppTree.Views.ServiceNodeSummary
+    name: ServiceNodeSummary
+  - uid: SMACD.AppTree.Views.ServiceNodeView
+    name: ServiceNodeView
+  - uid: SMACD.AppTree.Views.VulnerabilityDisplay
+    name: VulnerabilityDisplay
+- uid: SMACD.Data
+  name: SMACD.Data
+  items:
+  - uid: SMACD.Data.AbuseCaseModel
+    name: AbuseCaseModel
+  - uid: SMACD.Data.ActionPointerModel
+    name: ActionPointerModel
+  - uid: SMACD.Data.EnvironmentSettings
+    name: EnvironmentSettings
+  - uid: SMACD.Data.FeatureModel
+    name: FeatureModel
+  - uid: SMACD.Data.IBusinessEntityModel
+    name: IBusinessEntityModel
+  - uid: SMACD.Data.IModel
+    name: IModel
+  - uid: SMACD.Data.OwnerPointerModel
+    name: OwnerPointerModel
+  - uid: SMACD.Data.ServiceMapFile
+    name: ServiceMapFile
+  - uid: SMACD.Data.TargetModel
+    name: TargetModel
+  - uid: SMACD.Data.UseCaseModel
+    name: UseCaseModel
+- uid: SMACD.Data.Resources
+  name: SMACD.Data.Resources
+  items:
+  - uid: SMACD.Data.Resources.HttpTargetModel
+    name: HttpTargetModel
+  - uid: SMACD.Data.Resources.SocketPortTargetModel
+    name: SocketPortTargetModel
+- uid: Synthesys.Plugins.AzureDevOps
+  name: Synthesys.Plugins.AzureDevOps
+  items:
+  - uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+    name: AzureDevOpsService
+- uid: Synthesys.Plugins.Dummy
+  name: Synthesys.Plugins.Dummy
+  items:
+  - uid: Synthesys.Plugins.Dummy.DummyAction
+    name: DummyAction
+  - uid: Synthesys.Plugins.Dummy.DummyDataClass
+    name: DummyDataClass
+  - uid: Synthesys.Plugins.Dummy.DummyReaction
+    name: DummyReaction
+  - uid: Synthesys.Plugins.Dummy.DummyReportSummary
+    name: DummyReportSummary
+  - uid: Synthesys.Plugins.Dummy.DummyReportView
+    name: DummyReportView
+- uid: Synthesys.Plugins.Nikto
+  name: Synthesys.Plugins.Nikto
+  items:
+  - uid: Synthesys.Plugins.Nikto.NiktoAction
+    name: NiktoAction
+  - uid: Synthesys.Plugins.Nikto.NiktoReport
+    name: NiktoReport
+  - uid: Synthesys.Plugins.Nikto.NiktoReportSummary
+    name: NiktoReportSummary
+  - uid: Synthesys.Plugins.Nikto.NiktoReportView
+    name: NiktoReportView
+- uid: Synthesys.Plugins.Nmap
+  name: Synthesys.Plugins.Nmap
+  items:
+  - uid: Synthesys.Plugins.Nmap.NmapPort
+    name: NmapPort
+  - uid: Synthesys.Plugins.Nmap.NmapReportSummary
+    name: NmapReportSummary
+  - uid: Synthesys.Plugins.Nmap.NmapReportView
+    name: NmapReportView
+  - uid: Synthesys.Plugins.Nmap.NmapRunReport
+    name: NmapRunReport
+  - uid: Synthesys.Plugins.Nmap.NmapScannerAction
+    name: NmapScannerAction
+- uid: Synthesys.Plugins.OwaspZap
+  name: Synthesys.Plugins.OwaspZap
+  items:
+  - uid: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
+    name: OwaspZapReportSummary
+  - uid: Synthesys.Plugins.OwaspZap.OwaspZapReportView
+    name: OwaspZapReportView
+  - uid: Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
+    name: OwaspZapScannerAction
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+    name: ZapJsonAlert
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+    name: ZapJsonAlertInstance
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+    name: ZapJsonAlertWithInstances
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonReport
+    name: ZapJsonReport
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonSite
+    name: ZapJsonSite
+- uid: Synthesys.Plugins.SQLMap
+  name: Synthesys.Plugins.SQLMap
+  items:
+  - uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+    name: SqlMapInjectionVector
+  - uid: Synthesys.Plugins.SQLMap.SqlMapReaction
+    name: SqlMapReaction
+  - uid: Synthesys.Plugins.SQLMap.SqlMapReport
+    name: SqlMapReport
+  - uid: Synthesys.Plugins.SQLMap.SqlMapScanner
+    name: SqlMapScanner
+- uid: Synthesys.SDK
+  name: Synthesys.SDK
+  items:
+  - uid: Synthesys.SDK.ExecutionWrapper
+    name: ExecutionWrapper
+  - uid: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+    name: ExecutionWrapper.ExternalProcessDataReceived
+  - uid: Synthesys.SDK.ExtensionReport
+    name: ExtensionReport
+  - uid: Synthesys.SDK.Global
+    name: Global
+  - uid: Synthesys.SDK.LogExtensions
+    name: LogExtensions
+  - uid: Synthesys.SDK.UrlHelper
+    name: UrlHelper
+- uid: Synthesys.SDK.Attributes
+  name: Synthesys.SDK.Attributes
+  items:
+  - uid: Synthesys.SDK.Attributes.ConfigurableAttribute
+    name: ConfigurableAttribute
+  - uid: Synthesys.SDK.Attributes.ExtensionAttribute
+    name: ExtensionAttribute
+  - uid: Synthesys.SDK.Attributes.TriggeredByAttribute
+    name: TriggeredByAttribute
+- uid: Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  items:
+  - uid: Synthesys.SDK.Capabilities.IOperateOnHost
+    name: IOperateOnHost
+  - uid: Synthesys.SDK.Capabilities.IOperateOnHostPort
+    name: IOperateOnHostPort
+  - uid: Synthesys.SDK.Capabilities.IOperateOnHttpService
+    name: IOperateOnHttpService
+  - uid: Synthesys.SDK.Capabilities.IOperateOnUrl
+    name: IOperateOnUrl
+  - uid: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+    name: IUnderstandProjectInformation
+  - uid: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+    name: IUnderstandServiceMaps
+- uid: Synthesys.SDK.Extensions
+  name: Synthesys.SDK.Extensions
+  items:
+  - uid: Synthesys.SDK.Extensions.ActionExtension
+    name: ActionExtension
+  - uid: Synthesys.SDK.Extensions.Extension
+    name: Extension
+  - uid: Synthesys.SDK.Extensions.ReactionExtension
+    name: ReactionExtension
+- uid: Synthesys.SDK.HostCommands
+  name: Synthesys.SDK.HostCommands
+  items:
+  - uid: Synthesys.SDK.HostCommands.DockerHostCommand
+    name: DockerHostCommand
+  - uid: Synthesys.SDK.HostCommands.DockerHostMount
+    name: DockerHostMount
+  - uid: Synthesys.SDK.HostCommands.HostCommand
+    name: HostCommand
+  - uid: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+    name: HostCommand.ExternalProcessDataReceived
+  - uid: Synthesys.SDK.HostCommands.NativeHostCommand
+    name: NativeHostCommand
+- uid: Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  items:
+  - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+    name: AppTreeNodeEvents
+  - uid: Synthesys.SDK.Triggers.ArtifactTriggerDescriptor
+    name: ArtifactTriggerDescriptor
+  - uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+    name: ExtensionConditionTrigger
+  - uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+    name: ExtensionTriggerDescriptor
+  - uid: Synthesys.SDK.Triggers.SystemEvents
+    name: SystemEvents
+  - uid: Synthesys.SDK.Triggers.SystemEventTriggerDescriptor
+    name: SystemEventTriggerDescriptor
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+- uid: Synthesys.Tasks
+  name: Synthesys.Tasks
+  items:
+  - uid: Synthesys.Tasks.AggressiveTypeResolutionBinder
+    name: AggressiveTypeResolutionBinder
+  - uid: Synthesys.Tasks.ExtensionConfigurator
+    name: ExtensionConfigurator
+  - uid: Synthesys.Tasks.ExtensionLibrary
+    name: ExtensionLibrary
+  - uid: Synthesys.Tasks.ExtensionToolbox
+    name: ExtensionToolbox
+  - uid: Synthesys.Tasks.Global
+    name: Global
+  - uid: Synthesys.Tasks.ITaskToolbox
+    name: ITaskToolbox
+  - uid: Synthesys.Tasks.RuntimeTaskDescriptor
+    name: RuntimeTaskDescriptor
+  - uid: Synthesys.Tasks.Session
+    name: Session
+  - uid: Synthesys.Tasks.TaskToolbox
+    name: TaskToolbox
+- uid: Synthesys.Tasks.Attributes
+  name: Synthesys.Tasks.Attributes
+  items:
+  - uid: Synthesys.Tasks.Attributes.ICanQueueTasks
+    name: ICanQueueTasks

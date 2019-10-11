@@ -5,8 +5,16 @@ using System.Threading.Tasks;
 
 namespace Synthesys.SDK.HostCommands
 {
+    /// <summary>
+    ///     Represents a command run to execute a command on the host
+    /// </summary>
     public class NativeHostCommand : HostCommand, IDisposable
     {
+        /// <summary>
+        ///     Represents a command run to execute a command on the host
+        /// </summary>
+        /// <param name="command">Command to execute</param>
+        /// <param name="args">Arguments for command</param>
         public NativeHostCommand(string command, params string[] args)
         {
             ProcessStartInfo = new ProcessStartInfo
@@ -22,9 +30,20 @@ namespace Synthesys.SDK.HostCommands
             };
         }
 
+        /// <summary>
+        ///     Process start information
+        /// </summary>
         protected ProcessStartInfo ProcessStartInfo { get; set; }
+
+        /// <summary>
+        ///     Process wrapping the native host command
+        /// </summary>
         protected Process Process { get; set; } = new Process();
 
+        /// <summary>
+        ///     Validate that the command exists on the host
+        /// </summary>
+        /// <returns></returns>
         public bool ValidateCommandExists()
         {
             if (ProcessStartInfo == null)
@@ -90,6 +109,10 @@ namespace Synthesys.SDK.HostCommands
 
         private bool disposedValue; // To detect redundant calls
 
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
+        /// <param name="disposing">Currently disposing?</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -106,7 +129,9 @@ namespace Synthesys.SDK.HostCommands
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.

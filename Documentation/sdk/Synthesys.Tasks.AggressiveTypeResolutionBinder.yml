@@ -1,0 +1,608 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Tasks.AggressiveTypeResolutionBinder
+  commentId: T:Synthesys.Tasks.AggressiveTypeResolutionBinder
+  id: AggressiveTypeResolutionBinder
+  parent: Synthesys.Tasks
+  children:
+  - Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName(System.Type,System.String@,System.String@)
+  - Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: AggressiveTypeResolutionBinder
+  nameWithType: AggressiveTypeResolutionBinder
+  fullName: Synthesys.Tasks.AggressiveTypeResolutionBinder
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AggressiveTypeResolutionBinder
+    path: ../Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+    startLine: 10
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nProvides a more aggressive (computationally complex) avenue of Type resolution.\nThis is necessary to facilitate late-loaded libraries (Extensions) and their Types to be serialized cleanly.\n"
+  example: []
+  syntax:
+    content: 'public class AggressiveTypeResolutionBinder : ISerializationBinder'
+    content.vb: >-
+      Public Class AggressiveTypeResolutionBinder
+          Implements ISerializationBinder
+  inheritance:
+  - System.Object
+  implements:
+  - Newtonsoft.Json.Serialization.ISerializationBinder
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName(System.Type,System.String@,System.String@)
+  commentId: M:Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName(System.Type,System.String@,System.String@)
+  id: BindToName(System.Type,System.String@,System.String@)
+  parent: Synthesys.Tasks.AggressiveTypeResolutionBinder
+  langs:
+  - csharp
+  - vb
+  name: BindToName(Type, out String, out String)
+  nameWithType: AggressiveTypeResolutionBinder.BindToName(Type, out String, out String)
+  fullName: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName(System.Type, out System.String, out System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: BindToName
+    path: ../Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+    startLine: 18
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nGet the AssemblyName and TypeName of a given Type\n"
+  example: []
+  syntax:
+    content: public void BindToName(Type serializedType, out string assemblyName, out string typeName)
+    parameters:
+    - id: serializedType
+      type: System.Type
+      description: Type to investigate
+    - id: assemblyName
+      type: System.String
+      description: Assembly name
+    - id: typeName
+      type: System.String
+      description: Type name
+    content.vb: Public Sub BindToName(serializedType As Type, ByRef assemblyName As String, ByRef typeName As String)
+  overload: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName*
+  implements:
+  - Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)
+  nameWithType.vb: AggressiveTypeResolutionBinder.BindToName(Type, ByRef String, ByRef String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName(System.Type, ByRef System.String, ByRef System.String)
+  name.vb: BindToName(Type, ByRef String, ByRef String)
+- uid: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType(System.String,System.String)
+  commentId: M:Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType(System.String,System.String)
+  id: BindToType(System.String,System.String)
+  parent: Synthesys.Tasks.AggressiveTypeResolutionBinder
+  langs:
+  - csharp
+  - vb
+  name: BindToType(String, String)
+  nameWithType: AggressiveTypeResolutionBinder.BindToType(String, String)
+  fullName: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType(System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: BindToType
+    path: ../Synthesys.Tasks/AggressiveTypeResolutionBinder.cs
+    startLine: 30
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nGet the runtime Type described by a given Assembly and Type\n"
+  example: []
+  syntax:
+    content: public Type BindToType(string assemblyName, string typeName)
+    parameters:
+    - id: assemblyName
+      type: System.String
+      description: Assembly name
+    - id: typeName
+      type: System.String
+      description: Type name
+    return:
+      type: System.Type
+      description: Resolved runtime Type
+    content.vb: Public Function BindToType(assemblyName As String, typeName As String) As Type
+  overload: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType*
+  implements:
+  - Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Tasks
+  commentId: N:Synthesys.Tasks
+  name: Synthesys.Tasks
+  nameWithType: Synthesys.Tasks
+  fullName: Synthesys.Tasks
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Newtonsoft.Json.Serialization.ISerializationBinder
+  commentId: T:Newtonsoft.Json.Serialization.ISerializationBinder
+  parent: Newtonsoft.Json.Serialization
+  isExternal: true
+  name: ISerializationBinder
+  nameWithType: ISerializationBinder
+  fullName: Newtonsoft.Json.Serialization.ISerializationBinder
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Newtonsoft.Json.Serialization
+  commentId: N:Newtonsoft.Json.Serialization
+  isExternal: true
+  name: Newtonsoft.Json.Serialization
+  nameWithType: Newtonsoft.Json.Serialization
+  fullName: Newtonsoft.Json.Serialization
+- uid: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName*
+  commentId: Overload:Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName
+  name: BindToName
+  nameWithType: AggressiveTypeResolutionBinder.BindToName
+  fullName: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToName
+- uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)
+  commentId: M:Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)
+  parent: Newtonsoft.Json.Serialization.ISerializationBinder
+  isExternal: true
+  name: BindToName(Type, String, String)
+  nameWithType: ISerializationBinder.BindToName(Type, String, String)
+  fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type, System.String, System.String)
+  spec.csharp:
+  - uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)
+    name: BindToName
+    nameWithType: ISerializationBinder.BindToName
+    fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName(System.Type,System.String@,System.String@)
+    name: BindToName
+    nameWithType: ISerializationBinder.BindToName
+    fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToName
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType*
+  commentId: Overload:Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType
+  name: BindToType
+  nameWithType: AggressiveTypeResolutionBinder.BindToType
+  fullName: Synthesys.Tasks.AggressiveTypeResolutionBinder.BindToType
+- uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)
+  commentId: M:Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)
+  parent: Newtonsoft.Json.Serialization.ISerializationBinder
+  isExternal: true
+  name: BindToType(String, String)
+  nameWithType: ISerializationBinder.BindToType(String, String)
+  fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String, System.String)
+  spec.csharp:
+  - uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)
+    name: BindToType
+    nameWithType: ISerializationBinder.BindToType
+    fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType(System.String,System.String)
+    name: BindToType
+    nameWithType: ISerializationBinder.BindToType
+    fullName: Newtonsoft.Json.Serialization.ISerializationBinder.BindToType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

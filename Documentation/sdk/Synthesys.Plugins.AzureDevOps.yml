@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.AzureDevOps
+  commentId: N:Synthesys.Plugins.AzureDevOps
+  id: Synthesys.Plugins.AzureDevOps
+  children:
+  - Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Plugins.AzureDevOps
+  nameWithType: Synthesys.Plugins.AzureDevOps
+  fullName: Synthesys.Plugins.AzureDevOps
+  type: Namespace
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+references:
+- uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+  commentId: T:Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+  name: AzureDevOpsService
+  nameWithType: AzureDevOpsService
+  fullName: Synthesys.Plugins.AzureDevOps.AzureDevOpsService

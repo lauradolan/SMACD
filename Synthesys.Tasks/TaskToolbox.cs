@@ -10,8 +10,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using SMACD.Data;
 
 namespace Synthesys.Tasks
 {
@@ -57,31 +59,36 @@ namespace Synthesys.Tasks
         ///     Number of tasks running and queued
         /// </summary>
         public int Count => RunningTasks.Count + QueuedTasks.Count;
+        
+        /// <summary>
+        ///     Service Map currently in use to generate Tasks
+        /// </summary>
+        public ServiceMapFile ServiceMap { get; set; }
 
         /// <summary>
         ///     Enqueue a Task based on its Descriptor
         /// </summary>
-        /// <param name="descriptor">Task Descriptor to enqueue</param>
+        /// <param name="extensionIdentifier">Extension identifier</param>
+        /// <param name="rootArtifact">Root app tree node for extension</param>
+        /// <param name="options">Action options</param>
+        /// <param name="serviceMapItemPtr">Pointer to element in Service Map which queued the Extension</param>
         /// <returns>Task which resolves to the Action-Specific Report</returns>
-        public Task<List<ExtensionReport>> Enqueue(string actionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+        public Task<List<ExtensionReport>> Enqueue(string extensionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
         {
-            if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == actionIdentifier)))
+            if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == extensionIdentifier)))
             {
                 return null;
             }
 
-            ActionExtension actionExtension = ExtensionToolbox.Instance.EmitAction(actionIdentifier).Configure(rootArtifact, options) as ActionExtension;
-            if (actionExtension is ICanQueueTasks)
+            ActionExtension actionExtension = ExtensionToolbox.Instance.EmitAction(extensionIdentifier).Configure(rootArtifact, options) as ActionExtension;
+            ApplyExtensionIntegrations(actionExtension, serviceMapItemPtr);
+
+            if (ServiceMap != null && !IsExtensionAllowed(ServiceMap.EnvironmentSettings, actionExtension.Metadata.ExtensionIdentifier))
             {
-                ((ICanQueueTasks)actionExtension).Tasks = this;
+                Logger.LogWarning("Attempted to enqueue ActionExtension {0} but was blocked by a white/blacklist rule", actionExtension.Metadata.ExtensionIdentifier);
+                return Task.FromResult(new List<ExtensionReport>());
             }
 
-            if (actionExtension is IUnderstandProjectInformation)
-            {
-                ((IUnderstandProjectInformation)actionExtension).ProjectPointer = serviceMapItemPtr;
-            }
-
-            List<ReactionExtension> reactions = new List<ReactionExtension>();
             RuntimeTaskDescriptor runtimeTaskDescriptor = new RuntimeTaskDescriptor() { Artifact = rootArtifact, Extension = actionExtension };
             runtimeTaskDescriptor.Task = new Task<List<ExtensionReport>>(() =>
             {
@@ -95,9 +102,9 @@ namespace Synthesys.Tasks
 
                     if (actionExtension == null)
                     {
-                        Logger.LogCritical("Requested Action {0} is not loaded in system!", actionIdentifier);
+                        Logger.LogCritical("Requested Action {0} is not loaded in system!", extensionIdentifier);
                         reports.Add(ExtensionReport.Error(
-                            new Exception($"Requested Action {actionIdentifier} is not loaded in system!")));
+                            new Exception($"Requested Action {extensionIdentifier} is not loaded in system!")));
                     }
                     else
                     {
@@ -123,32 +130,28 @@ namespace Synthesys.Tasks
                 if (actionExtension != null)
                 {
                     List<ReactionExtension> reactions = new List<ReactionExtension>();
-                    reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(actionExtension, succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails));
 
-                    foreach (ReactionExtension reaction in reactions)
+                    // create Trigger description from event condition
+                    var trigger = TriggerDescriptor.ExtensionTrigger(
+                        extensionIdentifier,
+                        succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails);
+
+                    reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(trigger));
+
+                    foreach (var reaction in reactions)
                     {
+                        if (ServiceMap != null && !IsExtensionAllowed(ServiceMap.EnvironmentSettings, reaction.Metadata.ExtensionIdentifier))
+                        {
+                            Logger.LogInformation("ReactionExtension {0} was attempted to be queued from Trigger {1} but was blocked by a white/blacklist rule", reaction.Metadata.ExtensionIdentifier, trigger);
+                            continue;
+                        }
+
                         // todo: reaction options?
-                        ReactionExtension configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;
+                        var configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;
+                        ApplyExtensionIntegrations(configuredReaction, serviceMapItemPtr);
 
-                        if (configuredReaction is ICanQueueTasks)
-                        {
-                            ((ICanQueueTasks)configuredReaction).Tasks = this;
-                        }
-
-                        if (configuredReaction is IUnderstandProjectInformation)
-                        {
-                            ((IUnderstandProjectInformation)configuredReaction).ProjectPointer = serviceMapItemPtr;
-                        }
-                    }
-                    foreach (ReactionExtension item in reactions)
-                    {
-                        // todo: Reaction Options are not distinguished from Action options, so we have to ground it here
-                        item.Configure(rootArtifact, new Dictionary<string, string>());
-
-                        ExtensionReport report = item.React(TriggerDescriptor.ExtensionTrigger(
-                            actionIdentifier,
-                            succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails));
-                        report.ExtensionIdentifier = item.Metadata.ExtensionIdentifier;
+                        var report = configuredReaction.React(trigger);
+                        report.ExtensionIdentifier = configuredReaction.Metadata.ExtensionIdentifier;
 
                         reports.Add(report);
                     }
@@ -178,7 +181,15 @@ namespace Synthesys.Tasks
 
             TaskManagerWorker = Task.Run(() =>
             {
-                DateTime lastLog = DateTime.Now;
+                // Assume console width of 80 chars, assume logger prefix takes up 20 chars = 60 chars
+                var totalWidth = 60;
+                var headerText = " .o-=[RUNNING TASKS]=-o. ";
+                var header =
+                    new string('#', (totalWidth - headerText.Length) / 2) +
+                    headerText +
+                    new string('#', (totalWidth - headerText.Length) / 2);
+
+                var lastLog = DateTime.Now;
                 while (IsRunning)
                 {
                     Thread.Sleep(500);
@@ -189,25 +200,56 @@ namespace Synthesys.Tasks
                             TotalCompletedTasks);
                         lastLog = DateTime.Now;
 
-                        int totalWidth = 24 + 24 + 10 + 9 + 13; // 13 is the bars and extra spaces
-                        int headerWidth = totalWidth - " RUNNING TASKS ".Length;
-                        Logger.LogTrace($"{new string('#', headerWidth / 2 + 1)} RUNNING TASKS {new string('#', headerWidth / 2)}");
-                        foreach (KeyValuePair<RuntimeTaskDescriptor, bool> item in RunningTasks)
+                        Logger.LogTrace(header);
+                        foreach (var (key, value) in RunningTasks)
                         {
-                            Logger.LogTrace($"Action '{item.Key.Extension.GetType().Name}' operating on {item.Key.Artifact}");
+                            Logger.LogTrace($"Action '{key.Extension.GetType().Name}' operating on {key.Artifact}");
                         }
 
                         Logger.LogTrace(new string('#', totalWidth));
                     }
 
-                    if (RunningTasks.Count < MAXIMUM_CONCURRENT_ACTIONS && !QueuedTasks.IsEmpty)
-                    {
-                        QueuedTasks.TryDequeue(out RuntimeTaskDescriptor task);
-                        RunningTasks.TryAdd(task, false);
-                        task.Task.Start();
-                    }
+                    if (RunningTasks.Count >= MAXIMUM_CONCURRENT_ACTIONS || QueuedTasks.IsEmpty) continue;
+
+                    QueuedTasks.TryDequeue(out var task);
+                    RunningTasks.TryAdd(task, false);
+                    task.Task.Start();
                 }
             });
+        }
+
+        /// <summary>
+        ///     Apply integration properties like "Tasks" or "ProjectPointer" which link to other system elements
+        /// </summary>
+        /// <param name="extension">Extension to configure</param>
+        /// <param name="serviceMapItemPtr">Service Map item to apply, if appropriate</param>
+        private void ApplyExtensionIntegrations(Extension extension, ProjectPointer serviceMapItemPtr)
+        {
+            switch (extension)
+            {
+                case ICanQueueTasks reactionCast:
+                    reactionCast.Tasks = this;
+                    break;
+                case IUnderstandProjectInformation reactionCast:
+                    reactionCast.ProjectPointer = serviceMapItemPtr;
+                    break;
+                case IUnderstandServiceMaps reactionCast:
+                    reactionCast.ServiceMap = ServiceMap;
+                    break;
+            }
+        }
+
+        private static bool IsExtensionAllowed(EnvironmentSettings environmentSettings, string extensionIdentifier)
+        {
+            var regexTest = "^" + Regex.Escape(extensionIdentifier).Replace("\\?", ".").Replace("\\*", ".*") + "$";
+
+            if (environmentSettings.Whitelist.Any() && !environmentSettings.Whitelist.Any(i => Regex.IsMatch(i, regexTest)))
+                return false;
+
+            if (environmentSettings.Blacklist.Any() && environmentSettings.Blacklist.Any(i => Regex.IsMatch(i, regexTest)))
+                return false;
+
+            return true;
         }
     }
 }

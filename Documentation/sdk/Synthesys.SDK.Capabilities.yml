@@ -1,0 +1,61 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  id: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IOperateOnHost
+  - Synthesys.SDK.Capabilities.IOperateOnHostPort
+  - Synthesys.SDK.Capabilities.IOperateOnHttpService
+  - Synthesys.SDK.Capabilities.IOperateOnUrl
+  - Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  - Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.Capabilities.IOperateOnHost
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHost
+  parent: Synthesys.SDK.Capabilities
+  name: IOperateOnHost
+  nameWithType: IOperateOnHost
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHost
+- uid: Synthesys.SDK.Capabilities.IOperateOnHostPort
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHostPort
+  name: IOperateOnHostPort
+  nameWithType: IOperateOnHostPort
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHostPort
+- uid: Synthesys.SDK.Capabilities.IOperateOnHttpService
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHttpService
+  parent: Synthesys.SDK.Capabilities
+  name: IOperateOnHttpService
+  nameWithType: IOperateOnHttpService
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHttpService
+- uid: Synthesys.SDK.Capabilities.IOperateOnUrl
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnUrl
+  parent: Synthesys.SDK.Capabilities
+  name: IOperateOnUrl
+  nameWithType: IOperateOnUrl
+  fullName: Synthesys.SDK.Capabilities.IOperateOnUrl
+- uid: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  commentId: T:Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  parent: Synthesys.SDK.Capabilities
+  name: IUnderstandProjectInformation
+  nameWithType: IUnderstandProjectInformation
+  fullName: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+- uid: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  commentId: T:Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  name: IUnderstandServiceMaps
+  nameWithType: IUnderstandServiceMaps
+  fullName: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities

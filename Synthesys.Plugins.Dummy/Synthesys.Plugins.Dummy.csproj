@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RazorLanguage>3.0</RazorLanguage>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.Dummy.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>Dummy Developer Plugin for Synthesys</Product>
     <Description>Demonstrates how a plugin can provide Action and Reaction extensions</Description>

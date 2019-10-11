@@ -1,0 +1,118 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  commentId: T:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  id: ServiceNode.KnownServiceNodeTypes
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Http
+  - SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Unknown
+  langs:
+  - csharp
+  - vb
+  name: ServiceNode.KnownServiceNodeTypes
+  nameWithType: ServiceNode.KnownServiceNodeTypes
+  fullName: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  type: Enum
+  source:
+    remote:
+      path: SMACD.AppTree/ServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: KnownServiceNodeTypes
+    path: ../SMACD.AppTree/ServiceNode.cs
+    startLine: 15
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nService types which are known by the system for investigation\n"
+  example: []
+  syntax:
+    content: public enum KnownServiceNodeTypes
+    content.vb: Public Enum KnownServiceNodeTypes
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Unknown
+  commentId: F:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Unknown
+  id: Unknown
+  parent: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: ServiceNode.KnownServiceNodeTypes.Unknown
+  fullName: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Unknown
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/ServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Unknown
+    path: ../SMACD.AppTree/ServiceNode.cs
+    startLine: 20
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nService fingerprint failed\n"
+  example: []
+  syntax:
+    content: Unknown = 0
+    return:
+      type: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Http
+  commentId: F:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Http
+  id: Http
+  parent: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  langs:
+  - csharp
+  - vb
+  name: Http
+  nameWithType: ServiceNode.KnownServiceNodeTypes.Http
+  fullName: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes.Http
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/ServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Http
+    path: ../SMACD.AppTree/ServiceNode.cs
+    startLine: 25
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nWeb (HTTP/S) service\n"
+  example: []
+  syntax:
+    content: Http = 1
+    return:
+      type: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  commentId: T:SMACD.AppTree.ServiceNode.KnownServiceNodeTypes
+  parent: SMACD.AppTree
+  name: ServiceNode.KnownServiceNodeTypes
+  nameWithType: ServiceNode.KnownServiceNodeTypes
+  fullName: SMACD.AppTree.ServiceNode.KnownServiceNodeTypes

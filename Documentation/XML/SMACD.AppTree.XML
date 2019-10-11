@@ -284,9 +284,34 @@
             <param name="typeName">Type name</param>
             <returns>Resolved runtime Type</returns>
         </member>
+        <member name="T:SMACD.AppTree.Evidence.Evidence">
+            <summary>
+                Wraps supporting evidence data
+            </summary>
+        </member>
         <member name="T:SMACD.AppTree.Evidence.Evidence.EvidenceTypes">
             <summary>
             Possible encapsulated data types expressed in Evidence
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Unknown">
+            <summary>
+                Unknown type
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.Object">
+            <summary>
+                Object evidence
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.String">
+            <summary>
+                String evidence
+            </summary>
+        </member>
+        <member name="F:SMACD.AppTree.Evidence.Evidence.EvidenceTypes.VFS">
+            <summary>
+                Virtual file system evidence
             </summary>
         </member>
         <member name="M:SMACD.AppTree.Evidence.Evidence.#ctor(System.String)">
@@ -428,6 +453,22 @@
             </summary>
             <param name="fileName">File name</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.AppTree.Evidence.NativeDirectoryContext.Dispose(System.Boolean)">
+            <summary>
+                Dispose of context
+            </summary>
+            <param name="disposing">Currently disposing?</param>
+        </member>
+        <member name="M:SMACD.AppTree.Evidence.NativeDirectoryContext.Finalize">
+            <summary>
+                Destructor to dispose
+            </summary>
+        </member>
+        <member name="M:SMACD.AppTree.Evidence.NativeDirectoryContext.Dispose">
+            <summary>
+                Dispose of context
+            </summary>
         </member>
         <member name="T:SMACD.AppTree.Evidence.NativeDirectoryEvidence">
             <summary>
@@ -1036,7 +1077,12 @@
             </summary>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:SMACD.AppTree.Versionable`1.op_Implicit(SMACD.AppTree.Versionable{`0})~`0" -->
+        <member name="M:SMACD.AppTree.Versionable`1.op_Implicit(SMACD.AppTree.Versionable{`0})~`0">
+            <summary>
+                Convert the Versionable to its native TData
+            </summary>
+            <param name="v">Versionable data</param>
+        </member>
         <member name="M:SMACD.AppTree.Versionable`1.ToString">
             <summary>
                 String representation of coalesced value

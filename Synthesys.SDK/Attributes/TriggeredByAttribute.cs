@@ -9,7 +9,7 @@ namespace Synthesys.SDK.Attributes
     ///     This Attribute can be used multiple times on the same Extension.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class TriggeredByAttribute : Attribute
+    public sealed class TriggeredByAttribute : Attribute
     {
         /// <summary>
         ///     Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
@@ -26,7 +26,7 @@ namespace Synthesys.SDK.Attributes
         /// </summary>
         /// <param name="extensionIdentifier">Extension identifier</param>
         /// <param name="trigger">Triggering execution status</param>
-        public TriggeredByAttribute(string extensionIdentifier, ExtensionConditionTrigger trigger, bool inherit = false)
+        public TriggeredByAttribute(string extensionIdentifier, ExtensionConditionTrigger trigger)
         {
             Trigger = TriggerDescriptor.ExtensionTrigger(extensionIdentifier, trigger);
         }

@@ -11,7 +11,7 @@ namespace Synthesys.Verbs
             Required = false)]
         public LogEventLevel LogLevel { get; set; }
 
-        [Option('z', "silence", Default = false,
+        [Option('z', "silent", Default = false,
             HelpText = "Suppress output styling (such as logo and section banners)", Required = false)]
         public bool Silent { get; set; }
 

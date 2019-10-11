@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Tasks.Attributes
+  commentId: N:Synthesys.Tasks.Attributes
+  id: Synthesys.Tasks.Attributes
+  children:
+  - Synthesys.Tasks.Attributes.ICanQueueTasks
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Tasks.Attributes
+  nameWithType: Synthesys.Tasks.Attributes
+  fullName: Synthesys.Tasks.Attributes
+  type: Namespace
+  assemblies:
+  - Synthesys.Tasks
+references:
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks
+  commentId: T:Synthesys.Tasks.Attributes.ICanQueueTasks
+  parent: Synthesys.Tasks.Attributes
+  name: ICanQueueTasks
+  nameWithType: ICanQueueTasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks
+- uid: Synthesys.Tasks.Attributes
+  commentId: N:Synthesys.Tasks.Attributes
+  name: Synthesys.Tasks.Attributes
+  nameWithType: Synthesys.Tasks.Attributes
+  fullName: Synthesys.Tasks.Attributes

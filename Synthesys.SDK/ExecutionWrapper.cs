@@ -12,6 +12,12 @@ namespace Synthesys.SDK
     /// </summary>
     public class ExecutionWrapper : IDisposable
     {
+        /// <summary>
+        ///     Invoked when an external process generates data
+        /// </summary>
+        /// <param name="sender">Sender object</param>
+        /// <param name="ownerTaskId">Task ID of owner</param>
+        /// <param name="data">Data generated</param>
         public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
 
         /// <summary>
@@ -19,11 +25,18 @@ namespace Synthesys.SDK
         /// </summary>
         public static ConcurrentDictionary<int, int> Maps = new ConcurrentDictionary<int, int>();
 
+        /// <summary>
+        ///     Wraps the execution of external (system) tasks run by a plugin
+        /// </summary>
         public ExecutionWrapper()
         {
             OwnerTaskId = Task.CurrentId.GetValueOrDefault(-1);
         }
 
+        /// <summary>
+        ///     Wraps the execution of external (system) tasks run by a plugin
+        /// </summary>
+        /// <param name="cmd">Command to run</param>
         public ExecutionWrapper(string cmd) : this()
         {
             Command = cmd;
@@ -164,6 +177,10 @@ namespace Synthesys.SDK
 
         private bool disposedValue; // To detect redundant calls
 
+        /// <summary>
+        ///     Dispose of execution wrapper context
+        /// </summary>
+        /// <param name="disposing">Currently disposing?</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -180,10 +197,11 @@ namespace Synthesys.SDK
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
+        /// <summary>
+        ///     Destructor to dispose
+        /// </summary>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
         }
 

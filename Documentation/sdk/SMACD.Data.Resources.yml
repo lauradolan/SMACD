@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.Data.Resources
+  commentId: N:SMACD.Data.Resources
+  id: SMACD.Data.Resources
+  children:
+  - SMACD.Data.Resources.HttpTargetModel
+  - SMACD.Data.Resources.SocketPortTargetModel
+  langs:
+  - csharp
+  - vb
+  name: SMACD.Data.Resources
+  nameWithType: SMACD.Data.Resources
+  fullName: SMACD.Data.Resources
+  type: Namespace
+  assemblies:
+  - SMACD.Data
+references:
+- uid: SMACD.Data.Resources.HttpTargetModel
+  commentId: T:SMACD.Data.Resources.HttpTargetModel
+  name: HttpTargetModel
+  nameWithType: HttpTargetModel
+  fullName: SMACD.Data.Resources.HttpTargetModel
+- uid: SMACD.Data.Resources.SocketPortTargetModel
+  commentId: T:SMACD.Data.Resources.SocketPortTargetModel
+  name: SocketPortTargetModel
+  nameWithType: SocketPortTargetModel
+  fullName: SMACD.Data.Resources.SocketPortTargetModel

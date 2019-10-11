@@ -1,0 +1,496 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.ProjectPointer
+  commentId: T:SMACD.AppTree.ProjectPointer
+  id: ProjectPointer
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.ProjectPointer.AbuseCase
+  - SMACD.AppTree.ProjectPointer.Feature
+  - SMACD.AppTree.ProjectPointer.UseCase
+  langs:
+  - csharp
+  - vb
+  name: ProjectPointer
+  nameWithType: ProjectPointer
+  fullName: SMACD.AppTree.ProjectPointer
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/ProjectPointer.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProjectPointer
+    path: ../SMACD.AppTree/ProjectPointer.cs
+    startLine: 7
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nDescribes a location in a Service Map which precipitated an event\n"
+  example: []
+  syntax:
+    content: public class ProjectPointer
+    content.vb: Public Class ProjectPointer
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.AppTree.ProjectPointer.Feature
+  commentId: P:SMACD.AppTree.ProjectPointer.Feature
+  id: Feature
+  parent: SMACD.AppTree.ProjectPointer
+  langs:
+  - csharp
+  - vb
+  name: Feature
+  nameWithType: ProjectPointer.Feature
+  fullName: SMACD.AppTree.ProjectPointer.Feature
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/ProjectPointer.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Feature
+    path: ../SMACD.AppTree/ProjectPointer.cs
+    startLine: 12
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nFeature which creates the Action\n"
+  example: []
+  syntax:
+    content: public FeatureModel Feature { get; set; }
+    parameters: []
+    return:
+      type: SMACD.Data.FeatureModel
+    content.vb: Public Property Feature As FeatureModel
+  overload: SMACD.AppTree.ProjectPointer.Feature*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.ProjectPointer.UseCase
+  commentId: P:SMACD.AppTree.ProjectPointer.UseCase
+  id: UseCase
+  parent: SMACD.AppTree.ProjectPointer
+  langs:
+  - csharp
+  - vb
+  name: UseCase
+  nameWithType: ProjectPointer.UseCase
+  fullName: SMACD.AppTree.ProjectPointer.UseCase
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/ProjectPointer.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: UseCase
+    path: ../SMACD.AppTree/ProjectPointer.cs
+    startLine: 17
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nUse Case which creates the Action\n"
+  example: []
+  syntax:
+    content: public UseCaseModel UseCase { get; set; }
+    parameters: []
+    return:
+      type: SMACD.Data.UseCaseModel
+    content.vb: Public Property UseCase As UseCaseModel
+  overload: SMACD.AppTree.ProjectPointer.UseCase*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.ProjectPointer.AbuseCase
+  commentId: P:SMACD.AppTree.ProjectPointer.AbuseCase
+  id: AbuseCase
+  parent: SMACD.AppTree.ProjectPointer
+  langs:
+  - csharp
+  - vb
+  name: AbuseCase
+  nameWithType: ProjectPointer.AbuseCase
+  fullName: SMACD.AppTree.ProjectPointer.AbuseCase
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/ProjectPointer.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AbuseCase
+    path: ../SMACD.AppTree/ProjectPointer.cs
+    startLine: 22
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAbuse Case which creates the Action\n"
+  example: []
+  syntax:
+    content: public AbuseCaseModel AbuseCase { get; set; }
+    parameters: []
+    return:
+      type: SMACD.Data.AbuseCaseModel
+    content.vb: Public Property AbuseCase As AbuseCaseModel
+  overload: SMACD.AppTree.ProjectPointer.AbuseCase*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.ProjectPointer.Feature*
+  commentId: Overload:SMACD.AppTree.ProjectPointer.Feature
+  name: Feature
+  nameWithType: ProjectPointer.Feature
+  fullName: SMACD.AppTree.ProjectPointer.Feature
+- uid: SMACD.Data.FeatureModel
+  commentId: T:SMACD.Data.FeatureModel
+  parent: SMACD.Data
+  name: FeatureModel
+  nameWithType: FeatureModel
+  fullName: SMACD.Data.FeatureModel
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data
+- uid: SMACD.AppTree.ProjectPointer.UseCase*
+  commentId: Overload:SMACD.AppTree.ProjectPointer.UseCase
+  name: UseCase
+  nameWithType: ProjectPointer.UseCase
+  fullName: SMACD.AppTree.ProjectPointer.UseCase
+- uid: SMACD.Data.UseCaseModel
+  commentId: T:SMACD.Data.UseCaseModel
+  parent: SMACD.Data
+  name: UseCaseModel
+  nameWithType: UseCaseModel
+  fullName: SMACD.Data.UseCaseModel
+- uid: SMACD.AppTree.ProjectPointer.AbuseCase*
+  commentId: Overload:SMACD.AppTree.ProjectPointer.AbuseCase
+  name: AbuseCase
+  nameWithType: ProjectPointer.AbuseCase
+  fullName: SMACD.AppTree.ProjectPointer.AbuseCase
+- uid: SMACD.Data.AbuseCaseModel
+  commentId: T:SMACD.Data.AbuseCaseModel
+  parent: SMACD.Data
+  name: AbuseCaseModel
+  nameWithType: AbuseCaseModel
+  fullName: SMACD.Data.AbuseCaseModel

@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  commentId: T:Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  id: IUnderstandProjectInformation
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+  langs:
+  - csharp
+  - vb
+  name: IUnderstandProjectInformation
+  nameWithType: IUnderstandProjectInformation
+  fullName: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IUnderstandProjectInformation.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IUnderstandProjectInformation
+    path: ../Synthesys.SDK/Capabilities/IUnderstandProjectInformation.cs
+    startLine: 8
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nIUnderstandProjectInformation indicates that the Extension needs to know what business object is related to its\ninstance.\n"
+  example: []
+  syntax:
+    content: public interface IUnderstandProjectInformation
+    content.vb: Public Interface IUnderstandProjectInformation
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+  commentId: P:Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+  id: ProjectPointer
+  parent: Synthesys.SDK.Capabilities.IUnderstandProjectInformation
+  langs:
+  - csharp
+  - vb
+  name: ProjectPointer
+  nameWithType: IUnderstandProjectInformation.ProjectPointer
+  fullName: Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IUnderstandProjectInformation.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProjectPointer
+    path: ../Synthesys.SDK/Capabilities/IUnderstandProjectInformation.cs
+    startLine: 13
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the project information\n"
+  example: []
+  syntax:
+    content: ProjectPointer ProjectPointer { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.ProjectPointer
+    content.vb: Property ProjectPointer As ProjectPointer
+  overload: Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer*
+  commentId: Overload:Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+  name: ProjectPointer
+  nameWithType: IUnderstandProjectInformation.ProjectPointer
+  fullName: Synthesys.SDK.Capabilities.IUnderstandProjectInformation.ProjectPointer
+- uid: SMACD.AppTree.ProjectPointer
+  commentId: T:SMACD.AppTree.ProjectPointer
+  parent: SMACD.AppTree
+  name: ProjectPointer
+  nameWithType: ProjectPointer
+  fullName: SMACD.AppTree.ProjectPointer
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

@@ -1,0 +1,42 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Extensions
+  commentId: N:Synthesys.SDK.Extensions
+  id: Synthesys.SDK.Extensions
+  children:
+  - Synthesys.SDK.Extensions.ActionExtension
+  - Synthesys.SDK.Extensions.Extension
+  - Synthesys.SDK.Extensions.ReactionExtension
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK.Extensions
+  nameWithType: Synthesys.SDK.Extensions
+  fullName: Synthesys.SDK.Extensions
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.Extensions.ActionExtension
+  commentId: T:Synthesys.SDK.Extensions.ActionExtension
+  parent: Synthesys.SDK.Extensions
+  name: ActionExtension
+  nameWithType: ActionExtension
+  fullName: Synthesys.SDK.Extensions.ActionExtension
+- uid: Synthesys.SDK.Extensions.Extension
+  commentId: T:Synthesys.SDK.Extensions.Extension
+  parent: Synthesys.SDK.Extensions
+  name: Extension
+  nameWithType: Extension
+  fullName: Synthesys.SDK.Extensions.Extension
+- uid: Synthesys.SDK.Extensions.ReactionExtension
+  commentId: T:Synthesys.SDK.Extensions.ReactionExtension
+  parent: Synthesys.SDK.Extensions
+  name: ReactionExtension
+  nameWithType: ReactionExtension
+  fullName: Synthesys.SDK.Extensions.ReactionExtension
+- uid: Synthesys.SDK.Extensions
+  commentId: N:Synthesys.SDK.Extensions
+  name: Synthesys.SDK.Extensions
+  nameWithType: Synthesys.SDK.Extensions
+  fullName: Synthesys.SDK.Extensions

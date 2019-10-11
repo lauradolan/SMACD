@@ -68,6 +68,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:SMACD.Data.EnvironmentSettings">
+            <summary>
+                Configuration options for applications using this Service Map
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.EnvironmentSettings.Whitelist">
+            <summary>
+                Extensions which will be allowed to execute when running this Service Map
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.EnvironmentSettings.Blacklist">
+            <summary>
+                Extensions which are not allowed to execute when running this Service Map
+            </summary>
+        </member>
         <member name="T:SMACD.Data.FeatureModel">
             <summary>
                 Represents a Feature: A group of Use Cases that, together, accomplish a larger functional task
@@ -206,7 +221,7 @@
         </member>
         <member name="T:SMACD.Data.ServiceMapFile">
             <summary>
-                Service Map - Stores both Features and Resources for an application's test
+                Service Map - Stores Features and Resources for an application's test, as well as environment settings
             </summary>
         </member>
         <member name="P:SMACD.Data.ServiceMapFile.Created">
@@ -217,6 +232,11 @@
         <member name="P:SMACD.Data.ServiceMapFile.Updated">
             <summary>
                 When this file was last updated
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.EnvironmentSettings">
+            <summary>
+                Configuration options for applications using this Service Map
             </summary>
         </member>
         <member name="P:SMACD.Data.ServiceMapFile.Features">

@@ -1,0 +1,1100 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.ExecutionWrapper
+  commentId: T:Synthesys.SDK.ExecutionWrapper
+  id: ExecutionWrapper
+  parent: Synthesys.SDK
+  children:
+  - Synthesys.SDK.ExecutionWrapper.#ctor
+  - Synthesys.SDK.ExecutionWrapper.#ctor(System.String)
+  - Synthesys.SDK.ExecutionWrapper.Command
+  - Synthesys.SDK.ExecutionWrapper.Dispose
+  - Synthesys.SDK.ExecutionWrapper.Dispose(System.Boolean)
+  - Synthesys.SDK.ExecutionWrapper.ExecutionTime
+  - Synthesys.SDK.ExecutionWrapper.FailedToExecute
+  - Synthesys.SDK.ExecutionWrapper.Maps
+  - Synthesys.SDK.ExecutionWrapper.RuntimeTask
+  - Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived
+  - Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived
+  - Synthesys.SDK.ExecutionWrapper.Start
+  - Synthesys.SDK.ExecutionWrapper.StdErr
+  - Synthesys.SDK.ExecutionWrapper.StdOut
+  langs:
+  - csharp
+  - vb
+  name: ExecutionWrapper
+  nameWithType: ExecutionWrapper
+  fullName: Synthesys.SDK.ExecutionWrapper
+  type: Class
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExecutionWrapper
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nWraps the execution of external (system) tasks run by a plugin\n"
+  example: []
+  syntax:
+    content: 'public class ExecutionWrapper : IDisposable'
+    content.vb: >-
+      Public Class ExecutionWrapper
+          Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.SDK.ExecutionWrapper.Maps
+  commentId: F:Synthesys.SDK.ExecutionWrapper.Maps
+  id: Maps
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: Maps
+  nameWithType: ExecutionWrapper.Maps
+  fullName: Synthesys.SDK.ExecutionWrapper.Maps
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Maps
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 25
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nA collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)\n"
+  example: []
+  syntax:
+    content: public static ConcurrentDictionary<int, int> Maps
+    return:
+      type: System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+    content.vb: Public Shared Maps As ConcurrentDictionary(Of Integer, Integer)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.SDK.ExecutionWrapper.#ctor
+  commentId: M:Synthesys.SDK.ExecutionWrapper.#ctor
+  id: '#ctor'
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: ExecutionWrapper()
+  nameWithType: ExecutionWrapper.ExecutionWrapper()
+  fullName: Synthesys.SDK.ExecutionWrapper.ExecutionWrapper()
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 30
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nWraps the execution of external (system) tasks run by a plugin\n"
+  example: []
+  syntax:
+    content: public ExecutionWrapper()
+    content.vb: Public Sub New
+  overload: Synthesys.SDK.ExecutionWrapper.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.#ctor(System.String)
+  commentId: M:Synthesys.SDK.ExecutionWrapper.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: ExecutionWrapper(String)
+  nameWithType: ExecutionWrapper.ExecutionWrapper(String)
+  fullName: Synthesys.SDK.ExecutionWrapper.ExecutionWrapper(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 39
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nWraps the execution of external (system) tasks run by a plugin\n"
+  example: []
+  syntax:
+    content: public ExecutionWrapper(string cmd)
+    parameters:
+    - id: cmd
+      type: System.String
+      description: Command to run
+    content.vb: Public Sub New(cmd As String)
+  overload: Synthesys.SDK.ExecutionWrapper.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.RuntimeTask
+  commentId: P:Synthesys.SDK.ExecutionWrapper.RuntimeTask
+  id: RuntimeTask
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: RuntimeTask
+  nameWithType: ExecutionWrapper.RuntimeTask
+  fullName: Synthesys.SDK.ExecutionWrapper.RuntimeTask
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: RuntimeTask
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 47
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nTask wrapping this execution\n"
+  example: []
+  syntax:
+    content: public Task RuntimeTask { get; }
+    parameters: []
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public ReadOnly Property RuntimeTask As Task
+  overload: Synthesys.SDK.ExecutionWrapper.RuntimeTask*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.SDK.ExecutionWrapper.Command
+  commentId: P:Synthesys.SDK.ExecutionWrapper.Command
+  id: Command
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: Command
+  nameWithType: ExecutionWrapper.Command
+  fullName: Synthesys.SDK.ExecutionWrapper.Command
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Command
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 52
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nCommand being executed\n"
+  example: []
+  syntax:
+    content: public string Command { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Command As String
+  overload: Synthesys.SDK.ExecutionWrapper.Command*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.ExecutionTime
+  commentId: P:Synthesys.SDK.ExecutionWrapper.ExecutionTime
+  id: ExecutionTime
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: ExecutionTime
+  nameWithType: ExecutionWrapper.ExecutionTime
+  fullName: Synthesys.SDK.ExecutionWrapper.ExecutionTime
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExecutionTime
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 57
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nDuration of last execution\n"
+  example: []
+  syntax:
+    content: public TimeSpan ExecutionTime { get; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public ReadOnly Property ExecutionTime As TimeSpan
+  overload: Synthesys.SDK.ExecutionWrapper.ExecutionTime*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.SDK.ExecutionWrapper.StdOut
+  commentId: P:Synthesys.SDK.ExecutionWrapper.StdOut
+  id: StdOut
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: StdOut
+  nameWithType: ExecutionWrapper.StdOut
+  fullName: Synthesys.SDK.ExecutionWrapper.StdOut
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StdOut
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 67
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nStandard output from last execution\n"
+  example: []
+  syntax:
+    content: public string StdOut { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property StdOut As String
+  overload: Synthesys.SDK.ExecutionWrapper.StdOut*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.StdErr
+  commentId: P:Synthesys.SDK.ExecutionWrapper.StdErr
+  id: StdErr
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: StdErr
+  nameWithType: ExecutionWrapper.StdErr
+  fullName: Synthesys.SDK.ExecutionWrapper.StdErr
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StdErr
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 72
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nStandard error from last execution\n"
+  example: []
+  syntax:
+    content: public string StdErr { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property StdErr As String
+  overload: Synthesys.SDK.ExecutionWrapper.StdErr*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.FailedToExecute
+  commentId: P:Synthesys.SDK.ExecutionWrapper.FailedToExecute
+  id: FailedToExecute
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: FailedToExecute
+  nameWithType: ExecutionWrapper.FailedToExecute
+  fullName: Synthesys.SDK.ExecutionWrapper.FailedToExecute
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: FailedToExecute
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 77
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nIf this process failed to execute\n"
+  example: []
+  syntax:
+    content: public bool FailedToExecute { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property FailedToExecute As Boolean
+  overload: Synthesys.SDK.ExecutionWrapper.FailedToExecute*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived
+  commentId: E:Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived
+  id: StandardOutputDataReceived
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: StandardOutputDataReceived
+  nameWithType: ExecutionWrapper.StandardOutputDataReceived
+  fullName: Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived
+  type: Event
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StandardOutputDataReceived
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 85
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nFired when data is written to STDOUT\n"
+  example: []
+  syntax:
+    content: public event ExecutionWrapper.ExternalProcessDataReceived StandardOutputDataReceived
+    return:
+      type: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+    content.vb: Public Event StandardOutputDataReceived As ExecutionWrapper.ExternalProcessDataReceived
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived
+  commentId: E:Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived
+  id: StandardErrorDataReceived
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: StandardErrorDataReceived
+  nameWithType: ExecutionWrapper.StandardErrorDataReceived
+  fullName: Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived
+  type: Event
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StandardErrorDataReceived
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 90
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nFired when data is written to STDERR\n"
+  example: []
+  syntax:
+    content: public event ExecutionWrapper.ExternalProcessDataReceived StandardErrorDataReceived
+    return:
+      type: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+    content.vb: Public Event StandardErrorDataReceived As ExecutionWrapper.ExternalProcessDataReceived
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.Start
+  commentId: M:Synthesys.SDK.ExecutionWrapper.Start
+  id: Start
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: Start()
+  nameWithType: ExecutionWrapper.Start()
+  fullName: Synthesys.SDK.ExecutionWrapper.Start()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Start
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 96
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nExecute the command, wrapped by a Task\n"
+  example: []
+  syntax:
+    content: public Task Start()
+    return:
+      type: System.Threading.Tasks.Task
+      description: ''
+    content.vb: Public Function Start As Task
+  overload: Synthesys.SDK.ExecutionWrapper.Start*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExecutionWrapper.Dispose(System.Boolean)
+  commentId: M:Synthesys.SDK.ExecutionWrapper.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: Dispose(Boolean)
+  nameWithType: ExecutionWrapper.Dispose(Boolean)
+  fullName: Synthesys.SDK.ExecutionWrapper.Dispose(System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Dispose
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 183
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nDispose of execution wrapper context\n"
+  example: []
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+      description: Currently disposing?
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+  overload: Synthesys.SDK.ExecutionWrapper.Dispose*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: Synthesys.SDK.ExecutionWrapper.Dispose
+  commentId: M:Synthesys.SDK.ExecutionWrapper.Dispose
+  id: Dispose
+  parent: Synthesys.SDK.ExecutionWrapper
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: ExecutionWrapper.Dispose()
+  fullName: Synthesys.SDK.ExecutionWrapper.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExecutionWrapper.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Dispose
+    path: ../Synthesys.SDK/ExecutionWrapper.cs
+    startLine: 202
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nDestructor to dispose\n"
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose
+  overload: Synthesys.SDK.ExecutionWrapper.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+  commentId: T:System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+  parent: System.Collections.Concurrent
+  definition: System.Collections.Concurrent.ConcurrentDictionary`2
+  name: ConcurrentDictionary<Int32, Int32>
+  nameWithType: ConcurrentDictionary<Int32, Int32>
+  fullName: System.Collections.Concurrent.ConcurrentDictionary<System.Int32, System.Int32>
+  nameWithType.vb: ConcurrentDictionary(Of Int32, Int32)
+  fullName.vb: System.Collections.Concurrent.ConcurrentDictionary(Of System.Int32, System.Int32)
+  name.vb: ConcurrentDictionary(Of Int32, Int32)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Concurrent.ConcurrentDictionary`2
+  commentId: T:System.Collections.Concurrent.ConcurrentDictionary`2
+  isExternal: true
+  name: ConcurrentDictionary<TKey, TValue>
+  nameWithType: ConcurrentDictionary<TKey, TValue>
+  fullName: System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>
+  nameWithType.vb: ConcurrentDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Concurrent.ConcurrentDictionary(Of TKey, TValue)
+  name.vb: ConcurrentDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Concurrent
+  commentId: N:System.Collections.Concurrent
+  isExternal: true
+  name: System.Collections.Concurrent
+  nameWithType: System.Collections.Concurrent
+  fullName: System.Collections.Concurrent
+- uid: Synthesys.SDK.ExecutionWrapper.#ctor*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.#ctor
+  name: ExecutionWrapper
+  nameWithType: ExecutionWrapper.ExecutionWrapper
+  fullName: Synthesys.SDK.ExecutionWrapper.ExecutionWrapper
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.SDK.ExecutionWrapper.RuntimeTask*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.RuntimeTask
+  name: RuntimeTask
+  nameWithType: ExecutionWrapper.RuntimeTask
+  fullName: Synthesys.SDK.ExecutionWrapper.RuntimeTask
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: Synthesys.SDK.ExecutionWrapper.Command*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.Command
+  name: Command
+  nameWithType: ExecutionWrapper.Command
+  fullName: Synthesys.SDK.ExecutionWrapper.Command
+- uid: Synthesys.SDK.ExecutionWrapper.ExecutionTime*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.ExecutionTime
+  name: ExecutionTime
+  nameWithType: ExecutionWrapper.ExecutionTime
+  fullName: Synthesys.SDK.ExecutionWrapper.ExecutionTime
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Synthesys.SDK.ExecutionWrapper.StdOut*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.StdOut
+  name: StdOut
+  nameWithType: ExecutionWrapper.StdOut
+  fullName: Synthesys.SDK.ExecutionWrapper.StdOut
+- uid: Synthesys.SDK.ExecutionWrapper.StdErr*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.StdErr
+  name: StdErr
+  nameWithType: ExecutionWrapper.StdErr
+  fullName: Synthesys.SDK.ExecutionWrapper.StdErr
+- uid: Synthesys.SDK.ExecutionWrapper.FailedToExecute*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.FailedToExecute
+  name: FailedToExecute
+  nameWithType: ExecutionWrapper.FailedToExecute
+  fullName: Synthesys.SDK.ExecutionWrapper.FailedToExecute
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+  commentId: T:Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+  parent: Synthesys.SDK
+  name: ExecutionWrapper.ExternalProcessDataReceived
+  nameWithType: ExecutionWrapper.ExternalProcessDataReceived
+  fullName: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
+- uid: Synthesys.SDK.ExecutionWrapper.Start*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.Start
+  name: Start
+  nameWithType: ExecutionWrapper.Start
+  fullName: Synthesys.SDK.ExecutionWrapper.Start
+- uid: Synthesys.SDK.ExecutionWrapper.Dispose*
+  commentId: Overload:Synthesys.SDK.ExecutionWrapper.Dispose
+  name: Dispose
+  nameWithType: ExecutionWrapper.Dispose
+  fullName: Synthesys.SDK.ExecutionWrapper.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

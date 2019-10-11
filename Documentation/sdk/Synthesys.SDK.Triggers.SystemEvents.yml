@@ -1,0 +1,188 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Triggers.SystemEvents
+  commentId: T:Synthesys.SDK.Triggers.SystemEvents
+  id: SystemEvents
+  parent: Synthesys.SDK.Triggers
+  children:
+  - Synthesys.SDK.Triggers.SystemEvents.TaskAddedToQueue
+  - Synthesys.SDK.Triggers.SystemEvents.TaskCompleted
+  - Synthesys.SDK.Triggers.SystemEvents.TaskQueueDepleted
+  - Synthesys.SDK.Triggers.SystemEvents.TaskStarted
+  langs:
+  - csharp
+  - vb
+  name: SystemEvents
+  nameWithType: SystemEvents
+  fullName: Synthesys.SDK.Triggers.SystemEvents
+  type: Enum
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SystemEvents
+    path: ../Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nEvents which can be fired from the scanner system\n"
+  example: []
+  syntax:
+    content: public enum SystemEvents
+    content.vb: Public Enum SystemEvents
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Synthesys.SDK.Triggers.SystemEvents.TaskAddedToQueue
+  commentId: F:Synthesys.SDK.Triggers.SystemEvents.TaskAddedToQueue
+  id: TaskAddedToQueue
+  parent: Synthesys.SDK.Triggers.SystemEvents
+  langs:
+  - csharp
+  - vb
+  name: TaskAddedToQueue
+  nameWithType: SystemEvents.TaskAddedToQueue
+  fullName: Synthesys.SDK.Triggers.SystemEvents.TaskAddedToQueue
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskAddedToQueue
+    path: ../Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired when a task is added to the queue\n"
+  example: []
+  syntax:
+    content: TaskAddedToQueue = 0
+    return:
+      type: Synthesys.SDK.Triggers.SystemEvents
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.Triggers.SystemEvents.TaskStarted
+  commentId: F:Synthesys.SDK.Triggers.SystemEvents.TaskStarted
+  id: TaskStarted
+  parent: Synthesys.SDK.Triggers.SystemEvents
+  langs:
+  - csharp
+  - vb
+  name: TaskStarted
+  nameWithType: SystemEvents.TaskStarted
+  fullName: Synthesys.SDK.Triggers.SystemEvents.TaskStarted
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskStarted
+    path: ../Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+    startLine: 17
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired when a task is started\n"
+  example: []
+  syntax:
+    content: TaskStarted = 1
+    return:
+      type: Synthesys.SDK.Triggers.SystemEvents
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.Triggers.SystemEvents.TaskCompleted
+  commentId: F:Synthesys.SDK.Triggers.SystemEvents.TaskCompleted
+  id: TaskCompleted
+  parent: Synthesys.SDK.Triggers.SystemEvents
+  langs:
+  - csharp
+  - vb
+  name: TaskCompleted
+  nameWithType: SystemEvents.TaskCompleted
+  fullName: Synthesys.SDK.Triggers.SystemEvents.TaskCompleted
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskCompleted
+    path: ../Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+    startLine: 22
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired when a task completes\n"
+  example: []
+  syntax:
+    content: TaskCompleted = 2
+    return:
+      type: Synthesys.SDK.Triggers.SystemEvents
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.Triggers.SystemEvents.TaskQueueDepleted
+  commentId: F:Synthesys.SDK.Triggers.SystemEvents.TaskQueueDepleted
+  id: TaskQueueDepleted
+  parent: Synthesys.SDK.Triggers.SystemEvents
+  langs:
+  - csharp
+  - vb
+  name: TaskQueueDepleted
+  nameWithType: SystemEvents.TaskQueueDepleted
+  fullName: Synthesys.SDK.Triggers.SystemEvents.TaskQueueDepleted
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskQueueDepleted
+    path: ../Synthesys.SDK/Triggers/SystemEventTriggerDescriptor.cs
+    startLine: 27
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired when the task queue has completely drained\n"
+  example: []
+  syntax:
+    content: TaskQueueDepleted = 3
+    return:
+      type: Synthesys.SDK.Triggers.SystemEvents
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
+- uid: Synthesys.SDK.Triggers.SystemEvents
+  commentId: T:Synthesys.SDK.Triggers.SystemEvents
+  parent: Synthesys.SDK.Triggers
+  name: SystemEvents
+  nameWithType: SystemEvents
+  fullName: Synthesys.SDK.Triggers.SystemEvents
