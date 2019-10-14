@@ -1,0 +1,153 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.HostCommands.StreamTypes
+  commentId: T:Synthesys.SDK.HostCommands.StreamTypes
+  id: StreamTypes
+  parent: Synthesys.SDK.HostCommands
+  children:
+  - Synthesys.SDK.HostCommands.StreamTypes.Stderr
+  - Synthesys.SDK.HostCommands.StreamTypes.Stdin
+  - Synthesys.SDK.HostCommands.StreamTypes.Stdout
+  langs:
+  - csharp
+  - vb
+  name: StreamTypes
+  nameWithType: StreamTypes
+  fullName: Synthesys.SDK.HostCommands.StreamTypes
+  type: Enum
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StreamTypes
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 18
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStream types which can input or output data\n"
+  example: []
+  syntax:
+    content: public enum StreamTypes
+    content.vb: Public Enum StreamTypes
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Synthesys.SDK.HostCommands.StreamTypes.Stdin
+  commentId: F:Synthesys.SDK.HostCommands.StreamTypes.Stdin
+  id: Stdin
+  parent: Synthesys.SDK.HostCommands.StreamTypes
+  langs:
+  - csharp
+  - vb
+  name: Stdin
+  nameWithType: StreamTypes.Stdin
+  fullName: Synthesys.SDK.HostCommands.StreamTypes.Stdin
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Stdin
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 23
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStandard input (STDIN)\n"
+  example: []
+  syntax:
+    content: Stdin = 0
+    return:
+      type: Synthesys.SDK.HostCommands.StreamTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.HostCommands.StreamTypes.Stdout
+  commentId: F:Synthesys.SDK.HostCommands.StreamTypes.Stdout
+  id: Stdout
+  parent: Synthesys.SDK.HostCommands.StreamTypes
+  langs:
+  - csharp
+  - vb
+  name: Stdout
+  nameWithType: StreamTypes.Stdout
+  fullName: Synthesys.SDK.HostCommands.StreamTypes.Stdout
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Stdout
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 28
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStandard output (STDOUT)\n"
+  example: []
+  syntax:
+    content: Stdout = 1
+    return:
+      type: Synthesys.SDK.HostCommands.StreamTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.HostCommands.StreamTypes.Stderr
+  commentId: F:Synthesys.SDK.HostCommands.StreamTypes.Stderr
+  id: Stderr
+  parent: Synthesys.SDK.HostCommands.StreamTypes
+  langs:
+  - csharp
+  - vb
+  name: Stderr
+  nameWithType: StreamTypes.Stderr
+  fullName: Synthesys.SDK.HostCommands.StreamTypes.Stderr
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Stderr
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 33
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStandard error (STDERR)\n"
+  example: []
+  syntax:
+    content: Stderr = 2
+    return:
+      type: Synthesys.SDK.HostCommands.StreamTypes
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Synthesys.SDK.HostCommands
+  commentId: N:Synthesys.SDK.HostCommands
+  name: Synthesys.SDK.HostCommands
+  nameWithType: Synthesys.SDK.HostCommands
+  fullName: Synthesys.SDK.HostCommands
+- uid: Synthesys.SDK.HostCommands.StreamTypes
+  commentId: T:Synthesys.SDK.HostCommands.StreamTypes
+  parent: Synthesys.SDK.HostCommands
+  name: StreamTypes
+  nameWithType: StreamTypes
+  fullName: Synthesys.SDK.HostCommands.StreamTypes

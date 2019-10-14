@@ -8,7 +8,6 @@ items:
   - Synthesys.Plugins.SQLMap.SqlMapReaction.Execute(System.String)
   - Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
   - Synthesys.Plugins.SQLMap.SqlMapReaction.Tasks
-  - Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
   langs:
   - csharp
   - vb
@@ -23,7 +22,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: SqlMapReaction
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 19
+    startLine: 20
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -42,7 +41,9 @@ items:
       <TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)>
 
       Public Class SqlMapReaction
+
           Inherits ReactionExtension
+
           Implements ICanQueueTasks
   inheritance:
   - System.Object
@@ -54,6 +55,7 @@ items:
   - Synthesys.SDK.Extensions.ReactionExtension.Triggers
   - Synthesys.SDK.Extensions.Extension.Logger
   - Synthesys.SDK.Extensions.Extension.Initialize
+  - Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   - Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
   - Synthesys.SDK.Extensions.Extension.Metadata
   - Synthesys.SDK.Extensions.Extension.ConfigurableProperties
@@ -117,7 +119,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Tasks
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -136,41 +138,6 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
-  commentId: M:Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
-  id: ValidateEnvironmentReadiness
-  parent: Synthesys.Plugins.SQLMap.SqlMapReaction
-  langs:
-  - csharp
-  - vb
-  name: ValidateEnvironmentReadiness()
-  nameWithType: SqlMapReaction.ValidateEnvironmentReadiness()
-  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness()
-  type: Method
-  source:
-    remote:
-      path: Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: ValidateEnvironmentReadiness
-    path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 30
-  assemblies:
-  - Synthesys.Plugins.SQLMap
-  namespace: Synthesys.Plugins.SQLMap
-  syntax:
-    content: public override bool ValidateEnvironmentReadiness()
-    return:
-      type: System.Boolean
-    content.vb: Public Overrides Function ValidateEnvironmentReadiness As Boolean
-  overridden: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  overload: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness*
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
 - uid: Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
   commentId: M:Synthesys.Plugins.SQLMap.SqlMapReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
   id: React(Synthesys.SDK.Triggers.TriggerDescriptor)
@@ -189,7 +156,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: React
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 42
+    startLine: 31
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -227,7 +194,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Execute
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 65
+    startLine: 54
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -309,6 +276,34 @@ references:
     name: Initialize
     nameWithType: Extension.Initialize
     fullName: Synthesys.SDK.Extensions.Extension.Initialize
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  parent: Synthesys.SDK.Extensions.Extension
+  name: ValidateEnvironmentReadiness()
+  nameWithType: Extension.ValidateEnvironmentReadiness()
+  fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness()
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   - name: (
     nameWithType: (
     fullName: (
@@ -896,46 +891,6 @@ references:
   name: ITaskToolbox
   nameWithType: ITaskToolbox
   fullName: Synthesys.Tasks.ITaskToolbox
-- uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  parent: Synthesys.SDK.Extensions.Extension
-  name: ValidateEnvironmentReadiness()
-  nameWithType: Extension.ValidateEnvironmentReadiness()
-  fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness()
-  spec.csharp:
-  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-    name: ValidateEnvironmentReadiness
-    nameWithType: Extension.ValidateEnvironmentReadiness
-    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-    name: ValidateEnvironmentReadiness
-    nameWithType: Extension.ValidateEnvironmentReadiness
-    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness*
-  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
-  name: ValidateEnvironmentReadiness
-  nameWithType: SqlMapReaction.ValidateEnvironmentReadiness
-  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction.ValidateEnvironmentReadiness
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
   commentId: M:Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
   parent: Synthesys.SDK.Extensions.ReactionExtension

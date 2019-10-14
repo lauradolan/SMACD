@@ -7,7 +7,6 @@ items:
   children:
   - Synthesys.Plugins.Nmap.NmapScannerAction.Act
   - Synthesys.Plugins.Nmap.NmapScannerAction.Host
-  - Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness
   langs:
   - csharp
   - vb
@@ -22,7 +21,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NmapScannerAction
     path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 22
+    startLine: 24
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -38,7 +37,9 @@ items:
       <Extension("nmap", Name:="NMap Port Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
       Public Class NmapScannerAction
+
           Inherits ActionExtension
+
           Implements IOperateOnHost
   inheritance:
   - System.Object
@@ -49,6 +50,7 @@ items:
   inheritedMembers:
   - Synthesys.SDK.Extensions.Extension.Logger
   - Synthesys.SDK.Extensions.Extension.Initialize
+  - Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   - Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
   - Synthesys.SDK.Extensions.Extension.Metadata
   - Synthesys.SDK.Extensions.Extension.ConfigurableProperties
@@ -105,7 +107,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Host
     path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 32
+    startLine: 34
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -126,41 +128,6 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness
-  commentId: M:Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness
-  id: ValidateEnvironmentReadiness
-  parent: Synthesys.Plugins.Nmap.NmapScannerAction
-  langs:
-  - csharp
-  - vb
-  name: ValidateEnvironmentReadiness()
-  nameWithType: NmapScannerAction.ValidateEnvironmentReadiness()
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness()
-  type: Method
-  source:
-    remote:
-      path: Synthesys.Plugins.Nmap/NmapScannerAction.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: ValidateEnvironmentReadiness
-    path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 34
-  assemblies:
-  - Synthesys.Plugins.Nmap
-  namespace: Synthesys.Plugins.Nmap
-  syntax:
-    content: public override bool ValidateEnvironmentReadiness()
-    return:
-      type: System.Boolean
-    content.vb: Public Overrides Function ValidateEnvironmentReadiness As Boolean
-  overridden: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  overload: Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness*
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
 - uid: Synthesys.Plugins.Nmap.NmapScannerAction.Act
   commentId: M:Synthesys.Plugins.Nmap.NmapScannerAction.Act
   id: Act
@@ -179,7 +146,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Act
     path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 56
+    startLine: 36
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -255,6 +222,34 @@ references:
     name: Initialize
     nameWithType: Extension.Initialize
     fullName: Synthesys.SDK.Extensions.Extension.Initialize
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  parent: Synthesys.SDK.Extensions.Extension
+  name: ValidateEnvironmentReadiness()
+  nameWithType: Extension.ValidateEnvironmentReadiness()
+  fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness()
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
+    name: ValidateEnvironmentReadiness
+    nameWithType: Extension.ValidateEnvironmentReadiness
+    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   - name: (
     nameWithType: (
     fullName: (
@@ -847,46 +842,6 @@ references:
   name: SMACD.AppTree
   nameWithType: SMACD.AppTree
   fullName: SMACD.AppTree
-- uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  parent: Synthesys.SDK.Extensions.Extension
-  name: ValidateEnvironmentReadiness()
-  nameWithType: Extension.ValidateEnvironmentReadiness()
-  fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness()
-  spec.csharp:
-  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-    name: ValidateEnvironmentReadiness
-    nameWithType: Extension.ValidateEnvironmentReadiness
-    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-    name: ValidateEnvironmentReadiness
-    nameWithType: Extension.ValidateEnvironmentReadiness
-    fullName: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness*
-  commentId: Overload:Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness
-  name: ValidateEnvironmentReadiness
-  nameWithType: NmapScannerAction.ValidateEnvironmentReadiness
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.ValidateEnvironmentReadiness
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: Synthesys.SDK.Extensions.ActionExtension.Act
   commentId: M:Synthesys.SDK.Extensions.ActionExtension.Act
   parent: Synthesys.SDK.Extensions.ActionExtension

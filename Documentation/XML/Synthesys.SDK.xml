@@ -168,97 +168,6 @@
                 Framework-populated reference to the Service Map
             </summary>
         </member>
-        <member name="T:Synthesys.SDK.ExecutionWrapper">
-            <summary>
-                Wraps the execution of external (system) tasks run by a plugin
-            </summary>
-        </member>
-        <member name="T:Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived">
-            <summary>
-                Invoked when an external process generates data
-            </summary>
-            <param name="sender">Sender object</param>
-            <param name="ownerTaskId">Task ID of owner</param>
-            <param name="data">Data generated</param>
-        </member>
-        <member name="F:Synthesys.SDK.ExecutionWrapper.Maps">
-            <summary>
-                A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.#ctor">
-            <summary>
-                Wraps the execution of external (system) tasks run by a plugin
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.#ctor(System.String)">
-            <summary>
-                Wraps the execution of external (system) tasks run by a plugin
-            </summary>
-            <param name="cmd">Command to run</param>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.RuntimeTask">
-            <summary>
-                Task wrapping this execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.Command">
-            <summary>
-                Command being executed
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.ExecutionTime">
-            <summary>
-                Duration of last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.Process">
-            <summary>
-                Process object executing this command
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.StdOut">
-            <summary>
-                Standard output from last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.StdErr">
-            <summary>
-                Standard error from last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.FailedToExecute">
-            <summary>
-                If this process failed to execute
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived">
-            <summary>
-                Fired when data is written to STDOUT
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived">
-            <summary>
-                Fired when data is written to STDERR
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.Start">
-            <summary>
-                Execute the command, wrapped by a Task
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.Dispose(System.Boolean)">
-            <summary>
-                Dispose of execution wrapper context
-            </summary>
-            <param name="disposing">Currently disposing?</param>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.Dispose">
-            <summary>
-                Destructor to dispose
-            </summary>
-        </member>
         <member name="T:Synthesys.SDK.ExtensionReport">
             <summary>
                 Encapsulates interesting runtime and output information from an Extension.
@@ -472,6 +381,26 @@
                 Log factory for elements in SDK
             </summary>
         </member>
+        <member name="T:Synthesys.SDK.HostCommands.StreamTypes">
+            <summary>
+                Stream types which can input or output data
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stdin">
+            <summary>
+                Standard input (STDIN)
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stdout">
+            <summary>
+                Standard output (STDOUT)
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stderr">
+            <summary>
+                Standard error (STDERR)
+            </summary>
+        </member>
         <member name="T:Synthesys.SDK.HostCommands.DockerHostMount">
             <summary>
                 Represents a mount between the host and a Docker container
@@ -497,13 +426,42 @@
                 Represents a command run to execute a Docker container
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)">
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker">
+            <summary>
+                If the platform is running an accessible Docker daemon
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)">
             <summary>
                 Represents a command run to execute a Docker container
             </summary>
             <param name="image">Image name</param>
+            <param name="command">Command and arguments to execute</param>
             <param name="mounts">Mounts for container</param>
             <param name="user">User to execute container as</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])">
+            <summary>
+                Represents a command run to execute a Docker container
+                
+                A context will be mounted at /synthesys inside the container
+            </summary>
+            <param name="image">Image name</param>
+            <param name="context">Context to attach to Docker container</param>
+            <param name="command">Command and arguments to execute</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.String[])">
+            <summary>
+                Represents a command run to execute a Docker container
+            </summary>
+            <param name="image">Image name</param>
+            <param name="command">Command and arguments to execute</param>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory">
+            <summary>
+                Container Working Directory
+            </summary>
         </member>
         <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(Docker.DotNet.Models.CreateContainerParameters)">
             <summary>
@@ -676,6 +634,11 @@
         <member name="T:Synthesys.SDK.LogExtensions">
             <summary>
                 Extensions to the log function to allow a binding between external processes and their encapsulating threads
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.LogExtensions.Maps">
+            <summary>
+                Managed to unmanaged thread ID maps for logging enrichment extension
             </summary>
         </member>
         <member name="M:Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">

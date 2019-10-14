@@ -26,7 +26,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NativeHostCommand
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 10
+    startLine: 12
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -36,7 +36,9 @@ items:
     content: 'public class NativeHostCommand : HostCommand, IDisposable'
     content.vb: >-
       Public Class NativeHostCommand
+
           Inherits HostCommand
+
           Implements IDisposable
   inheritance:
   - System.Object
@@ -89,7 +91,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 17
+    startLine: 19
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -131,7 +133,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ProcessStartInfo
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 35
+    startLine: 38
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -168,7 +170,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Process
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 40
+    startLine: 43
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -205,7 +207,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ValidateCommandExists
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 46
+    startLine: 49
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -240,7 +242,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Start
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 67
+    startLine: 70
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -275,7 +277,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Dispose
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 115
+    startLine: 145
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -313,7 +315,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Dispose
     path: ../Synthesys.SDK/HostCommands/NativeHostCommand.cs
-    startLine: 134
+    startLine: 164
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands

@@ -4,7 +4,9 @@ items:
   commentId: N:Synthesys.Plugins.AzureDevOps
   id: Synthesys.Plugins.AzureDevOps
   children:
+  - Synthesys.Plugins.AzureDevOps.AzureDevOpsInterop
   - Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+  - Synthesys.Plugins.AzureDevOps.PatchDocument
   langs:
   - csharp
   - vb
@@ -15,8 +17,18 @@ items:
   assemblies:
   - Synthesys.Plugins.AzureDevOps
 references:
+- uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsInterop
+  commentId: T:Synthesys.Plugins.AzureDevOps.AzureDevOpsInterop
+  name: AzureDevOpsInterop
+  nameWithType: AzureDevOpsInterop
+  fullName: Synthesys.Plugins.AzureDevOps.AzureDevOpsInterop
 - uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsService
   commentId: T:Synthesys.Plugins.AzureDevOps.AzureDevOpsService
   name: AzureDevOpsService
   nameWithType: AzureDevOpsService
   fullName: Synthesys.Plugins.AzureDevOps.AzureDevOpsService
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument
+  commentId: T:Synthesys.Plugins.AzureDevOps.PatchDocument
+  name: PatchDocument
+  nameWithType: PatchDocument
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument

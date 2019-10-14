@@ -41,7 +41,9 @@ items:
       <TriggeredBy("dummy", ExtensionConditionTrigger.Succeeds)>
 
       Public Class DummyReaction
+
           Inherits ReactionExtension
+
           Implements IOperateOnHost, IUnderstandProjectInformation
   inheritance:
   - System.Object

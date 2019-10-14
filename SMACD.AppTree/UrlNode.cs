@@ -12,7 +12,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public override string NodeViewName => "SMACD.Artifacts.Views.UrlNodeView";
+        public override string NodeViewName => "Compass.AppTree.UrlNodeView";
 
         /// <summary>
         ///     String representing this segment of a URL

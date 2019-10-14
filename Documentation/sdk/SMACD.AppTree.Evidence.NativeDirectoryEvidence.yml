@@ -32,6 +32,7 @@ items:
     content: 'public class NativeDirectoryEvidence : Evidence'
     content.vb: >-
       Public Class NativeDirectoryEvidence
+
           Inherits Evidence
   inheritance:
   - System.Object

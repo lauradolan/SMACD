@@ -20,6 +20,9 @@ namespace Synthesys.SDK
         /// <returns>Artifact representing leaf of URL</returns>
         public static UrlNode GeneratePathArtifacts(HttpServiceNode httpService, string url, string method)
         {
+            if (httpService.Root.LockTreeNodes)
+                return null;
+
             if (!url.StartsWith("http"))
             {
                 url = "http://" + httpService.Host.Hostname + ":" + httpService.Port + url;
@@ -40,7 +43,7 @@ namespace Synthesys.SDK
             }
 
             // "artifact" is leaf URL, create request here
-            UrlRequestNode request = new UrlRequestNode();
+            UrlRequestNode request = new UrlRequestNode() { Parent = artifact };
 
             foreach (string key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
             {

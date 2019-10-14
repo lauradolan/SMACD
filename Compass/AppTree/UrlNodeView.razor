@@ -1,0 +1,71 @@
+﻿<div class="d-sm-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-dark mb-0">URL Segment - @UrlArtifact.GetEntireUrl()</h3><i class="fas da-2x fa-plug"></i>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">URL Segment Children</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var item in UrlArtifact.ChildrenAre<UrlNode>())
+                    {
+                        <li class="list-group-item">
+                            <i class="fa fa-globe" style="margin-right: 0.25em;"></i>
+                            <span>@item.UrlSegment</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="card shadow mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="text-primary font-weight-bold m-0">Requests</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach (var item in UrlArtifact.ChildrenAre<UrlRequestNode>())
+                    {
+                        <li class="list-group-item">
+                            <i class="fa fa-puzzle" style="margin-right: 0.25em;"></i>
+                            <ul>
+                                @foreach (var kvp in item.Fields)
+                                {
+                                    <li><strong>@kvp.Key</strong> - @kvp.Value</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <Compass.Components.VulnerabilityViewer Vulnerabilities="@UrlArtifact.Vulnerabilities" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <Compass.Components.EvidenceSummaryViewer Node="@Artifact" />
+    </div>
+</div>
+
+@using SMACD.AppTree;
+@using SMACD.AppTree.Details
+@code
+{
+    [Parameter]
+    public AppTreeNode Artifact { get; set; }
+    public UrlNode UrlArtifact => Artifact as UrlNode;
+    public UrlDetails Metadata => UrlArtifact?.Detail;
+}

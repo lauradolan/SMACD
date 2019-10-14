@@ -1,8 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.TeamFoundation.SourceControl.WebApi;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.Identity;
 using Microsoft.VisualStudio.Services.WebApi;
+using Microsoft.VisualStudio.Services.WebApi.Patch;
+using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
+using SMACD.AppTree;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
@@ -63,30 +68,6 @@ namespace Synthesys.Plugins.AzureDevOps
         //        new Uri(OrganizationUrl), 
         //        new VssBasicCredential(string.Empty, PersonalAccessToken));
         //}
-
-        private async Task CreatePullRequestThread(string projectId, string repositoryId, int pullRequestId,
-            string content)
-        {
-            GitHttpClient cli = Connection.GetClient<GitHttpClient>();
-            try
-            {
-                GitPullRequestCommentThread result = await cli.CreateThreadAsync(new GitPullRequestCommentThread
-                {
-                    Comments = new List<Comment>
-                    {
-                        new Comment
-                        {
-                            Content = content,
-                            CommentType = CommentType.System
-                        }
-                    }
-                }, projectId, repositoryId, pullRequestId);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogCritical(ex, "Error posting thread");
-            }
-        }
 
         public override ExtensionReport React(TriggerDescriptor trigger)
         {

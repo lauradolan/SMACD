@@ -4,8 +4,6 @@ items:
   commentId: N:Synthesys.SDK
   id: Synthesys.SDK
   children:
-  - Synthesys.SDK.ExecutionWrapper
-  - Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
   - Synthesys.SDK.ExtensionReport
   - Synthesys.SDK.Global
   - Synthesys.SDK.LogExtensions
@@ -20,17 +18,6 @@ items:
   assemblies:
   - Synthesys.SDK
 references:
-- uid: Synthesys.SDK.ExecutionWrapper
-  commentId: T:Synthesys.SDK.ExecutionWrapper
-  name: ExecutionWrapper
-  nameWithType: ExecutionWrapper
-  fullName: Synthesys.SDK.ExecutionWrapper
-- uid: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
-  commentId: T:Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
-  parent: Synthesys.SDK
-  name: ExecutionWrapper.ExternalProcessDataReceived
-  nameWithType: ExecutionWrapper.ExternalProcessDataReceived
-  fullName: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
 - uid: Synthesys.SDK.ExtensionReport
   commentId: T:Synthesys.SDK.ExtensionReport
   parent: Synthesys.SDK

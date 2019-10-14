@@ -13,7 +13,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public override string NodeViewName => "SMACD.AppTree.Views.HostNodeView";
+        public override string NodeViewName => "Compass.AppTree.HostNodeView";
 
         /// <summary>
         ///     Name of Host

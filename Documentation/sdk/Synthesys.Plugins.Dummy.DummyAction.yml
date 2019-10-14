@@ -41,7 +41,9 @@ items:
       <Extension("dummy", Name:="Dummy Action", Version:="1.1.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
       Public Class DummyAction
+
           Inherits ActionExtension
+
           Implements IOperateOnHost, ICanQueueTasks
   inheritance:
   - System.Object

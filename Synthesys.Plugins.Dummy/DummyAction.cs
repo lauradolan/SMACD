@@ -106,11 +106,11 @@ namespace Synthesys.Plugins.Dummy
                         // The temporary directory name is stored in the "Directory" property of the context
                         File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
 
-                        // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
+                        // Use "NativeHostCommand" to run commands whose syntax is identical between OSes
                         // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
                         //   "owner" Task that spawned this external program (to correlate issues in logs)
-                        ExecutionWrapper execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
-                        ExecutionWrapper execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
+                        var execFail = new SDK.HostCommands.NativeHostCommand("echo", "This is a test of a syntax error", "&&");
+                        var execSuccess = new SDK.HostCommands.NativeHostCommand("echo", "This is a test of a valid output");
                         execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
                         {
                             // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
@@ -127,6 +127,17 @@ namespace Synthesys.Plugins.Dummy
                         Task.WhenAll(
                             execFail.Start(),
                             execSuccess.Start()).Wait();
+
+                        // You can do the same thing with DockerHostCommand if a container is available; just specify the container image!
+                        if (SDK.HostCommands.DockerHostCommand.SupportsDocker())
+                        {
+                            var dockerCommmand = new SDK.HostCommands.DockerHostCommand("alpine:latest", "echo", "Hello from inside Docker!");
+                            dockerCommmand.StandardErrorDataReceived += (sender, ownerTaskId, data) => Logger.TaskLogCritical(ownerTaskId, "RECEIVED DOCKER ERROR: {1}", data.Trim());
+                            dockerCommmand.StandardOutputDataReceived += (sender, ownerTaskId, data) => Logger.TaskLogInformation(ownerTaskId, "RECEIVED DOCKER DATA: {1}", data.Trim());
+                            Task.WhenAll(dockerCommmand.Start()).Wait();
+                        }
+                        else
+                            Logger.LogInformation("Docker not running (or accessible) on platform, skipping Docker demo.");
                     }
                 }
             }

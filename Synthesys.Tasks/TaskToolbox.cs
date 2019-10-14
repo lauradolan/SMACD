@@ -184,10 +184,7 @@ namespace Synthesys.Tasks
                 // Assume console width of 80 chars, assume logger prefix takes up 20 chars = 60 chars
                 var totalWidth = 60;
                 var headerText = " .o-=[RUNNING TASKS]=-o. ";
-                var header =
-                    new string('#', (totalWidth - headerText.Length) / 2) +
-                    headerText +
-                    new string('#', (totalWidth - headerText.Length) / 2);
+                
 
                 var lastLog = DateTime.Now;
                 while (IsRunning)
@@ -200,13 +197,20 @@ namespace Synthesys.Tasks
                             TotalCompletedTasks);
                         lastLog = DateTime.Now;
 
-                        Logger.LogTrace(header);
-                        foreach (var (key, value) in RunningTasks)
-                        {
-                            Logger.LogTrace($"Action '{key.Extension.GetType().Name}' operating on {key.Artifact}");
-                        }
+                        var lines = new List<string>();
+                        RunningTasks.ToList().ForEach(t => lines.Add($"{t.Key.Extension.Metadata.ExtensionIdentifier} => {t.Key.Artifact}"));
+                        var longest = lines.Max(l => l.Length) + 4;
 
-                        Logger.LogTrace(new string('#', totalWidth));
+                        var header =
+                            "┏" +
+                            new string('━', (longest - headerText.Length - 2) / 2) +
+                            headerText +
+                            new string('━', (longest - headerText.Length - 2) / 2) +
+                            "┓";
+                        var runningTasks = string.Join('\n', lines.Select(l => $"┃ {l} ┃"));
+                        var footer = "┗" + new string('━', longest - 2) + "┛";
+
+                        Logger.LogTrace($"\n{header}\n{runningTasks}\n{footer}");
                     }
 
                     if (RunningTasks.Count >= MAXIMUM_CONCURRENT_ACTIONS || QueuedTasks.IsEmpty) continue;

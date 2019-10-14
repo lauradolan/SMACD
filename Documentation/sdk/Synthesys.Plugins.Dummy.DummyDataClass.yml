@@ -21,7 +21,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: DummyDataClass
     path: ../Synthesys.Plugins.Dummy/DummyAction.cs
-    startLine: 165
+    startLine: 176
   assemblies:
   - Synthesys.Plugins.Dummy
   namespace: Synthesys.Plugins.Dummy
@@ -62,7 +62,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: DummyString
     path: ../Synthesys.Plugins.Dummy/DummyAction.cs
-    startLine: 167
+    startLine: 178
   assemblies:
   - Synthesys.Plugins.Dummy
   namespace: Synthesys.Plugins.Dummy
@@ -97,7 +97,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: DummyDouble
     path: ../Synthesys.Plugins.Dummy/DummyAction.cs
-    startLine: 168
+    startLine: 179
   assemblies:
   - Synthesys.Plugins.Dummy
   namespace: Synthesys.Plugins.Dummy

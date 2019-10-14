@@ -5,6 +5,7 @@ items:
   id: LogExtensions
   parent: Synthesys.SDK
   children:
+  - Synthesys.SDK.LogExtensions.Maps
   - Synthesys.SDK.LogExtensions.SHA1(System.String)
   - Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
   - Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
@@ -26,7 +27,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: LogExtensions
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 10
+    startLine: 11
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -52,6 +53,45 @@ items:
   modifiers.vb:
   - Public
   - Module
+- uid: Synthesys.SDK.LogExtensions.Maps
+  commentId: P:Synthesys.SDK.LogExtensions.Maps
+  id: Maps
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: Maps
+  nameWithType: LogExtensions.Maps
+  fullName: Synthesys.SDK.LogExtensions.Maps
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Maps
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 16
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nManaged to unmanaged thread ID maps for logging enrichment extension\n"
+  example: []
+  syntax:
+    content: public static Dictionary<int, int> Maps { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+    content.vb: Public Shared ReadOnly Property Maps As Dictionary(Of Integer, Integer)
+  overload: Synthesys.SDK.LogExtensions.Maps*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
   commentId: M:Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
   id: TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
@@ -71,7 +111,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogCritical
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 26
+    startLine: 32
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -125,7 +165,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogDebug
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 38
+    startLine: 44
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -179,7 +219,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogError
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 50
+    startLine: 56
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -233,7 +273,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogInformation
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 62
+    startLine: 68
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -287,7 +327,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogTrace
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 75
+    startLine: 81
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -341,7 +381,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskLogWarning
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 87
+    startLine: 93
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -395,7 +435,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: SHA1
     path: ../Synthesys.SDK/LogExtensions.cs
-    startLine: 97
+    startLine: 103
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK
@@ -719,6 +759,128 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Synthesys.SDK.LogExtensions.Maps*
+  commentId: Overload:Synthesys.SDK.LogExtensions.Maps
+  name: Maps
+  nameWithType: LogExtensions.Maps
+  fullName: Synthesys.SDK.LogExtensions.Maps
+- uid: System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+  commentId: T:System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<Int32, Int32>
+  nameWithType: Dictionary<Int32, Int32>
+  fullName: System.Collections.Generic.Dictionary<System.Int32, System.Int32>
+  nameWithType.vb: Dictionary(Of Int32, Int32)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.Int32, System.Int32)
+  name.vb: Dictionary(Of Int32, Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: Synthesys.SDK.LogExtensions.TaskLogCritical*
   commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogCritical
   name: TaskLogCritical

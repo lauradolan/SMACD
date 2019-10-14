@@ -1,5 +1,6 @@
 ﻿@page "/artifacts"
-@layout LayoutWithoutPadding
+@layout Layouts.LayoutWithoutPadding
+@using SMACD.AppTree.Evidence
 @using Synthesys.Tasks
 @using SMACD.AppTree
 
@@ -13,7 +14,7 @@
         <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;color:#fff">
             @foreach (var item in Program.Session.Artifacts.Children)
             {
-                <ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+                <Compass.Layouts.Navigation.AppTree.ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
             }
         </ul>
     }
@@ -26,6 +27,15 @@
     [Parameter]
     public AppTreeNode Artifact { get; set; } = Program.Session?.Artifacts;
 
+    public Modal modalRef;
+
+    public NativeDirectoryContext NativeContext { get; set; }
+
+    public void ToggleModal()
+    {
+        if (modalRef.IsOpen) modalRef.Hide();
+        else modalRef.Show();
+    }
 
     public void IdentifierClicked(AppTreeNode artifact)
     {
@@ -53,12 +63,6 @@
             // First, see if we can resolve this cheaply.
             componentType = Type.GetType(Artifact.NodeViewName);
 
-            // Try resolving inside the Artifacts assembly
-            if (componentType == null && Artifact.NodeViewName.Contains(".AppTree."))
-            {
-                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.AppTree.Views.DefaultNodeView)).GetType(Artifact.NodeViewName);
-            }
-
             // Try resolving inside the loaded extensions
             if (componentType == null)
             {
@@ -67,7 +71,7 @@
         }
 
         if (componentType == null)
-            componentType = typeof(SMACD.AppTree.Views.DefaultNodeView);
+            componentType = typeof(Compass.AppTree.DefaultNodeView);
 
         return componentType;
     }

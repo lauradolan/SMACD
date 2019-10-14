@@ -30,6 +30,7 @@ items:
     content: 'public abstract class ActionExtension : Extension'
     content.vb: >-
       Public MustInherit Class ActionExtension
+
           Inherits Extension
   inheritance:
   - System.Object

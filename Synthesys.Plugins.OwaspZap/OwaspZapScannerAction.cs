@@ -6,7 +6,9 @@ using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.HostCommands;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -80,22 +82,11 @@ namespace Synthesys.Plugins.OwaspZap
         private void RunScanner(NativeDirectoryEvidence nativePathEvidence)
         {
             Logger.LogInformation("Starting OWASP ZAP Scanner against {0}", HttpService);
-            ExecutionWrapper wrapper = new ExecutionWrapper();
 
             string pyScript = Aggressive ? "zap-full-scan.py" : "zap-baseline.py";
 
             Logger.LogDebug("Using scanner script {0} (aggressive option is {1})", pyScript,
                 Aggressive);
-
-            string dockerCommandTemplate = "docker run " +
-                                        "-v {0}:/zap/wrk:rw " +
-                                        "-u zap " +
-                                        "-i ictu/zap2docker-weekly " +
-                                        "{1} -t {2} -J {3} -r {4} ";
-            if (UseAjaxSpider)
-            {
-                dockerCommandTemplate += "-j ";
-            }
 
             using (NativeDirectoryContext context = nativePathEvidence.GetContext())
             {
@@ -109,17 +100,46 @@ namespace Synthesys.Plugins.OwaspZap
                     schema = "http";
                 }
 
-                Logger.LogDebug("Invoking command " + dockerCommandTemplate,
-                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
-                    JSON_REPORT_FILE, HTML_REPORT_FILE);
-                wrapper.Command = string.Format(dockerCommandTemplate,
-                    context.Directory, pyScript, $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
-                    JSON_REPORT_FILE, HTML_REPORT_FILE);
+                if (DockerHostCommand.SupportsDocker())
+                {
+                    using var dockerCommand = new DockerHostCommand("owasp/zap2docker-weekly",
+                        new List<string>() {
+                            pyScript,
+                            "-t", $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
+                            "-J", JSON_REPORT_FILE,
+                            "-r", HTML_REPORT_FILE,
+                            UseAjaxSpider ? "-j" : ""
+                        },
+                        new List<DockerHostMount>()
+                        {
+                            new DockerHostMount()
+                            {
+                                ContainerPath = "/zap/wrk",
+                                LocalPath = context.Directory,
+                                IsReadOnly = false
+                            }
+                        },
+                        "zap");
 
-                wrapper.StandardOutputDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
-                wrapper.StandardErrorDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
+                    dockerCommand.StandardOutputDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
+                    dockerCommand.StandardErrorDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
 
-                wrapper.Start().Wait();
+                    dockerCommand.Start().Wait();
+                }
+                else
+                {
+                    using var hostCommand = new NativeHostCommand(
+                            pyScript,
+                            "-t", $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
+                            "-J", JSON_REPORT_FILE,
+                            "-r", HTML_REPORT_FILE,
+                            UseAjaxSpider ? "-j" : "");
+
+                    hostCommand.StandardOutputDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
+                    hostCommand.StandardErrorDataReceived += (s, taskOwner, data) => TranslateZapLogs(taskOwner, data);
+
+                    hostCommand.Start().Wait();
+                }
             }
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution");
@@ -211,38 +231,43 @@ namespace Synthesys.Plugins.OwaspZap
                     try
                     {
                         System.Collections.Generic.List<UrlRequestNode> targets = alert.Instances.Select(i =>
-                    {
-                        UrlNode inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
-
-                        UrlRequestNode artifact = new UrlRequestNode();
-                        if (i.Param != null)
                         {
-                            string[] paramsSplit = i.Param.Split(',');
-                            foreach (string param in paramsSplit)
+                            UrlNode inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
+                            if (inner == null)
                             {
-                                if (param.Contains('='))
+                                Logger.LogDebug("Inner URL node not created/found, abandoning further data embedding");
+                                return null;
+                            }
+
+                            UrlRequestNode artifact = new UrlRequestNode() { Parent = inner };
+                            if (i.Param != null)
+                            {
+                                string[] paramsSplit = i.Param.Split(',');
+                                foreach (string param in paramsSplit)
                                 {
-                                    artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
-                                }
-                                else
-                                {
-                                    artifact.Fields.Add(param, string.Empty);
+                                    if (param.Contains('='))
+                                    {
+                                        artifact.Fields.Add(param.Split('=')[0], param.Split('=')[1]);
+                                    }
+                                    else
+                                    {
+                                        artifact.Fields.Add(param, string.Empty);
+                                    }
                                 }
                             }
-                        }
 
-                        inner.Vulnerabilities.Add(new Vulnerability
-                        {
-                            Confidence = (Vulnerability.Confidences)alert.Confidence,
-                            RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
-                            Description = alert.Desc,
-                            Occurrences = alert.Instances.Count(),
-                            Remedy = alert.Solution,
-                            Title = alert.Name
-                        });
+                            inner.Vulnerabilities.Add(new Vulnerability
+                            {
+                                Confidence = (Vulnerability.Confidences)alert.Confidence,
+                                RiskLevel = (Vulnerability.RiskLevels)alert.RiskCode,
+                                Description = alert.Desc,
+                                Occurrences = alert.Instances.Count(),
+                                Remedy = alert.Solution,
+                                Title = alert.Name
+                            });
 
-                        return inner.AddRequest(i.Method, artifact.Fields, artifact.Headers);
-                    }).ToList();
+                            return inner.AddRequest(i.Method, artifact.Fields, artifact.Headers);
+                        }).ToList();
                     }
                     catch (Exception ex)
                     {

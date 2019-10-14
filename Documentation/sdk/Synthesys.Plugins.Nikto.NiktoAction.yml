@@ -21,7 +21,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NiktoAction
     path: ../Synthesys.Plugins.Nikto/NiktoAction.cs
-    startLine: 21
+    startLine: 22
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto
@@ -37,7 +37,9 @@ items:
       <Extension("nikto", Name:="Nikto Web Server Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
       Public Class NiktoAction
+
           Inherits ActionExtension
+
           Implements IOperateOnHttpService
   inheritance:
   - System.Object
@@ -105,7 +107,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: HttpService
     path: ../Synthesys.Plugins.Nikto/NiktoAction.cs
-    startLine: 35
+    startLine: 36
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto
@@ -144,7 +146,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Act
     path: ../Synthesys.Plugins.Nikto/NiktoAction.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto

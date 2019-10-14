@@ -42,6 +42,7 @@ items:
     - id: TData
     content.vb: >-
       Public Class Versionable(Of TData As New)
+
           Inherits Versionable
   inheritance:
   - System.Object

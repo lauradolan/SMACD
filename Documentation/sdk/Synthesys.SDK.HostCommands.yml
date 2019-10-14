@@ -9,6 +9,7 @@ items:
   - Synthesys.SDK.HostCommands.HostCommand
   - Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
   - Synthesys.SDK.HostCommands.NativeHostCommand
+  - Synthesys.SDK.HostCommands.StreamTypes
   langs:
   - csharp
   - vb
@@ -19,6 +20,12 @@ items:
   assemblies:
   - Synthesys.SDK
 references:
+- uid: Synthesys.SDK.HostCommands.StreamTypes
+  commentId: T:Synthesys.SDK.HostCommands.StreamTypes
+  parent: Synthesys.SDK.HostCommands
+  name: StreamTypes
+  nameWithType: StreamTypes
+  fullName: Synthesys.SDK.HostCommands.StreamTypes
 - uid: Synthesys.SDK.HostCommands.DockerHostMount
   commentId: T:Synthesys.SDK.HostCommands.DockerHostMount
   name: DockerHostMount

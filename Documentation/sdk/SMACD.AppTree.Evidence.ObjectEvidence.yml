@@ -33,6 +33,7 @@ items:
     content: 'public class ObjectEvidence : Evidence'
     content.vb: >-
       Public Class ObjectEvidence
+
           Inherits Evidence
   inheritance:
   - System.Object

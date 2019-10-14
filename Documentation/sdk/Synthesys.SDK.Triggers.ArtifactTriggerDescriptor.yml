@@ -37,6 +37,7 @@ items:
     content: 'public class ArtifactTriggerDescriptor : TriggerDescriptor'
     content.vb: >-
       Public Class ArtifactTriggerDescriptor
+
           Inherits TriggerDescriptor
   inheritance:
   - System.Object

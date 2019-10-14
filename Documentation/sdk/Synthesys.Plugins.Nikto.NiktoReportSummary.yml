@@ -30,7 +30,9 @@ items:
     content: 'public class NiktoReportSummary : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class NiktoReportSummary
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object

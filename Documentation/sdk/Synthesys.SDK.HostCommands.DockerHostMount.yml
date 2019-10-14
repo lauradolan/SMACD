@@ -22,7 +22,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: DockerHostMount
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 15
+    startLine: 39
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -65,7 +65,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: LocalPath
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 20
+    startLine: 44
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -102,7 +102,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ContainerPath
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 25
+    startLine: 49
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -139,7 +139,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsReadOnly
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 30
+    startLine: 54
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands

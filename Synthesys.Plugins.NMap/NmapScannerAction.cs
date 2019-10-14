@@ -6,7 +6,9 @@ using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.HostCommands;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -32,28 +34,6 @@ namespace Synthesys.Plugins.Nmap
         /// </summary>
         public HostNode Host { get; set; }
 
-        public override bool ValidateEnvironmentReadiness()
-        {
-            bool result;
-            try
-            {
-                ExecutionWrapper wrapper = new ExecutionWrapper("nmap --help");
-                wrapper.Start().Wait();
-                result = !wrapper.FailedToExecute;
-            }
-            catch (Exception)
-            {
-                result = false;
-            }
-
-            if (!result)
-            {
-                Logger.LogWarning("Nmap not installed on host");
-            }
-
-            return result;
-        }
-
         public override ExtensionReport Act()
         {
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
@@ -71,37 +51,40 @@ namespace Synthesys.Plugins.Nmap
             };
             report.SetExtensionSpecificReport(nmapReport);
 
-            foreach (NmapPort port in nmapReport.Ports)
+            if (!Host.Root.LockTreeNodes)
             {
-                if (new[] { "httpd" }.Contains(port.Service))
+                foreach (NmapPort port in nmapReport.Ports)
                 {
-                    Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode();
-                }
-
-                Host[$"{port.Protocol}/{port.Port}"].Detail.Set(
-                    new ServiceDetails()
+                    if (new[] { "httpd" }.Contains(port.Service))
                     {
-                        ServiceName = port.Service,
-                        ProductName = port.ProductName,
-                        ProductVersion = port.ProductVersion
-                    },
-                    "nmap",
-                    DataProviderSpecificity.GeneralPurposeScanner,
-                    port.ServiceFingerprintConfidence / 3.0d);
+                        Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode();
+                    }
 
-                Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)port.ServiceFingerprintConfidence;
-                Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability
-                {
-                    Confidence = confidenceEnum,
-                    RiskLevel = Vulnerability.RiskLevels.Informational,
-                    Description =
-                        $"NMap found an open port {port.Protocol} {port.Port} on {Host.Hostname}. NMap's guess for this service is {port.Service} (confidence: {port.ServiceFingerprintConfidence} - {confidenceEnum})",
-                    Occurrences = 1,
-                    Remedy =
-                        "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
-                        "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
-                    Title = $"{port.Protocol} {port.Port} open" + (port.Service == null ? "" : $" ({port.Service})")
-                });
+                    Host[$"{port.Protocol}/{port.Port}"].Detail.Set(
+                        new ServiceDetails()
+                        {
+                            ServiceName = port.Service,
+                            ProductName = port.ProductName,
+                            ProductVersion = port.ProductVersion
+                        },
+                        "nmap",
+                        DataProviderSpecificity.GeneralPurposeScanner,
+                        port.ServiceFingerprintConfidence / 3.0d);
+
+                    Vulnerability.Confidences confidenceEnum = (Vulnerability.Confidences)port.ServiceFingerprintConfidence;
+                    Host[$"{port.Protocol}/{port.Port}"].Vulnerabilities.Add(new Vulnerability
+                    {
+                        Confidence = confidenceEnum,
+                        RiskLevel = Vulnerability.RiskLevels.Informational,
+                        Description =
+                            $"NMap found an open port {port.Protocol} {port.Port} on {Host.Hostname}. NMap's guess for this service is {port.Service} (confidence: {port.ServiceFingerprintConfidence} - {confidenceEnum})",
+                        Occurrences = 1,
+                        Remedy =
+                            "If this port should be open to provide a service, there is no need for a change. Otherwise, find out if this port needs to be opened, and if not, " +
+                            "terminate the service using it, or apply firewall rules to prevent its access from the open Internet.",
+                        Title = $"{port.Protocol} {port.Port} open" + (port.Service == null ? "" : $" ({port.Service})")
+                    });
+                }
             }
 
             return report;
@@ -111,13 +94,40 @@ namespace Synthesys.Plugins.Nmap
         {
             using (NativeDirectoryContext context = artifact.GetContext())
             {
-                string cmd = $"nmap --open -T4 -PN -A {targetIp} -n -oX {context.DirectoryWithFile("scan.xml")}";
+                if (DockerHostCommand.SupportsDocker())
+                {
+                    using var dockerCommand = new DockerHostCommand("jess/nmap:latest",
+                        context,
+                        "--open",
+                        "-T4",
+                        "-PN",
+                        "-A",
+                        targetIp,
+                        "-n",
+                        "-oX", "/synthesys/scan.xml");
 
-                ExecutionWrapper wrapper = new ExecutionWrapper(cmd);
-                wrapper.StandardOutputDataReceived +=
-                    (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
-                wrapper.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
-                wrapper.Start().Wait();
+                    dockerCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+                    dockerCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+
+                    dockerCommand.Start().Wait();
+                }
+                else
+                {
+                    using var hostCommand = new NativeHostCommand(
+                        "nmap",
+                        "--open",
+                        "-T4",
+                        "-PN",
+                        "-A",
+                        targetIp,
+                        "-n",
+                        "-oX", context.DirectoryWithFile("scan.xml"));
+
+                    hostCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+                    hostCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+
+                    hostCommand.Start().Wait();
+                }
             }
         }
 

@@ -31,7 +31,9 @@ items:
     content: 'public class OwaspZapReportView : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class OwaspZapReportView
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object

@@ -39,7 +39,9 @@ items:
     content: 'public class UrlRequestNode : AppTreeNode, IAppTreeNode<UrlRequestDetails>'
     content.vb: >-
       Public Class UrlRequestNode
+
           Inherits AppTreeNode
+
           Implements IAppTreeNode(Of UrlRequestDetails)
   inheritance:
   - System.Object

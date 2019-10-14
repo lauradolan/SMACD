@@ -1,0 +1,11 @@
+﻿<div class="text-center pt-2">
+    <h2>Root Artifact</h2>
+    <p>Root Artifacts will never need to track exploits, by design.</p>
+</div>
+
+@using SMACD.AppTree
+@code
+{
+    [Parameter]
+    public RootNode Artifact { get; set; }
+}

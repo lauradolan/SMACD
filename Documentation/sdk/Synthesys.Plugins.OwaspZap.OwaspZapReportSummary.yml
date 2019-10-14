@@ -30,7 +30,9 @@ items:
     content: 'public class OwaspZapReportSummary : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class OwaspZapReportSummary
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object

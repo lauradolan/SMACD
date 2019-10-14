@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Synthesys.SDK.HostCommands
@@ -17,17 +19,18 @@ namespace Synthesys.SDK.HostCommands
         /// <param name="args">Arguments for command</param>
         public NativeHostCommand(string command, params string[] args)
         {
-            ProcessStartInfo = new ProcessStartInfo
-            {
-                FileName = Path.GetFileName(command),
-                WorkingDirectory = Path.GetDirectoryName(command),
-                Arguments = string.Join(' ', args).Replace("\"", "\\\""),
+            ProcessStartInfo = GetStartInfo(command, args);
+            //ProcessStartInfo = new ProcessStartInfo
+            //{
+            //    FileName = Path.GetFileName(command),
+            //    WorkingDirectory = Path.GetDirectoryName(command),
+            //    Arguments = string.Join(' ', args).Replace("\"", "\\\""),
 
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
+            //    RedirectStandardOutput = true,
+            //    RedirectStandardError = true,
+            //    UseShellExecute = false,
+            //    CreateNoWindow = true
+            //};
         }
 
         /// <summary>
@@ -77,7 +80,11 @@ namespace Synthesys.SDK.HostCommands
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
 
-                if (!Process.Start())
+                try
+                {
+                    Process = Process.Start(ProcessStartInfo);
+                }
+                catch
                 {
                     Logger.TaskLogCritical(OwnerTaskId, "Process {0} failed to execute!",
                         Process.StartInfo.FileName + " " + Process.StartInfo.Arguments);
@@ -103,6 +110,29 @@ namespace Synthesys.SDK.HostCommands
             });
 
             return RuntimeTask;
+        }
+
+        private ProcessStartInfo GetStartInfo(string cmd, string[] args)
+        {
+            ProcessStartInfo procStartInfo;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                procStartInfo = new ProcessStartInfo("cmd");
+                procStartInfo.ArgumentList.Add("/c");
+            }
+            else
+            {
+                procStartInfo = new ProcessStartInfo("/bin/bash");
+                procStartInfo.ArgumentList.Add("-c");
+            }
+
+            procStartInfo.ArgumentList.Add(cmd);
+            args.ToList().ForEach(a => procStartInfo.ArgumentList.Add(a));
+            procStartInfo.RedirectStandardOutput = true;
+            procStartInfo.RedirectStandardError = true;
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.CreateNoWindow = true;
+            return procStartInfo;
         }
 
         #region IDisposable Support

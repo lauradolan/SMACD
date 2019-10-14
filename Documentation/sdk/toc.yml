@@ -1,4 +1,15 @@
 ### YamlMime:TableOfContent
+- uid: Compass.Components
+  name: Compass.Components
+  items:
+  - uid: Compass.Components._Imports
+    name: _Imports
+  - uid: Compass.Components.EvidenceSummaryViewer
+    name: EvidenceSummaryViewer
+  - uid: Compass.Components.NativeDirectoryEvidenceViewer
+    name: NativeDirectoryEvidenceViewer
+  - uid: Compass.Components.VulnerabilityViewer
+    name: VulnerabilityViewer
 - uid: SMACD.AppTree
   name: SMACD.AppTree
   items:
@@ -75,25 +86,6 @@
     name: ObjectEvidence
   - uid: SMACD.AppTree.Evidence.StringEvidence
     name: StringEvidence
-- uid: SMACD.AppTree.Views
-  name: SMACD.AppTree.Views
-  items:
-  - uid: SMACD.AppTree.Views._Imports
-    name: _Imports
-  - uid: SMACD.AppTree.Views.DefaultNodeView
-    name: DefaultNodeView
-  - uid: SMACD.AppTree.Views.EvidenceDisplay
-    name: EvidenceDisplay
-  - uid: SMACD.AppTree.Views.HostNodeView
-    name: HostNodeView
-  - uid: SMACD.AppTree.Views.RootNodeView
-    name: RootNodeView
-  - uid: SMACD.AppTree.Views.ServiceNodeSummary
-    name: ServiceNodeSummary
-  - uid: SMACD.AppTree.Views.ServiceNodeView
-    name: ServiceNodeView
-  - uid: SMACD.AppTree.Views.VulnerabilityDisplay
-    name: VulnerabilityDisplay
 - uid: SMACD.Data
   name: SMACD.Data
   items:
@@ -127,8 +119,12 @@
 - uid: Synthesys.Plugins.AzureDevOps
   name: Synthesys.Plugins.AzureDevOps
   items:
+  - uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsInterop
+    name: AzureDevOpsInterop
   - uid: Synthesys.Plugins.AzureDevOps.AzureDevOpsService
     name: AzureDevOpsService
+  - uid: Synthesys.Plugins.AzureDevOps.PatchDocument
+    name: PatchDocument
 - uid: Synthesys.Plugins.Dummy
   name: Synthesys.Plugins.Dummy
   items:
@@ -199,10 +195,6 @@
 - uid: Synthesys.SDK
   name: Synthesys.SDK
   items:
-  - uid: Synthesys.SDK.ExecutionWrapper
-    name: ExecutionWrapper
-  - uid: Synthesys.SDK.ExecutionWrapper.ExternalProcessDataReceived
-    name: ExecutionWrapper.ExternalProcessDataReceived
   - uid: Synthesys.SDK.ExtensionReport
     name: ExtensionReport
   - uid: Synthesys.SDK.Global
@@ -257,6 +249,8 @@
     name: HostCommand.ExternalProcessDataReceived
   - uid: Synthesys.SDK.HostCommands.NativeHostCommand
     name: NativeHostCommand
+  - uid: Synthesys.SDK.HostCommands.StreamTypes
+    name: StreamTypes
 - uid: Synthesys.SDK.Triggers
   name: Synthesys.SDK.Triggers
   items:

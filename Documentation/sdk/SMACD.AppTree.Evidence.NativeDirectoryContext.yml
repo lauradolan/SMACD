@@ -34,6 +34,7 @@ items:
     content: 'public class NativeDirectoryContext : IDisposable'
     content.vb: >-
       Public Class NativeDirectoryContext
+
           Implements IDisposable
   inheritance:
   - System.Object

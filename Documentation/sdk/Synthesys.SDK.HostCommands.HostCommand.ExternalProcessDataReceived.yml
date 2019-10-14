@@ -19,7 +19,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ExternalProcessDataReceived
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 19
+    startLine: 18
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands

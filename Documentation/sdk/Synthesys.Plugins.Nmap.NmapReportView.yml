@@ -23,7 +23,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NmapReportView
     path: ../Synthesys.Plugins.Nmap/obj/Release/netcoreapp3.0/RazorDeclaration/NmapReportView.razor.g.cs
-    startLine: 29
+    startLine: 22
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -31,7 +31,9 @@ items:
     content: 'public class NmapReportView : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class NmapReportView
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object
@@ -86,7 +88,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: BuildRenderTree
     path: ../Synthesys.Plugins.Nmap/obj/Release/netcoreapp3.0/RazorDeclaration/NmapReportView.razor.g.cs
-    startLine: 32
+    startLine: 25
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -122,7 +124,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Report
     path: ../Synthesys.Plugins.Nmap/obj/Release/netcoreapp3.0/RazorDeclaration/NmapReportView.razor.g.cs
-    startLine: 39
+    startLine: 32
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -167,7 +169,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NmapReport
     path: ../Synthesys.Plugins.Nmap/obj/Release/netcoreapp3.0/RazorDeclaration/NmapReportView.razor.g.cs
-    startLine: 42
+    startLine: 35
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap
@@ -202,7 +204,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: SelectedPort
     path: ../Synthesys.Plugins.Nmap/obj/Release/netcoreapp3.0/RazorDeclaration/NmapReportView.razor.g.cs
-    startLine: 44
+    startLine: 37
   assemblies:
   - Synthesys.Plugins.Nmap
   namespace: Synthesys.Plugins.Nmap

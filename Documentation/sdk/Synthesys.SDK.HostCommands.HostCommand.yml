@@ -34,7 +34,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: HostCommand
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 11
+    startLine: 10
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -82,7 +82,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Maps
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 24
+    startLine: 23
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -117,7 +117,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 29
+    startLine: 28
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -149,7 +149,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Logger
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 38
+    startLine: 37
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -186,7 +186,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: OwnerTaskId
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 43
+    startLine: 42
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -223,7 +223,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: RuntimeTask
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 48
+    startLine: 47
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -262,7 +262,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ExecutionTime
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 53
+    startLine: 52
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -301,7 +301,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: CaptureStdOut
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 58
+    startLine: 57
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -338,7 +338,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: CaptureStdErr
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 63
+    startLine: 62
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -375,7 +375,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: StdOut
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 68
+    startLine: 67
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -414,7 +414,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: StdErr
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 73
+    startLine: 72
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -453,7 +453,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: FailedToExecute
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 78
+    startLine: 77
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -492,7 +492,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: StandardOutputDataReceived
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 83
+    startLine: 82
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -525,7 +525,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: StandardErrorDataReceived
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 88
+    startLine: 87
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -558,7 +558,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: HandleStdOut
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 94
+    startLine: 93
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -594,7 +594,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: HandleStdErr
     path: ../Synthesys.SDK/HostCommands/HostCommand.cs
-    startLine: 108
+    startLine: 110
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands

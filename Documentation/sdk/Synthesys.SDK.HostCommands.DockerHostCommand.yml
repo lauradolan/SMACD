@@ -6,12 +6,16 @@ items:
   parent: Synthesys.SDK.HostCommands
   children:
   - Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(Docker.DotNet.Models.CreateContainerParameters)
-  - Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
+  - Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])
+  - Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
+  - Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.String[])
   - Synthesys.SDK.HostCommands.DockerHostCommand.ContainerId
   - Synthesys.SDK.HostCommands.DockerHostCommand.ContainerParameters
+  - Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
   - Synthesys.SDK.HostCommands.DockerHostCommand.Dispose
   - Synthesys.SDK.HostCommands.DockerHostCommand.Dispose(System.Boolean)
   - Synthesys.SDK.HostCommands.DockerHostCommand.Start
+  - Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker
   langs:
   - csharp
   - vb
@@ -26,7 +30,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: DockerHostCommand
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 36
+    startLine: 60
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -36,7 +40,9 @@ items:
     content: 'public class DockerHostCommand : HostCommand, IDisposable'
     content.vb: >-
       Public Class DockerHostCommand
+
           Inherits HostCommand
+
           Implements IDisposable
   inheritance:
   - System.Object
@@ -71,16 +77,53 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
-  commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
-  id: '#ctor(System.String,System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)'
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker
+  commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker
+  id: SupportsDocker
   parent: Synthesys.SDK.HostCommands.DockerHostCommand
   langs:
   - csharp
   - vb
-  name: DockerHostCommand(String, IEnumerable<DockerHostMount>, String)
-  nameWithType: DockerHostCommand.DockerHostCommand(String, IEnumerable<DockerHostMount>, String)
-  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.Collections.Generic.IEnumerable<Synthesys.SDK.HostCommands.DockerHostMount>, System.String)
+  name: SupportsDocker()
+  nameWithType: DockerHostCommand.SupportsDocker()
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SupportsDocker
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 69
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nIf the platform is running an accessible Docker daemon\n"
+  example: []
+  syntax:
+    content: public static bool SupportsDocker()
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Shared Function SupportsDocker As Boolean
+  overload: Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
+  commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)
+  id: '#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)'
+  parent: Synthesys.SDK.HostCommands.DockerHostCommand
+  langs:
+  - csharp
+  - vb
+  name: DockerHostCommand(String, List<String>, IEnumerable<DockerHostMount>, String)
+  nameWithType: DockerHostCommand.DockerHostCommand(String, List<String>, IEnumerable<DockerHostMount>, String)
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.Collections.Generic.List<System.String>, System.Collections.Generic.IEnumerable<Synthesys.SDK.HostCommands.DockerHostMount>, System.String)
   type: Constructor
   source:
     remote:
@@ -89,33 +132,160 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 44
+    startLine: 96
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
   summary: "\nRepresents a command run to execute a Docker container\n"
   example: []
   syntax:
-    content: public DockerHostCommand(string image, IEnumerable<DockerHostMount> mounts, string user)
+    content: public DockerHostCommand(string image, List<string> command, IEnumerable<DockerHostMount> mounts, string user)
     parameters:
     - id: image
       type: System.String
       description: Image name
+    - id: command
+      type: System.Collections.Generic.List{System.String}
+      description: Command and arguments to execute
     - id: mounts
       type: System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount}
       description: Mounts for container
     - id: user
       type: System.String
       description: User to execute container as
-    content.vb: Public Sub New(image As String, mounts As IEnumerable(Of DockerHostMount), user As String)
+    content.vb: Public Sub New(image As String, command As List(Of String), mounts As IEnumerable(Of DockerHostMount), user As String)
   overload: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor*
-  nameWithType.vb: DockerHostCommand.DockerHostCommand(String, IEnumerable(Of DockerHostMount), String)
+  nameWithType.vb: DockerHostCommand.DockerHostCommand(String, List(Of String), IEnumerable(Of DockerHostMount), String)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.Collections.Generic.IEnumerable(Of Synthesys.SDK.HostCommands.DockerHostMount), System.String)
-  name.vb: DockerHostCommand(String, IEnumerable(Of DockerHostMount), String)
+  fullName.vb: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.Collections.Generic.List(Of System.String), System.Collections.Generic.IEnumerable(Of Synthesys.SDK.HostCommands.DockerHostMount), System.String)
+  name.vb: DockerHostCommand(String, List(Of String), IEnumerable(Of DockerHostMount), String)
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])
+  commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])
+  id: '#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])'
+  parent: Synthesys.SDK.HostCommands.DockerHostCommand
+  langs:
+  - csharp
+  - vb
+  name: DockerHostCommand(String, NativeDirectoryContext, String[])
+  nameWithType: DockerHostCommand.DockerHostCommand(String, NativeDirectoryContext, String[])
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, SMACD.AppTree.Evidence.NativeDirectoryContext, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 124
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nRepresents a command run to execute a Docker container\n\nA context will be mounted at /synthesys inside the container\n"
+  example: []
+  syntax:
+    content: public DockerHostCommand(string image, NativeDirectoryContext context, params string[] command)
+    parameters:
+    - id: image
+      type: System.String
+      description: Image name
+    - id: context
+      type: SMACD.AppTree.Evidence.NativeDirectoryContext
+      description: Context to attach to Docker container
+    - id: command
+      type: System.String[]
+      description: Command and arguments to execute
+    content.vb: Public Sub New(image As String, context As NativeDirectoryContext, ParamArray command As String())
+  overload: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor*
+  nameWithType.vb: DockerHostCommand.DockerHostCommand(String, NativeDirectoryContext, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, SMACD.AppTree.Evidence.NativeDirectoryContext, System.String())
+  name.vb: DockerHostCommand(String, NativeDirectoryContext, String())
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.String[])
+  commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.String[])
+  id: '#ctor(System.String,System.String[])'
+  parent: Synthesys.SDK.HostCommands.DockerHostCommand
+  langs:
+  - csharp
+  - vb
+  name: DockerHostCommand(String, String[])
+  nameWithType: DockerHostCommand.DockerHostCommand(String, String[])
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 148
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nRepresents a command run to execute a Docker container\n"
+  example: []
+  syntax:
+    content: public DockerHostCommand(string image, params string[] command)
+    parameters:
+    - id: image
+      type: System.String
+      description: Image name
+    - id: command
+      type: System.String[]
+      description: Command and arguments to execute
+    content.vb: Public Sub New(image As String, ParamArray command As String())
+  overload: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor*
+  nameWithType.vb: DockerHostCommand.DockerHostCommand(String, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.SDK.HostCommands.DockerHostCommand.DockerHostCommand(System.String, System.String())
+  name.vb: DockerHostCommand(String, String())
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
+  commentId: P:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
+  id: ContainerWorkingDirectory
+  parent: Synthesys.SDK.HostCommands.DockerHostCommand
+  langs:
+  - csharp
+  - vb
+  name: ContainerWorkingDirectory
+  nameWithType: DockerHostCommand.ContainerWorkingDirectory
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/DockerHostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ContainerWorkingDirectory
+    path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
+    startLine: 163
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nContainer Working Directory\n"
+  example: []
+  syntax:
+    content: public string ContainerWorkingDirectory { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ContainerWorkingDirectory As String
+  overload: Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(Docker.DotNet.Models.CreateContainerParameters)
   commentId: M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(Docker.DotNet.Models.CreateContainerParameters)
   id: '#ctor(Docker.DotNet.Models.CreateContainerParameters)'
@@ -134,7 +304,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 65
+    startLine: 169
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -170,7 +340,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ContainerParameters
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 73
+    startLine: 177
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -207,7 +377,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ContainerId
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 78
+    startLine: 182
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -244,7 +414,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Start
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 84
+    startLine: 188
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -279,7 +449,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Dispose
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 168
+    startLine: 349
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -317,7 +487,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Dispose
     path: ../Synthesys.SDK/HostCommands/DockerHostCommand.cs
-    startLine: 183
+    startLine: 365
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.HostCommands
@@ -794,6 +964,18 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker*
+  commentId: Overload:Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker
+  name: SupportsDocker
+  nameWithType: DockerHostCommand.SupportsDocker
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
 - uid: Synthesys.SDK.HostCommands.DockerHostCommand.#ctor*
   commentId: Overload:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor
   name: DockerHostCommand
@@ -806,6 +988,50 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<String>
+  nameWithType: List<String>
+  fullName: System.Collections.Generic.List<System.String>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of System.String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount}
   commentId: T:System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount}
   parent: System.Collections.Generic
@@ -848,6 +1074,51 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: System.Collections.Generic.IEnumerable`1
   commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
@@ -887,12 +1158,48 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
+- uid: SMACD.AppTree.Evidence.NativeDirectoryContext
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryContext
+  parent: SMACD.AppTree.Evidence
+  name: NativeDirectoryContext
+  nameWithType: NativeDirectoryContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryContext
+- uid: System.String[]
   isExternal: true
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+- uid: Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory*
+  commentId: Overload:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
+  name: ContainerWorkingDirectory
+  nameWithType: DockerHostCommand.ContainerWorkingDirectory
+  fullName: Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory
 - uid: Docker.DotNet.Models.CreateContainerParameters
   commentId: T:Docker.DotNet.Models.CreateContainerParameters
   parent: Docker.DotNet.Models
@@ -939,13 +1246,6 @@ references:
   name: Dispose
   nameWithType: DockerHostCommand.Dispose
   fullName: Synthesys.SDK.HostCommands.DockerHostCommand.Dispose
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: System.IDisposable.Dispose
   commentId: M:System.IDisposable.Dispose
   parent: System.IDisposable

@@ -34,6 +34,7 @@ items:
     content: 'public class SystemEventTriggerDescriptor : TriggerDescriptor'
     content.vb: >-
       Public Class SystemEventTriggerDescriptor
+
           Inherits TriggerDescriptor
   inheritance:
   - System.Object

@@ -55,6 +55,7 @@ items:
       description: Specifies the type of the values in this collection.
     content.vb: >-
       Public Class ObservableDictionary(Of TKey, TValue)
+
           Implements IDictionary(Of TKey, TValue), ICollection(Of KeyValuePair(Of TKey, TValue)), IEnumerable(Of KeyValuePair(Of TKey, TValue)), IEnumerable, INotifyCollectionChanged, INotifyPropertyChanged
   inheritance:
   - System.Object

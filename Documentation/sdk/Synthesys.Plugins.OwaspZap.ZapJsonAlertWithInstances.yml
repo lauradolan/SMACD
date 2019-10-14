@@ -28,6 +28,7 @@ items:
     content: 'public class ZapJsonAlertWithInstances : ZapJsonAlert'
     content.vb: >-
       Public Class ZapJsonAlertWithInstances
+
           Inherits ZapJsonAlert
   inheritance:
   - System.Object

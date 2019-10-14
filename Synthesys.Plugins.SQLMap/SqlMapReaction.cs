@@ -4,6 +4,7 @@ using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.HostCommands;
 using Synthesys.SDK.Triggers;
 using Synthesys.Tasks;
 using Synthesys.Tasks.Attributes;
@@ -27,18 +28,6 @@ namespace Synthesys.Plugins.SQLMap
     {
         private bool _useInLocalMode;
         public ITaskToolbox Tasks { get; set; }
-
-        public override bool ValidateEnvironmentReadiness()
-        {
-            ExecutionWrapper localTest = new ExecutionWrapper("sqlmap --help");
-            localTest.Start().Wait();
-            if (string.IsNullOrEmpty(localTest.StdErr))
-            {
-                _useInLocalMode = true;
-            }
-
-            return true;
-        }
 
         public override ExtensionReport React(TriggerDescriptor trigger)
         {
@@ -66,28 +55,43 @@ namespace Synthesys.Plugins.SQLMap
         public ExtensionReport Execute(string target)
         {
             string logFile;
+            var Aggressive = false;
 
             NativeDirectoryEvidence nativePathArtifact = new NativeDirectoryEvidence("sqlmap-" + HashCode.Combine(target));
             using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
-                string dir = context.Directory;
-
-                string baseCmd = "docker run -ti --rm --name sqlmap -v " + dir + ":/data alexandreoda/sqlmap";
-                if (_useInLocalMode)
+                if (DockerHostCommand.SupportsDocker())
                 {
-                    baseCmd = "sqlmap";
+                    using var dockerCommand = new DockerHostCommand("alexandreoda/sqlmap:latest",
+                        context,
+                        "sqlmap",
+                        $"--url={target}",
+                        "--batch",
+                        "--flush-session",
+                        "--banner",
+                        "--output-dir=/synthesys",
+                        Aggressive ? "--level=5" : "--level=2",
+                        Aggressive ? "--risk=3" : "--risk=1");
+                    dockerCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+                    dockerCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+
+                    dockerCommand.Start().Wait();
                 }
+                else
+                {
+                    using var nativeCommand = new NativeHostCommand("sqlmap",
+                        $"--url={target}",
+                        "--batch",
+                        "--flush-session",
+                        "--banner",
+                        $"--output-dir={context.Directory}",
+                        Aggressive ? "--level=5" : "--level=2",
+                        Aggressive ? "--risk=3" : "--risk=1");
+                    nativeCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+                    nativeCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
 
-                bool Aggressive = false; // todo: reaction config
-
-                string cmd = baseCmd +
-                          $" --url={target}" +
-                          " --batch --flush-session --banner" +
-                          (_useInLocalMode ? " --output-dir=" + dir : " --output-dir=/data") +
-                          (Aggressive ? " --level=5 --risk=3" : " --level=2 --risk=1");
-
-                ExecutionWrapper execution = new ExecutionWrapper(cmd);
-                execution.Start().Wait();
+                    nativeCommand.Start().Wait();
+                }
 
                 if (!File.Exists(context.DirectoryWithFile("log")))
                 {

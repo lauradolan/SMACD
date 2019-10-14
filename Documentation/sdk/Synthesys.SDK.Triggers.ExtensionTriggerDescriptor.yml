@@ -35,6 +35,7 @@ items:
     content: 'public class ExtensionTriggerDescriptor : TriggerDescriptor'
     content.vb: >-
       Public Class ExtensionTriggerDescriptor
+
           Inherits TriggerDescriptor
   inheritance:
   - System.Object

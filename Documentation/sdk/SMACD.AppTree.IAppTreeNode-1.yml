@@ -20,7 +20,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IAppTreeNode
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 319
+    startLine: 333
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -29,6 +29,7 @@ items:
   syntax:
     content: >-
       public interface IAppTreeNode<TDetailPayload>
+
           where TDetailPayload : new()
     typeParameters:
     - id: TDetailPayload
@@ -60,7 +61,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Detail
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 324
+    startLine: 338
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree

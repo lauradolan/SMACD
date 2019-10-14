@@ -1,0 +1,130 @@
+﻿@using System
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using SMACD.AppTree.Evidence;
+
+@if (EvidenceCollection != null && EvidenceCollection.Any())
+{
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h6 class="text-primary font-weight-bold m-0">Data Attachments (Supporting Evidence)</h6>
+            <div class="dropdown no-arrow">
+                <button class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in" role="menu">
+                    @if (IsVisible)
+                    {
+                        <a class="dropdown-item" role="presentation" href="javascript:;" @onclick="(() => IsVisible = false)">&nbsp;Hide</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item" role="presentation" href="javascript:;" @onclick="(() => IsVisible = true)">&nbsp;Show</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <DataGrid TItem="Evidence"
+                          Data="@EvidenceCollection"
+                          @bind-SelectedRow="@SelectedEvidence">
+                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.Name)" Caption="Name" AllowSort="true" />
+                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.EvidenceType)" Caption="Evidence Type" AllowSort="false">
+                        <DisplayTemplate>
+                            @switch (context.EvidenceType)
+                            {
+                                case Evidence.EvidenceTypes.Object:
+                                    <i title="Object" class="fa fa-cube text-muted"></i>
+                                    break;
+                                case Evidence.EvidenceTypes.String:
+                                    <i title="String" class="fa fa-quote-left text-muted"></i>
+                                    break;
+                                case Evidence.EvidenceTypes.VFS:
+                                    <i title="Virtual Filesystem" class="fa fa-sitemap text-muted"></i>
+                                    break;
+                            }
+                        </DisplayTemplate>
+                    </DataGridColumn>
+                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Size">
+                        <DisplayTemplate>
+                            @if (context.StoredData != null)
+                            {@SizeSuffix(context.StoredData.Count())}
+                        </DisplayTemplate>
+                    </DataGridColumn>
+                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Data">
+                        <DisplayTemplate>
+                            @if (context is ObjectEvidence)
+                            {<pre>@(System.Text.UnicodeEncoding.Unicode.GetString(((ObjectEvidence)context).StoredData))</pre>}
+                            @if (context is StringEvidence)
+                            {<pre>@(((StringEvidence)context).Get())</pre>}
+                            @if (context is NativeDirectoryEvidence)
+                            {<a class="btn-link" href="/evidence/@Encoded(context.Name)"><i class="fa fa-link"></i> Explore Data</a>}
+                        </DisplayTemplate>
+                    </DataGridColumn>
+                </DataGrid>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public AppTreeNode Node { get; set; }
+
+    public EvidenceCollection EvidenceCollection => Node.Evidence;
+
+    public Evidence SelectedEvidence { get; set; }
+
+    public bool IsVisible { get; set; } = false;
+
+    protected Modal modalRef { get; set; }
+
+    protected Column DataColumn { get; set; }
+
+    protected string Encoded(string name) => System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Node.GetUUIDPath() + "@" + name));
+
+    public void ToggleModal(Evidence artifact = null)
+    {
+        if (artifact != null) SelectedEvidence = artifact;
+        ToggleModal();
+    }
+
+    public void ToggleModal()
+    {
+        if (SelectedEvidence == null) return;
+        if (modalRef.IsOpen) modalRef.Hide();
+        else modalRef.Show();
+    }
+
+    public RenderFragment EmitHtml(string html) => builder =>
+    {
+        builder.AddMarkupContent(0, html);
+    };
+
+    static readonly string[] SizeSuffixes =
+                   { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+    static string SizeSuffix(Int64 value, int decimalPlaces = 1)
+    {
+        if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException("decimalPlaces"); }
+        if (value < 0) { return "-" + SizeSuffix(-value); }
+        if (value == 0) { return string.Format("{0:n" + decimalPlaces + "} bytes", 0); }
+
+        // mag is 0 for bytes, 1 for KB, 2, for MB, etc.
+        int mag = (int)Math.Log(value, 1024);
+
+        // 1L << (mag * 10) == 2 ^ (10 * mag)
+        // [i.e. the number of bytes in the unit corresponding to mag]
+        decimal adjustedSize = (decimal)value / (1L << (mag * 10));
+
+        // make adjustment when the value is large enough that
+        // it would round up to 1000 or more
+        if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
+        {
+            mag += 1;
+            adjustedSize /= 1024;
+        }
+
+        return string.Format("{0:n" + decimalPlaces + "} {1}",
+            adjustedSize,
+            SizeSuffixes[mag]);
+    }
+}

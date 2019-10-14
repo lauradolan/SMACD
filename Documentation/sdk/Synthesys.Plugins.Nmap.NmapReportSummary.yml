@@ -30,7 +30,9 @@ items:
     content: 'public class NmapReportSummary : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class NmapReportSummary
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object

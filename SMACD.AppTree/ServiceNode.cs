@@ -29,7 +29,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public override string NodeViewName => "SMACD.Artifacts.Views.ServiceNodeView";
+        public override string NodeViewName => "Compass.AppTree.ServiceNodeView";
 
         /// <summary>
         ///     Hostname/IP of this Service

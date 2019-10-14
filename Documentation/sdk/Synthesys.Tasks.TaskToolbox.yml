@@ -37,6 +37,7 @@ items:
     content: 'public class TaskToolbox : ITaskToolbox'
     content.vb: >-
       Public Class TaskToolbox
+
           Implements ITaskToolbox
   inheritance:
   - System.Object

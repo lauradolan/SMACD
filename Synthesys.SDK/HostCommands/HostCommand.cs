@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Synthesys.SDK.HostCommands
@@ -94,6 +93,9 @@ namespace Synthesys.SDK.HostCommands
         /// <param name="text">STDOUT text</param>
         protected void HandleStdOut(string text)
         {
+            if (string.IsNullOrEmpty(text))
+                return;
+
             if (CaptureStdOut)
             {
                 StdOut += $"{text}{Environment.NewLine}";
@@ -108,6 +110,9 @@ namespace Synthesys.SDK.HostCommands
         /// <param name="text">STDERR text</param>
         protected void HandleStdErr(string text)
         {
+            if (string.IsNullOrEmpty(text))
+                return;
+
             if (CaptureStdErr)
             {
                 StdErr += $"{text}{Environment.NewLine}";

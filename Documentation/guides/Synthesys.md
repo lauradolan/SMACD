@@ -28,6 +28,12 @@ Extensions in Synthesys generate scores based on the errors discovered. Since th
 
 Once you understand the maximum threshold for issues, you can specify it on the command line with `-t` or `--threshold`. If the threshold is exceeded, the application will exit with a `-1` code; this is to help with automation (such as a CI/CD pipeline).
 
+## Feature/Use Case Constraints
+The scanner can constrain its tests to a specific Feature or Use Case by specifying its name with `--feature` or `--usecase`. When specifying `--usecase`, you must give both the Feature name and Use Case name: `--usecase myFeature//myUseCase`. This limits the scanning to only those items in the Service Map.
+
+## Limit to Known Items Constraint
+If the developer does not want the scanner to go exploring other parts of the application based on information it sees, the scanner can be run with `-k` or `--limitknown`. This will only maintain nodes in the AppTree based on what nodes are created during the import of the Service Map.
+
 ### Service Map Generator
 Synthesys can generate a sample Service Map with data from [Bogus](https://github.com/bchavez/Bogus), if needed:
 

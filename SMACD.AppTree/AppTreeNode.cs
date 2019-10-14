@@ -50,9 +50,9 @@ namespace SMACD.AppTree
         public IReadOnlyCollection<TChild> ChildrenAre<TChild>(Predicate<TChild> predicate)
         {
             return Children
-.Where(c => c is TChild)
-.Cast<TChild>()
-.Where(c => predicate(c)).ToList().AsReadOnly();
+                .Where(c => c is TChild)
+                .Cast<TChild>()
+                .Where(c => predicate(c)).ToList().AsReadOnly();
         }
 
         /// <summary>
@@ -70,8 +70,6 @@ namespace SMACD.AppTree
         /// </summary>
         public Guid UUID { get; set; } = Guid.NewGuid();
 
-
-
         /// <summary>
         ///     Data attachments providing evidence of correlating data pertaining to Artifact
         /// </summary>
@@ -85,7 +83,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public virtual string NodeViewName { get; } = "SMACD.AppTree.Views.DefaultNodeView";
+        public virtual string NodeViewName { get; } = "Compass.AppTree.DefaultNodeView";
 
         /// <summary>
         ///     Get a child Artifact by its identifier
@@ -93,6 +91,22 @@ namespace SMACD.AppTree
         /// <param name="uuid">Artifact UUID</param>
         /// <returns></returns>
         public AppTreeNode this[Guid uuid] => Children.FirstOrDefault(c => c.UUID == uuid);
+
+
+        /// <summary>
+        ///     Represents a single node in a tree, including all navigation properties
+        /// </summary>
+        public AppTreeNode()
+        {
+            Children.CollectionChanged += (s, e) =>
+            {
+                if (Root != null && Root.LockTreeNodes)
+                    throw new Exception("Attempted to modify AppTree in locked mode. Contact the developer of the Extension.");
+
+                if (e.NewItems.Count > 0 && Root != null && ((AppTreeNode)e.NewItems[0]).Parent != null)
+                    NotifyChildAdded((AppTreeNode)e.NewItems[0]);
+            };
+        }
 
         /// <summary>
         ///     Attach Parent properties for each Node

@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.AppTree.Views\SMACD.AppTree.Views.csproj" />
+    <ProjectReference Include="..\Compass.Components\Compass.Components.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
   </ItemGroup>
 

@@ -37,7 +37,9 @@ items:
     content: 'public class EvidenceCollection : List<Evidence>, IList<Evidence>, ICollection<Evidence>, IReadOnlyList<Evidence>, IReadOnlyCollection<Evidence>, IEnumerable<Evidence>, IList, ICollection, IEnumerable'
     content.vb: >-
       Public Class EvidenceCollection
+
           Inherits List(Of Evidence)
+
           Implements IList(Of Evidence), ICollection(Of Evidence), IReadOnlyList(Of Evidence), IReadOnlyCollection(Of Evidence), IEnumerable(Of Evidence), IList, ICollection, IEnumerable
   inheritance:
   - System.Object

@@ -5,6 +5,7 @@ items:
   id: AppTreeNode
   parent: SMACD.AppTree
   children:
+  - SMACD.AppTree.AppTreeNode.#ctor
   - SMACD.AppTree.AppTreeNode.Children
   - SMACD.AppTree.AppTreeNode.ChildrenAre``1
   - SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
@@ -397,7 +398,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Evidence
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 77
+    startLine: 75
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -434,7 +435,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Vulnerabilities
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 82
+    startLine: 80
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -471,7 +472,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NodeViewName
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 87
+    startLine: 85
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -510,7 +511,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: this[]
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 94
+    startLine: 92
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -536,6 +537,38 @@ items:
   - ReadOnly
   fullName.vb: SMACD.AppTree.AppTreeNode.Item(System.Guid)
   name.vb: Item(Guid)
+- uid: SMACD.AppTree.AppTreeNode.#ctor
+  commentId: M:SMACD.AppTree.AppTreeNode.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: AppTreeNode()
+  nameWithType: AppTreeNode.AppTreeNode()
+  fullName: SMACD.AppTree.AppTreeNode.AppTreeNode()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 98
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single node in a tree, including all navigation properties\n"
+  example: []
+  syntax:
+    content: public AppTreeNode()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.AppTreeNode.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
   commentId: M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
   id: Connect(SMACD.AppTree.AppTreeNode)
@@ -554,7 +587,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Connect
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 100
+    startLine: 114
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -590,7 +623,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetNodeByRelativeUUIDPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 114
+    startLine: 128
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -629,7 +662,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 140
+    startLine: 154
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -671,7 +704,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetDisplayPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 149
+    startLine: 163
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -706,7 +739,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetUUIDPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 158
+    startLine: 172
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -741,7 +774,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 167
+    startLine: 181
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -776,7 +809,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsDescribedByPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 185
+    startLine: 199
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -815,7 +848,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyChanged
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 293
+    startLine: 307
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -847,7 +880,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyChildAdded
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 302
+    startLine: 316
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -883,7 +916,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyCreated
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 310
+    startLine: 324
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1663,6 +1696,11 @@ references:
   name: Item
   nameWithType: AppTreeNode.Item
   fullName: SMACD.AppTree.AppTreeNode.Item
+- uid: SMACD.AppTree.AppTreeNode.#ctor*
+  commentId: Overload:SMACD.AppTree.AppTreeNode.#ctor
+  name: AppTreeNode
+  nameWithType: AppTreeNode.AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode.AppTreeNode
 - uid: SMACD.AppTree.AppTreeNode.Connect*
   commentId: Overload:SMACD.AppTree.AppTreeNode.Connect
   name: Connect

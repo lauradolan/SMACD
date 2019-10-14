@@ -29,6 +29,7 @@ items:
     content: 'public class HttpServiceDetails : ServiceDetails'
     content.vb: >-
       Public Class HttpServiceDetails
+
           Inherits ServiceDetails
   inheritance:
   - System.Object

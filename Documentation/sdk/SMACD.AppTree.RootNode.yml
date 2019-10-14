@@ -10,6 +10,7 @@ items:
   - SMACD.AppTree.RootNode.ArtifactChildAdded
   - SMACD.AppTree.RootNode.ArtifactCreated
   - SMACD.AppTree.RootNode.Item(System.String)
+  - SMACD.AppTree.RootNode.LockTreeNodes
   - SMACD.AppTree.RootNode.NodeViewName
   - SMACD.AppTree.RootNode.SuppressEventFiring
   langs:
@@ -36,6 +37,7 @@ items:
     content: 'public class RootNode : AppTreeNode'
     content.vb: >-
       Public Class RootNode
+
           Inherits AppTreeNode
   inheritance:
   - System.Object
@@ -152,6 +154,43 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: SMACD.AppTree.RootNode.LockTreeNodes
+  commentId: P:SMACD.AppTree.RootNode.LockTreeNodes
+  id: LockTreeNodes
+  parent: SMACD.AppTree.RootNode
+  langs:
+  - csharp
+  - vb
+  name: LockTreeNodes
+  nameWithType: RootNode.LockTreeNodes
+  fullName: SMACD.AppTree.RootNode.LockTreeNodes
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/RootNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: LockTreeNodes
+    path: ../SMACD.AppTree/RootNode.cs
+    startLine: 33
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nPrevent the creation of new nodes in the AppTree\n"
+  example: []
+  syntax:
+    content: public bool LockTreeNodes { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property LockTreeNodes As Boolean
+  overload: SMACD.AppTree.RootNode.LockTreeNodes*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.RootNode.Item(System.String)
   commentId: P:SMACD.AppTree.RootNode.Item(System.String)
   id: Item(System.String)
@@ -170,7 +209,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: this[]
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 35
+    startLine: 40
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -214,7 +253,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ArtifactCreated
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 113
+    startLine: 118
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -247,7 +286,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ArtifactChanged
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 118
+    startLine: 123
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -280,7 +319,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ArtifactChildAdded
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 123
+    startLine: 128
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -313,7 +352,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 128
+    startLine: 133
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1269,6 +1308,11 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: SMACD.AppTree.RootNode.LockTreeNodes*
+  commentId: Overload:SMACD.AppTree.RootNode.LockTreeNodes
+  name: LockTreeNodes
+  nameWithType: RootNode.LockTreeNodes
+  fullName: SMACD.AppTree.RootNode.LockTreeNodes
 - uid: SMACD.AppTree.RootNode.Item*
   commentId: Overload:SMACD.AppTree.RootNode.Item
   name: Item

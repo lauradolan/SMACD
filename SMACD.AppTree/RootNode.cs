@@ -29,6 +29,11 @@ namespace SMACD.AppTree
         public bool SuppressEventFiring { get; set; } = false;
 
         /// <summary>
+        ///     Prevent the creation of new nodes in the AppTree
+        /// </summary>
+        public bool LockTreeNodes { get; set; }
+
+        /// <summary>
         ///     Hostname or IP of resource
         /// </summary>
         /// <param name="hostNameOrIp">Hostname/IP</param>

@@ -31,6 +31,7 @@ items:
     content: 'public class AggressiveTypeResolutionBinder : ISerializationBinder'
     content.vb: >-
       Public Class AggressiveTypeResolutionBinder
+
           Implements ISerializationBinder
   inheritance:
   - System.Object

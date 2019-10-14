@@ -36,7 +36,9 @@ items:
     content: 'public class ServiceNode : AppTreeNode, IAppTreeNode<ServiceDetails>'
     content.vb: >-
       Public Class ServiceNode
+
           Inherits AppTreeNode
+
           Implements IAppTreeNode(Of ServiceDetails)
   inheritance:
   - System.Object

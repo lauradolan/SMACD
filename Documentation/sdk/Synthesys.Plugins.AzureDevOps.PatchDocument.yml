@@ -1,0 +1,548 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument
+  commentId: T:Synthesys.Plugins.AzureDevOps.PatchDocument
+  id: PatchDocument
+  parent: Synthesys.Plugins.AzureDevOps
+  children:
+  - Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation(System.String,System.String)
+  - Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps(System.String)
+  - Synthesys.Plugins.AzureDevOps.PatchDocument.Severity(SMACD.AppTree.Vulnerability.RiskLevels)
+  - Synthesys.Plugins.AzureDevOps.PatchDocument.Title(System.String)
+  langs:
+  - csharp
+  - vb
+  name: PatchDocument
+  nameWithType: PatchDocument
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: PatchDocument
+    path: ../Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+    startLine: 6
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+  namespace: Synthesys.Plugins.AzureDevOps
+  syntax:
+    content: public static class PatchDocument
+    content.vb: Public Module PatchDocument
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.Severity(SMACD.AppTree.Vulnerability.RiskLevels)
+  commentId: M:Synthesys.Plugins.AzureDevOps.PatchDocument.Severity(SMACD.AppTree.Vulnerability.RiskLevels)
+  id: Severity(SMACD.AppTree.Vulnerability.RiskLevels)
+  parent: Synthesys.Plugins.AzureDevOps.PatchDocument
+  langs:
+  - csharp
+  - vb
+  name: Severity(Vulnerability.RiskLevels)
+  nameWithType: PatchDocument.Severity(Vulnerability.RiskLevels)
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.Severity(SMACD.AppTree.Vulnerability.RiskLevels)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Severity
+    path: ../Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+    startLine: 8
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+  namespace: Synthesys.Plugins.AzureDevOps
+  syntax:
+    content: public static JsonPatchOperation Severity(Vulnerability.RiskLevels riskLevel)
+    parameters:
+    - id: riskLevel
+      type: SMACD.AppTree.Vulnerability.RiskLevels
+    return:
+      type: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+    content.vb: Public Shared Function Severity(riskLevel As Vulnerability.RiskLevels) As JsonPatchOperation
+  overload: Synthesys.Plugins.AzureDevOps.PatchDocument.Severity*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.Title(System.String)
+  commentId: M:Synthesys.Plugins.AzureDevOps.PatchDocument.Title(System.String)
+  id: Title(System.String)
+  parent: Synthesys.Plugins.AzureDevOps.PatchDocument
+  langs:
+  - csharp
+  - vb
+  name: Title(String)
+  nameWithType: PatchDocument.Title(String)
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.Title(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Title
+    path: ../Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+    startLine: 32
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+  namespace: Synthesys.Plugins.AzureDevOps
+  syntax:
+    content: public static JsonPatchOperation Title(string title)
+    parameters:
+    - id: title
+      type: System.String
+    return:
+      type: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+    content.vb: Public Shared Function Title(title As String) As JsonPatchOperation
+  overload: Synthesys.Plugins.AzureDevOps.PatchDocument.Title*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps(System.String)
+  commentId: M:Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps(System.String)
+  id: ReproSteps(System.String)
+  parent: Synthesys.Plugins.AzureDevOps.PatchDocument
+  langs:
+  - csharp
+  - vb
+  name: ReproSteps(String)
+  nameWithType: PatchDocument.ReproSteps(String)
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ReproSteps
+    path: ../Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+    startLine: 37
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+  namespace: Synthesys.Plugins.AzureDevOps
+  syntax:
+    content: public static JsonPatchOperation ReproSteps(string reproSteps)
+    parameters:
+    - id: reproSteps
+      type: System.String
+    return:
+      type: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+    content.vb: Public Shared Function ReproSteps(reproSteps As String) As JsonPatchOperation
+  overload: Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation(System.String,System.String)
+  commentId: M:Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation(System.String,System.String)
+  id: CreateBoilerplatePatchOperation(System.String,System.String)
+  parent: Synthesys.Plugins.AzureDevOps.PatchDocument
+  langs:
+  - csharp
+  - vb
+  name: CreateBoilerplatePatchOperation(String, String)
+  nameWithType: PatchDocument.CreateBoilerplatePatchOperation(String, String)
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation(System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: CreateBoilerplatePatchOperation
+    path: ../Synthesys.Plugins.AzureDevOps/PatchDocument.cs
+    startLine: 42
+  assemblies:
+  - Synthesys.Plugins.AzureDevOps
+  namespace: Synthesys.Plugins.AzureDevOps
+  syntax:
+    content: public static JsonPatchOperation CreateBoilerplatePatchOperation(string path, string value)
+    parameters:
+    - id: path
+      type: System.String
+    - id: value
+      type: System.String
+    return:
+      type: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+    content.vb: Public Shared Function CreateBoilerplatePatchOperation(path As String, value As String) As JsonPatchOperation
+  overload: Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Synthesys.Plugins.AzureDevOps
+  commentId: N:Synthesys.Plugins.AzureDevOps
+  name: Synthesys.Plugins.AzureDevOps
+  nameWithType: Synthesys.Plugins.AzureDevOps
+  fullName: Synthesys.Plugins.AzureDevOps
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.Severity*
+  commentId: Overload:Synthesys.Plugins.AzureDevOps.PatchDocument.Severity
+  name: Severity
+  nameWithType: PatchDocument.Severity
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.Severity
+- uid: SMACD.AppTree.Vulnerability.RiskLevels
+  commentId: T:SMACD.AppTree.Vulnerability.RiskLevels
+  parent: SMACD.AppTree
+  name: Vulnerability.RiskLevels
+  nameWithType: Vulnerability.RiskLevels
+  fullName: SMACD.AppTree.Vulnerability.RiskLevels
+- uid: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+  commentId: T:Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+  parent: Microsoft.VisualStudio.Services.WebApi.Patch.Json
+  isExternal: true
+  name: JsonPatchOperation
+  nameWithType: JsonPatchOperation
+  fullName: Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchOperation
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: Microsoft.VisualStudio.Services.WebApi.Patch.Json
+  commentId: N:Microsoft.VisualStudio.Services.WebApi.Patch.Json
+  isExternal: true
+  name: Microsoft.VisualStudio.Services.WebApi.Patch.Json
+  nameWithType: Microsoft.VisualStudio.Services.WebApi.Patch.Json
+  fullName: Microsoft.VisualStudio.Services.WebApi.Patch.Json
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.Title*
+  commentId: Overload:Synthesys.Plugins.AzureDevOps.PatchDocument.Title
+  name: Title
+  nameWithType: PatchDocument.Title
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.Title
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps*
+  commentId: Overload:Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps
+  name: ReproSteps
+  nameWithType: PatchDocument.ReproSteps
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.ReproSteps
+- uid: Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation*
+  commentId: Overload:Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation
+  name: CreateBoilerplatePatchOperation
+  nameWithType: PatchDocument.CreateBoilerplatePatchOperation
+  fullName: Synthesys.Plugins.AzureDevOps.PatchDocument.CreateBoilerplatePatchOperation

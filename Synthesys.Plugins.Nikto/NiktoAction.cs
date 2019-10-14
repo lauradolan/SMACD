@@ -6,6 +6,7 @@ using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.HostCommands;
 using System;
 using System.IO;
 using System.Linq;
@@ -43,15 +44,16 @@ namespace Synthesys.Plugins.Nikto
                 return ExtensionReport.Error(new Exception("Failed to generate XML"));
             }
 
-            System.Collections.Generic.IEnumerable<XElement> scanDetails = xml.Root.Descendants("scandetails");
+            var scanRoot = xml.Root.Descendants("niktoscan").First();
+            System.Collections.Generic.IEnumerable<XElement> scanDetails = scanRoot.Descendants("scandetails");
 
             // Create report (general and specific)
             ExtensionReport report = new ExtensionReport();
             NiktoReport niktoReport = new NiktoReport
             {
-                NiktoVersion = xml.Root.Attributes("version").First().Value,
-                ScanStart = xml.Root.Attributes("scanstart").First().Value,
-                ScanEnd = xml.Root.Attributes("scanend").First().Value,
+                NiktoVersion = scanRoot.Attributes("version").First().Value,
+                ScanStart = scanRoot.Attributes("scanstart").First().Value,
+                ScanEnd = scanRoot.Attributes("scanend").First().Value,
                 ServerBanner = scanDetails.Attributes("targetbanner").First().Value,
                 SiteName = scanDetails.Attributes("sitename").First().Value
             };
@@ -91,7 +93,9 @@ namespace Synthesys.Plugins.Nikto
                     Description = item.Descendants("description").First().Value
                 };
                 report.Vulnerabilities.Add(vulnerability);
-                urlLeaf.Vulnerabilities.Add(vulnerability);
+
+                if (urlLeaf != null)
+                    urlLeaf.Vulnerabilities.Add(vulnerability);
             }
 
             HttpService.Vulnerabilities.AddRange(report.Vulnerabilities);
@@ -101,24 +105,45 @@ namespace Synthesys.Plugins.Nikto
 
         private XDocument ExecuteScanner()
         {
-            using (NativeDirectoryContext context = HttpService.Evidence.CreateOrLoadNativePath("nikto").GetContext())
-            using (ExecutionWrapper wrapper = new ExecutionWrapper(
-                "nikto " +
-                "-Display 1234P " +
-                $"-host http://{HttpService.Host.Hostname}:{HttpService.Port} " +
-                $"-o {context.DirectoryWithFile("scan.xml")} " +
-                "-Format xml"))
+            using NativeDirectoryContext context = HttpService.Evidence.CreateOrLoadNativePath("nikto").GetContext();
+
+            if (DockerHostCommand.SupportsDocker())
             {
-                wrapper.Start().Wait();
+                using DockerHostCommand dockerCommand = new DockerHostCommand("kalo/nikto2:latest",
+                    context,
+                    "/usr/local/nikto/nikto.pl",
+                    "-Display", "1234P",
+                    "-host", $"http://{HttpService.Host.Hostname}:{HttpService.Port}",
+                    "-o", "/synthesys/scan.xml",
+                    "-Format", "xml") { ContainerWorkingDirectory = "/usr/local/nikto" };
 
-                if (!File.Exists(context.DirectoryWithFile("scan.xml")))
-                {
-                    Logger.LogCritical("XML report from this plugin was not found! Aborting...");
-                    return null;
-                }
+                dockerCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+                dockerCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
 
-                return XDocument.Load(context.DirectoryWithFile("scan.xml"));
+                dockerCommand.Start().Wait();
             }
+            else
+            {
+                using NativeHostCommand hostCommand = new NativeHostCommand(
+                    "nikto",
+                    "-Display", "1234P",
+                    "-host", $"http://{HttpService.Host.Hostname}:{HttpService.Port}",
+                    "-o", context.DirectoryWithFile("scan.xml"),
+                    "-Format", "xml");
+
+                hostCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
+                hostCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+
+                hostCommand.Start().Wait();
+            }
+
+            if (!File.Exists(context.DirectoryWithFile("scan.xml")))
+            {
+                Logger.LogCritical("XML report from this plugin was not found! Aborting...");
+                return null;
+            }
+
+            return XDocument.Load(context.DirectoryWithFile("scan.xml"));
         }
     }
 }

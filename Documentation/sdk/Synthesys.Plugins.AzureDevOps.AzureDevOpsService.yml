@@ -23,7 +23,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: AzureDevOpsService
     path: ../Synthesys.Plugins.AzureDevOps/AzureDevOpsService.cs
-    startLine: 16
+    startLine: 21
   assemblies:
   - Synthesys.Plugins.AzureDevOps
   namespace: Synthesys.Plugins.AzureDevOps
@@ -36,6 +36,7 @@ items:
       <Extension("azuredevops", Name:="Azure DevOps Integration", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
       Public Class AzureDevOpsService
+
           Inherits ReactionExtension
   inheritance:
   - System.Object
@@ -102,7 +103,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.Plugins.AzureDevOps/AzureDevOpsService.cs
-    startLine: 24
+    startLine: 29
   assemblies:
   - Synthesys.Plugins.AzureDevOps
   namespace: Synthesys.Plugins.AzureDevOps
@@ -132,7 +133,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: OrganizationUrl
     path: ../Synthesys.Plugins.AzureDevOps/AzureDevOpsService.cs
-    startLine: 37
+    startLine: 42
   assemblies:
   - Synthesys.Plugins.AzureDevOps
   namespace: Synthesys.Plugins.AzureDevOps
@@ -167,7 +168,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: PersonalAccessToken
     path: ../Synthesys.Plugins.AzureDevOps/AzureDevOpsService.cs
-    startLine: 38
+    startLine: 43
   assemblies:
   - Synthesys.Plugins.AzureDevOps
   namespace: Synthesys.Plugins.AzureDevOps
@@ -202,7 +203,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: React
     path: ../Synthesys.Plugins.AzureDevOps/AzureDevOpsService.cs
-    startLine: 90
+    startLine: 71
   assemblies:
   - Synthesys.Plugins.AzureDevOps
   namespace: Synthesys.Plugins.AzureDevOps

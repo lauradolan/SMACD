@@ -12,7 +12,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public override string NodeViewName => "SMACD.Artifacts.Views.UrlRequestNodeView";
+        public override string NodeViewName => "Compass.AppTree.UrlRequestNodeView";
 
         /// <summary>
         ///     Entire URL associated with this request
@@ -102,8 +102,8 @@ namespace SMACD.AppTree
         /// </summary>
         public UrlRequestNode()
         {
-            Fields.CollectionChanged += (s, e) => NotifyChanged();
-            Headers.CollectionChanged += (s, e) => NotifyChanged();
+            Fields.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };
+            Headers.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };
         }
 
         /// <summary>

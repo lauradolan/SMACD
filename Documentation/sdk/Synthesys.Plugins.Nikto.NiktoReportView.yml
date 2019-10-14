@@ -22,7 +22,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NiktoReportView
     path: ../Synthesys.Plugins.Nikto/obj/Release/netcoreapp3.0/RazorDeclaration/NiktoReportView.razor.g.cs
-    startLine: 22
+    startLine: 15
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto
@@ -30,7 +30,9 @@ items:
     content: 'public class NiktoReportView : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender'
     content.vb: >-
       Public Class NiktoReportView
+
           Inherits ComponentBase
+
           Implements IComponent, IHandleEvent, IHandleAfterRender
   inheritance:
   - System.Object
@@ -85,7 +87,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: BuildRenderTree
     path: ../Synthesys.Plugins.Nikto/obj/Release/netcoreapp3.0/RazorDeclaration/NiktoReportView.razor.g.cs
-    startLine: 25
+    startLine: 18
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto
@@ -121,7 +123,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Report
     path: ../Synthesys.Plugins.Nikto/obj/Release/netcoreapp3.0/RazorDeclaration/NiktoReportView.razor.g.cs
-    startLine: 32
+    startLine: 25
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto
@@ -166,7 +168,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NiktoReport
     path: ../Synthesys.Plugins.Nikto/obj/Release/netcoreapp3.0/RazorDeclaration/NiktoReportView.razor.g.cs
-    startLine: 35
+    startLine: 28
   assemblies:
   - Synthesys.Plugins.Nikto
   namespace: Synthesys.Plugins.Nikto

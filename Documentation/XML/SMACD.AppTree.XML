@@ -75,6 +75,11 @@
             <param name="uuid">Artifact UUID</param>
             <returns></returns>
         </member>
+        <member name="M:SMACD.AppTree.AppTreeNode.#ctor">
+            <summary>
+                Represents a single node in a tree, including all navigation properties
+            </summary>
+        </member>
         <member name="M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)">
             <summary>
                 Attach Parent properties for each Node
@@ -758,6 +763,11 @@
         <member name="P:SMACD.AppTree.RootNode.SuppressEventFiring">
             <summary>
                 Whether or not to suppress Artifact tree related events (useful during data loads or when responsiveness is not desired)
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.RootNode.LockTreeNodes">
+            <summary>
+                Prevent the creation of new nodes in the AppTree
             </summary>
         </member>
         <member name="P:SMACD.AppTree.RootNode.Item(System.String)">

@@ -79,7 +79,7 @@ namespace Synthesys.Verbs
                                             {
                                                 Action = "dummy",
                                                 Options = new Dictionary<string, string>
-                                                    {{"parameter", "value"}},
+                                                    {{"ConfigurationOption", "value"}},
                                                 Target = "dummyResource"
                                             }).ToList()
                                 }).ToList()

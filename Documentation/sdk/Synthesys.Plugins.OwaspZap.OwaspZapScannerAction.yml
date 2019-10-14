@@ -23,7 +23,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: OwaspZapScannerAction
     path: ../Synthesys.Plugins.OwaspZap/OwaspZapScannerAction.cs
-    startLine: 21
+    startLine: 23
   assemblies:
   - Synthesys.Plugins.OwaspZap
   namespace: Synthesys.Plugins.OwaspZap
@@ -38,7 +38,9 @@ items:
       <Extension("owaspzap", Name:="OWASP ZAP Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
       Public Class OwaspZapScannerAction
+
           Inherits ActionExtension
+
           Implements IOperateOnHttpService
   inheritance:
   - System.Object
@@ -106,7 +108,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Aggressive
     path: ../Synthesys.Plugins.OwaspZap/OwaspZapScannerAction.cs
-    startLine: 34
+    startLine: 36
   assemblies:
   - Synthesys.Plugins.OwaspZap
   namespace: Synthesys.Plugins.OwaspZap
@@ -155,7 +157,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: UseAjaxSpider
     path: ../Synthesys.Plugins.OwaspZap/OwaspZapScannerAction.cs
-    startLine: 40
+    startLine: 42
   assemblies:
   - Synthesys.Plugins.OwaspZap
   namespace: Synthesys.Plugins.OwaspZap
@@ -204,7 +206,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: HttpService
     path: ../Synthesys.Plugins.OwaspZap/OwaspZapScannerAction.cs
-    startLine: 46
+    startLine: 48
   assemblies:
   - Synthesys.Plugins.OwaspZap
   namespace: Synthesys.Plugins.OwaspZap
@@ -243,7 +245,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Act
     path: ../Synthesys.Plugins.OwaspZap/OwaspZapScannerAction.cs
-    startLine: 48
+    startLine: 50
   assemblies:
   - Synthesys.Plugins.OwaspZap
   namespace: Synthesys.Plugins.OwaspZap

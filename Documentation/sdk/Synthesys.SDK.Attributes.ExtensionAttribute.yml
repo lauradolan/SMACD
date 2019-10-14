@@ -42,6 +42,7 @@ items:
       <AttributeUsage(AttributeTargets.Class)>
 
       Public Class ExtensionAttribute
+
           Inherits Attribute
   inheritance:
   - System.Object
