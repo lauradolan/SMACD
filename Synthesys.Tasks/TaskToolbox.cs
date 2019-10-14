@@ -183,7 +183,7 @@ namespace Synthesys.Tasks
             {
                 // Assume console width of 80 chars, assume logger prefix takes up 20 chars = 60 chars
                 var totalWidth = 60;
-                var headerText = " .o-=[RUNNING TASKS]=-o. ";
+                var headerText = "=[RUNNING TASKS]=";
                 
 
                 var lastLog = DateTime.Now;
@@ -207,7 +207,7 @@ namespace Synthesys.Tasks
                             headerText +
                             new string('━', (longest - headerText.Length - 2) / 2) +
                             "┓";
-                        var runningTasks = string.Join('\n', lines.Select(l => $"┃ {l} ┃"));
+                        var runningTasks = string.Join('\n', lines.Select(l => $"┃ {l.PadRight(longest - 4)} ┃"));
                         var footer = "┗" + new string('━', longest - 2) + "┛";
 
                         Logger.LogTrace($"\n{header}\n{runningTasks}\n{footer}");

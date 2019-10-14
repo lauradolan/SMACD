@@ -103,7 +103,7 @@ namespace SMACD.AppTree
                 if (Root != null && Root.LockTreeNodes)
                     throw new Exception("Attempted to modify AppTree in locked mode. Contact the developer of the Extension.");
 
-                if (e.NewItems.Count > 0 && Root != null && ((AppTreeNode)e.NewItems[0]).Parent != null)
+                if (e.NewItems != null && e.NewItems.Count > 0 && Root != null && ((AppTreeNode)e.NewItems[0]).Parent != null)
                     NotifyChildAdded((AppTreeNode)e.NewItems[0]);
             };
         }

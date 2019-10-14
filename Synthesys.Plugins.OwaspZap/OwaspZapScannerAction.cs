@@ -267,7 +267,7 @@ namespace Synthesys.Plugins.OwaspZap
                             });
 
                             return inner.AddRequest(i.Method, artifact.Fields, artifact.Headers);
-                        }).ToList();
+                        }).Where(t => t != null).ToList();
                     }
                     catch (Exception ex)
                     {

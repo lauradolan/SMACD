@@ -75,6 +75,9 @@ namespace SMACD.AppTree
                 result.Headers.Add(kvp.Key, kvp.Value);
             }
 
+            if (Children.Any(c => c.NiceIdentifier == result.NiceIdentifier))
+                return Children.FirstOrDefault(c => c.NiceIdentifier == result.NiceIdentifier) as UrlRequestNode;
+
             Children.Add(result);
             return result;
         }

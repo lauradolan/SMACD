@@ -112,7 +112,7 @@ namespace Synthesys.Plugins.Nikto
                 using DockerHostCommand dockerCommand = new DockerHostCommand("kalo/nikto2:latest",
                     context,
                     "/usr/local/nikto/nikto.pl",
-                    "-Display", "1234P",
+                    //"-Display", "1234P",
                     "-host", $"http://{HttpService.Host.Hostname}:{HttpService.Port}",
                     "-o", "/synthesys/scan.xml",
                     "-Format", "xml") { ContainerWorkingDirectory = "/usr/local/nikto" };
@@ -126,7 +126,7 @@ namespace Synthesys.Plugins.Nikto
             {
                 using NativeHostCommand hostCommand = new NativeHostCommand(
                     "nikto",
-                    "-Display", "1234P",
+                    //"-Display", "1234P",
                     "-host", $"http://{HttpService.Host.Hostname}:{HttpService.Port}",
                     "-o", context.DirectoryWithFile("scan.xml"),
                     "-Format", "xml");

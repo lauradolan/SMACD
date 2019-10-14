@@ -19,6 +19,8 @@
     </div>
 </div>
 
+@if (UrlRequestArtifact.Fields.Any())
+{
 <div class="row">
     <div class="col">
         <div class="card shadow mb-4">
@@ -29,15 +31,18 @@
                 <div class="table-responsive">
                     <DataGrid TItem="KeyValuePair<string, string>"
                               Data="@UrlRequestArtifact.Fields">
-                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string,string>.Key)" Caption="Key" AllowSort="true" />
-                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string,string>.Value)" Caption="Value" AllowSort="false" />
+                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string, string>.Key)" Caption="Key" AllowSort="true" />
+                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string, string>.Value)" Caption="Value" AllowSort="false" />
                     </DataGrid>
                 </div>
             </div>
         </div>
     </div>
 </div>
+}
 
+@if (UrlRequestArtifact.Headers.Any())
+{
 <div class="row">
     <div class="col">
         <div class="card shadow mb-4">
@@ -48,14 +53,15 @@
                 <div class="table-responsive">
                     <DataGrid TItem="KeyValuePair<string, string>"
                               Data="@UrlRequestArtifact.Headers">
-                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string,string>.Key)" Caption="Header" AllowSort="true" />
-                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string,string>.Value)" Caption="Value" AllowSort="false" />
+                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string, string>.Key)" Caption="Header" AllowSort="true" />
+                        <DataGridColumn TItem="KeyValuePair<string, string>" Field="@nameof(KeyValuePair<string, string>.Value)" Caption="Value" AllowSort="false" />
                     </DataGrid>
                 </div>
             </div>
         </div>
     </div>
 </div>
+}
 
 <div class="row">
     <div class="col">

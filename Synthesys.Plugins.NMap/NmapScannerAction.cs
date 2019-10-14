@@ -34,6 +34,26 @@ namespace Synthesys.Plugins.Nmap
         /// </summary>
         public HostNode Host { get; set; }
 
+        private Dictionary<string, int> _portPointValues = new Dictionary<string, int>()
+        {
+            { "httpd", 5 },
+            { "pop3d", 5 },
+            { "imapd", 5 },
+            { "smtp", 5 },
+            { "nameserver", 10 },
+            { "tftp", 10 },
+            { "kerberos-sec", 10 },
+            { "netbios-ssn", 10 },
+            { "netbios-ns", 10 },
+            { "snmp", 10 },
+            { "sftp", 5 },
+            { "ftp", 5 },
+            { "ftp-data", 5 },
+            { "ssh", 15 },
+            { "telnet", 20 },
+            { "rdp", 15 }
+        };
+
         public override ExtensionReport Act()
         {
             Logger.LogInformation("Starting Nmap plugin against host {0}", Host);
@@ -49,7 +69,6 @@ namespace Synthesys.Plugins.Nmap
                 ReportViewName = typeof(NmapReportView).FullName,
                 ReportSummaryName = typeof(NmapReportSummary).FullName
             };
-            report.SetExtensionSpecificReport(nmapReport);
 
             if (!Host.Root.LockTreeNodes)
             {
@@ -86,6 +105,20 @@ namespace Synthesys.Plugins.Nmap
                     });
                 }
             }
+
+            var totalPoints = 100;
+            foreach (var port in nmapReport.Ports)
+            {
+                if (_portPointValues.ContainsKey(port.Service))
+                    totalPoints -= _portPointValues[port.Service];
+                else
+                    totalPoints -= 10; // arbitrary midpoint value
+            }
+            if (totalPoints < 0) totalPoints = 0;
+            report.RawPointsScored = totalPoints;
+            report.MaximumPointsAvailable = 100;
+
+            report.SetExtensionSpecificReport(nmapReport);
 
             return report;
         }
