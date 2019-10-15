@@ -281,10 +281,18 @@ namespace Synthesys.SDK.HostCommands
             while (true)
             {
                 containerList = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true });
-                if (containerList.Any(c => c.ID == ContainerId && (c.State.ToLower() == "exited" || c.State.ToLower() == "dead")))
-                    break;
-                else
+                try
+                {
+                    if (containerList.Any(c => c.ID == ContainerId && (c.State.ToLower() == "exited" || c.State.ToLower() == "dead")))
+                        break;
+                    else
+                        Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError("Error detecting Container from Docker daemon!");
                     Thread.Sleep(1000);
+                }
             }
 
             if (containerList.Any(c => c.ID == ContainerId))
@@ -299,7 +307,8 @@ namespace Synthesys.SDK.HostCommands
                 while (true)
                 {
                     Array.Clear(segmentHeader, 0, segmentHeader.Length);
-                    var count = await stream.ReadAsync(segmentHeader, 0, segmentHeader.Length, default);
+                    var cts = new CancellationTokenSource(1000);
+                    var count = await stream.ReadAsync(segmentHeader, 0, segmentHeader.Length, cts.Token);
                     StreamTypes streamType = (StreamTypes)segmentHeader[0];
 
                     if (count > 0 && segmentHeader[1] == 0 && segmentHeader[2] == 0 && segmentHeader[3] == 0 && count < 32767)
@@ -312,11 +321,17 @@ namespace Synthesys.SDK.HostCommands
                         if (size > 0)
                         {
                             var buffer = new byte[size];
-                            var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-                            if (bytesRead != size)
+                            var ptr = 0;
+                            var bytesRead = 0;
+                            cts = new CancellationTokenSource(1000);
+                            while (bytesRead < size)
                             {
-                                Logger.LogDebug("Mismatched size in header from available message size. This will misalign the buffer! (Will attempt to fix with an arbitrary 4096-byte realignment buffer)");
+                                bytesRead += await stream.ReadAsync(buffer, bytesRead, buffer.Length - bytesRead, cts.Token);
                             }
+                            //if (bytesRead != size)
+                            //{
+                            //    Logger.LogDebug("Mismatched size in header from available message size. This will misalign the buffer! (Will attempt to fix with an arbitrary 4096-byte realignment buffer)");
+                            //}
                             var str = Encoding.UTF8.GetString(buffer, 0, buffer.Length).TrimEnd('\n');
                             action(streamType, str);
                         }
@@ -331,6 +346,7 @@ namespace Synthesys.SDK.HostCommands
                     }
                 }
             }
+            catch (OperationCanceledException) { }
             catch (Exception ex)
             {
                 Logger.LogError(ex, "Failure during read from Docker container");

@@ -54,8 +54,7 @@ namespace Synthesys.Plugins.OwaspZap
             try
             {
                 NativeDirectoryEvidence nativePathArtifact = HttpService.Evidence.CreateOrLoadNativePath("owaspzap_" + HttpService.NiceIdentifier);
-                RunScanner(nativePathArtifact);
-                jsonReport = GetJsonObject(nativePathArtifact);
+                jsonReport = RunScanner(nativePathArtifact);
                 if (jsonReport == null)
                 {
                     Logger.LogCritical("OWASP ZAP Scanner did not produce a report; may have been a down service!");
@@ -79,7 +78,7 @@ namespace Synthesys.Plugins.OwaspZap
             return report;
         }
 
-        private void RunScanner(NativeDirectoryEvidence nativePathEvidence)
+        private ZapJsonReport RunScanner(NativeDirectoryEvidence nativePathEvidence)
         {
             Logger.LogInformation("Starting OWASP ZAP Scanner against {0}", HttpService);
 
@@ -88,6 +87,7 @@ namespace Synthesys.Plugins.OwaspZap
             Logger.LogDebug("Using scanner script {0} (aggressive option is {1})", pyScript,
                 Aggressive);
 
+            ZapJsonReport report = null;
             using (NativeDirectoryContext context = nativePathEvidence.GetContext())
             {
                 string schema = string.Empty;
@@ -102,7 +102,7 @@ namespace Synthesys.Plugins.OwaspZap
 
                 if (DockerHostCommand.SupportsDocker())
                 {
-                    using var dockerCommand = new DockerHostCommand("owasp/zap2docker-weekly",
+                    using var dockerCommand = new DockerHostCommand("owasp/zap2docker-weekly:latest",
                         new List<string>() {
                             pyScript,
                             "-t", $"{schema}://{HttpService.Host.Hostname}:{HttpService.Port}/",
@@ -140,9 +140,35 @@ namespace Synthesys.Plugins.OwaspZap
 
                     hostCommand.Start().Wait();
                 }
+
+                // -- Get Report --
+                string jsonReportPath = context.DirectoryWithFile(JSON_REPORT_FILE);
+                if (File.Exists(jsonReportPath))
+                {
+                    try
+                    {
+                        using (StreamReader sr = new StreamReader(jsonReportPath))
+                        {
+                            report = JsonConvert.DeserializeObject<ZapJsonReport>(sr.ReadToEnd());
+                            if (report == null)
+                            {
+                                Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogCritical(ex, "Error deserializing OWASP ZAP JSON output report!");
+                    }
+                }
+                else
+                {
+                    Logger.LogCritical("JSON report from this plugin was not found! Aborting...");
+                }
             }
 
             Logger.LogInformation("Completed OWASP ZAP scanner runtime execution");
+            return report;
         }
 
         private void TranslateZapLogs(int taskOwner, string logText)
@@ -187,41 +213,6 @@ namespace Synthesys.Plugins.OwaspZap
             }
         }
 
-        private ZapJsonReport GetJsonObject(NativeDirectoryEvidence nativePathArtifact)
-        {
-            ZapJsonReport report;
-            using (NativeDirectoryContext context = nativePathArtifact.GetContext())
-            {
-                string jsonReportPath = context.DirectoryWithFile(JSON_REPORT_FILE);
-                if (File.Exists(jsonReportPath))
-                {
-                    try
-                    {
-                        using (StreamReader sr = new StreamReader(jsonReportPath))
-                        {
-                            report = JsonConvert.DeserializeObject<ZapJsonReport>(sr.ReadToEnd());
-                            if (report == null)
-                            {
-                                Logger.LogCritical("JSON report from this plugin was not valid! Aborting...");
-                            }
-
-                            return report;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.LogCritical(ex, "Error deserializing OWASP ZAP JSON output report!");
-                    }
-                }
-                else
-                {
-                    Logger.LogCritical("JSON report from this plugin was not found! Aborting...");
-                }
-            }
-
-            return null;
-        }
-
         private void RunScorer(ZapJsonReport report)
         {
             foreach (ZapJsonSite site in report.Site)
@@ -230,7 +221,7 @@ namespace Synthesys.Plugins.OwaspZap
                 {
                     try
                     {
-                        System.Collections.Generic.List<UrlRequestNode> targets = alert.Instances.Select(i =>
+                        List<UrlRequestNode> targets = alert.Instances.Select(i =>
                         {
                             UrlNode inner = UrlHelper.GeneratePathArtifacts(HttpService, i.Uri, i.Method);
                             if (inner == null)
@@ -239,7 +230,7 @@ namespace Synthesys.Plugins.OwaspZap
                                 return null;
                             }
 
-                            UrlRequestNode artifact = new UrlRequestNode() { Parent = inner };
+                            UrlRequestNode artifact = new UrlRequestNode(inner);
                             if (i.Param != null)
                             {
                                 string[] paramsSplit = i.Param.Split(',');
@@ -263,7 +254,10 @@ namespace Synthesys.Plugins.OwaspZap
                                 Description = alert.Desc,
                                 Occurrences = alert.Instances.Count(),
                                 Remedy = alert.Solution,
-                                Title = alert.Name
+                                Title = alert.Name,
+                                AdditionalInformation = alert.OtherInfo,
+                                ReferenceUrl = alert.Reference,
+                                ItemEvidence = inner.Evidence
                             });
 
                             return inner.AddRequest(i.Method, artifact.Fields, artifact.Headers);

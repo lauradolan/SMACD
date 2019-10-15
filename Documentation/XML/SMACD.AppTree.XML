@@ -75,10 +75,11 @@
             <param name="uuid">Artifact UUID</param>
             <returns></returns>
         </member>
-        <member name="M:SMACD.AppTree.AppTreeNode.#ctor">
+        <member name="M:SMACD.AppTree.AppTreeNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])">
             <summary>
                 Represents a single node in a tree, including all navigation properties
             </summary>
+            <param name="identifiers">Identifiers for node</param>
         </member>
         <member name="M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)">
             <summary>
@@ -591,6 +592,13 @@
             <param name="protocolAndPort">Protocol and port, i.e. Tcp/80</param>
             <returns></returns>
         </member>
+        <member name="M:SMACD.AppTree.HostNode.#ctor(SMACD.AppTree.RootNode,System.String[])">
+            <summary>
+                Represents a single host (server) involved in some part of the application
+            </summary>
+            <param name="parent">Parent node</param>
+            <param name="identifiers">Identifiers</param>
+        </member>
         <member name="M:SMACD.AppTree.HostNode.ToString">
             <summary>
                 String representation of host
@@ -618,6 +626,13 @@
             </summary>
             <param name="urlSegment">URL segment</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.AppTree.HttpServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])">
+            <summary>
+                Represents an HTTP service accessible via a specific protocol and port
+            </summary>
+            <param name="parent">Parent node</param>
+            <param name="identifiers">Identifiers for node</param>
         </member>
         <member name="M:SMACD.AppTree.HttpServiceNode.ToString">
             <summary>
@@ -792,10 +807,11 @@
                 Fired when an Artifact is added to a given Artifact
             </summary>
         </member>
-        <member name="M:SMACD.AppTree.RootNode.#ctor">
+        <member name="M:SMACD.AppTree.RootNode.#ctor(SMACD.AppTree.AppTreeNode)">
             <summary>
                 Represents the root of an Artifact correlation tree
             </summary>
+            <param name="parent">Parent node (should be null)</param>
         </member>
         <member name="M:SMACD.AppTree.RootNode.InvokeTreeNodeCreated(SMACD.AppTree.AppTreeNode)">
             <summary>
@@ -865,6 +881,13 @@
                 Details around a Service
             </summary>
         </member>
+        <member name="M:SMACD.AppTree.ServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])">
+            <summary>
+                Represents a single service, listening on a port of a Host
+            </summary>
+            <param name="parent">Parent node</param>
+            <param name="identifiers">Identifiers for node</param>
+        </member>
         <member name="M:SMACD.AppTree.ServiceNode.ToString">
             <summary>
                 String representation of Service Port Artifact
@@ -907,6 +930,13 @@
             </summary>
             <param name="urlSegment">URL segment</param>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.AppTree.UrlNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])">
+            <summary>
+                Represents a single URL segment (directory or file) in some part of the application
+            </summary>
+            <param name="parent">Parent node</param>
+            <param name="identifiers">Identifiers for node</param>
         </member>
         <member name="M:SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
@@ -970,10 +1000,12 @@
             <param name="urlSegment">URL segment</param>
             <returns></returns>
         </member>
-        <member name="M:SMACD.AppTree.UrlRequestNode.#ctor">
+        <member name="M:SMACD.AppTree.UrlRequestNode.#ctor(SMACD.AppTree.UrlNode,System.String[])">
             <summary>
                 Represents a single request to a URL in some part of the application
             </summary>
+            <param name="parent">Parent node</param>
+            <param name="identifiers">Identifiers for node</param>
         </member>
         <member name="M:SMACD.AppTree.UrlRequestNode.GetEntireUrl">
             <summary>
@@ -1194,6 +1226,16 @@
         <member name="P:SMACD.AppTree.Vulnerability.AdditionalInformation">
             <summary>
                 Additional information about vulnerability
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.Vulnerability.ReferenceUrl">
+            <summary>
+                URL containing more information on vulnerability and/or its solution
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.Vulnerability.ItemEvidence">
+            <summary>
+                Evidence for what part of the item was affected by the Vulnerability
             </summary>
         </member>
     </members>

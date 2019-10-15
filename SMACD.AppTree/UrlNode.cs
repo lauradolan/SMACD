@@ -46,13 +46,22 @@ namespace SMACD.AppTree
                 UrlNode result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
-                    result = new UrlNode { Parent = this };
+                    result = new UrlNode(this);
                     result.Identifiers.Add(urlSegment);
                     Children.Add(result);
                 }
 
                 return result;
             }
+        }
+
+        /// <summary>
+        ///     Represents a single URL segment (directory or file) in some part of the application
+        /// </summary>
+        /// <param name="parent">Parent node</param>
+        /// <param name="identifiers">Identifiers for node</param>
+        public UrlNode(AppTreeNode parent, params string[] identifiers) : base(parent, identifiers)
+        {
         }
 
         /// <summary>
@@ -63,8 +72,13 @@ namespace SMACD.AppTree
         /// <param name="headers">Headers to send</param>
         public UrlRequestNode AddRequest(string method, IDictionary<string, string> fields, IDictionary<string, string> headers)
         {
-            UrlRequestNode result = new UrlRequestNode() { Parent = this };
-            result.Identifiers.Add($"{method.ToString().ToUpper()} ({string.Join(", ", fields.Keys)}) ({string.Join(", ", fields.Select(f => $"{f.Key} => {f.Value}"))})");
+            UrlRequestNode result = new UrlRequestNode(this);
+
+            var identifier = method.ToString().ToUpper();
+            if (fields.Any()) identifier = $"{identifier} ({string.Join(", ", fields.Keys)})";
+            if (headers.Any()) identifier = $"{identifier} ({string.Join(", ", headers.Keys)}";
+
+            result.Identifiers.Add(identifier);
             foreach (KeyValuePair<string, string> kvp in fields)
             {
                 result.Fields.Add(kvp.Key, kvp.Value);

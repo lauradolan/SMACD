@@ -18,7 +18,7 @@ namespace Synthesys.Helpers
 
         private static readonly string[] ADJECTIVES =
         {
-            "24/365", "24/7", "B2B", "B2C", "back-end", "best-of-breed", "bleeding-edge", "bricks-and-clicks",
+            "24-365", "24-7", "B2B", "B2C", "back-end", "best-of-breed", "bleeding-edge", "bricks-and-clicks",
             "clicks-and-mortar", "collaborative", "compelling", "cross-platform", "cross-media", "customized",
             "cutting-edge", "distributed", "dot-com", "dynamic", "e-business", "efficient", "end-to-end", "enterprise",
             "extensible", "frictionless", "front-end", "global", "granular", "holistic", "impactful", "innovative",

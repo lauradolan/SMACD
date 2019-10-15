@@ -75,7 +75,7 @@ namespace Synthesys.SDK.Triggers
         {
             if (Node != null)
             {
-                return $"Artifact Trigger ({Node.GetUUIDPath()} {Trigger.ToString()})";
+                return $"Artifact Trigger ({Node.GetDisplayPath()} {Trigger.ToString()})";
             }
 
             return $"Artifact Trigger Path {NodePath} {Trigger.ToString()}";

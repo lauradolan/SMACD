@@ -45,12 +45,15 @@
 
     RenderFragment CreateDynamicComponent() => builder =>
     {
-        builder.OpenComponent(1, GetComponentType());
-        if (!(Artifact is RootNode))
-            builder.AddAttribute(2, "Artifact", Artifact);
-        else
-            builder.AddAttribute(2, "Artifact", (object)null);
-        builder.CloseComponent();
+        if (Artifact != null)
+        {
+            builder.OpenComponent(1, GetComponentType());
+            if (!(Artifact is RootNode))
+                builder.AddAttribute(2, "Artifact", Artifact);
+            else
+                builder.AddAttribute(2, "Artifact", (object)null);
+            builder.CloseComponent();
+        }
     };
 
     private Type GetComponentType()

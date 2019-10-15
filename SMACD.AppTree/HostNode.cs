@@ -76,8 +76,7 @@ namespace SMACD.AppTree
                 ServiceNode result = ChildrenAre<ServiceNode>().FirstOrDefault(n => n.Port == port && n.Protocol == protocol);
                 if (result == null)
                 {
-                    result = new ServiceNode() { Parent = this };
-                    result.Identifiers.Add($"{protocol}/{port}");
+                    result = new ServiceNode(this, $"{protocol}/{port}");
                     Children.Add(result);
                 }
 
@@ -101,6 +100,15 @@ namespace SMACD.AppTree
 
                 Children.Add(value);
             }
+        }
+
+        /// <summary>
+        ///     Represents a single host (server) involved in some part of the application
+        /// </summary>
+        /// <param name="parent">Parent node</param>
+        /// <param name="identifiers">Identifiers</param>
+        public HostNode(RootNode parent, params string[] identifiers) : base(parent, identifiers)
+        {
         }
 
         /// <summary>

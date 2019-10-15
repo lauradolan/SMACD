@@ -50,7 +50,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synthesys.Tasks", "Synthesy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMACD.AppTree", "SMACD.AppTree\SMACD.AppTree.csproj", "{BD788BEF-F55F-4BEF-9C39-786DFDCC0694}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compass.Components", "Compass.Components\Compass.Components.csproj", "{711C009E-12C8-47EB-87D4-161CE9C02878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compass.Components", "Compass.Components\Compass.Components.csproj", "{711C009E-12C8-47EB-87D4-161CE9C02878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesys.Plugins.HTMLExplorer", "Synthesys.Plugins.HTMLExplorer\Synthesys.Plugins.HTMLExplorer.csproj", "{BBD49B40-77E5-47EE-BF9C-6A89E725B031}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +112,10 @@ Global
 		{711C009E-12C8-47EB-87D4-161CE9C02878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711C009E-12C8-47EB-87D4-161CE9C02878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711C009E-12C8-47EB-87D4-161CE9C02878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD49B40-77E5-47EE-BF9C-6A89E725B031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD49B40-77E5-47EE-BF9C-6A89E725B031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD49B40-77E5-47EE-BF9C-6A89E725B031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD49B40-77E5-47EE-BF9C-6A89E725B031}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{2814E17D-10F6-4BD9-820B-2875176738D8} = {408E378A-D08F-419F-B970-7BCC839510A5}
 		{BD788BEF-F55F-4BEF-9C39-786DFDCC0694} = {5D968566-9536-4558-9686-AC107A79869D}
 		{711C009E-12C8-47EB-87D4-161CE9C02878} = {A61D26B6-750B-4BD2-9248-CFDF38DF7379}
+		{BBD49B40-77E5-47EE-BF9C-6A89E725B031} = {56B0A048-2393-497A-B32C-F2ECD4CA7AF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73249C41-2490-4A52-B639-60FB96435BD4}

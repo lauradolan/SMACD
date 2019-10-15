@@ -99,6 +99,14 @@ namespace SMACD.AppTree
         /// </summary>
         public Versionable<ServiceDetails> Detail { get; set; } = new Versionable<ServiceDetails>();
 
+        /// <summary>
+        ///     Represents a single service, listening on a port of a Host
+        /// </summary>
+        /// <param name="parent">Parent node</param>
+        /// <param name="identifiers">Identifiers for node</param>
+        public ServiceNode(HostNode parent, params string[] identifiers) : base(parent, identifiers)
+        {
+        }
 
         /// <summary>
         ///     String representation of Service Port Artifact

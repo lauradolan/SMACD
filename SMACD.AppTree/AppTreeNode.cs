@@ -58,7 +58,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     Artifact Identifier for path
         /// </summary>
-        public List<string> Identifiers { get; } = new List<string>();
+        public HashSet<string> Identifiers { get; } = new HashSet<string>();
 
         /// <summary>
         ///     Get nice-name identifier for Artifact (first non-UUID)
@@ -96,8 +96,13 @@ namespace SMACD.AppTree
         /// <summary>
         ///     Represents a single node in a tree, including all navigation properties
         /// </summary>
-        public AppTreeNode()
+        /// <param name="identifiers">Identifiers for node</param>
+        public AppTreeNode(AppTreeNode parent, params string[] identifiers)
         {
+            Parent = parent;
+            foreach (var identifier in identifiers)
+                Identifiers.Add(identifier);
+
             Children.CollectionChanged += (s, e) =>
             {
                 if (Root != null && Root.LockTreeNodes)
@@ -106,6 +111,8 @@ namespace SMACD.AppTree
                 if (e.NewItems != null && e.NewItems.Count > 0 && Root != null && ((AppTreeNode)e.NewItems[0]).Parent != null)
                     NotifyChildAdded((AppTreeNode)e.NewItems[0]);
             };
+
+            NotifyCreated();
         }
 
         /// <summary>

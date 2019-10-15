@@ -88,7 +88,7 @@ namespace SMACD.AppTree
                 UrlNode result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
-                    result = new UrlNode { Parent = this };
+                    result = new UrlNode(this);
                     result.Identifiers.Add(urlSegment);
                     Children.Add(result);
                 }
@@ -100,7 +100,9 @@ namespace SMACD.AppTree
         /// <summary>
         ///     Represents a single request to a URL in some part of the application
         /// </summary>
-        public UrlRequestNode()
+        /// <param name="parent">Parent node</param>
+        /// <param name="identifiers">Identifiers for node</param>
+        public UrlRequestNode(UrlNode parent, params string[] identifiers) : base(parent, identifiers)
         {
             Fields.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };
             Headers.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };

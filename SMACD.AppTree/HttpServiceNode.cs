@@ -30,13 +30,21 @@ namespace SMACD.AppTree
                 UrlNode result = ChildrenAre<UrlNode>(u => u.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
-                    result = new UrlNode { Parent = this };
-                    result.Identifiers.Add(urlSegment);
+                    result = new UrlNode(this, urlSegment);
                     Children.Add(result);
                 }
 
                 return result;
             }
+        }
+
+        /// <summary>
+        ///     Represents an HTTP service accessible via a specific protocol and port
+        /// </summary>
+        /// <param name="parent">Parent node</param>
+        /// <param name="identifiers">Identifiers for node</param>
+        public HttpServiceNode(HostNode parent, params string[] identifiers) : base(parent, identifiers)
+        {
         }
 
         /// <summary>

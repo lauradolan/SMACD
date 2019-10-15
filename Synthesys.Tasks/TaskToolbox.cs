@@ -137,6 +137,7 @@ namespace Synthesys.Tasks
                         succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails);
 
                     reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(trigger));
+                    Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", reactions.Count, trigger);
 
                     foreach (var reaction in reactions)
                     {
@@ -145,6 +146,8 @@ namespace Synthesys.Tasks
                             Logger.LogInformation("ReactionExtension {0} was attempted to be queued from Trigger {1} but was blocked by a white/blacklist rule", reaction.Metadata.ExtensionIdentifier, trigger);
                             continue;
                         }
+                        else
+                            Logger.LogTrace("Executing Reaction {0}", reaction.Metadata.ExtensionIdentifier);
 
                         // todo: reaction options?
                         var configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;

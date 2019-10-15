@@ -76,7 +76,7 @@ namespace Synthesys.Plugins.Nmap
                 {
                     if (new[] { "httpd" }.Contains(port.Service))
                     {
-                        Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode();
+                        Host[$"{port.Protocol}/{port.Port}"] = new HttpServiceNode(Host, $"{port.Protocol}/{port.Port}");
                     }
 
                     Host[$"{port.Protocol}/{port.Port}"].Detail.Set(

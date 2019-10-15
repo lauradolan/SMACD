@@ -43,7 +43,7 @@ namespace Synthesys.SDK
             }
 
             // "artifact" is leaf URL, create request here
-            UrlRequestNode request = new UrlRequestNode() { Parent = artifact };
+            UrlRequestNode request = new UrlRequestNode(artifact);
 
             foreach (string key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
             {

@@ -46,6 +46,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- HTML Explorer Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.HTMLExplorer\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.HTMLExplorer.dll" Link="Plugins\Synthesys.Plugins.HTMLExplorer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Nmap Plugin -->
     <EmbeddedResource Include="..\Synthesys.Plugins.Nmap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nmap.dll" Link="Plugins\Synthesys.Plugins.Nmap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

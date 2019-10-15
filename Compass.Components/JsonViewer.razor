@@ -1,0 +1,134 @@
+﻿@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+
+<div class="card shadow mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="text-primary font-weight-bold m-0">JSON Detail</h6>
+        <div class="dropdown no-arrow">
+            <button class="btn btn-link btn-sm" type="button" @onclick="(() => IsShowingJsonDetail = !IsShowingJsonDetail)">
+                @if (IsShowingJsonDetail)
+                {
+                    <i class="fas fa-sort-down text-gray-500"></i>
+                }
+                else
+                {
+                    <i class="fas fa-sort-up text-gray-500"></i>
+                }
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (IsShowingJsonDetail)
+        {
+            @if (!string.IsNullOrEmpty(SerializedData))
+            {
+                <pre><code class="language-json">@SerializedData</code></pre>
+            }
+            else
+            {
+                <strong class="text-warning">This item does not have JSON detail available</strong>
+            }
+        }
+    </div>
+</div>
+
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@using System.Reflection
+@code
+{
+    [Parameter]
+    public SMACD.AppTree.AppTreeNode Artifact { get; set; }
+
+    private string SerializedData { get; set; }
+
+    private bool IsShowingJsonDetail { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Artifact != null)
+        {
+            var jsonResolver = new PropertyRenameAndIgnoreSerializerContractResolver();
+            jsonResolver.IgnoreProperty(typeof(AppTreeNode), "Children");
+            jsonResolver.IgnoreProperty(typeof(AppTreeNode), "Evidence");
+            jsonResolver.IgnoreProperty(typeof(AppTreeNode), "Parent");
+            jsonResolver.IgnoreProperty(typeof(AppTreeNode), "Root");
+
+            SerializedData = Newtonsoft.Json.JsonConvert.SerializeObject(Artifact, new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                ContractResolver = jsonResolver
+            }).Trim();
+        }
+        else
+            SerializedData = string.Empty;
+
+        var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
+    }
+
+    public class PropertyRenameAndIgnoreSerializerContractResolver : DefaultContractResolver
+{
+    private readonly Dictionary<Type, HashSet<string>> _ignores;
+    private readonly Dictionary<Type, Dictionary<string, string>> _renames;
+
+    public PropertyRenameAndIgnoreSerializerContractResolver()
+    {
+        _ignores = new Dictionary<Type, HashSet<string>>();
+        _renames = new Dictionary<Type, Dictionary<string, string>>();
+    }
+
+    public void IgnoreProperty(Type type, params string[] jsonPropertyNames)
+    {
+        if (!_ignores.ContainsKey(type))
+            _ignores[type] = new HashSet<string>();
+
+        foreach (var prop in jsonPropertyNames)
+            _ignores[type].Add(prop);
+    }
+
+    public void RenameProperty(Type type, string propertyName, string newJsonPropertyName)
+    {
+        if (!_renames.ContainsKey(type))
+            _renames[type] = new Dictionary<string, string>();
+
+        _renames[type][propertyName] = newJsonPropertyName;
+    }
+
+    protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+    {
+        var property = base.CreateProperty(member, memberSerialization);
+
+        if (IsIgnored(property.DeclaringType, property.PropertyName))
+        {
+            property.ShouldSerialize = i => false;
+            property.Ignored = true;
+        }
+
+        if (IsRenamed(property.DeclaringType, property.PropertyName, out var newJsonPropertyName))
+            property.PropertyName = newJsonPropertyName;
+
+        return property;
+    }
+
+    private bool IsIgnored(Type type, string jsonPropertyName)
+    {
+        if (!_ignores.ContainsKey(type))
+            return false;
+
+        return _ignores[type].Contains(jsonPropertyName);
+    }
+
+    private bool IsRenamed(Type type, string jsonPropertyName, out string newJsonPropertyName)
+    {
+        Dictionary<string, string> renames;
+
+        if (!_renames.TryGetValue(type, out renames) || !renames.TryGetValue(jsonPropertyName, out newJsonPropertyName))
+        {
+            newJsonPropertyName = null;
+            return false;
+        }
+
+        return true;
+    }
+}
+}

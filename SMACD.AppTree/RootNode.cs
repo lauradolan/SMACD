@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -90,9 +91,8 @@ namespace SMACD.AppTree
                 HostNode result = ChildrenAre<HostNode>(n => n.Identifiers.Any(i => resolvedAliases.Contains(i))).FirstOrDefault();
                 if (result == null)
                 {
-                    result = new HostNode
+                    result = new HostNode(this)
                     {
-                        Parent = this,
                         IpAddress = ip,
                         Hostname = hostName
                     };
@@ -131,9 +131,9 @@ namespace SMACD.AppTree
         /// <summary>
         ///     Represents the root of an Artifact correlation tree
         /// </summary>
-        public RootNode()
+        /// <param name="parent">Parent node (should be null)</param>
+        public RootNode(AppTreeNode parent = null) : base(parent, "_root_")
         {
-            Identifiers.Add("_root_");
         }
 
         /// <summary>

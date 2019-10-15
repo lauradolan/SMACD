@@ -22,8 +22,7 @@ namespace Synthesys
                 ServiceNode serviceBase = session.Artifacts[uri.Host][uri.Port];
                 if (serviceBase.ServiceNodeType != ServiceNode.KnownServiceNodeTypes.Http)
                 {
-                    HttpServiceNode httpArtifact = new HttpServiceNode() { Parent = session.Artifacts[uri.Host] };
-                    httpArtifact.Identifiers.Add($"{ProtocolType.Tcp.ToString()}/{uri.Port}");
+                    HttpServiceNode httpArtifact = new HttpServiceNode(session.Artifacts[uri.Host], $"{ProtocolType.Tcp.ToString()}/{uri.Port}");
                     session.Artifacts[uri.Host][uri.Port] = httpArtifact;
 
                     ServiceNode httpBase = session.Artifacts[uri.Host][uri.Port];
@@ -39,7 +38,7 @@ namespace Synthesys
             if (resourceModel is SocketPortTargetModel)
             {
                 SocketPortTargetModel socket = resourceModel as SocketPortTargetModel;
-                session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"] = new ServiceNode() { Parent = session.Artifacts[socket.Hostname] };
+                session.Artifacts[socket.Hostname][$"{socket.Protocol}/{socket.Port}"] = new ServiceNode(session.Artifacts[socket.Hostname], $"{socket.Protocol}/{socket.Port}");
             }
         }
     }

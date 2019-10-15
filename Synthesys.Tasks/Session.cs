@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SMACD.AppTree;
 using Synthesys.SDK;
+using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 
 namespace Synthesys.Tasks
@@ -94,42 +97,42 @@ namespace Synthesys.Tasks
             }
         }
 
+        private ILogger Logger { get; set; } = Global.LogFactory.CreateLogger("Session");
         private void BindArtifactTriggers()
         {
             Artifacts.ArtifactChanged += artifact =>
             {
-                List<SDK.Extensions.ReactionExtension> triggered =
-                    ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.IsUpdated);
-                foreach (SDK.Extensions.ReactionExtension item in triggered)
-                {
-                    item.React(TriggerDescriptor.ArtifactTrigger(
+                var trigger = TriggerDescriptor.ArtifactTrigger(
                         artifact,
-                        AppTreeNodeEvents.IsUpdated));
-                }
+                        AppTreeNodeEvents.IsUpdated);
+                EngageTriggeredReactions(trigger, ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.IsUpdated));
             };
             Artifacts.ArtifactChildAdded += artifact =>
             {
                 artifact = artifact.Parent; // this event returns the child
-                List<SDK.Extensions.ReactionExtension> triggered =
-                    ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.AddsChild);
-                foreach (SDK.Extensions.ReactionExtension item in triggered)
-                {
-                    item.React(TriggerDescriptor.ArtifactTrigger(
+                var trigger = TriggerDescriptor.ArtifactTrigger(
                         artifact,
-                        AppTreeNodeEvents.AddsChild));
-                }
+                        AppTreeNodeEvents.AddsChild);
+                EngageTriggeredReactions(trigger, ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.AddsChild));
             };
             Artifacts.ArtifactCreated += artifact =>
             {
-                List<SDK.Extensions.ReactionExtension> triggered =
-                    ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.IsCreated);
-                foreach (SDK.Extensions.ReactionExtension item in triggered)
-                {
-                    item.React(TriggerDescriptor.ArtifactTrigger(
+                var trigger = TriggerDescriptor.ArtifactTrigger(
                         artifact,
-                        AppTreeNodeEvents.IsCreated));
-                }
+                        AppTreeNodeEvents.IsCreated);
+                EngageTriggeredReactions(trigger, ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(artifact, AppTreeNodeEvents.IsCreated));
             };
+        }
+
+        private void EngageTriggeredReactions(TriggerDescriptor trigger, List<ReactionExtension> extensions)
+        {
+            if (extensions.Any())
+                Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", extensions.Count, trigger);
+            foreach (SDK.Extensions.ReactionExtension extension in extensions)
+            {
+                Logger.LogTrace("Processing Reaction {0}", extension.Metadata.ExtensionIdentifier);
+                Reports.Add(extension.React(trigger));
+            }
         }
     }
 }

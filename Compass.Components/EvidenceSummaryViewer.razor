@@ -9,59 +9,61 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h6 class="text-primary font-weight-bold m-0">Data Attachments (Supporting Evidence)</h6>
             <div class="dropdown no-arrow">
-                <button class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
-                <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in" role="menu">
+                <button class="btn btn-link btn-sm" type="button" @onclick="(() => IsVisible = !IsVisible)">
                     @if (IsVisible)
                     {
-                        <a class="dropdown-item" role="presentation" href="javascript:;" @onclick="(() => IsVisible = false)">&nbsp;Hide</a>
+                        <i class="fas fa-sort-down text-gray-500"></i>
                     }
                     else
                     {
-                        <a class="dropdown-item" role="presentation" href="javascript:;" @onclick="(() => IsVisible = true)">&nbsp;Show</a>
+                        <i class="fas fa-sort-up text-gray-500"></i>
                     }
-                </div>
+                </button>
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <DataGrid TItem="Evidence"
-                          Data="@EvidenceCollection"
-                          @bind-SelectedRow="@SelectedEvidence">
-                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.Name)" Caption="Name" AllowSort="true" />
-                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.EvidenceType)" Caption="Evidence Type" AllowSort="false">
-                        <DisplayTemplate>
-                            @switch (context.EvidenceType)
-                            {
-                                case Evidence.EvidenceTypes.Object:
-                                    <i title="Object" class="fa fa-cube text-muted"></i>
-                                    break;
-                                case Evidence.EvidenceTypes.String:
-                                    <i title="String" class="fa fa-quote-left text-muted"></i>
-                                    break;
-                                case Evidence.EvidenceTypes.VFS:
-                                    <i title="Virtual Filesystem" class="fa fa-sitemap text-muted"></i>
-                                    break;
-                            }
-                        </DisplayTemplate>
-                    </DataGridColumn>
-                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Size">
-                        <DisplayTemplate>
-                            @if (context.StoredData != null)
-                            {@SizeSuffix(context.StoredData.Count())}
-                        </DisplayTemplate>
-                    </DataGridColumn>
-                    <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Data">
-                        <DisplayTemplate>
-                            @if (context is ObjectEvidence)
-                            {<pre>@(System.Text.UnicodeEncoding.Unicode.GetString(((ObjectEvidence)context).StoredData))</pre>}
-                            @if (context is StringEvidence)
-                            {<pre>@(((StringEvidence)context).Get())</pre>}
-                            @if (context is NativeDirectoryEvidence)
-                            {<a class="btn-link" href="/evidence/@Encoded(context.Name)"><i class="fa fa-link"></i> Explore Data</a>}
-                        </DisplayTemplate>
-                    </DataGridColumn>
-                </DataGrid>
-            </div>
+            @if (IsVisible)
+            {
+                <div class="table-responsive">
+                    <DataGrid TItem="Evidence"
+                              Data="@EvidenceCollection"
+                              @bind-SelectedRow="@SelectedEvidence">
+                        <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.Name)" Caption="Name" AllowSort="true" />
+                        <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.EvidenceType)" Caption="Evidence Type" AllowSort="false">
+                            <DisplayTemplate>
+                                @switch (context.EvidenceType)
+                                {
+                                    case Evidence.EvidenceTypes.Object:
+                                        <i title="Object" class="fa fa-cube text-muted"></i>
+                                        break;
+                                    case Evidence.EvidenceTypes.String:
+                                        <i title="String" class="fa fa-quote-left text-muted"></i>
+                                        break;
+                                    case Evidence.EvidenceTypes.VFS:
+                                        <i title="Virtual Filesystem" class="fa fa-sitemap text-muted"></i>
+                                        break;
+                                }
+                            </DisplayTemplate>
+                        </DataGridColumn>
+                        <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Size">
+                            <DisplayTemplate>
+                                @if (context.StoredData != null)
+                                {@SizeSuffix(context.StoredData.Count())}
+                            </DisplayTemplate>
+                        </DataGridColumn>
+                        <DataGridColumn TItem="Evidence" Field="@nameof(Evidence.StoredData)" Caption="Data">
+                            <DisplayTemplate>
+                                @if (context is ObjectEvidence)
+                                {<pre>@(System.Text.UnicodeEncoding.Unicode.GetString(((ObjectEvidence)context).StoredData))</pre>}
+                                @if (context is StringEvidence)
+                                {<pre>@(((StringEvidence)context).Get())</pre>}
+                                @if (context is NativeDirectoryEvidence)
+                                {<a class="btn-link" href="/evidence/@Encoded(context.Name)"><i class="fa fa-link"></i> Explore Data</a>}
+                            </DisplayTemplate>
+                        </DataGridColumn>
+                    </DataGrid>
+                </div>
+            }
         </div>
     </div>
 }
