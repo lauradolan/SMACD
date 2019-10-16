@@ -65,6 +65,11 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
+        ///     Represents a single URL segment (directory or file) in some part of the application
+        /// </summary>
+        public UrlNode() { }
+
+        /// <summary>
         ///     Add a Request description to this URL segment
         /// </summary>
         /// <param name="method">HTTP Method</param>

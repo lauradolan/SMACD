@@ -1,69 +1,110 @@
-﻿<div class="d-sm-flex justify-content-between align-items-center mb-4">
+﻿@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+
+<div class="d-sm-flex justify-content-between align-items-center mb-4">
     <h3 class="text-dark mb-0">URL Request - @UrlRequestArtifact.GetEntireUrl()</h3><i class="fas da-2x fa-globe"></i>
 </div>
 
+@if (Metadata.ResultCode != 0)
+{
+    <div class="row">
+        <div class="col-sm-4">
+            @{
+                var codeText = $"{Metadata.ResultCode} {((System.Net.HttpStatusCode)Metadata.ResultCode)}";
+            }
+            @if (Metadata.ResultCode == 200)
+            {
+                <Compass.Components.SmallCard Color="success" Title="HTTP Result Code" Value="@codeText" />
+            }
+            else
+            {
+                <Compass.Components.SmallCard Color="warning" Title="HTTP Result Code" Value="@codeText" />
+            }
+        </div>
+
+        @if (ReceivedHeaders.Any())
+        {
+            <div class="col-sm-8">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="text-primary font-weight-bold m-0">Headers Received</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <DataGrid TItem="KeyValueObject"
+                                      Data="@ReceivedHeaders">
+                                <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Key)" Caption="Header" AllowSort="true" />
+                                <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Value)" Caption="Value" AllowSort="false" />
+                            </DataGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
 @if (!string.IsNullOrEmpty(Metadata.ResultHtml))
 {
-<div class="row">
-    <div class="col">
-        <div class="card shadow mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="text-primary font-weight-bold m-0">Result HTML</h6>
-            </div>
-            <div class="card-body">
-                <pre>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Result HTML</h6>
+                </div>
+                <div class="card-body">
+                    <pre>
                     <code class="language-html">
                         @Metadata.ResultHtml
                     </code>
                 </pre>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 @if (Fields.Any())
 {
-<div class="row">
-    <div class="col">
-        <div class="card shadow mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="text-primary font-weight-bold m-0">Data Fields</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <DataGrid TItem="KeyValueObject"
-                              Data="@Fields">
-                        <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Key)" Caption="Key" AllowSort="true" />
-                        <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Value)" Caption="Value" AllowSort="false" />
-                    </DataGrid>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Data Fields</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <DataGrid TItem="KeyValueObject"
+                                  Data="@Fields">
+                            <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Key)" Caption="Key" AllowSort="true" />
+                            <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Value)" Caption="Value" AllowSort="false" />
+                        </DataGrid>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 @if (Headers.Any())
 {
-<div class="row">
-    <div class="col">
-        <div class="card shadow mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="text-primary font-weight-bold m-0">Headers</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <DataGrid TItem="KeyValueObject"
-                              Data="@Headers">
-                        <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Key)" Caption="Header" AllowSort="true" />
-                        <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Value)" Caption="Value" AllowSort="false" />
-                    </DataGrid>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-primary font-weight-bold m-0">Headers</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <DataGrid TItem="KeyValueObject"
+                                  Data="@Headers">
+                            <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Key)" Caption="Header" AllowSort="true" />
+                            <DataGridColumn TItem="KeyValueObject" Field="@nameof(KeyValueObject.Value)" Caption="Value" AllowSort="false" />
+                        </DataGrid>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 
 <div class="row">
@@ -91,9 +132,16 @@
     public List<KeyValueObject> Fields => UrlRequestArtifact.Fields.Where(f => !string.IsNullOrEmpty(f.Key)).Select(f => new KeyValueObject() { Key = f.Key, Value = f.Value }).ToList();
     public List<KeyValueObject> Headers => UrlRequestArtifact.Headers.Where(f => !string.IsNullOrEmpty(f.Key)).Select(f => new KeyValueObject() { Key = f.Key, Value = f.Value }).ToList();
 
+    public List<KeyValueObject> ReceivedHeaders => Metadata.Headers.Where(f => !string.IsNullOrEmpty(f.Key)).Select(f => new KeyValueObject() { Key = f.Key, Value = f.Value }).ToList();
+
     public class KeyValueObject
     {
         public string Key { get; set; }
         public string Value { get; set; }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
     }
 }

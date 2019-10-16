@@ -81,6 +81,11 @@
             </summary>
             <param name="identifiers">Identifiers for node</param>
         </member>
+        <member name="M:SMACD.AppTree.AppTreeNode.#ctor">
+            <summary>
+                Represents a single node in a tree, including all navigation properties
+            </summary>
+        </member>
         <member name="M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)">
             <summary>
                 Attach Parent properties for each Node
@@ -266,6 +271,16 @@
         <member name="P:SMACD.AppTree.Details.UrlRequestDetails.ResultHtml">
             <summary>
                 HTML generated from executing the URL with the given parameters
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.Details.UrlRequestDetails.ResultCode">
+            <summary>
+                Result code when requesting URL
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.Details.UrlRequestDetails.Headers">
+            <summary>
+                Headers received during request
             </summary>
         </member>
         <member name="T:SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder">
@@ -599,6 +614,11 @@
             <param name="parent">Parent node</param>
             <param name="identifiers">Identifiers</param>
         </member>
+        <member name="M:SMACD.AppTree.HostNode.#ctor">
+            <summary>
+                Represents a single host (server) involved in some part of the application
+            </summary>
+        </member>
         <member name="M:SMACD.AppTree.HostNode.ToString">
             <summary>
                 String representation of host
@@ -633,6 +653,11 @@
             </summary>
             <param name="parent">Parent node</param>
             <param name="identifiers">Identifiers for node</param>
+        </member>
+        <member name="M:SMACD.AppTree.HttpServiceNode.#ctor">
+            <summary>
+                Represents an HTTP service accessible via a specific protocol and port
+            </summary>
         </member>
         <member name="M:SMACD.AppTree.HttpServiceNode.ToString">
             <summary>
@@ -888,6 +913,11 @@
             <param name="parent">Parent node</param>
             <param name="identifiers">Identifiers for node</param>
         </member>
+        <member name="M:SMACD.AppTree.ServiceNode.#ctor">
+            <summary>
+                Represents a single service, listening on a port of a Host
+            </summary>
+        </member>
         <member name="M:SMACD.AppTree.ServiceNode.ToString">
             <summary>
                 String representation of Service Port Artifact
@@ -937,6 +967,11 @@
             </summary>
             <param name="parent">Parent node</param>
             <param name="identifiers">Identifiers for node</param>
+        </member>
+        <member name="M:SMACD.AppTree.UrlNode.#ctor">
+            <summary>
+                Represents a single URL segment (directory or file) in some part of the application
+            </summary>
         </member>
         <member name="M:SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
@@ -1006,6 +1041,11 @@
             </summary>
             <param name="parent">Parent node</param>
             <param name="identifiers">Identifiers for node</param>
+        </member>
+        <member name="M:SMACD.AppTree.UrlRequestNode.#ctor">
+            <summary>
+                Represents a single request to a URL in some part of the application
+            </summary>
         </member>
         <member name="M:SMACD.AppTree.UrlRequestNode.GetEntireUrl">
             <summary>

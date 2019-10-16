@@ -7,7 +7,6 @@ using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
 using Synthesys.Tasks;
 using Synthesys.Tasks.Attributes;
-using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,45 +35,40 @@ namespace Synthesys.Plugins.HTMLExplorer
                 {
                     lock (node)
                     {
-                        foreach (var request in node.Requests.Where(r => string.IsNullOrEmpty(((UrlRequestDetails)r.Detail).ResultHtml)))
+                        foreach (var request in node.Requests.Where(r => !r.Detail.UnderlyingCollection.Any()))
                         {
-                            try
+                            using (var http = new HttpClient())
                             {
-                                var url = request.GetEntireUrl();
-                                Logger.LogInformation("Retrieving HTML from {0}", url);
-
-                                string html = string.Empty;
-                                using (var wc = new WebClient())
+                                HttpResponseMessage result = null;
+                                try
                                 {
+                                    var url = request.GetEntireUrl();
                                     if (request.Method == HttpMethod.Get)
-                                        html = wc.DownloadString(url);
+                                    {
+                                        result = http.GetAsync(url).Result;
+                                    }
                                     else if (request.Method == HttpMethod.Post)
                                     {
-                                        var fields = string.Join("&", request.Fields.Select(f => $"{f.Key}={f.Value}"));
-                                        wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-                                        html = wc.UploadString(url, fields);
-                                    }
-                                    else
-                                    {
-                                        Logger.LogCritical("Triggered HTML population on non-GET/POST verb!");
+                                        var content = new FormUrlEncodedContent(request.Fields);
+                                        result = http.PostAsync(url, content).Result;
                                     }
 
-                                    if (!string.IsNullOrEmpty(html))
+                                    if (result != null)
                                     {
-                                        request.Detail.Set(new SMACD.AppTree.Details.UrlRequestDetails()
+                                        var details = new UrlRequestDetails()
                                         {
-                                            ResultHtml = html
-                                        }, "htmlexplorer", DataProviderSpecificity.ExploitSpecificScanner);
+                                            ResultCode = (int)result.StatusCode,
+                                            Headers = result.Headers.ToDictionary(k => k.Key, v => v.Value.FirstOrDefault()),
+                                            ResultHtml = result.Content.ReadAsStringAsync().Result
+                                        };
+
+                                        request.Detail.Set(details, "htmlexplorer", DataProviderSpecificity.ExploitSpecificScanner);
                                     }
                                 }
-                            }
-                            catch (WebException ex)
-                            {
-                                // handle 404s
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.LogCritical(ex, "Could not download HTML");
+                                catch (WebException ex)
+                                {
+                                    Logger.LogWarning(ex, "HTML Explorer encountered an issue grabbing content");
+                                }
                             }
                         }
                     }

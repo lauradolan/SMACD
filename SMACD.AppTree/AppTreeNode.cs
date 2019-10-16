@@ -1,4 +1,5 @@
-﻿using SMACD.AppTree.Evidence;
+﻿using Newtonsoft.Json;
+using SMACD.AppTree.Evidence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,7 +59,14 @@ namespace SMACD.AppTree
         /// <summary>
         ///     Artifact Identifier for path
         /// </summary>
-        public HashSet<string> Identifiers { get; } = new HashSet<string>();
+        public HashSet<string> Identifiers { get; set; } = new HashSet<string>();
+
+        //[JsonRequired]
+        //private List<string> _identifiers
+        //{
+        //    get => Identifiers.ToList();
+        //    set => Identifiers = new HashSet<string>(value);
+        //}
 
         /// <summary>
         ///     Get nice-name identifier for Artifact (first non-UUID)
@@ -97,12 +105,20 @@ namespace SMACD.AppTree
         ///     Represents a single node in a tree, including all navigation properties
         /// </summary>
         /// <param name="identifiers">Identifiers for node</param>
-        public AppTreeNode(AppTreeNode parent, params string[] identifiers)
+        public AppTreeNode(AppTreeNode parent, params string[] identifiers) : this()
         {
             Parent = parent;
             foreach (var identifier in identifiers)
                 Identifiers.Add(identifier);
 
+            NotifyCreated();
+        }
+
+        /// <summary>
+        ///     Represents a single node in a tree, including all navigation properties
+        /// </summary>
+        public AppTreeNode()
+        {
             Children.CollectionChanged += (s, e) =>
             {
                 if (Root != null && Root.LockTreeNodes)
@@ -111,8 +127,6 @@ namespace SMACD.AppTree
                 if (e.NewItems != null && e.NewItems.Count > 0 && Root != null && ((AppTreeNode)e.NewItems[0]).Parent != null)
                     NotifyChildAdded((AppTreeNode)e.NewItems[0]);
             };
-
-            NotifyCreated();
         }
 
         /// <summary>

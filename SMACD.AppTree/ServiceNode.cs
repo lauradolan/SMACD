@@ -109,6 +109,11 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
+        ///     Represents a single service, listening on a port of a Host
+        /// </summary>
+        public ServiceNode() { }
+
+        /// <summary>
         ///     String representation of Service Port Artifact
         /// </summary>
         /// <returns></returns>

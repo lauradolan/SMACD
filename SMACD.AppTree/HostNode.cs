@@ -112,6 +112,11 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
+        ///     Represents a single host (server) involved in some part of the application
+        /// </summary>
+        public HostNode() { }
+
+        /// <summary>
         ///     String representation of host
         /// </summary>
         /// <returns></returns>

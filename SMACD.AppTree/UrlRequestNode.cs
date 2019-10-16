@@ -109,6 +109,15 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
+        ///     Represents a single request to a URL in some part of the application
+        /// </summary>
+        public UrlRequestNode()
+        {
+            Fields.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };
+            Headers.CollectionChanged += (s, e) => { if (Root != null) NotifyChanged(); };
+        }
+
+        /// <summary>
         ///     Get entire URL from all segments (assuming this item is the last URL segment)
         /// </summary>
         /// <returns></returns>

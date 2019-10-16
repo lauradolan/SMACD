@@ -48,6 +48,11 @@ namespace SMACD.AppTree
         }
 
         /// <summary>
+        ///     Represents an HTTP service accessible via a specific protocol and port
+        /// </summary>
+        public HttpServiceNode() { }
+
+        /// <summary>
         ///     String representation of HTTP Service artifact
         /// </summary>
         /// <returns></returns>
