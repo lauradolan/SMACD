@@ -114,10 +114,9 @@ namespace SMACD.AppTree
         /// <returns></returns>
         public string GetEntireUrl()
         {
-            System.Collections.Generic.List<AppTreeNode> path = GetPath();
-            HttpServiceNode service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
-            string url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
-            return $"{service.Host.Hostname}:{service.Port}/{url}";
+            var url = ((UrlNode)Parent).GetEntireUrl();
+            url += string.Join("&", Fields.Select(field => $"{field.Key}={field.Value}"));
+            return url;
         }
 
         /// <summary>

@@ -104,8 +104,8 @@ namespace SMACD.AppTree
         {
             List<AppTreeNode> path = GetPath();
             HttpServiceNode service = path.FirstOrDefault(p => p is HttpServiceNode) as HttpServiceNode;
-            string url = string.Join('/', path.Where(p => p is UrlNode).Select(n => ((UrlNode)n).UrlSegment));
-            return $"{service.Host.Hostname}:{service.Port}/{url}";
+            string url = string.Join('/', path.Where(p => p is UrlNode).Where(u => ((UrlNode)u).UrlSegment != "/").Select(n => ((UrlNode)n).UrlSegment));
+            return $"{(service.Port == 443 ? "https://" : "http://")}{service.Host.Hostname}:{service.Port}/{url}";
         }
 
         /// <summary>

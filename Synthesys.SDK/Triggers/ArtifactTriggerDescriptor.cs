@@ -1,5 +1,6 @@
 ﻿using SMACD.AppTree;
 using System;
+using System.Collections.Generic;
 
 namespace Synthesys.SDK.Triggers
 {

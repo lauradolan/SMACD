@@ -23,7 +23,7 @@ namespace Synthesys.Plugins.SQLMap
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)]
+    //[TriggeredBy("**//{UrlRequestNode}*", AppTreeNodeEvents.IsCreated)]
     public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     {
         private bool _useInLocalMode;

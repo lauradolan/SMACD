@@ -131,6 +131,7 @@ namespace Synthesys.Tasks
             foreach (SDK.Extensions.ReactionExtension extension in extensions)
             {
                 Logger.LogTrace("Processing Reaction {0}", extension.Metadata.ExtensionIdentifier);
+                extension.Configure(Artifacts, new Dictionary<string, string>());
                 Reports.Add(extension.React(trigger));
             }
         }
