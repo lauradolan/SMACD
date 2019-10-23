@@ -2,9 +2,11 @@
 using Crayon;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using SMACD.AppTree;
 using Synthesys.Helpers;
 using Synthesys.Verbs;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
@@ -21,6 +23,19 @@ namespace Synthesys
 
         private static void Main(string[] args)
         {
+            var fakeTree = new SMACD.AppTree.RootNode();
+            var host = fakeTree["127.0.0.1"] as HostNode;
+
+            host["Tcp/80"] = new HttpServiceNode(host, "Tcp/80");
+            host["Tcp/443"] = new HttpServiceNode(host, "Tcp/443");
+
+            var web = host["Tcp/443"] as HttpServiceNode;
+            web["/"]["index.php"].AddRequest("GET", new Dictionary<string, string>(), new Dictionary<string, string>());
+
+            var path = "**//{UrlNode}*";
+            var node = PathParserExtensions.GetNodeByPath(path, fakeTree);
+
+
             //┏━┓┏┳┓┏━┓┏━╸╺┳┓
             //┃  ┃┃┃┃ ┃┃   ┃┃  Synthesys Vulnerability Scanning Tool
             //┗━┓┃┃┃┣━┫┃   ┃┃  

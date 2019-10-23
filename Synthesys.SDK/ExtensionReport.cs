@@ -116,19 +116,5 @@ namespace Synthesys.SDK
         {
             return new ExtensionReport() { ErrorEncountered = ex };
         }
-
-        /// <summary>
-        ///     Finalize report by disconnecting TaskDescriptor from recursive loops
-        /// </summary>
-        /// <returns></returns>
-        public ExtensionReport FinalizeReport()
-        {
-            // TODO: Handle reattachments so we don't orphan reports away from their artifact anchors
-            //TaskDescriptor.ArtifactRoot = null;
-
-            // TODO: Anything left to finalize?
-
-            return this;
-        }
     }
 }

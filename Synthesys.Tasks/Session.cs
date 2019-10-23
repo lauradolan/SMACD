@@ -4,6 +4,7 @@ using SMACD.AppTree;
 using Synthesys.SDK;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -125,15 +126,20 @@ namespace Synthesys.Tasks
             };
         }
 
-        private void EngageTriggeredReactions(TriggerDescriptor trigger, List<ReactionExtension> extensions)
+        private void EngageTriggeredReactions(TriggerDescriptor trigger, List<Type> extensionTypes)
         {
-            if (extensions.Any())
-                Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", extensions.Count, trigger);
-            foreach (SDK.Extensions.ReactionExtension extension in extensions)
+            if (extensionTypes.Any())
+                Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", extensionTypes.Count, trigger);
+            foreach (var extensionType in extensionTypes)
             {
-                Logger.LogTrace("Processing Reaction {0}", extension.Metadata.ExtensionIdentifier);
-                extension.Configure(Artifacts, new Dictionary<string, string>());
-                Reports.Add(extension.React(trigger));
+                var extension = Activator.CreateInstance(extensionType) as ReactionExtension;
+
+                Logger.LogTrace("Enqueueing Reaction {0}", extension.Metadata.ExtensionIdentifier);
+                Tasks.Enqueue(
+                    trigger,
+                    extension.Metadata.ExtensionIdentifier,
+                    this.Artifacts,
+                    new Dictionary<string, string>()).ContinueWith(r => Reports.Add(r.Result));
             }
         }
     }

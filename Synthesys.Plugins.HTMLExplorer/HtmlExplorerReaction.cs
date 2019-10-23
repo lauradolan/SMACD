@@ -10,6 +10,7 @@ using Synthesys.Tasks.Attributes;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace Synthesys.Plugins.HTMLExplorer
 {
@@ -23,6 +24,12 @@ namespace Synthesys.Plugins.HTMLExplorer
     public class HtmlExplorerReaction : ReactionExtension, ICanQueueTasks
     {
         public ITaskToolbox Tasks { get; set; }
+
+        public override void Initialize()
+        {
+            // Register a broader set of encoding providers to handle more character sets
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
 
         public override ExtensionReport React(TriggerDescriptor trigger)
         {

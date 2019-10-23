@@ -14,6 +14,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using SMACD.Data;
+using System.Reflection;
+using Synthesys.SDK.Attributes;
 
 namespace Synthesys.Tasks
 {
@@ -22,7 +24,7 @@ namespace Synthesys.Tasks
     /// </summary>
     public class TaskToolbox : ITaskToolbox
     {
-        private const int MAXIMUM_CONCURRENT_ACTIONS = 10;
+        private const int MAXIMUM_CONCURRENT_ACTIONS = 5;
 
         private ConcurrentQueue<RuntimeTaskDescriptor> QueuedTasks { get; } =
             new ConcurrentQueue<RuntimeTaskDescriptor>();
@@ -66,115 +68,160 @@ namespace Synthesys.Tasks
         public ServiceMapFile ServiceMap { get; set; }
 
         /// <summary>
-        ///     Enqueue a Task based on its Descriptor
+        ///     Enqueue a ReactionExtension based on its Descriptor
+        /// </summary>
+        /// <param name="trigger">Trigger creating the Reaction</param>
+        /// <param name="extensionIdentifier">ReactionExtension identifier</param>
+        /// <param name="rootNode">Root of AppTree</param>
+        /// <param name="options">Reaction options</param>
+        /// <param name="serviceMapItemPtr">Pointer to element in Service Map which queued the Extension</param>
+        /// <returns>Task which resolves to the Action-Specific Report</returns>
+        public Task<ExtensionReport> Enqueue(TriggerDescriptor trigger, string extensionIdentifier, RootNode rootNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+        {
+            if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ReactionExtensions.Any(e => e.Value.Any(t => t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionIdentifier))))
+            {
+                return null;
+            }
+
+            var task = GetTaskDescriptor(
+                ExtensionToolbox.Instance.EmitReaction(extensionIdentifier), 
+                rootNode, 
+                options, 
+                trigger,
+                serviceMapItemPtr);
+            QueuedTasks.Enqueue(task);
+            RuntimeManagerStackProcessingLoop();
+            return task.Task;
+        }
+
+        /// <summary>
+        ///     Enqueue an ActionExtension based on its Descriptor
         /// </summary>
         /// <param name="extensionIdentifier">Extension identifier</param>
-        /// <param name="rootArtifact">Root app tree node for extension</param>
+        /// <param name="appTreeNode">Root app tree node for extension</param>
         /// <param name="options">Action options</param>
         /// <param name="serviceMapItemPtr">Pointer to element in Service Map which queued the Extension</param>
         /// <returns>Task which resolves to the Action-Specific Report</returns>
-        public Task<List<ExtensionReport>> Enqueue(string extensionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+        public Task<ExtensionReport> Enqueue(string extensionIdentifier, AppTreeNode appTreeNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
         {
             if (!ExtensionToolbox.Instance.ExtensionLibraries.Any(l => l.ActionExtensions.Any(e => e.Key == extensionIdentifier)))
             {
                 return null;
             }
 
-            ActionExtension actionExtension = ExtensionToolbox.Instance.EmitAction(extensionIdentifier).Configure(rootArtifact, options) as ActionExtension;
-            ApplyExtensionIntegrations(actionExtension, serviceMapItemPtr);
+            var task = GetTaskDescriptor(
+                ExtensionToolbox.Instance.EmitAction(extensionIdentifier), 
+                appTreeNode, 
+                options,
+                null,
+                serviceMapItemPtr);
 
-            if (ServiceMap != null && !IsExtensionAllowed(ServiceMap.EnvironmentSettings, actionExtension.Metadata.ExtensionIdentifier))
+            QueuedTasks.Enqueue(task);
+            RuntimeManagerStackProcessingLoop();
+            return task.Task;
+        }
+
+        /// <summary>
+        ///     Create a RuntimeTaskDescriptor with a Task configured to execute a given Extension by its identifier
+        /// </summary>
+        /// <param name="extensionIdentifier">Extension identifier to resolve</param>
+        /// <param name="appTreeNode">AppTreeNode to pass into Extension</param>
+        /// <param name="options">Options to pass</param>
+        /// <param name="serviceMapItemPtr">Pointer to item in Service Map causing this execution</param>
+        /// <returns></returns>
+        private RuntimeTaskDescriptor GetTaskDescriptor(Extension extension, AppTreeNode appTreeNode, Dictionary<string, string> options, TriggerDescriptor trigger = null, ProjectPointer serviceMapItemPtr = null)
+        { 
+            // Configures all [Configurable], applies AppTreeNodes to their strong types, and adds RootNodes where needed
+            extension = extension.Configure(appTreeNode, options);
+
+            // Adds system integrations, such as Service Map awareness and Task queueing
+            ApplyExtensionIntegrations(extension, serviceMapItemPtr);
+
+            RuntimeTaskDescriptor runtimeTaskDescriptor = new RuntimeTaskDescriptor() { Artifact = appTreeNode, Extension = extension, Trigger = trigger };
+            if (ServiceMap != null && !IsExtensionAllowed(ServiceMap.EnvironmentSettings, extension.Metadata.ExtensionIdentifier))
             {
-                Logger.LogWarning("Attempted to enqueue ActionExtension {0} but was blocked by a white/blacklist rule", actionExtension.Metadata.ExtensionIdentifier);
-                return Task.FromResult(new List<ExtensionReport>());
+                Logger.LogWarning("Attempted to enqueue Extension {0} but was blocked by a whitelist/blacklist rule", extension.Metadata.ExtensionIdentifier);
+                runtimeTaskDescriptor.Task = Task.FromResult(ExtensionReport.Error(new InvalidOperationException("Blocked by whitelist/blacklist rule")));
             }
-
-            RuntimeTaskDescriptor runtimeTaskDescriptor = new RuntimeTaskDescriptor() { Artifact = rootArtifact, Extension = actionExtension };
-            runtimeTaskDescriptor.Task = new Task<List<ExtensionReport>>(() =>
+            else
             {
-                TaskStarted?.Invoke(this, runtimeTaskDescriptor);
-                List<ExtensionReport> reports = new List<ExtensionReport>();
-                bool succeeded = false;
-                Stopwatch sw = new Stopwatch();
-                try
+                runtimeTaskDescriptor.Task = new Task<ExtensionReport>(() =>
                 {
-                    sw.Start();
-
-                    if (actionExtension == null)
-                    {
-                        Logger.LogCritical("Requested Action {0} is not loaded in system!", extensionIdentifier);
-                        reports.Add(ExtensionReport.Error(
-                            new Exception($"Requested Action {extensionIdentifier} is not loaded in system!")));
-                    }
-                    else
-                    {
-                        reports.Add(actionExtension.Act());
-                    }
-
-                    sw.Stop();
-
-                    succeeded = true;
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogCritical(ex, "Error running Action (from harness)");
-                    TaskFaulted?.Invoke(this, runtimeTaskDescriptor);
-                    reports.Add(ExtensionReport.Error(ex));
-                }
-
-                TaskCompleted?.Invoke(this, runtimeTaskDescriptor);
-                RunningTasks.TryRemove(runtimeTaskDescriptor, out bool dummy);
-                TotalCompletedTasks++;
-
-                // If the Action was resolved, run any Triggers
-                if (actionExtension != null)
-                {
-                    List<ReactionExtension> reactions = new List<ReactionExtension>();
+                    var report = ExecuteExtension(runtimeTaskDescriptor);
 
                     // create Trigger description from event condition
                     var trigger = TriggerDescriptor.ExtensionTrigger(
-                        extensionIdentifier,
-                        succeeded ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails);
+                            extension.Metadata.ExtensionIdentifier,
+                            report.ErrorEncountered == null ? ExtensionConditionTrigger.Succeeds : ExtensionConditionTrigger.Fails);
 
-                    reactions.AddRange(ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(trigger));
-                    Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", reactions.Count, trigger);
-
-                    foreach (var reaction in reactions)
-                    {
-                        if (ServiceMap != null && !IsExtensionAllowed(ServiceMap.EnvironmentSettings, reaction.Metadata.ExtensionIdentifier))
-                        {
-                            Logger.LogInformation("ReactionExtension {0} was attempted to be queued from Trigger {1} but was blocked by a white/blacklist rule", reaction.Metadata.ExtensionIdentifier, trigger);
-                            continue;
-                        }
-                        else
-                            Logger.LogTrace("Executing Reaction {0}", reaction.Metadata.ExtensionIdentifier);
-
-                        // todo: reaction options?
-                        var configuredReaction = reaction.Configure(rootArtifact, new Dictionary<string, string>()) as ReactionExtension;
-                        ApplyExtensionIntegrations(configuredReaction, serviceMapItemPtr);
-
-                        var report = configuredReaction.React(trigger);
-                        report.ExtensionIdentifier = configuredReaction.Metadata.ExtensionIdentifier;
-
-                        reports.Add(report);
-                    }
-                }
-
-                reports.ForEach(r =>
-                {
-                    r.Runtime = sw.Elapsed;
-                    r.AffectedArtifactPaths.Add(rootArtifact.GetUUIDPath());
-                });
-
-                return reports;
-            });
-
-            QueuedTasks.Enqueue(runtimeTaskDescriptor);
-            RuntimeManagerStackProcessingLoop();
-
-            return runtimeTaskDescriptor.Task;
+                    QueueReactions(trigger, appTreeNode is RootNode ? appTreeNode as RootNode : appTreeNode.Root, serviceMapItemPtr);
+                    return report;
+                }, TaskCreationOptions.LongRunning);
+            }
+            return runtimeTaskDescriptor;
         }
 
+        /// <summary>
+        ///     Execute the Task body of a queued Extension
+        /// </summary>
+        /// <param name="runtimeTaskDescriptor">Task descriptor</param>
+        /// <returns></returns>
+        private ExtensionReport ExecuteExtension(RuntimeTaskDescriptor runtimeTaskDescriptor)
+        {
+            var extension = runtimeTaskDescriptor.Extension;
+            TaskStarted?.Invoke(this, runtimeTaskDescriptor);
+            ExtensionReport report = ExtensionReport.Blank();
+            Stopwatch sw = new Stopwatch();
+            try
+            {
+                sw.Start();
+
+                if (extension is ActionExtension)
+                    report = ((ActionExtension)extension).Act();
+                else
+                    report = ((ReactionExtension)extension).React(runtimeTaskDescriptor.Trigger);
+
+                sw.Stop();
+
+                report.ExtensionIdentifier = extension.Metadata.ExtensionIdentifier;
+                report.AffectedArtifactPaths = new List<string>() { runtimeTaskDescriptor.Artifact.GetUUIDPath() };
+            }
+            catch (Exception ex)
+            {
+                Logger.LogCritical(ex, "Error running Action (from harness)");
+                TaskFaulted?.Invoke(this, runtimeTaskDescriptor);
+                report = ExtensionReport.Error(ex);
+            }
+
+            TaskCompleted?.Invoke(this, runtimeTaskDescriptor);
+            RunningTasks.TryRemove(runtimeTaskDescriptor, out var _);
+            TotalCompletedTasks++;
+
+            return report;
+        }
+
+        /// <summary>
+        ///     Queue Reactions which occurred as the result of a given Trigger
+        /// </summary>
+        /// <param name="trigger">Trigger which executed the Reaction</param>
+        /// <param name="rootNode">Root node of AppTree</param>
+        /// <param name="projectPointer">Pointer to Service Map location originating the Action causing this</param>
+        private void QueueReactions(TriggerDescriptor trigger, RootNode rootNode, ProjectPointer projectPointer)
+        {
+            var reactions = ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(trigger);
+            Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", reactions.Count, trigger);
+
+            foreach (var reaction in reactions)
+            {
+                var metadata = reaction.GetCustomAttribute<ExtensionAttribute>();
+                Logger.LogTrace("Attempting to queue Reaction {0}", metadata.ExtensionIdentifier);
+                Enqueue(trigger, metadata.ExtensionIdentifier, rootNode, new Dictionary<string, string>(), projectPointer);
+            }
+        }
+
+        /// <summary>
+        ///     Run stack processing loop for Tasks
+        /// </summary>
         private void RuntimeManagerStackProcessingLoop()
         {
             if (TaskManagerWorker != null)
@@ -220,7 +267,7 @@ namespace Synthesys.Tasks
 
                     QueuedTasks.TryDequeue(out var task);
                     RunningTasks.TryAdd(task, false);
-                    task.Task.Start();
+                    task.Task.Start(TaskScheduler.Default);
                 }
             });
         }
@@ -246,6 +293,12 @@ namespace Synthesys.Tasks
             }
         }
 
+        /// <summary>
+        ///     Check if Extension can be executed based on permissiveness
+        /// </summary>
+        /// <param name="environmentSettings">Environment settings</param>
+        /// <param name="extensionIdentifier">Extension identifier</param>
+        /// <returns></returns>
         private static bool IsExtensionAllowed(EnvironmentSettings environmentSettings, string extensionIdentifier)
         {
             var regexTest = "^" + Regex.Escape(extensionIdentifier).Replace("\\?", ".").Replace("\\*", ".*") + "$";

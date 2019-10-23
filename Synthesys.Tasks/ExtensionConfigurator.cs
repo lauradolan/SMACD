@@ -104,6 +104,15 @@ namespace Synthesys.Tasks
 
             foreach (PropertyInfo artifactProperty in artifactProperties)
             {
+                if (artifactProperty.PropertyType == typeof(RootNode))
+                {
+                    if (resourceArtifact is RootNode)
+                        artifactProperty.SetValue(extensionInstance, resourceArtifact);
+                    else
+                        artifactProperty.SetValue(extensionInstance, resourceArtifact.Root);
+                    continue;
+                }
+
                 AppTreeNode value = null;
                 value = resourceArtifact.GetPath()
                     .FirstOrDefault(a => a.GetType() == artifactProperty.PropertyType);

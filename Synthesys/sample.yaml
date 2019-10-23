@@ -17,12 +17,16 @@ features:
       description: This is the first abuse case for the first use case for the first feature!
       actions:
       - action: owaspzap
-        target: acunetix_sample
+        target: resourceRoot
+      - action: nmap
+        target: resourceRoot
+      - action: nikto
+        target: resourceRoot
 targets:
 - !http
   targetId: resourceRoot
   method: get
-  url: http://holomatrix.tomahna.net:1234
+  url: http://holomatrix.tomahna.net:32775
 - !http
   targetId: acunetix_sample
   url: http://testphp.vulnweb.com/

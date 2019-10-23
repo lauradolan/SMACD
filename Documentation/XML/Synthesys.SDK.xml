@@ -261,12 +261,6 @@
             <param name="ex">Exception generated</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.ExtensionReport.FinalizeReport">
-            <summary>
-                Finalize report by disconnecting TaskDescriptor from recursive loops
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Synthesys.SDK.Extensions.ActionExtension">
             <summary>
                 An ActionExtension is generated from known information about a system. ActionExtensions are imported into the

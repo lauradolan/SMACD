@@ -1,6 +1,8 @@
 ﻿<div class="d-sm-flex justify-content-between align-items-center mb-4">
     <h3 class="text-dark mb-0">URL Segment - @UrlArtifact.GetEntireUrl()</h3><i class="fas da-2x fa-plug"></i>
 </div>
+@if (UrlArtifact.ChildrenAre<UrlNode>().Any())
+{
 <div class="row">
     <div class="col">
         <div class="card shadow mb-4">
@@ -21,7 +23,10 @@
         </div>
     </div>
 </div>
+}
 
+@if (UrlArtifact.ChildrenAre<UrlRequestNode>().Any())
+{
 <div class="row">
     <div class="col">
         <div class="card shadow mb-4">
@@ -32,14 +37,21 @@
                 <ul class="list-group">
                     @foreach (var item in UrlArtifact.ChildrenAre<UrlRequestNode>())
                     {
-                        <li class="list-group-item">
-                            <i class="fa fa-puzzle" style="margin-right: 0.25em;"></i>
-                            <ul>
-                                @foreach (var kvp in item.Fields)
+                        <li>
+                            @if (item.Fields.Any())
+                            {
+                                @foreach (var field in item.Fields)
                                 {
-                                    <li><strong>@kvp.Key</strong> - @kvp.Value</li>
+                                    <div>
+                                        <i class="fa fa-puzzle-piece" style="margin-right: 0.25em;"></i>
+                                        <strong>@field.Key</strong> &rArr; @field.Value
+                                    </div>
                                 }
-                            </ul>
+                            }
+                            else
+                            {
+                                <p>No field information was sent.</p>
+                            }
                         </li>
                     }
                 </ul>
@@ -47,6 +59,7 @@
         </div>
     </div>
 </div>
+}
 
 <div class="row">
     <div class="col">

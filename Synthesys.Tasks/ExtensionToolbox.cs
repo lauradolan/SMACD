@@ -51,8 +51,9 @@ namespace Synthesys.Tasks
             }
             else
             {
-                return EmitReaction(_extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
-                    t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionId)).FirstOrDefault(i => i != null));
+                var reactionType = _extensionLibraries.Select(l => l.ProvidedTypes.FirstOrDefault(t =>
+                    t.GetCustomAttribute<ExtensionAttribute>()?.ExtensionIdentifier == extensionId)).FirstOrDefault(i => i != null);
+                return Activator.CreateInstance(reactionType) as ReactionExtension;
             }
         }
 
@@ -118,17 +119,36 @@ namespace Synthesys.Tasks
         }
 
         /// <summary>
+        ///     Emit a ReactionExtension
+        /// </summary>
+        /// <param name="extensionIdentifier">Reaction identifier</param>
+        /// <returns></returns>
+        public ReactionExtension EmitReaction(string extensionIdentifier)
+        {
+            if (!_reactionExtensionMap.Any(r => r.Value.Any(t => t.GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier == extensionIdentifier)))
+            {
+                Logger.LogCritical("Requested Emit for Reaction Identifier '{0}' which does not exist",
+                    extensionIdentifier);
+                return null;
+            }
+
+            var target = _reactionExtensionMap.First(r => r.Value.Any(t => t.GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier == extensionIdentifier));
+            var type = target.Value.First(v => v.GetCustomAttribute<ExtensionAttribute>().ExtensionIdentifier == extensionIdentifier);
+            return (ReactionExtension)Activator.CreateInstance(type);
+        }
+
+        /// <summary>
         ///     Get a list of ReactionExtensions triggered by an action performed on a given Artifact node
         /// </summary>
         /// <param name="appTreeNode">Node causing the trigger</param>
         /// <param name="trigger">Trigger action type</param>
         /// <returns></returns>
-        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(AppTreeNode appTreeNode,
+        public List<Type> GetReactionExtensionsTriggeredBy(AppTreeNode appTreeNode,
             AppTreeNodeEvents trigger) =>
                 _reactionExtensionMap
                     .Where(e => e.Key is ArtifactTriggerDescriptor)
                     .Where(e => appTreeNode.IsDescribedByPath(((ArtifactTriggerDescriptor)e.Key).NodePath))
-                    .SelectMany(m => m.Value.Select(EmitReaction))
+                    .SelectMany(m => m.Value)
                     .ToList();
 
         /// <summary>
@@ -137,13 +157,13 @@ namespace Synthesys.Tasks
         /// <param name="triggeringExtension">Extension causing the trigger</param>
         /// <param name="trigger">Trigger execution state condition</param>
         /// <returns></returns>
-        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(Extension triggeringExtension,
+        public List<Type> GetReactionExtensionsTriggeredBy(Extension triggeringExtension,
             ExtensionConditionTrigger trigger) =>
                 _reactionExtensionMap
                     .Where(e => e.Key is ExtensionTriggerDescriptor)
                     .Where(e => ((ExtensionTriggerDescriptor)e.Key).ExtensionIdentifier == triggeringExtension.Metadata.ExtensionIdentifier)
                     .Where(e => ((ExtensionTriggerDescriptor)e.Key).Trigger == trigger)
-                    .SelectMany(m => m.Value.Select(EmitReaction))
+                    .SelectMany(m => m.Value)
                     .ToList();
 
         /// <summary>
@@ -151,11 +171,11 @@ namespace Synthesys.Tasks
         /// </summary>
         /// <param name="triggeringEvent">System event causing the trigger</param>
         /// <returns></returns>
-        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(SystemEvents triggeringEvent) =>
+        public List<Type> GetReactionExtensionsTriggeredBy(SystemEvents triggeringEvent) =>
                 _reactionExtensionMap
                     .Where(e => e.Key is SystemEventTriggerDescriptor)
                     .Where(e => ((SystemEventTriggerDescriptor)e.Key).SystemEvent == triggeringEvent)
-                    .SelectMany(m => m.Value.Select(EmitReaction))
+                    .SelectMany(m => m.Value)
                     .ToList();
 
         /// <summary>
@@ -165,22 +185,12 @@ namespace Synthesys.Tasks
         /// </summary>
         /// <param name="trigger">Trigger description of event</param>
         /// <returns></returns>
-        public List<ReactionExtension> GetReactionExtensionsTriggeredBy(TriggerDescriptor trigger)
+        public List<Type> GetReactionExtensionsTriggeredBy(TriggerDescriptor trigger)
         {
             return _reactionExtensionMap
                 .Where(m => m.Key == trigger)
-                .SelectMany(m => m.Value.Select(EmitReaction))
+                .SelectMany(m => m.Value)
                 .ToList();
-        }
-
-        /// <summary>
-        ///     Emit a non-contextualized instance of a ReactionExtension (expects Type to exist and inherit from ReactionExtension)
-        /// </summary>
-        /// <param name="type">ReactionExtension Type</param>
-        /// <returns></returns>
-        private ReactionExtension EmitReaction(Type type)
-        {
-            return (ReactionExtension)Activator.CreateInstance(type);
         }
     }
 }

@@ -91,7 +91,7 @@ namespace Synthesys.Verbs
             // Apply Service Map to TaskToolbox to be included in some Extensions
             session.Tasks.ServiceMap = serviceMap;
 
-            List<Task<List<ExtensionReport>>> generatedTasks = new List<Task<List<ExtensionReport>>>();
+            List<Task<ExtensionReport>> generatedTasks = new List<Task<ExtensionReport>>();
 
             // Queue all tasks if constraints are not specified
             if (string.IsNullOrEmpty(Feature) && string.IsNullOrEmpty(UseCase))
@@ -190,7 +190,7 @@ namespace Synthesys.Verbs
                 Thread.Sleep(500);
             }
 
-            IEnumerable<ExtensionReport> results = generatedTasks.SelectMany(t => t.Result.Select(r => r.FinalizeReport()));
+            IEnumerable<ExtensionReport> results = generatedTasks.Select(t => t.Result);
             session.Reports.AddRange(results);
 
             using (FileStream stream = new FileStream(SessionFile, FileMode.OpenOrCreate,
@@ -228,7 +228,7 @@ namespace Synthesys.Verbs
             return Task.FromResult(0);
         }
 
-        private Task<List<ExtensionReport>> QueueTasksFrom(Session session, ServiceMapFile serviceMap, ProjectPointer projectPointer, ActionPointerModel pluginPointer)
+        private Task<ExtensionReport> QueueTasksFrom(Session session, ServiceMapFile serviceMap, ProjectPointer projectPointer, ActionPointerModel pluginPointer)
         {
             TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
 

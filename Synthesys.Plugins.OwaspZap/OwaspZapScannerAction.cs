@@ -75,6 +75,8 @@ namespace Synthesys.Plugins.OwaspZap
             };
             report.SetExtensionSpecificReport(jsonReport);
 
+
+
             return report;
         }
 
