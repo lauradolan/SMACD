@@ -290,7 +290,7 @@ namespace Synthesys.SDK.HostCommands
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Error detecting Container from Docker daemon!");
+                    Logger.LogError(ex, "Error detecting Container from Docker daemon!");
                     Thread.Sleep(1000);
                 }
             }
@@ -321,7 +321,6 @@ namespace Synthesys.SDK.HostCommands
                         if (size > 0)
                         {
                             var buffer = new byte[size];
-                            var ptr = 0;
                             var bytesRead = 0;
                             cts = new CancellationTokenSource(1000);
                             while (bytesRead < size)

@@ -231,11 +231,8 @@ namespace Synthesys.Tasks
 
             TaskManagerWorker = Task.Run(() =>
             {
-                // Assume console width of 80 chars, assume logger prefix takes up 20 chars = 60 chars
-                var totalWidth = 60;
                 var headerText = "=[RUNNING TASKS]=";
                 
-
                 var lastLog = DateTime.Now;
                 while (IsRunning)
                 {

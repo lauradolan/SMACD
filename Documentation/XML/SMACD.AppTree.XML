@@ -765,6 +765,68 @@
             <param name="key">The key.</param>
             <returns></returns>
         </member>
+        <member name="T:SMACD.AppTree.PathGeneration">
+            <summary>
+                A single Generation of Paths which matched the requested address
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.Path">
+            <summary>
+                Path being tested
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.PathSegmentIndex">
+            <summary>
+                Index of segment within Path which matched for this Generation
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.PathSegment">
+            <summary>
+                Segment which matched for this Generation
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.MatchingNode">
+            <summary>
+                AppTreeNode linked to Generation
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.Children">
+            <summary>
+                Nodes which matched in the next Generation
+            </summary>
+        </member>
+        <member name="P:SMACD.AppTree.PathGeneration.IsResultNode">
+            <summary>
+                If the node is matching the Path
+            </summary>
+        </member>
+        <member name="M:SMACD.AppTree.PathGeneration.GetResultNodes">
+            <summary>
+                Retrieve all the nodes within this Path Generation set which are matched by the requested Path
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.AppTree.PathParserExtensions">
+            <summary>
+                Extensions to parse string Paths into Nodes
+            </summary>
+        </member>
+        <member name="M:SMACD.AppTree.PathParserExtensions.NodeMeetsConstraints(System.String,SMACD.AppTree.AppTreeNode)">
+            <summary>
+                If a Node meets the constraints of a provided path segment
+            </summary>
+            <param name="pathSegment">Path segment</param>
+            <param name="node">Node to test</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.AppTree.PathParserExtensions.GetNodeByPath(System.String,SMACD.AppTree.RootNode)">
+            <summary>
+                Get a Node Path by its string path, provided a Root node
+            </summary>
+            <param name="path">Path to node(s)</param>
+            <param name="root">Root node to search from</param>
+            <returns></returns>
+        </member>
         <member name="T:SMACD.AppTree.ProjectPointer">
             <summary>
                 Describes a location in a Service Map which precipitated an event

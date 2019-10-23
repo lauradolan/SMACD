@@ -26,7 +26,6 @@ namespace Synthesys.Plugins.SQLMap
     //[TriggeredBy("**//{UrlRequestNode}*", AppTreeNodeEvents.IsCreated)]
     public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     {
-        private bool _useInLocalMode;
         public ITaskToolbox Tasks { get; set; }
 
         public override ExtensionReport React(TriggerDescriptor trigger)

@@ -5,16 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace SMACD.AppTree
 {
-    public class PathGeneration
-    {
-        public string Path { get; set; }
-        public int PathSegmentIndex { get; set; }
-        public string PathSegment => Path.Split(PathParserExtensions.PATH_SEPARATOR)[PathSegmentIndex];
-
-        public AppTreeNode MatchingNode { get; set; }
-        public List<PathGeneration> Children { get; set; } = new List<PathGeneration>();
-    }
-
+    /// <summary>
+    ///     Extensions to parse string Paths into Nodes
+    /// </summary>
     public static class PathParserExtensions
     {
         internal const string PATH_SEPARATOR = "//";
@@ -46,48 +39,77 @@ namespace SMACD.AppTree
             return true; // must be a wildcard
         }
 
+        /// <summary>
+        ///     If a Node meets the constraints of a provided path segment
+        /// </summary>
+        /// <param name="pathSegment">Path segment</param>
+        /// <param name="node">Node to test</param>
+        /// <returns></returns>
         public static bool NodeMeetsConstraints(this string pathSegment, AppTreeNode node) =>
             (HasTypeConstraint(pathSegment) ? NodeMeetsTypeConstraint(pathSegment, node) : true) &&
             (NodeMeetsNameConstraint(GetName(pathSegment), node));
 
+        /// <summary>
+        ///     Get a Node Path by its string path, provided a Root node
+        /// </summary>
+        /// <param name="path">Path to node(s)</param>
+        /// <param name="root">Root node to search from</param>
+        /// <returns></returns>
         public static PathGeneration GetNodeByPath(this string path, RootNode root)
         {
-            return GetGeneration(root, path.Split(PATH_SEPARATOR).ToList(), 0);
+            return GetGeneration(root, path.Split(PATH_SEPARATOR).Where(p => !string.IsNullOrEmpty(p)).ToList(), 0);
         }
         private static PathGeneration GetGeneration(AppTreeNode node, List<string> segments, int index)
         {
-            int newIndex = index;
-            if (HasAnyConstraint(segments[index]) || NodeMeetsConstraints(segments[index+1], node))
-                newIndex = index + 1;
-            else if (GetNameWithoutTypeConstraint(segments[index]) == N_GENERATION_WILDCARD)
-                newIndex = index;
-
-            // todo: how to handle when **//{UrlNode}* has {UrlNode} underneath? (i.e. ** is preferred when specific matches better)
-            // -- do it by length? ... if there are more nodes to process than there are path elements remaining then prefer **?
-
-            // host//service//urlnode//urlnode//urlrequest
-            // **//{UrlNode}*
-
-            // host ** // service ** // urlnode {UrlNode}* // urlnode ...?
-            // if moving from ** to specific, traverse into the next node once for itself, once as **
-
-            if (newIndex > segments.Count-1)
-                return null;
-
             var generation = new PathGeneration()
             {
                 MatchingNode = node,
                 Path = string.Join(PATH_SEPARATOR, segments),
-                PathSegmentIndex = newIndex
+                PathSegmentIndex = index
             };
 
-            var children = node.Children.Where(c => NodeMeetsConstraints(segments[newIndex], c));
+            var nextIndex = 0;
+            if (HasAnyConstraint(segments[index]) && NodeMeetsConstraints(segments[index], node))
+            {
+                // has constraints which match, advance to children (won't be wildcard here)
+                nextIndex = index + 1;
+            }
+            if (index < segments.Count && !HasAnyConstraint(segments[index]) && HasAnyConstraint(segments[index + 1]) && NodeMeetsConstraints(segments[index + 1], node))
+            {
+                // transitioning from ** to constrained (and met)
+                nextIndex = index + 1;
+            }
+            else if (!HasAnyConstraint(segments[index]))
+            {
+                // wildcard, don't advance ptr
+                nextIndex = index;
+            }
+
+            if (nextIndex == segments.Count && NodeMeetsConstraints(segments[index], node))
+            {
+                // no more path segments after this, if constraints are met this is successful
+                generation.IsResultNode = true;
+            }
+            else if (!HasAnyConstraint(segments[index]) && nextIndex == segments.Count - 1 && NodeMeetsConstraints(segments[index + 1], node))
+            {
+                // currently inside wildcard but last (next) path segment matches this node
+                generation.IsResultNode = true;
+            }
+
+            if (index + 1 == segments.Count)
+            {
+                if (generation.IsResultNode)
+                    return generation;
+                return null;
+            }
+
+            var children = node.Children.Where(c => NodeMeetsConstraints(segments[nextIndex], c));
             if (!children.Any() && segments.Count > index)
                 return null;
 
             foreach (var child in children)
             {
-                var newGeneration = GetGeneration(child, segments, newIndex);
+                var newGeneration = GetGeneration(child, segments, nextIndex);
                 if (newGeneration != null)
                     generation.Children.Add(newGeneration);
             }
