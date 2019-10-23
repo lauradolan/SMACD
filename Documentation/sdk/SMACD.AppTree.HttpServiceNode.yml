@@ -5,6 +5,8 @@ items:
   id: HttpServiceNode
   parent: SMACD.AppTree
   children:
+  - SMACD.AppTree.HttpServiceNode.#ctor
+  - SMACD.AppTree.HttpServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
   - SMACD.AppTree.HttpServiceNode.Detail
   - SMACD.AppTree.HttpServiceNode.Item(System.String)
   - SMACD.AppTree.HttpServiceNode.NodeViewName
@@ -205,6 +207,80 @@ items:
   - ReadOnly
   fullName.vb: SMACD.AppTree.HttpServiceNode.Item(System.String)
   name.vb: Item(String)
+- uid: SMACD.AppTree.HttpServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
+  commentId: M:SMACD.AppTree.HttpServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
+  id: '#ctor(SMACD.AppTree.HostNode,System.String[])'
+  parent: SMACD.AppTree.HttpServiceNode
+  langs:
+  - csharp
+  - vb
+  name: HttpServiceNode(HostNode, String[])
+  nameWithType: HttpServiceNode.HttpServiceNode(HostNode, String[])
+  fullName: SMACD.AppTree.HttpServiceNode.HttpServiceNode(SMACD.AppTree.HostNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/HttpServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/HttpServiceNode.cs
+    startLine: 45
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents an HTTP service accessible via a specific protocol and port\n"
+  example: []
+  syntax:
+    content: public HttpServiceNode(HostNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.HostNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers for node
+    content.vb: Public Sub New(parent As HostNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.HttpServiceNode.#ctor*
+  nameWithType.vb: HttpServiceNode.HttpServiceNode(HostNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.HttpServiceNode.HttpServiceNode(SMACD.AppTree.HostNode, System.String())
+  name.vb: HttpServiceNode(HostNode, String())
+- uid: SMACD.AppTree.HttpServiceNode.#ctor
+  commentId: M:SMACD.AppTree.HttpServiceNode.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.HttpServiceNode
+  langs:
+  - csharp
+  - vb
+  name: HttpServiceNode()
+  nameWithType: HttpServiceNode.HttpServiceNode()
+  fullName: SMACD.AppTree.HttpServiceNode.HttpServiceNode()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/HttpServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/HttpServiceNode.cs
+    startLine: 52
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents an HTTP service accessible via a specific protocol and port\n"
+  example: []
+  syntax:
+    content: public HttpServiceNode()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.HttpServiceNode.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.HttpServiceNode.ToString
   commentId: M:SMACD.AppTree.HttpServiceNode.ToString
   id: ToString
@@ -223,7 +299,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../SMACD.AppTree/HttpServiceNode.cs
-    startLine: 45
+    startLine: 58
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1397,6 +1473,43 @@ references:
   name: UrlNode
   nameWithType: UrlNode
   fullName: SMACD.AppTree.UrlNode
+- uid: SMACD.AppTree.HttpServiceNode.#ctor*
+  commentId: Overload:SMACD.AppTree.HttpServiceNode.#ctor
+  name: HttpServiceNode
+  nameWithType: HttpServiceNode.HttpServiceNode
+  fullName: SMACD.AppTree.HttpServiceNode.HttpServiceNode
+- uid: SMACD.AppTree.HostNode
+  commentId: T:SMACD.AppTree.HostNode
+  parent: SMACD.AppTree
+  name: HostNode
+  nameWithType: HostNode
+  fullName: SMACD.AppTree.HostNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: SMACD.AppTree.ServiceNode.ToString
   commentId: M:SMACD.AppTree.ServiceNode.ToString
   parent: SMACD.AppTree.ServiceNode

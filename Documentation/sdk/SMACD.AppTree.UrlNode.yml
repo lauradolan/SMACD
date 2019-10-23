@@ -5,6 +5,8 @@ items:
   id: UrlNode
   parent: SMACD.AppTree
   children:
+  - SMACD.AppTree.UrlNode.#ctor
+  - SMACD.AppTree.UrlNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
   - SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
   - SMACD.AppTree.UrlNode.Detail
   - SMACD.AppTree.UrlNode.GetEntireUrl
@@ -315,6 +317,80 @@ items:
   - ReadOnly
   fullName.vb: SMACD.AppTree.UrlNode.Item(System.String)
   name.vb: Item(String)
+- uid: SMACD.AppTree.UrlNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
+  commentId: M:SMACD.AppTree.UrlNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
+  id: '#ctor(SMACD.AppTree.AppTreeNode,System.String[])'
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: UrlNode(AppTreeNode, String[])
+  nameWithType: UrlNode.UrlNode(AppTreeNode, String[])
+  fullName: SMACD.AppTree.UrlNode.UrlNode(SMACD.AppTree.AppTreeNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 62
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single URL segment (directory or file) in some part of the application\n"
+  example: []
+  syntax:
+    content: public UrlNode(AppTreeNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.AppTreeNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers for node
+    content.vb: Public Sub New(parent As AppTreeNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.UrlNode.#ctor*
+  nameWithType.vb: UrlNode.UrlNode(AppTreeNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.UrlNode.UrlNode(SMACD.AppTree.AppTreeNode, System.String())
+  name.vb: UrlNode(AppTreeNode, String())
+- uid: SMACD.AppTree.UrlNode.#ctor
+  commentId: M:SMACD.AppTree.UrlNode.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: UrlNode()
+  nameWithType: UrlNode.UrlNode()
+  fullName: SMACD.AppTree.UrlNode.UrlNode()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 69
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single URL segment (directory or file) in some part of the application\n"
+  example: []
+  syntax:
+    content: public UrlNode()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.UrlNode.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
   commentId: M:SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
   id: AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
@@ -333,7 +409,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: AddRequest
     path: ../SMACD.AppTree/UrlNode.cs
-    startLine: 63
+    startLine: 77
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -380,7 +456,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetEntireUrl
     path: ../SMACD.AppTree/UrlNode.cs
-    startLine: 85
+    startLine: 107
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -415,7 +491,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../SMACD.AppTree/UrlNode.cs
-    startLine: 97
+    startLine: 119
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1628,6 +1704,37 @@ references:
   name: UrlNode
   nameWithType: UrlNode
   fullName: SMACD.AppTree.UrlNode
+- uid: SMACD.AppTree.UrlNode.#ctor*
+  commentId: Overload:SMACD.AppTree.UrlNode.#ctor
+  name: UrlNode
+  nameWithType: UrlNode.UrlNode
+  fullName: SMACD.AppTree.UrlNode.UrlNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: SMACD.AppTree.UrlNode.AddRequest*
   commentId: Overload:SMACD.AppTree.UrlNode.AddRequest
   name: AddRequest

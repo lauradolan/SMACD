@@ -5,6 +5,8 @@ items:
   id: ServiceNode
   parent: SMACD.AppTree
   children:
+  - SMACD.AppTree.ServiceNode.#ctor
+  - SMACD.AppTree.ServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
   - SMACD.AppTree.ServiceNode.Detail
   - SMACD.AppTree.ServiceNode.Host
   - SMACD.AppTree.ServiceNode.NodeViewName
@@ -308,6 +310,80 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: SMACD.AppTree.ServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
+  commentId: M:SMACD.AppTree.ServiceNode.#ctor(SMACD.AppTree.HostNode,System.String[])
+  id: '#ctor(SMACD.AppTree.HostNode,System.String[])'
+  parent: SMACD.AppTree.ServiceNode
+  langs:
+  - csharp
+  - vb
+  name: ServiceNode(HostNode, String[])
+  nameWithType: ServiceNode.ServiceNode(HostNode, String[])
+  fullName: SMACD.AppTree.ServiceNode.ServiceNode(SMACD.AppTree.HostNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/ServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/ServiceNode.cs
+    startLine: 106
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single service, listening on a port of a Host\n"
+  example: []
+  syntax:
+    content: public ServiceNode(HostNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.HostNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers for node
+    content.vb: Public Sub New(parent As HostNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.ServiceNode.#ctor*
+  nameWithType.vb: ServiceNode.ServiceNode(HostNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.ServiceNode.ServiceNode(SMACD.AppTree.HostNode, System.String())
+  name.vb: ServiceNode(HostNode, String())
+- uid: SMACD.AppTree.ServiceNode.#ctor
+  commentId: M:SMACD.AppTree.ServiceNode.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.ServiceNode
+  langs:
+  - csharp
+  - vb
+  name: ServiceNode()
+  nameWithType: ServiceNode.ServiceNode()
+  fullName: SMACD.AppTree.ServiceNode.ServiceNode()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/ServiceNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/ServiceNode.cs
+    startLine: 113
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single service, listening on a port of a Host\n"
+  example: []
+  syntax:
+    content: public ServiceNode()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.ServiceNode.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.ServiceNode.ToString
   commentId: M:SMACD.AppTree.ServiceNode.ToString
   id: ToString
@@ -326,7 +402,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../SMACD.AppTree/ServiceNode.cs
-    startLine: 106
+    startLine: 119
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1471,6 +1547,37 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: SMACD.AppTree.ServiceNode.#ctor*
+  commentId: Overload:SMACD.AppTree.ServiceNode.#ctor
+  name: ServiceNode
+  nameWithType: ServiceNode.ServiceNode
+  fullName: SMACD.AppTree.ServiceNode.ServiceNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object

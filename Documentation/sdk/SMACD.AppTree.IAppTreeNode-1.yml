@@ -20,7 +20,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IAppTreeNode
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 333
+    startLine: 355
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -61,7 +61,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Detail
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 338
+    startLine: 360
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree

@@ -5,6 +5,8 @@ items:
   id: HostNode
   parent: SMACD.AppTree
   children:
+  - SMACD.AppTree.HostNode.#ctor
+  - SMACD.AppTree.HostNode.#ctor(SMACD.AppTree.RootNode,System.String[])
   - SMACD.AppTree.HostNode.Detail
   - SMACD.AppTree.HostNode.Hostname
   - SMACD.AppTree.HostNode.IpAddress
@@ -320,6 +322,80 @@ items:
   - Public
   fullName.vb: SMACD.AppTree.HostNode.Item(System.String)
   name.vb: Item(String)
+- uid: SMACD.AppTree.HostNode.#ctor(SMACD.AppTree.RootNode,System.String[])
+  commentId: M:SMACD.AppTree.HostNode.#ctor(SMACD.AppTree.RootNode,System.String[])
+  id: '#ctor(SMACD.AppTree.RootNode,System.String[])'
+  parent: SMACD.AppTree.HostNode
+  langs:
+  - csharp
+  - vb
+  name: HostNode(RootNode, String[])
+  nameWithType: HostNode.HostNode(RootNode, String[])
+  fullName: SMACD.AppTree.HostNode.HostNode(SMACD.AppTree.RootNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/HostNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/HostNode.cs
+    startLine: 109
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single host (server) involved in some part of the application\n"
+  example: []
+  syntax:
+    content: public HostNode(RootNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.RootNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers
+    content.vb: Public Sub New(parent As RootNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.HostNode.#ctor*
+  nameWithType.vb: HostNode.HostNode(RootNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.HostNode.HostNode(SMACD.AppTree.RootNode, System.String())
+  name.vb: HostNode(RootNode, String())
+- uid: SMACD.AppTree.HostNode.#ctor
+  commentId: M:SMACD.AppTree.HostNode.#ctor
+  id: '#ctor'
+  parent: SMACD.AppTree.HostNode
+  langs:
+  - csharp
+  - vb
+  name: HostNode()
+  nameWithType: HostNode.HostNode()
+  fullName: SMACD.AppTree.HostNode.HostNode()
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/HostNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/HostNode.cs
+    startLine: 116
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single host (server) involved in some part of the application\n"
+  example: []
+  syntax:
+    content: public HostNode()
+    content.vb: Public Sub New
+  overload: SMACD.AppTree.HostNode.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: SMACD.AppTree.HostNode.ToString
   commentId: M:SMACD.AppTree.HostNode.ToString
   id: ToString
@@ -338,7 +414,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../SMACD.AppTree/HostNode.cs
-    startLine: 109
+    startLine: 122
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1459,6 +1535,43 @@ references:
   name: ServiceNode
   nameWithType: ServiceNode
   fullName: SMACD.AppTree.ServiceNode
+- uid: SMACD.AppTree.HostNode.#ctor*
+  commentId: Overload:SMACD.AppTree.HostNode.#ctor
+  name: HostNode
+  nameWithType: HostNode.HostNode
+  fullName: SMACD.AppTree.HostNode.HostNode
+- uid: SMACD.AppTree.RootNode
+  commentId: T:SMACD.AppTree.RootNode
+  parent: SMACD.AppTree
+  name: RootNode
+  nameWithType: RootNode
+  fullName: SMACD.AppTree.RootNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object

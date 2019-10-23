@@ -6,6 +6,7 @@ items:
   parent: Synthesys.Tasks
   children:
   - Synthesys.Tasks.ITaskToolbox.Count
+  - Synthesys.Tasks.ITaskToolbox.Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor,System.String,SMACD.AppTree.RootNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
   - Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
   - Synthesys.Tasks.ITaskToolbox.IsRunning
   - Synthesys.Tasks.ITaskToolbox.TaskCompleted
@@ -25,7 +26,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ITaskToolbox
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 8
+    startLine: 9
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -56,7 +57,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsRunning
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -91,7 +92,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Count
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -126,7 +127,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskCompleted
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -155,7 +156,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskFaulted
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -184,7 +185,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: TaskStarted
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -213,35 +214,85 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Enqueue
     path: ../Synthesys.Tasks/ITaskToolbox.cs
-    startLine: 43
+    startLine: 44
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
-  summary: "\nEnqueue a new Task\n"
+  summary: "\nEnqueue an ActionExtension based on its Descriptor\n"
   example: []
   syntax:
-    content: Task<List<ExtensionReport>> Enqueue(string actionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+    content: Task<ExtensionReport> Enqueue(string extensionIdentifier, AppTreeNode appTreeNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
     parameters:
-    - id: actionIdentifier
+    - id: extensionIdentifier
       type: System.String
-      description: ActionExtension identifier
-    - id: rootArtifact
+      description: Extension identifier
+    - id: appTreeNode
       type: SMACD.AppTree.AppTreeNode
-      description: AppTreeNode to be used as the root of the Action
+      description: Root app tree node for extension
     - id: options
       type: System.Collections.Generic.Dictionary{System.String,System.String}
-      description: ActionExtension options
+      description: Action options
     - id: serviceMapItemPtr
       type: SMACD.AppTree.ProjectPointer
-      description: Pointer to element in Service Map queuing this Action
+      description: Pointer to element in Service Map which queued the Extension
     return:
-      type: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
-      description: ''
-    content.vb: Function Enqueue(actionIdentifier As String, rootArtifact As AppTreeNode, options As Dictionary(Of String, String), serviceMapItemPtr As ProjectPointer = Nothing) As Task(Of List(Of ExtensionReport))
+      type: System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
+      description: Task which resolves to the Action-Specific Report
+    content.vb: Function Enqueue(extensionIdentifier As String, appTreeNode As AppTreeNode, options As Dictionary(Of String, String), serviceMapItemPtr As ProjectPointer = Nothing) As Task(Of ExtensionReport)
   overload: Synthesys.Tasks.ITaskToolbox.Enqueue*
   nameWithType.vb: ITaskToolbox.Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
   fullName.vb: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary(Of System.String, System.String), SMACD.AppTree.ProjectPointer)
   name.vb: Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
+- uid: Synthesys.Tasks.ITaskToolbox.Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor,System.String,SMACD.AppTree.RootNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  commentId: M:Synthesys.Tasks.ITaskToolbox.Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor,System.String,SMACD.AppTree.RootNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  id: Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor,System.String,SMACD.AppTree.RootNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  parent: Synthesys.Tasks.ITaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: Enqueue(TriggerDescriptor, String, RootNode, Dictionary<String, String>, ProjectPointer)
+  nameWithType: ITaskToolbox.Enqueue(TriggerDescriptor, String, RootNode, Dictionary<String, String>, ProjectPointer)
+  fullName: Synthesys.Tasks.ITaskToolbox.Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor, System.String, SMACD.AppTree.RootNode, System.Collections.Generic.Dictionary<System.String, System.String>, SMACD.AppTree.ProjectPointer)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Tasks/ITaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Enqueue
+    path: ../Synthesys.Tasks/ITaskToolbox.cs
+    startLine: 55
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nEnqueue a ReactionExtension based on its Descriptor\n"
+  example: []
+  syntax:
+    content: Task<ExtensionReport> Enqueue(TriggerDescriptor trigger, string extensionIdentifier, RootNode rootNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+    parameters:
+    - id: trigger
+      type: Synthesys.SDK.Triggers.TriggerDescriptor
+      description: Trigger creating the Reaction
+    - id: extensionIdentifier
+      type: System.String
+      description: ReactionExtension identifier
+    - id: rootNode
+      type: SMACD.AppTree.RootNode
+      description: Root of AppTree
+    - id: options
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Reaction options
+    - id: serviceMapItemPtr
+      type: SMACD.AppTree.ProjectPointer
+      description: Pointer to element in Service Map which queued the Extension
+    return:
+      type: System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
+      description: Task which resolves to the Action-Specific Report
+    content.vb: Function Enqueue(trigger As TriggerDescriptor, extensionIdentifier As String, rootNode As RootNode, options As Dictionary(Of String, String), serviceMapItemPtr As ProjectPointer = Nothing) As Task(Of ExtensionReport)
+  overload: Synthesys.Tasks.ITaskToolbox.Enqueue*
+  nameWithType.vb: ITaskToolbox.Enqueue(TriggerDescriptor, String, RootNode, Dictionary(Of String, String), ProjectPointer)
+  fullName.vb: Synthesys.Tasks.ITaskToolbox.Enqueue(Synthesys.SDK.Triggers.TriggerDescriptor, System.String, SMACD.AppTree.RootNode, System.Collections.Generic.Dictionary(Of System.String, System.String), SMACD.AppTree.ProjectPointer)
+  name.vb: Enqueue(TriggerDescriptor, String, RootNode, Dictionary(Of String, String), ProjectPointer)
 references:
 - uid: Synthesys.Tasks
   commentId: N:Synthesys.Tasks
@@ -443,16 +494,16 @@ references:
   name: ProjectPointer
   nameWithType: ProjectPointer
   fullName: SMACD.AppTree.ProjectPointer
-- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
-  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
+- uid: System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
+  commentId: T:System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<List<ExtensionReport>>
-  nameWithType: Task<List<ExtensionReport>>
-  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<Synthesys.SDK.ExtensionReport>>
-  nameWithType.vb: Task(Of List(Of ExtensionReport))
-  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of Synthesys.SDK.ExtensionReport))
-  name.vb: Task(Of List(Of ExtensionReport))
+  name: Task<ExtensionReport>
+  nameWithType: Task<ExtensionReport>
+  fullName: System.Threading.Tasks.Task<Synthesys.SDK.ExtensionReport>
+  nameWithType.vb: Task(Of ExtensionReport)
+  fullName.vb: System.Threading.Tasks.Task(Of Synthesys.SDK.ExtensionReport)
+  name.vb: Task(Of ExtensionReport)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -462,21 +513,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: Synthesys.SDK.ExtensionReport
     name: ExtensionReport
     nameWithType: ExtensionReport
     fullName: Synthesys.SDK.ExtensionReport
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -489,21 +529,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: Synthesys.SDK.ExtensionReport
     name: ExtensionReport
     nameWithType: ExtensionReport
     fullName: Synthesys.SDK.ExtensionReport
-  - name: )
-    nameWithType: )
-    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -614,3 +643,20 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+- uid: SMACD.AppTree.RootNode
+  commentId: T:SMACD.AppTree.RootNode
+  parent: SMACD.AppTree
+  name: RootNode
+  nameWithType: RootNode
+  fullName: SMACD.AppTree.RootNode
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers

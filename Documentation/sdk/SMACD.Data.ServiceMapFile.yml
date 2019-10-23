@@ -11,6 +11,7 @@ items:
   - SMACD.Data.ServiceMapFile.GetServiceMap(System.String)
   - SMACD.Data.ServiceMapFile.GetServiceMapFromYaml(System.String)
   - SMACD.Data.ServiceMapFile.PutServiceMap(SMACD.Data.ServiceMapFile,System.String)
+  - SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)
   - SMACD.Data.ServiceMapFile.Targets
   - SMACD.Data.ServiceMapFile.Updated
   langs:
@@ -359,6 +360,47 @@ items:
       description: File to serialize Service Map to
     content.vb: Public Shared Sub PutServiceMap(serviceMap As ServiceMapFile, file As String)
   overload: SMACD.Data.ServiceMapFile.PutServiceMap*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)
+  commentId: M:SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)
+  id: PutServiceMapToYaml(SMACD.Data.ServiceMapFile)
+  parent: SMACD.Data.ServiceMapFile
+  langs:
+  - csharp
+  - vb
+  name: PutServiceMapToYaml(ServiceMapFile)
+  nameWithType: ServiceMapFile.PutServiceMapToYaml(ServiceMapFile)
+  fullName: SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)
+  type: Method
+  source:
+    remote:
+      path: SMACD.Data/ServiceMapFile.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: PutServiceMapToYaml
+    path: ../SMACD.Data/ServiceMapFile.cs
+    startLine: 99
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nSerialize a Service Map to a YAML string\n"
+  example: []
+  syntax:
+    content: public static string PutServiceMapToYaml(ServiceMapFile serviceMap)
+    parameters:
+    - id: serviceMap
+      type: SMACD.Data.ServiceMapFile
+      description: Service Map to serialize
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function PutServiceMapToYaml(serviceMap As ServiceMapFile) As String
+  overload: SMACD.Data.ServiceMapFile.PutServiceMapToYaml*
   modifiers.csharp:
   - public
   - static
@@ -864,3 +906,8 @@ references:
   name: PutServiceMap
   nameWithType: ServiceMapFile.PutServiceMap
   fullName: SMACD.Data.ServiceMapFile.PutServiceMap
+- uid: SMACD.Data.ServiceMapFile.PutServiceMapToYaml*
+  commentId: Overload:SMACD.Data.ServiceMapFile.PutServiceMapToYaml
+  name: PutServiceMapToYaml
+  nameWithType: ServiceMapFile.PutServiceMapToYaml
+  fullName: SMACD.Data.ServiceMapFile.PutServiceMapToYaml

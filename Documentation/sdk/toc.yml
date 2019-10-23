@@ -1,15 +1,4 @@
 ### YamlMime:TableOfContent
-- uid: Compass.Components
-  name: Compass.Components
-  items:
-  - uid: Compass.Components._Imports
-    name: _Imports
-  - uid: Compass.Components.EvidenceSummaryViewer
-    name: EvidenceSummaryViewer
-  - uid: Compass.Components.NativeDirectoryEvidenceViewer
-    name: NativeDirectoryEvidenceViewer
-  - uid: Compass.Components.VulnerabilityViewer
-    name: VulnerabilityViewer
 - uid: SMACD.AppTree
   name: SMACD.AppTree
   items:
@@ -29,6 +18,10 @@
   - uid: SMACD.AppTree.ObservableDictionary`2
     name: ObservableDictionary<TKey, TValue>
     name.vb: ObservableDictionary(Of TKey, TValue)
+  - uid: SMACD.AppTree.PathGeneration
+    name: PathGeneration
+  - uid: SMACD.AppTree.PathParserExtensions
+    name: PathParserExtensions
   - uid: SMACD.AppTree.ProjectPointer
     name: ProjectPointer
   - uid: SMACD.AppTree.RootNode
@@ -134,10 +127,11 @@
     name: DummyDataClass
   - uid: Synthesys.Plugins.Dummy.DummyReaction
     name: DummyReaction
-  - uid: Synthesys.Plugins.Dummy.DummyReportSummary
-    name: DummyReportSummary
-  - uid: Synthesys.Plugins.Dummy.DummyReportView
-    name: DummyReportView
+- uid: Synthesys.Plugins.HTMLExplorer
+  name: Synthesys.Plugins.HTMLExplorer
+  items:
+  - uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+    name: HtmlExplorerReaction
 - uid: Synthesys.Plugins.Nikto
   name: Synthesys.Plugins.Nikto
   items:
@@ -145,19 +139,11 @@
     name: NiktoAction
   - uid: Synthesys.Plugins.Nikto.NiktoReport
     name: NiktoReport
-  - uid: Synthesys.Plugins.Nikto.NiktoReportSummary
-    name: NiktoReportSummary
-  - uid: Synthesys.Plugins.Nikto.NiktoReportView
-    name: NiktoReportView
 - uid: Synthesys.Plugins.Nmap
   name: Synthesys.Plugins.Nmap
   items:
   - uid: Synthesys.Plugins.Nmap.NmapPort
     name: NmapPort
-  - uid: Synthesys.Plugins.Nmap.NmapReportSummary
-    name: NmapReportSummary
-  - uid: Synthesys.Plugins.Nmap.NmapReportView
-    name: NmapReportView
   - uid: Synthesys.Plugins.Nmap.NmapRunReport
     name: NmapRunReport
   - uid: Synthesys.Plugins.Nmap.NmapScannerAction
@@ -165,10 +151,6 @@
 - uid: Synthesys.Plugins.OwaspZap
   name: Synthesys.Plugins.OwaspZap
   items:
-  - uid: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
-    name: OwaspZapReportSummary
-  - uid: Synthesys.Plugins.OwaspZap.OwaspZapReportView
-    name: OwaspZapReportView
   - uid: Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
     name: OwaspZapScannerAction
   - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert

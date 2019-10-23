@@ -8,6 +8,7 @@ items:
   - Synthesys.Tasks.RuntimeTaskDescriptor.Artifact
   - Synthesys.Tasks.RuntimeTaskDescriptor.Extension
   - Synthesys.Tasks.RuntimeTaskDescriptor.Task
+  - Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
   langs:
   - csharp
   - vb
@@ -68,11 +69,11 @@ items:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
   syntax:
-    content: public Task<List<ExtensionReport>> Task { get; set; }
+    content: public Task<ExtensionReport> Task { get; set; }
     parameters: []
     return:
-      type: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
-    content.vb: Public Property Task As Task(Of List(Of ExtensionReport))
+      type: System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
+    content.vb: Public Property Task As Task(Of ExtensionReport)
   overload: Synthesys.Tasks.RuntimeTaskDescriptor.Task*
   modifiers.csharp:
   - public
@@ -144,6 +145,41 @@ items:
       type: SMACD.AppTree.AppTreeNode
     content.vb: Public Property Artifact As AppTreeNode
   overload: Synthesys.Tasks.RuntimeTaskDescriptor.Artifact*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
+  commentId: P:Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
+  id: Trigger
+  parent: Synthesys.Tasks.RuntimeTaskDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Trigger
+  nameWithType: RuntimeTaskDescriptor.Trigger
+  fullName: Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/RuntimeTaskDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Trigger
+    path: ../Synthesys.Tasks/RuntimeTaskDescriptor.cs
+    startLine: 13
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  syntax:
+    content: public TriggerDescriptor Trigger { get; set; }
+    parameters: []
+    return:
+      type: Synthesys.SDK.Triggers.TriggerDescriptor
+    content.vb: Public Property Trigger As TriggerDescriptor
+  overload: Synthesys.Tasks.RuntimeTaskDescriptor.Trigger*
   modifiers.csharp:
   - public
   - get
@@ -453,16 +489,16 @@ references:
   name: Task
   nameWithType: RuntimeTaskDescriptor.Task
   fullName: Synthesys.Tasks.RuntimeTaskDescriptor.Task
-- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
-  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
+- uid: System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
+  commentId: T:System.Threading.Tasks.Task{Synthesys.SDK.ExtensionReport}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
-  name: Task<List<ExtensionReport>>
-  nameWithType: Task<List<ExtensionReport>>
-  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<Synthesys.SDK.ExtensionReport>>
-  nameWithType.vb: Task(Of List(Of ExtensionReport))
-  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of Synthesys.SDK.ExtensionReport))
-  name.vb: Task(Of List(Of ExtensionReport))
+  name: Task<ExtensionReport>
+  nameWithType: Task<ExtensionReport>
+  fullName: System.Threading.Tasks.Task<Synthesys.SDK.ExtensionReport>
+  nameWithType.vb: Task(Of ExtensionReport)
+  fullName.vb: System.Threading.Tasks.Task(Of Synthesys.SDK.ExtensionReport)
+  name.vb: Task(Of ExtensionReport)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
     name: Task
@@ -472,21 +508,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
   - uid: Synthesys.SDK.ExtensionReport
     name: ExtensionReport
     nameWithType: ExtensionReport
     fullName: Synthesys.SDK.ExtensionReport
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -499,21 +524,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
   - uid: Synthesys.SDK.ExtensionReport
     name: ExtensionReport
     nameWithType: ExtensionReport
     fullName: Synthesys.SDK.ExtensionReport
-  - name: )
-    nameWithType: )
-    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -594,3 +608,19 @@ references:
   name: SMACD.AppTree
   nameWithType: SMACD.AppTree
   fullName: SMACD.AppTree
+- uid: Synthesys.Tasks.RuntimeTaskDescriptor.Trigger*
+  commentId: Overload:Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
+  name: Trigger
+  nameWithType: RuntimeTaskDescriptor.Trigger
+  fullName: Synthesys.Tasks.RuntimeTaskDescriptor.Trigger
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers

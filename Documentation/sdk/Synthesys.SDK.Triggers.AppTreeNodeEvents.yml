@@ -22,7 +22,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: AppTreeNodeEvents
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 8
+    startLine: 9
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -55,7 +55,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsCreated
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -89,7 +89,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsUpdated
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -123,7 +123,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: AddsChild
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers

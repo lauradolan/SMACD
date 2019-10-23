@@ -1,38 +1,40 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Synthesys.Tasks.Session
-  commentId: T:Synthesys.Tasks.Session
-  id: Session
-  parent: Synthesys.Tasks
+- uid: SMACD.AppTree.PathGeneration
+  commentId: T:SMACD.AppTree.PathGeneration
+  id: PathGeneration
+  parent: SMACD.AppTree
   children:
-  - Synthesys.Tasks.Session.#ctor
-  - Synthesys.Tasks.Session.Artifacts
-  - Synthesys.Tasks.Session.Export(System.IO.Stream,System.Boolean)
-  - Synthesys.Tasks.Session.Import(System.IO.Stream)
-  - Synthesys.Tasks.Session.Reports
-  - Synthesys.Tasks.Session.ServiceMapYaml
-  - Synthesys.Tasks.Session.Tasks
+  - SMACD.AppTree.PathGeneration.Children
+  - SMACD.AppTree.PathGeneration.GetResultNodes
+  - SMACD.AppTree.PathGeneration.IsResultNode
+  - SMACD.AppTree.PathGeneration.MatchingNode
+  - SMACD.AppTree.PathGeneration.Path
+  - SMACD.AppTree.PathGeneration.PathSegment
+  - SMACD.AppTree.PathGeneration.PathSegmentIndex
   langs:
   - csharp
   - vb
-  name: Session
-  nameWithType: Session
-  fullName: Synthesys.Tasks.Session
+  name: PathGeneration
+  nameWithType: PathGeneration
+  fullName: SMACD.AppTree.PathGeneration
   type: Class
   source:
     remote:
-      path: Synthesys.Tasks/Session.cs
+      path: SMACD.AppTree/PathGeneration.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: Session
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 15
+    id: PathGeneration
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 7
   assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nA single Generation of Paths which matched the requested address\n"
+  example: []
   syntax:
-    content: public class Session
-    content.vb: Public Class Session
+    content: public class PathGeneration
+    content.vb: Public Class PathGeneration
   inheritance:
   - System.Object
   inheritedMembers:
@@ -49,282 +51,269 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Synthesys.Tasks.Session.Import(System.IO.Stream)
-  commentId: M:Synthesys.Tasks.Session.Import(System.IO.Stream)
-  id: Import(System.IO.Stream)
-  parent: Synthesys.Tasks.Session
+- uid: SMACD.AppTree.PathGeneration.Path
+  commentId: P:SMACD.AppTree.PathGeneration.Path
+  id: Path
+  parent: SMACD.AppTree.PathGeneration
   langs:
   - csharp
   - vb
-  name: Import(Stream)
-  nameWithType: Session.Import(Stream)
-  fullName: Synthesys.Tasks.Session.Import(System.IO.Stream)
-  type: Method
-  source:
-    remote:
-      path: Synthesys.Tasks/Session.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: Import
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 22
-  assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nCreate a Session from a previously exported Session\n"
-  example: []
-  syntax:
-    content: public static Session Import(Stream existingSession)
-    parameters:
-    - id: existingSession
-      type: System.IO.Stream
-      description: Previously exported Session
-    return:
-      type: Synthesys.Tasks.Session
-      description: Imported and linked Session
-    content.vb: Public Shared Function Import(existingSession As Stream) As Session
-  overload: Synthesys.Tasks.Session.Import*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Synthesys.Tasks.Session.#ctor
-  commentId: M:Synthesys.Tasks.Session.#ctor
-  id: '#ctor'
-  parent: Synthesys.Tasks.Session
-  langs:
-  - csharp
-  - vb
-  name: Session()
-  nameWithType: Session.Session()
-  fullName: Synthesys.Tasks.Session.Session()
-  type: Constructor
-  source:
-    remote:
-      path: Synthesys.Tasks/Session.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: .ctor
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 50
-  assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nCreate a new Session\n"
-  example: []
-  syntax:
-    content: public Session()
-    content.vb: Public Sub New
-  overload: Synthesys.Tasks.Session.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Synthesys.Tasks.Session.Tasks
-  commentId: P:Synthesys.Tasks.Session.Tasks
-  id: Tasks
-  parent: Synthesys.Tasks.Session
-  langs:
-  - csharp
-  - vb
-  name: Tasks
-  nameWithType: Session.Tasks
-  fullName: Synthesys.Tasks.Session.Tasks
+  name: Path
+  nameWithType: PathGeneration.Path
+  fullName: SMACD.AppTree.PathGeneration.Path
   type: Property
   source:
     remote:
-      path: Synthesys.Tasks/Session.cs
+      path: SMACD.AppTree/PathGeneration.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: Tasks
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 63
+    id: Path
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 12
   assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nTask queue\n"
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nPath being tested\n"
   example: []
   syntax:
-    content: >-
-      [JsonIgnore]
-
-      public TaskToolbox Tasks { get; }
-    parameters: []
-    return:
-      type: Synthesys.Tasks.TaskToolbox
-    content.vb: >-
-      <JsonIgnore>
-
-      Public ReadOnly Property Tasks As TaskToolbox
-  overload: Synthesys.Tasks.Session.Tasks*
-  attributes:
-  - type: Newtonsoft.Json.JsonIgnoreAttribute
-    ctor: Newtonsoft.Json.JsonIgnoreAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Synthesys.Tasks.Session.Artifacts
-  commentId: P:Synthesys.Tasks.Session.Artifacts
-  id: Artifacts
-  parent: Synthesys.Tasks.Session
-  langs:
-  - csharp
-  - vb
-  name: Artifacts
-  nameWithType: Session.Artifacts
-  fullName: Synthesys.Tasks.Session.Artifacts
-  type: Property
-  source:
-    remote:
-      path: Synthesys.Tasks/Session.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: Artifacts
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 69
-  assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nArtifact tree root\n"
-  example: []
-  syntax:
-    content: public RootNode Artifacts { get; }
-    parameters: []
-    return:
-      type: SMACD.AppTree.RootNode
-    content.vb: Public ReadOnly Property Artifacts As RootNode
-  overload: Synthesys.Tasks.Session.Artifacts*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Synthesys.Tasks.Session.Reports
-  commentId: P:Synthesys.Tasks.Session.Reports
-  id: Reports
-  parent: Synthesys.Tasks.Session
-  langs:
-  - csharp
-  - vb
-  name: Reports
-  nameWithType: Session.Reports
-  fullName: Synthesys.Tasks.Session.Reports
-  type: Property
-  source:
-    remote:
-      path: Synthesys.Tasks/Session.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: Reports
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 74
-  assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nReports which have been generated by Extensions in this Session\n"
-  example: []
-  syntax:
-    content: public List<ExtensionReport> Reports { get; }
-    parameters: []
-    return:
-      type: System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}
-    content.vb: Public ReadOnly Property Reports As List(Of ExtensionReport)
-  overload: Synthesys.Tasks.Session.Reports*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Synthesys.Tasks.Session.ServiceMapYaml
-  commentId: P:Synthesys.Tasks.Session.ServiceMapYaml
-  id: ServiceMapYaml
-  parent: Synthesys.Tasks.Session
-  langs:
-  - csharp
-  - vb
-  name: ServiceMapYaml
-  nameWithType: Session.ServiceMapYaml
-  fullName: Synthesys.Tasks.Session.ServiceMapYaml
-  type: Property
-  source:
-    remote:
-      path: Synthesys.Tasks/Session.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: ServiceMapYaml
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 79
-  assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nService Map YAML generating this Session\n"
-  example: []
-  syntax:
-    content: public string ServiceMapYaml { get; set; }
+    content: public string Path { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property ServiceMapYaml As String
-  overload: Synthesys.Tasks.Session.ServiceMapYaml*
+    content.vb: Public Property Path As String
+  overload: SMACD.AppTree.PathGeneration.Path*
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: Synthesys.Tasks.Session.Export(System.IO.Stream,System.Boolean)
-  commentId: M:Synthesys.Tasks.Session.Export(System.IO.Stream,System.Boolean)
-  id: Export(System.IO.Stream,System.Boolean)
-  parent: Synthesys.Tasks.Session
+- uid: SMACD.AppTree.PathGeneration.PathSegmentIndex
+  commentId: P:SMACD.AppTree.PathGeneration.PathSegmentIndex
+  id: PathSegmentIndex
+  parent: SMACD.AppTree.PathGeneration
   langs:
   - csharp
   - vb
-  name: Export(Stream, Boolean)
-  nameWithType: Session.Export(Stream, Boolean)
-  fullName: Synthesys.Tasks.Session.Export(System.IO.Stream, System.Boolean)
+  name: PathSegmentIndex
+  nameWithType: PathGeneration.PathSegmentIndex
+  fullName: SMACD.AppTree.PathGeneration.PathSegmentIndex
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/PathGeneration.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: PathSegmentIndex
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 17
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nIndex of segment within Path which matched for this Generation\n"
+  example: []
+  syntax:
+    content: public int PathSegmentIndex { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property PathSegmentIndex As Integer
+  overload: SMACD.AppTree.PathGeneration.PathSegmentIndex*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.PathGeneration.PathSegment
+  commentId: P:SMACD.AppTree.PathGeneration.PathSegment
+  id: PathSegment
+  parent: SMACD.AppTree.PathGeneration
+  langs:
+  - csharp
+  - vb
+  name: PathSegment
+  nameWithType: PathGeneration.PathSegment
+  fullName: SMACD.AppTree.PathGeneration.PathSegment
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/PathGeneration.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: PathSegment
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 22
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nSegment which matched for this Generation\n"
+  example: []
+  syntax:
+    content: public string PathSegment { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property PathSegment As String
+  overload: SMACD.AppTree.PathGeneration.PathSegment*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.PathGeneration.MatchingNode
+  commentId: P:SMACD.AppTree.PathGeneration.MatchingNode
+  id: MatchingNode
+  parent: SMACD.AppTree.PathGeneration
+  langs:
+  - csharp
+  - vb
+  name: MatchingNode
+  nameWithType: PathGeneration.MatchingNode
+  fullName: SMACD.AppTree.PathGeneration.MatchingNode
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/PathGeneration.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: MatchingNode
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 27
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAppTreeNode linked to Generation\n"
+  example: []
+  syntax:
+    content: public AppTreeNode MatchingNode { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.AppTreeNode
+    content.vb: Public Property MatchingNode As AppTreeNode
+  overload: SMACD.AppTree.PathGeneration.MatchingNode*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.PathGeneration.Children
+  commentId: P:SMACD.AppTree.PathGeneration.Children
+  id: Children
+  parent: SMACD.AppTree.PathGeneration
+  langs:
+  - csharp
+  - vb
+  name: Children
+  nameWithType: PathGeneration.Children
+  fullName: SMACD.AppTree.PathGeneration.Children
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/PathGeneration.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Children
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 32
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nNodes which matched in the next Generation\n"
+  example: []
+  syntax:
+    content: public List<PathGeneration> Children { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{SMACD.AppTree.PathGeneration}
+    content.vb: Public Property Children As List(Of PathGeneration)
+  overload: SMACD.AppTree.PathGeneration.Children*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.PathGeneration.IsResultNode
+  commentId: P:SMACD.AppTree.PathGeneration.IsResultNode
+  id: IsResultNode
+  parent: SMACD.AppTree.PathGeneration
+  langs:
+  - csharp
+  - vb
+  name: IsResultNode
+  nameWithType: PathGeneration.IsResultNode
+  fullName: SMACD.AppTree.PathGeneration.IsResultNode
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/PathGeneration.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IsResultNode
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 37
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nIf the node is matching the Path\n"
+  example: []
+  syntax:
+    content: public bool IsResultNode { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsResultNode As Boolean
+  overload: SMACD.AppTree.PathGeneration.IsResultNode*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.PathGeneration.GetResultNodes
+  commentId: M:SMACD.AppTree.PathGeneration.GetResultNodes
+  id: GetResultNodes
+  parent: SMACD.AppTree.PathGeneration
+  langs:
+  - csharp
+  - vb
+  name: GetResultNodes()
+  nameWithType: PathGeneration.GetResultNodes()
+  fullName: SMACD.AppTree.PathGeneration.GetResultNodes()
   type: Method
   source:
     remote:
-      path: Synthesys.Tasks/Session.cs
+      path: SMACD.AppTree/PathGeneration.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: Export
-    path: ../Synthesys.Tasks/Session.cs
-    startLine: 86
+    id: GetResultNodes
+    path: ../SMACD.AppTree/PathGeneration.cs
+    startLine: 43
   assemblies:
-  - Synthesys.Tasks
-  namespace: Synthesys.Tasks
-  summary: "\nExport the Session&apos;s reports and Artifacts to a Stream\n"
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRetrieve all the nodes within this Path Generation set which are matched by the requested Path\n"
   example: []
   syntax:
-    content: public void Export(Stream data, bool leaveOpen = true)
-    parameters:
-    - id: data
-      type: System.IO.Stream
-      description: Stream to contain Session data
-    - id: leaveOpen
-      type: System.Boolean
-      description: If the stream should be left open when complete
-    content.vb: Public Sub Export(data As Stream, leaveOpen As Boolean = True)
-  overload: Synthesys.Tasks.Session.Export*
+    content: public List<AppTreeNode> GetResultNodes()
+    return:
+      type: System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+      description: ''
+    content.vb: Public Function GetResultNodes As List(Of AppTreeNode)
+  overload: SMACD.AppTree.PathGeneration.GetResultNodes*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
 references:
-- uid: Synthesys.Tasks
-  commentId: N:Synthesys.Tasks
-  name: Synthesys.Tasks
-  nameWithType: Synthesys.Tasks
-  fullName: Synthesys.Tasks
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -617,77 +606,61 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Synthesys.Tasks.Session.Import*
-  commentId: Overload:Synthesys.Tasks.Session.Import
-  name: Import
-  nameWithType: Session.Import
-  fullName: Synthesys.Tasks.Session.Import
-- uid: System.IO.Stream
-  commentId: T:System.IO.Stream
-  parent: System.IO
+- uid: SMACD.AppTree.PathGeneration.Path*
+  commentId: Overload:SMACD.AppTree.PathGeneration.Path
+  name: Path
+  nameWithType: PathGeneration.Path
+  fullName: SMACD.AppTree.PathGeneration.Path
+- uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
-  name: Stream
-  nameWithType: Stream
-  fullName: System.IO.Stream
-- uid: Synthesys.Tasks.Session
-  commentId: T:Synthesys.Tasks.Session
-  parent: Synthesys.Tasks
-  name: Session
-  nameWithType: Session
-  fullName: Synthesys.Tasks.Session
-- uid: System.IO
-  commentId: N:System.IO
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.PathGeneration.PathSegmentIndex*
+  commentId: Overload:SMACD.AppTree.PathGeneration.PathSegmentIndex
+  name: PathSegmentIndex
+  nameWithType: PathGeneration.PathSegmentIndex
+  fullName: SMACD.AppTree.PathGeneration.PathSegmentIndex
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
-  name: System.IO
-  nameWithType: System.IO
-  fullName: System.IO
-- uid: Synthesys.Tasks.Session.#ctor*
-  commentId: Overload:Synthesys.Tasks.Session.#ctor
-  name: Session
-  nameWithType: Session.Session
-  fullName: Synthesys.Tasks.Session.Session
-- uid: Synthesys.Tasks.Session.Tasks*
-  commentId: Overload:Synthesys.Tasks.Session.Tasks
-  name: Tasks
-  nameWithType: Session.Tasks
-  fullName: Synthesys.Tasks.Session.Tasks
-- uid: Synthesys.Tasks.TaskToolbox
-  commentId: T:Synthesys.Tasks.TaskToolbox
-  parent: Synthesys.Tasks
-  name: TaskToolbox
-  nameWithType: TaskToolbox
-  fullName: Synthesys.Tasks.TaskToolbox
-- uid: Synthesys.Tasks.Session.Artifacts*
-  commentId: Overload:Synthesys.Tasks.Session.Artifacts
-  name: Artifacts
-  nameWithType: Session.Artifacts
-  fullName: Synthesys.Tasks.Session.Artifacts
-- uid: SMACD.AppTree.RootNode
-  commentId: T:SMACD.AppTree.RootNode
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: SMACD.AppTree.PathGeneration.PathSegment*
+  commentId: Overload:SMACD.AppTree.PathGeneration.PathSegment
+  name: PathSegment
+  nameWithType: PathGeneration.PathSegment
+  fullName: SMACD.AppTree.PathGeneration.PathSegment
+- uid: SMACD.AppTree.PathGeneration.MatchingNode*
+  commentId: Overload:SMACD.AppTree.PathGeneration.MatchingNode
+  name: MatchingNode
+  nameWithType: PathGeneration.MatchingNode
+  fullName: SMACD.AppTree.PathGeneration.MatchingNode
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
   parent: SMACD.AppTree
-  name: RootNode
-  nameWithType: RootNode
-  fullName: SMACD.AppTree.RootNode
-- uid: SMACD.AppTree
-  commentId: N:SMACD.AppTree
-  name: SMACD.AppTree
-  nameWithType: SMACD.AppTree
-  fullName: SMACD.AppTree
-- uid: Synthesys.Tasks.Session.Reports*
-  commentId: Overload:Synthesys.Tasks.Session.Reports
-  name: Reports
-  nameWithType: Session.Reports
-  fullName: Synthesys.Tasks.Session.Reports
-- uid: System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}
-  commentId: T:System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+- uid: SMACD.AppTree.PathGeneration.Children*
+  commentId: Overload:SMACD.AppTree.PathGeneration.Children
+  name: Children
+  nameWithType: PathGeneration.Children
+  fullName: SMACD.AppTree.PathGeneration.Children
+- uid: System.Collections.Generic.List{SMACD.AppTree.PathGeneration}
+  commentId: T:System.Collections.Generic.List{SMACD.AppTree.PathGeneration}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.List`1
-  name: List<ExtensionReport>
-  nameWithType: List<ExtensionReport>
-  fullName: System.Collections.Generic.List<Synthesys.SDK.ExtensionReport>
-  nameWithType.vb: List(Of ExtensionReport)
-  fullName.vb: System.Collections.Generic.List(Of Synthesys.SDK.ExtensionReport)
-  name.vb: List(Of ExtensionReport)
+  name: List<PathGeneration>
+  nameWithType: List<PathGeneration>
+  fullName: System.Collections.Generic.List<SMACD.AppTree.PathGeneration>
+  nameWithType.vb: List(Of PathGeneration)
+  fullName.vb: System.Collections.Generic.List(Of SMACD.AppTree.PathGeneration)
+  name.vb: List(Of PathGeneration)
   spec.csharp:
   - uid: System.Collections.Generic.List`1
     name: List
@@ -697,10 +670,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Synthesys.SDK.ExtensionReport
-    name: ExtensionReport
-    nameWithType: ExtensionReport
-    fullName: Synthesys.SDK.ExtensionReport
+  - uid: SMACD.AppTree.PathGeneration
+    name: PathGeneration
+    nameWithType: PathGeneration
+    fullName: SMACD.AppTree.PathGeneration
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -713,10 +686,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Synthesys.SDK.ExtensionReport
-    name: ExtensionReport
-    nameWithType: ExtensionReport
-    fullName: Synthesys.SDK.ExtensionReport
+  - uid: SMACD.AppTree.PathGeneration
+    name: PathGeneration
+    nameWithType: PathGeneration
+    fullName: SMACD.AppTree.PathGeneration
   - name: )
     nameWithType: )
     fullName: )
@@ -765,23 +738,11 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
-- uid: Synthesys.Tasks.Session.ServiceMapYaml*
-  commentId: Overload:Synthesys.Tasks.Session.ServiceMapYaml
-  name: ServiceMapYaml
-  nameWithType: Session.ServiceMapYaml
-  fullName: Synthesys.Tasks.Session.ServiceMapYaml
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
-- uid: Synthesys.Tasks.Session.Export*
-  commentId: Overload:Synthesys.Tasks.Session.Export
-  name: Export
-  nameWithType: Session.Export
-  fullName: Synthesys.Tasks.Session.Export
+- uid: SMACD.AppTree.PathGeneration.IsResultNode*
+  commentId: Overload:SMACD.AppTree.PathGeneration.IsResultNode
+  name: IsResultNode
+  nameWithType: PathGeneration.IsResultNode
+  fullName: SMACD.AppTree.PathGeneration.IsResultNode
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -789,3 +750,50 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: SMACD.AppTree.PathGeneration.GetResultNodes*
+  commentId: Overload:SMACD.AppTree.PathGeneration.GetResultNodes
+  name: GetResultNodes
+  nameWithType: PathGeneration.GetResultNodes
+  fullName: SMACD.AppTree.PathGeneration.GetResultNodes
+- uid: System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+  commentId: T:System.Collections.Generic.List{SMACD.AppTree.AppTreeNode}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<AppTreeNode>
+  nameWithType: List<AppTreeNode>
+  fullName: System.Collections.Generic.List<SMACD.AppTree.AppTreeNode>
+  nameWithType.vb: List(Of AppTreeNode)
+  fullName.vb: System.Collections.Generic.List(Of SMACD.AppTree.AppTreeNode)
+  name.vb: List(Of AppTreeNode)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )

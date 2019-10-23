@@ -11,7 +11,6 @@ items:
   - Synthesys.SDK.ExtensionReport.Error(System.Exception)
   - Synthesys.SDK.ExtensionReport.ErrorEncountered
   - Synthesys.SDK.ExtensionReport.ExtensionIdentifier
-  - Synthesys.SDK.ExtensionReport.FinalizeReport
   - Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport``1
   - Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
   - Synthesys.SDK.ExtensionReport.ProjectPointer
@@ -667,41 +666,6 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Synthesys.SDK.ExtensionReport.FinalizeReport
-  commentId: M:Synthesys.SDK.ExtensionReport.FinalizeReport
-  id: FinalizeReport
-  parent: Synthesys.SDK.ExtensionReport
-  langs:
-  - csharp
-  - vb
-  name: FinalizeReport()
-  nameWithType: ExtensionReport.FinalizeReport()
-  fullName: Synthesys.SDK.ExtensionReport.FinalizeReport()
-  type: Method
-  source:
-    remote:
-      path: Synthesys.SDK/ExtensionReport.cs
-      branch: reactions
-      repo: https://github.com/anthturner/SMACD.git
-    id: FinalizeReport
-    path: ../Synthesys.SDK/ExtensionReport.cs
-    startLine: 123
-  assemblies:
-  - Synthesys.SDK
-  namespace: Synthesys.SDK
-  summary: "\nFinalize report by disconnecting TaskDescriptor from recursive loops\n"
-  example: []
-  syntax:
-    content: public ExtensionReport FinalizeReport()
-    return:
-      type: Synthesys.SDK.ExtensionReport
-      description: ''
-    content.vb: Public Function FinalizeReport As ExtensionReport
-  overload: Synthesys.SDK.ExtensionReport.FinalizeReport*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 references:
 - uid: Synthesys.SDK
   commentId: N:Synthesys.SDK
@@ -1273,8 +1237,3 @@ references:
   name: Error
   nameWithType: ExtensionReport.Error
   fullName: Synthesys.SDK.ExtensionReport.Error
-- uid: Synthesys.SDK.ExtensionReport.FinalizeReport*
-  commentId: Overload:Synthesys.SDK.ExtensionReport.FinalizeReport
-  name: FinalizeReport
-  nameWithType: ExtensionReport.FinalizeReport
-  fullName: Synthesys.SDK.ExtensionReport.FinalizeReport

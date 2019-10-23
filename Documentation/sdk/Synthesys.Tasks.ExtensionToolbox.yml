@@ -6,6 +6,7 @@ items:
   parent: Synthesys.Tasks
   children:
   - Synthesys.Tasks.ExtensionToolbox.EmitAction(System.String)
+  - Synthesys.Tasks.ExtensionToolbox.EmitReaction(System.String)
   - Synthesys.Tasks.ExtensionToolbox.ExtensionLibraries
   - Synthesys.Tasks.ExtensionToolbox.GetExtensionMetadata
   - Synthesys.Tasks.ExtensionToolbox.GetExtensionMetadata(System.String)
@@ -13,7 +14,6 @@ items:
   - Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(Synthesys.SDK.Extensions.Extension,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
   - Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(Synthesys.SDK.Triggers.SystemEvents)
   - Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(Synthesys.SDK.Triggers.TriggerDescriptor)
-  - Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
   - Synthesys.Tasks.ExtensionToolbox.Instance
   - Synthesys.Tasks.ExtensionToolbox.LoadExtensionLibrariesFromPath(System.String,System.String,System.Boolean)
   - Synthesys.Tasks.ExtensionToolbox.LoadExtensionLibrary(System.String)
@@ -224,7 +224,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: LoadExtensionLibrariesFromPath
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 64
+    startLine: 65
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -266,7 +266,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: LoadExtensionLibrary
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 75
+    startLine: 76
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -302,7 +302,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetExtensionMetadata
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 85
+    startLine: 86
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -341,7 +341,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetExtensionMetadata
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 95
+    startLine: 96
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -376,7 +376,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: EmitAction
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 107
+    startLine: 108
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
@@ -397,43 +397,41 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
-  commentId: M:Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
-  id: GetReactionExtensionsTriggeredBy(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+- uid: Synthesys.Tasks.ExtensionToolbox.EmitReaction(System.String)
+  commentId: M:Synthesys.Tasks.ExtensionToolbox.EmitReaction(System.String)
+  id: EmitReaction(System.String)
   parent: Synthesys.Tasks.ExtensionToolbox
   langs:
   - csharp
   - vb
-  name: GetReactionExtensionsTriggeredBy(String, AppTreeNodeEvents)
-  nameWithType: ExtensionToolbox.GetReactionExtensionsTriggeredBy(String, AppTreeNodeEvents)
-  fullName: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy(System.String, Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  name: EmitReaction(String)
+  nameWithType: ExtensionToolbox.EmitReaction(String)
+  fullName: Synthesys.Tasks.ExtensionToolbox.EmitReaction(System.String)
   type: Method
   source:
     remote:
       path: Synthesys.Tasks/ExtensionToolbox.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: GetReactionExtensionsTriggeredBy
+    id: EmitReaction
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
     startLine: 125
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
-  summary: "\nGet a list of ReactionExtensions triggered by an action performed on a given Artifact node\n"
+  summary: "\nEmit a ReactionExtension\n"
   example: []
   syntax:
-    content: public List<ReactionExtension> GetReactionExtensionsTriggeredBy(string appTreeNodePath, AppTreeNodeEvents trigger)
+    content: public ReactionExtension EmitReaction(string extensionIdentifier)
     parameters:
-    - id: appTreeNodePath
+    - id: extensionIdentifier
       type: System.String
-    - id: trigger
-      type: Synthesys.SDK.Triggers.AppTreeNodeEvents
-      description: Trigger action type
+      description: Reaction identifier
     return:
-      type: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+      type: Synthesys.SDK.Extensions.ReactionExtension
       description: ''
-    content.vb: Public Function GetReactionExtensionsTriggeredBy(appTreeNodePath As String, trigger As AppTreeNodeEvents) As List(Of ReactionExtension)
-  overload: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
+    content.vb: Public Function EmitReaction(extensionIdentifier As String) As ReactionExtension
+  overload: Synthesys.Tasks.ExtensionToolbox.EmitReaction*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -456,14 +454,14 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetReactionExtensionsTriggeredBy
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 137
+    startLine: 145
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
   summary: "\nGet a list of ReactionExtensions triggered by an action performed on a given Artifact node\n"
   example: []
   syntax:
-    content: public List<ReactionExtension> GetReactionExtensionsTriggeredBy(AppTreeNode appTreeNode, AppTreeNodeEvents trigger)
+    content: public List<Type> GetReactionExtensionsTriggeredBy(AppTreeNode appTreeNode, AppTreeNodeEvents trigger)
     parameters:
     - id: appTreeNode
       type: SMACD.AppTree.AppTreeNode
@@ -472,9 +470,9 @@ items:
       type: Synthesys.SDK.Triggers.AppTreeNodeEvents
       description: Trigger action type
     return:
-      type: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+      type: System.Collections.Generic.List{System.Type}
       description: ''
-    content.vb: Public Function GetReactionExtensionsTriggeredBy(appTreeNode As AppTreeNode, trigger As AppTreeNodeEvents) As List(Of ReactionExtension)
+    content.vb: Public Function GetReactionExtensionsTriggeredBy(appTreeNode As AppTreeNode, trigger As AppTreeNodeEvents) As List(Of Type)
   overload: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
   modifiers.csharp:
   - public
@@ -498,14 +496,14 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetReactionExtensionsTriggeredBy
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 149
+    startLine: 159
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
   summary: "\nGet a list of ReactionExtensions triggered by an extension being run\n"
   example: []
   syntax:
-    content: public List<ReactionExtension> GetReactionExtensionsTriggeredBy(Extension triggeringExtension, ExtensionConditionTrigger trigger)
+    content: public List<Type> GetReactionExtensionsTriggeredBy(Extension triggeringExtension, ExtensionConditionTrigger trigger)
     parameters:
     - id: triggeringExtension
       type: Synthesys.SDK.Extensions.Extension
@@ -514,9 +512,9 @@ items:
       type: Synthesys.SDK.Triggers.ExtensionConditionTrigger
       description: Trigger execution state condition
     return:
-      type: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+      type: System.Collections.Generic.List{System.Type}
       description: ''
-    content.vb: Public Function GetReactionExtensionsTriggeredBy(triggeringExtension As Extension, trigger As ExtensionConditionTrigger) As List(Of ReactionExtension)
+    content.vb: Public Function GetReactionExtensionsTriggeredBy(triggeringExtension As Extension, trigger As ExtensionConditionTrigger) As List(Of Type)
   overload: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
   modifiers.csharp:
   - public
@@ -540,22 +538,22 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetReactionExtensionsTriggeredBy
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 160
+    startLine: 173
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
   summary: "\nGet a list of ReactionExtensions triggered by a system event\n"
   example: []
   syntax:
-    content: public List<ReactionExtension> GetReactionExtensionsTriggeredBy(SystemEvents triggeringEvent)
+    content: public List<Type> GetReactionExtensionsTriggeredBy(SystemEvents triggeringEvent)
     parameters:
     - id: triggeringEvent
       type: Synthesys.SDK.Triggers.SystemEvents
       description: System event causing the trigger
     return:
-      type: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+      type: System.Collections.Generic.List{System.Type}
       description: ''
-    content.vb: Public Function GetReactionExtensionsTriggeredBy(triggeringEvent As SystemEvents) As List(Of ReactionExtension)
+    content.vb: Public Function GetReactionExtensionsTriggeredBy(triggeringEvent As SystemEvents) As List(Of Type)
   overload: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
   modifiers.csharp:
   - public
@@ -579,22 +577,22 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetReactionExtensionsTriggeredBy
     path: ../Synthesys.Tasks/ExtensionToolbox.cs
-    startLine: 170
+    startLine: 187
   assemblies:
   - Synthesys.Tasks
   namespace: Synthesys.Tasks
-  summary: "\nGet a list of ReactionExtensions triggered by a given event\n"
+  summary: "\nGet a list of ReactionExtensions triggered by a given event\n\nNOTE: This does not properly resolve wildcard paths for Artifacts.\n"
   example: []
   syntax:
-    content: public List<ReactionExtension> GetReactionExtensionsTriggeredBy(TriggerDescriptor trigger)
+    content: public List<Type> GetReactionExtensionsTriggeredBy(TriggerDescriptor trigger)
     parameters:
     - id: trigger
       type: Synthesys.SDK.Triggers.TriggerDescriptor
       description: Trigger description of event
     return:
-      type: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+      type: System.Collections.Generic.List{System.Type}
       description: ''
-    content.vb: Public Function GetReactionExtensionsTriggeredBy(trigger As TriggerDescriptor) As List(Of ReactionExtension)
+    content.vb: Public Function GetReactionExtensionsTriggeredBy(trigger As TriggerDescriptor) As List(Of Type)
   overload: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
   modifiers.csharp:
   - public
@@ -1167,27 +1165,44 @@ references:
   name: ActionExtension
   nameWithType: ActionExtension
   fullName: Synthesys.SDK.Extensions.ActionExtension
+- uid: Synthesys.Tasks.ExtensionToolbox.EmitReaction*
+  commentId: Overload:Synthesys.Tasks.ExtensionToolbox.EmitReaction
+  name: EmitReaction
+  nameWithType: ExtensionToolbox.EmitReaction
+  fullName: Synthesys.Tasks.ExtensionToolbox.EmitReaction
+- uid: Synthesys.SDK.Extensions.ReactionExtension
+  commentId: T:Synthesys.SDK.Extensions.ReactionExtension
+  parent: Synthesys.SDK.Extensions
+  name: ReactionExtension
+  nameWithType: ReactionExtension
+  fullName: Synthesys.SDK.Extensions.ReactionExtension
 - uid: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy*
   commentId: Overload:Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy
   name: GetReactionExtensionsTriggeredBy
   nameWithType: ExtensionToolbox.GetReactionExtensionsTriggeredBy
   fullName: Synthesys.Tasks.ExtensionToolbox.GetReactionExtensionsTriggeredBy
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
 - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
   commentId: T:Synthesys.SDK.Triggers.AppTreeNodeEvents
   parent: Synthesys.SDK.Triggers
   name: AppTreeNodeEvents
   nameWithType: AppTreeNodeEvents
   fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
-- uid: System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
-  commentId: T:System.Collections.Generic.List{Synthesys.SDK.Extensions.ReactionExtension}
+- uid: System.Collections.Generic.List{System.Type}
+  commentId: T:System.Collections.Generic.List{System.Type}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.List`1
-  name: List<ReactionExtension>
-  nameWithType: List<ReactionExtension>
-  fullName: System.Collections.Generic.List<Synthesys.SDK.Extensions.ReactionExtension>
-  nameWithType.vb: List(Of ReactionExtension)
-  fullName.vb: System.Collections.Generic.List(Of Synthesys.SDK.Extensions.ReactionExtension)
-  name.vb: List(Of ReactionExtension)
+  name: List<Type>
+  nameWithType: List<Type>
+  fullName: System.Collections.Generic.List<System.Type>
+  nameWithType.vb: List(Of Type)
+  fullName.vb: System.Collections.Generic.List(Of System.Type)
+  name.vb: List(Of Type)
   spec.csharp:
   - uid: System.Collections.Generic.List`1
     name: List
@@ -1197,10 +1212,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Synthesys.SDK.Extensions.ReactionExtension
-    name: ReactionExtension
-    nameWithType: ReactionExtension
-    fullName: Synthesys.SDK.Extensions.ReactionExtension
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1213,13 +1229,19 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Synthesys.SDK.Extensions.ReactionExtension
-    name: ReactionExtension
-    nameWithType: ReactionExtension
-    fullName: Synthesys.SDK.Extensions.ReactionExtension
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
 - uid: Synthesys.SDK.Triggers
   commentId: N:Synthesys.SDK.Triggers
   name: Synthesys.SDK.Triggers
@@ -1264,17 +1286,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: SMACD.AppTree.AppTreeNode
-  commentId: T:SMACD.AppTree.AppTreeNode
-  parent: SMACD.AppTree
-  name: AppTreeNode
-  nameWithType: AppTreeNode
-  fullName: SMACD.AppTree.AppTreeNode
-- uid: SMACD.AppTree
-  commentId: N:SMACD.AppTree
-  name: SMACD.AppTree
-  nameWithType: SMACD.AppTree
-  fullName: SMACD.AppTree
 - uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
   commentId: T:Synthesys.SDK.Triggers.ExtensionConditionTrigger
   parent: Synthesys.SDK.Triggers

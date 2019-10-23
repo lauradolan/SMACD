@@ -11,6 +11,8 @@ items:
   - SMACD.AppTree.HttpServiceNode
   - SMACD.AppTree.IAppTreeNode`1
   - SMACD.AppTree.ObservableDictionary`2
+  - SMACD.AppTree.PathGeneration
+  - SMACD.AppTree.PathParserExtensions
   - SMACD.AppTree.ProjectPointer
   - SMACD.AppTree.RootNode
   - SMACD.AppTree.RootNode.ArtifactEventDelegate
@@ -141,6 +143,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: SMACD.AppTree.PathGeneration
+  commentId: T:SMACD.AppTree.PathGeneration
+  parent: SMACD.AppTree
+  name: PathGeneration
+  nameWithType: PathGeneration
+  fullName: SMACD.AppTree.PathGeneration
+- uid: SMACD.AppTree.PathParserExtensions
+  commentId: T:SMACD.AppTree.PathParserExtensions
+  name: PathParserExtensions
+  nameWithType: PathParserExtensions
+  fullName: SMACD.AppTree.PathParserExtensions
 - uid: SMACD.AppTree.ProjectPointer
   commentId: T:SMACD.AppTree.ProjectPointer
   parent: SMACD.AppTree
@@ -234,7 +247,6 @@ references:
     fullName: )
 - uid: SMACD.AppTree.Vulnerability
   commentId: T:SMACD.AppTree.Vulnerability
-  parent: SMACD.AppTree
   name: Vulnerability
   nameWithType: Vulnerability
   fullName: SMACD.AppTree.Vulnerability

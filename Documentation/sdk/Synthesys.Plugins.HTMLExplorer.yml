@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.HTMLExplorer
+  commentId: N:Synthesys.Plugins.HTMLExplorer
+  id: Synthesys.Plugins.HTMLExplorer
+  children:
+  - Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Plugins.HTMLExplorer
+  nameWithType: Synthesys.Plugins.HTMLExplorer
+  fullName: Synthesys.Plugins.HTMLExplorer
+  type: Namespace
+  assemblies:
+  - Synthesys.Plugins.HTMLExplorer
+references:
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  commentId: T:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  name: HtmlExplorerReaction
+  nameWithType: HtmlExplorerReaction
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction

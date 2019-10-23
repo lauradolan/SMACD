@@ -39,6 +39,7 @@ items:
   derivedClasses:
   - Synthesys.Plugins.AzureDevOps.AzureDevOpsService
   - Synthesys.Plugins.Dummy.DummyReaction
+  - Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
   - Synthesys.Plugins.SQLMap.SqlMapReaction
   inheritedMembers:
   - Synthesys.SDK.Extensions.Extension.Logger

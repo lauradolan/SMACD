@@ -19,7 +19,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ArtifactEventDelegate
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree

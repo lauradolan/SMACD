@@ -6,6 +6,7 @@ items:
   parent: SMACD.AppTree
   children:
   - SMACD.AppTree.UrlRequestNode.#ctor
+  - SMACD.AppTree.UrlRequestNode.#ctor(SMACD.AppTree.UrlNode,System.String[])
   - SMACD.AppTree.UrlRequestNode.Detail
   - SMACD.AppTree.UrlRequestNode.Fields
   - SMACD.AppTree.UrlRequestNode.GetEntireUrl
@@ -353,6 +354,48 @@ items:
   - ReadOnly
   fullName.vb: SMACD.AppTree.UrlRequestNode.Item(System.String)
   name.vb: Item(String)
+- uid: SMACD.AppTree.UrlRequestNode.#ctor(SMACD.AppTree.UrlNode,System.String[])
+  commentId: M:SMACD.AppTree.UrlRequestNode.#ctor(SMACD.AppTree.UrlNode,System.String[])
+  id: '#ctor(SMACD.AppTree.UrlNode,System.String[])'
+  parent: SMACD.AppTree.UrlRequestNode
+  langs:
+  - csharp
+  - vb
+  name: UrlRequestNode(UrlNode, String[])
+  nameWithType: UrlRequestNode.UrlRequestNode(UrlNode, String[])
+  fullName: SMACD.AppTree.UrlRequestNode.UrlRequestNode(SMACD.AppTree.UrlNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/UrlRequestNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/UrlRequestNode.cs
+    startLine: 104
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single request to a URL in some part of the application\n"
+  example: []
+  syntax:
+    content: public UrlRequestNode(UrlNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.UrlNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers for node
+    content.vb: Public Sub New(parent As UrlNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.UrlRequestNode.#ctor*
+  nameWithType.vb: UrlRequestNode.UrlRequestNode(UrlNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.UrlRequestNode.UrlRequestNode(SMACD.AppTree.UrlNode, System.String())
+  name.vb: UrlRequestNode(UrlNode, String())
 - uid: SMACD.AppTree.UrlRequestNode.#ctor
   commentId: M:SMACD.AppTree.UrlRequestNode.#ctor
   id: '#ctor'
@@ -371,7 +414,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../SMACD.AppTree/UrlRequestNode.cs
-    startLine: 102
+    startLine: 113
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -403,7 +446,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetEntireUrl
     path: ../SMACD.AppTree/UrlRequestNode.cs
-    startLine: 112
+    startLine: 123
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -438,7 +481,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../SMACD.AppTree/UrlRequestNode.cs
-    startLine: 124
+    startLine: 134
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1686,6 +1729,32 @@ references:
   name: UrlRequestNode
   nameWithType: UrlRequestNode.UrlRequestNode
   fullName: SMACD.AppTree.UrlRequestNode.UrlRequestNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: SMACD.AppTree.UrlRequestNode.GetEntireUrl*
   commentId: Overload:SMACD.AppTree.UrlRequestNode.GetEntireUrl
   name: GetEntireUrl

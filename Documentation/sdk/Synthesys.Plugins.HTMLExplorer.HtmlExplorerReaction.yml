@@ -1,55 +1,57 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction
-  commentId: T:Synthesys.Plugins.Nmap.NmapScannerAction
-  id: NmapScannerAction
-  parent: Synthesys.Plugins.Nmap
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  commentId: T:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  id: HtmlExplorerReaction
+  parent: Synthesys.Plugins.HTMLExplorer
   children:
-  - Synthesys.Plugins.Nmap.NmapScannerAction.Act
-  - Synthesys.Plugins.Nmap.NmapScannerAction.Host
+  - Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize
+  - Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  - Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
   langs:
   - csharp
   - vb
-  name: NmapScannerAction
-  nameWithType: NmapScannerAction
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction
+  name: HtmlExplorerReaction
+  nameWithType: HtmlExplorerReaction
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
   type: Class
   source:
     remote:
-      path: Synthesys.Plugins.Nmap/NmapScannerAction.cs
+      path: Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: NmapScannerAction
-    path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 24
+    id: HtmlExplorerReaction
+    path: ../Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
+    startLine: 16
   assemblies:
-  - Synthesys.Plugins.Nmap
-  namespace: Synthesys.Plugins.Nmap
-  summary: "\nNmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services\n(application name and version) those hosts are offering, what operating systems (and OS versions) they are running,\nwhat type of packet filters/firewalls are in use, and dozens of other characteristics.\n"
-  remarks: Description from tools.kali.org
-  example: []
+  - Synthesys.Plugins.HTMLExplorer
+  namespace: Synthesys.Plugins.HTMLExplorer
   syntax:
     content: >-
-      [Extension("nmap", Name = "NMap Port Scanner", Version = "1.0.0", Author = "Anthony Turner", Website = "https://github.com/anthturner/smacd")]
+      [Extension("htmlexplorer", Name = "HTML Explorer", Description = "Populates HTML from successful requests", Version = "1.0.0", Author = "Anthony Turner", Website = "https://github.com/anthturner/smacd")]
 
-      public class NmapScannerAction : ActionExtension, IOperateOnHost
+      [TriggeredBy("**//{UrlNode}*", AppTreeNodeEvents.AddsChild)]
+
+      public class HtmlExplorerReaction : ReactionExtension, ICanQueueTasks
     content.vb: >-
-      <Extension("nmap", Name:="NMap Port Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
+      <Extension("htmlexplorer", Name:="HTML Explorer", Description:="Populates HTML from successful requests", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
 
-      Public Class NmapScannerAction
+      <TriggeredBy("**//{UrlNode}*", AppTreeNodeEvents.AddsChild)>
 
-          Inherits ActionExtension
+      Public Class HtmlExplorerReaction
 
-          Implements IOperateOnHost
+          Inherits ReactionExtension
+
+          Implements ICanQueueTasks
   inheritance:
   - System.Object
   - Synthesys.SDK.Extensions.Extension
-  - Synthesys.SDK.Extensions.ActionExtension
+  - Synthesys.SDK.Extensions.ReactionExtension
   implements:
-  - Synthesys.SDK.Capabilities.IOperateOnHost
+  - Synthesys.Tasks.Attributes.ICanQueueTasks
   inheritedMembers:
+  - Synthesys.SDK.Extensions.ReactionExtension.Triggers
   - Synthesys.SDK.Extensions.Extension.Logger
-  - Synthesys.SDK.Extensions.Extension.Initialize
   - Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   - Synthesys.SDK.Extensions.Extension.SetLoggerName(System.String)
   - Synthesys.SDK.Extensions.Extension.Metadata
@@ -69,11 +71,14 @@ items:
     ctor: Synthesys.SDK.Attributes.ExtensionAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: nmap
+      value: htmlexplorer
     namedArguments:
     - name: Name
       type: System.String
-      value: NMap Port Scanner
+      value: HTML Explorer
+    - name: Description
+      type: System.String
+      value: Populates HTML from successful requests
     - name: Version
       type: System.String
       value: 1.0.0
@@ -83,80 +88,121 @@ items:
     - name: Website
       type: System.String
       value: https://github.com/anthturner/smacd
+  - type: Synthesys.SDK.Attributes.TriggeredByAttribute
+    ctor: Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    arguments:
+    - type: System.String
+      value: '**//{UrlNode}*'
+    - type: Synthesys.SDK.Triggers.AppTreeNodeEvents
+      value: 2
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.Host
-  commentId: P:Synthesys.Plugins.Nmap.NmapScannerAction.Host
-  id: Host
-  parent: Synthesys.Plugins.Nmap.NmapScannerAction
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
+  commentId: P:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
+  id: Tasks
+  parent: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
   langs:
   - csharp
   - vb
-  name: Host
-  nameWithType: NmapScannerAction.Host
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.Host
+  name: Tasks
+  nameWithType: HtmlExplorerReaction.Tasks
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
   type: Property
   source:
     remote:
-      path: Synthesys.Plugins.Nmap/NmapScannerAction.cs
+      path: Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: Host
-    path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 34
+    id: Tasks
+    path: ../Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
+    startLine: 25
   assemblies:
-  - Synthesys.Plugins.Nmap
-  namespace: Synthesys.Plugins.Nmap
-  summary: "\nHost/IP address to scan\n"
-  example: []
+  - Synthesys.Plugins.HTMLExplorer
+  namespace: Synthesys.Plugins.HTMLExplorer
   syntax:
-    content: public HostNode Host { get; set; }
+    content: public ITaskToolbox Tasks { get; set; }
     parameters: []
     return:
-      type: SMACD.AppTree.HostNode
-    content.vb: Public Property Host As HostNode
-  overload: Synthesys.Plugins.Nmap.NmapScannerAction.Host*
+      type: Synthesys.Tasks.ITaskToolbox
+    content.vb: Public Property Tasks As ITaskToolbox
+  overload: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks*
   implements:
-  - Synthesys.SDK.Capabilities.IOperateOnHost.Host
+  - Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.Act
-  commentId: M:Synthesys.Plugins.Nmap.NmapScannerAction.Act
-  id: Act
-  parent: Synthesys.Plugins.Nmap.NmapScannerAction
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize
+  commentId: M:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize
+  id: Initialize
+  parent: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
   langs:
   - csharp
   - vb
-  name: Act()
-  nameWithType: NmapScannerAction.Act()
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.Act()
+  name: Initialize()
+  nameWithType: HtmlExplorerReaction.Initialize()
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize()
   type: Method
   source:
     remote:
-      path: Synthesys.Plugins.Nmap/NmapScannerAction.cs
+      path: Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
       branch: reactions
       repo: https://github.com/anthturner/SMACD.git
-    id: Act
-    path: ../Synthesys.Plugins.Nmap/NmapScannerAction.cs
-    startLine: 56
+    id: Initialize
+    path: ../Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
+    startLine: 27
   assemblies:
-  - Synthesys.Plugins.Nmap
-  namespace: Synthesys.Plugins.Nmap
+  - Synthesys.Plugins.HTMLExplorer
+  namespace: Synthesys.Plugins.HTMLExplorer
   syntax:
-    content: public override ExtensionReport Act()
+    content: public override void Initialize()
+    content.vb: Public Overrides Sub Initialize
+  overridden: Synthesys.SDK.Extensions.Extension.Initialize
+  overload: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  commentId: M:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  id: React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  parent: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction
+  langs:
+  - csharp
+  - vb
+  name: React(TriggerDescriptor)
+  nameWithType: HtmlExplorerReaction.React(TriggerDescriptor)
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: React
+    path: ../Synthesys.Plugins.HTMLExplorer/HtmlExplorerReaction.cs
+    startLine: 33
+  assemblies:
+  - Synthesys.Plugins.HTMLExplorer
+  namespace: Synthesys.Plugins.HTMLExplorer
+  syntax:
+    content: public override ExtensionReport React(TriggerDescriptor trigger)
+    parameters:
+    - id: trigger
+      type: Synthesys.SDK.Triggers.TriggerDescriptor
     return:
       type: Synthesys.SDK.ExtensionReport
-    content.vb: Public Overrides Function Act As ExtensionReport
-  overridden: Synthesys.SDK.Extensions.ActionExtension.Act
-  overload: Synthesys.Plugins.Nmap.NmapScannerAction.Act*
+    content.vb: Public Overrides Function React(trigger As TriggerDescriptor) As ExtensionReport
+  overridden: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  overload: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React*
   modifiers.csharp:
   - public
   - override
@@ -164,11 +210,11 @@ items:
   - Public
   - Overrides
 references:
-- uid: Synthesys.Plugins.Nmap
-  commentId: N:Synthesys.Plugins.Nmap
-  name: Synthesys.Plugins.Nmap
-  nameWithType: Synthesys.Plugins.Nmap
-  fullName: Synthesys.Plugins.Nmap
+- uid: Synthesys.Plugins.HTMLExplorer
+  commentId: N:Synthesys.Plugins.HTMLExplorer
+  name: Synthesys.Plugins.HTMLExplorer
+  nameWithType: Synthesys.Plugins.HTMLExplorer
+  fullName: Synthesys.Plugins.HTMLExplorer
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -182,52 +228,30 @@ references:
   name: Extension
   nameWithType: Extension
   fullName: Synthesys.SDK.Extensions.Extension
-- uid: Synthesys.SDK.Extensions.ActionExtension
-  commentId: T:Synthesys.SDK.Extensions.ActionExtension
+- uid: Synthesys.SDK.Extensions.ReactionExtension
+  commentId: T:Synthesys.SDK.Extensions.ReactionExtension
   parent: Synthesys.SDK.Extensions
-  name: ActionExtension
-  nameWithType: ActionExtension
-  fullName: Synthesys.SDK.Extensions.ActionExtension
-- uid: Synthesys.SDK.Capabilities.IOperateOnHost
-  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHost
-  parent: Synthesys.SDK.Capabilities
-  name: IOperateOnHost
-  nameWithType: IOperateOnHost
-  fullName: Synthesys.SDK.Capabilities.IOperateOnHost
+  name: ReactionExtension
+  nameWithType: ReactionExtension
+  fullName: Synthesys.SDK.Extensions.ReactionExtension
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks
+  commentId: T:Synthesys.Tasks.Attributes.ICanQueueTasks
+  parent: Synthesys.Tasks.Attributes
+  name: ICanQueueTasks
+  nameWithType: ICanQueueTasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks
+- uid: Synthesys.SDK.Extensions.ReactionExtension.Triggers
+  commentId: P:Synthesys.SDK.Extensions.ReactionExtension.Triggers
+  parent: Synthesys.SDK.Extensions.ReactionExtension
+  name: Triggers
+  nameWithType: ReactionExtension.Triggers
+  fullName: Synthesys.SDK.Extensions.ReactionExtension.Triggers
 - uid: Synthesys.SDK.Extensions.Extension.Logger
   commentId: P:Synthesys.SDK.Extensions.Extension.Logger
   parent: Synthesys.SDK.Extensions.Extension
   name: Logger
   nameWithType: Extension.Logger
   fullName: Synthesys.SDK.Extensions.Extension.Logger
-- uid: Synthesys.SDK.Extensions.Extension.Initialize
-  commentId: M:Synthesys.SDK.Extensions.Extension.Initialize
-  parent: Synthesys.SDK.Extensions.Extension
-  name: Initialize()
-  nameWithType: Extension.Initialize()
-  fullName: Synthesys.SDK.Extensions.Extension.Initialize()
-  spec.csharp:
-  - uid: Synthesys.SDK.Extensions.Extension.Initialize
-    name: Initialize
-    nameWithType: Extension.Initialize
-    fullName: Synthesys.SDK.Extensions.Extension.Initialize
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Synthesys.SDK.Extensions.Extension.Initialize
-    name: Initialize
-    nameWithType: Extension.Initialize
-    fullName: Synthesys.SDK.Extensions.Extension.Initialize
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   commentId: M:Synthesys.SDK.Extensions.Extension.ValidateEnvironmentReadiness
   parent: Synthesys.SDK.Extensions.Extension
@@ -697,11 +721,11 @@ references:
   name: Synthesys.SDK.Extensions
   nameWithType: Synthesys.SDK.Extensions
   fullName: Synthesys.SDK.Extensions
-- uid: Synthesys.SDK.Capabilities
-  commentId: N:Synthesys.SDK.Capabilities
-  name: Synthesys.SDK.Capabilities
-  nameWithType: Synthesys.SDK.Capabilities
-  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.Tasks.Attributes
+  commentId: N:Synthesys.Tasks.Attributes
+  name: Synthesys.Tasks.Attributes
+  nameWithType: Synthesys.Tasks.Attributes
+  fullName: Synthesys.Tasks.Attributes
 - uid: Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
   commentId: M:Synthesys.Tasks.ExtensionConfigurator.Configure(Synthesys.SDK.Extensions.Extension,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String})
   isExternal: true
@@ -820,39 +844,34 @@ references:
   name: Synthesys.Tasks
   nameWithType: Synthesys.Tasks
   fullName: Synthesys.Tasks
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.Host*
-  commentId: Overload:Synthesys.Plugins.Nmap.NmapScannerAction.Host
-  name: Host
-  nameWithType: NmapScannerAction.Host
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.Host
-- uid: Synthesys.SDK.Capabilities.IOperateOnHost.Host
-  commentId: P:Synthesys.SDK.Capabilities.IOperateOnHost.Host
-  parent: Synthesys.SDK.Capabilities.IOperateOnHost
-  name: Host
-  nameWithType: IOperateOnHost.Host
-  fullName: Synthesys.SDK.Capabilities.IOperateOnHost.Host
-- uid: SMACD.AppTree.HostNode
-  commentId: T:SMACD.AppTree.HostNode
-  parent: SMACD.AppTree
-  name: HostNode
-  nameWithType: HostNode
-  fullName: SMACD.AppTree.HostNode
-- uid: SMACD.AppTree
-  commentId: N:SMACD.AppTree
-  name: SMACD.AppTree
-  nameWithType: SMACD.AppTree
-  fullName: SMACD.AppTree
-- uid: Synthesys.SDK.Extensions.ActionExtension.Act
-  commentId: M:Synthesys.SDK.Extensions.ActionExtension.Act
-  parent: Synthesys.SDK.Extensions.ActionExtension
-  name: Act()
-  nameWithType: ActionExtension.Act()
-  fullName: Synthesys.SDK.Extensions.ActionExtension.Act()
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks*
+  commentId: Overload:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
+  name: Tasks
+  nameWithType: HtmlExplorerReaction.Tasks
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Tasks
+- uid: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  commentId: P:Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+  parent: Synthesys.Tasks.Attributes.ICanQueueTasks
+  name: Tasks
+  nameWithType: ICanQueueTasks.Tasks
+  fullName: Synthesys.Tasks.Attributes.ICanQueueTasks.Tasks
+- uid: Synthesys.Tasks.ITaskToolbox
+  commentId: T:Synthesys.Tasks.ITaskToolbox
+  parent: Synthesys.Tasks
+  name: ITaskToolbox
+  nameWithType: ITaskToolbox
+  fullName: Synthesys.Tasks.ITaskToolbox
+- uid: Synthesys.SDK.Extensions.Extension.Initialize
+  commentId: M:Synthesys.SDK.Extensions.Extension.Initialize
+  parent: Synthesys.SDK.Extensions.Extension
+  name: Initialize()
+  nameWithType: Extension.Initialize()
+  fullName: Synthesys.SDK.Extensions.Extension.Initialize()
   spec.csharp:
-  - uid: Synthesys.SDK.Extensions.ActionExtension.Act
-    name: Act
-    nameWithType: ActionExtension.Act
-    fullName: Synthesys.SDK.Extensions.ActionExtension.Act
+  - uid: Synthesys.SDK.Extensions.Extension.Initialize
+    name: Initialize
+    nameWithType: Extension.Initialize
+    fullName: Synthesys.SDK.Extensions.Extension.Initialize
   - name: (
     nameWithType: (
     fullName: (
@@ -860,27 +879,79 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Synthesys.SDK.Extensions.ActionExtension.Act
-    name: Act
-    nameWithType: ActionExtension.Act
-    fullName: Synthesys.SDK.Extensions.ActionExtension.Act
+  - uid: Synthesys.SDK.Extensions.Extension.Initialize
+    name: Initialize
+    nameWithType: Extension.Initialize
+    fullName: Synthesys.SDK.Extensions.Extension.Initialize
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: Synthesys.Plugins.Nmap.NmapScannerAction.Act*
-  commentId: Overload:Synthesys.Plugins.Nmap.NmapScannerAction.Act
-  name: Act
-  nameWithType: NmapScannerAction.Act
-  fullName: Synthesys.Plugins.Nmap.NmapScannerAction.Act
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize*
+  commentId: Overload:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize
+  name: Initialize
+  nameWithType: HtmlExplorerReaction.Initialize
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.Initialize
+- uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  commentId: M:Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  parent: Synthesys.SDK.Extensions.ReactionExtension
+  name: React(TriggerDescriptor)
+  nameWithType: ReactionExtension.React(TriggerDescriptor)
+  fullName: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+  spec.csharp:
+  - uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+    name: React
+    nameWithType: ReactionExtension.React
+    fullName: Synthesys.SDK.Extensions.ReactionExtension.React
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Extensions.ReactionExtension.React(Synthesys.SDK.Triggers.TriggerDescriptor)
+    name: React
+    nameWithType: ReactionExtension.React
+    fullName: Synthesys.SDK.Extensions.ReactionExtension.React
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React*
+  commentId: Overload:Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React
+  name: React
+  nameWithType: HtmlExplorerReaction.React
+  fullName: Synthesys.Plugins.HTMLExplorer.HtmlExplorerReaction.React
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
 - uid: Synthesys.SDK.ExtensionReport
   commentId: T:Synthesys.SDK.ExtensionReport
   parent: Synthesys.SDK
   name: ExtensionReport
   nameWithType: ExtensionReport
   fullName: Synthesys.SDK.ExtensionReport
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
 - uid: Synthesys.SDK
   commentId: N:Synthesys.SDK
   name: Synthesys.SDK

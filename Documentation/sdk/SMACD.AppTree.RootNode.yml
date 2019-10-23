@@ -5,7 +5,7 @@ items:
   id: RootNode
   parent: SMACD.AppTree
   children:
-  - SMACD.AppTree.RootNode.#ctor
+  - SMACD.AppTree.RootNode.#ctor(SMACD.AppTree.AppTreeNode)
   - SMACD.AppTree.RootNode.ArtifactChanged
   - SMACD.AppTree.RootNode.ArtifactChildAdded
   - SMACD.AppTree.RootNode.ArtifactCreated
@@ -27,7 +27,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: RootNode
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -95,7 +95,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NodeViewName
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -135,7 +135,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: SuppressEventFiring
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 28
+    startLine: 29
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -172,7 +172,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: LockTreeNodes
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -209,7 +209,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: this[]
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -334,16 +334,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: SMACD.AppTree.RootNode.#ctor
-  commentId: M:SMACD.AppTree.RootNode.#ctor
-  id: '#ctor'
+- uid: SMACD.AppTree.RootNode.#ctor(SMACD.AppTree.AppTreeNode)
+  commentId: M:SMACD.AppTree.RootNode.#ctor(SMACD.AppTree.AppTreeNode)
+  id: '#ctor(SMACD.AppTree.AppTreeNode)'
   parent: SMACD.AppTree.RootNode
   langs:
   - csharp
   - vb
-  name: RootNode()
-  nameWithType: RootNode.RootNode()
-  fullName: SMACD.AppTree.RootNode.RootNode()
+  name: RootNode(AppTreeNode)
+  nameWithType: RootNode.RootNode(AppTreeNode)
+  fullName: SMACD.AppTree.RootNode.RootNode(SMACD.AppTree.AppTreeNode)
   type: Constructor
   source:
     remote:
@@ -352,15 +352,19 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../SMACD.AppTree/RootNode.cs
-    startLine: 133
+    startLine: 134
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
   summary: "\nRepresents the root of an Artifact correlation tree\n"
   example: []
   syntax:
-    content: public RootNode()
-    content.vb: Public Sub New
+    content: public RootNode(AppTreeNode parent = null)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.AppTreeNode
+      description: Parent node (should be null)
+    content.vb: Public Sub New(parent As AppTreeNode = Nothing)
   overload: SMACD.AppTree.RootNode.#ctor*
   modifiers.csharp:
   - public

@@ -4,8 +4,6 @@ items:
   commentId: N:Synthesys.Plugins.OwaspZap
   id: Synthesys.Plugins.OwaspZap
   children:
-  - Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
-  - Synthesys.Plugins.OwaspZap.OwaspZapReportView
   - Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
   - Synthesys.Plugins.OwaspZap.ZapJsonAlert
   - Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
@@ -29,7 +27,6 @@ references:
   fullName: Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
 - uid: Synthesys.Plugins.OwaspZap.ZapJsonReport
   commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonReport
-  parent: Synthesys.Plugins.OwaspZap
   name: ZapJsonReport
   nameWithType: ZapJsonReport
   fullName: Synthesys.Plugins.OwaspZap.ZapJsonReport
@@ -54,16 +51,6 @@ references:
   name: ZapJsonAlertInstance
   nameWithType: ZapJsonAlertInstance
   fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
-- uid: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
-  commentId: T:Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
-  name: OwaspZapReportSummary
-  nameWithType: OwaspZapReportSummary
-  fullName: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
-- uid: Synthesys.Plugins.OwaspZap.OwaspZapReportView
-  commentId: T:Synthesys.Plugins.OwaspZap.OwaspZapReportView
-  name: OwaspZapReportView
-  nameWithType: OwaspZapReportView
-  fullName: Synthesys.Plugins.OwaspZap.OwaspZapReportView
 - uid: Synthesys.Plugins.OwaspZap
   commentId: N:Synthesys.Plugins.OwaspZap
   name: Synthesys.Plugins.OwaspZap

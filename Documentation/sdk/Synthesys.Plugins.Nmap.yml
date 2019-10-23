@@ -5,8 +5,6 @@ items:
   id: Synthesys.Plugins.Nmap
   children:
   - Synthesys.Plugins.Nmap.NmapPort
-  - Synthesys.Plugins.Nmap.NmapReportSummary
-  - Synthesys.Plugins.Nmap.NmapReportView
   - Synthesys.Plugins.Nmap.NmapRunReport
   - Synthesys.Plugins.Nmap.NmapScannerAction
   langs:
@@ -21,13 +19,11 @@ items:
 references:
 - uid: Synthesys.Plugins.Nmap.NmapRunReport
   commentId: T:Synthesys.Plugins.Nmap.NmapRunReport
-  parent: Synthesys.Plugins.Nmap
   name: NmapRunReport
   nameWithType: NmapRunReport
   fullName: Synthesys.Plugins.Nmap.NmapRunReport
 - uid: Synthesys.Plugins.Nmap.NmapPort
   commentId: T:Synthesys.Plugins.Nmap.NmapPort
-  parent: Synthesys.Plugins.Nmap
   name: NmapPort
   nameWithType: NmapPort
   fullName: Synthesys.Plugins.Nmap.NmapPort
@@ -36,18 +32,3 @@ references:
   name: NmapScannerAction
   nameWithType: NmapScannerAction
   fullName: Synthesys.Plugins.Nmap.NmapScannerAction
-- uid: Synthesys.Plugins.Nmap.NmapReportSummary
-  commentId: T:Synthesys.Plugins.Nmap.NmapReportSummary
-  name: NmapReportSummary
-  nameWithType: NmapReportSummary
-  fullName: Synthesys.Plugins.Nmap.NmapReportSummary
-- uid: Synthesys.Plugins.Nmap.NmapReportView
-  commentId: T:Synthesys.Plugins.Nmap.NmapReportView
-  name: NmapReportView
-  nameWithType: NmapReportView
-  fullName: Synthesys.Plugins.Nmap.NmapReportView
-- uid: Synthesys.Plugins.Nmap
-  commentId: N:Synthesys.Plugins.Nmap
-  name: Synthesys.Plugins.Nmap
-  nameWithType: Synthesys.Plugins.Nmap
-  fullName: Synthesys.Plugins.Nmap

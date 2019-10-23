@@ -27,7 +27,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ArtifactTriggerDescriptor
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 29
+    startLine: 30
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -76,7 +76,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 36
+    startLine: 37
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -115,7 +115,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 47
+    startLine: 48
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -154,7 +154,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Node
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 57
+    startLine: 58
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -191,7 +191,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NodePath
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 62
+    startLine: 63
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -228,7 +228,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Trigger
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 67
+    startLine: 68
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -265,7 +265,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ToString
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 73
+    startLine: 74
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -303,7 +303,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Equals
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 88
+    startLine: 89
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers
@@ -345,7 +345,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetHashCode
     path: ../Synthesys.SDK/Triggers/ArtifactTriggerDescriptor.cs
-    startLine: 108
+    startLine: 109
   assemblies:
   - Synthesys.SDK
   namespace: Synthesys.SDK.Triggers

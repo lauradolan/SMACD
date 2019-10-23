@@ -6,8 +6,6 @@ items:
   children:
   - Synthesys.Plugins.Nikto.NiktoAction
   - Synthesys.Plugins.Nikto.NiktoReport
-  - Synthesys.Plugins.Nikto.NiktoReportSummary
-  - Synthesys.Plugins.Nikto.NiktoReportView
   langs:
   - csharp
   - vb
@@ -25,22 +23,6 @@ references:
   fullName: Synthesys.Plugins.Nikto.NiktoAction
 - uid: Synthesys.Plugins.Nikto.NiktoReport
   commentId: T:Synthesys.Plugins.Nikto.NiktoReport
-  parent: Synthesys.Plugins.Nikto
   name: NiktoReport
   nameWithType: NiktoReport
   fullName: Synthesys.Plugins.Nikto.NiktoReport
-- uid: Synthesys.Plugins.Nikto.NiktoReportSummary
-  commentId: T:Synthesys.Plugins.Nikto.NiktoReportSummary
-  name: NiktoReportSummary
-  nameWithType: NiktoReportSummary
-  fullName: Synthesys.Plugins.Nikto.NiktoReportSummary
-- uid: Synthesys.Plugins.Nikto.NiktoReportView
-  commentId: T:Synthesys.Plugins.Nikto.NiktoReportView
-  name: NiktoReportView
-  nameWithType: NiktoReportView
-  fullName: Synthesys.Plugins.Nikto.NiktoReportView
-- uid: Synthesys.Plugins.Nikto
-  commentId: N:Synthesys.Plugins.Nikto
-  name: Synthesys.Plugins.Nikto
-  nameWithType: Synthesys.Plugins.Nikto
-  fullName: Synthesys.Plugins.Nikto

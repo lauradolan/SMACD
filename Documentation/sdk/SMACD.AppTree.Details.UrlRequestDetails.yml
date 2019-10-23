@@ -5,6 +5,8 @@ items:
   id: UrlRequestDetails
   parent: SMACD.AppTree.Details
   children:
+  - SMACD.AppTree.Details.UrlRequestDetails.Headers
+  - SMACD.AppTree.Details.UrlRequestDetails.ResultCode
   - SMACD.AppTree.Details.UrlRequestDetails.ResultHtml
   langs:
   - csharp
@@ -20,7 +22,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: UrlRequestDetails
     path: ../SMACD.AppTree/Details/UrlRequestDetails.cs
-    startLine: 5
+    startLine: 7
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree.Details
@@ -63,7 +65,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ResultHtml
     path: ../SMACD.AppTree/Details/UrlRequestDetails.cs
-    startLine: 10
+    startLine: 12
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree.Details
@@ -76,6 +78,80 @@ items:
       type: System.String
     content.vb: Public Property ResultHtml As String
   overload: SMACD.AppTree.Details.UrlRequestDetails.ResultHtml*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Details.UrlRequestDetails.ResultCode
+  commentId: P:SMACD.AppTree.Details.UrlRequestDetails.ResultCode
+  id: ResultCode
+  parent: SMACD.AppTree.Details.UrlRequestDetails
+  langs:
+  - csharp
+  - vb
+  name: ResultCode
+  nameWithType: UrlRequestDetails.ResultCode
+  fullName: SMACD.AppTree.Details.UrlRequestDetails.ResultCode
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Details/UrlRequestDetails.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ResultCode
+    path: ../SMACD.AppTree/Details/UrlRequestDetails.cs
+    startLine: 17
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Details
+  summary: "\nResult code when requesting URL\n"
+  example: []
+  syntax:
+    content: public int ResultCode { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ResultCode As Integer
+  overload: SMACD.AppTree.Details.UrlRequestDetails.ResultCode*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.Details.UrlRequestDetails.Headers
+  commentId: P:SMACD.AppTree.Details.UrlRequestDetails.Headers
+  id: Headers
+  parent: SMACD.AppTree.Details.UrlRequestDetails
+  langs:
+  - csharp
+  - vb
+  name: Headers
+  nameWithType: UrlRequestDetails.Headers
+  fullName: SMACD.AppTree.Details.UrlRequestDetails.Headers
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/Details/UrlRequestDetails.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Headers
+    path: ../SMACD.AppTree/Details/UrlRequestDetails.cs
+    startLine: 22
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree.Details
+  summary: "\nHeaders received during request\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, string> Headers { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+    content.vb: Public Property Headers As Dictionary(Of String, String)
+  overload: SMACD.AppTree.Details.UrlRequestDetails.Headers*
   modifiers.csharp:
   - public
   - get
@@ -392,3 +468,137 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: SMACD.AppTree.Details.UrlRequestDetails.ResultCode*
+  commentId: Overload:SMACD.AppTree.Details.UrlRequestDetails.ResultCode
+  name: ResultCode
+  nameWithType: UrlRequestDetails.ResultCode
+  fullName: SMACD.AppTree.Details.UrlRequestDetails.ResultCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: SMACD.AppTree.Details.UrlRequestDetails.Headers*
+  commentId: Overload:SMACD.AppTree.Details.UrlRequestDetails.Headers
+  name: Headers
+  nameWithType: UrlRequestDetails.Headers
+  fullName: SMACD.AppTree.Details.UrlRequestDetails.Headers
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

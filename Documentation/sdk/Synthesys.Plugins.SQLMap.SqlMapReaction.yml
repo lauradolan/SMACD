@@ -32,13 +32,9 @@ items:
     content: >-
       [Extension("sqlmap_field_reaction", Name = "SQLMap SQLi Scanner", Version = "1.0.0", Author = "Anthony Turner", Website = "https://github.com/anthturner/smacd")]
 
-      [TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)]
-
       public class SqlMapReaction : ReactionExtension, ICanQueueTasks
     content.vb: >-
       <Extension("sqlmap_field_reaction", Name:="SQLMap SQLi Scanner", Version:="1.0.0", Author:="Anthony Turner", Website:="https://github.com/anthturner/smacd")>
-
-      <TriggeredBy("**//{UrlRequestArtifact}*", AppTreeNodeEvents.IsCreated)>
 
       Public Class SqlMapReaction
 
@@ -88,13 +84,6 @@ items:
     - name: Website
       type: System.String
       value: https://github.com/anthturner/smacd
-  - type: Synthesys.SDK.Attributes.TriggeredByAttribute
-    ctor: Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
-    arguments:
-    - type: System.String
-      value: '**//{UrlRequestArtifact}*'
-    - type: Synthesys.SDK.Triggers.AppTreeNodeEvents
-      value: 0
   modifiers.csharp:
   - public
   - class
@@ -119,7 +108,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Tasks
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 29
+    startLine: 28
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -156,7 +145,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: React
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 31
+    startLine: 30
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap
@@ -194,7 +183,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Execute
     path: ../Synthesys.Plugins.SQLMap/SqlMapReaction.cs
-    startLine: 54
+    startLine: 53
   assemblies:
   - Synthesys.Plugins.SQLMap
   namespace: Synthesys.Plugins.SQLMap

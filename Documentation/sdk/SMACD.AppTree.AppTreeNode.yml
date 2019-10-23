@@ -6,6 +6,7 @@ items:
   parent: SMACD.AppTree
   children:
   - SMACD.AppTree.AppTreeNode.#ctor
+  - SMACD.AppTree.AppTreeNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
   - SMACD.AppTree.AppTreeNode.Children
   - SMACD.AppTree.AppTreeNode.ChildrenAre``1
   - SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
@@ -42,7 +43,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: AppTreeNode
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -91,7 +92,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Root
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 22
+    startLine: 23
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -128,7 +129,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Parent
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -165,7 +166,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Children
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -202,7 +203,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ChildrenAre
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 39
+    startLine: 40
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -243,7 +244,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: ChildrenAre
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -287,25 +288,25 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Identifiers
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 60
+    startLine: 61
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
   summary: "\nArtifact Identifier for path\n"
   example: []
   syntax:
-    content: public List<string> Identifiers { get; }
+    content: public HashSet<string> Identifiers { get; set; }
     parameters: []
     return:
-      type: System.Collections.Generic.List{System.String}
-    content.vb: Public ReadOnly Property Identifiers As List(Of String)
+      type: System.Collections.Generic.HashSet{System.String}
+    content.vb: Public Property Identifiers As HashSet(Of String)
   overload: SMACD.AppTree.AppTreeNode.Identifiers*
   modifiers.csharp:
   - public
   - get
+  - set
   modifiers.vb:
   - Public
-  - ReadOnly
 - uid: SMACD.AppTree.AppTreeNode.NiceIdentifier
   commentId: P:SMACD.AppTree.AppTreeNode.NiceIdentifier
   id: NiceIdentifier
@@ -324,7 +325,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NiceIdentifier
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 65
+    startLine: 73
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -361,7 +362,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: UUID
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 70
+    startLine: 78
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -398,7 +399,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Evidence
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 75
+    startLine: 83
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -435,7 +436,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Vulnerabilities
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 80
+    startLine: 88
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -472,7 +473,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NodeViewName
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 85
+    startLine: 93
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -511,7 +512,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: this[]
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 92
+    startLine: 100
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -537,6 +538,48 @@ items:
   - ReadOnly
   fullName.vb: SMACD.AppTree.AppTreeNode.Item(System.Guid)
   name.vb: Item(Guid)
+- uid: SMACD.AppTree.AppTreeNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
+  commentId: M:SMACD.AppTree.AppTreeNode.#ctor(SMACD.AppTree.AppTreeNode,System.String[])
+  id: '#ctor(SMACD.AppTree.AppTreeNode,System.String[])'
+  parent: SMACD.AppTree.AppTreeNode
+  langs:
+  - csharp
+  - vb
+  name: AppTreeNode(AppTreeNode, String[])
+  nameWithType: AppTreeNode.AppTreeNode(AppTreeNode, String[])
+  fullName: SMACD.AppTree.AppTreeNode.AppTreeNode(SMACD.AppTree.AppTreeNode, System.String[])
+  type: Constructor
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 108
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single node in a tree, including all navigation properties\n"
+  example: []
+  syntax:
+    content: public AppTreeNode(AppTreeNode parent, params string[] identifiers)
+    parameters:
+    - id: parent
+      type: SMACD.AppTree.AppTreeNode
+      description: Parent node
+    - id: identifiers
+      type: System.String[]
+      description: Identifiers for node
+    content.vb: Public Sub New(parent As AppTreeNode, ParamArray identifiers As String())
+  overload: SMACD.AppTree.AppTreeNode.#ctor*
+  nameWithType.vb: AppTreeNode.AppTreeNode(AppTreeNode, String())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.AppTreeNode.AppTreeNode(SMACD.AppTree.AppTreeNode, System.String())
+  name.vb: AppTreeNode(AppTreeNode, String())
 - uid: SMACD.AppTree.AppTreeNode.#ctor
   commentId: M:SMACD.AppTree.AppTreeNode.#ctor
   id: '#ctor'
@@ -555,7 +598,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: .ctor
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 98
+    startLine: 120
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -587,7 +630,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: Connect
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 114
+    startLine: 136
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -623,7 +666,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetNodeByRelativeUUIDPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 128
+    startLine: 150
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -662,7 +705,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 154
+    startLine: 176
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -704,7 +747,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetDisplayPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 163
+    startLine: 185
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -739,7 +782,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetUUIDPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 172
+    startLine: 194
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -774,7 +817,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: GetPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 181
+    startLine: 203
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -809,7 +852,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: IsDescribedByPath
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 199
+    startLine: 221
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -848,7 +891,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyChanged
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 307
+    startLine: 329
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -880,7 +923,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyChildAdded
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 316
+    startLine: 338
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -916,7 +959,7 @@ items:
       repo: https://github.com/anthturner/SMACD.git
     id: NotifyCreated
     path: ../SMACD.AppTree/AppTreeNode.cs
-    startLine: 324
+    startLine: 346
   assemblies:
   - SMACD.AppTree
   namespace: SMACD.AppTree
@@ -1516,21 +1559,21 @@ references:
   name: Identifiers
   nameWithType: AppTreeNode.Identifiers
   fullName: SMACD.AppTree.AppTreeNode.Identifiers
-- uid: System.Collections.Generic.List{System.String}
-  commentId: T:System.Collections.Generic.List{System.String}
+- uid: System.Collections.Generic.HashSet{System.String}
+  commentId: T:System.Collections.Generic.HashSet{System.String}
   parent: System.Collections.Generic
-  definition: System.Collections.Generic.List`1
-  name: List<String>
-  nameWithType: List<String>
-  fullName: System.Collections.Generic.List<System.String>
-  nameWithType.vb: List(Of String)
-  fullName.vb: System.Collections.Generic.List(Of System.String)
-  name.vb: List(Of String)
+  definition: System.Collections.Generic.HashSet`1
+  name: HashSet<String>
+  nameWithType: HashSet<String>
+  fullName: System.Collections.Generic.HashSet<System.String>
+  nameWithType.vb: HashSet(Of String)
+  fullName.vb: System.Collections.Generic.HashSet(Of System.String)
+  name.vb: HashSet(Of String)
   spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
     isExternal: true
   - name: <
     nameWithType: <
@@ -1544,10 +1587,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1560,20 +1603,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.List`1
-  commentId: T:System.Collections.Generic.List`1
+- uid: System.Collections.Generic.HashSet`1
+  commentId: T:System.Collections.Generic.HashSet`1
   isExternal: true
-  name: List<T>
-  nameWithType: List<T>
-  fullName: System.Collections.Generic.List<T>
-  nameWithType.vb: List(Of T)
-  fullName.vb: System.Collections.Generic.List(Of T)
-  name.vb: List(Of T)
+  name: HashSet<T>
+  nameWithType: HashSet<T>
+  fullName: System.Collections.Generic.HashSet<T>
+  nameWithType.vb: HashSet(Of T)
+  fullName.vb: System.Collections.Generic.HashSet(Of T)
+  name.vb: HashSet(Of T)
   spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
     isExternal: true
   - name: <
     nameWithType: <
@@ -1585,10 +1628,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    nameWithType: HashSet
+    fullName: System.Collections.Generic.HashSet
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1686,6 +1729,45 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: SMACD.AppTree.AppTreeNode.NodeViewName*
   commentId: Overload:SMACD.AppTree.AppTreeNode.NodeViewName
   name: NodeViewName
@@ -1701,6 +1783,32 @@ references:
   name: AppTreeNode
   nameWithType: AppTreeNode.AppTreeNode
   fullName: SMACD.AppTree.AppTreeNode.AppTreeNode
+- uid: System.String[]
+  isExternal: true
+  name: String[]
+  nameWithType: String[]
+  fullName: System.String[]
+  nameWithType.vb: String()
+  fullName.vb: System.String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: SMACD.AppTree.AppTreeNode.Connect*
   commentId: Overload:SMACD.AppTree.AppTreeNode.Connect
   name: Connect

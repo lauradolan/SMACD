@@ -7,8 +7,6 @@ items:
   - Synthesys.Plugins.Dummy.DummyAction
   - Synthesys.Plugins.Dummy.DummyDataClass
   - Synthesys.Plugins.Dummy.DummyReaction
-  - Synthesys.Plugins.Dummy.DummyReportSummary
-  - Synthesys.Plugins.Dummy.DummyReportView
   langs:
   - csharp
   - vb
@@ -34,13 +32,3 @@ references:
   name: DummyReaction
   nameWithType: DummyReaction
   fullName: Synthesys.Plugins.Dummy.DummyReaction
-- uid: Synthesys.Plugins.Dummy.DummyReportSummary
-  commentId: T:Synthesys.Plugins.Dummy.DummyReportSummary
-  name: DummyReportSummary
-  nameWithType: DummyReportSummary
-  fullName: Synthesys.Plugins.Dummy.DummyReportSummary
-- uid: Synthesys.Plugins.Dummy.DummyReportView
-  commentId: T:Synthesys.Plugins.Dummy.DummyReportView
-  name: DummyReportView
-  nameWithType: DummyReportView
-  fullName: Synthesys.Plugins.Dummy.DummyReportView

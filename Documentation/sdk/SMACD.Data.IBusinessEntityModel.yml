@@ -166,11 +166,11 @@ items:
   summary: "\nRelative level of risk for this entity in comparison to other entities in this generation\nA high business risk may indicate that the entity manages sensitive data\n"
   example: []
   syntax:
-    content: int BusinessRisk { get; set; }
+    content: int? BusinessRisk { get; set; }
     parameters: []
     return:
-      type: System.Int32
-    content.vb: Property BusinessRisk As Integer
+      type: System.Nullable{System.Int32}
+    content.vb: Property BusinessRisk As Integer?
   overload: SMACD.Data.IBusinessEntityModel.BusinessRisk*
   modifiers.csharp:
   - get
@@ -200,11 +200,11 @@ items:
   summary: "\nRelative level of technical risk for this entity in comparison to other entities in this generation\nA high technical risk may indicate that there is a low degree of complexity to technically attack the targets\nassociated with this entity\n"
   example: []
   syntax:
-    content: int TechnicalRisk { get; set; }
+    content: int? TechnicalRisk { get; set; }
     parameters: []
     return:
-      type: System.Int32
-    content.vb: Property TechnicalRisk As Integer
+      type: System.Nullable{System.Int32}
+    content.vb: Property TechnicalRisk As Integer?
   overload: SMACD.Data.IBusinessEntityModel.TechnicalRisk*
   modifiers.csharp:
   - get
@@ -335,13 +335,89 @@ references:
   name: BusinessRisk
   nameWithType: IBusinessEntityModel.BusinessRisk
   fullName: SMACD.Data.IBusinessEntityModel.BusinessRisk
-- uid: System.Int32
-  commentId: T:System.Int32
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
   parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int32>
+  nameWithType: Nullable<Int32>
+  fullName: System.Nullable<System.Int32>
+  nameWithType.vb: Nullable(Of Int32)
+  fullName.vb: System.Nullable(Of System.Int32)
+  name.vb: Nullable(Of Int32)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
   isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: SMACD.Data.IBusinessEntityModel.TechnicalRisk*
   commentId: Overload:SMACD.Data.IBusinessEntityModel.TechnicalRisk
   name: TechnicalRisk
