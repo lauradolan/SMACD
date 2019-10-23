@@ -1,0 +1,24 @@
+﻿@using SMACD.Data
+@using System.Security.Cryptography
+@using System.Text
+@code
+{
+
+    [Parameter]
+    public OwnerPointerModel OwnerModel { get; set; }
+
+    private string CalculateMD5Hash(string email)
+    {
+        var hash = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(email));
+        var sb = new StringBuilder();
+        for (int i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("x2"));
+        }
+        return sb.ToString();
+    }
+}
+
+<a class="dropdown-item" role="presentation" href="javascript:return false;" style="padding: 4px 18px;">
+    <img class="border rounded-circle" src="https://www.gravatar.com/avatar/@(CalculateMD5Hash(OwnerModel.Email.Trim().ToLower()))" style="width: auto; height: 32px;">&nbsp; @OwnerModel.Name
+</a>

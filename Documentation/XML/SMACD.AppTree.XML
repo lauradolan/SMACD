@@ -80,6 +80,7 @@
                 Represents a single node in a tree, including all navigation properties
             </summary>
             <param name="identifiers">Identifiers for node</param>
+            <param name="parent">Parent node</param>
         </member>
         <member name="M:SMACD.AppTree.AppTreeNode.#ctor">
             <summary>

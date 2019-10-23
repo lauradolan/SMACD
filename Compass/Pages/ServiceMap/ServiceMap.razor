@@ -1,0 +1,38 @@
+﻿@page "/servicemap"
+@{
+    if (Program.ServiceMap == null)
+    {
+        <p>No Service Map loaded.</p>
+        return;
+    }
+}
+
+
+@using SMACD.Data
+@code
+{
+    public IBusinessEntityModel EditingModel { get; set; }
+
+    public void SetModel(IBusinessEntityModel model)
+    {
+        EditingModel = model;
+        StateHasChanged();
+    }
+}
+
+<div role="tablist" id="accordion-1">
+    @foreach (var feature in Program.ServiceMap.Features)
+    {
+        <NestedBusinessObject Model="@feature" Parent="@this"></NestedBusinessObject>
+    }
+</div>
+
+<EditObjectModal EditingModel="EditingModel" OnSave="(() => { StateHasChanged(); EditingModel = null; })" />
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        Program.RefreshRequested += StateHasChanged;
+    }
+}

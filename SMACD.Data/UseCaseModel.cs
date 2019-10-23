@@ -31,13 +31,13 @@ namespace SMACD.Data
         ///     Relative level of risk for this Use Case in comparison to other Use Cases for this Feature
         ///     A high business risk may indicate that the Use Case could access sensitive data
         /// </summary>
-        public int BusinessRisk { get; set; }
+        public int? BusinessRisk { get; set; }
 
         /// <summary>
         ///     Relative level of technical risk for this Use Case in comparison to other Use Cases for this Feature
         ///     A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
         ///     associated with this Use Case
         /// </summary>
-        public int TechnicalRisk { get; set; }
+        public int? TechnicalRisk { get; set; }
     }
 }

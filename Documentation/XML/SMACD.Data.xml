@@ -271,6 +271,13 @@
             <param name="file">File to serialize Service Map to</param>
             <returns></returns>
         </member>
+        <member name="M:SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)">
+            <summary>
+                Serialize a Service Map to a YAML string
+            </summary>
+            <param name="serviceMap">Service Map to serialize</param>
+            <returns></returns>
+        </member>
         <member name="T:SMACD.Data.TargetModel">
             <summary>
                 Represents a Resource resolved to its handler

@@ -82,9 +82,10 @@ namespace Synthesys.Tasks
         ///     Export the Session's reports and Artifacts to a Stream
         /// </summary>
         /// <param name="data">Stream to contain Session data</param>
-        public void Export(Stream data)
+        /// <param name="leaveOpen">If the stream should be left open when complete</param>
+        public void Export(Stream data, bool leaveOpen = true)
         {
-            using (DeflateStream compressor = new DeflateStream(data, CompressionMode.Compress))
+            using (DeflateStream compressor = new DeflateStream(data, CompressionMode.Compress, leaveOpen))
             {
                 string str = JsonConvert.SerializeObject(this, new JsonSerializerSettings
                 {

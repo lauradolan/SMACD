@@ -1,0 +1,98 @@
+﻿@using SMACD.Data
+@code
+{
+    [Parameter]
+    public IBusinessEntityModel EditingModel { get; set; }
+
+    [Parameter]
+    public Action OnSave { get; set; }
+
+    public void SetModel(IBusinessEntityModel model)
+    {
+        EditingModel = model;
+        StateHasChanged();
+    }
+
+    private void AddUser()
+    {
+        // todo: how to do this?
+    }
+
+    private void Save()
+    {
+        if (EditingModel.BusinessRisk == 0)
+            EditingModel.BusinessRisk = null;
+        if (EditingModel.TechnicalRisk == 0)
+            EditingModel.TechnicalRisk = null;
+
+        EditingModel = null;
+
+        OnSave?.Invoke();
+    }
+}
+
+@using System.Security.Cryptography
+@using System.Text
+@code
+{
+
+    private string CalculateMD5Hash(string email)
+    {
+        var hash = MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(email));
+        var sb = new StringBuilder();
+        for (int i = 0; i < hash.Length; i++)
+        {
+            sb.Append(hash[i].ToString("x2"));
+        }
+        return sb.ToString();
+    }
+}
+
+@if (EditingModel != null)
+{
+    <div role="dialog" tabindex="-1" class="modal fade show" style="display: block; background-color: #000000aa;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @if (EditingModel is FeatureModel)
+                    {<h4 class="modal-title">Edit Feature</h4>}
+                    @if (EditingModel is UseCaseModel)
+                    {<h4 class="modal-title">Edit Use Case</h4>}
+                    @if (EditingModel is AbuseCaseModel)
+                    {<h4 class="modal-title">Edit Abuse Case</h4>}
+                    <button type="button" class="close" @onclick="(() => SetModel(null))" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group d-flex flex-row align-items-xl-center"><label class="d-xl-flex" for="name" style="width: 7em;">Name</label><input type="text" class="form-control" name="name" @bind-value="EditingModel.Name" /></div>
+                        <div class="form-group d-flex flex-row align-items-xl-center"><label class="d-xl-flex" for="description" style="width: 7em;">Description</label><textarea class="form-control" name="description" @bind="@EditingModel.Description"></textarea></div>
+                        <div class="d-xl-flex justify-content-xl-center align-items-xl-center">
+                            <div class="form-group" style="margin-right: 2em;">
+                                <input type="number" @bind-value="@EditingModel.BusinessRisk" class="border rounded form-control form-control-sm d-flex d-xl-flex flex-row align-items-center align-content-center" style="width: 3.8em;padding: 0;margin: 0 auto;" title="Relative level of risk for this Feature in comparison to other Features. A high business risk may indicate that the Feature could access sensitive data." /><small class="form-text text-center text-muted" style="padding: 0;" title="Relative level of risk for this Feature in comparison to other Features. A high business risk may indicate that the Feature could access sensitive data.">Business Risk</small>
+                            </div>
+                            <div class="form-group" style="margin-left: 2em;">
+                                <input type="number" @bind-value="@EditingModel.TechnicalRisk" class="border rounded form-control form-control-sm d-flex d-xl-flex flex-row align-items-center align-content-center" style="width: 3.8em;padding: 0;margin: 0 auto;" title="Relative level of technical risk for this Feature in comparison to other Features. A high technical risk may indicate that there is a low degree of complexity to technically attack the target(s) associated with this Feature" /><small class="form-text text-center text-muted" style="font-size: 12px;" title="Relative level of technical risk for this Feature in comparison to other Features. A high technical risk may indicate that there is a low degree of complexity to technically attack the target(s) associated with this Feature">Technical Risk</small>
+                            </div>
+                        </div>
+                        <h5 style="margin-bottom: 0px;margin-left: 5px;">Owners</h5>
+                        <ul class="list-group">
+                            @foreach (var owner in EditingModel.Owners)
+                            {
+                                <li class="list-group-item">
+                                    <img class="border rounded-circle" src="https://www.gravatar.com/avatar/@(CalculateMD5Hash(owner.Email.Trim().ToLower()))" style="width: auto; height: 25px;">&nbsp; @owner.Name
+                                    <i class="fa fa-user-times float-right" style="color: var(--red);"></i>
+                                </li>
+                            }
+                            <li class="list-group-item" style="background-color: var(--light)">
+                                <a href="javascript:return false;" @onclick="(() => AddUser())">
+                                    <span>Add New Owner ...</span><i class="fa fa-user-plus float-right" style="color: var(--green);"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary" type="button" @onclick="(() => Save())">Save</button></div>
+            </div>
+        </div>
+    </div>
+}

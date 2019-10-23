@@ -91,6 +91,23 @@ namespace SMACD.Data
                     .Serialize(sr, serviceMap);
             }
         }
+
+        /// <summary>
+        ///     Serialize a Service Map to a YAML string
+        /// </summary>
+        /// <param name="serviceMap">Service Map to serialize</param>
+        /// <returns></returns>
+        public static string PutServiceMapToYaml(ServiceMapFile serviceMap)
+        {
+            // Change the metadata to reflect this updated version
+            serviceMap.Updated = DateTime.Now;
+
+            return new SerializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .AddLoadedTagMappings()
+                .Build()
+                .Serialize(serviceMap);
+        }
     }
 
     internal static class ServiceMapFileExtensions

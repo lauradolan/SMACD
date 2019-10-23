@@ -105,6 +105,7 @@ namespace SMACD.AppTree
         ///     Represents a single node in a tree, including all navigation properties
         /// </summary>
         /// <param name="identifiers">Identifiers for node</param>
+        /// <param name="parent">Parent node</param>
         public AppTreeNode(AppTreeNode parent, params string[] identifiers) : this()
         {
             Parent = parent;

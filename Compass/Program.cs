@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using SMACD.AppTree;
 using SMACD.Data;
 using Synthesys.Tasks;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -15,6 +16,9 @@ namespace Compass
         public static string LoadedFileName { get; set; }
         public static ServiceMapFile ServiceMap { get; set; }
         public static Synthesys.Tasks.Session Session { get; set; }
+
+        public static event Action RefreshRequested;
+        public static void RequestPageRefresh() => RefreshRequested?.Invoke();
 
         public static List<Vulnerability> GetAllVulnerabilitiesIn(AppTreeNode artifact)
         {
