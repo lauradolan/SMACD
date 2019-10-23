@@ -1,0 +1,42 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Attributes
+  commentId: N:Synthesys.SDK.Attributes
+  id: Synthesys.SDK.Attributes
+  children:
+  - Synthesys.SDK.Attributes.ConfigurableAttribute
+  - Synthesys.SDK.Attributes.ExtensionAttribute
+  - Synthesys.SDK.Attributes.TriggeredByAttribute
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK.Attributes
+  nameWithType: Synthesys.SDK.Attributes
+  fullName: Synthesys.SDK.Attributes
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.Attributes.ConfigurableAttribute
+  commentId: T:Synthesys.SDK.Attributes.ConfigurableAttribute
+  parent: Synthesys.SDK.Attributes
+  name: ConfigurableAttribute
+  nameWithType: ConfigurableAttribute
+  fullName: Synthesys.SDK.Attributes.ConfigurableAttribute
+- uid: Synthesys.SDK.Attributes.ExtensionAttribute
+  commentId: T:Synthesys.SDK.Attributes.ExtensionAttribute
+  parent: Synthesys.SDK.Attributes
+  name: ExtensionAttribute
+  nameWithType: ExtensionAttribute
+  fullName: Synthesys.SDK.Attributes.ExtensionAttribute
+- uid: Synthesys.SDK.Attributes.TriggeredByAttribute
+  commentId: T:Synthesys.SDK.Attributes.TriggeredByAttribute
+  parent: Synthesys.SDK.Attributes
+  name: TriggeredByAttribute
+  nameWithType: TriggeredByAttribute
+  fullName: Synthesys.SDK.Attributes.TriggeredByAttribute
+- uid: Synthesys.SDK.Attributes
+  commentId: N:Synthesys.SDK.Attributes
+  name: Synthesys.SDK.Attributes
+  nameWithType: Synthesys.SDK.Attributes
+  fullName: Synthesys.SDK.Attributes

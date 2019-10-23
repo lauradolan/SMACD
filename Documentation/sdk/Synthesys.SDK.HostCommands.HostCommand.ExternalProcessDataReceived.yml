@@ -1,0 +1,79 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  commentId: T:Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  id: HostCommand.ExternalProcessDataReceived
+  parent: Synthesys.SDK.HostCommands
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: HostCommand.ExternalProcessDataReceived
+  nameWithType: HostCommand.ExternalProcessDataReceived
+  fullName: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  type: Delegate
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExternalProcessDataReceived
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 18
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nInvoked when an external process generates data\n"
+  example: []
+  syntax:
+    content: public delegate void ExternalProcessDataReceived(object sender, int ownerTaskId, string data);
+    parameters:
+    - id: sender
+      type: System.Object
+      description: Sender object
+    - id: ownerTaskId
+      type: System.Int32
+      description: Task ID of owner
+    - id: data
+      type: System.String
+      description: Data generated
+    content.vb: Public Delegate Sub ExternalProcessDataReceived(sender As Object, ownerTaskId As Integer, data As String)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: Synthesys.SDK.HostCommands
+  commentId: N:Synthesys.SDK.HostCommands
+  name: Synthesys.SDK.HostCommands
+  nameWithType: Synthesys.SDK.HostCommands
+  fullName: Synthesys.SDK.HostCommands
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

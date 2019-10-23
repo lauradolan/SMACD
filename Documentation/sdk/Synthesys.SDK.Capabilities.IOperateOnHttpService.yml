@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IOperateOnHttpService
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHttpService
+  id: IOperateOnHttpService
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+  langs:
+  - csharp
+  - vb
+  name: IOperateOnHttpService
+  nameWithType: IOperateOnHttpService
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHttpService
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHttpService.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IOperateOnHttpService
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHttpService.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nIOperateOnHttpService indicates that the Extension acts upon a web server\n"
+  example: []
+  syntax:
+    content: public interface IOperateOnHttpService
+    content.vb: Public Interface IOperateOnHttpService
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+  commentId: P:Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+  id: HttpService
+  parent: Synthesys.SDK.Capabilities.IOperateOnHttpService
+  langs:
+  - csharp
+  - vb
+  name: HttpService
+  nameWithType: IOperateOnHttpService.HttpService
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHttpService.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HttpService
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHttpService.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the HttpService Node\n"
+  example: []
+  syntax:
+    content: HttpServiceNode HttpService { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.HttpServiceNode
+    content.vb: Property HttpService As HttpServiceNode
+  overload: Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService*
+  commentId: Overload:Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+  name: HttpService
+  nameWithType: IOperateOnHttpService.HttpService
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService
+- uid: SMACD.AppTree.HttpServiceNode
+  commentId: T:SMACD.AppTree.HttpServiceNode
+  parent: SMACD.AppTree
+  name: HttpServiceNode
+  nameWithType: HttpServiceNode
+  fullName: SMACD.AppTree.HttpServiceNode
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

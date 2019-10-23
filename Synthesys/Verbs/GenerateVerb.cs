@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bogus;
+﻿using Bogus;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Synthesys.Verbs
 {
@@ -24,8 +24,8 @@ namespace Synthesys.Verbs
 
         public override Task Execute()
         {
-            var random = new Random((int) DateTime.Now.Ticks);
-            var serviceMap = new ServiceMapFile();
+            Random random = new Random((int)DateTime.Now.Ticks);
+            ServiceMapFile serviceMap = new ServiceMapFile();
             Logger.LogInformation("Creating 1-{0} of each element for a new Service Map", MaxOfEach);
             Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(featureId => new FeatureModel
             {
@@ -33,7 +33,7 @@ namespace Synthesys.Verbs
                 Description = new Faker().Lorem.Paragraph(2),
                 Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(ownerId =>
                 {
-                    var person = new Faker().Person;
+                    Person person = new Faker().Person;
                     return new OwnerPointerModel
                     {
                         Name = person.FullName,
@@ -48,7 +48,7 @@ namespace Synthesys.Verbs
                         Description = new Faker().Lorem.Paragraph(2),
                         Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(ownerId =>
                         {
-                            var person = new Faker().Person;
+                            Person person = new Faker().Person;
                             return new OwnerPointerModel
                             {
                                 Name = person.FullName,
@@ -65,7 +65,7 @@ namespace Synthesys.Verbs
                                     Owners = Enumerable.Range(0, random.Next(1, MaxOfEach)).Select(
                                         ownerId =>
                                         {
-                                            var person = new Faker().Person;
+                                            Person person = new Faker().Person;
                                             return new OwnerPointerModel
                                             {
                                                 Name = person.FullName,
@@ -79,7 +79,7 @@ namespace Synthesys.Verbs
                                             {
                                                 Action = "dummy",
                                                 Options = new Dictionary<string, string>
-                                                    {{"parameter", "value"}},
+                                                    {{"ConfigurationOption", "value"}},
                                                 Target = "dummyResource"
                                             }).ToList()
                                 }).ToList()

@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  id: Synthesys.SDK.Triggers
+  children:
+  - Synthesys.SDK.Triggers.AppTreeNodeEvents
+  - Synthesys.SDK.Triggers.ArtifactTriggerDescriptor
+  - Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  - Synthesys.SDK.Triggers.SystemEvents
+  - Synthesys.SDK.Triggers.SystemEventTriggerDescriptor
+  - Synthesys.SDK.Triggers.TriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+  commentId: T:Synthesys.SDK.Triggers.AppTreeNodeEvents
+  parent: Synthesys.SDK.Triggers
+  name: AppTreeNodeEvents
+  nameWithType: AppTreeNodeEvents
+  fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
+- uid: Synthesys.SDK.Triggers.ArtifactTriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: ArtifactTriggerDescriptor
+  nameWithType: ArtifactTriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.ArtifactTriggerDescriptor
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  commentId: T:Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  parent: Synthesys.SDK.Triggers
+  name: ExtensionConditionTrigger
+  nameWithType: ExtensionConditionTrigger
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: ExtensionTriggerDescriptor
+  nameWithType: ExtensionTriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+- uid: Synthesys.SDK.Triggers.SystemEvents
+  commentId: T:Synthesys.SDK.Triggers.SystemEvents
+  parent: Synthesys.SDK.Triggers
+  name: SystemEvents
+  nameWithType: SystemEvents
+  fullName: Synthesys.SDK.Triggers.SystemEvents
+- uid: Synthesys.SDK.Triggers.SystemEventTriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: SystemEventTriggerDescriptor
+  nameWithType: SystemEventTriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.SystemEventTriggerDescriptor
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers

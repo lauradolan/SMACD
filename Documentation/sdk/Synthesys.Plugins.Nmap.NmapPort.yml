@@ -1,0 +1,657 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.Nmap.NmapPort
+  commentId: T:Synthesys.Plugins.Nmap.NmapPort
+  id: NmapPort
+  parent: Synthesys.Plugins.Nmap
+  children:
+  - Synthesys.Plugins.Nmap.NmapPort.ExtraInfo
+  - Synthesys.Plugins.Nmap.NmapPort.Port
+  - Synthesys.Plugins.Nmap.NmapPort.ProductName
+  - Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+  - Synthesys.Plugins.Nmap.NmapPort.Protocol
+  - Synthesys.Plugins.Nmap.NmapPort.Service
+  - Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+  langs:
+  - csharp
+  - vb
+  name: NmapPort
+  nameWithType: NmapPort
+  fullName: Synthesys.Plugins.Nmap.NmapPort
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NmapPort
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 14
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  syntax:
+    content: public class NmapPort
+    content.vb: Public Class NmapPort
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.Nmap.NmapPort.Protocol
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.Protocol
+  id: Protocol
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: Protocol
+  nameWithType: NmapPort.Protocol
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Protocol
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Protocol
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 19
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nNetwork protocol (TCP, UDP, etc.)\n"
+  example: []
+  syntax:
+    content: public string Protocol { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Protocol As String
+  overload: Synthesys.Plugins.Nmap.NmapPort.Protocol*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.Port
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.Port
+  id: Port
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: Port
+  nameWithType: NmapPort.Port
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Port
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Port
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 24
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nPort number\n"
+  example: []
+  syntax:
+    content: public int Port { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Port As Integer
+  overload: Synthesys.Plugins.Nmap.NmapPort.Port*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.Service
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.Service
+  id: Service
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: Service
+  nameWithType: NmapPort.Service
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Service
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Service
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 29
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nService fingerprint\n"
+  example: []
+  syntax:
+    content: public string Service { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Service As String
+  overload: Synthesys.Plugins.Nmap.NmapPort.Service*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+  id: ServiceFingerprintConfidence
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: ServiceFingerprintConfidence
+  nameWithType: NmapPort.ServiceFingerprintConfidence
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ServiceFingerprintConfidence
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 34
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nService fingerprint confidence\n"
+  example: []
+  syntax:
+    content: public int ServiceFingerprintConfidence { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property ServiceFingerprintConfidence As Integer
+  overload: Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.ProductName
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.ProductName
+  id: ProductName
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: ProductName
+  nameWithType: NmapPort.ProductName
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ProductName
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProductName
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 39
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nProduct name\n"
+  example: []
+  syntax:
+    content: public string ProductName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ProductName As String
+  overload: Synthesys.Plugins.Nmap.NmapPort.ProductName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+  id: ProductVersion
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: ProductVersion
+  nameWithType: NmapPort.ProductVersion
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProductVersion
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 44
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nProduct version\n"
+  example: []
+  syntax:
+    content: public string ProductVersion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ProductVersion As String
+  overload: Synthesys.Plugins.Nmap.NmapPort.ProductVersion*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nmap.NmapPort.ExtraInfo
+  commentId: P:Synthesys.Plugins.Nmap.NmapPort.ExtraInfo
+  id: ExtraInfo
+  parent: Synthesys.Plugins.Nmap.NmapPort
+  langs:
+  - csharp
+  - vb
+  name: ExtraInfo
+  nameWithType: NmapPort.ExtraInfo
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ExtraInfo
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nmap/NmapRunReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtraInfo
+    path: ../Synthesys.Plugins.Nmap/NmapRunReport.cs
+    startLine: 49
+  assemblies:
+  - Synthesys.Plugins.Nmap
+  namespace: Synthesys.Plugins.Nmap
+  summary: "\nAny additional info NMap understands about the service\n"
+  example: []
+  syntax:
+    content: public string ExtraInfo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExtraInfo As String
+  overload: Synthesys.Plugins.Nmap.NmapPort.ExtraInfo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.Nmap
+  commentId: N:Synthesys.Plugins.Nmap
+  name: Synthesys.Plugins.Nmap
+  nameWithType: Synthesys.Plugins.Nmap
+  fullName: Synthesys.Plugins.Nmap
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.Nmap.NmapPort.Protocol*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.Protocol
+  name: Protocol
+  nameWithType: NmapPort.Protocol
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Protocol
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Plugins.Nmap.NmapPort.Port*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.Port
+  name: Port
+  nameWithType: NmapPort.Port
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Port
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Synthesys.Plugins.Nmap.NmapPort.Service*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.Service
+  name: Service
+  nameWithType: NmapPort.Service
+  fullName: Synthesys.Plugins.Nmap.NmapPort.Service
+- uid: Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+  name: ServiceFingerprintConfidence
+  nameWithType: NmapPort.ServiceFingerprintConfidence
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ServiceFingerprintConfidence
+- uid: Synthesys.Plugins.Nmap.NmapPort.ProductName*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.ProductName
+  name: ProductName
+  nameWithType: NmapPort.ProductName
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ProductName
+- uid: Synthesys.Plugins.Nmap.NmapPort.ProductVersion*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+  name: ProductVersion
+  nameWithType: NmapPort.ProductVersion
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ProductVersion
+- uid: Synthesys.Plugins.Nmap.NmapPort.ExtraInfo*
+  commentId: Overload:Synthesys.Plugins.Nmap.NmapPort.ExtraInfo
+  name: ExtraInfo
+  nameWithType: NmapPort.ExtraInfo
+  fullName: Synthesys.Plugins.Nmap.NmapPort.ExtraInfo

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Crayon;
+﻿using Crayon;
 using Serilog.Core;
 using Serilog.Events;
 using Synthesys.SDK;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Synthesys.Helpers
 {
@@ -13,11 +13,11 @@ namespace Synthesys.Helpers
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            if (Task.CurrentId == null || ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
+            if (Task.CurrentId == null || LogExtensions.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
             {
-                if (ExecutionWrapper.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
+                if (LogExtensions.Maps.ContainsKey(Thread.CurrentThread.ManagedThreadId))
                 {
-                    var owner = ExecutionWrapper.Maps[Thread.CurrentThread.ManagedThreadId];
+                    int owner = LogExtensions.Maps[Thread.CurrentThread.ManagedThreadId];
                     logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("TaskId",
                         Style(owner % Colors.Count, Output.Underline().Text("WORK" + owner))));
                 }

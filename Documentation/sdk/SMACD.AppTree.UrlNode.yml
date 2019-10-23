@@ -1,0 +1,1793 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.UrlNode
+  commentId: T:SMACD.AppTree.UrlNode
+  id: UrlNode
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
+  - SMACD.AppTree.UrlNode.Detail
+  - SMACD.AppTree.UrlNode.GetEntireUrl
+  - SMACD.AppTree.UrlNode.HasRequests
+  - SMACD.AppTree.UrlNode.Item(System.String)
+  - SMACD.AppTree.UrlNode.NodeViewName
+  - SMACD.AppTree.UrlNode.Requests
+  - SMACD.AppTree.UrlNode.ToString
+  - SMACD.AppTree.UrlNode.UrlSegment
+  langs:
+  - csharp
+  - vb
+  name: UrlNode
+  nameWithType: UrlNode
+  fullName: SMACD.AppTree.UrlNode
+  type: Class
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: UrlNode
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 9
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single URL segment (directory or file) in some part of the application\n"
+  example: []
+  syntax:
+    content: 'public class UrlNode : AppTreeNode, IAppTreeNode<UrlDetails>'
+    content.vb: >-
+      Public Class UrlNode
+
+          Inherits AppTreeNode
+
+          Implements IAppTreeNode(Of UrlDetails)
+  inheritance:
+  - System.Object
+  - SMACD.AppTree.AppTreeNode
+  implements:
+  - SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}
+  inheritedMembers:
+  - SMACD.AppTree.AppTreeNode.Root
+  - SMACD.AppTree.AppTreeNode.Parent
+  - SMACD.AppTree.AppTreeNode.Children
+  - SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  - SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{{TChild}})
+  - SMACD.AppTree.AppTreeNode.Identifiers
+  - SMACD.AppTree.AppTreeNode.NiceIdentifier
+  - SMACD.AppTree.AppTreeNode.UUID
+  - SMACD.AppTree.AppTreeNode.Evidence
+  - SMACD.AppTree.AppTreeNode.Vulnerabilities
+  - SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  - SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  - SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  - SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  - SMACD.AppTree.AppTreeNode.GetDisplayPath
+  - SMACD.AppTree.AppTreeNode.GetUUIDPath
+  - SMACD.AppTree.AppTreeNode.GetPath
+  - SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  - SMACD.AppTree.AppTreeNode.NotifyChanged
+  - SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  - SMACD.AppTree.AppTreeNode.NotifyCreated
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.AppTree.UrlNode.NodeViewName
+  commentId: P:SMACD.AppTree.UrlNode.NodeViewName
+  id: NodeViewName
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: NodeViewName
+  nameWithType: UrlNode.NodeViewName
+  fullName: SMACD.AppTree.UrlNode.NodeViewName
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NodeViewName
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 14
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nA Razor component view which can be used to visualize the content of a given node\n"
+  example: []
+  syntax:
+    content: public override string NodeViewName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overrides ReadOnly Property NodeViewName As String
+  overridden: SMACD.AppTree.AppTreeNode.NodeViewName
+  overload: SMACD.AppTree.UrlNode.NodeViewName*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  modifiers.vb:
+  - Public
+  - Overrides
+  - ReadOnly
+- uid: SMACD.AppTree.UrlNode.UrlSegment
+  commentId: P:SMACD.AppTree.UrlNode.UrlSegment
+  id: UrlSegment
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: UrlSegment
+  nameWithType: UrlNode.UrlSegment
+  fullName: SMACD.AppTree.UrlNode.UrlSegment
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: UrlSegment
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 19
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nString representing this segment of a URL\n"
+  example: []
+  syntax:
+    content: public string UrlSegment { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property UrlSegment As String
+  overload: SMACD.AppTree.UrlNode.UrlSegment*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.UrlNode.HasRequests
+  commentId: P:SMACD.AppTree.UrlNode.HasRequests
+  id: HasRequests
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: HasRequests
+  nameWithType: UrlNode.HasRequests
+  fullName: SMACD.AppTree.UrlNode.HasRequests
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HasRequests
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 24
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nIf this URL segment has any Requests\n"
+  example: []
+  syntax:
+    content: public bool HasRequests { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property HasRequests As Boolean
+  overload: SMACD.AppTree.UrlNode.HasRequests*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.UrlNode.Requests
+  commentId: P:SMACD.AppTree.UrlNode.Requests
+  id: Requests
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: Requests
+  nameWithType: UrlNode.Requests
+  fullName: SMACD.AppTree.UrlNode.Requests
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Requests
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 29
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRequests to this URL\n"
+  example: []
+  syntax:
+    content: public IReadOnlyCollection<UrlRequestNode> Requests { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyCollection{SMACD.AppTree.UrlRequestNode}
+    content.vb: Public ReadOnly Property Requests As IReadOnlyCollection(Of UrlRequestNode)
+  overload: SMACD.AppTree.UrlNode.Requests*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SMACD.AppTree.UrlNode.Detail
+  commentId: P:SMACD.AppTree.UrlNode.Detail
+  id: Detail
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: Detail
+  nameWithType: UrlNode.Detail
+  fullName: SMACD.AppTree.UrlNode.Detail
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Detail
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 34
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nDetails around a URL segment\n"
+  example: []
+  syntax:
+    content: public Versionable<UrlDetails> Detail { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.Versionable{SMACD.AppTree.Details.UrlDetails}
+    content.vb: Public Property Detail As Versionable(Of UrlDetails)
+  overload: SMACD.AppTree.UrlNode.Detail*
+  implements:
+  - SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}.Detail
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.UrlNode.Item(System.String)
+  commentId: P:SMACD.AppTree.UrlNode.Item(System.String)
+  id: Item(System.String)
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: Item[String]
+  nameWithType: UrlNode.Item[String]
+  fullName: SMACD.AppTree.UrlNode.Item[System.String]
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: this[]
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 41
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet a child URL segment\n"
+  example: []
+  syntax:
+    content: public UrlNode this[string urlSegment] { get; }
+    parameters:
+    - id: urlSegment
+      type: System.String
+      description: URL segment
+    return:
+      type: SMACD.AppTree.UrlNode
+      description: ''
+    content.vb: Public ReadOnly Property Item(urlSegment As String) As UrlNode
+  overload: SMACD.AppTree.UrlNode.Item*
+  nameWithType.vb: UrlNode.Item(String)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: SMACD.AppTree.UrlNode.Item(System.String)
+  name.vb: Item(String)
+- uid: SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
+  commentId: M:SMACD.AppTree.UrlNode.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
+  id: AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: AddRequest(String, IDictionary<String, String>, IDictionary<String, String>)
+  nameWithType: UrlNode.AddRequest(String, IDictionary<String, String>, IDictionary<String, String>)
+  fullName: SMACD.AppTree.UrlNode.AddRequest(System.String, System.Collections.Generic.IDictionary<System.String, System.String>, System.Collections.Generic.IDictionary<System.String, System.String>)
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AddRequest
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 63
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nAdd a Request description to this URL segment\n"
+  example: []
+  syntax:
+    content: public UrlRequestNode AddRequest(string method, IDictionary<string, string> fields, IDictionary<string, string> headers)
+    parameters:
+    - id: method
+      type: System.String
+      description: HTTP Method
+    - id: fields
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      description: Fields to send
+    - id: headers
+      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      description: Headers to send
+    return:
+      type: SMACD.AppTree.UrlRequestNode
+    content.vb: Public Function AddRequest(method As String, fields As IDictionary(Of String, String), headers As IDictionary(Of String, String)) As UrlRequestNode
+  overload: SMACD.AppTree.UrlNode.AddRequest*
+  nameWithType.vb: UrlNode.AddRequest(String, IDictionary(Of String, String), IDictionary(Of String, String))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: SMACD.AppTree.UrlNode.AddRequest(System.String, System.Collections.Generic.IDictionary(Of System.String, System.String), System.Collections.Generic.IDictionary(Of System.String, System.String))
+  name.vb: AddRequest(String, IDictionary(Of String, String), IDictionary(Of String, String))
+- uid: SMACD.AppTree.UrlNode.GetEntireUrl
+  commentId: M:SMACD.AppTree.UrlNode.GetEntireUrl
+  id: GetEntireUrl
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: GetEntireUrl()
+  nameWithType: UrlNode.GetEntireUrl()
+  fullName: SMACD.AppTree.UrlNode.GetEntireUrl()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetEntireUrl
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 85
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nGet entire URL from all segments (assuming this item is the last URL segment)\n"
+  example: []
+  syntax:
+    content: public string GetEntireUrl()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Function GetEntireUrl As String
+  overload: SMACD.AppTree.UrlNode.GetEntireUrl*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SMACD.AppTree.UrlNode.ToString
+  commentId: M:SMACD.AppTree.UrlNode.ToString
+  id: ToString
+  parent: SMACD.AppTree.UrlNode
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: UrlNode.ToString()
+  fullName: SMACD.AppTree.UrlNode.ToString()
+  type: Method
+  source:
+    remote:
+      path: SMACD.AppTree/UrlNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ToString
+    path: ../SMACD.AppTree/UrlNode.cs
+    startLine: 97
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nString representation of URL segment\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: SMACD.AppTree.UrlNode.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+- uid: SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}
+  commentId: T:SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}
+  parent: SMACD.AppTree
+  definition: SMACD.AppTree.IAppTreeNode`1
+  name: IAppTreeNode<UrlDetails>
+  nameWithType: IAppTreeNode<UrlDetails>
+  fullName: SMACD.AppTree.IAppTreeNode<SMACD.AppTree.Details.UrlDetails>
+  nameWithType.vb: IAppTreeNode(Of UrlDetails)
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of SMACD.AppTree.Details.UrlDetails)
+  name.vb: IAppTreeNode(Of UrlDetails)
+  spec.csharp:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.Details.UrlDetails
+    name: UrlDetails
+    nameWithType: UrlDetails
+    fullName: SMACD.AppTree.Details.UrlDetails
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.Details.UrlDetails
+    name: UrlDetails
+    nameWithType: UrlDetails
+    fullName: SMACD.AppTree.Details.UrlDetails
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.Root
+  commentId: P:SMACD.AppTree.AppTreeNode.Root
+  parent: SMACD.AppTree.AppTreeNode
+  name: Root
+  nameWithType: AppTreeNode.Root
+  fullName: SMACD.AppTree.AppTreeNode.Root
+- uid: SMACD.AppTree.AppTreeNode.Parent
+  commentId: P:SMACD.AppTree.AppTreeNode.Parent
+  parent: SMACD.AppTree.AppTreeNode
+  name: Parent
+  nameWithType: AppTreeNode.Parent
+  fullName: SMACD.AppTree.AppTreeNode.Parent
+- uid: SMACD.AppTree.AppTreeNode.Children
+  commentId: P:SMACD.AppTree.AppTreeNode.Children
+  parent: SMACD.AppTree.AppTreeNode
+  name: Children
+  nameWithType: AppTreeNode.Children
+  fullName: SMACD.AppTree.AppTreeNode.Children
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  commentId: M:SMACD.AppTree.AppTreeNode.ChildrenAre``1
+  parent: SMACD.AppTree.AppTreeNode
+  name: ChildrenAre<TChild>()
+  nameWithType: AppTreeNode.ChildrenAre<TChild>()
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>()
+  nameWithType.vb: AppTreeNode.ChildrenAre(Of TChild)()
+  fullName.vb: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)()
+  name.vb: ChildrenAre(Of TChild)()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1
+    name: ChildrenAre<TChild>
+    nameWithType: AppTreeNode.ChildrenAre<TChild>
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1
+    name: ChildrenAre(Of TChild)
+    nameWithType: AppTreeNode.ChildrenAre(Of TChild)
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{{TChild}})
+  commentId: M:SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  parent: SMACD.AppTree.AppTreeNode
+  definition: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  name: ChildrenAre<TChild>(Predicate<TChild>)
+  nameWithType: AppTreeNode.ChildrenAre<TChild>(Predicate<TChild>)
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>(System.Predicate<TChild>)
+  nameWithType.vb: AppTreeNode.ChildrenAre(Of TChild)(Predicate(Of TChild))
+  fullName.vb: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)(System.Predicate(Of TChild))
+  name.vb: ChildrenAre(Of TChild)(Predicate(Of TChild))
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+    name: ChildrenAre<TChild>
+    nameWithType: AppTreeNode.ChildrenAre<TChild>
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+    name: ChildrenAre(Of TChild)
+    nameWithType: AppTreeNode.ChildrenAre(Of TChild)
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.Identifiers
+  commentId: P:SMACD.AppTree.AppTreeNode.Identifiers
+  parent: SMACD.AppTree.AppTreeNode
+  name: Identifiers
+  nameWithType: AppTreeNode.Identifiers
+  fullName: SMACD.AppTree.AppTreeNode.Identifiers
+- uid: SMACD.AppTree.AppTreeNode.NiceIdentifier
+  commentId: P:SMACD.AppTree.AppTreeNode.NiceIdentifier
+  parent: SMACD.AppTree.AppTreeNode
+  name: NiceIdentifier
+  nameWithType: AppTreeNode.NiceIdentifier
+  fullName: SMACD.AppTree.AppTreeNode.NiceIdentifier
+- uid: SMACD.AppTree.AppTreeNode.UUID
+  commentId: P:SMACD.AppTree.AppTreeNode.UUID
+  parent: SMACD.AppTree.AppTreeNode
+  name: UUID
+  nameWithType: AppTreeNode.UUID
+  fullName: SMACD.AppTree.AppTreeNode.UUID
+- uid: SMACD.AppTree.AppTreeNode.Evidence
+  commentId: P:SMACD.AppTree.AppTreeNode.Evidence
+  parent: SMACD.AppTree.AppTreeNode
+  name: Evidence
+  nameWithType: AppTreeNode.Evidence
+  fullName: SMACD.AppTree.AppTreeNode.Evidence
+- uid: SMACD.AppTree.AppTreeNode.Vulnerabilities
+  commentId: P:SMACD.AppTree.AppTreeNode.Vulnerabilities
+  parent: SMACD.AppTree.AppTreeNode
+  name: Vulnerabilities
+  nameWithType: AppTreeNode.Vulnerabilities
+  fullName: SMACD.AppTree.AppTreeNode.Vulnerabilities
+- uid: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  commentId: P:SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  parent: SMACD.AppTree.AppTreeNode
+  isExternal: true
+  name: Item[Guid]
+  nameWithType: AppTreeNode.Item[Guid]
+  fullName: SMACD.AppTree.AppTreeNode.Item[System.Guid]
+  nameWithType.vb: AppTreeNode.Item(Guid)
+  fullName.vb: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+  name.vb: Item(Guid)
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+    name: Item
+    nameWithType: AppTreeNode.Item
+    fullName: SMACD.AppTree.AppTreeNode.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Guid
+    name: Guid
+    nameWithType: Guid
+    fullName: System.Guid
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.Item(System.Guid)
+    name: Item
+    nameWithType: AppTreeNode.Item
+    fullName: SMACD.AppTree.AppTreeNode.Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Guid
+    name: Guid
+    nameWithType: Guid
+    fullName: System.Guid
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  commentId: M:SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  parent: SMACD.AppTree.AppTreeNode
+  name: Connect(AppTreeNode)
+  nameWithType: AppTreeNode.Connect(AppTreeNode)
+  fullName: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+    name: Connect
+    nameWithType: AppTreeNode.Connect
+    fullName: SMACD.AppTree.AppTreeNode.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.Connect(SMACD.AppTree.AppTreeNode)
+    name: Connect
+    nameWithType: AppTreeNode.Connect
+    fullName: SMACD.AppTree.AppTreeNode.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  commentId: M:SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  parent: SMACD.AppTree.AppTreeNode
+  isExternal: true
+  name: GetNodeByRelativeUUIDPath(String)
+  nameWithType: AppTreeNode.GetNodeByRelativeUUIDPath(String)
+  fullName: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+    name: GetNodeByRelativeUUIDPath
+    nameWithType: AppTreeNode.GetNodeByRelativeUUIDPath
+    fullName: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath(System.String)
+    name: GetNodeByRelativeUUIDPath
+    nameWithType: AppTreeNode.GetNodeByRelativeUUIDPath
+    fullName: SMACD.AppTree.AppTreeNode.GetNodeByRelativeUUIDPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  commentId: M:SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+  parent: SMACD.AppTree.AppTreeNode
+  isExternal: true
+  name: GetPath(Func<AppTreeNode, String>)
+  nameWithType: AppTreeNode.GetPath(Func<AppTreeNode, String>)
+  fullName: SMACD.AppTree.AppTreeNode.GetPath(System.Func<SMACD.AppTree.AppTreeNode, System.String>)
+  nameWithType.vb: AppTreeNode.GetPath(Func(Of AppTreeNode, String))
+  fullName.vb: SMACD.AppTree.AppTreeNode.GetPath(System.Func(Of SMACD.AppTree.AppTreeNode, System.String))
+  name.vb: GetPath(Func(Of AppTreeNode, String))
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+    name: GetPath
+    nameWithType: AppTreeNode.GetPath
+    fullName: SMACD.AppTree.AppTreeNode.GetPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.GetPath(System.Func{SMACD.AppTree.AppTreeNode,System.String})
+    name: GetPath
+    nameWithType: AppTreeNode.GetPath
+    fullName: SMACD.AppTree.AppTreeNode.GetPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetDisplayPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetDisplayPath
+  parent: SMACD.AppTree.AppTreeNode
+  name: GetDisplayPath()
+  nameWithType: AppTreeNode.GetDisplayPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetDisplayPath()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.GetDisplayPath
+    name: GetDisplayPath
+    nameWithType: AppTreeNode.GetDisplayPath
+    fullName: SMACD.AppTree.AppTreeNode.GetDisplayPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.GetDisplayPath
+    name: GetDisplayPath
+    nameWithType: AppTreeNode.GetDisplayPath
+    fullName: SMACD.AppTree.AppTreeNode.GetDisplayPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetUUIDPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetUUIDPath
+  parent: SMACD.AppTree.AppTreeNode
+  name: GetUUIDPath()
+  nameWithType: AppTreeNode.GetUUIDPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetUUIDPath()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.GetUUIDPath
+    name: GetUUIDPath
+    nameWithType: AppTreeNode.GetUUIDPath
+    fullName: SMACD.AppTree.AppTreeNode.GetUUIDPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.GetUUIDPath
+    name: GetUUIDPath
+    nameWithType: AppTreeNode.GetUUIDPath
+    fullName: SMACD.AppTree.AppTreeNode.GetUUIDPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.GetPath
+  commentId: M:SMACD.AppTree.AppTreeNode.GetPath
+  parent: SMACD.AppTree.AppTreeNode
+  name: GetPath()
+  nameWithType: AppTreeNode.GetPath()
+  fullName: SMACD.AppTree.AppTreeNode.GetPath()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.GetPath
+    name: GetPath
+    nameWithType: AppTreeNode.GetPath
+    fullName: SMACD.AppTree.AppTreeNode.GetPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.GetPath
+    name: GetPath
+    nameWithType: AppTreeNode.GetPath
+    fullName: SMACD.AppTree.AppTreeNode.GetPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  commentId: M:SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  parent: SMACD.AppTree.AppTreeNode
+  isExternal: true
+  name: IsDescribedByPath(String)
+  nameWithType: AppTreeNode.IsDescribedByPath(String)
+  fullName: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+    name: IsDescribedByPath
+    nameWithType: AppTreeNode.IsDescribedByPath
+    fullName: SMACD.AppTree.AppTreeNode.IsDescribedByPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.IsDescribedByPath(System.String)
+    name: IsDescribedByPath
+    nameWithType: AppTreeNode.IsDescribedByPath
+    fullName: SMACD.AppTree.AppTreeNode.IsDescribedByPath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NotifyChanged
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyChanged
+  parent: SMACD.AppTree.AppTreeNode
+  name: NotifyChanged()
+  nameWithType: AppTreeNode.NotifyChanged()
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChanged()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyChanged
+    name: NotifyChanged
+    nameWithType: AppTreeNode.NotifyChanged
+    fullName: SMACD.AppTree.AppTreeNode.NotifyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyChanged
+    name: NotifyChanged
+    nameWithType: AppTreeNode.NotifyChanged
+    fullName: SMACD.AppTree.AppTreeNode.NotifyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  parent: SMACD.AppTree.AppTreeNode
+  name: NotifyChildAdded(AppTreeNode)
+  nameWithType: AppTreeNode.NotifyChildAdded(AppTreeNode)
+  fullName: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+    name: NotifyChildAdded
+    nameWithType: AppTreeNode.NotifyChildAdded
+    fullName: SMACD.AppTree.AppTreeNode.NotifyChildAdded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyChildAdded(SMACD.AppTree.AppTreeNode)
+    name: NotifyChildAdded
+    nameWithType: AppTreeNode.NotifyChildAdded
+    fullName: SMACD.AppTree.AppTreeNode.NotifyChildAdded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NotifyCreated
+  commentId: M:SMACD.AppTree.AppTreeNode.NotifyCreated
+  parent: SMACD.AppTree.AppTreeNode
+  name: NotifyCreated()
+  nameWithType: AppTreeNode.NotifyCreated()
+  fullName: SMACD.AppTree.AppTreeNode.NotifyCreated()
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyCreated
+    name: NotifyCreated
+    nameWithType: AppTreeNode.NotifyCreated
+    fullName: SMACD.AppTree.AppTreeNode.NotifyCreated
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.NotifyCreated
+    name: NotifyCreated
+    nameWithType: AppTreeNode.NotifyCreated
+    fullName: SMACD.AppTree.AppTreeNode.NotifyCreated
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.AppTree.IAppTreeNode`1
+  commentId: T:SMACD.AppTree.IAppTreeNode`1
+  name: IAppTreeNode<TDetailPayload>
+  nameWithType: IAppTreeNode<TDetailPayload>
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload)
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload)
+  name.vb: IAppTreeNode(Of TDetailPayload)
+  spec.csharp:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.IAppTreeNode`1
+    name: IAppTreeNode
+    nameWithType: IAppTreeNode
+    fullName: SMACD.AppTree.IAppTreeNode
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  commentId: M:SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+  isExternal: true
+  name: ChildrenAre<TChild>(Predicate<TChild>)
+  nameWithType: AppTreeNode.ChildrenAre<TChild>(Predicate<TChild>)
+  fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>(System.Predicate<TChild>)
+  nameWithType.vb: AppTreeNode.ChildrenAre(Of TChild)(Predicate(Of TChild))
+  fullName.vb: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)(System.Predicate(Of TChild))
+  name.vb: ChildrenAre(Of TChild)(Predicate(Of TChild))
+  spec.csharp:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+    name: ChildrenAre<TChild>
+    nameWithType: AppTreeNode.ChildrenAre<TChild>
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre<TChild>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: SMACD.AppTree.AppTreeNode.ChildrenAre``1(System.Predicate{``0})
+    name: ChildrenAre(Of TChild)
+    nameWithType: AppTreeNode.ChildrenAre(Of TChild)
+    fullName: SMACD.AppTree.AppTreeNode.ChildrenAre(Of TChild)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TChild
+    nameWithType: TChild
+    fullName: TChild
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.AppTreeNode.NodeViewName
+  commentId: P:SMACD.AppTree.AppTreeNode.NodeViewName
+  parent: SMACD.AppTree.AppTreeNode
+  name: NodeViewName
+  nameWithType: AppTreeNode.NodeViewName
+  fullName: SMACD.AppTree.AppTreeNode.NodeViewName
+- uid: SMACD.AppTree.UrlNode.NodeViewName*
+  commentId: Overload:SMACD.AppTree.UrlNode.NodeViewName
+  name: NodeViewName
+  nameWithType: UrlNode.NodeViewName
+  fullName: SMACD.AppTree.UrlNode.NodeViewName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.UrlNode.UrlSegment*
+  commentId: Overload:SMACD.AppTree.UrlNode.UrlSegment
+  name: UrlSegment
+  nameWithType: UrlNode.UrlSegment
+  fullName: SMACD.AppTree.UrlNode.UrlSegment
+- uid: SMACD.AppTree.UrlNode.HasRequests*
+  commentId: Overload:SMACD.AppTree.UrlNode.HasRequests
+  name: HasRequests
+  nameWithType: UrlNode.HasRequests
+  fullName: SMACD.AppTree.UrlNode.HasRequests
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: SMACD.AppTree.UrlNode.Requests*
+  commentId: Overload:SMACD.AppTree.UrlNode.Requests
+  name: Requests
+  nameWithType: UrlNode.Requests
+  fullName: SMACD.AppTree.UrlNode.Requests
+- uid: System.Collections.Generic.IReadOnlyCollection{SMACD.AppTree.UrlRequestNode}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{SMACD.AppTree.UrlRequestNode}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  name: IReadOnlyCollection<UrlRequestNode>
+  nameWithType: IReadOnlyCollection<UrlRequestNode>
+  fullName: System.Collections.Generic.IReadOnlyCollection<SMACD.AppTree.UrlRequestNode>
+  nameWithType.vb: IReadOnlyCollection(Of UrlRequestNode)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of SMACD.AppTree.UrlRequestNode)
+  name.vb: IReadOnlyCollection(Of UrlRequestNode)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.UrlRequestNode
+    name: UrlRequestNode
+    nameWithType: UrlRequestNode
+    fullName: SMACD.AppTree.UrlRequestNode
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.UrlRequestNode
+    name: UrlRequestNode
+    nameWithType: UrlRequestNode
+    fullName: SMACD.AppTree.UrlRequestNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    nameWithType: IReadOnlyCollection
+    fullName: System.Collections.Generic.IReadOnlyCollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: SMACD.AppTree.UrlNode.Detail*
+  commentId: Overload:SMACD.AppTree.UrlNode.Detail
+  name: Detail
+  nameWithType: UrlNode.Detail
+  fullName: SMACD.AppTree.UrlNode.Detail
+- uid: SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}.Detail
+  commentId: P:SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}.Detail
+  parent: SMACD.AppTree.IAppTreeNode{SMACD.AppTree.Details.UrlDetails}
+  definition: SMACD.AppTree.IAppTreeNode`1.Detail
+  name: Detail
+  nameWithType: IAppTreeNode<UrlDetails>.Detail
+  fullName: SMACD.AppTree.IAppTreeNode<SMACD.AppTree.Details.UrlDetails>.Detail
+  nameWithType.vb: IAppTreeNode(Of UrlDetails).Detail
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of SMACD.AppTree.Details.UrlDetails).Detail
+- uid: SMACD.AppTree.Versionable{SMACD.AppTree.Details.UrlDetails}
+  commentId: T:SMACD.AppTree.Versionable{SMACD.AppTree.Details.UrlDetails}
+  parent: SMACD.AppTree
+  definition: SMACD.AppTree.Versionable`1
+  name: Versionable<UrlDetails>
+  nameWithType: Versionable<UrlDetails>
+  fullName: SMACD.AppTree.Versionable<SMACD.AppTree.Details.UrlDetails>
+  nameWithType.vb: Versionable(Of UrlDetails)
+  fullName.vb: SMACD.AppTree.Versionable(Of SMACD.AppTree.Details.UrlDetails)
+  name.vb: Versionable(Of UrlDetails)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.Details.UrlDetails
+    name: UrlDetails
+    nameWithType: UrlDetails
+    fullName: SMACD.AppTree.Details.UrlDetails
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.Details.UrlDetails
+    name: UrlDetails
+    nameWithType: UrlDetails
+    fullName: SMACD.AppTree.Details.UrlDetails
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.IAppTreeNode`1.Detail
+  commentId: P:SMACD.AppTree.IAppTreeNode`1.Detail
+  name: Detail
+  nameWithType: IAppTreeNode<TDetailPayload>.Detail
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>.Detail
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload).Detail
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload).Detail
+- uid: SMACD.AppTree.Versionable`1
+  commentId: T:SMACD.AppTree.Versionable`1
+  parent: SMACD.AppTree
+  name: Versionable<TData>
+  nameWithType: Versionable<TData>
+  fullName: SMACD.AppTree.Versionable<TData>
+  nameWithType.vb: Versionable(Of TData)
+  fullName.vb: SMACD.AppTree.Versionable(Of TData)
+  name.vb: Versionable(Of TData)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.UrlNode.Item*
+  commentId: Overload:SMACD.AppTree.UrlNode.Item
+  name: Item
+  nameWithType: UrlNode.Item
+  fullName: SMACD.AppTree.UrlNode.Item
+- uid: SMACD.AppTree.UrlNode
+  commentId: T:SMACD.AppTree.UrlNode
+  parent: SMACD.AppTree
+  name: UrlNode
+  nameWithType: UrlNode
+  fullName: SMACD.AppTree.UrlNode
+- uid: SMACD.AppTree.UrlNode.AddRequest*
+  commentId: Overload:SMACD.AppTree.UrlNode.AddRequest
+  name: AddRequest
+  nameWithType: UrlNode.AddRequest
+  fullName: SMACD.AppTree.UrlNode.AddRequest
+- uid: System.Collections.Generic.IDictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
+  name: IDictionary<String, String>
+  nameWithType: IDictionary<String, String>
+  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
+  nameWithType.vb: IDictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
+  name.vb: IDictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.UrlRequestNode
+  commentId: T:SMACD.AppTree.UrlRequestNode
+  parent: SMACD.AppTree
+  name: UrlRequestNode
+  nameWithType: UrlRequestNode
+  fullName: SMACD.AppTree.UrlRequestNode
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
+  isExternal: true
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    nameWithType: IDictionary
+    fullName: System.Collections.Generic.IDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.UrlNode.GetEntireUrl*
+  commentId: Overload:SMACD.AppTree.UrlNode.GetEntireUrl
+  name: GetEntireUrl
+  nameWithType: UrlNode.GetEntireUrl
+  fullName: SMACD.AppTree.UrlNode.GetEntireUrl
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.UrlNode.ToString*
+  commentId: Overload:SMACD.AppTree.UrlNode.ToString
+  name: ToString
+  nameWithType: UrlNode.ToString
+  fullName: SMACD.AppTree.UrlNode.ToString

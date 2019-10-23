@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\SMACD.Data\SMACD.Data.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
     <ProjectReference Include="..\Synthesys.Tasks\Synthesys.Tasks.csproj" />
@@ -30,6 +29,7 @@
     <PackageReference Include="CommandLineParser" Version="2.6.0" />
     <PackageReference Include="Crayon" Version="0.0.38" />
     <PackageReference Include="McMaster.NETCore.Plugins" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="ObjectDumper.NET" Version="2.4.19218.1" />
@@ -39,7 +39,6 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
-    <PackageReference Include="YamlDotNet" Version="7.0.0" />
   </ItemGroup>
 
   <!--+++++++++++++++++++++++++++++++PLUGINS++++++++++++++++++++++++++++++++-->
@@ -47,6 +46,13 @@
   <ItemGroup>
     <!-- Dummy Plugin -->
     <EmbeddedResource Include="..\Synthesys.Plugins.Dummy\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Dummy.dll" Link="Plugins\Synthesys.Plugins.Dummy.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- HTML Explorer Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.HTMLExplorer\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.HTMLExplorer.dll" Link="Plugins\Synthesys.Plugins.HTMLExplorer.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -71,6 +77,13 @@
   <ItemGroup>
     <!-- Nikto Plugin -->
     <EmbeddedResource Include="..\Synthesys.Plugins.Nikto\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.Nikto.dll" Link="Plugins\Synthesys.Plugins.Nikto.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- SQLMap Plugin -->
+    <EmbeddedResource Include="..\Synthesys.Plugins.SQLMap\bin\$(Configuration)\netcoreapp3.0\Synthesys.Plugins.SQLMap.dll" Link="Plugins\Synthesys.Plugins.SQLMap.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -2,6 +2,9 @@
 
 namespace SMACD.Data
 {
+    /// <summary>
+    ///     Represents a business entity in the system, which tracks ownership and risk from a project management perspective
+    /// </summary>
     public interface IBusinessEntityModel
     {
         /// <summary>
@@ -23,13 +26,13 @@ namespace SMACD.Data
         ///     Relative level of risk for this entity in comparison to other entities in this generation
         ///     A high business risk may indicate that the entity manages sensitive data
         /// </summary>
-        int BusinessRisk { get; set; }
+        int? BusinessRisk { get; set; }
 
         /// <summary>
         ///     Relative level of technical risk for this entity in comparison to other entities in this generation
         ///     A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
         ///     associated with this entity
         /// </summary>
-        int TechnicalRisk { get; set; }
+        int? TechnicalRisk { get; set; }
     }
 }

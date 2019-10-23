@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
+﻿using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
+using Synthesys.SDK.HostCommands;
+using System.IO;
+using System.Linq;
 
 namespace Synthesys.Plugins.SQLMap
 {
@@ -24,8 +24,6 @@ namespace Synthesys.Plugins.SQLMap
         Website = "https://github.com/anthturner/smacd")]
     public class SqlMapScanner : ActionExtension, IOperateOnUrl
     {
-        private bool _useInLocalMode;
-
         /// <summary>
         ///     If <c>TRUE</c>, SQLmap will run at Level 5/Risk Level 3 instead of the default Level 2/Risk Level 1
         /// </summary>
@@ -35,54 +33,67 @@ namespace Synthesys.Plugins.SQLMap
         /// <summary>
         ///     URL being scanned
         /// </summary>
-        public UrlArtifact Url { get; set; }
-
-        public override bool ValidateEnvironmentReadiness()
-        {
-            var localTest = new ExecutionWrapper("sqlmap --help");
-            localTest.Start().Wait();
-            if (string.IsNullOrEmpty(localTest.StdErr)) _useInLocalMode = true;
-
-            return true;
-        }
-
+        public UrlNode Url { get; set; }
+        
         public override ExtensionReport Act()
         {
             string logFile;
 
-            var nativePathArtifact = new NativeDirectoryArtifact("sqlmap-" + Url.GetUrl());
-            using (var context = nativePathArtifact.GetContext())
+            NativeDirectoryEvidence nativePathArtifact = new NativeDirectoryEvidence("sqlmap-" + Url.GetEntireUrl());
+            using (NativeDirectoryContext context = nativePathArtifact.GetContext())
             {
-                var dir = context.Directory;
+                if (DockerHostCommand.SupportsDocker())
+                {
+                    using var dockerCommand = new DockerHostCommand("alexandreoda/sqlmap:latest",
+                        context,
+                        "sqlmap",
+                        $"--url={Url.GetEntireUrl()}",
+                        "--batch",
+                        "--flush-session",
+                        "--banner",
+                        "--output-dir=/synthesys",
+                        Aggressive ? "--level=5" : "--level=2",
+                        Aggressive ? "--risk=3" : "--risk=1");
+                    dockerCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+                    dockerCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
 
-                var baseCmd = "docker run -ti --rm --name sqlmap -v " + dir + ":/data alexandreoda/sqlmap";
-                if (_useInLocalMode) baseCmd = "sqlmap";
+                    dockerCommand.Start().Wait();
+                }
+                else
+                {
+                    using var nativeCommand = new NativeHostCommand("sqlmap",
+                        $"--url={Url.GetEntireUrl()}",
+                        "--batch",
+                        "--flush-session",
+                        "--banner",
+                        $"--output-dir={context.Directory}",
+                        Aggressive ? "--level=5" : "--level=2",
+                        Aggressive ? "--risk=3" : "--risk=1");
+                    nativeCommand.StandardOutputDataReceived += (s, taskOwner, data) => Logger.TaskLogDebug(taskOwner, data);
+                    nativeCommand.StandardErrorDataReceived += (s, taskOwner, data) => Logger.TaskLogInformation(taskOwner, data);
 
-                var cmd = baseCmd +
-                          $" --url={Url.GetUrl()}" +
-                          " --batch --flush-session --banner" +
-                          (_useInLocalMode ? " --output-dir=" + dir : " --output-dir=/data") +
-                          (Aggressive ? " --level=5 --risk=3" : " --level=2 --risk=1");
+                    nativeCommand.Start().Wait();
+                }
 
-                var execution = new ExecutionWrapper(cmd);
-                execution.Start().Wait();
-
-                if (!File.Exists(context.DirectoryWithFile("log"))) return ExtensionReport.Blank();
+                if (!File.Exists(context.DirectoryWithFile("log")))
+                {
+                    return ExtensionReport.Blank();
+                }
 
                 logFile = File.ReadAllText(context.DirectoryWithFile("log"));
             }
 
-            var sqlMapReport = new SqlMapReport();
-            var issues = logFile.Split("---").Skip(1).ToList(); // first line is summary
+            SqlMapReport sqlMapReport = new SqlMapReport();
+            System.Collections.Generic.List<string> issues = logFile.Split("---").Skip(1).ToList(); // first line is summary
 
-            foreach (var issue in issues)
+            foreach (string issue in issues)
             {
-                var lines = issue.Split('\n');
-                var vector = new SqlMapInjectionVector();
-                foreach (var line in lines)
+                string[] lines = issue.Split('\n');
+                SqlMapInjectionVector vector = new SqlMapInjectionVector();
+                foreach (string line in lines)
                 {
-                    var name = line.Split(':')[0].Trim();
-                    var value = line.Split(':')[1].Trim();
+                    string name = line.Split(':')[0].Trim();
+                    string value = line.Split(':')[1].Trim();
 
                     switch (name)
                     {
@@ -104,7 +115,7 @@ namespace Synthesys.Plugins.SQLMap
                 sqlMapReport.InjectionVectors.Add(vector);
             }
 
-            var report = new ExtensionReport();
+            ExtensionReport report = new ExtensionReport();
             report.SetExtensionSpecificReport(sqlMapReport);
 
             return report;

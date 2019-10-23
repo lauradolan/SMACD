@@ -4,3 +4,5 @@
   href: DataModel.md
 - name: Scanner Workflow
   href: ScannerWorkflow.md
+- name: Synthesys Scanner
+  href: Synthesys.md

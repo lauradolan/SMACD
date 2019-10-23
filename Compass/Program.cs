@@ -1,11 +1,12 @@
-using System.Collections.Generic;
-using System.IO;
+using ElectronNET.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using SMACD.AppTree;
 using SMACD.Data;
-using ElectronNET.API;
-using SMACD.Artifacts;
 using Synthesys.Tasks;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace Compass
@@ -16,17 +17,20 @@ namespace Compass
         public static ServiceMapFile ServiceMap { get; set; }
         public static Synthesys.Tasks.Session Session { get; set; }
 
-        public static List<Vulnerability> GetAllVulnerabilitiesIn(Artifact artifact)
+        public static event Action RefreshRequested;
+        public static void RequestPageRefresh() => RefreshRequested?.Invoke();
+
+        public static List<Vulnerability> GetAllVulnerabilitiesIn(AppTreeNode artifact)
         {
-            var list = new List<Vulnerability>();
+            List<Vulnerability> list = new List<Vulnerability>();
             GetAllVulnerabilitiesIn(artifact, ref list);
             return list;
         }
 
-        private static void GetAllVulnerabilitiesIn(Artifact artifact, ref List<Vulnerability> vulnerabilities)
+        private static void GetAllVulnerabilitiesIn(AppTreeNode artifact, ref List<Vulnerability> vulnerabilities)
         {
             vulnerabilities.AddRange(artifact.Vulnerabilities);
-            foreach (var child in artifact.Children)
+            foreach (AppTreeNode child in artifact.Children)
             {
                 GetAllVulnerabilitiesIn(child, ref vulnerabilities);
             }
@@ -34,18 +38,27 @@ namespace Compass
 
         public static List<Vulnerability> GetAllVulnerabilities()
         {
-            var result = new List<Vulnerability>();
+            List<Vulnerability> result = new List<Vulnerability>();
             if (Session != null)
+            {
                 Get(Session.Artifacts, ref result);
+            }
+
             return result;
         }
 
-        private static void Get(Artifact a, ref List<Vulnerability> list)
+        private static void Get(AppTreeNode a, ref List<Vulnerability> list)
         {
-            if (list == null) list = new List<Vulnerability>();
+            if (list == null)
+            {
+                list = new List<Vulnerability>();
+            }
+
             list.AddRange(a.Vulnerabilities);
-            foreach (var child in a.Children)
+            foreach (AppTreeNode child in a.Children)
+            {
                 Get(child, ref list);
+            }
         }
 
         public static void Main(string[] args)
@@ -57,8 +70,9 @@ namespace Compass
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .UseEnvironment(Environments.Development)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
@@ -66,5 +80,6 @@ namespace Compass
                     webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
                     webBuilder.UseElectron(args);
                 });
+        }
     }
 }

@@ -1,0 +1,1280 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.ExtensionReport
+  commentId: T:Synthesys.SDK.ExtensionReport
+  id: ExtensionReport
+  parent: Synthesys.SDK
+  children:
+  - Synthesys.SDK.ExtensionReport.AdjustedScore
+  - Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+  - Synthesys.SDK.ExtensionReport.Blank
+  - Synthesys.SDK.ExtensionReport.Error(System.Exception)
+  - Synthesys.SDK.ExtensionReport.ErrorEncountered
+  - Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+  - Synthesys.SDK.ExtensionReport.FinalizeReport
+  - Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport``1
+  - Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+  - Synthesys.SDK.ExtensionReport.ProjectPointer
+  - Synthesys.SDK.ExtensionReport.RawPointsScored
+  - Synthesys.SDK.ExtensionReport.ReportSummaryName
+  - Synthesys.SDK.ExtensionReport.ReportViewName
+  - Synthesys.SDK.ExtensionReport.Runtime
+  - Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+  - Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport``1(``0)
+  - Synthesys.SDK.ExtensionReport.Vulnerabilities
+  langs:
+  - csharp
+  - vb
+  name: ExtensionReport
+  nameWithType: ExtensionReport
+  fullName: Synthesys.SDK.ExtensionReport
+  type: Class
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionReport
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 11
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nEncapsulates interesting runtime and output information from an Extension.\nThis is a generalized container--Extensions should use the &quot;SerializedExtensionSpecificReport&quot; property to store more specific information for report viewing.\n"
+  example: []
+  syntax:
+    content: public sealed class ExtensionReport
+    content.vb: Public NotInheritable Class ExtensionReport
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - sealed
+  - class
+  modifiers.vb:
+  - Public
+  - NotInheritable
+  - Class
+- uid: Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+  commentId: P:Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+  id: ExtensionIdentifier
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: ExtensionIdentifier
+  nameWithType: ExtensionReport.ExtensionIdentifier
+  fullName: Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionIdentifier
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 16
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nIdentifier of Extension which created this Report\n"
+  example: []
+  syntax:
+    content: public string ExtensionIdentifier { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExtensionIdentifier As String
+  overload: Synthesys.SDK.ExtensionReport.ExtensionIdentifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+  commentId: P:Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+  id: AffectedArtifactPaths
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: AffectedArtifactPaths
+  nameWithType: ExtensionReport.AffectedArtifactPaths
+  fullName: Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AffectedArtifactPaths
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 21
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nList of paths to Artifacts that were registered with the Extension\n"
+  example: []
+  syntax:
+    content: public List<string> AffectedArtifactPaths { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Property AffectedArtifactPaths As List(Of String)
+  overload: Synthesys.SDK.ExtensionReport.AffectedArtifactPaths*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.ProjectPointer
+  commentId: P:Synthesys.SDK.ExtensionReport.ProjectPointer
+  id: ProjectPointer
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: ProjectPointer
+  nameWithType: ExtensionReport.ProjectPointer
+  fullName: Synthesys.SDK.ExtensionReport.ProjectPointer
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProjectPointer
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 26
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nPointer to Service Map entry which spawned the creation of this report\n"
+  example: []
+  syntax:
+    content: public ProjectPointer ProjectPointer { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.ProjectPointer
+    content.vb: Public Property ProjectPointer As ProjectPointer
+  overload: Synthesys.SDK.ExtensionReport.ProjectPointer*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.Runtime
+  commentId: P:Synthesys.SDK.ExtensionReport.Runtime
+  id: Runtime
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: Runtime
+  nameWithType: ExtensionReport.Runtime
+  fullName: Synthesys.SDK.ExtensionReport.Runtime
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Runtime
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 31
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nHow long the Extension took to execute\n"
+  example: []
+  syntax:
+    content: public TimeSpan Runtime { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public Property Runtime As TimeSpan
+  overload: Synthesys.SDK.ExtensionReport.Runtime*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.RawPointsScored
+  commentId: P:Synthesys.SDK.ExtensionReport.RawPointsScored
+  id: RawPointsScored
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: RawPointsScored
+  nameWithType: ExtensionReport.RawPointsScored
+  fullName: Synthesys.SDK.ExtensionReport.RawPointsScored
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: RawPointsScored
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 36
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nNumber of points scored on the Extension&apos;s own scale\n"
+  example: []
+  syntax:
+    content: public int RawPointsScored { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property RawPointsScored As Integer
+  overload: Synthesys.SDK.ExtensionReport.RawPointsScored*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+  commentId: P:Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+  id: MaximumPointsAvailable
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: MaximumPointsAvailable
+  nameWithType: ExtensionReport.MaximumPointsAvailable
+  fullName: Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: MaximumPointsAvailable
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 41
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nMaximum number of points available on the Extension&apos;s own scale\n"
+  example: []
+  syntax:
+    content: public int MaximumPointsAvailable { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property MaximumPointsAvailable As Integer
+  overload: Synthesys.SDK.ExtensionReport.MaximumPointsAvailable*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.AdjustedScore
+  commentId: P:Synthesys.SDK.ExtensionReport.AdjustedScore
+  id: AdjustedScore
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: AdjustedScore
+  nameWithType: ExtensionReport.AdjustedScore
+  fullName: Synthesys.SDK.ExtensionReport.AdjustedScore
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AdjustedScore
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 46
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nAdjusted score out of 1.0\n"
+  example: []
+  syntax:
+    content: public double AdjustedScore { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property AdjustedScore As Double
+  overload: Synthesys.SDK.ExtensionReport.AdjustedScore*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.SDK.ExtensionReport.ReportViewName
+  commentId: P:Synthesys.SDK.ExtensionReport.ReportViewName
+  id: ReportViewName
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: ReportViewName
+  nameWithType: ExtensionReport.ReportViewName
+  fullName: Synthesys.SDK.ExtensionReport.ReportViewName
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ReportViewName
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 52
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nName of the View describing this ExtensionReport\n"
+  example: []
+  syntax:
+    content: public string ReportViewName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ReportViewName As String
+  overload: Synthesys.SDK.ExtensionReport.ReportViewName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.ReportSummaryName
+  commentId: P:Synthesys.SDK.ExtensionReport.ReportSummaryName
+  id: ReportSummaryName
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: ReportSummaryName
+  nameWithType: ExtensionReport.ReportSummaryName
+  fullName: Synthesys.SDK.ExtensionReport.ReportSummaryName
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ReportSummaryName
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 57
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nName of the summary control to represent this ExtensionReport\n"
+  example: []
+  syntax:
+    content: public string ReportSummaryName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ReportSummaryName As String
+  overload: Synthesys.SDK.ExtensionReport.ReportSummaryName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+  commentId: P:Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+  id: SerializedExtensionSpecificReport
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: SerializedExtensionSpecificReport
+  nameWithType: ExtensionReport.SerializedExtensionSpecificReport
+  fullName: Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SerializedExtensionSpecificReport
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 62
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nSerialized version of the Extension-specific report\n"
+  example: []
+  syntax:
+    content: public string SerializedExtensionSpecificReport { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SerializedExtensionSpecificReport As String
+  overload: Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.Vulnerabilities
+  commentId: P:Synthesys.SDK.ExtensionReport.Vulnerabilities
+  id: Vulnerabilities
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: Vulnerabilities
+  nameWithType: ExtensionReport.Vulnerabilities
+  fullName: Synthesys.SDK.ExtensionReport.Vulnerabilities
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Vulnerabilities
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 67
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nVulnerabilities generated by this Extension\n"
+  example: []
+  syntax:
+    content: public List<Vulnerability> Vulnerabilities { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+    content.vb: Public Property Vulnerabilities As List(Of Vulnerability)
+  overload: Synthesys.SDK.ExtensionReport.Vulnerabilities*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.ErrorEncountered
+  commentId: P:Synthesys.SDK.ExtensionReport.ErrorEncountered
+  id: ErrorEncountered
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: ErrorEncountered
+  nameWithType: ExtensionReport.ErrorEncountered
+  fullName: Synthesys.SDK.ExtensionReport.ErrorEncountered
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ErrorEncountered
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 72
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nOptional Exception, if an error was encountered while generating the report\n"
+  example: []
+  syntax:
+    content: public Exception ErrorEncountered { get; set; }
+    parameters: []
+    return:
+      type: System.Exception
+    content.vb: Public Property ErrorEncountered As Exception
+  overload: Synthesys.SDK.ExtensionReport.ErrorEncountered*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport``1
+  commentId: M:Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport``1
+  id: GetExtensionSpecificReport``1
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: GetExtensionSpecificReport<T>()
+  nameWithType: ExtensionReport.GetExtensionSpecificReport<T>()
+  fullName: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport<T>()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetExtensionSpecificReport
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 79
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nDeserialize the Extension-specific report with the default serializer\n"
+  example: []
+  syntax:
+    content: public T GetExtensionSpecificReport<T>()
+    typeParameters:
+    - id: T
+      description: Report type
+    return:
+      type: '{T}'
+      description: Instance of Report, deserialized from SerializedExtensionSpecificReport
+    content.vb: Public Function GetExtensionSpecificReport(Of T) As T
+  overload: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport*
+  nameWithType.vb: ExtensionReport.GetExtensionSpecificReport(Of T)()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport(Of T)()
+  name.vb: GetExtensionSpecificReport(Of T)()
+- uid: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport``1(``0)
+  commentId: M:Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport``1(``0)
+  id: SetExtensionSpecificReport``1(``0)
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: SetExtensionSpecificReport<T>(T)
+  nameWithType: ExtensionReport.SetExtensionSpecificReport<T>(T)
+  fullName: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport<T>(T)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SetExtensionSpecificReport
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 92
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nSerialize the Extension-specific report with the default serializer\n"
+  example: []
+  syntax:
+    content: public void SetExtensionSpecificReport<T>(T obj)
+    parameters:
+    - id: obj
+      type: '{T}'
+    typeParameters:
+    - id: T
+      description: Report type
+    content.vb: Public Sub SetExtensionSpecificReport(Of T)(obj As T)
+  overload: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport*
+  nameWithType.vb: ExtensionReport.SetExtensionSpecificReport(Of T)(T)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport(Of T)(T)
+  name.vb: SetExtensionSpecificReport(Of T)(T)
+- uid: Synthesys.SDK.ExtensionReport.Blank
+  commentId: M:Synthesys.SDK.ExtensionReport.Blank
+  id: Blank
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: Blank()
+  nameWithType: ExtensionReport.Blank()
+  fullName: Synthesys.SDK.ExtensionReport.Blank()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Blank
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 104
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nCreate a blank report\n"
+  example: []
+  syntax:
+    content: public static ExtensionReport Blank()
+    return:
+      type: Synthesys.SDK.ExtensionReport
+      description: ''
+    content.vb: Public Shared Function Blank As ExtensionReport
+  overload: Synthesys.SDK.ExtensionReport.Blank*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.SDK.ExtensionReport.Error(System.Exception)
+  commentId: M:Synthesys.SDK.ExtensionReport.Error(System.Exception)
+  id: Error(System.Exception)
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: Error(Exception)
+  nameWithType: ExtensionReport.Error(Exception)
+  fullName: Synthesys.SDK.ExtensionReport.Error(System.Exception)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Error
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 114
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nCreate an error-containing report\n"
+  example: []
+  syntax:
+    content: public static ExtensionReport Error(Exception ex)
+    parameters:
+    - id: ex
+      type: System.Exception
+      description: Exception generated
+    return:
+      type: Synthesys.SDK.ExtensionReport
+      description: ''
+    content.vb: Public Shared Function Error(ex As Exception) As ExtensionReport
+  overload: Synthesys.SDK.ExtensionReport.Error*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.SDK.ExtensionReport.FinalizeReport
+  commentId: M:Synthesys.SDK.ExtensionReport.FinalizeReport
+  id: FinalizeReport
+  parent: Synthesys.SDK.ExtensionReport
+  langs:
+  - csharp
+  - vb
+  name: FinalizeReport()
+  nameWithType: ExtensionReport.FinalizeReport()
+  fullName: Synthesys.SDK.ExtensionReport.FinalizeReport()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/ExtensionReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: FinalizeReport
+    path: ../Synthesys.SDK/ExtensionReport.cs
+    startLine: 123
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nFinalize report by disconnecting TaskDescriptor from recursive loops\n"
+  example: []
+  syntax:
+    content: public ExtensionReport FinalizeReport()
+    return:
+      type: Synthesys.SDK.ExtensionReport
+      description: ''
+    content.vb: Public Function FinalizeReport As ExtensionReport
+  overload: Synthesys.SDK.ExtensionReport.FinalizeReport*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.SDK.ExtensionReport.ExtensionIdentifier*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+  name: ExtensionIdentifier
+  nameWithType: ExtensionReport.ExtensionIdentifier
+  fullName: Synthesys.SDK.ExtensionReport.ExtensionIdentifier
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.SDK.ExtensionReport.AffectedArtifactPaths*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+  name: AffectedArtifactPaths
+  nameWithType: ExtensionReport.AffectedArtifactPaths
+  fullName: Synthesys.SDK.ExtensionReport.AffectedArtifactPaths
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<String>
+  nameWithType: List<String>
+  fullName: System.Collections.Generic.List<System.String>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of System.String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Synthesys.SDK.ExtensionReport.ProjectPointer*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.ProjectPointer
+  name: ProjectPointer
+  nameWithType: ExtensionReport.ProjectPointer
+  fullName: Synthesys.SDK.ExtensionReport.ProjectPointer
+- uid: SMACD.AppTree.ProjectPointer
+  commentId: T:SMACD.AppTree.ProjectPointer
+  parent: SMACD.AppTree
+  name: ProjectPointer
+  nameWithType: ProjectPointer
+  fullName: SMACD.AppTree.ProjectPointer
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: Synthesys.SDK.ExtensionReport.Runtime*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.Runtime
+  name: Runtime
+  nameWithType: ExtensionReport.Runtime
+  fullName: Synthesys.SDK.ExtensionReport.Runtime
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Synthesys.SDK.ExtensionReport.RawPointsScored*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.RawPointsScored
+  name: RawPointsScored
+  nameWithType: ExtensionReport.RawPointsScored
+  fullName: Synthesys.SDK.ExtensionReport.RawPointsScored
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Synthesys.SDK.ExtensionReport.MaximumPointsAvailable*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+  name: MaximumPointsAvailable
+  nameWithType: ExtensionReport.MaximumPointsAvailable
+  fullName: Synthesys.SDK.ExtensionReport.MaximumPointsAvailable
+- uid: Synthesys.SDK.ExtensionReport.AdjustedScore*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.AdjustedScore
+  name: AdjustedScore
+  nameWithType: ExtensionReport.AdjustedScore
+  fullName: Synthesys.SDK.ExtensionReport.AdjustedScore
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Synthesys.SDK.ExtensionReport.ReportViewName*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.ReportViewName
+  name: ReportViewName
+  nameWithType: ExtensionReport.ReportViewName
+  fullName: Synthesys.SDK.ExtensionReport.ReportViewName
+- uid: Synthesys.SDK.ExtensionReport.ReportSummaryName*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.ReportSummaryName
+  name: ReportSummaryName
+  nameWithType: ExtensionReport.ReportSummaryName
+  fullName: Synthesys.SDK.ExtensionReport.ReportSummaryName
+- uid: Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+  name: SerializedExtensionSpecificReport
+  nameWithType: ExtensionReport.SerializedExtensionSpecificReport
+  fullName: Synthesys.SDK.ExtensionReport.SerializedExtensionSpecificReport
+- uid: Synthesys.SDK.ExtensionReport.Vulnerabilities*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.Vulnerabilities
+  name: Vulnerabilities
+  nameWithType: ExtensionReport.Vulnerabilities
+  fullName: Synthesys.SDK.ExtensionReport.Vulnerabilities
+- uid: System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+  commentId: T:System.Collections.Generic.List{SMACD.AppTree.Vulnerability}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Vulnerability>
+  nameWithType: List<Vulnerability>
+  fullName: System.Collections.Generic.List<SMACD.AppTree.Vulnerability>
+  nameWithType.vb: List(Of Vulnerability)
+  fullName.vb: System.Collections.Generic.List(Of SMACD.AppTree.Vulnerability)
+  name.vb: List(Of Vulnerability)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.AppTree.Vulnerability
+    name: Vulnerability
+    nameWithType: Vulnerability
+    fullName: SMACD.AppTree.Vulnerability
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.AppTree.Vulnerability
+    name: Vulnerability
+    nameWithType: Vulnerability
+    fullName: SMACD.AppTree.Vulnerability
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.ExtensionReport.ErrorEncountered*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.ErrorEncountered
+  name: ErrorEncountered
+  nameWithType: ExtensionReport.ErrorEncountered
+  fullName: Synthesys.SDK.ExtensionReport.ErrorEncountered
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport
+  name: GetExtensionSpecificReport
+  nameWithType: ExtensionReport.GetExtensionSpecificReport
+  fullName: Synthesys.SDK.ExtensionReport.GetExtensionSpecificReport
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport
+  name: SetExtensionSpecificReport
+  nameWithType: ExtensionReport.SetExtensionSpecificReport
+  fullName: Synthesys.SDK.ExtensionReport.SetExtensionSpecificReport
+- uid: Synthesys.SDK.ExtensionReport.Blank*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.Blank
+  name: Blank
+  nameWithType: ExtensionReport.Blank
+  fullName: Synthesys.SDK.ExtensionReport.Blank
+- uid: Synthesys.SDK.ExtensionReport
+  commentId: T:Synthesys.SDK.ExtensionReport
+  parent: Synthesys.SDK
+  name: ExtensionReport
+  nameWithType: ExtensionReport
+  fullName: Synthesys.SDK.ExtensionReport
+- uid: Synthesys.SDK.ExtensionReport.Error*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.Error
+  name: Error
+  nameWithType: ExtensionReport.Error
+  fullName: Synthesys.SDK.ExtensionReport.Error
+- uid: Synthesys.SDK.ExtensionReport.FinalizeReport*
+  commentId: Overload:Synthesys.SDK.ExtensionReport.FinalizeReport
+  name: FinalizeReport
+  nameWithType: ExtensionReport.FinalizeReport
+  fullName: Synthesys.SDK.ExtensionReport.FinalizeReport

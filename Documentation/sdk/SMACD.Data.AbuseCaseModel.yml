@@ -1,0 +1,803 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.Data.AbuseCaseModel
+  commentId: T:SMACD.Data.AbuseCaseModel
+  id: AbuseCaseModel
+  parent: SMACD.Data
+  children:
+  - SMACD.Data.AbuseCaseModel.Actions
+  - SMACD.Data.AbuseCaseModel.BusinessRisk
+  - SMACD.Data.AbuseCaseModel.Description
+  - SMACD.Data.AbuseCaseModel.Name
+  - SMACD.Data.AbuseCaseModel.Owners
+  - SMACD.Data.AbuseCaseModel.TechnicalRisk
+  langs:
+  - csharp
+  - vb
+  name: AbuseCaseModel
+  nameWithType: AbuseCaseModel
+  fullName: SMACD.Data.AbuseCaseModel
+  type: Class
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: AbuseCaseModel
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 7
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRepresents an Abuse Case: a way an attacker can abuse a resource to break a use case\n"
+  example: []
+  syntax:
+    content: 'public class AbuseCaseModel : IBusinessEntityModel, IModel'
+    content.vb: >-
+      Public Class AbuseCaseModel
+
+          Implements IBusinessEntityModel, IModel
+  inheritance:
+  - System.Object
+  implements:
+  - SMACD.Data.IBusinessEntityModel
+  - SMACD.Data.IModel
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SMACD.Data.AbuseCaseModel.Actions
+  commentId: P:SMACD.Data.AbuseCaseModel.Actions
+  id: Actions
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: Actions
+  nameWithType: AbuseCaseModel.Actions
+  fullName: SMACD.Data.AbuseCaseModel.Actions
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Actions
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 12
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nPlugins that can be used to scan for this abuse case\n"
+  example: []
+  syntax:
+    content: public IList<ActionPointerModel> Actions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{SMACD.Data.ActionPointerModel}
+    content.vb: Public Property Actions As IList(Of ActionPointerModel)
+  overload: SMACD.Data.AbuseCaseModel.Actions*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.AbuseCaseModel.Name
+  commentId: P:SMACD.Data.AbuseCaseModel.Name
+  id: Name
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: AbuseCaseModel.Name
+  fullName: SMACD.Data.AbuseCaseModel.Name
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Name
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 17
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nName of abuse case\n"
+  example: []
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: SMACD.Data.AbuseCaseModel.Name*
+  implements:
+  - SMACD.Data.IBusinessEntityModel.Name
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.AbuseCaseModel.Description
+  commentId: P:SMACD.Data.AbuseCaseModel.Description
+  id: Description
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: AbuseCaseModel.Description
+  fullName: SMACD.Data.AbuseCaseModel.Description
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Description
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 22
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nDescription of how abuse case works\n"
+  example: []
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Description As String
+  overload: SMACD.Data.AbuseCaseModel.Description*
+  implements:
+  - SMACD.Data.IBusinessEntityModel.Description
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.AbuseCaseModel.Owners
+  commentId: P:SMACD.Data.AbuseCaseModel.Owners
+  id: Owners
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: Owners
+  nameWithType: AbuseCaseModel.Owners
+  fullName: SMACD.Data.AbuseCaseModel.Owners
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Owners
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 27
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nBusiness owners of this abuse case\n"
+  example: []
+  syntax:
+    content: public IList<OwnerPointerModel> Owners { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+    content.vb: Public Property Owners As IList(Of OwnerPointerModel)
+  overload: SMACD.Data.AbuseCaseModel.Owners*
+  implements:
+  - SMACD.Data.IBusinessEntityModel.Owners
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.AbuseCaseModel.BusinessRisk
+  commentId: P:SMACD.Data.AbuseCaseModel.BusinessRisk
+  id: BusinessRisk
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: BusinessRisk
+  nameWithType: AbuseCaseModel.BusinessRisk
+  fullName: SMACD.Data.AbuseCaseModel.BusinessRisk
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: BusinessRisk
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 33
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRelative level of risk for this Abuse Case in comparison to other Abuse Cases for this Use Case\nA high business risk may indicate that the Abuse Case could access sensitive data\n"
+  example: []
+  syntax:
+    content: public int BusinessRisk { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property BusinessRisk As Integer
+  overload: SMACD.Data.AbuseCaseModel.BusinessRisk*
+  implements:
+  - SMACD.Data.IBusinessEntityModel.BusinessRisk
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SMACD.Data.AbuseCaseModel.TechnicalRisk
+  commentId: P:SMACD.Data.AbuseCaseModel.TechnicalRisk
+  id: TechnicalRisk
+  parent: SMACD.Data.AbuseCaseModel
+  langs:
+  - csharp
+  - vb
+  name: TechnicalRisk
+  nameWithType: AbuseCaseModel.TechnicalRisk
+  fullName: SMACD.Data.AbuseCaseModel.TechnicalRisk
+  type: Property
+  source:
+    remote:
+      path: SMACD.Data/AbuseCaseModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TechnicalRisk
+    path: ../SMACD.Data/AbuseCaseModel.cs
+    startLine: 40
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nRelative level of technical risk for this Abuse Case in comparison to other Abuse Cases for this Use Case\nA high technical risk may indicate that there is a low degree of complexity to technically attack the targets\nassociated with this Abuse Case\n"
+  example: []
+  syntax:
+    content: public int TechnicalRisk { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TechnicalRisk As Integer
+  overload: SMACD.Data.AbuseCaseModel.TechnicalRisk*
+  implements:
+  - SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: SMACD.Data.IBusinessEntityModel
+  commentId: T:SMACD.Data.IBusinessEntityModel
+  parent: SMACD.Data
+  name: IBusinessEntityModel
+  nameWithType: IBusinessEntityModel
+  fullName: SMACD.Data.IBusinessEntityModel
+- uid: SMACD.Data.IModel
+  commentId: T:SMACD.Data.IModel
+  parent: SMACD.Data
+  name: IModel
+  nameWithType: IModel
+  fullName: SMACD.Data.IModel
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SMACD.Data.AbuseCaseModel.Actions*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.Actions
+  name: Actions
+  nameWithType: AbuseCaseModel.Actions
+  fullName: SMACD.Data.AbuseCaseModel.Actions
+- uid: System.Collections.Generic.IList{SMACD.Data.ActionPointerModel}
+  commentId: T:System.Collections.Generic.IList{SMACD.Data.ActionPointerModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<ActionPointerModel>
+  nameWithType: IList<ActionPointerModel>
+  fullName: System.Collections.Generic.IList<SMACD.Data.ActionPointerModel>
+  nameWithType.vb: IList(Of ActionPointerModel)
+  fullName.vb: System.Collections.Generic.IList(Of SMACD.Data.ActionPointerModel)
+  name.vb: IList(Of ActionPointerModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.Data.ActionPointerModel
+    name: ActionPointerModel
+    nameWithType: ActionPointerModel
+    fullName: SMACD.Data.ActionPointerModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.Data.ActionPointerModel
+    name: ActionPointerModel
+    nameWithType: ActionPointerModel
+    fullName: SMACD.Data.ActionPointerModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: SMACD.Data.AbuseCaseModel.Name*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.Name
+  name: Name
+  nameWithType: AbuseCaseModel.Name
+  fullName: SMACD.Data.AbuseCaseModel.Name
+- uid: SMACD.Data.IBusinessEntityModel.Name
+  commentId: P:SMACD.Data.IBusinessEntityModel.Name
+  parent: SMACD.Data.IBusinessEntityModel
+  name: Name
+  nameWithType: IBusinessEntityModel.Name
+  fullName: SMACD.Data.IBusinessEntityModel.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.Data.AbuseCaseModel.Description*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.Description
+  name: Description
+  nameWithType: AbuseCaseModel.Description
+  fullName: SMACD.Data.AbuseCaseModel.Description
+- uid: SMACD.Data.IBusinessEntityModel.Description
+  commentId: P:SMACD.Data.IBusinessEntityModel.Description
+  parent: SMACD.Data.IBusinessEntityModel
+  name: Description
+  nameWithType: IBusinessEntityModel.Description
+  fullName: SMACD.Data.IBusinessEntityModel.Description
+- uid: SMACD.Data.AbuseCaseModel.Owners*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.Owners
+  name: Owners
+  nameWithType: AbuseCaseModel.Owners
+  fullName: SMACD.Data.AbuseCaseModel.Owners
+- uid: SMACD.Data.IBusinessEntityModel.Owners
+  commentId: P:SMACD.Data.IBusinessEntityModel.Owners
+  parent: SMACD.Data.IBusinessEntityModel
+  name: Owners
+  nameWithType: IBusinessEntityModel.Owners
+  fullName: SMACD.Data.IBusinessEntityModel.Owners
+- uid: System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+  commentId: T:System.Collections.Generic.IList{SMACD.Data.OwnerPointerModel}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<OwnerPointerModel>
+  nameWithType: IList<OwnerPointerModel>
+  fullName: System.Collections.Generic.IList<SMACD.Data.OwnerPointerModel>
+  nameWithType.vb: IList(Of OwnerPointerModel)
+  fullName.vb: System.Collections.Generic.IList(Of SMACD.Data.OwnerPointerModel)
+  name.vb: IList(Of OwnerPointerModel)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SMACD.Data.OwnerPointerModel
+    name: OwnerPointerModel
+    nameWithType: OwnerPointerModel
+    fullName: SMACD.Data.OwnerPointerModel
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SMACD.Data.OwnerPointerModel
+    name: OwnerPointerModel
+    nameWithType: OwnerPointerModel
+    fullName: SMACD.Data.OwnerPointerModel
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.Data.AbuseCaseModel.BusinessRisk*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.BusinessRisk
+  name: BusinessRisk
+  nameWithType: AbuseCaseModel.BusinessRisk
+  fullName: SMACD.Data.AbuseCaseModel.BusinessRisk
+- uid: SMACD.Data.IBusinessEntityModel.BusinessRisk
+  commentId: P:SMACD.Data.IBusinessEntityModel.BusinessRisk
+  parent: SMACD.Data.IBusinessEntityModel
+  name: BusinessRisk
+  nameWithType: IBusinessEntityModel.BusinessRisk
+  fullName: SMACD.Data.IBusinessEntityModel.BusinessRisk
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: SMACD.Data.AbuseCaseModel.TechnicalRisk*
+  commentId: Overload:SMACD.Data.AbuseCaseModel.TechnicalRisk
+  name: TechnicalRisk
+  nameWithType: AbuseCaseModel.TechnicalRisk
+  fullName: SMACD.Data.AbuseCaseModel.TechnicalRisk
+- uid: SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  commentId: P:SMACD.Data.IBusinessEntityModel.TechnicalRisk
+  parent: SMACD.Data.IBusinessEntityModel
+  name: TechnicalRisk
+  nameWithType: IBusinessEntityModel.TechnicalRisk
+  fullName: SMACD.Data.IBusinessEntityModel.TechnicalRisk

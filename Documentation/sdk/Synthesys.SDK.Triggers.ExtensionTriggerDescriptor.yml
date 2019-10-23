@@ -1,0 +1,878 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  id: ExtensionTriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  children:
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals(System.Object)
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString
+  - Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+  langs:
+  - csharp
+  - vb
+  name: ExtensionTriggerDescriptor
+  nameWithType: ExtensionTriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  type: Class
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionTriggerDescriptor
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 23
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nCreate a descriptor for a trigger activated by execution of an Extension\n"
+  example: []
+  syntax:
+    content: 'public class ExtensionTriggerDescriptor : TriggerDescriptor'
+    content.vb: >-
+      Public Class ExtensionTriggerDescriptor
+
+          Inherits TriggerDescriptor
+  inheritance:
+  - System.Object
+  - Synthesys.SDK.Triggers.TriggerDescriptor
+  inheritedMembers:
+  - Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  - Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  - Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  - Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+  - Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  commentId: M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  id: '#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)'
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: ExtensionTriggerDescriptor(String, ExtensionConditionTrigger)
+  nameWithType: ExtensionTriggerDescriptor.ExtensionTriggerDescriptor(String, ExtensionConditionTrigger)
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionTriggerDescriptor(System.String, Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 30
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nCreate a descriptor for a trigger activated by execution of an Extension\n"
+  example: []
+  syntax:
+    content: public ExtensionTriggerDescriptor(string extensionIdentifier, ExtensionConditionTrigger trigger)
+    parameters:
+    - id: extensionIdentifier
+      type: System.String
+      description: Artifact path
+    - id: trigger
+      type: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+      description: Triggering operation
+    content.vb: Public Sub New(extensionIdentifier As String, trigger As ExtensionConditionTrigger)
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+  commentId: P:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+  id: ExtensionIdentifier
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: ExtensionIdentifier
+  nameWithType: ExtensionTriggerDescriptor.ExtensionIdentifier
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionIdentifier
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 39
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nExtension identifier being tracked\n"
+  example: []
+  syntax:
+    content: public string ExtensionIdentifier { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExtensionIdentifier As String
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+  commentId: P:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+  id: Trigger
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Trigger
+  nameWithType: ExtensionTriggerDescriptor.Trigger
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Trigger
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 44
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nTrigger condition\n"
+  example: []
+  syntax:
+    content: public ExtensionConditionTrigger Trigger { get; set; }
+    parameters: []
+    return:
+      type: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+    content.vb: Public Property Trigger As ExtensionConditionTrigger
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString
+  commentId: M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString
+  id: ToString
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: ExtensionTriggerDescriptor.ToString()
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ToString
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 50
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nString representation of Extension Trigger\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals(System.Object)
+  commentId: M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: ExtensionTriggerDescriptor.Equals(Object)
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Equals
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 60
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nIf an Extension Trigger matches another\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: Extension Trigger to compare
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode
+  commentId: M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode
+  id: GetHashCode
+  parent: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: ExtensionTriggerDescriptor.GetHashCode()
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GetHashCode
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 81
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nGet hash code from Extension Identifier and trigger condition\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: ''
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor
+  commentId: T:Synthesys.SDK.Triggers.TriggerDescriptor
+  parent: Synthesys.SDK.Triggers
+  name: TriggerDescriptor
+  nameWithType: TriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  commentId: M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  parent: Synthesys.SDK.Triggers.TriggerDescriptor
+  isExternal: true
+  name: ArtifactTrigger(String, AppTreeNodeEvents)
+  nameWithType: TriggerDescriptor.ArtifactTrigger(String, AppTreeNodeEvents)
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String, Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  spec.csharp:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    name: ArtifactTrigger
+    nameWithType: TriggerDescriptor.ArtifactTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+    name: AppTreeNodeEvents
+    nameWithType: AppTreeNodeEvents
+    fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    name: ArtifactTrigger
+    nameWithType: TriggerDescriptor.ArtifactTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+    name: AppTreeNodeEvents
+    nameWithType: AppTreeNodeEvents
+    fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  commentId: M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  parent: Synthesys.SDK.Triggers.TriggerDescriptor
+  name: ArtifactTrigger(AppTreeNode, AppTreeNodeEvents)
+  nameWithType: TriggerDescriptor.ArtifactTrigger(AppTreeNode, AppTreeNodeEvents)
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode, Synthesys.SDK.Triggers.AppTreeNodeEvents)
+  spec.csharp:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    name: ArtifactTrigger
+    nameWithType: TriggerDescriptor.ArtifactTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+    name: AppTreeNodeEvents
+    nameWithType: AppTreeNodeEvents
+    fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)
+    name: ArtifactTrigger
+    nameWithType: TriggerDescriptor.ArtifactTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.AppTreeNodeEvents
+    name: AppTreeNodeEvents
+    nameWithType: AppTreeNodeEvents
+    fullName: Synthesys.SDK.Triggers.AppTreeNodeEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  commentId: M:Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  parent: Synthesys.SDK.Triggers.TriggerDescriptor
+  isExternal: true
+  name: ExtensionTrigger(String, ExtensionConditionTrigger)
+  nameWithType: TriggerDescriptor.ExtensionTrigger(String, ExtensionConditionTrigger)
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String, Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+  spec.csharp:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+    name: ExtensionTrigger
+    nameWithType: TriggerDescriptor.ExtensionTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+    name: ExtensionConditionTrigger
+    nameWithType: ExtensionConditionTrigger
+    fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)
+    name: ExtensionTrigger
+    nameWithType: TriggerDescriptor.ExtensionTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.ExtensionTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+    name: ExtensionConditionTrigger
+    nameWithType: ExtensionConditionTrigger
+    fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+  commentId: M:Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+  parent: Synthesys.SDK.Triggers.TriggerDescriptor
+  name: SystemEventTrigger(SystemEvents)
+  nameWithType: TriggerDescriptor.SystemEventTrigger(SystemEvents)
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+  spec.csharp:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+    name: SystemEventTrigger
+    nameWithType: TriggerDescriptor.SystemEventTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.SystemEvents
+    name: SystemEvents
+    nameWithType: SystemEvents
+    fullName: Synthesys.SDK.Triggers.SystemEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger(Synthesys.SDK.Triggers.SystemEvents)
+    name: SystemEventTrigger
+    nameWithType: TriggerDescriptor.SystemEventTrigger
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.SystemEventTrigger
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Synthesys.SDK.Triggers.SystemEvents
+    name: SystemEvents
+    nameWithType: SystemEvents
+    fullName: Synthesys.SDK.Triggers.SystemEvents
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+  commentId: M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+  parent: Synthesys.SDK.Triggers.TriggerDescriptor
+  name: GeneratePath(AppTreeNode)
+  nameWithType: TriggerDescriptor.GeneratePath(AppTreeNode)
+  fullName: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+  spec.csharp:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+    name: GeneratePath
+    nameWithType: TriggerDescriptor.GeneratePath
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)
+    name: GeneratePath
+    nameWithType: TriggerDescriptor.GeneratePath
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor
+  name: ExtensionTriggerDescriptor
+  nameWithType: ExtensionTriggerDescriptor.ExtensionTriggerDescriptor
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionTriggerDescriptor
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  commentId: T:Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  parent: Synthesys.SDK.Triggers
+  name: ExtensionConditionTrigger
+  nameWithType: ExtensionConditionTrigger
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+  name: ExtensionIdentifier
+  nameWithType: ExtensionTriggerDescriptor.ExtensionIdentifier
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+  name: Trigger
+  nameWithType: ExtensionTriggerDescriptor.Trigger
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString
+  name: ToString
+  nameWithType: ExtensionTriggerDescriptor.ToString
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals
+  name: Equals
+  nameWithType: ExtensionTriggerDescriptor.Equals
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode*
+  commentId: Overload:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode
+  name: GetHashCode
+  nameWithType: ExtensionTriggerDescriptor.GetHashCode
+  fullName: Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

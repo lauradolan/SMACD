@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.OwaspZap.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>OWASP ZAProxy Web Scanner Plugin for Synthesys</Product>
     <Description>Implements a wrapper around the OWASP ZAProxy scanner to provide data in Synthesys scans</Description>
@@ -26,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
   </ItemGroup>
 

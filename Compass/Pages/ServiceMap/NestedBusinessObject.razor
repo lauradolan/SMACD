@@ -1,0 +1,91 @@
+﻿@using SMACD.Data
+@code
+{
+    [Parameter]
+    public IBusinessEntityModel Model { get; set; }
+
+    [Parameter]
+    public ServiceMap Parent { get; set; }
+
+    public bool IsVisible { get; set; } = false;
+
+    [CascadingParameter]
+    public IBusinessEntityModel EditingModel { get; set; }
+}
+<div class="card">
+    <div role="tab" class="card-header d-flex" style="padding-top: 0.5em;padding-left: 0.5em;">
+        @if (IsVisible)
+        {
+            <i class="fa fa-minus d-xl-flex align-items-xl-start" style="padding-top: 0.2em;padding-right: 0.2em;"></i>
+        }
+        else
+        {
+            <i class="fa fa-plus d-xl-flex align-items-xl-start" style="padding-top: 0.2em;padding-right: 0.2em;"></i>
+        }
+        <h5 class="d-xl-flex flex-column flex-grow-1 justify-content-xl-start align-items-xl-start mb-0">
+            <a @onclick="(() => IsVisible = !IsVisible)" href="javascript:return;">
+                @Model.Name
+                <p class="text-secondary d-flex d-xl-flex flex-row flex-wrap small" style="padding-right: 0.3em;">@Model.Description</p>
+            </a>
+        </h5>
+        <div class="d-flex flex-row align-items-baseline justify-content-xl-end">
+            @if (Model.BusinessRisk.HasValue)
+            {
+                <div class="text-center d-xl-flex flex-column align-items-xl-center" style="margin: 0.3em;">
+                    <span class="border rounded border-secondary" style="color: #00aa00;padding: 0.3em;">@Model.BusinessRisk.Value</span>
+                    <small class="form-text text-center text-muted" style="font-size: 8px;">Business Risk</small>
+                </div>
+            }
+
+            @if (Model.TechnicalRisk.HasValue)
+            {
+                <div class="text-center d-xl-flex flex-column align-items-xl-center" style="margin: 0.3em;">
+                    <span class="border rounded border-secondary" style="color: #0000aa;padding: 0.3em;">@Model.TechnicalRisk.Value</span>
+                    <small class="form-text text-center text-muted" style="font-size: 8px;">Technical Risk</small>
+                </div>
+            }
+
+            <div role="group" class="btn-group d-flex flex-row justify-content-xl-center align-items-xl-start"
+                 style="margin-top: 0.5em;margin-left: 0.5em;">
+                <button class="btn btn-primary" type="button"><i class="fa fa-plus"></i></button>
+                <div class="dropdown btn-group" role="group">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fa fa-user" style="margin-right: 5px;"></i></button>
+                    <div role="menu" class="dropdown-menu">
+                        @foreach (var owner in Model.Owners)
+                        {
+                            <Owner OwnerModel="@owner" />
+                        }
+                    </div>
+                </div><button class="btn btn-primary" type="button" @onclick="(() => Parent.SetModel(Model))"><i class="fa fa-edit"></i></button><button class="btn btn-primary" type="button"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </div>
+    <div role="tabpanel">
+        <div class="card-body pr-0">
+            @if (IsVisible)
+            {
+                @if (Model is FeatureModel)
+                {
+                    foreach (var useCase in ((FeatureModel)Model).UseCases)
+                    {
+                        <NestedBusinessObject Model="useCase" Parent="@Parent" />
+                    }
+                }
+                @if (Model is UseCaseModel)
+                {
+                    foreach (var abuseCase in ((UseCaseModel)Model).AbuseCases)
+                    {
+                        <NestedBusinessObject Model="abuseCase" Parent="@Parent" />
+                    }
+                }
+                @if (Model is AbuseCaseModel)
+                {
+                    foreach (var action in ((AbuseCaseModel)Model).Actions)
+                    {
+                        <p>Action: @action.Action</p>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

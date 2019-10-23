@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IOperateOnUrl
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnUrl
+  id: IOperateOnUrl
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+  langs:
+  - csharp
+  - vb
+  name: IOperateOnUrl
+  nameWithType: IOperateOnUrl
+  fullName: Synthesys.SDK.Capabilities.IOperateOnUrl
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnUrl.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IOperateOnUrl
+    path: ../Synthesys.SDK/Capabilities/IOperateOnUrl.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nIOperateOnUrl indicates that the Extension acts upon a URL\n"
+  example: []
+  syntax:
+    content: public interface IOperateOnUrl
+    content.vb: Public Interface IOperateOnUrl
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+  commentId: P:Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+  id: Url
+  parent: Synthesys.SDK.Capabilities.IOperateOnUrl
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: IOperateOnUrl.Url
+  fullName: Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnUrl.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Url
+    path: ../Synthesys.SDK/Capabilities/IOperateOnUrl.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the URL node\n"
+  example: []
+  syntax:
+    content: UrlNode Url { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.UrlNode
+    content.vb: Property Url As UrlNode
+  overload: Synthesys.SDK.Capabilities.IOperateOnUrl.Url*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IOperateOnUrl.Url*
+  commentId: Overload:Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+  name: Url
+  nameWithType: IOperateOnUrl.Url
+  fullName: Synthesys.SDK.Capabilities.IOperateOnUrl.Url
+- uid: SMACD.AppTree.UrlNode
+  commentId: T:SMACD.AppTree.UrlNode
+  parent: SMACD.AppTree
+  name: UrlNode
+  nameWithType: UrlNode
+  fullName: SMACD.AppTree.UrlNode
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

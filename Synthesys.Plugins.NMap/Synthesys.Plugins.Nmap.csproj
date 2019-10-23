@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RazorLanguage>3.0</RazorLanguage>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.Nmap.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>Nmap Web Scanner Plugin for Synthesys</Product>
     <Description>Implements a wrapper around the Nmap port scanner to provide data in Synthesys scans</Description>
@@ -26,8 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
-    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
+    <ProjectReference Include="..\Compass.Components\Compass.Components.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
   </ItemGroup>
 

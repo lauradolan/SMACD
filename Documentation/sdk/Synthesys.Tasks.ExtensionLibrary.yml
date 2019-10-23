@@ -1,0 +1,961 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Tasks.ExtensionLibrary
+  commentId: T:Synthesys.Tasks.ExtensionLibrary
+  id: ExtensionLibrary
+  parent: Synthesys.Tasks
+  children:
+  - Synthesys.Tasks.ExtensionLibrary.#ctor(System.String)
+  - Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+  - Synthesys.Tasks.ExtensionLibrary.Assembly
+  - Synthesys.Tasks.ExtensionLibrary.FileName
+  - Synthesys.Tasks.ExtensionLibrary.Logger
+  - Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+  - Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+  langs:
+  - csharp
+  - vb
+  name: ExtensionLibrary
+  nameWithType: ExtensionLibrary
+  fullName: Synthesys.Tasks.ExtensionLibrary
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionLibrary
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 18
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nEncapsulates functionality of the system in the form of Extensions\n"
+  example: []
+  syntax:
+    content: public class ExtensionLibrary
+    content.vb: Public Class ExtensionLibrary
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Tasks.ExtensionLibrary.#ctor(System.String)
+  commentId: M:Synthesys.Tasks.ExtensionLibrary.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: ExtensionLibrary(String)
+  nameWithType: ExtensionLibrary.ExtensionLibrary(String)
+  fullName: Synthesys.Tasks.ExtensionLibrary.ExtensionLibrary(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 29
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nLibrary File that provides Actions to the system\n"
+  example: []
+  syntax:
+    content: public ExtensionLibrary(string fileName)
+    parameters:
+    - id: fileName
+      type: System.String
+      description: Filename of the Library to load
+    content.vb: Public Sub New(fileName As String)
+  overload: Synthesys.Tasks.ExtensionLibrary.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.ExtensionLibrary.FileName
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.FileName
+  id: FileName
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: FileName
+  nameWithType: ExtensionLibrary.FileName
+  fullName: Synthesys.Tasks.ExtensionLibrary.FileName
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: FileName
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 50
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nFile name where Library was loaded from\n"
+  example: []
+  syntax:
+    content: public string FileName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property FileName As String
+  overload: Synthesys.Tasks.ExtensionLibrary.FileName*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.ExtensionLibrary.Assembly
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.Assembly
+  id: Assembly
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: Assembly
+  nameWithType: ExtensionLibrary.Assembly
+  fullName: Synthesys.Tasks.ExtensionLibrary.Assembly
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Assembly
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 55
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nAssembly that represents the loaded Library in managed code\n"
+  example: []
+  syntax:
+    content: public Assembly Assembly { get; }
+    parameters: []
+    return:
+      type: System.Reflection.Assembly
+    content.vb: Public ReadOnly Property Assembly As Assembly
+  overload: Synthesys.Tasks.ExtensionLibrary.Assembly*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+  id: ActionExtensions
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: ActionExtensions
+  nameWithType: ExtensionLibrary.ActionExtensions
+  fullName: Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ActionExtensions
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 60
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nActionExtensions provided by library\n"
+  example: []
+  syntax:
+    content: public ReadOnlyDictionary<string, Type> ActionExtensions { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.ReadOnlyDictionary{System.String,System.Type}
+    content.vb: Public ReadOnly Property ActionExtensions As ReadOnlyDictionary(Of String, Type)
+  overload: Synthesys.Tasks.ExtensionLibrary.ActionExtensions*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+  id: ReactionExtensions
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: ReactionExtensions
+  nameWithType: ExtensionLibrary.ReactionExtensions
+  fullName: Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ReactionExtensions
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 66
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nReactionExtensions grouped by Trigger requirement\n"
+  example: []
+  syntax:
+    content: public ReadOnlyDictionary<TriggerDescriptor, List<Type>> ReactionExtensions { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.ReadOnlyDictionary{Synthesys.SDK.Triggers.TriggerDescriptor,System.Collections.Generic.List{System.Type}}
+    content.vb: Public ReadOnly Property ReactionExtensions As ReadOnlyDictionary(Of TriggerDescriptor, List(Of Type))
+  overload: Synthesys.Tasks.ExtensionLibrary.ReactionExtensions*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+  id: ProvidedTypes
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: ProvidedTypes
+  nameWithType: ExtensionLibrary.ProvidedTypes
+  fullName: Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ProvidedTypes
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 72
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nTypes defined in the library Assembly\n"
+  example: []
+  syntax:
+    content: public List<Type> ProvidedTypes { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.Type}
+    content.vb: Public ReadOnly Property ProvidedTypes As List(Of Type)
+  overload: Synthesys.Tasks.ExtensionLibrary.ProvidedTypes*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.ExtensionLibrary.Logger
+  commentId: P:Synthesys.Tasks.ExtensionLibrary.Logger
+  id: Logger
+  parent: Synthesys.Tasks.ExtensionLibrary
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: ExtensionLibrary.Logger
+  fullName: Synthesys.Tasks.ExtensionLibrary.Logger
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/ExtensionLibrary.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Logger
+    path: ../Synthesys.Tasks/ExtensionLibrary.cs
+    startLine: 75
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  syntax:
+    content: protected ILogger Logger { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected ReadOnly Property Logger As ILogger
+  overload: Synthesys.Tasks.ExtensionLibrary.Logger*
+  modifiers.csharp:
+  - protected
+  - get
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+references:
+- uid: Synthesys.Tasks
+  commentId: N:Synthesys.Tasks
+  name: Synthesys.Tasks
+  nameWithType: Synthesys.Tasks
+  fullName: Synthesys.Tasks
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Tasks.ExtensionLibrary.#ctor*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.#ctor
+  name: ExtensionLibrary
+  nameWithType: ExtensionLibrary.ExtensionLibrary
+  fullName: Synthesys.Tasks.ExtensionLibrary.ExtensionLibrary
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Tasks.ExtensionLibrary.FileName*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.FileName
+  name: FileName
+  nameWithType: ExtensionLibrary.FileName
+  fullName: Synthesys.Tasks.ExtensionLibrary.FileName
+- uid: Synthesys.Tasks.ExtensionLibrary.Assembly*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.Assembly
+  name: Assembly
+  nameWithType: ExtensionLibrary.Assembly
+  fullName: Synthesys.Tasks.ExtensionLibrary.Assembly
+- uid: System.Reflection.Assembly
+  commentId: T:System.Reflection.Assembly
+  parent: System.Reflection
+  isExternal: true
+  name: Assembly
+  nameWithType: Assembly
+  fullName: System.Reflection.Assembly
+- uid: System.Reflection
+  commentId: N:System.Reflection
+  isExternal: true
+  name: System.Reflection
+  nameWithType: System.Reflection
+  fullName: System.Reflection
+- uid: Synthesys.Tasks.ExtensionLibrary.ActionExtensions*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+  name: ActionExtensions
+  nameWithType: ExtensionLibrary.ActionExtensions
+  fullName: Synthesys.Tasks.ExtensionLibrary.ActionExtensions
+- uid: System.Collections.ObjectModel.ReadOnlyDictionary{System.String,System.Type}
+  commentId: T:System.Collections.ObjectModel.ReadOnlyDictionary{System.String,System.Type}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.ReadOnlyDictionary`2
+  name: ReadOnlyDictionary<String, Type>
+  nameWithType: ReadOnlyDictionary<String, Type>
+  fullName: System.Collections.ObjectModel.ReadOnlyDictionary<System.String, System.Type>
+  nameWithType.vb: ReadOnlyDictionary(Of String, Type)
+  fullName.vb: System.Collections.ObjectModel.ReadOnlyDictionary(Of System.String, System.Type)
+  name.vb: ReadOnlyDictionary(Of String, Type)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+  commentId: T:System.Collections.ObjectModel.ReadOnlyDictionary`2
+  isExternal: true
+  name: ReadOnlyDictionary<TKey, TValue>
+  nameWithType: ReadOnlyDictionary<TKey, TValue>
+  fullName: System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>
+  nameWithType.vb: ReadOnlyDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.ObjectModel.ReadOnlyDictionary(Of TKey, TValue)
+  name.vb: ReadOnlyDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Synthesys.Tasks.ExtensionLibrary.ReactionExtensions*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+  name: ReactionExtensions
+  nameWithType: ExtensionLibrary.ReactionExtensions
+  fullName: Synthesys.Tasks.ExtensionLibrary.ReactionExtensions
+- uid: System.Collections.ObjectModel.ReadOnlyDictionary{Synthesys.SDK.Triggers.TriggerDescriptor,System.Collections.Generic.List{System.Type}}
+  commentId: T:System.Collections.ObjectModel.ReadOnlyDictionary{Synthesys.SDK.Triggers.TriggerDescriptor,System.Collections.Generic.List{System.Type}}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.ReadOnlyDictionary`2
+  name: ReadOnlyDictionary<TriggerDescriptor, List<Type>>
+  nameWithType: ReadOnlyDictionary<TriggerDescriptor, List<Type>>
+  fullName: System.Collections.ObjectModel.ReadOnlyDictionary<Synthesys.SDK.Triggers.TriggerDescriptor, System.Collections.Generic.List<System.Type>>
+  nameWithType.vb: ReadOnlyDictionary(Of TriggerDescriptor, List(Of Type))
+  fullName.vb: System.Collections.ObjectModel.ReadOnlyDictionary(Of Synthesys.SDK.Triggers.TriggerDescriptor, System.Collections.Generic.List(Of System.Type))
+  name.vb: ReadOnlyDictionary(Of TriggerDescriptor, List(Of Type))
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.ReadOnlyDictionary`2
+    name: ReadOnlyDictionary
+    nameWithType: ReadOnlyDictionary
+    fullName: System.Collections.ObjectModel.ReadOnlyDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Synthesys.SDK.Triggers.TriggerDescriptor
+    name: TriggerDescriptor
+    nameWithType: TriggerDescriptor
+    fullName: Synthesys.SDK.Triggers.TriggerDescriptor
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Tasks.ExtensionLibrary.ProvidedTypes*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+  name: ProvidedTypes
+  nameWithType: ExtensionLibrary.ProvidedTypes
+  fullName: Synthesys.Tasks.ExtensionLibrary.ProvidedTypes
+- uid: System.Collections.Generic.List{System.Type}
+  commentId: T:System.Collections.Generic.List{System.Type}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Type>
+  nameWithType: List<Type>
+  fullName: System.Collections.Generic.List<System.Type>
+  nameWithType.vb: List(Of Type)
+  fullName.vb: System.Collections.Generic.List(Of System.Type)
+  name.vb: List(Of Type)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Synthesys.Tasks.ExtensionLibrary.Logger*
+  commentId: Overload:Synthesys.Tasks.ExtensionLibrary.Logger
+  name: Logger
+  nameWithType: ExtensionLibrary.Logger
+  fullName: Synthesys.Tasks.ExtensionLibrary.Logger
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging

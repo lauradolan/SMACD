@@ -1,0 +1,54 @@
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+
+
+@if (Artifact != null)
+{
+    <div class="row text-center pt-2">
+        <div class="col">
+            <h2>Artifact without Visualizer</h2>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <p class="pt-2">The artifact <code>@Artifact.NiceIdentifier</code> either requested a Visualizer that was not loaded, or does not have a preferred Visualizer.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Compass.Components.VulnerabilityViewer Vulnerabilities="Artifact.Vulnerabilities" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Compass.Components.EvidenceSummaryViewer Node="@Artifact" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 col-xl-12">
+            <Compass.Components.JsonViewer Artifact="@Artifact" />
+        </div>
+    </div>
+}
+else
+{
+    <div class="row text-center pt-2">
+        <div class="col">
+            <h2>Select an Artifact to Inspect</h2>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <p class="pt-2">Use the tree on the left to explore the application as understood by the scan results.</p>
+        </div>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public SMACD.AppTree.AppTreeNode Artifact { get; set; }
+}

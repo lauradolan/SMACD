@@ -2,7 +2,7 @@
 
     <div class="container-fluid">
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
-            <h3 class="text-dark mb-0">Nmap Scan - X.X.X.X</h3><i class="fas fa-server"></i>
+            <h3 class="text-dark mb-0">Nmap Scan</h3><i class="fas fa-server"></i>
         </div>
         <div class="row">
             <div class="col-md-6 col-xl-7 mb-4">
@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="row align-items-center no-gutters">
                             <div class="col mr-2">
-                                <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>Server Aliases</span></div>
+                                <div class="text-uppercase text-success font-weight-bold text-xs mb-1"><span>AppTree Paths</span></div>
                                 <div class="text-dark mb-0 text-monospace small"><span>@string.Join(", ", Report.AffectedArtifactPaths)</span></div>
                             </div>
                             <div class="col-auto"><i class="fas fa-clone fa-2x text-gray-300"></i></div>
@@ -42,8 +42,8 @@
                         <div class="table-responsive">
                             <DataGrid TItem="NmapPort"
                                         Data="@NmapReport.Ports"
-                                        @bind-SelectedRow="@SelectedPort">
-                                <DataGridCommandColumn TItem="NmapPort" />
+                                        @bind-SelectedRow="@SelectedPort"
+                                        ShowPager="true">
                                 <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Port)" Caption="Port" AllowSort="true" />
                                 <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Protocol)" Caption="Protocol" AllowSort="true" />
                                 <DataGridColumn TItem="NmapPort" Field="@nameof(NmapPort.Service)" Caption="Service" AllowSort="true" />
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <SMACD.Artifacts.Views.VulnerabilityDisplay Vulnerabilities="@Report.Vulnerabilities"/>
+                <Compass.Components.VulnerabilityViewer Vulnerabilities="@Report.Vulnerabilities"/>
             </div>
         </div>
     </div>

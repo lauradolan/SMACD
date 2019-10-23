@@ -1,0 +1,60 @@
+﻿<div class="d-sm-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-dark mb-0">@ServicePortArtifact.Host @($"{ServicePortArtifact.Protocol}/{ServicePortArtifact.Port}")</h3><i class="fas da-2x fa-plug"></i>
+</div>
+<div class="row">
+    <div class="col-sm-6 mb-4">
+        @if (!string.IsNullOrEmpty(Metadata.ServiceBanner))
+        {
+            <SmallCard Color="warning" Icon="fa-envelope-open-text" Title="Service Banner" Value="@Metadata.ServiceBanner" />
+        }
+        else
+        {
+            <SmallCard Color="warning" Icon="fa-envelope-open-text" Title="Service Banner" Value="Unknown" />
+        }
+    </div>
+    <div class="col-sm-3 mb-4">
+        @if (!string.IsNullOrEmpty(Metadata.ServiceName))
+        {
+            <SmallCard Color="primary" Icon="fa-cogs" Title="Fingerprint" Value="@Metadata.ServiceName" />
+        }
+        else
+        {
+            <SmallCard Color="primary" Icon="fa-cogs" Title="Fingerprint" Value="Unknown" />
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(Metadata.ProductName))
+    {
+        <div class="col-sm-3 mb-4">
+            @{ var fullName = $"{Metadata.ProductName} {Metadata.ProductVersion}"; }
+            <SmallCard Color="success" Icon="fa-archive" Title="Product" Value="@fullName" />
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col">
+        <Compass.Components.VulnerabilityViewer Vulnerabilities="@ServicePortArtifact.Vulnerabilities" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <Compass.Components.EvidenceSummaryViewer Node="@Artifact" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-7 col-xl-12">
+        <Compass.Components.JsonViewer Artifact="@Artifact" />
+    </div>
+</div>
+
+@using SMACD.AppTree
+@using SMACD.AppTree.Details
+@using Compass.Components
+@code
+{
+    [Parameter]
+    public AppTreeNode Artifact { get; set; }
+    public ServiceNode ServicePortArtifact => Artifact as ServiceNode;
+    public ServiceDetails Metadata => ServicePortArtifact?.Detail;
+}

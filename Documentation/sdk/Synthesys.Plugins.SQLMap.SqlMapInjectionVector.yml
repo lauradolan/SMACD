@@ -1,0 +1,523 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  id: SqlMapInjectionVector
+  parent: Synthesys.Plugins.SQLMap
+  children:
+  - Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+  - Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload
+  - Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+  - Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+  langs:
+  - csharp
+  - vb
+  name: SqlMapInjectionVector
+  nameWithType: SqlMapInjectionVector
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SqlMapInjectionVector
+    path: ../Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+    startLine: 5
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nA way to request a page which results in the ability to read/write otherwise protected data, execute code, etc.\n"
+  example: []
+  syntax:
+    content: public class SqlMapInjectionVector
+    content.vb: Public Class SqlMapInjectionVector
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+  commentId: P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+  id: Parameter
+  parent: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  langs:
+  - csharp
+  - vb
+  name: Parameter
+  nameWithType: SqlMapInjectionVector.Parameter
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Parameter
+    path: ../Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+    startLine: 10
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nParameter that is injectable\n"
+  example: []
+  syntax:
+    content: public string Parameter { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Parameter As String
+  overload: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+  commentId: P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+  id: Type
+  parent: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: SqlMapInjectionVector.Type
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Type
+    path: ../Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+    startLine: 15
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nType of injection\n"
+  example: []
+  syntax:
+    content: public string Type { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Type As String
+  overload: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+  commentId: P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+  id: Title
+  parent: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: SqlMapInjectionVector.Title
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Title
+    path: ../Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+    startLine: 20
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nTitle of injection\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Title As String
+  overload: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload
+  commentId: P:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload
+  id: Payload
+  parent: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  langs:
+  - csharp
+  - vb
+  name: Payload
+  nameWithType: SqlMapInjectionVector.Payload
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Payload
+    path: ../Synthesys.Plugins.SQLMap/SqlMapInjectionVector.cs
+    startLine: 25
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+  namespace: Synthesys.Plugins.SQLMap
+  summary: "\nInjection payload\n"
+  example: []
+  syntax:
+    content: public string Payload { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Payload As String
+  overload: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.SQLMap
+  commentId: N:Synthesys.Plugins.SQLMap
+  name: Synthesys.Plugins.SQLMap
+  nameWithType: Synthesys.Plugins.SQLMap
+  fullName: Synthesys.Plugins.SQLMap
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+  name: Parameter
+  nameWithType: SqlMapInjectionVector.Parameter
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Parameter
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+  name: Type
+  nameWithType: SqlMapInjectionVector.Type
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Type
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+  name: Title
+  nameWithType: SqlMapInjectionVector.Title
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Title
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload*
+  commentId: Overload:Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload
+  name: Payload
+  nameWithType: SqlMapInjectionVector.Payload
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector.Payload

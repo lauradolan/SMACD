@@ -1,0 +1,169 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.IAppTreeNode`1
+  commentId: T:SMACD.AppTree.IAppTreeNode`1
+  id: IAppTreeNode`1
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.IAppTreeNode`1.Detail
+  langs:
+  - csharp
+  - vb
+  name: IAppTreeNode<TDetailPayload>
+  nameWithType: IAppTreeNode<TDetailPayload>
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>
+  type: Interface
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IAppTreeNode
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 333
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nRepresents a single node in a tree which contains a data payload\n"
+  example: []
+  syntax:
+    content: >-
+      public interface IAppTreeNode<TDetailPayload>
+
+          where TDetailPayload : new()
+    typeParameters:
+    - id: TDetailPayload
+    content.vb: Public Interface IAppTreeNode(Of TDetailPayload As New)
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload)
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload)
+  name.vb: IAppTreeNode(Of TDetailPayload)
+- uid: SMACD.AppTree.IAppTreeNode`1.Detail
+  commentId: P:SMACD.AppTree.IAppTreeNode`1.Detail
+  id: Detail
+  parent: SMACD.AppTree.IAppTreeNode`1
+  langs:
+  - csharp
+  - vb
+  name: Detail
+  nameWithType: IAppTreeNode<TDetailPayload>.Detail
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>.Detail
+  type: Property
+  source:
+    remote:
+      path: SMACD.AppTree/AppTreeNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Detail
+    path: ../SMACD.AppTree/AppTreeNode.cs
+    startLine: 338
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nNode data detail\n"
+  example: []
+  syntax:
+    content: Versionable<TDetailPayload> Detail { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.Versionable{{TDetailPayload}}
+    content.vb: Property Detail As Versionable(Of TDetailPayload)
+  overload: SMACD.AppTree.IAppTreeNode`1.Detail*
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload).Detail
+  modifiers.csharp:
+  - get
+  - set
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload).Detail
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: SMACD.AppTree.IAppTreeNode`1.Detail*
+  commentId: Overload:SMACD.AppTree.IAppTreeNode`1.Detail
+  name: Detail
+  nameWithType: IAppTreeNode<TDetailPayload>.Detail
+  fullName: SMACD.AppTree.IAppTreeNode<TDetailPayload>.Detail
+  nameWithType.vb: IAppTreeNode(Of TDetailPayload).Detail
+  fullName.vb: SMACD.AppTree.IAppTreeNode(Of TDetailPayload).Detail
+- uid: SMACD.AppTree.Versionable{{TDetailPayload}}
+  commentId: T:SMACD.AppTree.Versionable{`0}
+  parent: SMACD.AppTree
+  definition: SMACD.AppTree.Versionable`1
+  name: Versionable<TDetailPayload>
+  nameWithType: Versionable<TDetailPayload>
+  fullName: SMACD.AppTree.Versionable<TDetailPayload>
+  nameWithType.vb: Versionable(Of TDetailPayload)
+  fullName.vb: SMACD.AppTree.Versionable(Of TDetailPayload)
+  name.vb: Versionable(Of TDetailPayload)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TDetailPayload
+    nameWithType: TDetailPayload
+    fullName: TDetailPayload
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.Versionable`1
+  commentId: T:SMACD.AppTree.Versionable`1
+  parent: SMACD.AppTree
+  name: Versionable<TData>
+  nameWithType: Versionable<TData>
+  fullName: SMACD.AppTree.Versionable<TData>
+  nameWithType.vb: Versionable(Of TData)
+  fullName.vb: SMACD.AppTree.Versionable(Of TData)
+  name.vb: Versionable(Of TData)
+  spec.csharp:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: SMACD.AppTree.Versionable`1
+    name: Versionable
+    nameWithType: Versionable
+    fullName: SMACD.AppTree.Versionable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TData
+    nameWithType: TData
+    fullName: TData
+  - name: )
+    nameWithType: )
+    fullName: )

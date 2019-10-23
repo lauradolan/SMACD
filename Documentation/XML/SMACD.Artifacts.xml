@@ -61,11 +61,6 @@
                 Represents a single node in an Artifact correlation tree, including its metadata and evidence
             </summary>
         </member>
-        <member name="M:SMACD.Artifacts.Artifact.Disconnect">
-            <summary>
-                Disconnect parents in Artifact tree
-            </summary>
-        </member>
         <member name="M:SMACD.Artifacts.Artifact.Connect(SMACD.Artifacts.Artifact)">
             <summary>
                 Create Parent pointers in Artifact tree
@@ -95,6 +90,13 @@
                 Get a list of nodes between this node and the root node
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:SMACD.Artifacts.Artifact.IsDescribedByPath(System.String)">
+            <summary>
+                If the Artifact can be described by the given string path (may contain wildcards, etc)
+            </summary>
+            <param name="path">Path to test</param>
+            <returns><c>TRUE</c> if the path describes the Artifact, otherwise <c>FALSE</c></returns>
         </member>
         <member name="M:SMACD.Artifacts.Artifact.NotifyChanged">
             <summary>
@@ -296,7 +298,7 @@
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.ArtifactSummaryViewTypeName">
             <summary>
-            An Action which can be registered by the Extension to return an HTML component to view artifact
+                An Action which can be registered by the Extension to return an HTML component to view artifact
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HostArtifact.Metadata">
@@ -337,6 +339,11 @@
         <member name="T:SMACD.Artifacts.HttpServicePortArtifact">
             <summary>
                 Represents an HTTP service accessible via a specific protocol and port
+            </summary>
+        </member>
+        <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Metadata">
+            <summary>
+                HTTP Service Metadata
             </summary>
         </member>
         <member name="P:SMACD.Artifacts.HttpServicePortArtifact.Item(System.String)">
@@ -523,6 +530,11 @@
                 An Action which can be registered by the Extension to return an HTML component to view artifact
             </summary>
         </member>
+        <member name="P:SMACD.Artifacts.RootArtifact.SuppressEventFiring">
+            <summary>
+                Whether or not to suppress Artifact tree related events (useful during data loads or when responsiveness is not desired)
+            </summary>
+        </member>
         <member name="P:SMACD.Artifacts.RootArtifact.Item(System.String)">
             <summary>
                 Hostname or IP of resource
@@ -627,17 +639,20 @@
                 Requests which can be made against this URL
             </summary>
         </member>
+        <member name="M:SMACD.Artifacts.UrlArtifact.AddRequest(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+                Add a Request description to this URL segment
+            </summary>
+            <param name="method">HTTP Method</param>
+            <param name="fields">Fields to send</param>
+            <param name="headers">Headers to send</param>
+        </member>
         <member name="P:SMACD.Artifacts.UrlArtifact.Item(System.String)">
             <summary>
                 Get a child URL segment
             </summary>
             <param name="urlSegment">URL segment</param>
             <returns></returns>
-        </member>
-        <member name="M:SMACD.Artifacts.UrlArtifact.#ctor">
-            <summary>
-                Represents a segment of a URL
-            </summary>
         </member>
         <member name="M:SMACD.Artifacts.UrlArtifact.GetUrl(System.String)">
             <summary>
@@ -687,6 +702,61 @@
                 String representation of URL Request
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:SMACD.Artifacts.Vulnerability">
+            <summary>
+                Represents a generalized Vulnerability found by one or more scanners
+            </summary>
+        </member>
+        <member name="T:SMACD.Artifacts.Vulnerability.Confidences">
+            <summary>
+                Confidence in the accuracy of this Vulnerability
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.FalsePositive">
+            <summary>
+                False Positive
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.Low">
+            <summary>
+                Low confidence
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.Medium">
+            <summary>
+                Medium confidence
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.Confidences.High">
+            <summary>
+                High confidence
+            </summary>
+        </member>
+        <member name="T:SMACD.Artifacts.Vulnerability.RiskLevels">
+            <summary>
+                Level of risk incurred through this Vulnerability
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Informational">
+            <summary>
+                Informational only
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Low">
+            <summary>
+                Low risk
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.Medium">
+            <summary>
+                Medium risk
+            </summary>
+        </member>
+        <member name="F:SMACD.Artifacts.Vulnerability.RiskLevels.High">
+            <summary>
+                High risk
+            </summary>
         </member>
         <member name="P:SMACD.Artifacts.Vulnerability.RiskLevel">
             <summary>

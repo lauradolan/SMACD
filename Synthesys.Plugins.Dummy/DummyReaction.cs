@@ -1,13 +1,13 @@
-using System;
-using System.IO;
 using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Artifacts.Data;
+using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.SDK.Triggers;
+using System;
+using System.IO;
 
 namespace Synthesys.Plugins.Dummy
 {
@@ -25,7 +25,7 @@ namespace Synthesys.Plugins.Dummy
         /// <summary>
         ///     Hostname/IP which is acted upon by the ReactionExtension. This value is populated by the framework.
         /// </summary>
-        public HostArtifact Host { get; set; }
+        public HostNode Host { get; set; }
 
         /// <summary>
         ///     Information about the business elements used to call this ReactionExtension.
@@ -45,7 +45,7 @@ namespace Synthesys.Plugins.Dummy
 
             // Data Artifacts can be entire directories, so that external applications can make use of that file data
             string text;
-            using (var execContainer = Host.Attachments["dummyBasicContainer"].AsNativeDirectoryArtifact().GetContext())
+            using (NativeDirectoryContext execContainer = Host.Evidence["dummyBasicContainer"].AsNativeDirectoryEvidence().GetContext())
             {
                 text = File.ReadAllText(execContainer.DirectoryWithFile("test.dat"));
                 Logger.LogInformation("Text Inside Using: " + text);
@@ -54,7 +54,7 @@ namespace Synthesys.Plugins.Dummy
             Logger.LogInformation("Text Outside Using: " + text);
 
             // Artifacts can be retrieved with strong typing
-            var stronglyTyped = Host.Attachments["dummyResult"].AsObjectArtifact().Get<DummyDataClass>();
+            DummyDataClass stronglyTyped = Host.Evidence["dummyResult"].AsObjectEvidence().Get<DummyDataClass>();
 
             try
             {

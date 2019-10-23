@@ -1,0 +1,27 @@
+﻿<div class="card shadow border-left-@Color py-2">
+    <div class="card-body">
+        <div class="row align-items-center no-gutters">
+            <div class="col mr-2">
+                <div class="text-uppercase text-@Color font-weight-bold text-xs mb-1"><span>@Title</span></div>
+                <div class="text-dark mb-0 text-monospace">
+                    @Value
+                </div>
+            </div>
+            <div class="col-auto"><i class="fas @Icon fa-2x text-gray-300"></i></div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public string Color { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; } = "fa-envelope-open-text";
+}

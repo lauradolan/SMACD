@@ -1,0 +1,1219 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Tasks.TaskToolbox
+  commentId: T:Synthesys.Tasks.TaskToolbox
+  id: TaskToolbox
+  parent: Synthesys.Tasks
+  children:
+  - Synthesys.Tasks.TaskToolbox.Count
+  - Synthesys.Tasks.TaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  - Synthesys.Tasks.TaskToolbox.IsRunning
+  - Synthesys.Tasks.TaskToolbox.Logger
+  - Synthesys.Tasks.TaskToolbox.ServiceMap
+  - Synthesys.Tasks.TaskToolbox.TaskCompleted
+  - Synthesys.Tasks.TaskToolbox.TaskFaulted
+  - Synthesys.Tasks.TaskToolbox.TaskStarted
+  langs:
+  - csharp
+  - vb
+  name: TaskToolbox
+  nameWithType: TaskToolbox
+  fullName: Synthesys.Tasks.TaskToolbox
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskToolbox
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 22
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nManages the Task queue\n"
+  example: []
+  syntax:
+    content: 'public class TaskToolbox : ITaskToolbox'
+    content.vb: >-
+      Public Class TaskToolbox
+
+          Implements ITaskToolbox
+  inheritance:
+  - System.Object
+  implements:
+  - Synthesys.Tasks.ITaskToolbox
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Tasks.TaskToolbox.Logger
+  commentId: P:Synthesys.Tasks.TaskToolbox.Logger
+  id: Logger
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: TaskToolbox.Logger
+  fullName: Synthesys.Tasks.TaskToolbox.Logger
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Logger
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 35
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  syntax:
+    content: protected ILogger Logger { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected ReadOnly Property Logger As ILogger
+  overload: Synthesys.Tasks.TaskToolbox.Logger*
+  modifiers.csharp:
+  - protected
+  - get
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+- uid: Synthesys.Tasks.TaskToolbox.TaskStarted
+  commentId: E:Synthesys.Tasks.TaskToolbox.TaskStarted
+  id: TaskStarted
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: TaskStarted
+  nameWithType: TaskToolbox.TaskStarted
+  fullName: Synthesys.Tasks.TaskToolbox.TaskStarted
+  type: Event
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskStarted
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 40
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nFired when a Task moves from Queued to Running\n"
+  example: []
+  syntax:
+    content: public event EventHandler<RuntimeTaskDescriptor> TaskStarted
+    return:
+      type: System.EventHandler{Synthesys.Tasks.RuntimeTaskDescriptor}
+    content.vb: Public Event TaskStarted As EventHandler(Of RuntimeTaskDescriptor)
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.TaskStarted
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.TaskToolbox.TaskCompleted
+  commentId: E:Synthesys.Tasks.TaskToolbox.TaskCompleted
+  id: TaskCompleted
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: TaskCompleted
+  nameWithType: TaskToolbox.TaskCompleted
+  fullName: Synthesys.Tasks.TaskToolbox.TaskCompleted
+  type: Event
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskCompleted
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 45
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nFired when a Task moves from Running to Complete\n"
+  example: []
+  syntax:
+    content: public event EventHandler<RuntimeTaskDescriptor> TaskCompleted
+    return:
+      type: System.EventHandler{Synthesys.Tasks.RuntimeTaskDescriptor}
+    content.vb: Public Event TaskCompleted As EventHandler(Of RuntimeTaskDescriptor)
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.TaskCompleted
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.TaskToolbox.TaskFaulted
+  commentId: E:Synthesys.Tasks.TaskToolbox.TaskFaulted
+  id: TaskFaulted
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: TaskFaulted
+  nameWithType: TaskToolbox.TaskFaulted
+  fullName: Synthesys.Tasks.TaskToolbox.TaskFaulted
+  type: Event
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskFaulted
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 50
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nFired when a Task moves from Running to Faulted\n"
+  example: []
+  syntax:
+    content: public event EventHandler<RuntimeTaskDescriptor> TaskFaulted
+    return:
+      type: System.EventHandler{Synthesys.Tasks.RuntimeTaskDescriptor}
+    content.vb: Public Event TaskFaulted As EventHandler(Of RuntimeTaskDescriptor)
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.TaskFaulted
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.TaskToolbox.IsRunning
+  commentId: P:Synthesys.Tasks.TaskToolbox.IsRunning
+  id: IsRunning
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: IsRunning
+  nameWithType: TaskToolbox.IsRunning
+  fullName: Synthesys.Tasks.TaskToolbox.IsRunning
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IsRunning
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 55
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nIf the Task queue is running (has any elements)\n"
+  example: []
+  syntax:
+    content: public bool IsRunning { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsRunning As Boolean
+  overload: Synthesys.Tasks.TaskToolbox.IsRunning*
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.IsRunning
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.TaskToolbox.Count
+  commentId: P:Synthesys.Tasks.TaskToolbox.Count
+  id: Count
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: TaskToolbox.Count
+  fullName: Synthesys.Tasks.TaskToolbox.Count
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Count
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 60
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nNumber of tasks running and queued\n"
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: Synthesys.Tasks.TaskToolbox.Count*
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.Count
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Synthesys.Tasks.TaskToolbox.ServiceMap
+  commentId: P:Synthesys.Tasks.TaskToolbox.ServiceMap
+  id: ServiceMap
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: ServiceMap
+  nameWithType: TaskToolbox.ServiceMap
+  fullName: Synthesys.Tasks.TaskToolbox.ServiceMap
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ServiceMap
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 65
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nService Map currently in use to generate Tasks\n"
+  example: []
+  syntax:
+    content: public ServiceMapFile ServiceMap { get; set; }
+    parameters: []
+    return:
+      type: SMACD.Data.ServiceMapFile
+    content.vb: Public Property ServiceMap As ServiceMapFile
+  overload: Synthesys.Tasks.TaskToolbox.ServiceMap*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Tasks.TaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  commentId: M:Synthesys.Tasks.TaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  id: Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  parent: Synthesys.Tasks.TaskToolbox
+  langs:
+  - csharp
+  - vb
+  name: Enqueue(String, AppTreeNode, Dictionary<String, String>, ProjectPointer)
+  nameWithType: TaskToolbox.Enqueue(String, AppTreeNode, Dictionary<String, String>, ProjectPointer)
+  fullName: Synthesys.Tasks.TaskToolbox.Enqueue(System.String, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary<System.String, System.String>, SMACD.AppTree.ProjectPointer)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.Tasks/TaskToolbox.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Enqueue
+    path: ../Synthesys.Tasks/TaskToolbox.cs
+    startLine: 75
+  assemblies:
+  - Synthesys.Tasks
+  namespace: Synthesys.Tasks
+  summary: "\nEnqueue a Task based on its Descriptor\n"
+  example: []
+  syntax:
+    content: public Task<List<ExtensionReport>> Enqueue(string extensionIdentifier, AppTreeNode rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null)
+    parameters:
+    - id: extensionIdentifier
+      type: System.String
+      description: Extension identifier
+    - id: rootArtifact
+      type: SMACD.AppTree.AppTreeNode
+      description: Root app tree node for extension
+    - id: options
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: Action options
+    - id: serviceMapItemPtr
+      type: SMACD.AppTree.ProjectPointer
+      description: Pointer to element in Service Map which queued the Extension
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
+      description: Task which resolves to the Action-Specific Report
+    content.vb: Public Function Enqueue(extensionIdentifier As String, rootArtifact As AppTreeNode, options As Dictionary(Of String, String), serviceMapItemPtr As ProjectPointer = Nothing) As Task(Of List(Of ExtensionReport))
+  overload: Synthesys.Tasks.TaskToolbox.Enqueue*
+  implements:
+  - Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  nameWithType.vb: TaskToolbox.Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Synthesys.Tasks.TaskToolbox.Enqueue(System.String, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary(Of System.String, System.String), SMACD.AppTree.ProjectPointer)
+  name.vb: Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
+references:
+- uid: Synthesys.Tasks
+  commentId: N:Synthesys.Tasks
+  name: Synthesys.Tasks
+  nameWithType: Synthesys.Tasks
+  fullName: Synthesys.Tasks
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Synthesys.Tasks.ITaskToolbox
+  commentId: T:Synthesys.Tasks.ITaskToolbox
+  parent: Synthesys.Tasks
+  name: ITaskToolbox
+  nameWithType: ITaskToolbox
+  fullName: Synthesys.Tasks.ITaskToolbox
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Tasks.TaskToolbox.Logger*
+  commentId: Overload:Synthesys.Tasks.TaskToolbox.Logger
+  name: Logger
+  nameWithType: TaskToolbox.Logger
+  fullName: Synthesys.Tasks.TaskToolbox.Logger
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Synthesys.Tasks.ITaskToolbox.TaskStarted
+  commentId: E:Synthesys.Tasks.ITaskToolbox.TaskStarted
+  parent: Synthesys.Tasks.ITaskToolbox
+  name: TaskStarted
+  nameWithType: ITaskToolbox.TaskStarted
+  fullName: Synthesys.Tasks.ITaskToolbox.TaskStarted
+- uid: System.EventHandler{Synthesys.Tasks.RuntimeTaskDescriptor}
+  commentId: T:System.EventHandler{Synthesys.Tasks.RuntimeTaskDescriptor}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<RuntimeTaskDescriptor>
+  nameWithType: EventHandler<RuntimeTaskDescriptor>
+  fullName: System.EventHandler<Synthesys.Tasks.RuntimeTaskDescriptor>
+  nameWithType.vb: EventHandler(Of RuntimeTaskDescriptor)
+  fullName.vb: System.EventHandler(Of Synthesys.Tasks.RuntimeTaskDescriptor)
+  name.vb: EventHandler(Of RuntimeTaskDescriptor)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Synthesys.Tasks.RuntimeTaskDescriptor
+    name: RuntimeTaskDescriptor
+    nameWithType: RuntimeTaskDescriptor
+    fullName: Synthesys.Tasks.RuntimeTaskDescriptor
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Synthesys.Tasks.RuntimeTaskDescriptor
+    name: RuntimeTaskDescriptor
+    nameWithType: RuntimeTaskDescriptor
+    fullName: Synthesys.Tasks.RuntimeTaskDescriptor
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Synthesys.Tasks.ITaskToolbox.TaskCompleted
+  commentId: E:Synthesys.Tasks.ITaskToolbox.TaskCompleted
+  parent: Synthesys.Tasks.ITaskToolbox
+  name: TaskCompleted
+  nameWithType: ITaskToolbox.TaskCompleted
+  fullName: Synthesys.Tasks.ITaskToolbox.TaskCompleted
+- uid: Synthesys.Tasks.ITaskToolbox.TaskFaulted
+  commentId: E:Synthesys.Tasks.ITaskToolbox.TaskFaulted
+  parent: Synthesys.Tasks.ITaskToolbox
+  name: TaskFaulted
+  nameWithType: ITaskToolbox.TaskFaulted
+  fullName: Synthesys.Tasks.ITaskToolbox.TaskFaulted
+- uid: Synthesys.Tasks.TaskToolbox.IsRunning*
+  commentId: Overload:Synthesys.Tasks.TaskToolbox.IsRunning
+  name: IsRunning
+  nameWithType: TaskToolbox.IsRunning
+  fullName: Synthesys.Tasks.TaskToolbox.IsRunning
+- uid: Synthesys.Tasks.ITaskToolbox.IsRunning
+  commentId: P:Synthesys.Tasks.ITaskToolbox.IsRunning
+  parent: Synthesys.Tasks.ITaskToolbox
+  name: IsRunning
+  nameWithType: ITaskToolbox.IsRunning
+  fullName: Synthesys.Tasks.ITaskToolbox.IsRunning
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Synthesys.Tasks.TaskToolbox.Count*
+  commentId: Overload:Synthesys.Tasks.TaskToolbox.Count
+  name: Count
+  nameWithType: TaskToolbox.Count
+  fullName: Synthesys.Tasks.TaskToolbox.Count
+- uid: Synthesys.Tasks.ITaskToolbox.Count
+  commentId: P:Synthesys.Tasks.ITaskToolbox.Count
+  parent: Synthesys.Tasks.ITaskToolbox
+  name: Count
+  nameWithType: ITaskToolbox.Count
+  fullName: Synthesys.Tasks.ITaskToolbox.Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Synthesys.Tasks.TaskToolbox.ServiceMap*
+  commentId: Overload:Synthesys.Tasks.TaskToolbox.ServiceMap
+  name: ServiceMap
+  nameWithType: TaskToolbox.ServiceMap
+  fullName: Synthesys.Tasks.TaskToolbox.ServiceMap
+- uid: SMACD.Data.ServiceMapFile
+  commentId: T:SMACD.Data.ServiceMapFile
+  parent: SMACD.Data
+  name: ServiceMapFile
+  nameWithType: ServiceMapFile
+  fullName: SMACD.Data.ServiceMapFile
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data
+- uid: Synthesys.Tasks.TaskToolbox.Enqueue*
+  commentId: Overload:Synthesys.Tasks.TaskToolbox.Enqueue
+  name: Enqueue
+  nameWithType: TaskToolbox.Enqueue
+  fullName: Synthesys.Tasks.TaskToolbox.Enqueue
+- uid: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  commentId: M:Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+  parent: Synthesys.Tasks.ITaskToolbox
+  isExternal: true
+  name: Enqueue(String, AppTreeNode, Dictionary<String, String>, ProjectPointer)
+  nameWithType: ITaskToolbox.Enqueue(String, AppTreeNode, Dictionary<String, String>, ProjectPointer)
+  fullName: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary<System.String, System.String>, SMACD.AppTree.ProjectPointer)
+  nameWithType.vb: ITaskToolbox.Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
+  fullName.vb: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String, SMACD.AppTree.AppTreeNode, System.Collections.Generic.Dictionary(Of System.String, System.String), SMACD.AppTree.ProjectPointer)
+  name.vb: Enqueue(String, AppTreeNode, Dictionary(Of String, String), ProjectPointer)
+  spec.csharp:
+  - uid: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+    name: Enqueue
+    nameWithType: ITaskToolbox.Enqueue
+    fullName: Synthesys.Tasks.ITaskToolbox.Enqueue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.ProjectPointer
+    name: ProjectPointer
+    nameWithType: ProjectPointer
+    fullName: SMACD.AppTree.ProjectPointer
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Synthesys.Tasks.ITaskToolbox.Enqueue(System.String,SMACD.AppTree.AppTreeNode,System.Collections.Generic.Dictionary{System.String,System.String},SMACD.AppTree.ProjectPointer)
+    name: Enqueue
+    nameWithType: ITaskToolbox.Enqueue
+    fullName: Synthesys.Tasks.ITaskToolbox.Enqueue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.AppTreeNode
+    name: AppTreeNode
+    nameWithType: AppTreeNode
+    fullName: SMACD.AppTree.AppTreeNode
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: SMACD.AppTree.ProjectPointer
+    name: ProjectPointer
+    nameWithType: ProjectPointer
+    fullName: SMACD.AppTree.ProjectPointer
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree.ProjectPointer
+  commentId: T:SMACD.AppTree.ProjectPointer
+  parent: SMACD.AppTree
+  name: ProjectPointer
+  nameWithType: ProjectPointer
+  fullName: SMACD.AppTree.ProjectPointer
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{Synthesys.SDK.ExtensionReport}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<List<ExtensionReport>>
+  nameWithType: Task<List<ExtensionReport>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<Synthesys.SDK.ExtensionReport>>
+  nameWithType.vb: Task(Of List(Of ExtensionReport))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of Synthesys.SDK.ExtensionReport))
+  name.vb: Task(Of List(Of ExtensionReport))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Synthesys.SDK.ExtensionReport
+    name: ExtensionReport
+    nameWithType: ExtensionReport
+    fullName: Synthesys.SDK.ExtensionReport
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Synthesys.SDK.ExtensionReport
+    name: ExtensionReport
+    nameWithType: ExtensionReport
+    fullName: Synthesys.SDK.ExtensionReport
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks

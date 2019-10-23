@@ -1,0 +1,20 @@
+﻿@page "/evidence/{Address}"
+
+<h2>Evidence - @Node.GetDisplayPath() [@EvidenceName]</h2>
+
+<Compass.Components.NativeDirectoryEvidenceViewer Context="@this.EvidenceItem?.AsNativeDirectoryEvidence().GetContext()" />
+
+@using SMACD.AppTree
+@code
+{
+    [Parameter]
+    public string Address { get; set; }
+
+    public string UUIDAddress => System.Text.Encoding.ASCII.GetString(System.Convert.FromBase64String(Address)).Split("@")[0];
+
+    public string EvidenceName => System.Text.Encoding.ASCII.GetString(System.Convert.FromBase64String(Address)).Split("@")[1];
+
+    public AppTreeNode Node => Program.Session?.Artifacts.GetNodeByRelativeUUIDPath(UUIDAddress);
+
+    public SMACD.AppTree.Evidence.Evidence EvidenceItem => Node?.Evidence[EvidenceName];
+}

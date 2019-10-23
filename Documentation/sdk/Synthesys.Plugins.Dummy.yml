@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.Dummy
+  commentId: N:Synthesys.Plugins.Dummy
+  id: Synthesys.Plugins.Dummy
+  children:
+  - Synthesys.Plugins.Dummy.DummyAction
+  - Synthesys.Plugins.Dummy.DummyDataClass
+  - Synthesys.Plugins.Dummy.DummyReaction
+  - Synthesys.Plugins.Dummy.DummyReportSummary
+  - Synthesys.Plugins.Dummy.DummyReportView
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Plugins.Dummy
+  nameWithType: Synthesys.Plugins.Dummy
+  fullName: Synthesys.Plugins.Dummy
+  type: Namespace
+  assemblies:
+  - Synthesys.Plugins.Dummy
+references:
+- uid: Synthesys.Plugins.Dummy.DummyAction
+  commentId: T:Synthesys.Plugins.Dummy.DummyAction
+  name: DummyAction
+  nameWithType: DummyAction
+  fullName: Synthesys.Plugins.Dummy.DummyAction
+- uid: Synthesys.Plugins.Dummy.DummyDataClass
+  commentId: T:Synthesys.Plugins.Dummy.DummyDataClass
+  name: DummyDataClass
+  nameWithType: DummyDataClass
+  fullName: Synthesys.Plugins.Dummy.DummyDataClass
+- uid: Synthesys.Plugins.Dummy.DummyReaction
+  commentId: T:Synthesys.Plugins.Dummy.DummyReaction
+  name: DummyReaction
+  nameWithType: DummyReaction
+  fullName: Synthesys.Plugins.Dummy.DummyReaction
+- uid: Synthesys.Plugins.Dummy.DummyReportSummary
+  commentId: T:Synthesys.Plugins.Dummy.DummyReportSummary
+  name: DummyReportSummary
+  nameWithType: DummyReportSummary
+  fullName: Synthesys.Plugins.Dummy.DummyReportSummary
+- uid: Synthesys.Plugins.Dummy.DummyReportView
+  commentId: T:Synthesys.Plugins.Dummy.DummyReportView
+  name: DummyReportView
+  nameWithType: DummyReportView
+  fullName: Synthesys.Plugins.Dummy.DummyReportView

@@ -1,0 +1,103 @@
+﻿@using System.IO
+@using SMACD.AppTree.Evidence
+@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+
+<div class="row">
+    <div class="col-xl-4">
+        <ul class="list-group">
+            @foreach (var item in Directory.EnumerateFiles(Context.Directory))
+            {
+                <li class="list-group-item" @onclick="@(() => SelectedFilename = item)">
+                    <i class="fa @GetIcon(item)" style="margin-right: 0.25em;"></i>
+                    <span>@item.Replace(Context.Directory, "")</span>
+                    <small class="text-muted" style="margin-left: 0.5em;">@SizeSuffix(new FileInfo(item).Length, 1)</small>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-xl-8">
+        <pre><code class="@GetHighlightType(SelectedFilename)">@FileData</code></pre>
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public NativeDirectoryContext Context { get; set; }
+
+    private string _selectedFilename;
+    public string SelectedFilename
+    {
+        get => _selectedFilename;
+        set
+        {
+            _selectedFilename = value;
+            FileData = File.ReadAllText(_selectedFilename);
+        }
+    }
+    public string FileData { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!string.IsNullOrEmpty(_selectedFilename))
+        {
+            FileData = File.ReadAllText(_selectedFilename);
+            var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
+        }
+    }
+
+    public string GetIcon(string fileName)
+    {
+        switch (System.IO.Path.GetExtension(fileName))
+        {
+            case ".txt":
+                return "fa-file-text-o";
+            case ".json":
+            case ".xml":
+                return "fa-file-code-o";
+            default:
+                return "fa-file-o";
+        }
+    }
+
+    public string GetHighlightType(string fileName)
+    {
+        switch (System.IO.Path.GetExtension(fileName))
+        {
+            case ".json":
+                return "language-json";
+            case ".xml":
+                return "language-xml";
+            default:
+                return "language-none";
+        }
+    }
+
+    static readonly string[] SizeSuffixes =
+    { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+    static string SizeSuffix(Int64 value, int decimalPlaces = 1)
+    {
+        if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException("decimalPlaces"); }
+        if (value < 0) { return "-" + SizeSuffix(-value); }
+        if (value == 0) { return string.Format("{0:n" + decimalPlaces + "} bytes", 0); }
+
+        // mag is 0 for bytes, 1 for KB, 2, for MB, etc.
+        int mag = (int)Math.Log(value, 1024);
+
+        // 1L << (mag * 10) == 2 ^ (10 * mag)
+        // [i.e. the number of bytes in the unit corresponding to mag]
+        decimal adjustedSize = (decimal)value / (1L << (mag * 10));
+
+        // make adjustment when the value is large enough that
+        // it would round up to 1000 or more
+        if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
+        {
+            mag += 1;
+            adjustedSize /= 1024;
+        }
+
+        return string.Format("{0:n" + decimalPlaces + "} {1}",
+        adjustedSize,
+        SizeSuffixes[mag]);
+    }
+}

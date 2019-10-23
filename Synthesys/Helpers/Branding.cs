@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Colorful;
+using System;
 using System.Drawing;
 using System.IO;
-using Colorful;
 using Console = Colorful.Console;
 
 namespace Synthesys.Helpers
@@ -12,14 +12,17 @@ namespace Synthesys.Helpers
         {
             get
             {
-                var dir = GitDirectoryLocation;
-                if (string.IsNullOrEmpty(dir)) return string.Empty;
+                string dir = GitDirectoryLocation;
+                if (string.IsNullOrEmpty(dir))
+                {
+                    return string.Empty;
+                }
 
-                var headFile = File.ReadAllText(Path.Combine(dir, ".git", "HEAD"));
+                string headFile = File.ReadAllText(Path.Combine(dir, ".git", "HEAD"));
                 if (headFile.StartsWith("ref:"))
                 {
-                    var refLocation = headFile.Substring("ref: ".Length).Trim('\r', '\n', '\t');
-                    var hash = File.ReadAllText(Path.Combine(dir, ".git", refLocation));
+                    string refLocation = headFile.Substring("ref: ".Length).Trim('\r', '\n', '\t');
+                    string hash = File.ReadAllText(Path.Combine(dir, ".git", refLocation));
                     hash = hash.Substring(0, 8);
                     return hash;
                 }
@@ -33,12 +36,15 @@ namespace Synthesys.Helpers
         {
             get
             {
-                var dir = Directory.GetCurrentDirectory();
+                string dir = Directory.GetCurrentDirectory();
 
                 while (!Directory.Exists(Path.Combine(dir, ".git")))
                 {
-                    var parent = Directory.GetParent(dir);
-                    if (parent == null || parent.FullName == dir) return string.Empty;
+                    DirectoryInfo parent = Directory.GetParent(dir);
+                    if (parent == null || parent.FullName == dir)
+                    {
+                        return string.Empty;
+                    }
 
                     dir = Directory.GetParent(dir).FullName;
                 }
@@ -61,7 +67,7 @@ namespace Synthesys.Helpers
 
         private static void DrawBanner(Color[] gradient)
         {
-            var bannerFormat =
+            string bannerFormat =
                 "" + Environment.NewLine +
                 " {0}" + Environment.NewLine +
                 " {1}  {5}" + Environment.NewLine +

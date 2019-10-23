@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Triggers
 {
@@ -20,12 +17,23 @@ namespace Synthesys.SDK.Triggers
         /// <summary>
         ///     Create an artifact-based trigger
         /// </summary>
-        /// <param name="artifactPath">Artifact path</param>
+        /// <param name="nodePath">Node path</param>
         /// <param name="trigger">Trigger operation</param>
         /// <returns></returns>
-        public static ArtifactTriggerDescriptor ArtifactTrigger(string artifactPath, ArtifactTrigger trigger)
+        public static ArtifactTriggerDescriptor ArtifactTrigger(string nodePath, AppTreeNodeEvents trigger)
         {
-            return new ArtifactTriggerDescriptor(artifactPath, trigger);
+            return new ArtifactTriggerDescriptor(nodePath, trigger);
+        }
+
+        /// <summary>
+        ///     Create an artifact-based trigger
+        /// </summary>
+        /// <param name="node">Node instance</param>
+        /// <param name="trigger">Trigger operation</param>
+        /// <returns></returns>
+        public static ArtifactTriggerDescriptor ArtifactTrigger(AppTreeNode node, AppTreeNodeEvents trigger)
+        {
+            return new ArtifactTriggerDescriptor(node, trigger);
         }
 
         /// <summary>
@@ -51,35 +59,13 @@ namespace Synthesys.SDK.Triggers
         }
 
         /// <summary>
-        ///     Check if the Artifact's path matches the given path
-        /// </summary>
-        /// <param name="triggeringArtifact">Artifact</param>
-        /// <param name="path">Path to check against</param>
-        /// <returns></returns>
-        public static bool PathMatches(Artifact triggeringArtifact, string path)
-        {
-            return PathMatches(triggeringArtifact, path.Split(Artifact.PATH_SEPARATOR).ToList());
-        }
-
-        private static bool PathMatches(Artifact artifact, List<string> pathElements)
-        {
-            var nextEl = pathElements.First();
-            var nextElements = new List<string>();
-            if (pathElements.Count > 1) nextElements = new List<string>(pathElements.Skip(1));
-
-            if (nextEl == "*" || artifact.UUID == Guid.Parse(nextEl))
-                if (nextElements.Count == 0 ||
-                    artifact.Children.Any(child => PathMatches(child, nextElements)))
-                    return true;
-
-            return false;
-        }
-
-        /// <summary>
         ///     Generate the path for a given artifact
         /// </summary>
-        /// <param name="artifact">Artifact</param>
+        /// <param name="node">Artifact</param>
         /// <returns></returns>
-        public static string GeneratePath(Artifact artifact) => artifact.GetUUIDPathToRoot();
+        public static string GeneratePath(AppTreeNode node)
+        {
+            return node.GetUUIDPath();
+        }
     }
 }

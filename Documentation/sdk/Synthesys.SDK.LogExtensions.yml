@@ -1,0 +1,971 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.LogExtensions
+  commentId: T:Synthesys.SDK.LogExtensions
+  id: LogExtensions
+  parent: Synthesys.SDK
+  children:
+  - Synthesys.SDK.LogExtensions.Maps
+  - Synthesys.SDK.LogExtensions.SHA1(System.String)
+  - Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  - Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  - Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  - Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  - Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  - Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  langs:
+  - csharp
+  - vb
+  name: LogExtensions
+  nameWithType: LogExtensions
+  fullName: Synthesys.SDK.LogExtensions
+  type: Class
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: LogExtensions
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 11
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nExtensions to the log function to allow a binding between external processes and their encapsulating threads\n"
+  example: []
+  syntax:
+    content: public static class LogExtensions
+    content.vb: Public Module LogExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Synthesys.SDK.LogExtensions.Maps
+  commentId: P:Synthesys.SDK.LogExtensions.Maps
+  id: Maps
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: Maps
+  nameWithType: LogExtensions.Maps
+  fullName: Synthesys.SDK.LogExtensions.Maps
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Maps
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 16
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nManaged to unmanaged thread ID maps for logging enrichment extension\n"
+  example: []
+  syntax:
+    content: public static Dictionary<int, int> Maps { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+    content.vb: Public Shared ReadOnly Property Maps As Dictionary(Of Integer, Integer)
+  overload: Synthesys.SDK.LogExtensions.Maps*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogCritical(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogCritical(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogCritical
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 32
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the CRITICAL level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogCritical(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogCritical(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogCritical*
+  nameWithType.vb: LogExtensions.TaskLogCritical(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogCritical(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogDebug(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogDebug(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogDebug
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 44
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the DEBUG level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogDebug(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogDebug(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogDebug*
+  nameWithType.vb: LogExtensions.TaskLogDebug(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogDebug(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogError(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogError(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogError(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogError
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 56
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the ERROR level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogError(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogError(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogError*
+  nameWithType.vb: LogExtensions.TaskLogError(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogError(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogInformation(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogInformation(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogInformation(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogInformation
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 68
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the INFORMATION level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogInformation(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogInformation(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogInformation*
+  nameWithType.vb: LogExtensions.TaskLogInformation(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogInformation(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogTrace(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogTrace(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogTrace(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogTrace
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 81
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the TRACE level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogTrace(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogTrace(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogTrace*
+  nameWithType.vb: LogExtensions.TaskLogTrace(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogTrace(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  commentId: M:Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  id: TaskLogWarning(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: TaskLogWarning(ILogger, Int32, String, Object[])
+  nameWithType: LogExtensions.TaskLogWarning(ILogger, Int32, String, Object[])
+  fullName: Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: TaskLogWarning
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 93
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nLog a message at the WARNING level\n"
+  example: []
+  syntax:
+    content: public static void TaskLogWarning(this ILogger logger, int taskId, string message, params object[] parameters)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger
+      description: Logger to invoke
+    - id: taskId
+      type: System.Int32
+      description: Task ID to correlate to thread
+    - id: message
+      type: System.String
+      description: Message to log
+    - id: parameters
+      type: System.Object[]
+      description: Parameters for message template
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub TaskLogWarning(logger As ILogger, taskId As Integer, message As String, ParamArray parameters As Object())
+  overload: Synthesys.SDK.LogExtensions.TaskLogWarning*
+  nameWithType.vb: LogExtensions.TaskLogWarning(ILogger, Int32, String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger, System.Int32, System.String, System.Object())
+  name.vb: TaskLogWarning(ILogger, Int32, String, Object())
+- uid: Synthesys.SDK.LogExtensions.SHA1(System.String)
+  commentId: M:Synthesys.SDK.LogExtensions.SHA1(System.String)
+  id: SHA1(System.String)
+  isExtensionMethod: true
+  parent: Synthesys.SDK.LogExtensions
+  langs:
+  - csharp
+  - vb
+  name: SHA1(String)
+  nameWithType: LogExtensions.SHA1(String)
+  fullName: Synthesys.SDK.LogExtensions.SHA1(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/LogExtensions.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SHA1
+    path: ../Synthesys.SDK/LogExtensions.cs
+    startLine: 103
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK
+  summary: "\nCalculate SHA1 hash of a string (not cryptographically safe operation!)\n"
+  example: []
+  syntax:
+    content: public static string SHA1(this string str)
+    parameters:
+    - id: str
+      type: System.String
+      description: String to hash
+    return:
+      type: System.String
+      description: ''
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function SHA1(str As String) As String
+  overload: Synthesys.SDK.LogExtensions.SHA1*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.SDK.LogExtensions.Maps*
+  commentId: Overload:Synthesys.SDK.LogExtensions.Maps
+  name: Maps
+  nameWithType: LogExtensions.Maps
+  fullName: Synthesys.SDK.LogExtensions.Maps
+- uid: System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+  commentId: T:System.Collections.Generic.Dictionary{System.Int32,System.Int32}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<Int32, Int32>
+  nameWithType: Dictionary<Int32, Int32>
+  fullName: System.Collections.Generic.Dictionary<System.Int32, System.Int32>
+  nameWithType.vb: Dictionary(Of Int32, Int32)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.Int32, System.Int32)
+  name.vb: Dictionary(Of Int32, Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Synthesys.SDK.LogExtensions.TaskLogCritical*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogCritical
+  name: TaskLogCritical
+  nameWithType: LogExtensions.TaskLogCritical
+  fullName: Synthesys.SDK.LogExtensions.TaskLogCritical
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Object[]
+  isExternal: true
+  name: Object[]
+  nameWithType: Object[]
+  fullName: System.Object[]
+  nameWithType.vb: Object()
+  fullName.vb: System.Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Synthesys.SDK.LogExtensions.TaskLogDebug*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogDebug
+  name: TaskLogDebug
+  nameWithType: LogExtensions.TaskLogDebug
+  fullName: Synthesys.SDK.LogExtensions.TaskLogDebug
+- uid: Synthesys.SDK.LogExtensions.TaskLogError*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogError
+  name: TaskLogError
+  nameWithType: LogExtensions.TaskLogError
+  fullName: Synthesys.SDK.LogExtensions.TaskLogError
+- uid: Synthesys.SDK.LogExtensions.TaskLogInformation*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogInformation
+  name: TaskLogInformation
+  nameWithType: LogExtensions.TaskLogInformation
+  fullName: Synthesys.SDK.LogExtensions.TaskLogInformation
+- uid: Synthesys.SDK.LogExtensions.TaskLogTrace*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogTrace
+  name: TaskLogTrace
+  nameWithType: LogExtensions.TaskLogTrace
+  fullName: Synthesys.SDK.LogExtensions.TaskLogTrace
+- uid: Synthesys.SDK.LogExtensions.TaskLogWarning*
+  commentId: Overload:Synthesys.SDK.LogExtensions.TaskLogWarning
+  name: TaskLogWarning
+  nameWithType: LogExtensions.TaskLogWarning
+  fullName: Synthesys.SDK.LogExtensions.TaskLogWarning
+- uid: Synthesys.SDK.LogExtensions.SHA1*
+  commentId: Overload:Synthesys.SDK.LogExtensions.SHA1
+  name: SHA1
+  nameWithType: LogExtensions.SHA1
+  fullName: Synthesys.SDK.LogExtensions.SHA1

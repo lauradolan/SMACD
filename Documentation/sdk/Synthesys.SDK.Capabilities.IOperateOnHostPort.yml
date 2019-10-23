@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IOperateOnHostPort
+  commentId: T:Synthesys.SDK.Capabilities.IOperateOnHostPort
+  id: IOperateOnHostPort
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+  langs:
+  - csharp
+  - vb
+  name: IOperateOnHostPort
+  nameWithType: IOperateOnHostPort
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHostPort
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHostPort.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IOperateOnHostPort
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHostPort.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nICanQueueTasks indicates that the Extension acts upon an unknown service (by port)\n"
+  example: []
+  syntax:
+    content: public interface IOperateOnHostPort
+    content.vb: Public Interface IOperateOnHostPort
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+  commentId: P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+  id: Service
+  parent: Synthesys.SDK.Capabilities.IOperateOnHostPort
+  langs:
+  - csharp
+  - vb
+  name: Service
+  nameWithType: IOperateOnHostPort.Service
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IOperateOnHostPort.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Service
+    path: ../Synthesys.SDK/Capabilities/IOperateOnHostPort.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the Service Node\n"
+  example: []
+  syntax:
+    content: ServiceNode Service { get; set; }
+    parameters: []
+    return:
+      type: SMACD.AppTree.ServiceNode
+    content.vb: Property Service As ServiceNode
+  overload: Synthesys.SDK.Capabilities.IOperateOnHostPort.Service*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IOperateOnHostPort.Service*
+  commentId: Overload:Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+  name: Service
+  nameWithType: IOperateOnHostPort.Service
+  fullName: Synthesys.SDK.Capabilities.IOperateOnHostPort.Service
+- uid: SMACD.AppTree.ServiceNode
+  commentId: T:SMACD.AppTree.ServiceNode
+  parent: SMACD.AppTree
+  name: ServiceNode
+  nameWithType: ServiceNode
+  fullName: SMACD.AppTree.ServiceNode
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree

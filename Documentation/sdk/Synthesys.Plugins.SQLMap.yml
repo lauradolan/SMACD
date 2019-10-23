@@ -1,0 +1,40 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.SQLMap
+  commentId: N:Synthesys.Plugins.SQLMap
+  id: Synthesys.Plugins.SQLMap
+  children:
+  - Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  - Synthesys.Plugins.SQLMap.SqlMapReaction
+  - Synthesys.Plugins.SQLMap.SqlMapReport
+  - Synthesys.Plugins.SQLMap.SqlMapScanner
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Plugins.SQLMap
+  nameWithType: Synthesys.Plugins.SQLMap
+  fullName: Synthesys.Plugins.SQLMap
+  type: Namespace
+  assemblies:
+  - Synthesys.Plugins.SQLMap
+references:
+- uid: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+  name: SqlMapInjectionVector
+  nameWithType: SqlMapInjectionVector
+  fullName: Synthesys.Plugins.SQLMap.SqlMapInjectionVector
+- uid: Synthesys.Plugins.SQLMap.SqlMapReaction
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapReaction
+  name: SqlMapReaction
+  nameWithType: SqlMapReaction
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReaction
+- uid: Synthesys.Plugins.SQLMap.SqlMapReport
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapReport
+  name: SqlMapReport
+  nameWithType: SqlMapReport
+  fullName: Synthesys.Plugins.SQLMap.SqlMapReport
+- uid: Synthesys.Plugins.SQLMap.SqlMapScanner
+  commentId: T:Synthesys.Plugins.SQLMap.SqlMapScanner
+  name: SqlMapScanner
+  nameWithType: SqlMapScanner
+  fullName: Synthesys.Plugins.SQLMap.SqlMapScanner

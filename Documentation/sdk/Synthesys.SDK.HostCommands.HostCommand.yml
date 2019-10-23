@@ -1,0 +1,1149 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.HostCommands.HostCommand
+  commentId: T:Synthesys.SDK.HostCommands.HostCommand
+  id: HostCommand
+  parent: Synthesys.SDK.HostCommands
+  children:
+  - Synthesys.SDK.HostCommands.HostCommand.#ctor
+  - Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+  - Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+  - Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+  - Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+  - Synthesys.SDK.HostCommands.HostCommand.HandleStdErr(System.String)
+  - Synthesys.SDK.HostCommands.HostCommand.HandleStdOut(System.String)
+  - Synthesys.SDK.HostCommands.HostCommand.Logger
+  - Synthesys.SDK.HostCommands.HostCommand.Maps
+  - Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+  - Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+  - Synthesys.SDK.HostCommands.HostCommand.StandardErrorDataReceived
+  - Synthesys.SDK.HostCommands.HostCommand.StandardOutputDataReceived
+  - Synthesys.SDK.HostCommands.HostCommand.StdErr
+  - Synthesys.SDK.HostCommands.HostCommand.StdOut
+  langs:
+  - csharp
+  - vb
+  name: HostCommand
+  nameWithType: HostCommand
+  fullName: Synthesys.SDK.HostCommands.HostCommand
+  type: Class
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HostCommand
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 10
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nCommand executed on the host running the application\n"
+  example: []
+  syntax:
+    content: public abstract class HostCommand
+    content.vb: Public MustInherit Class HostCommand
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Synthesys.SDK.HostCommands.DockerHostCommand
+  - Synthesys.SDK.HostCommands.NativeHostCommand
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - abstract
+  - class
+  modifiers.vb:
+  - Public
+  - MustInherit
+  - Class
+- uid: Synthesys.SDK.HostCommands.HostCommand.Maps
+  commentId: F:Synthesys.SDK.HostCommands.HostCommand.Maps
+  id: Maps
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: Maps
+  nameWithType: HostCommand.Maps
+  fullName: Synthesys.SDK.HostCommands.HostCommand.Maps
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Maps
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 23
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nA collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)\n"
+  example: []
+  syntax:
+    content: public static ConcurrentDictionary<int, int> Maps
+    return:
+      type: System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+    content.vb: Public Shared Maps As ConcurrentDictionary(Of Integer, Integer)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Synthesys.SDK.HostCommands.HostCommand.#ctor
+  commentId: M:Synthesys.SDK.HostCommands.HostCommand.#ctor
+  id: '#ctor'
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: HostCommand()
+  nameWithType: HostCommand.HostCommand()
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HostCommand()
+  type: Constructor
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: .ctor
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 28
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nCommand executed on the host running the application\n"
+  example: []
+  syntax:
+    content: protected HostCommand()
+    content.vb: Protected Sub New
+  overload: Synthesys.SDK.HostCommands.HostCommand.#ctor*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Synthesys.SDK.HostCommands.HostCommand.Logger
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.Logger
+  id: Logger
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: HostCommand.Logger
+  fullName: Synthesys.SDK.HostCommands.HostCommand.Logger
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Logger
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 37
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nLogger for command\n"
+  example: []
+  syntax:
+    content: protected ILogger Logger { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Logging.ILogger
+    content.vb: Protected ReadOnly Property Logger As ILogger
+  overload: Synthesys.SDK.HostCommands.HostCommand.Logger*
+  modifiers.csharp:
+  - protected
+  - get
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+- uid: Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+  id: OwnerTaskId
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: OwnerTaskId
+  nameWithType: HostCommand.OwnerTaskId
+  fullName: Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: OwnerTaskId
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 42
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nTask ID of owner\n"
+  example: []
+  syntax:
+    content: protected int OwnerTaskId { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Protected ReadOnly Property OwnerTaskId As Integer
+  overload: Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId*
+  modifiers.csharp:
+  - protected
+  - get
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+- uid: Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+  id: RuntimeTask
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: RuntimeTask
+  nameWithType: HostCommand.RuntimeTask
+  fullName: Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: RuntimeTask
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 47
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nTask wrapping this execution\n"
+  example: []
+  syntax:
+    content: public Task RuntimeTask { get; protected set; }
+    parameters: []
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Property RuntimeTask As Task
+  overload: Synthesys.SDK.HostCommands.HostCommand.RuntimeTask*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+  id: ExecutionTime
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: ExecutionTime
+  nameWithType: HostCommand.ExecutionTime
+  fullName: Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExecutionTime
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 52
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nDuration of last execution\n"
+  example: []
+  syntax:
+    content: public TimeSpan ExecutionTime { get; protected set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+    content.vb: Public Property ExecutionTime As TimeSpan
+  overload: Synthesys.SDK.HostCommands.HostCommand.ExecutionTime*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+  id: CaptureStdOut
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: CaptureStdOut
+  nameWithType: HostCommand.CaptureStdOut
+  fullName: Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: CaptureStdOut
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 57
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nIf STDOUT should be captured and stored in StdOut property\n"
+  example: []
+  syntax:
+    content: public bool CaptureStdOut { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property CaptureStdOut As Boolean
+  overload: Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+  id: CaptureStdErr
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: CaptureStdErr
+  nameWithType: HostCommand.CaptureStdErr
+  fullName: Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: CaptureStdErr
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 62
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nIf STDERR should be captured and stored in StdErr property\n"
+  example: []
+  syntax:
+    content: public bool CaptureStdErr { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property CaptureStdErr As Boolean
+  overload: Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.HostCommands.HostCommand.StdOut
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.StdOut
+  id: StdOut
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: StdOut
+  nameWithType: HostCommand.StdOut
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StdOut
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StdOut
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 67
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStandard output from last execution\n"
+  example: []
+  syntax:
+    content: public string StdOut { get; protected set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property StdOut As String
+  overload: Synthesys.SDK.HostCommands.HostCommand.StdOut*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Synthesys.SDK.HostCommands.HostCommand.StdErr
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.StdErr
+  id: StdErr
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: StdErr
+  nameWithType: HostCommand.StdErr
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StdErr
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StdErr
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 72
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nStandard error from last execution\n"
+  example: []
+  syntax:
+    content: public string StdErr { get; protected set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property StdErr As String
+  overload: Synthesys.SDK.HostCommands.HostCommand.StdErr*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+  commentId: P:Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+  id: FailedToExecute
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: FailedToExecute
+  nameWithType: HostCommand.FailedToExecute
+  fullName: Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: FailedToExecute
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 77
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nIf this process failed to execute\n"
+  example: []
+  syntax:
+    content: public bool FailedToExecute { get; protected set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property FailedToExecute As Boolean
+  overload: Synthesys.SDK.HostCommands.HostCommand.FailedToExecute*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Synthesys.SDK.HostCommands.HostCommand.StandardOutputDataReceived
+  commentId: E:Synthesys.SDK.HostCommands.HostCommand.StandardOutputDataReceived
+  id: StandardOutputDataReceived
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: StandardOutputDataReceived
+  nameWithType: HostCommand.StandardOutputDataReceived
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StandardOutputDataReceived
+  type: Event
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StandardOutputDataReceived
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 82
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nFired when data is written to STDOUT\n"
+  example: []
+  syntax:
+    content: public event HostCommand.ExternalProcessDataReceived StandardOutputDataReceived
+    return:
+      type: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+    content.vb: Public Event StandardOutputDataReceived As HostCommand.ExternalProcessDataReceived
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.HostCommands.HostCommand.StandardErrorDataReceived
+  commentId: E:Synthesys.SDK.HostCommands.HostCommand.StandardErrorDataReceived
+  id: StandardErrorDataReceived
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: StandardErrorDataReceived
+  nameWithType: HostCommand.StandardErrorDataReceived
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StandardErrorDataReceived
+  type: Event
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: StandardErrorDataReceived
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 87
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nFired when data is written to STDERR\n"
+  example: []
+  syntax:
+    content: public event HostCommand.ExternalProcessDataReceived StandardErrorDataReceived
+    return:
+      type: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+    content.vb: Public Event StandardErrorDataReceived As HostCommand.ExternalProcessDataReceived
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Synthesys.SDK.HostCommands.HostCommand.HandleStdOut(System.String)
+  commentId: M:Synthesys.SDK.HostCommands.HostCommand.HandleStdOut(System.String)
+  id: HandleStdOut(System.String)
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: HandleStdOut(String)
+  nameWithType: HostCommand.HandleStdOut(String)
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HandleStdOut(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HandleStdOut
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 93
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nRoute STDOUT to buffer and event\n"
+  example: []
+  syntax:
+    content: protected void HandleStdOut(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: STDOUT text
+    content.vb: Protected Sub HandleStdOut(text As String)
+  overload: Synthesys.SDK.HostCommands.HostCommand.HandleStdOut*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Synthesys.SDK.HostCommands.HostCommand.HandleStdErr(System.String)
+  commentId: M:Synthesys.SDK.HostCommands.HostCommand.HandleStdErr(System.String)
+  id: HandleStdErr(System.String)
+  parent: Synthesys.SDK.HostCommands.HostCommand
+  langs:
+  - csharp
+  - vb
+  name: HandleStdErr(String)
+  nameWithType: HostCommand.HandleStdErr(String)
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HandleStdErr(System.String)
+  type: Method
+  source:
+    remote:
+      path: Synthesys.SDK/HostCommands/HostCommand.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: HandleStdErr
+    path: ../Synthesys.SDK/HostCommands/HostCommand.cs
+    startLine: 110
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.HostCommands
+  summary: "\nRoute STDERR to buffer and event\n"
+  example: []
+  syntax:
+    content: protected void HandleStdErr(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: STDERR text
+    content.vb: Protected Sub HandleStdErr(text As String)
+  overload: Synthesys.SDK.HostCommands.HostCommand.HandleStdErr*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+references:
+- uid: Synthesys.SDK.HostCommands
+  commentId: N:Synthesys.SDK.HostCommands
+  name: Synthesys.SDK.HostCommands
+  nameWithType: Synthesys.SDK.HostCommands
+  fullName: Synthesys.SDK.HostCommands
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+  commentId: T:System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Int32}
+  parent: System.Collections.Concurrent
+  definition: System.Collections.Concurrent.ConcurrentDictionary`2
+  name: ConcurrentDictionary<Int32, Int32>
+  nameWithType: ConcurrentDictionary<Int32, Int32>
+  fullName: System.Collections.Concurrent.ConcurrentDictionary<System.Int32, System.Int32>
+  nameWithType.vb: ConcurrentDictionary(Of Int32, Int32)
+  fullName.vb: System.Collections.Concurrent.ConcurrentDictionary(Of System.Int32, System.Int32)
+  name.vb: ConcurrentDictionary(Of Int32, Int32)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Concurrent.ConcurrentDictionary`2
+  commentId: T:System.Collections.Concurrent.ConcurrentDictionary`2
+  isExternal: true
+  name: ConcurrentDictionary<TKey, TValue>
+  nameWithType: ConcurrentDictionary<TKey, TValue>
+  fullName: System.Collections.Concurrent.ConcurrentDictionary<TKey, TValue>
+  nameWithType.vb: ConcurrentDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Concurrent.ConcurrentDictionary(Of TKey, TValue)
+  name.vb: ConcurrentDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Concurrent.ConcurrentDictionary`2
+    name: ConcurrentDictionary
+    nameWithType: ConcurrentDictionary
+    fullName: System.Collections.Concurrent.ConcurrentDictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Concurrent
+  commentId: N:System.Collections.Concurrent
+  isExternal: true
+  name: System.Collections.Concurrent
+  nameWithType: System.Collections.Concurrent
+  fullName: System.Collections.Concurrent
+- uid: Synthesys.SDK.HostCommands.HostCommand.#ctor*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.#ctor
+  name: HostCommand
+  nameWithType: HostCommand.HostCommand
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HostCommand
+- uid: Synthesys.SDK.HostCommands.HostCommand.Logger*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.Logger
+  name: Logger
+  nameWithType: HostCommand.Logger
+  fullName: Synthesys.SDK.HostCommands.HostCommand.Logger
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+  name: OwnerTaskId
+  nameWithType: HostCommand.OwnerTaskId
+  fullName: Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Synthesys.SDK.HostCommands.HostCommand.RuntimeTask*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+  name: RuntimeTask
+  nameWithType: HostCommand.RuntimeTask
+  fullName: Synthesys.SDK.HostCommands.HostCommand.RuntimeTask
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: Synthesys.SDK.HostCommands.HostCommand.ExecutionTime*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+  name: ExecutionTime
+  nameWithType: HostCommand.ExecutionTime
+  fullName: Synthesys.SDK.HostCommands.HostCommand.ExecutionTime
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+  name: CaptureStdOut
+  nameWithType: HostCommand.CaptureStdOut
+  fullName: Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+  name: CaptureStdErr
+  nameWithType: HostCommand.CaptureStdErr
+  fullName: Synthesys.SDK.HostCommands.HostCommand.CaptureStdErr
+- uid: Synthesys.SDK.HostCommands.HostCommand.StdOut*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.StdOut
+  name: StdOut
+  nameWithType: HostCommand.StdOut
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StdOut
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.SDK.HostCommands.HostCommand.StdErr*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.StdErr
+  name: StdErr
+  nameWithType: HostCommand.StdErr
+  fullName: Synthesys.SDK.HostCommands.HostCommand.StdErr
+- uid: Synthesys.SDK.HostCommands.HostCommand.FailedToExecute*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+  name: FailedToExecute
+  nameWithType: HostCommand.FailedToExecute
+  fullName: Synthesys.SDK.HostCommands.HostCommand.FailedToExecute
+- uid: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  commentId: T:Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+  parent: Synthesys.SDK.HostCommands
+  name: HostCommand.ExternalProcessDataReceived
+  nameWithType: HostCommand.ExternalProcessDataReceived
+  fullName: Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived
+- uid: Synthesys.SDK.HostCommands.HostCommand.HandleStdOut*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.HandleStdOut
+  name: HandleStdOut
+  nameWithType: HostCommand.HandleStdOut
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HandleStdOut
+- uid: Synthesys.SDK.HostCommands.HostCommand.HandleStdErr*
+  commentId: Overload:Synthesys.SDK.HostCommands.HostCommand.HandleStdErr
+  name: HandleStdErr
+  nameWithType: HostCommand.HandleStdErr
+  fullName: Synthesys.SDK.HostCommands.HostCommand.HandleStdErr

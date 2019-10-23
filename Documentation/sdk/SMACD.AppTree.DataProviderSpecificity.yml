@@ -1,0 +1,223 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.DataProviderSpecificity
+  commentId: T:SMACD.AppTree.DataProviderSpecificity
+  id: DataProviderSpecificity
+  parent: SMACD.AppTree
+  children:
+  - SMACD.AppTree.DataProviderSpecificity.Explicit
+  - SMACD.AppTree.DataProviderSpecificity.ExploitSpecificScanner
+  - SMACD.AppTree.DataProviderSpecificity.GeneralPurposeScanner
+  - SMACD.AppTree.DataProviderSpecificity.ServiceSpecificScanner
+  - SMACD.AppTree.DataProviderSpecificity.Unknown
+  langs:
+  - csharp
+  - vb
+  name: DataProviderSpecificity
+  nameWithType: DataProviderSpecificity
+  fullName: SMACD.AppTree.DataProviderSpecificity
+  type: Enum
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: DataProviderSpecificity
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 10
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nSpecificity of the data provider which created this data\n"
+  example: []
+  syntax:
+    content: public enum DataProviderSpecificity
+    content.vb: Public Enum DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: SMACD.AppTree.DataProviderSpecificity.Unknown
+  commentId: F:SMACD.AppTree.DataProviderSpecificity.Unknown
+  id: Unknown
+  parent: SMACD.AppTree.DataProviderSpecificity
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: DataProviderSpecificity.Unknown
+  fullName: SMACD.AppTree.DataProviderSpecificity.Unknown
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Unknown
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 15
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nUnknown specificity\n"
+  example: []
+  syntax:
+    content: Unknown = 1
+    return:
+      type: SMACD.AppTree.DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.DataProviderSpecificity.GeneralPurposeScanner
+  commentId: F:SMACD.AppTree.DataProviderSpecificity.GeneralPurposeScanner
+  id: GeneralPurposeScanner
+  parent: SMACD.AppTree.DataProviderSpecificity
+  langs:
+  - csharp
+  - vb
+  name: GeneralPurposeScanner
+  nameWithType: DataProviderSpecificity.GeneralPurposeScanner
+  fullName: SMACD.AppTree.DataProviderSpecificity.GeneralPurposeScanner
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: GeneralPurposeScanner
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 20
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nData provider was a general-purpose scanner\n"
+  example: []
+  syntax:
+    content: GeneralPurposeScanner = 2
+    return:
+      type: SMACD.AppTree.DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.DataProviderSpecificity.ServiceSpecificScanner
+  commentId: F:SMACD.AppTree.DataProviderSpecificity.ServiceSpecificScanner
+  id: ServiceSpecificScanner
+  parent: SMACD.AppTree.DataProviderSpecificity
+  langs:
+  - csharp
+  - vb
+  name: ServiceSpecificScanner
+  nameWithType: DataProviderSpecificity.ServiceSpecificScanner
+  fullName: SMACD.AppTree.DataProviderSpecificity.ServiceSpecificScanner
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ServiceSpecificScanner
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 25
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nData provider is designed for the specific service\n"
+  example: []
+  syntax:
+    content: ServiceSpecificScanner = 3
+    return:
+      type: SMACD.AppTree.DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.DataProviderSpecificity.ExploitSpecificScanner
+  commentId: F:SMACD.AppTree.DataProviderSpecificity.ExploitSpecificScanner
+  id: ExploitSpecificScanner
+  parent: SMACD.AppTree.DataProviderSpecificity
+  langs:
+  - csharp
+  - vb
+  name: ExploitSpecificScanner
+  nameWithType: DataProviderSpecificity.ExploitSpecificScanner
+  fullName: SMACD.AppTree.DataProviderSpecificity.ExploitSpecificScanner
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExploitSpecificScanner
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 30
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nData provider is designed for a specific exploit\n"
+  example: []
+  syntax:
+    content: ExploitSpecificScanner = 4
+    return:
+      type: SMACD.AppTree.DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SMACD.AppTree.DataProviderSpecificity.Explicit
+  commentId: F:SMACD.AppTree.DataProviderSpecificity.Explicit
+  id: Explicit
+  parent: SMACD.AppTree.DataProviderSpecificity
+  langs:
+  - csharp
+  - vb
+  name: Explicit
+  nameWithType: DataProviderSpecificity.Explicit
+  fullName: SMACD.AppTree.DataProviderSpecificity.Explicit
+  type: Field
+  source:
+    remote:
+      path: SMACD.AppTree/Versionable.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Explicit
+    path: ../SMACD.AppTree/Versionable.cs
+    startLine: 35
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nData provider is explicit (i.e. known data)\n"
+  example: []
+  syntax:
+    content: Explicit = 5
+    return:
+      type: SMACD.AppTree.DataProviderSpecificity
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: SMACD.AppTree.DataProviderSpecificity
+  commentId: T:SMACD.AppTree.DataProviderSpecificity
+  parent: SMACD.AppTree
+  name: DataProviderSpecificity
+  nameWithType: DataProviderSpecificity
+  fullName: SMACD.AppTree.DataProviderSpecificity

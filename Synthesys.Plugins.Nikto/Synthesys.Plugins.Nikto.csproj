@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RazorLanguage>3.0</RazorLanguage>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.Nikto.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>Nikto Web Scanner Plugin for Synthesys</Product>
     <Description>Implements a wrapper around the Nikto scanner to provide data in Synthesys scans</Description>
@@ -25,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts.Views\SMACD.Artifacts.Views.csproj" />
+    <ProjectReference Include="..\Compass.Components\Compass.Components.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
   </ItemGroup>
 

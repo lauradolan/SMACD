@@ -1,0 +1,118 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  commentId: T:Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  id: ExtensionConditionTrigger
+  parent: Synthesys.SDK.Triggers
+  children:
+  - Synthesys.SDK.Triggers.ExtensionConditionTrigger.Fails
+  - Synthesys.SDK.Triggers.ExtensionConditionTrigger.Succeeds
+  langs:
+  - csharp
+  - vb
+  name: ExtensionConditionTrigger
+  nameWithType: ExtensionConditionTrigger
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  type: Enum
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ExtensionConditionTrigger
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nExtension result types\n"
+  example: []
+  syntax:
+    content: public enum ExtensionConditionTrigger
+    content.vb: Public Enum ExtensionConditionTrigger
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger.Succeeds
+  commentId: F:Synthesys.SDK.Triggers.ExtensionConditionTrigger.Succeeds
+  id: Succeeds
+  parent: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  langs:
+  - csharp
+  - vb
+  name: Succeeds
+  nameWithType: ExtensionConditionTrigger.Succeeds
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger.Succeeds
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Succeeds
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired if the event succeeds\n"
+  example: []
+  syntax:
+    content: Succeeds = 0
+    return:
+      type: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger.Fails
+  commentId: F:Synthesys.SDK.Triggers.ExtensionConditionTrigger.Fails
+  id: Fails
+  parent: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  langs:
+  - csharp
+  - vb
+  name: Fails
+  nameWithType: ExtensionConditionTrigger.Fails
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger.Fails
+  type: Field
+  source:
+    remote:
+      path: Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Fails
+    path: ../Synthesys.SDK/Triggers/ExtensionTriggerDescriptor.cs
+    startLine: 17
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Triggers
+  summary: "\nFired if the event fails\n"
+  example: []
+  syntax:
+    content: Fails = 1
+    return:
+      type: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Synthesys.SDK.Triggers
+  commentId: N:Synthesys.SDK.Triggers
+  name: Synthesys.SDK.Triggers
+  nameWithType: Synthesys.SDK.Triggers
+  fullName: Synthesys.SDK.Triggers
+- uid: Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  commentId: T:Synthesys.SDK.Triggers.ExtensionConditionTrigger
+  parent: Synthesys.SDK.Triggers
+  name: ExtensionConditionTrigger
+  nameWithType: ExtensionConditionTrigger
+  fullName: Synthesys.SDK.Triggers.ExtensionConditionTrigger

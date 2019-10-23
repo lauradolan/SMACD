@@ -82,14 +82,14 @@
                 This Attribute can be used multiple times on the same Extension.
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
                 Specify that the Extension is added to the end of the Task Queue when an Artifact is created or changed
             </summary>
             <param name="artifactPath">Artifact path</param>
             <param name="trigger">Trigger event</param>
         </member>
-        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger,System.Boolean)">
+        <member name="M:Synthesys.SDK.Attributes.TriggeredByAttribute.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)">
             <summary>
                 Specify that the Extension is added to the end of the Task Queue when an Extension completes
             </summary>
@@ -114,7 +114,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHost.Host">
             <summary>
-                Framework-populated reference to the Host Artifact
+                Framework-populated reference to the Host Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHostPort">
@@ -122,9 +122,9 @@
                 ICanQueueTasks indicates that the Extension acts upon an unknown service (by port)
             </summary>
         </member>
-        <member name="P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Port">
+        <member name="P:Synthesys.SDK.Capabilities.IOperateOnHostPort.Service">
             <summary>
-                Framework-populated reference to the ServicePort Artifact
+                Framework-populated reference to the Service Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnHttpService">
@@ -134,7 +134,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnHttpService.HttpService">
             <summary>
-                Framework-populated reference to the HttpServicePort Artifact
+                Framework-populated reference to the HttpService Node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IOperateOnUrl">
@@ -144,7 +144,7 @@
         </member>
         <member name="P:Synthesys.SDK.Capabilities.IOperateOnUrl.Url">
             <summary>
-                Framework-populated reference to the URL artifact
+                Framework-populated reference to the URL node
             </summary>
         </member>
         <member name="T:Synthesys.SDK.Capabilities.IUnderstandProjectInformation">
@@ -158,66 +158,15 @@
                 Framework-populated reference to the project information
             </summary>
         </member>
-        <member name="T:Synthesys.SDK.ExecutionWrapper">
+        <member name="T:Synthesys.SDK.Capabilities.IUnderstandServiceMaps">
             <summary>
-                Wraps the execution of external (system) tasks run by a plugin
+                IUnderstandServiceMaps indicates that the Extension needs access to the Service Map in use
             </summary>
         </member>
-        <member name="F:Synthesys.SDK.ExecutionWrapper.Maps">
+        <member name="P:Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap">
             <summary>
-                A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
+                Framework-populated reference to the Service Map
             </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.RuntimeTask">
-            <summary>
-                Task wrapping this execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.Command">
-            <summary>
-                Command being executed
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.ExecutionTime">
-            <summary>
-                Duration of last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.Process">
-            <summary>
-                Process object executing this command
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.StdOut">
-            <summary>
-                Standard output from last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.StdErr">
-            <summary>
-                Standard error from last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.ExecutionWrapper.FailedToExecute">
-            <summary>
-                If this process failed to execute
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ExecutionWrapper.StandardOutputDataReceived">
-            <summary>
-                Fired when data is written to STDOUT
-            </summary>
-        </member>
-        <member name="E:Synthesys.SDK.ExecutionWrapper.StandardErrorDataReceived">
-            <summary>
-                Fired when data is written to STDERR
-            </summary>
-        </member>
-        <member name="M:Synthesys.SDK.ExecutionWrapper.Start">
-            <summary>
-                Execute the command, wrapped by a Task
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Synthesys.SDK.ExtensionReport">
             <summary>
@@ -312,12 +261,6 @@
             <param name="ex">Exception generated</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.ExtensionReport.FinalizeReport">
-            <summary>
-                Finalize report by disconnecting TaskDescriptor from recursive loops
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Synthesys.SDK.Extensions.ActionExtension">
             <summary>
                 An ActionExtension is generated from known information about a system. ActionExtensions are imported into the
@@ -335,6 +278,11 @@
             <summary>
                 An Extension is some function, which can either be an Action or a Reaction, which executes with the intent of
                 populating the Artifact Tree with additional data.
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Extensions.Extension.Logger">
+            <summary>
+                Extension logger
             </summary>
         </member>
         <member name="M:Synthesys.SDK.Extensions.Extension.Initialize">
@@ -417,9 +365,162 @@
                 Retrieve a list of Triggers which cause this Extension to react
             </summary>
         </member>
+        <member name="T:Synthesys.SDK.Global">
+            <summary>
+                Global entities for SDK
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Global.LogFactory">
+            <summary>
+                Log factory for elements in SDK
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.StreamTypes">
+            <summary>
+                Stream types which can input or output data
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stdin">
+            <summary>
+                Standard input (STDIN)
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stdout">
+            <summary>
+                Standard output (STDOUT)
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.HostCommands.StreamTypes.Stderr">
+            <summary>
+                Standard error (STDERR)
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.DockerHostMount">
+            <summary>
+                Represents a mount between the host and a Docker container
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostMount.LocalPath">
+            <summary>
+                Path on host
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostMount.ContainerPath">
+            <summary>
+                Path inside container
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostMount.IsReadOnly">
+            <summary>
+                If the mount is read-only
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.DockerHostCommand">
+            <summary>
+                Represents a command run to execute a Docker container
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.SupportsDocker">
+            <summary>
+                If the platform is running an accessible Docker daemon
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.IEnumerable{Synthesys.SDK.HostCommands.DockerHostMount},System.String)">
+            <summary>
+                Represents a command run to execute a Docker container
+            </summary>
+            <param name="image">Image name</param>
+            <param name="command">Command and arguments to execute</param>
+            <param name="mounts">Mounts for container</param>
+            <param name="user">User to execute container as</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,SMACD.AppTree.Evidence.NativeDirectoryContext,System.String[])">
+            <summary>
+                Represents a command run to execute a Docker container
+                
+                A context will be mounted at /synthesys inside the container
+            </summary>
+            <param name="image">Image name</param>
+            <param name="context">Context to attach to Docker container</param>
+            <param name="command">Command and arguments to execute</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(System.String,System.String[])">
+            <summary>
+                Represents a command run to execute a Docker container
+            </summary>
+            <param name="image">Image name</param>
+            <param name="command">Command and arguments to execute</param>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerWorkingDirectory">
+            <summary>
+                Container Working Directory
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.#ctor(Docker.DotNet.Models.CreateContainerParameters)">
+            <summary>
+                Represents a command run to execute a Docker container
+            </summary>
+            <param name="containerParameters">Container parameters for new container</param>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerParameters">
+            <summary>
+                Parameters to be used during the creation of the Docker container
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.DockerHostCommand.ContainerId">
+            <summary>
+                Container identifier name
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.Start">
+            <summary>
+                Start container task
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.Dispose(System.Boolean)">
+            <summary>
+                Destructor to dispose
+            </summary>
+            <param name="disposing">Currently disposing?</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.DockerHostCommand.Dispose">
+            <summary>
+                Destructor to dispose
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.HostCommand">
+            <summary>
+                Command executed on the host running the application
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.HostCommand.ExternalProcessDataReceived">
+            <summary>
+                Invoked when an external process generates data
+            </summary>
+            <param name="sender">Sender object</param>
+            <param name="ownerTaskId">Task ID of owner</param>
+            <param name="data">Data generated</param>
+        </member>
         <member name="F:Synthesys.SDK.HostCommands.HostCommand.Maps">
             <summary>
                 A collection of maps between ManagedThreadId (from ExecutionWrapper) and TaskId (from plugin)
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.HostCommand.#ctor">
+            <summary>
+                Command executed on the host running the application
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.HostCommand.Logger">
+            <summary>
+                Logger for command
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.HostCommand.OwnerTaskId">
+            <summary>
+                Task ID of owner
             </summary>
         </member>
         <member name="P:Synthesys.SDK.HostCommands.HostCommand.RuntimeTask">
@@ -430,11 +531,6 @@
         <member name="P:Synthesys.SDK.HostCommands.HostCommand.ExecutionTime">
             <summary>
                 Duration of last execution
-            </summary>
-        </member>
-        <member name="P:Synthesys.SDK.HostCommands.HostCommand.Process">
-            <summary>
-                Process object executing this command
             </summary>
         </member>
         <member name="P:Synthesys.SDK.HostCommands.HostCommand.CaptureStdOut">
@@ -472,11 +568,126 @@
                 Fired when data is written to STDERR
             </summary>
         </member>
+        <member name="M:Synthesys.SDK.HostCommands.HostCommand.HandleStdOut(System.String)">
+            <summary>
+                Route STDOUT to buffer and event
+            </summary>
+            <param name="text">STDOUT text</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.HostCommand.HandleStdErr(System.String)">
+            <summary>
+                Route STDERR to buffer and event
+            </summary>
+            <param name="text">STDERR text</param>
+        </member>
+        <member name="T:Synthesys.SDK.HostCommands.NativeHostCommand">
+            <summary>
+                Represents a command run to execute a command on the host
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.NativeHostCommand.#ctor(System.String,System.String[])">
+            <summary>
+                Represents a command run to execute a command on the host
+            </summary>
+            <param name="command">Command to execute</param>
+            <param name="args">Arguments for command</param>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.NativeHostCommand.ProcessStartInfo">
+            <summary>
+                Process start information
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.HostCommands.NativeHostCommand.Process">
+            <summary>
+                Process wrapping the native host command
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.NativeHostCommand.ValidateCommandExists">
+            <summary>
+                Validate that the command exists on the host
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Synthesys.SDK.HostCommands.NativeHostCommand.Start">
             <summary>
                 Execute the command, wrapped by a Task
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.NativeHostCommand.Dispose(System.Boolean)">
+            <summary>
+                Destructor to dispose
+            </summary>
+            <param name="disposing">Currently disposing?</param>
+        </member>
+        <member name="M:Synthesys.SDK.HostCommands.NativeHostCommand.Dispose">
+            <summary>
+                Destructor to dispose
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.LogExtensions">
+            <summary>
+                Extensions to the log function to allow a binding between external processes and their encapsulating threads
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.LogExtensions.Maps">
+            <summary>
+                Managed to unmanaged thread ID maps for logging enrichment extension
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogCritical(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the CRITICAL level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogDebug(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the DEBUG level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogError(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the ERROR level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogInformation(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the INFORMATION level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogTrace(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the TRACE level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
+        </member>
+        <member name="M:Synthesys.SDK.LogExtensions.TaskLogWarning(Microsoft.Extensions.Logging.ILogger,System.Int32,System.String,System.Object[])">
+            <summary>
+                Log a message at the WARNING level
+            </summary>
+            <param name="logger">Logger to invoke</param>
+            <param name="taskId">Task ID to correlate to thread</param>
+            <param name="message">Message to log</param>
+            <param name="parameters">Parameters for message template</param>
         </member>
         <member name="M:Synthesys.SDK.LogExtensions.SHA1(System.String)">
             <summary>
@@ -485,14 +696,51 @@
             <param name="str">String to hash</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="T:Synthesys.SDK.Triggers.AppTreeNodeEvents">
             <summary>
-                Create a descriptor for a trigger activated by an operation on an Artifact
+                Events which can be fired by nodes in the AppTree
             </summary>
-            <param name="artifactPath">Artifact path</param>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.AppTreeNodeEvents.IsCreated">
+            <summary>
+                Fired when a node is created
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.AppTreeNodeEvents.IsUpdated">
+            <summary>
+                Fired when the data in a node is changed
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.AppTreeNodeEvents.AddsChild">
+            <summary>
+                Fired when a child node is added to another node
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor">
+            <summary>
+                Descriptor for a trigger activated by an operation on a node in the Application Tree
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
+            <summary>
+                Create a descriptor for a trigger activated by an operation on a node in the Application Tree
+            </summary>
+            <param name="nodePath">Application Tree node path</param>
             <param name="trigger">Triggering operation</param>
         </member>
-        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.ArtifactPath">
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.#ctor(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
+            <summary>
+                Create a descriptor for a trigger activated by an operation on a node in the Application Tree
+            </summary>
+            <param name="node">Application Tree node instance</param>
+            <param name="trigger">Triggering operation</param>
+        </member>
+        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.Node">
+            <summary>
+                Artifact Instance
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.NodePath">
             <summary>
                 Path to Artifact
             </summary>
@@ -502,12 +750,110 @@
                 Artifact operation causing trigger
             </summary>
         </member>
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.ToString">
+            <summary>
+                String representation of Artifact Trigger
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.Equals(System.Object)">
+            <summary>
+                If an Artifact Trigger matches another
+            </summary>
+            <param name="obj">Artifact trigger to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ArtifactTriggerDescriptor.GetHashCode">
+            <summary>
+                Get hash code from path and trigger type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Synthesys.SDK.Triggers.ExtensionConditionTrigger">
+            <summary>
+                Extension result types
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.ExtensionConditionTrigger.Succeeds">
+            <summary>
+                Fired if the event succeeds
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.ExtensionConditionTrigger.Fails">
+            <summary>
+                Fired if the event fails
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor">
+            <summary>
+                Create a descriptor for a trigger activated by execution of an Extension
+            </summary>
+        </member>
         <member name="M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.#ctor(System.String,Synthesys.SDK.Triggers.ExtensionConditionTrigger)">
             <summary>
                 Create a descriptor for a trigger activated by execution of an Extension
             </summary>
             <param name="extensionIdentifier">Artifact path</param>
             <param name="trigger">Triggering operation</param>
+        </member>
+        <member name="P:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ExtensionIdentifier">
+            <summary>
+                Extension identifier being tracked
+            </summary>
+        </member>
+        <member name="P:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Trigger">
+            <summary>
+                Trigger condition
+            </summary>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.ToString">
+            <summary>
+                String representation of Extension Trigger
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.Equals(System.Object)">
+            <summary>
+                If an Extension Trigger matches another
+            </summary>
+            <param name="obj">Extension Trigger to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.ExtensionTriggerDescriptor.GetHashCode">
+            <summary>
+                Get hash code from Extension Identifier and trigger condition
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Synthesys.SDK.Triggers.SystemEvents">
+            <summary>
+                Events which can be fired from the scanner system
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.SystemEvents.TaskAddedToQueue">
+            <summary>
+                Fired when a task is added to the queue
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.SystemEvents.TaskStarted">
+            <summary>
+                Fired when a task is started
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.SystemEvents.TaskCompleted">
+            <summary>
+                Fired when a task completes
+            </summary>
+        </member>
+        <member name="F:Synthesys.SDK.Triggers.SystemEvents.TaskQueueDepleted">
+            <summary>
+                Fired when the task queue has completely drained
+            </summary>
+        </member>
+        <member name="T:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor">
+            <summary>
+                Descriptor for a trigger activated by a System Event
+            </summary>
         </member>
         <member name="M:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor.#ctor(Synthesys.SDK.Triggers.SystemEvents)">
             <summary>
@@ -520,6 +866,25 @@
                 System event trigger
             </summary>
         </member>
+        <member name="M:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor.ToString">
+            <summary>
+                String representation of System Event trigger
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor.Equals(System.Object)">
+            <summary>
+                If a System Event trigger matches another
+            </summary>
+            <param name="obj">System Event Trigger to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.SystemEventTriggerDescriptor.GetHashCode">
+            <summary>
+                Get hash code from the system event
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Synthesys.SDK.Triggers.TriggerDescriptor">
             <summary>
                 Describes a wrapper around an event and its details, to pass to ReactionExtensions
@@ -530,11 +895,19 @@
                 Describes a wrapper around an event and its details, to pass to ReactionExtensions
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.ArtifactTrigger)">
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(System.String,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
             <summary>
                 Create an artifact-based trigger
             </summary>
-            <param name="artifactPath">Artifact path</param>
+            <param name="nodePath">Node path</param>
+            <param name="trigger">Trigger operation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.ArtifactTrigger(SMACD.AppTree.AppTreeNode,Synthesys.SDK.Triggers.AppTreeNodeEvents)">
+            <summary>
+                Create an artifact-based trigger
+            </summary>
+            <param name="node">Node instance</param>
             <param name="trigger">Trigger operation</param>
             <returns></returns>
         </member>
@@ -553,19 +926,11 @@
             <param name="trigger">System event</param>
             <returns></returns>
         </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.PathMatches(SMACD.Artifacts.Artifact,System.String)">
-            <summary>
-                Check if the Artifact's path matches the given path
-            </summary>
-            <param name="triggeringArtifact">Artifact</param>
-            <param name="path">Path to check against</param>
-            <returns></returns>
-        </member>
-        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.Artifacts.Artifact)">
+        <member name="M:Synthesys.SDK.Triggers.TriggerDescriptor.GeneratePath(SMACD.AppTree.AppTreeNode)">
             <summary>
                 Generate the path for a given artifact
             </summary>
-            <param name="artifact">Artifact</param>
+            <param name="node">Artifact</param>
             <returns></returns>
         </member>
         <member name="T:Synthesys.SDK.UrlHelper">
@@ -573,7 +938,7 @@
                 Functions to work with URLs in the Artifact correlation tree
             </summary>
         </member>
-        <member name="M:Synthesys.SDK.UrlHelper.GeneratePathArtifacts(SMACD.Artifacts.HttpServicePortArtifact,System.String,System.String)">
+        <member name="M:Synthesys.SDK.UrlHelper.GeneratePathArtifacts(SMACD.AppTree.HttpServiceNode,System.String,System.String)">
             <summary>
                 Generate artifacts under the given Artifact for each segment of a given URL and request method
             </summary>

@@ -1,7 +1,8 @@
 ﻿@page "/artifacts"
-@layout LayoutWithoutPadding
+@layout Layouts.LayoutWithoutPadding
+@using SMACD.AppTree.Evidence
 @using Synthesys.Tasks
-@using SMACD.Artifacts
+@using SMACD.AppTree
 
 <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
     @if (Program.Session == null || Program.Session.Artifacts == null)
@@ -13,7 +14,7 @@
         <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;color:#fff">
             @foreach (var item in Program.Session.Artifacts.Children)
             {
-                <ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+                <Compass.Layouts.Navigation.AppTree.ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
             }
         </ul>
     }
@@ -24,10 +25,19 @@
 
 @code {
     [Parameter]
-    public Artifact Artifact { get; set; } = Program.Session?.Artifacts;
+    public AppTreeNode Artifact { get; set; } = Program.Session?.Artifacts;
 
+    public Modal modalRef;
 
-    public void IdentifierClicked(Artifact artifact)
+    public NativeDirectoryContext NativeContext { get; set; }
+
+    public void ToggleModal()
+    {
+        if (modalRef.IsOpen) modalRef.Hide();
+        else modalRef.Show();
+    }
+
+    public void IdentifierClicked(AppTreeNode artifact)
     {
         Artifact = artifact;
         this.StateHasChanged();
@@ -35,39 +45,36 @@
 
     RenderFragment CreateDynamicComponent() => builder =>
     {
-        builder.OpenComponent(1, GetComponentType());
-        if (!(Artifact is RootArtifact))
-            builder.AddAttribute(2, "Artifact", Artifact);
-        else
-            builder.AddAttribute(2, "Artifact", (object)null);
-        builder.CloseComponent();
+        if (Artifact != null)
+        {
+            builder.OpenComponent(1, GetComponentType());
+            if (!(Artifact is RootNode))
+                builder.AddAttribute(2, "Artifact", Artifact);
+            else
+                builder.AddAttribute(2, "Artifact", (object)null);
+            builder.CloseComponent();
+        }
     };
 
     private Type GetComponentType()
     {
         Type componentType = null;
-        if (!string.IsNullOrEmpty(Artifact.ArtifactSummaryViewTypeName))
+        if (!string.IsNullOrEmpty(Artifact.NodeViewName))
         {
             // Gotta find that view!
 
             // First, see if we can resolve this cheaply.
-            componentType = Type.GetType(Artifact.ArtifactSummaryViewTypeName);
-
-            // Try resolving inside the Artifacts assembly
-            if (componentType == null && Artifact.ArtifactSummaryViewTypeName.Contains(".Artifacts."))
-            {
-                componentType = System.Reflection.Assembly.GetAssembly(typeof(SMACD.Artifacts.Views.DefaultArtifactView)).GetType(Artifact.ArtifactSummaryViewTypeName);
-            }
+            componentType = Type.GetType(Artifact.NodeViewName);
 
             // Try resolving inside the loaded extensions
             if (componentType == null)
             {
-                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.ArtifactSummaryViewTypeName)).FirstOrDefault(a => a != null);
+                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.NodeViewName)).FirstOrDefault(a => a != null);
             }
         }
 
         if (componentType == null)
-            componentType = typeof(SMACD.Artifacts.Views.DefaultArtifactView);
+            componentType = typeof(Compass.AppTree.DefaultNodeView);
 
         return componentType;
     }

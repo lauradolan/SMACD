@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Capabilities
 {
@@ -8,8 +8,8 @@ namespace Synthesys.SDK.Capabilities
     public interface IOperateOnHostPort
     {
         /// <summary>
-        ///     Framework-populated reference to the ServicePort Artifact
+        ///     Framework-populated reference to the Service Node
         /// </summary>
-        ServicePortArtifact Port { get; set; }
+        ServiceNode Service { get; set; }
     }
 }

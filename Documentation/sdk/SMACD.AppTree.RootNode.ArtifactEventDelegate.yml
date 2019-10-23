@@ -1,0 +1,52 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.RootNode.ArtifactEventDelegate
+  commentId: T:SMACD.AppTree.RootNode.ArtifactEventDelegate
+  id: RootNode.ArtifactEventDelegate
+  parent: SMACD.AppTree
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: RootNode.ArtifactEventDelegate
+  nameWithType: RootNode.ArtifactEventDelegate
+  fullName: SMACD.AppTree.RootNode.ArtifactEventDelegate
+  type: Delegate
+  source:
+    remote:
+      path: SMACD.AppTree/RootNode.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ArtifactEventDelegate
+    path: ../SMACD.AppTree/RootNode.cs
+    startLine: 18
+  assemblies:
+  - SMACD.AppTree
+  namespace: SMACD.AppTree
+  summary: "\nDelegate used to describe an affected Artifact when an Event occurs\n"
+  example: []
+  syntax:
+    content: public delegate void ArtifactEventDelegate(AppTreeNode affectedNode);
+    parameters:
+    - id: affectedNode
+      type: SMACD.AppTree.AppTreeNode
+      description: Affected node
+    content.vb: Public Delegate Sub ArtifactEventDelegate(affectedNode As AppTreeNode)
+  modifiers.csharp:
+  - public
+  - delegate
+  modifiers.vb:
+  - Public
+  - Delegate
+references:
+- uid: SMACD.AppTree
+  commentId: N:SMACD.AppTree
+  name: SMACD.AppTree
+  nameWithType: SMACD.AppTree
+  fullName: SMACD.AppTree
+- uid: SMACD.AppTree.AppTreeNode
+  commentId: T:SMACD.AppTree.AppTreeNode
+  parent: SMACD.AppTree
+  name: AppTreeNode
+  nameWithType: AppTreeNode
+  fullName: SMACD.AppTree.AppTreeNode

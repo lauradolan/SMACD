@@ -1,16 +1,17 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
+﻿using Microsoft.Extensions.Logging;
+using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using Synthesys.SDK;
 using Synthesys.SDK.Attributes;
 using Synthesys.SDK.Capabilities;
 using Synthesys.SDK.Extensions;
 using Synthesys.Tasks;
 using Synthesys.Tasks.Attributes;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Synthesys.Plugins.Dummy
 {
@@ -46,7 +47,7 @@ namespace Synthesys.Plugins.Dummy
         ///     identified as an HTTP server, that Target will be referenced from both this property and the "Service" property
         ///     below.
         /// </summary>
-        public HttpServicePortArtifact HttpService { get; set; }
+        public HttpServiceNode HttpService { get; set; }
 
         /// <summary>
         ///     Service acted upon by the ActionExtension, addressed via its port
@@ -55,7 +56,7 @@ namespace Synthesys.Plugins.Dummy
         ///     If a more concrete implementation is not matched (for example, because the service was not fingerprinted), the
         ///     property with the closest parent Type will be referenced.
         /// </summary>
-        public ServicePortArtifact Service { get; set; }
+        public ServiceNode Service { get; set; }
 
         /// <summary>
         ///     Link to the Task toolbox, which can queue Tasks
@@ -67,7 +68,7 @@ namespace Synthesys.Plugins.Dummy
         ///     This property will only be populated if the ActionExtension is queued with a hostname as a Target. If no compatible
         ///     Targets were found, this will remain null.
         /// </summary>
-        public HostArtifact Host { get; set; }
+        public HostNode Host { get; set; }
 
         public override ExtensionReport Act()
         {
@@ -79,11 +80,11 @@ namespace Synthesys.Plugins.Dummy
             // Using the "Tasks" property with ICanQueueTasks allows the Extension to address the Task Queue
             Logger.LogInformation($"Task queue running with {Tasks.Count} items");
 
-            var sw = new Stopwatch();
+            Stopwatch sw = new Stopwatch();
             sw.Start();
-            var rng = new Random((int) DateTime.Now.Ticks);
-            var v = 0;
-            var g = 0;
+            Random rng = new Random((int)DateTime.Now.Ticks);
+            int v = 0;
+            int g = 0;
             while (v < 50)
             {
                 g++;
@@ -99,17 +100,17 @@ namespace Synthesys.Plugins.Dummy
                     //   to get a temporary directory where external tools can persist information to disk or read information.
                     // When the object is disposed, the content of the directory will be compressed and saved to the wrapper
                     //   Artifact. When re-using the context at another time, the directory will be re-deployed.
-                    var nativePathArtifact = Host.Attachments.CreateOrLoadNativePath("dummyBasicContainer");
-                    using (var execContainer = nativePathArtifact.GetContext())
+                    NativeDirectoryEvidence nativePathArtifact = Host.Evidence.CreateOrLoadNativePath("dummyBasicContainer");
+                    using (NativeDirectoryContext execContainer = nativePathArtifact.GetContext())
                     {
                         // The temporary directory name is stored in the "Directory" property of the context
                         File.WriteAllText(Path.Combine(execContainer.Directory, "test.dat"), "this is a test file!");
 
-                        // Use "ExecutionWrapper" to run commands whose syntax is identical between OSes
+                        // Use "NativeHostCommand" to run commands whose syntax is identical between OSes
                         // - This provides 2 events, StandardOutputDataReceived and StandardErrorDataReceived, which also link back to the
                         //   "owner" Task that spawned this external program (to correlate issues in logs)
-                        var execFail = new ExecutionWrapper("echo This is a test of a syntax error &&");
-                        var execSuccess = new ExecutionWrapper("echo This is a test of a valid output");
+                        var execFail = new SDK.HostCommands.NativeHostCommand("echo", "This is a test of a syntax error", "&&");
+                        var execSuccess = new SDK.HostCommands.NativeHostCommand("echo", "This is a test of a valid output");
                         execFail.StandardErrorDataReceived += (sender, ownerTaskId, data) =>
                         {
                             // When logging information from inside an ExecutionWrapper callback, use Logger.TaskLog*
@@ -126,6 +127,17 @@ namespace Synthesys.Plugins.Dummy
                         Task.WhenAll(
                             execFail.Start(),
                             execSuccess.Start()).Wait();
+
+                        // You can do the same thing with DockerHostCommand if a container is available; just specify the container image!
+                        if (SDK.HostCommands.DockerHostCommand.SupportsDocker())
+                        {
+                            var dockerCommmand = new SDK.HostCommands.DockerHostCommand("alpine:latest", "echo", "Hello from inside Docker!");
+                            dockerCommmand.StandardErrorDataReceived += (sender, ownerTaskId, data) => Logger.TaskLogCritical(ownerTaskId, "RECEIVED DOCKER ERROR: {1}", data.Trim());
+                            dockerCommmand.StandardOutputDataReceived += (sender, ownerTaskId, data) => Logger.TaskLogInformation(ownerTaskId, "RECEIVED DOCKER DATA: {1}", data.Trim());
+                            Task.WhenAll(dockerCommmand.Start()).Wait();
+                        }
+                        else
+                            Logger.LogInformation("Docker not running (or accessible) on platform, skipping Docker demo.");
                     }
                 }
             }
@@ -135,7 +147,7 @@ namespace Synthesys.Plugins.Dummy
 
             // Artifacts can also be some sort of object (which is serialized by the framework)
             // Workspace.Artifacts.Save("dummyData", new { str = "arbitrary!", num = 42 });
-            Host.Attachments.Save("dummyResult", new DummyDataClass
+            Host.Evidence.Save("dummyResult", new DummyDataClass
             {
                 DummyString = "I'm a dummy string!",
                 DummyDouble = 42.42
@@ -143,13 +155,15 @@ namespace Synthesys.Plugins.Dummy
 
             // Returning an ExtensionReport with Attachments allows the Action to provide more information
             //   to the user (than the Artifact tree) during later review
-            var random = new Random((int) DateTime.Now.Ticks);
-            var randomData = new byte[32];
+            Random random = new Random((int)DateTime.Now.Ticks);
+            byte[] randomData = new byte[32];
             random.NextBytes(randomData);
 
-            var report = new ExtensionReport();
-            report.ReportSummaryName = typeof(DummyReportSummary).FullName;
-            report.ReportViewName = typeof(DummyReportView).FullName;
+            ExtensionReport report = new ExtensionReport
+            {
+                ReportSummaryName = typeof(DummyReportSummary).FullName,
+                ReportViewName = typeof(DummyReportView).FullName
+            };
             report.SetExtensionSpecificReport(new DummyDataClass()
             {
                 DummyDouble = random.NextDouble(),

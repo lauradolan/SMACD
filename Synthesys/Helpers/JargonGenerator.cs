@@ -18,7 +18,7 @@ namespace Synthesys.Helpers
 
         private static readonly string[] ADJECTIVES =
         {
-            "24/365", "24/7", "B2B", "B2C", "back-end", "best-of-breed", "bleeding-edge", "bricks-and-clicks",
+            "24-365", "24-7", "B2B", "B2C", "back-end", "best-of-breed", "bleeding-edge", "bricks-and-clicks",
             "clicks-and-mortar", "collaborative", "compelling", "cross-platform", "cross-media", "customized",
             "cutting-edge", "distributed", "dot-com", "dynamic", "e-business", "efficient", "end-to-end", "enterprise",
             "extensible", "frictionless", "front-end", "global", "granular", "holistic", "impactful", "innovative",
@@ -41,7 +41,7 @@ namespace Synthesys.Helpers
 
         internal static string GenerateVerbAdjNounJargon(bool capitalizeFirstLetter = true)
         {
-            var str = new Faker().PickRandom(VERBS) + " " +
+            string str = new Faker().PickRandom(VERBS) + " " +
                       new Faker().PickRandom(ADJECTIVES) + " " +
                       new Faker().PickRandom(NOUNS);
             return capitalizeFirstLetter ? FixCase(str) : str;
@@ -49,23 +49,23 @@ namespace Synthesys.Helpers
 
         internal static string GenerateAdjNounJargon(bool capitalizeFirstLetter = true)
         {
-            var str = new Faker().PickRandom(ADJECTIVES) + " " +
+            string str = new Faker().PickRandom(ADJECTIVES) + " " +
                       new Faker().PickRandom(NOUNS);
             return capitalizeFirstLetter ? FixCase(str) : str;
         }
 
         internal static string GenerateMultiPartJargon()
         {
-            var partA = GenerateVerbAdjNounJargon();
-            var i = new Faker().Random.Number(2);
+            string partA = GenerateVerbAdjNounJargon();
+            int i = new Faker().Random.Number(2);
             switch (i)
             {
                 case 0: // <a> with <b>
-                    string[] wordsLikeWith = {"with", "using"};
+                    string[] wordsLikeWith = { "with", "using" };
                     return $"{partA} {new Faker().PickRandom(wordsLikeWith)} {GenerateAdjNounJargon(false)}";
 
                 case 1: // <a> to <b>
-                    string[] wordsLikeAnd = {"and", "to"};
+                    string[] wordsLikeAnd = { "and", "to" };
                     return $"{partA} {new Faker().PickRandom(wordsLikeAnd)} {GenerateVerbAdjNounJargon(false)}";
 
                 default: // <a>, <b>, and <c>
@@ -75,9 +75,11 @@ namespace Synthesys.Helpers
 
         private static string FixCase(string str)
         {
-            var sentences = str.Split(". ");
-            for (var i = 0; i < sentences.Length; i++)
+            string[] sentences = str.Split(". ");
+            for (int i = 0; i < sentences.Length; i++)
+            {
                 sentences[i] = char.ToUpper(sentences[i].Trim()[0]) + sentences[i].Trim().Substring(1);
+            }
 
             return string.Join(". ", sentences);
         }

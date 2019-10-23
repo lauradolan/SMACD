@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  commentId: T:Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  id: IUnderstandServiceMaps
+  parent: Synthesys.SDK.Capabilities
+  children:
+  - Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+  langs:
+  - csharp
+  - vb
+  name: IUnderstandServiceMaps
+  nameWithType: IUnderstandServiceMaps
+  fullName: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  type: Interface
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IUnderstandServiceMaps.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IUnderstandServiceMaps
+    path: ../Synthesys.SDK/Capabilities/IUnderstandServiceMaps.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nIUnderstandServiceMaps indicates that the Extension needs access to the Service Map in use\n"
+  example: []
+  syntax:
+    content: public interface IUnderstandServiceMaps
+    content.vb: Public Interface IUnderstandServiceMaps
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+  commentId: P:Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+  id: ServiceMap
+  parent: Synthesys.SDK.Capabilities.IUnderstandServiceMaps
+  langs:
+  - csharp
+  - vb
+  name: ServiceMap
+  nameWithType: IUnderstandServiceMaps.ServiceMap
+  fullName: Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+  type: Property
+  source:
+    remote:
+      path: Synthesys.SDK/Capabilities/IUnderstandServiceMaps.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ServiceMap
+    path: ../Synthesys.SDK/Capabilities/IUnderstandServiceMaps.cs
+    startLine: 12
+  assemblies:
+  - Synthesys.SDK
+  namespace: Synthesys.SDK.Capabilities
+  summary: "\nFramework-populated reference to the Service Map\n"
+  example: []
+  syntax:
+    content: ServiceMapFile ServiceMap { get; set; }
+    parameters: []
+    return:
+      type: SMACD.Data.ServiceMapFile
+    content.vb: Property ServiceMap As ServiceMapFile
+  overload: Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Synthesys.SDK.Capabilities
+  commentId: N:Synthesys.SDK.Capabilities
+  name: Synthesys.SDK.Capabilities
+  nameWithType: Synthesys.SDK.Capabilities
+  fullName: Synthesys.SDK.Capabilities
+- uid: Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap*
+  commentId: Overload:Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+  name: ServiceMap
+  nameWithType: IUnderstandServiceMaps.ServiceMap
+  fullName: Synthesys.SDK.Capabilities.IUnderstandServiceMaps.ServiceMap
+- uid: SMACD.Data.ServiceMapFile
+  commentId: T:SMACD.Data.ServiceMapFile
+  parent: SMACD.Data
+  name: ServiceMapFile
+  nameWithType: ServiceMapFile
+  fullName: SMACD.Data.ServiceMapFile
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data

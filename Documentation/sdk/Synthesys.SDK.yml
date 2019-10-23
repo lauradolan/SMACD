@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  id: Synthesys.SDK
+  children:
+  - Synthesys.SDK.ExtensionReport
+  - Synthesys.SDK.Global
+  - Synthesys.SDK.LogExtensions
+  - Synthesys.SDK.UrlHelper
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK
+  type: Namespace
+  assemblies:
+  - Synthesys.SDK
+references:
+- uid: Synthesys.SDK.ExtensionReport
+  commentId: T:Synthesys.SDK.ExtensionReport
+  parent: Synthesys.SDK
+  name: ExtensionReport
+  nameWithType: ExtensionReport
+  fullName: Synthesys.SDK.ExtensionReport
+- uid: Synthesys.SDK.Global
+  commentId: T:Synthesys.SDK.Global
+  name: Global
+  nameWithType: Global
+  fullName: Synthesys.SDK.Global
+- uid: Synthesys.SDK.LogExtensions
+  commentId: T:Synthesys.SDK.LogExtensions
+  name: LogExtensions
+  nameWithType: LogExtensions
+  fullName: Synthesys.SDK.LogExtensions
+- uid: Synthesys.SDK.UrlHelper
+  commentId: T:Synthesys.SDK.UrlHelper
+  name: UrlHelper
+  nameWithType: UrlHelper
+  fullName: Synthesys.SDK.UrlHelper
+- uid: Synthesys.SDK
+  commentId: N:Synthesys.SDK
+  name: Synthesys.SDK
+  nameWithType: Synthesys.SDK
+  fullName: Synthesys.SDK

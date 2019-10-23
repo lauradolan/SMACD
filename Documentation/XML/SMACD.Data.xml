@@ -62,6 +62,27 @@
                 Target to be acted upon by the Action
             </summary>
         </member>
+        <member name="M:SMACD.Data.ActionPointerModel.ToString">
+            <summary>
+                String representation of Action with configuration
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SMACD.Data.EnvironmentSettings">
+            <summary>
+                Configuration options for applications using this Service Map
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.EnvironmentSettings.Whitelist">
+            <summary>
+                Extensions which will be allowed to execute when running this Service Map
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.EnvironmentSettings.Blacklist">
+            <summary>
+                Extensions which are not allowed to execute when running this Service Map
+            </summary>
+        </member>
         <member name="T:SMACD.Data.FeatureModel">
             <summary>
                 Represents a Feature: A group of Use Cases that, together, accomplish a larger functional task
@@ -100,6 +121,11 @@
                 associated with this Feature
             </summary>
         </member>
+        <member name="T:SMACD.Data.IBusinessEntityModel">
+            <summary>
+                Represents a business entity in the system, which tracks ownership and risk from a project management perspective
+            </summary>
+        </member>
         <member name="P:SMACD.Data.IBusinessEntityModel.Name">
             <summary>
                 Name of business entity
@@ -126,6 +152,11 @@
                 Relative level of technical risk for this entity in comparison to other entities in this generation
                 A high technical risk may indicate that there is a low degree of complexity to technically attack the targets
                 associated with this entity
+            </summary>
+        </member>
+        <member name="T:SMACD.Data.IModel">
+            <summary>
+                Common interface to show a data type as a data Model for the system
             </summary>
         </member>
         <member name="T:SMACD.Data.OwnerPointerModel">
@@ -190,7 +221,7 @@
         </member>
         <member name="T:SMACD.Data.ServiceMapFile">
             <summary>
-                Service Map - Stores both Features and Resources for an application's test
+                Service Map - Stores Features and Resources for an application's test, as well as environment settings
             </summary>
         </member>
         <member name="P:SMACD.Data.ServiceMapFile.Created">
@@ -201,6 +232,11 @@
         <member name="P:SMACD.Data.ServiceMapFile.Updated">
             <summary>
                 When this file was last updated
+            </summary>
+        </member>
+        <member name="P:SMACD.Data.ServiceMapFile.EnvironmentSettings">
+            <summary>
+                Configuration options for applications using this Service Map
             </summary>
         </member>
         <member name="P:SMACD.Data.ServiceMapFile.Features">
@@ -224,7 +260,7 @@
             <summary>
                 Deserialize a Service Map from a YAML string
             </summary>
-            <param name="file">Service Map YAML</param>
+            <param name="yaml">Service Map YAML</param>
             <returns></returns>
         </member>
         <member name="M:SMACD.Data.ServiceMapFile.PutServiceMap(SMACD.Data.ServiceMapFile,System.String)">
@@ -233,6 +269,13 @@
             </summary>
             <param name="serviceMap">Service Map to serialize</param>
             <param name="file">File to serialize Service Map to</param>
+            <returns></returns>
+        </member>
+        <member name="M:SMACD.Data.ServiceMapFile.PutServiceMapToYaml(SMACD.Data.ServiceMapFile)">
+            <summary>
+                Serialize a Service Map to a YAML string
+            </summary>
+            <param name="serviceMap">Service Map to serialize</param>
             <returns></returns>
         </member>
         <member name="T:SMACD.Data.TargetModel">

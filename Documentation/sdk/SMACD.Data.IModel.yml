@@ -1,0 +1,42 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.Data.IModel
+  commentId: T:SMACD.Data.IModel
+  id: IModel
+  parent: SMACD.Data
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IModel
+  nameWithType: IModel
+  fullName: SMACD.Data.IModel
+  type: Interface
+  source:
+    remote:
+      path: SMACD.Data/IModel.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: IModel
+    path: ../SMACD.Data/IModel.cs
+    startLine: 5
+  assemblies:
+  - SMACD.Data
+  namespace: SMACD.Data
+  summary: "\nCommon interface to show a data type as a data Model for the system\n"
+  example: []
+  syntax:
+    content: public interface IModel
+    content.vb: Public Interface IModel
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+references:
+- uid: SMACD.Data
+  commentId: N:SMACD.Data
+  name: SMACD.Data
+  nameWithType: SMACD.Data
+  fullName: SMACD.Data

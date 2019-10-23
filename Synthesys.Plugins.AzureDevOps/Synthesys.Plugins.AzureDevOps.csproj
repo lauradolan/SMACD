@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DocumentationFile>..\Documentation\XML\Synthesys.Plugins.AzureDevOps.XML</DocumentationFile>
     <Authors>Anthony Turner</Authors>
     <Product>Azure DevOps Plugin for Synthesys</Product>
     <Description>Integrates some data functionality from Azure DevOps with Synthesys scans</Description>
@@ -12,10 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NUnitParser.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="NUnitParser.cs" />
   </ItemGroup>
   
   <ItemGroup>
@@ -25,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMACD.Artifacts\SMACD.Artifacts.csproj" />
     <ProjectReference Include="..\Synthesys.SDK\Synthesys.SDK.csproj" />
   </ItemGroup>
 

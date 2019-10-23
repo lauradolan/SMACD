@@ -1,5 +1,6 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 using Synthesys.SDK;
+using Synthesys.SDK.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -34,10 +35,24 @@ namespace Synthesys.Tasks
         event EventHandler<RuntimeTaskDescriptor> TaskStarted;
 
         /// <summary>
-        ///     Enqueue a new Task
+        ///     Enqueue an ActionExtension based on its Descriptor
         /// </summary>
-        /// <param name="descriptor">Task Descriptor for new Task</param>
-        /// <returns></returns>
-        Task<List<ExtensionReport>> Enqueue(string actionIdentifier, Artifact rootArtifact, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
+        /// <param name="extensionIdentifier">Extension identifier</param>
+        /// <param name="appTreeNode">Root app tree node for extension</param>
+        /// <param name="options">Action options</param>
+        /// <param name="serviceMapItemPtr">Pointer to element in Service Map which queued the Extension</param>
+        /// <returns>Task which resolves to the Action-Specific Report</returns>
+        Task<ExtensionReport> Enqueue(string extensionIdentifier, AppTreeNode appTreeNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
+
+        /// <summary>
+        ///     Enqueue a ReactionExtension based on its Descriptor
+        /// </summary>
+        /// <param name="trigger">Trigger creating the Reaction</param>
+        /// <param name="extensionIdentifier">ReactionExtension identifier</param>
+        /// <param name="rootNode">Root of AppTree</param>
+        /// <param name="options">Reaction options</param>
+        /// <param name="serviceMapItemPtr">Pointer to element in Service Map which queued the Extension</param>
+        /// <returns>Task which resolves to the Action-Specific Report</returns>
+        Task<ExtensionReport> Enqueue(TriggerDescriptor trigger, string extensionIdentifier, RootNode rootNode, Dictionary<string, string> options, ProjectPointer serviceMapItemPtr = null);
     }
 }

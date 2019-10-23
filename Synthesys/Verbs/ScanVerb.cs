@@ -1,35 +1,41 @@
-﻿using System;
+﻿using CommandLine;
+using Microsoft.Extensions.Logging;
+using SMACD.AppTree;
+using SMACD.Data;
+using SMACD.Data.Resources;
+using Synthesys.SDK;
+using Synthesys.Tasks;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CommandLine;
-using Microsoft.Extensions.Logging;
-using SMACD.Artifacts;
-using SMACD.Data;
-using SMACD.Data.Resources;
-using Synthesys.SDK;
-using Synthesys.Tasks;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace Synthesys.Verbs
 {
     [Verb("scan", HelpText = "Run scan using plugins specified in a Service Map")]
     public class ScanVerb : VerbBase
     {
-        private bool workingDirectoryProvided;
 
         [Option('s', "servicemap", HelpText = "Location of the Service Map", Required = true)]
-        public string ServiceMap { get; set; }
+        public string ServiceMapFile { get; set; }
 
-        [Option('d', "workingdirectory", HelpText = "Working directory of Workspace")]
-        public string WorkingDirectory { get; set; }
+        [Option('n', "session", HelpText = "Location of Session file to generate. If it exists, this scan will be appended to the existing Session, otherwise it will be created")]
+        public string SessionFile { get; set; }
 
         [Option('t', "threshold", HelpText =
             "Threshold of final score out of 100 at which to fail (return -1 exit code)")]
         public int? Threshold { get; set; }
+
+        [Option('f', "feature", HelpText = "Limit scan to a single feature")]
+        public string Feature { get; set; }
+
+        [Option('u', "usecase", HelpText = "Limit scan to a single use case (as <feature>//<usecase>)")]
+        public string UseCase { get; set; }
+
+        [Option('k', "limitknown", HelpText = "Limit scan to only nodes populated from the Resources section of the Service Map")]
+        public bool LimitKnown { get; set; }
 
         private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
@@ -41,90 +47,161 @@ namespace Synthesys.Verbs
                 "Synthesys.Plugins.*.dll");
 
             // --------------------------------------------------------------------------------------------
-            if (string.IsNullOrEmpty(WorkingDirectory))
-            {
-                workingDirectoryProvided = true;
-                WorkingDirectory = Path.Combine(Path.GetTempPath(), "wks_workingdir",
-                    DateTime.Now.ToUniversalTime().ToString("u").Replace(" ", string.Empty).Replace(':', '-'));
-            }
 
             Session session = null;
-            if (File.Exists(Path.Combine(WorkingDirectory, "session")))
+            if (!File.Exists(ServiceMapFile))
             {
-                Logger.LogDebug("Session file exists, opening", WorkingDirectory);
-                using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.Open,
-                    FileAccess.Read))
+                Logger.LogCritical("Service map does not exist at {0}", ServiceMapFile);
+                Environment.Exit(-2);
+            }
+
+            if (!string.IsNullOrEmpty(SessionFile) && File.Exists(SessionFile))
+            {
+                Logger.LogDebug("Session file exists, opening {0}", SessionFile);
+                using (FileStream stream = new FileStream(SessionFile, FileMode.Open, FileAccess.Read))
                 {
                     session = Session.Import(stream);
                 }
             }
             else
             {
-                Logger.LogDebug("Session file not found in Working Directory {0}, creating new Session",
-                    WorkingDirectory);
-                if (!Directory.Exists(WorkingDirectory))
-                    Directory.CreateDirectory(WorkingDirectory);
-
-                session = new Session();
-                session.ServiceMapYaml = File.ReadAllText(ServiceMap);
+                SessionFile = Path.GetTempPath() + "synthesys_" + Helpers.JargonGenerator.GenerateVerbAdjNounJargon(false).Replace(' ', '-');
+                Logger.LogDebug("Creating new Session at {0}", SessionFile);
+                session = new Session
+                {
+                    ServiceMapYaml = File.ReadAllText(ServiceMapFile)
+                };
             }
+
+            // Don't fire events during data load
+            session.Artifacts.SuppressEventFiring = true;
 
             // Import Service Map
-            var serviceMap = ServiceMapFile.GetServiceMap(ServiceMap);
+            ServiceMapFile serviceMap = SMACD.Data.ServiceMapFile.GetServiceMap(ServiceMapFile);
 
             // Register Targets from Resources
-            foreach (var resourceModel in serviceMap.Targets)
-                session.RegisterTarget(resourceModel);
-
-            var generatedTasks = new List<Task<List<ExtensionReport>>>();
-            foreach (var feature in serviceMap.Features)
-            foreach (var useCase in feature.UseCases)
-            foreach (var abuseCase in useCase.AbuseCases)
-            foreach (var pluginPointer in abuseCase.Actions)
+            foreach (TargetModel resourceModel in serviceMap.Targets)
             {
-                var target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
-
-                Artifact artifact = null;
-                if (target is HttpTargetModel)
-                {
-                    var uri = new Uri(((HttpTargetModel) target).Url);
-                    artifact = session.Artifacts[uri.Host][uri.Port];
-                }
-                else if (target is SocketPortTargetModel)
-                {
-                    artifact = session.Artifacts
-                            [((SocketPortTargetModel) target).Hostname]
-                        [((SocketPortTargetModel) target).Port];
-                }
-
-                generatedTasks.Add(session.Tasks.Enqueue(pluginPointer.Action,
-                    artifact,
-                    pluginPointer.Options,
-                    new ProjectPointer
-                    {
-                        Feature = feature,
-                        UseCase = useCase,
-                        AbuseCase = abuseCase
-                    }
-                ));
+                session.RegisterTarget(resourceModel);
             }
 
-            while (session.Tasks.IsRunning) Thread.Sleep(500);
+            // Restore Artifact event firing
+            session.Artifacts.SuppressEventFiring = false;
 
-            var results = generatedTasks.SelectMany(t => t.Result.Select(r => r.FinalizeReport()));
+            // Apply Service Map to TaskToolbox to be included in some Extensions
+            session.Tasks.ServiceMap = serviceMap;
+
+            List<Task<ExtensionReport>> generatedTasks = new List<Task<ExtensionReport>>();
+
+            // Queue all tasks if constraints are not specified
+            if (string.IsNullOrEmpty(Feature) && string.IsNullOrEmpty(UseCase))
+            {
+                foreach (FeatureModel feature in serviceMap.Features)
+                {
+                    foreach (UseCaseModel useCase in feature.UseCases)
+                    {
+                        foreach (AbuseCaseModel abuseCase in useCase.AbuseCases)
+                        {
+                            var projectPtr = new ProjectPointer()
+                            {
+                                Feature = feature,
+                                UseCase = useCase,
+                                AbuseCase = abuseCase
+                            };
+                            foreach (ActionPointerModel pluginPointer in abuseCase.Actions)
+                            {
+                                generatedTasks.Add(QueueTasksFrom(session, serviceMap, projectPtr, pluginPointer));
+                            }
+                        }
+                    }
+                }
+            }
+            else if (!string.IsNullOrEmpty(Feature)) // Queue all tasks under a certain feature
+            {
+                var targetFeature = serviceMap.Features.FirstOrDefault(f => f.Name.Equals(Feature, StringComparison.OrdinalIgnoreCase));
+                if (targetFeature == null)
+                {
+                    Logger.LogCritical("Feature '{0}' not found.", Feature);
+                    Environment.Exit(-3);
+                }
+
+                Logger.LogInformation("Queueing by feature '{0}'", targetFeature.Name);
+                foreach (var useCase in targetFeature.UseCases)
+                {
+                    foreach (var abuseCase in useCase.AbuseCases)
+                    {
+                        var projectPtr = new ProjectPointer()
+                        {
+                            Feature = targetFeature,
+                            UseCase = useCase,
+                            AbuseCase = abuseCase
+                        };
+                        foreach (ActionPointerModel pluginPointer in abuseCase.Actions)
+                        {
+                            generatedTasks.Add(QueueTasksFrom(session, serviceMap, projectPtr, pluginPointer));
+                        }
+                    }
+                }
+            }
+            else if (!string.IsNullOrEmpty(UseCase)) // Queue all tasks under a certain feature//usecase
+            {
+                if (!UseCase.Contains("//"))
+                {
+                    Logger.LogCritical("UseCase must be specified in the format '{0}//{1}'", "<feature>", "<usecase>");
+                    Environment.Exit(-4);
+                }
+                var targetFeature = serviceMap.Features.FirstOrDefault(f => f.Name.Equals(UseCase.Split("//")[0], StringComparison.OrdinalIgnoreCase));
+                if (targetFeature == null)
+                {
+                    Logger.LogCritical("Feature '{0}' not found.", UseCase.Split("//")[0]);
+                    Environment.Exit(-5);
+                }
+                var targetUseCase = targetFeature.UseCases.FirstOrDefault(u => u.Name.Equals(UseCase.Split("//")[1], StringComparison.OrdinalIgnoreCase));
+                if (targetUseCase == null)
+                {
+                    Logger.LogCritical("Use Case '{0}' not found.", UseCase.Split("//")[1]);
+                    Environment.Exit(-6);
+                }
+
+                Logger.LogInformation("Queueing by use case '{0} under feature '{1}'", targetUseCase.Name, targetFeature.Name);
+                foreach (var abuseCase in targetUseCase.AbuseCases)
+                {
+                    var projectPtr = new ProjectPointer()
+                    {
+                        Feature = targetFeature,
+                        UseCase = targetUseCase,
+                        AbuseCase = abuseCase
+                    };
+                    foreach (ActionPointerModel pluginPointer in abuseCase.Actions)
+                    {
+                        generatedTasks.Add(QueueTasksFrom(session, serviceMap, projectPtr, pluginPointer));
+                    }
+                }
+            }
+
+            if (LimitKnown)
+            {
+                Logger.LogWarning("Running in constrained mode -- Extensions will not add additional nodes to AppTree");
+                session.Artifacts.LockTreeNodes = true;
+            }
+
+            while (session.Tasks.IsRunning)
+            {
+                Thread.Sleep(500);
+            }
+
+            IEnumerable<ExtensionReport> results = generatedTasks.Select(t => t.Result);
             session.Reports.AddRange(results);
 
-            using (var stream = new FileStream(Path.Combine(WorkingDirectory, "session"), FileMode.OpenOrCreate,
+            using (FileStream stream = new FileStream(SessionFile, FileMode.OpenOrCreate,
                 FileAccess.Write))
             {
                 session.Export(stream);
             }
 
-            if (!Silent || workingDirectoryProvided)
-                Logger.LogInformation("Report serialized to {0}", Path.Combine(WorkingDirectory, "session"));
-
             if (!Silent)
             {
+                Logger.LogInformation("Report serialized to {0}", SessionFile);
                 Console.WriteLine("Average score: {0}", results.Average(r => r.AdjustedScore));
                 Console.WriteLine("Summed score: {0}", results.Sum(r => r.AdjustedScore));
                 Console.WriteLine("Median score: {0}",
@@ -151,24 +228,28 @@ namespace Synthesys.Verbs
             return Task.FromResult(0);
         }
 
-        private static string Serialize<T>(T obj)
+        private Task<ExtensionReport> QueueTasksFrom(Session session, ServiceMapFile serviceMap, ProjectPointer projectPointer, ActionPointerModel pluginPointer)
         {
-            return new SerializerBuilder()
-                .WithNamingConvention(new CamelCaseNamingConvention())
-                .WithTagMapping("!http", typeof(HttpTargetModel))
-                .WithTagMapping("!raw", typeof(SocketPortTargetModel))
-                .Build()
-                .Serialize(obj);
-        }
+            TargetModel target = serviceMap.Targets.FirstOrDefault(t => t.TargetId == pluginPointer.Target);
 
-        private static T Deserialize<T>(string yaml)
-        {
-            return new DeserializerBuilder()
-                .WithNamingConvention(new CamelCaseNamingConvention())
-                .WithTagMapping("!http", typeof(HttpTargetModel))
-                .WithTagMapping("!raw", typeof(SocketPortTargetModel))
-                .Build()
-                .Deserialize<T>(yaml);
+            AppTreeNode artifact = null;
+            if (target is HttpTargetModel)
+            {
+                Uri uri = new Uri(((HttpTargetModel)target).Url);
+                artifact = session.Artifacts[uri.Host][uri.Port];
+            }
+            else if (target is SocketPortTargetModel)
+            {
+                artifact = session.Artifacts
+                        [((SocketPortTargetModel)target).Hostname]
+                    [((SocketPortTargetModel)target).Port];
+            }
+
+            return session.Tasks.Enqueue(pluginPointer.Action,
+                artifact,
+                pluginPointer.Options,
+                projectPointer
+            );
         }
     }
 }

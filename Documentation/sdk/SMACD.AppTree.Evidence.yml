@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  id: SMACD.AppTree.Evidence
+  children:
+  - SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder
+  - SMACD.AppTree.Evidence.Evidence
+  - SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  - SMACD.AppTree.Evidence.EvidenceCollection
+  - SMACD.AppTree.Evidence.NativeDirectoryContext
+  - SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  - SMACD.AppTree.Evidence.ObjectEvidence
+  - SMACD.AppTree.Evidence.StringEvidence
+  langs:
+  - csharp
+  - vb
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence
+  type: Namespace
+  assemblies:
+  - SMACD.AppTree
+references:
+- uid: SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder
+  commentId: T:SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder
+  name: AggressiveTypeResolutionBinder
+  nameWithType: AggressiveTypeResolutionBinder
+  fullName: SMACD.AppTree.Evidence.AggressiveTypeResolutionBinder
+- uid: SMACD.AppTree.Evidence.Evidence
+  commentId: T:SMACD.AppTree.Evidence.Evidence
+  parent: SMACD.AppTree.Evidence
+  name: Evidence
+  nameWithType: Evidence
+  fullName: SMACD.AppTree.Evidence.Evidence
+- uid: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  commentId: T:SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+  parent: SMACD.AppTree.Evidence
+  name: Evidence.EvidenceTypes
+  nameWithType: Evidence.EvidenceTypes
+  fullName: SMACD.AppTree.Evidence.Evidence.EvidenceTypes
+- uid: SMACD.AppTree.Evidence.EvidenceCollection
+  commentId: T:SMACD.AppTree.Evidence.EvidenceCollection
+  parent: SMACD.AppTree.Evidence
+  name: EvidenceCollection
+  nameWithType: EvidenceCollection
+  fullName: SMACD.AppTree.Evidence.EvidenceCollection
+- uid: SMACD.AppTree.Evidence.NativeDirectoryContext
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryContext
+  parent: SMACD.AppTree.Evidence
+  name: NativeDirectoryContext
+  nameWithType: NativeDirectoryContext
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryContext
+- uid: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  commentId: T:SMACD.AppTree.Evidence.NativeDirectoryEvidence
+  parent: SMACD.AppTree.Evidence
+  name: NativeDirectoryEvidence
+  nameWithType: NativeDirectoryEvidence
+  fullName: SMACD.AppTree.Evidence.NativeDirectoryEvidence
+- uid: SMACD.AppTree.Evidence.ObjectEvidence
+  commentId: T:SMACD.AppTree.Evidence.ObjectEvidence
+  parent: SMACD.AppTree.Evidence
+  name: ObjectEvidence
+  nameWithType: ObjectEvidence
+  fullName: SMACD.AppTree.Evidence.ObjectEvidence
+- uid: SMACD.AppTree.Evidence.StringEvidence
+  commentId: T:SMACD.AppTree.Evidence.StringEvidence
+  parent: SMACD.AppTree.Evidence
+  name: StringEvidence
+  nameWithType: StringEvidence
+  fullName: SMACD.AppTree.Evidence.StringEvidence
+- uid: SMACD.AppTree.Evidence
+  commentId: N:SMACD.AppTree.Evidence
+  name: SMACD.AppTree.Evidence
+  nameWithType: SMACD.AppTree.Evidence
+  fullName: SMACD.AppTree.Evidence

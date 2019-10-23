@@ -1,7 +1,8 @@
-﻿using System;
+﻿using SMACD.AppTree;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SMACD.Artifacts;
 
 namespace Synthesys.SDK
 {
@@ -17,33 +18,39 @@ namespace Synthesys.SDK
         /// <param name="url">URL to create data from</param>
         /// <param name="method">HTTP request method</param>
         /// <returns>Artifact representing leaf of URL</returns>
-        public static UrlArtifact GeneratePathArtifacts(HttpServicePortArtifact httpService, string url, string method)
+        public static UrlNode GeneratePathArtifacts(HttpServiceNode httpService, string url, string method)
         {
+            if (httpService.Root.LockTreeNodes)
+                return null;
+
             if (!url.StartsWith("http"))
+            {
                 url = "http://" + httpService.Host.Hostname + ":" + httpService.Port + url;
+            }
 
-            var uri = new Uri(url);
+            Uri uri = new Uri(url);
 
-            var scheme = uri.Scheme;
-            var host = uri.Host;
-            var pieces = uri.AbsolutePath.Split('/').Where(e => !string.IsNullOrEmpty(e)).ToList();
-            var queryParameters = HttpUtility.ParseQueryString(uri.Query);
+            string scheme = uri.Scheme;
+            string host = uri.Host;
+            System.Collections.Generic.List<string> pieces = uri.AbsolutePath.Split('/').Where(e => !string.IsNullOrEmpty(e)).ToList();
+            System.Collections.Specialized.NameValueCollection queryParameters = HttpUtility.ParseQueryString(uri.Query);
 
             // Create path through tree based on path pieces
-            var artifact = httpService["/"];
-            foreach (var piece in pieces)
+            UrlNode artifact = httpService["/"];
+            foreach (string piece in pieces)
             {
                 artifact = artifact[piece];
             }
 
             // "artifact" is leaf URL, create request here
-            var request = new UrlRequestArtifact();
+            UrlRequestNode request = new UrlRequestNode(artifact);
 
-            foreach (var key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
+            foreach (string key in queryParameters.AllKeys.Where(k => !string.IsNullOrEmpty(k)))
+            {
                 request.Fields[key] = queryParameters[key];
+            }
 
-            request.Identifiers.Add($"{method.ToUpper()} ({HashCode.Combine(request.Fields, request.Headers)})");
-            artifact.Requests.Add(request);
+            artifact.AddRequest(method, request.Fields, new Dictionary<string, string>());
 
             return artifact;
         }

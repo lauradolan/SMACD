@@ -1,4 +1,4 @@
-﻿using SMACD.Artifacts;
+﻿using SMACD.AppTree;
 
 namespace Synthesys.SDK.Capabilities
 {
@@ -8,8 +8,8 @@ namespace Synthesys.SDK.Capabilities
     public interface IOperateOnHttpService
     {
         /// <summary>
-        ///     Framework-populated reference to the HttpServicePort Artifact
+        ///     Framework-populated reference to the HttpService Node
         /// </summary>
-        HttpServicePortArtifact HttpService { get; set; }
+        HttpServiceNode HttpService { get; set; }
     }
 }

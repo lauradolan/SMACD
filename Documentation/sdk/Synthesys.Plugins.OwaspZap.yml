@@ -1,0 +1,71 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.OwaspZap
+  commentId: N:Synthesys.Plugins.OwaspZap
+  id: Synthesys.Plugins.OwaspZap
+  children:
+  - Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
+  - Synthesys.Plugins.OwaspZap.OwaspZapReportView
+  - Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  - Synthesys.Plugins.OwaspZap.ZapJsonReport
+  - Synthesys.Plugins.OwaspZap.ZapJsonSite
+  langs:
+  - csharp
+  - vb
+  name: Synthesys.Plugins.OwaspZap
+  nameWithType: Synthesys.Plugins.OwaspZap
+  fullName: Synthesys.Plugins.OwaspZap
+  type: Namespace
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+references:
+- uid: Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
+  commentId: T:Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
+  name: OwaspZapScannerAction
+  nameWithType: OwaspZapScannerAction
+  fullName: Synthesys.Plugins.OwaspZap.OwaspZapScannerAction
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonReport
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonReport
+  parent: Synthesys.Plugins.OwaspZap
+  name: ZapJsonReport
+  nameWithType: ZapJsonReport
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonReport
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonSite
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonSite
+  name: ZapJsonSite
+  nameWithType: ZapJsonSite
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonSite
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  name: ZapJsonAlertWithInstances
+  nameWithType: ZapJsonAlertWithInstances
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  parent: Synthesys.Plugins.OwaspZap
+  name: ZapJsonAlert
+  nameWithType: ZapJsonAlert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+  name: ZapJsonAlertInstance
+  nameWithType: ZapJsonAlertInstance
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+- uid: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
+  commentId: T:Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
+  name: OwaspZapReportSummary
+  nameWithType: OwaspZapReportSummary
+  fullName: Synthesys.Plugins.OwaspZap.OwaspZapReportSummary
+- uid: Synthesys.Plugins.OwaspZap.OwaspZapReportView
+  commentId: T:Synthesys.Plugins.OwaspZap.OwaspZapReportView
+  name: OwaspZapReportView
+  nameWithType: OwaspZapReportView
+  fullName: Synthesys.Plugins.OwaspZap.OwaspZapReportView
+- uid: Synthesys.Plugins.OwaspZap
+  commentId: N:Synthesys.Plugins.OwaspZap
+  name: Synthesys.Plugins.OwaspZap
+  nameWithType: Synthesys.Plugins.OwaspZap
+  fullName: Synthesys.Plugins.OwaspZap

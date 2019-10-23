@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Synthesys.SDK.Attributes;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +12,9 @@ namespace Synthesys.SDK.Extensions
     /// </summary>
     public abstract class Extension
     {
+        /// <summary>
+        ///     Extension logger
+        /// </summary>
         protected ILogger Logger { get; private set; }
 
         /// <summary>

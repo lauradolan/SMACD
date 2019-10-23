@@ -1,0 +1,554 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.Nikto.NiktoReport
+  commentId: T:Synthesys.Plugins.Nikto.NiktoReport
+  id: NiktoReport
+  parent: Synthesys.Plugins.Nikto
+  children:
+  - Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+  - Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+  - Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+  - Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+  - Synthesys.Plugins.Nikto.NiktoReport.SiteName
+  langs:
+  - csharp
+  - vb
+  name: NiktoReport
+  nameWithType: NiktoReport
+  fullName: Synthesys.Plugins.Nikto.NiktoReport
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NiktoReport
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 2
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public class NiktoReport
+    content.vb: Public Class NiktoReport
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+  commentId: P:Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+  id: NiktoVersion
+  parent: Synthesys.Plugins.Nikto.NiktoReport
+  langs:
+  - csharp
+  - vb
+  name: NiktoVersion
+  nameWithType: NiktoReport.NiktoVersion
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: NiktoVersion
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 4
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public string NiktoVersion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NiktoVersion As String
+  overload: Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+  commentId: P:Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+  id: ScanStart
+  parent: Synthesys.Plugins.Nikto.NiktoReport
+  langs:
+  - csharp
+  - vb
+  name: ScanStart
+  nameWithType: NiktoReport.ScanStart
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ScanStart
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 5
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public string ScanStart { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ScanStart As String
+  overload: Synthesys.Plugins.Nikto.NiktoReport.ScanStart*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+  commentId: P:Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+  id: ScanEnd
+  parent: Synthesys.Plugins.Nikto.NiktoReport
+  langs:
+  - csharp
+  - vb
+  name: ScanEnd
+  nameWithType: NiktoReport.ScanEnd
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ScanEnd
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 6
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public string ScanEnd { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ScanEnd As String
+  overload: Synthesys.Plugins.Nikto.NiktoReport.ScanEnd*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+  commentId: P:Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+  id: ServerBanner
+  parent: Synthesys.Plugins.Nikto.NiktoReport
+  langs:
+  - csharp
+  - vb
+  name: ServerBanner
+  nameWithType: NiktoReport.ServerBanner
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ServerBanner
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 7
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public string ServerBanner { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ServerBanner As String
+  overload: Synthesys.Plugins.Nikto.NiktoReport.ServerBanner*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Synthesys.Plugins.Nikto.NiktoReport.SiteName
+  commentId: P:Synthesys.Plugins.Nikto.NiktoReport.SiteName
+  id: SiteName
+  parent: Synthesys.Plugins.Nikto.NiktoReport
+  langs:
+  - csharp
+  - vb
+  name: SiteName
+  nameWithType: NiktoReport.SiteName
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.SiteName
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.Nikto/NiktoReport.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: SiteName
+    path: ../Synthesys.Plugins.Nikto/NiktoReport.cs
+    startLine: 8
+  assemblies:
+  - Synthesys.Plugins.Nikto
+  namespace: Synthesys.Plugins.Nikto
+  syntax:
+    content: public string SiteName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SiteName As String
+  overload: Synthesys.Plugins.Nikto.NiktoReport.SiteName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.Nikto
+  commentId: N:Synthesys.Plugins.Nikto
+  name: Synthesys.Plugins.Nikto
+  nameWithType: Synthesys.Plugins.Nikto
+  fullName: Synthesys.Plugins.Nikto
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion*
+  commentId: Overload:Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+  name: NiktoVersion
+  nameWithType: NiktoReport.NiktoVersion
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.NiktoVersion
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ScanStart*
+  commentId: Overload:Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+  name: ScanStart
+  nameWithType: NiktoReport.ScanStart
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ScanStart
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ScanEnd*
+  commentId: Overload:Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+  name: ScanEnd
+  nameWithType: NiktoReport.ScanEnd
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ScanEnd
+- uid: Synthesys.Plugins.Nikto.NiktoReport.ServerBanner*
+  commentId: Overload:Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+  name: ServerBanner
+  nameWithType: NiktoReport.ServerBanner
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.ServerBanner
+- uid: Synthesys.Plugins.Nikto.NiktoReport.SiteName*
+  commentId: Overload:Synthesys.Plugins.Nikto.NiktoReport.SiteName
+  name: SiteName
+  nameWithType: NiktoReport.SiteName
+  fullName: Synthesys.Plugins.Nikto.NiktoReport.SiteName

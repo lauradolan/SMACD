@@ -1,0 +1,580 @@
+### YamlMime:ManagedReference
+items:
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  id: ZapJsonAlertWithInstances
+  parent: Synthesys.Plugins.OwaspZap
+  children:
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+  langs:
+  - csharp
+  - vb
+  name: ZapJsonAlertWithInstances
+  nameWithType: ZapJsonAlertWithInstances
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  type: Class
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: ZapJsonAlertWithInstances
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 45
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  syntax:
+    content: 'public class ZapJsonAlertWithInstances : ZapJsonAlert'
+    content.vb: >-
+      Public Class ZapJsonAlertWithInstances
+
+          Inherits ZapJsonAlert
+  inheritance:
+  - System.Object
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  inheritedMembers:
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  - Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+  id: Instances
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances
+  langs:
+  - csharp
+  - vb
+  name: Instances
+  nameWithType: ZapJsonAlertWithInstances.Instances
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+  type: Property
+  source:
+    remote:
+      path: Synthesys.Plugins.OwaspZap/ZapJson.cs
+      branch: reactions
+      repo: https://github.com/anthturner/SMACD.git
+    id: Instances
+    path: ../Synthesys.Plugins.OwaspZap/ZapJson.cs
+    startLine: 50
+  assemblies:
+  - Synthesys.Plugins.OwaspZap
+  namespace: Synthesys.Plugins.OwaspZap
+  summary: "\nInstances of the alert\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ZapJsonAlertInstance> Instances { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance}
+    content.vb: Public Property Instances As IEnumerable(Of ZapJsonAlertInstance)
+  overload: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Synthesys.Plugins.OwaspZap
+  commentId: N:Synthesys.Plugins.OwaspZap
+  name: Synthesys.Plugins.OwaspZap
+  nameWithType: Synthesys.Plugins.OwaspZap
+  fullName: Synthesys.Plugins.OwaspZap
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  commentId: T:Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  parent: Synthesys.Plugins.OwaspZap
+  name: ZapJsonAlert
+  nameWithType: ZapJsonAlert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: PluginId
+  nameWithType: ZapJsonAlert.PluginId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.PluginId
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Alert
+  nameWithType: ZapJsonAlert.Alert
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Alert
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Name
+  nameWithType: ZapJsonAlert.Name
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Name
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: RiskCode
+  nameWithType: ZapJsonAlert.RiskCode
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskCode
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Confidence
+  nameWithType: ZapJsonAlert.Confidence
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Confidence
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: RiskDesc
+  nameWithType: ZapJsonAlert.RiskDesc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.RiskDesc
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Desc
+  nameWithType: ZapJsonAlert.Desc
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Desc
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Count
+  nameWithType: ZapJsonAlert.Count
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Count
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Solution
+  nameWithType: ZapJsonAlert.Solution
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Solution
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: OtherInfo
+  nameWithType: ZapJsonAlert.OtherInfo
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.OtherInfo
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: Reference
+  nameWithType: ZapJsonAlert.Reference
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.Reference
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: CWEId
+  nameWithType: ZapJsonAlert.CWEId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.CWEId
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: WASCId
+  nameWithType: ZapJsonAlert.WASCId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.WASCId
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  commentId: P:Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+  parent: Synthesys.Plugins.OwaspZap.ZapJsonAlert
+  name: SourceId
+  nameWithType: ZapJsonAlert.SourceId
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlert.SourceId
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances*
+  commentId: Overload:Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+  name: Instances
+  nameWithType: ZapJsonAlertWithInstances.Instances
+  fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertWithInstances.Instances
+- uid: System.Collections.Generic.IEnumerable{Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance}
+  commentId: T:System.Collections.Generic.IEnumerable{Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ZapJsonAlertInstance>
+  nameWithType: IEnumerable<ZapJsonAlertInstance>
+  fullName: System.Collections.Generic.IEnumerable<Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance>
+  nameWithType.vb: IEnumerable(Of ZapJsonAlertInstance)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance)
+  name.vb: IEnumerable(Of ZapJsonAlertInstance)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+    name: ZapJsonAlertInstance
+    nameWithType: ZapJsonAlertInstance
+    fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+    name: ZapJsonAlertInstance
+    nameWithType: ZapJsonAlertInstance
+    fullName: Synthesys.Plugins.OwaspZap.ZapJsonAlertInstance
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

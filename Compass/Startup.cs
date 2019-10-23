@@ -1,14 +1,14 @@
-using System.Threading.Tasks;
 using Blazor.FileReader;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using ElectronNET.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ElectronNET.API;
+using System.Threading.Tasks;
 
 namespace Compass
 {
@@ -26,7 +26,7 @@ namespace Compass
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor().AddHubOptions(o => o.MaximumReceiveMessageSize = 1024*1024*10); // 10MB
+            services.AddServerSideBlazor().AddHubOptions(o => o.MaximumReceiveMessageSize = 1024 * 1024 * 10); // 10MB
             services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
             services.AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
                 .AddBootstrapProviders()
