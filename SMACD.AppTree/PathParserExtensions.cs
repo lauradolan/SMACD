@@ -68,6 +68,12 @@ namespace SMACD.AppTree
                 PathSegmentIndex = index
             };
 
+            // Possible inputs:
+            // **//{Type}*
+            // **//{Type}*//{Type}*
+            // {Type}//**
+            // _root_//127.0.0.1
+
             var nextIndex = 0;
             if (HasAnyConstraint(segments[index]) && NodeMeetsConstraints(segments[index], node))
             {
@@ -105,7 +111,11 @@ namespace SMACD.AppTree
 
             var children = node.Children.Where(c => NodeMeetsConstraints(segments[nextIndex], c));
             if (!children.Any() && segments.Count > index)
+            {
+                if (generation.IsResultNode)
+                    return generation;
                 return null;
+            }
 
             foreach (var child in children)
             {
