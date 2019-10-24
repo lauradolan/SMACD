@@ -25,6 +25,11 @@
         if (EditingModel.TechnicalRisk == 0)
             EditingModel.TechnicalRisk = null;
 
+        Close();
+    }
+
+    private void Close()
+    {
         EditingModel = null;
 
         OnSave?.Invoke();
@@ -60,7 +65,7 @@
                     {<h4 class="modal-title">Edit Use Case</h4>}
                     @if (EditingModel is AbuseCaseModel)
                     {<h4 class="modal-title">Edit Abuse Case</h4>}
-                    <button type="button" class="close" @onclick="(() => SetModel(null))" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <button type="button" class="close" @onclick="(() => Close())" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
                     <form>
