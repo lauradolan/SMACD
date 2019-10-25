@@ -209,7 +209,8 @@ namespace Synthesys.Tasks
         private void QueueReactions(TriggerDescriptor trigger, RootNode rootNode, ProjectPointer projectPointer)
         {
             var reactions = ExtensionToolbox.Instance.GetReactionExtensionsTriggeredBy(trigger);
-            Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", reactions.Count, trigger);
+            if (reactions.Count > 0)
+                Logger.LogTrace("Processing {0} ReactionExtensions triggered by {1}", reactions.Count, trigger);
 
             foreach (var reaction in reactions)
             {
@@ -246,7 +247,11 @@ namespace Synthesys.Tasks
 
                         var lines = new List<string>();
                         RunningTasks.ToList().ForEach(t => lines.Add($"{t.Key.Extension.Metadata.ExtensionIdentifier} => {t.Key.Artifact}"));
-                        var longest = lines.Max(l => l.Length) + 4;
+                        int longest = 0;
+                        if (lines.Count == 0)
+                            longest = 20;
+                        else
+                            longest = lines.Max(l => l.Length) + 4;
 
                         var header =
                             "┏" +

@@ -50,7 +50,8 @@ namespace Synthesys.SDK
                 request.Fields[key] = queryParameters[key];
             }
 
-            artifact.AddRequest(method, request.Fields, new Dictionary<string, string>());
+            if (!string.IsNullOrEmpty(method))
+                artifact.AddRequest(method, request.Fields, new Dictionary<string, string>());
 
             return artifact;
         }

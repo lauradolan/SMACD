@@ -46,8 +46,7 @@ namespace SMACD.AppTree
                 UrlNode result = ChildrenAre<UrlNode>(n => n.UrlSegment == urlSegment).FirstOrDefault();
                 if (result == null)
                 {
-                    result = new UrlNode(this);
-                    result.Identifiers.Add(urlSegment);
+                    result = new UrlNode(this, urlSegment);
                     Children.Add(result);
                 }
 
@@ -77,13 +76,11 @@ namespace SMACD.AppTree
         /// <param name="headers">Headers to send</param>
         public UrlRequestNode AddRequest(string method, IDictionary<string, string> fields, IDictionary<string, string> headers)
         {
-            UrlRequestNode result = new UrlRequestNode(this);
-
             var identifier = method.ToString().ToUpper();
             if (fields.Any()) identifier = $"{identifier} ({string.Join(", ", fields.Keys)})";
             if (headers.Any()) identifier = $"{identifier} ({string.Join(", ", headers.Keys)}";
 
-            result.Identifiers.Add(identifier);
+            UrlRequestNode result = new UrlRequestNode(this, identifier);
             foreach (KeyValuePair<string, string> kvp in fields)
             {
                 result.Fields.Add(kvp.Key, kvp.Value);
