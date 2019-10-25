@@ -20,9 +20,14 @@ namespace Synthesys.Plugins.HTMLExplorer
         Version = "1.0.0",
         Author = "Anthony Turner",
         Website = "https://github.com/anthturner/smacd")]
-    [TriggeredBy("**//{UrlNode}*", AppTreeNodeEvents.AddsChild)]
+    [TriggeredBy("**//{UrlRequestNode}*", AppTreeNodeEvents.IsCreated)]
     public class HtmlExplorerReaction : ReactionExtension, ICanQueueTasks
     {
+        /// <summary>
+        ///     Default execution timeout of the HTTP request
+        /// </summary>
+        public const int TIMEOUT_MS = 10 * 1000; // 10s
+
         public ITaskToolbox Tasks { get; set; }
 
         public override void Initialize()
@@ -37,27 +42,54 @@ namespace Synthesys.Plugins.HTMLExplorer
             var artifactTrigger = trigger as ArtifactTriggerDescriptor;
             if (artifactTrigger != null)
             {
-                var node = artifactTrigger.Node as UrlNode;
-                if (node != null)
+                var node = artifactTrigger.Node as UrlRequestNode;
+                if (node != null && node.Method != null)
                 {
                     lock (node)
                     {
-                        foreach (var request in node.Requests.Where(r => !r.Detail.UnderlyingCollection.Any()))
+                        if (!node.Detail.UnderlyingCollection.Any())
                         {
                             using (var http = new HttpClient())
                             {
                                 HttpResponseMessage result = null;
                                 try
                                 {
-                                    var url = request.GetEntireUrl();
-                                    if (request.Method == HttpMethod.Get)
+                                    var cts = new System.Threading.CancellationTokenSource(TIMEOUT_MS);
+                                    var url = node.GetEntireUrl();
+                                    if (node.Method == HttpMethod.Get)
                                     {
-                                        result = http.GetAsync(url).Result;
+                                        result = http.GetAsync(url, cts.Token).Result;
                                     }
-                                    else if (request.Method == HttpMethod.Post)
+                                    else if (node.Method == HttpMethod.Post)
                                     {
-                                        var content = new FormUrlEncodedContent(request.Fields);
-                                        result = http.PostAsync(url, content).Result;
+                                        var content = new FormUrlEncodedContent(node.Fields);
+                                        result = http.PostAsync(url, content, cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Put)
+                                    {
+                                        var content = new FormUrlEncodedContent(node.Fields);
+                                        result = http.PutAsync(url, content, cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Delete)
+                                    {
+                                        result = http.DeleteAsync(url, cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Head)
+                                    {
+                                        result = http.SendAsync(new HttpRequestMessage(HttpMethod.Head, url), cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Options)
+                                    {
+                                        result = http.SendAsync(new HttpRequestMessage(HttpMethod.Delete, url), cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Patch)
+                                    {
+                                        var content = new FormUrlEncodedContent(node.Fields);
+                                        result = http.PatchAsync(url, content, cts.Token).Result;
+                                    }
+                                    else if (node.Method == HttpMethod.Trace)
+                                    {
+                                        result = http.SendAsync(new HttpRequestMessage(HttpMethod.Trace, url), cts.Token).Result;
                                     }
 
                                     if (result != null)
@@ -69,7 +101,7 @@ namespace Synthesys.Plugins.HTMLExplorer
                                             ResultHtml = result.Content.ReadAsStringAsync().Result
                                         };
 
-                                        request.Detail.Set(details, "htmlexplorer", DataProviderSpecificity.ExploitSpecificScanner);
+                                        node.Detail.Set(details, "htmlexplorer", DataProviderSpecificity.ExploitSpecificScanner);
                                     }
                                 }
                                 catch (WebException ex)
