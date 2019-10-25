@@ -452,6 +452,12 @@
                 Context which allocates and destroys a temporary directory to collect files for a NativeDirectoryEvidence
             </summary>
         </member>
+        <member name="P:SMACD.AppTree.Evidence.NativeDirectoryContext.TemporaryWorkingPath">
+            <summary>
+                Local path to use when extracting/accessing NativeDirectoryContexts.
+                This defaults to the temp path provided by the environment.
+            </summary>
+        </member>
         <member name="M:SMACD.AppTree.Evidence.NativeDirectoryContext.#ctor(System.Byte[])">
             <summary>
                 Open a previously created NativeDirectoryContext from its stored state

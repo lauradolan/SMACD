@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using Microsoft.Extensions.Logging;
 using SMACD.AppTree;
+using SMACD.AppTree.Evidence;
 using SMACD.Data;
 using SMACD.Data.Resources;
 using Synthesys.SDK;
@@ -37,10 +38,23 @@ namespace Synthesys.Verbs
         [Option('k', "limitknown", HelpText = "Limit scan to only nodes populated from the Resources section of the Service Map")]
         public bool LimitKnown { get; set; }
 
+        [Option("temp", HelpText = "Temporary path to use instead of the path provided by the environment")]
+        public string TempPath { get; set; }
+
         private static ILogger<ScanVerb> Logger { get; } = Global.LogFactory.CreateLogger<ScanVerb>();
 
         public override Task Execute()
         {
+            // Process command line arguments that modify core behavior
+            if (!string.IsNullOrEmpty(TempPath))
+            {
+                NativeDirectoryContext.TemporaryWorkingPath = TempPath;
+                Logger.LogWarning("Using alternate temporary working path provided by user: {0}", TempPath);
+            }
+
+            // --------------------------------------------------------------------------------------------
+
+            // Search for and load modules
             Logger.LogDebug("Starting ExtensionLibrary search");
             ExtensionToolbox.Instance.LoadExtensionLibrariesFromPath(
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"),
@@ -48,6 +62,7 @@ namespace Synthesys.Verbs
 
             // --------------------------------------------------------------------------------------------
 
+            // Create or load Session object
             Session session = null;
             if (!File.Exists(ServiceMapFile))
             {
