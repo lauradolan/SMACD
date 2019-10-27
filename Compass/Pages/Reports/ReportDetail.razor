@@ -5,7 +5,7 @@
 
 @if (Program.Session != null)
 {
-    @RenderDynamicReport(Program.Session.Reports[ReportIndex])
+    @RenderDynamicReport(Program.Session.Reports.Where(r => !string.IsNullOrEmpty(r.ReportSummaryName)).ElementAt(ReportIndex))
 }
 @code
 {
