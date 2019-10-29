@@ -1,0 +1,49 @@
+﻿@inject Microsoft.JSInterop.IJSRuntime JsRuntime
+
+<div class="card shadow mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="text-primary font-weight-bold m-0">Result Data</h6>
+        <div class="dropdown no-arrow">
+            <button class="btn btn-link btn-sm" type="button" @onclick="(() => IsVisible = !IsVisible)">
+                @if (IsVisible)
+                {
+                    <i class="fas fa-sort-down text-gray-500"></i>
+                }
+                else
+                {
+                    <i class="fas fa-sort-up text-gray-500"></i>
+                }
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (IsVisible)
+        {
+            @if (!string.IsNullOrEmpty(ResultData))
+            {
+                <pre><code class="language-json">@ResultData</code></pre>
+            }
+            else
+            {
+                <strong class="text-warning">This item does not have JSON detail available</strong>
+            }
+        }
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public string ResultData { get; set; }
+
+    [Parameter]
+    public string DataLanguageClass { get; set; }
+
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var result = await JsRuntime.InvokeAsync<object>("Prism.highlightAll", new object[0]);
+    }
+}

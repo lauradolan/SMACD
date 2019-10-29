@@ -22,7 +22,7 @@ namespace SMACD.AppTree
         /// <summary>
         ///     A Razor component view which can be used to visualize the content of a given node
         /// </summary>
-        public override string NodeViewName => "SMACD.Artifacts.Views.RootNodeView";
+        public override string NodeViewName => "Compass.AppTree.RootNodeView";
 
         /// <summary>
         ///     Whether or not to suppress Artifact tree related events (useful during data loads or when responsiveness is not desired)

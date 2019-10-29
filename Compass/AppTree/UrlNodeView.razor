@@ -37,22 +37,31 @@
                 <ul class="list-group">
                     @foreach (var item in UrlArtifact.ChildrenAre<UrlRequestNode>())
                     {
-                        <li>
+                    <li class="list-group-item">
+                        <i class="fa fa-puzzle-piece" style="margin-right: 0.25em;"></i>
+                        <strong>@item.Method</strong>
+                        <div>
                             @if (item.Fields.Any())
                             {
-                                @foreach (var field in item.Fields)
+                            <small>
+                                @if (item.Fields.Keys.Count > 1)
                                 {
-                                    <div>
-                                        <i class="fa fa-puzzle-piece" style="margin-right: 0.25em;"></i>
-                                        <strong>@field.Key</strong> &rArr; @field.Value
-                                    </div>
+                                    <span>Sent fields</span>
                                 }
+                                else
+                                {
+                                    <span>Sent field</span>
+                                }
+                                @for (var i = 0; i < item.Fields.Keys.Count; i++)
+                                {
+                                    @if (i > 0)
+                                    {<span>, </span>}
+                                    <em>'@item.Fields.Keys.ElementAt(i)'</em>
+                                }
+                            </small>
                             }
-                            else
-                            {
-                                <p>No field information was sent.</p>
-                            }
-                        </li>
+                        </div>
+                    </li>
                     }
                 </ul>
             </div>

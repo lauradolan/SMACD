@@ -1,41 +1,32 @@
 ﻿@page "/artifacts"
 @layout Layouts.LayoutWithoutPadding
 @using SMACD.AppTree.Evidence
-@using Synthesys.Tasks
 @using SMACD.AppTree
 
 <div class="shadow-lg flex-grow-1 sidebar p-0 bg-secondary text-white" style="min-width: 30em; font-size: 10px">
+    <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;color:#fff">
+        @foreach (var item in Program.Session.Artifacts.Children)
+        {
+            <Compass.Layouts.Navigation.AppTree.ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
+        }
+    </ul>
+</div>
+<div class="container flex-row flex-grow-1 p-2">
     @if (Program.Session == null || Program.Session.Artifacts == null)
     {
         <p><em>No loaded file, or loaded file does not contain Artifacts</em></p>
     }
     else
     {
-        <ul class="tree" style="padding: 10px;padding-right: 1em;padding-bottom: 1em;padding-left: 1em;padding-top: 0.5em;color:#fff">
-            @foreach (var item in Program.Session.Artifacts.Children)
-            {
-                <Compass.Layouts.Navigation.AppTree.ArtifactTreeNode Artifact="@item" IdentifierClicked="@((a) => IdentifierClicked(a))" />
-            }
-        </ul>
+        @CreateDynamicComponent()
     }
-</div>
-<div class="container flex-row flex-grow-1 p-2">
-    @CreateDynamicComponent()
 </div>
 
 @code {
     [Parameter]
     public AppTreeNode Artifact { get; set; } = Program.Session?.Artifacts;
 
-    public Modal modalRef;
-
     public NativeDirectoryContext NativeContext { get; set; }
-
-    public void ToggleModal()
-    {
-        if (modalRef.IsOpen) modalRef.Hide();
-        else modalRef.Show();
-    }
 
     public void IdentifierClicked(AppTreeNode artifact)
     {
@@ -47,35 +38,7 @@
     {
         if (Artifact != null)
         {
-            builder.OpenComponent(1, GetComponentType());
-            if (!(Artifact is RootNode))
-                builder.AddAttribute(2, "Artifact", Artifact);
-            else
-                builder.AddAttribute(2, "Artifact", (object)null);
-            builder.CloseComponent();
+            DynamicComponentGenerator.Inject(builder, Artifact.NodeViewName, new KeyValuePair<string, object>("Artifact", Artifact is RootNode ? null : Artifact));
         }
     };
-
-    private Type GetComponentType()
-    {
-        Type componentType = null;
-        if (!string.IsNullOrEmpty(Artifact.NodeViewName))
-        {
-            // Gotta find that view!
-
-            // First, see if we can resolve this cheaply.
-            componentType = Type.GetType(Artifact.NodeViewName);
-
-            // Try resolving inside the loaded extensions
-            if (componentType == null)
-            {
-                componentType = ExtensionToolbox.Instance.ExtensionLibraries.Select(l => l.Assembly.GetType(Artifact.NodeViewName)).FirstOrDefault(a => a != null);
-            }
-        }
-
-        if (componentType == null)
-            componentType = typeof(Compass.AppTree.DefaultNodeView);
-
-        return componentType;
-    }
 }

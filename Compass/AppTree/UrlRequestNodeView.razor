@@ -47,18 +47,7 @@
 {
     <div class="row">
         <div class="col">
-            <div class="card shadow mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h6 class="text-primary font-weight-bold m-0">Result HTML</h6>
-                </div>
-                <div class="card-body">
-                    <pre>
-                    <code class="language-html">
-                        @Metadata.ResultHtml
-                    </code>
-                </pre>
-                </div>
-            </div>
+            <Compass.Components.ResultDataViewer ResultData="@Metadata.ResultHtml" IsVisible="false" DataLanguageClass="language-html" />
         </div>
     </div>
 }
@@ -124,8 +113,18 @@
 @using SMACD.AppTree.Details
 @code
 {
+    private AppTreeNode _artifact;
+
     [Parameter]
-    public AppTreeNode Artifact { get; set; }
+    public AppTreeNode Artifact
+    {
+        get => _artifact;
+        set
+        {
+            _artifact = value;
+            StateHasChanged();
+        }
+    }
     public UrlRequestNode UrlRequestArtifact => Artifact as UrlRequestNode;
     public UrlRequestDetails Metadata => UrlRequestArtifact?.Detail;
 
